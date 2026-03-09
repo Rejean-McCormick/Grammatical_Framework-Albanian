@@ -1,2 +1,0 @@
-concrete DocumentationLat of Documentation = {
-}

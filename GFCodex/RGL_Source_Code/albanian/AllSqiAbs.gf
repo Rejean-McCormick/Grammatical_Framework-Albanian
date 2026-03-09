@@ -1,3 +1,0 @@
-abstract AllSqiAbs =
-  Lang
-  ** {}

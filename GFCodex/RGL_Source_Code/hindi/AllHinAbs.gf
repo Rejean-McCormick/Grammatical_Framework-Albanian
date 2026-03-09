@@ -1,4 +1,0 @@
-abstract AllHinAbs =
-  Lang,
-  Extend
-  ** {} ;

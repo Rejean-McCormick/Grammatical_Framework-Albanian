@@ -1,3 +1,0 @@
-abstract AllSwaAbs = 
-  Lang
-  ** {} ;

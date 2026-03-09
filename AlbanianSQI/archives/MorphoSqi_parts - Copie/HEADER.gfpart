@@ -1,4 +1,0 @@
-resource MorphoSqi = open CatSqi, ResSqi, Predef, Prelude in {
-
-oper
-
