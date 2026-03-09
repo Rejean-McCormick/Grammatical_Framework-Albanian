@@ -1,0 +1,623 @@
+mkV021 : Str -> V ;
+mkV021 base =
+  case base of {
+    base_1+"ie"+base_2@? =>
+      let
+        presS : Str = base_1+"ie"+base_2 ;
+        aorS  : Str = base_1+"o"+base_2 ;
+        impS  : Str = presS ;
+        part  : Str = base_1+"ie"+base_2+"ë" ;
+        partStem : Str = base_1+"ie"+base_2 ;       -- drop final ë
+        optBase : Str = aorS ;
+        optSh : Str = optBase+"sh" ;
+      in lin V {
+        Indicative = table {
+          Pres => table {
+            Sg => table { P1 => presS ; P2 => presS ; P3 => presS } ;
+            Pl => table { P1 => presS+"im" ; P2 => presS+"ni" ; P3 => presS+"in" }
+          } ;
+          Past => table {
+            Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+            Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+          } ;
+          Aorist => table {
+            Sg => table { P1 => aorS+"a" ; P2 => aorS+"e" ; P3 => aorS+"i" } ;
+            Pl => table { P1 => aorS+"ëm" ; P2 => aorS+"ët" ; P3 => aorS+"ën" }
+          } ;
+          Imperfect => table {
+            Sg => table { P1 => impS+"ja" ; P2 => impS+"je" ; P3 => impS+"te" } ;
+            Pl => table { P1 => impS+"nim" ; P2 => impS+"nit" ; P3 => impS+"nin" }
+          }
+        } ;
+        Imperative = table { Sg => presS ; Pl => presS+"ni" } ;
+        participle = part ;
+
+        pres_optative = table {
+          Sg => table { P1 => optSh+"a" ; P2 => optSh ; P3 => optBase+"të" } ;
+          Pl => table { P1 => optSh+"im" ; P2 => optSh+"i" ; P3 => optSh+"in" }
+        } ;
+
+        perf_optative = table {
+          Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+          Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+        } ;
+
+        pres_admirative = table {
+          Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+          Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+        } ;
+
+        imperf_admirative = table {
+          Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+          Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+        }
+      } ;
+    _ => error "Can't apply paradigm mkV021"
+  } ;
+
+mkV022 : Str -> V ;
+mkV022 base =
+  case base of {
+    base_1+"es" =>
+      let
+        presS : Str = base_1+"es" ;
+        aorS  : Str = base_1+"it" ;        -- since 1sg was ...ita
+        impS  : Str = presS ;
+        part  : Str = base_1+"itur" ;
+        partStem : Str = base_1+"itu" ;    -- drop final r
+        optBase : Str = aorS ;
+        optSh : Str = optBase+"sh" ;
+      in lin V {
+        Indicative = table {
+          Pres => table {
+            Sg => table { P1 => presS ; P2 => presS ; P3 => presS } ;
+            Pl => table { P1 => presS+"im" ; P2 => presS+"ni" ; P3 => presS+"in" }
+          } ;
+          Past => table {
+            Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+            Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+          } ;
+          Aorist => table {
+            Sg => table { P1 => aorS+"a" ; P2 => aorS+"e" ; P3 => aorS+"i" } ;
+            Pl => table { P1 => aorS+"ëm" ; P2 => aorS+"ët" ; P3 => aorS+"ën" }
+          } ;
+          Imperfect => table {
+            Sg => table { P1 => impS+"ja" ; P2 => impS+"je" ; P3 => impS+"te" } ;
+            Pl => table { P1 => impS+"nim" ; P2 => impS+"nit" ; P3 => impS+"nin" }
+          }
+        } ;
+        Imperative = table { Sg => presS ; Pl => presS+"ni" } ;
+        participle = part ;
+
+        pres_optative = table {
+          Sg => table { P1 => optSh+"a" ; P2 => optSh ; P3 => optBase+"të" } ;
+          Pl => table { P1 => optSh+"im" ; P2 => optSh+"i" ; P3 => optSh+"in" }
+        } ;
+
+        perf_optative = table {
+          Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+          Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+        } ;
+
+        pres_admirative = table {
+          Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+          Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+        } ;
+
+        imperf_admirative = table {
+          Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+          Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+        }
+      } ;
+    _ => error "Can't apply paradigm mkV022"
+  } ;
+
+mkV023 : Str -> V ;
+mkV023 base =
+  case base of {
+    base_1+"as" =>
+      let
+        presS : Str = base_1+"as" ;
+        aorS  : Str = base_1+"it" ;
+        impS  : Str = presS ;
+        part  : Str = base_1+"itur" ;
+        partStem : Str = base_1+"itu" ;
+        optBase : Str = aorS ;
+        optSh : Str = optBase+"sh" ;
+      in lin V {
+        Indicative = table {
+          Pres => table {
+            Sg => table { P1 => presS ; P2 => presS ; P3 => presS } ;
+            Pl => table { P1 => presS+"im" ; P2 => presS+"ni" ; P3 => presS+"in" }
+          } ;
+          Past => table {
+            Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+            Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+          } ;
+          Aorist => table {
+            Sg => table { P1 => aorS+"a" ; P2 => aorS+"e" ; P3 => aorS+"i" } ;
+            Pl => table { P1 => aorS+"ëm" ; P2 => aorS+"ët" ; P3 => aorS+"ën" }
+          } ;
+          Imperfect => table {
+            Sg => table { P1 => impS+"ja" ; P2 => impS+"je" ; P3 => impS+"te" } ;
+            Pl => table { P1 => impS+"nim" ; P2 => impS+"nit" ; P3 => impS+"nin" }
+          }
+        } ;
+        Imperative = table { Sg => presS ; Pl => presS+"ni" } ;
+        participle = part ;
+
+        pres_optative = table {
+          Sg => table { P1 => optSh+"a" ; P2 => optSh ; P3 => optBase+"të" } ;
+          Pl => table { P1 => optSh+"im" ; P2 => optSh+"i" ; P3 => optSh+"in" }
+        } ;
+
+        perf_optative = table {
+          Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+          Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+        } ;
+
+        pres_admirative = table {
+          Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+          Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+        } ;
+
+        imperf_admirative = table {
+          Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+          Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+        }
+      } ;
+    _ => error "Can't apply paradigm mkV023"
+  } ;
+
+mkV024 : Str -> V ;
+mkV024 base =
+  case base of {
+    base_1+"j" =>
+      let
+        pres1 : Str = base_1+"j" ;
+        pres23 : Str = base_1+"n" ;
+        pres1pl : Str = base_1+"jmë" ;
+        pres2pl : Str = base_1+"ni" ;
+        pres3pl : Str = base_1+"jnë" ;
+
+        aorStem : Str = base_1+"t" ;
+        impS : Str = base_1 ;              -- heuristic for imperfect
+        part : Str = base_1+"tur" ;
+        partStem : Str = base_1+"tu" ;
+
+        optBase : Str = aorStem ;
+        optSh : Str = optBase+"sh" ;
+      in lin V {
+        Indicative = table {
+          Pres => table {
+            Sg => table { P1 => pres1 ; P2 => pres23 ; P3 => pres23 } ;
+            Pl => table { P1 => pres1pl ; P2 => pres2pl ; P3 => pres3pl }
+          } ;
+          Past => table {
+            Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+            Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+          } ;
+          Aorist => table {
+            Sg => table { P1 => aorStem+"a" ; P2 => aorStem+"e" ; P3 => aorStem+"i" } ;
+            Pl => table { P1 => aorStem+"ëm" ; P2 => aorStem+"ët" ; P3 => aorStem+"ën" }
+          } ;
+          Imperfect => table {
+            Sg => table { P1 => impS+"ja" ; P2 => impS+"je" ; P3 => impS+"te" } ;
+            Pl => table { P1 => impS+"nim" ; P2 => impS+"nit" ; P3 => impS+"nin" }
+          }
+        } ;
+        Imperative = table { Sg => base_1 ; Pl => pres2pl } ;
+        participle = part ;
+
+        pres_optative = table {
+          Sg => table { P1 => optSh+"a" ; P2 => optSh ; P3 => optBase+"të" } ;
+          Pl => table { P1 => optSh+"im" ; P2 => optSh+"i" ; P3 => optSh+"in" }
+        } ;
+
+        perf_optative = table {
+          Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+          Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+        } ;
+
+        pres_admirative = table {
+          Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+          Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+        } ;
+
+        imperf_admirative = table {
+          Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+          Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+        }
+      } ;
+    _ => error "Can't apply paradigm mkV024"
+  } ;
+
+mkV025 : Str -> V ;
+mkV025 base =
+  case base of {
+    base_1+"y"+base_2@?+"j" =>
+      let
+        stemY : Str = base_1+"y"+base_2 ;           -- e.g. fry-
+        pres1 : Str = stemY+"j" ;
+        pres23 : Str = stemY+"n" ;
+        pres1pl : Str = stemY+"jmë" ;
+        pres2pl : Str = stemY+"ni" ;
+        pres3pl : Str = stemY+"jnë" ;
+
+        aorBase : Str = base_1+base_2 ;            -- drop y (per given 1sg aorist)
+        impS : Str = stemY ;                        -- heuristic
+
+        part : Str = stemY+"rë" ;                   -- more standard than bare -r
+        partStem : Str = stemY+"r" ;                -- drop ë
+
+        optBase : Str = aorBase ;                   -- consonant stem -> -sh
+        optSh : Str = optBase+"sh" ;
+      in lin V {
+        Indicative = table {
+          Pres => table {
+            Sg => table { P1 => pres1 ; P2 => pres23 ; P3 => pres23 } ;
+            Pl => table { P1 => pres1pl ; P2 => pres2pl ; P3 => pres3pl }
+          } ;
+          Past => table {
+            Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+            Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+          } ;
+          Aorist => table {
+            Sg => table { P1 => aorBase+"va" ; P2 => aorBase+"ve" ; P3 => aorBase+"u" } ;
+            Pl => table { P1 => aorBase+"më" ; P2 => aorBase+"të" ; P3 => aorBase+"në" }
+          } ;
+          Imperfect => table {
+            Sg => table { P1 => impS+"ja" ; P2 => impS+"je" ; P3 => impS+"te" } ;
+            Pl => table { P1 => impS+"nim" ; P2 => impS+"nit" ; P3 => impS+"nin" }
+          }
+        } ;
+        Imperative = table { Sg => stemY ; Pl => pres2pl } ;
+        participle = part ;
+
+        pres_optative = table {
+          Sg => table { P1 => optSh+"a" ; P2 => optSh ; P3 => optBase+"të" } ;
+          Pl => table { P1 => optSh+"im" ; P2 => optSh+"i" ; P3 => optSh+"in" }
+        } ;
+
+        perf_optative = table {
+          Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+          Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+        } ;
+
+        pres_admirative = table {
+          Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+          Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+        } ;
+
+        imperf_admirative = table {
+          Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+          Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+        }
+      } ;
+    _ => error "Can't apply paradigm mkV025"
+  } ;
+
+mkV026 : Str -> V ;
+mkV026 base =
+  case base of {
+    base_1+"e"+base_2@(?+?) =>
+      let
+        presS : Str = base_1+"e"+base_2 ;
+        aorS  : Str = base_1+"o"+base_2 ;
+        impS  : Str = presS ;
+        part  : Str = base_1+"e"+base_2+"ur" ;
+        partStem : Str = base_1+"e"+base_2+"u" ;
+        optBase : Str = aorS ;
+        optSh : Str = optBase+"sh" ;
+      in lin V {
+        Indicative = table {
+          Pres => table {
+            Sg => table { P1 => presS ; P2 => presS ; P3 => presS } ;
+            Pl => table { P1 => presS+"im" ; P2 => presS+"ni" ; P3 => presS+"in" }
+          } ;
+          Past => table {
+            Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+            Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+          } ;
+          Aorist => table {
+            Sg => table { P1 => aorS+"a" ; P2 => aorS+"e" ; P3 => aorS+"i" } ;
+            Pl => table { P1 => aorS+"ëm" ; P2 => aorS+"ët" ; P3 => aorS+"ën" }
+          } ;
+          Imperfect => table {
+            Sg => table { P1 => impS+"ja" ; P2 => impS+"je" ; P3 => impS+"te" } ;
+            Pl => table { P1 => impS+"nim" ; P2 => impS+"nit" ; P3 => impS+"nin" }
+          }
+        } ;
+        Imperative = table { Sg => presS ; Pl => presS+"ni" } ;
+        participle = part ;
+
+        pres_optative = table {
+          Sg => table { P1 => optSh+"a" ; P2 => optSh ; P3 => optBase+"të" } ;
+          Pl => table { P1 => optSh+"im" ; P2 => optSh+"i" ; P3 => optSh+"in" }
+        } ;
+
+        perf_optative = table {
+          Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+          Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+        } ;
+
+        pres_admirative = table {
+          Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+          Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+        } ;
+
+        imperf_admirative = table {
+          Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+          Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+        }
+      } ;
+    _ => error "Can't apply paradigm mkV026"
+  } ;
+
+mkV027 : Str -> V ;
+mkV027 base =
+  case base of {
+    base_1+"on" =>
+      let
+        stem : Str = base_1 ;
+
+        pres1 : Str = stem+"oj" ;
+        pres2 : Str = stem+"on" ;
+        pres3 : Str = stem+"on" ;
+        pres1pl : Str = stem+"ojmë" ;
+        pres2pl : Str = stem+"oni" ;
+        pres3pl : Str = stem+"ojnë" ;
+
+        imp1 : Str = stem+"oja" ;
+        imp2 : Str = stem+"oje" ;
+        imp3 : Str = stem+"onte" ;
+        imp1pl : Str = stem+"onim" ;
+        imp2pl : Str = stem+"onit" ;
+        imp3pl : Str = stem+"onin" ;
+
+        aor1 : Str = stem+"ova" ;
+        aor2 : Str = stem+"ove" ;
+        aor3 : Str = stem+"oi" ;
+        aor1pl : Str = stem+"uam" ;
+        aor2pl : Str = stem+"uat" ;
+        aor3pl : Str = stem+"uan" ;
+
+        part : Str = stem+"uar" ;
+        partStem : Str = stem+"ua" ;
+
+        impSg : Str = stem+"o" ;          -- for imperative sg: puno!
+        optBase : Str = stem+"o" ;
+        optFsh : Str = optBase+"fsh" ;
+      in lin V {
+        Indicative = table {
+          Pres => table {
+            Sg => table { P1 => pres1 ; P2 => pres2 ; P3 => pres3 } ;
+            Pl => table { P1 => pres1pl ; P2 => pres2pl ; P3 => pres3pl }
+          } ;
+          Past => table {
+            Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+            Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+          } ;
+          Aorist => table {
+            Sg => table { P1 => aor1 ; P2 => aor2 ; P3 => aor3 } ;
+            Pl => table { P1 => aor1pl ; P2 => aor2pl ; P3 => aor3pl }
+          } ;
+          Imperfect => table {
+            Sg => table { P1 => imp1 ; P2 => imp2 ; P3 => imp3 } ;
+            Pl => table { P1 => imp1pl ; P2 => imp2pl ; P3 => imp3pl }
+          }
+        } ;
+        Imperative = table { Sg => impSg ; Pl => pres2pl } ;
+        participle = part ;
+
+        pres_optative = table {
+          Sg => table { P1 => optFsh+"a" ; P2 => optFsh ; P3 => optBase+"ftë" } ;
+          Pl => table { P1 => optFsh+"im" ; P2 => optFsh+"i" ; P3 => optFsh+"in" }
+        } ;
+
+        perf_optative = table {
+          Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+          Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+        } ;
+
+        pres_admirative = table {
+          Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+          Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+        } ;
+
+        imperf_admirative = table {
+          Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+          Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+        }
+      } ;
+    _ => error "Can't apply paradigm mkV027"
+  } ;
+
+mkV028 : Str -> V ;
+mkV028 base =
+  case base of {
+    base_1+"oj" =>
+      let
+        stem : Str = base_1 ;
+
+        pres1 : Str = stem+"oj" ;
+        pres2 : Str = stem+"on" ;
+        pres3 : Str = stem+"on" ;
+        pres1pl : Str = stem+"ojmë" ;
+        pres2pl : Str = stem+"oni" ;
+        pres3pl : Str = stem+"ojnë" ;
+
+        imp1 : Str = stem+"oja" ;
+        imp2 : Str = stem+"oje" ;
+        imp3 : Str = stem+"onte" ;
+        imp1pl : Str = stem+"onim" ;
+        imp2pl : Str = stem+"onit" ;
+        imp3pl : Str = stem+"onin" ;
+
+        aor1 : Str = stem+"ova" ;
+        aor2 : Str = stem+"ove" ;
+        aor3 : Str = stem+"oi" ;
+        aor1pl : Str = stem+"uam" ;
+        aor2pl : Str = stem+"uat" ;
+        aor3pl : Str = stem+"uan" ;
+
+        part : Str = stem+"uar" ;
+        partStem : Str = stem+"ua" ;
+
+        impSg : Str = stem+"o" ;
+        optBase : Str = stem+"o" ;
+        optFsh : Str = optBase+"fsh" ;
+      in lin V {
+        Indicative = table {
+          Pres => table {
+            Sg => table { P1 => pres1 ; P2 => pres2 ; P3 => pres3 } ;
+            Pl => table { P1 => pres1pl ; P2 => pres2pl ; P3 => pres3pl }
+          } ;
+          Past => table {
+            Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+            Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+          } ;
+          Aorist => table {
+            Sg => table { P1 => aor1 ; P2 => aor2 ; P3 => aor3 } ;
+            Pl => table { P1 => aor1pl ; P2 => aor2pl ; P3 => aor3pl }
+          } ;
+          Imperfect => table {
+            Sg => table { P1 => imp1 ; P2 => imp2 ; P3 => imp3 } ;
+            Pl => table { P1 => imp1pl ; P2 => imp2pl ; P3 => imp3pl }
+          }
+        } ;
+        Imperative = table { Sg => impSg ; Pl => pres2pl } ;
+        participle = part ;
+
+        pres_optative = table {
+          Sg => table { P1 => optFsh+"a" ; P2 => optFsh ; P3 => optBase+"ftë" } ;
+          Pl => table { P1 => optFsh+"im" ; P2 => optFsh+"i" ; P3 => optFsh+"in" }
+        } ;
+
+        perf_optative = table {
+          Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+          Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+        } ;
+
+        pres_admirative = table {
+          Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+          Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+        } ;
+
+        imperf_admirative = table {
+          Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+          Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+        }
+      } ;
+    _ => error "Can't apply paradigm mkV028"
+  } ;
+
+mkV029 : Str -> V ;
+mkV029 base_1 =
+  let
+    presS : Str = base_1 ;
+    aorS  : Str = base_1 ;
+    impS  : Str = base_1 ;
+    part  : Str = base_1+"tur" ;
+    partStem : Str = base_1+"tu" ;
+    optBase : Str = aorS ;
+    optSh : Str = optBase+"sh" ;
+  in lin V {
+    Indicative = table {
+      Pres => table {
+        Sg => table { P1 => presS ; P2 => presS ; P3 => presS } ;
+        Pl => table { P1 => presS+"im" ; P2 => presS+"ni" ; P3 => presS+"in" }
+      } ;
+      Past => table {
+        Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+        Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+      } ;
+      Aorist => table {
+        Sg => table { P1 => aorS+"a" ; P2 => aorS+"e" ; P3 => aorS+"i" } ;
+        Pl => table { P1 => aorS+"ëm" ; P2 => aorS+"ët" ; P3 => aorS+"ën" }
+      } ;
+      Imperfect => table {
+        Sg => table { P1 => impS+"ja" ; P2 => impS+"je" ; P3 => impS+"te" } ;
+        Pl => table { P1 => impS+"nim" ; P2 => impS+"nit" ; P3 => impS+"nin" }
+      }
+    } ;
+    Imperative = table { Sg => presS ; Pl => presS+"ni" } ;
+    participle = part ;
+
+    pres_optative = table {
+      Sg => table { P1 => optSh+"a" ; P2 => optSh ; P3 => optBase+"të" } ;
+      Pl => table { P1 => optSh+"im" ; P2 => optSh+"i" ; P3 => optSh+"in" }
+    } ;
+
+    perf_optative = table {
+      Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+      Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+    } ;
+
+    pres_admirative = table {
+      Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+      Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+    } ;
+
+    imperf_admirative = table {
+      Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+      Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+    }
+  } ;
+
+mkV030 : Str -> V ;
+mkV030 base =
+  case base of {
+    base_1+"i" =>
+      let
+        presS : Str = base_1+"i" ;
+        aorStem : Str = base_1+"ev" ;      -- since 1sg was ...eva
+        impS : Str = presS ;
+        part : Str = base_1+"inë" ;
+        partStem : Str = base_1+"in" ;
+        optBase : Str = aorStem ;
+        optSh : Str = optBase+"sh" ;
+      in lin V {
+        Indicative = table {
+          Pres => table {
+            Sg => table { P1 => presS ; P2 => presS ; P3 => presS } ;
+            Pl => table { P1 => presS+"më" ; P2 => presS+"ni" ; P3 => presS+"në" }
+          } ;
+          Past => table {
+            Sg => table { P1 => "kam "+part ; P2 => "ke "+part ; P3 => "ka "+part } ;
+            Pl => table { P1 => "kemi "+part ; P2 => "keni "+part ; P3 => "kanë "+part }
+          } ;
+          Aorist => table {
+            Sg => table { P1 => aorStem+"a" ; P2 => aorStem+"e" ; P3 => aorStem+"i" } ;
+            Pl => table { P1 => aorStem+"ëm" ; P2 => aorStem+"ët" ; P3 => aorStem+"ën" }
+          } ;
+          Imperfect => table {
+            Sg => table { P1 => impS+"ja" ; P2 => impS+"je" ; P3 => impS+"te" } ;
+            Pl => table { P1 => impS+"nim" ; P2 => impS+"nit" ; P3 => impS+"nin" }
+          }
+        } ;
+        Imperative = table { Sg => presS ; Pl => presS+"ni" } ;
+        participle = part ;
+
+        pres_optative = table {
+          Sg => table { P1 => optSh+"a" ; P2 => optSh ; P3 => optBase+"të" } ;
+          Pl => table { P1 => optSh+"im" ; P2 => optSh+"i" ; P3 => optSh+"in" }
+        } ;
+
+        perf_optative = table {
+          Sg => table { P1 => "paça "+part ; P2 => "paç "+part ; P3 => "pastë "+part } ;
+          Pl => table { P1 => "paçim "+part ; P2 => "paçi "+part ; P3 => "paçin "+part }
+        } ;
+
+        pres_admirative = table {
+          Sg => table { P1 => partStem+"kam" ; P2 => partStem+"ke" ; P3 => partStem+"ka" } ;
+          Pl => table { P1 => partStem+"kemi" ; P2 => partStem+"keni" ; P3 => partStem+"kan" }
+        } ;
+
+        imperf_admirative = table {
+          Sg => table { P1 => partStem+"kësha" ; P2 => partStem+"këshe" ; P3 => partStem+"kësh" } ;
+          Pl => table { P1 => partStem+"këshim" ; P2 => partStem+"këshit" ; P3 => partStem+"këshin" }
+        }
+      } ;
+    _ => error "Can't apply paradigm mkV030"
+  } ;

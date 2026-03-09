@@ -1,0 +1,1 @@
+abstract TestAbs = { cat N ; fun t : N ; }

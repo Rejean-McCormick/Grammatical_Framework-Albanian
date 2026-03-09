@@ -1,0 +1,161 @@
+mkA001 : Str -> A ;
+mkA001 base_1 =
+  let
+    mS = base_1 ; mP = base_1 ;
+    fS = base_1+"e" ; fP = base_1+"e" ;
+  in lin A {
+    s = table {
+      Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+    } ;
+    clit = True
+  } ;
+
+mkA002 : Str -> A ;
+mkA002 base_1 =
+  let
+    mS = base_1 ; mP = base_1 ;
+    fS = base_1+"ë" ; fP = base_1+"a" ;
+  in lin A {
+    s = table {
+      Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+    } ;
+    clit = True
+  } ;
+
+mkA003 : Str -> A ;
+mkA003 base_1 =
+  let
+    mS = base_1 ; mP = base_1 ;
+    fS = base_1 ; fP = base_1 ;
+  in lin A {
+    s = table {
+      Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+    } ;
+    clit = True
+  } ;
+
+mkA004 : Str -> A ;
+mkA004 base_1 =
+  let
+    mS = base_1 ; mP = base_1+"ë" ;
+    fS = base_1+"e" ; fP = base_1+"e" ;
+  in lin A {
+    s = table {
+      Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+    } ;
+    clit = True
+  } ;
+
+mkA005 : Str -> A ;
+mkA005 base =
+  case base of {
+    base_1+"ë"+base_2@? =>
+      let
+        mS = base_1+"ë"+base_2 ; mP = base_1+"ë"+base_2 ;
+        fS = base_1+base_2+"e" ; fP = base_1+base_2+"e" ;
+      in lin A {
+        s = table {
+          Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+          Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+          Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+          Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+        } ;
+        clit = True
+      } ;
+    _ => error "Can't apply paradigm mkA005"
+  } ;
+
+mkA006 : Str -> A ;
+mkA006 base_1 =
+  let
+    mS = base_1 ; mP = base_1 ;
+    fS = base_1 ; fP = base_1+"a" ;
+  in lin A {
+    s = table {
+      Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+    } ;
+    clit = True
+  } ;
+
+mkA007 : Str -> A ;
+mkA007 base =
+  case base of {
+    base_1+"i" =>
+      let
+        mS = base_1+"i" ;  mP = base_1+"inj" ;
+        fS = base_1+"e" ;  fP = base_1+"eja" ;
+      in lin A {
+        s = table {
+          Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+          Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+          Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+          Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+        } ;
+        clit = True
+      } ;
+    _ => error "Can't apply paradigm mkA007"
+  } ;
+
+mkA008 : Str -> A ;
+mkA008 base =
+  case base of {
+    base_1+"i" =>
+      let
+        mS = base_1+"i" ;   mP = base_1+"inj" ;
+        fS = base_1+"ezë" ; fP = base_1+"eza" ;
+      in lin A {
+        s = table {
+          Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+          Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+          Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+          Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+        } ;
+        clit = True
+      } ;
+    _ => error "Can't apply paradigm mkA008"
+  } ;
+
+mkA009 : Str -> A ;
+mkA009 base_1 =
+  let
+    mS = base_1 ; mP = base_1 ;
+    fS = base_1 ; fP = base_1+"a" ;
+  in lin A {
+    s = table {
+      Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+    } ;
+    clit = True
+  } ;
+
+mkA010 : Str -> A ;
+mkA010 base_1 =
+  let
+    mS = base_1 ; mP = base_1 ;
+    fS = base_1+"ë" ; fP = base_1+"ë" ;
+  in lin A {
+    s = table {
+      Nom   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Acc   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Dat   => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } } ;
+      Ablat => table { Masc => table { Sg => mS ; Pl => mP } ; Fem => table { Sg => fS ; Pl => fP } }
+    } ;
+    clit = True
+  } ;

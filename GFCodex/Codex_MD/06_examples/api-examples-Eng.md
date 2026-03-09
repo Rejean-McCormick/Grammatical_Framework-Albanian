@@ -1,0 +1,3510 @@
+# RGL API Examples (English)
+
+## mkText-Phr-Punct-Text-Text
+```gf
+mkText (mkPhr (mkQS (mkCl she_NP sleep_V))) questMarkPunct (mkText (mkPhr yes_Utt) fullStopPunct)
+```
+```txt
+does she sleep ? yes .
+```
+
+## mkText-Utt-Text
+```gf
+mkText yes_Utt
+```
+```txt
+yes .
+```
+
+## mkText-S-Text
+```gf
+mkText (mkS pastTense (mkCl she_NP sleep_V))
+```
+```txt
+she slept .
+```
+
+## mkText-Cl-Text
+```gf
+mkText (mkCl she_NP sleep_V)
+```
+```txt
+she sleeps .
+```
+
+## mkText-QS-Text
+```gf
+mkText (mkQS pastTense (mkQCl (mkCl she_NP sleep_V)))
+```
+```txt
+did she sleep ?
+```
+
+## mkText-Pol-Imp-Text
+```gf
+mkText negativePol (mkImp sleep_V)
+```
+```txt
+don't sleep !
+```
+
+## mkText-Text-Text-Text
+```gf
+mkText (mkText (mkPhr (mkUtt where_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt here_Adv)))) (mkText (mkPhr (mkUtt when_IAdv)) questMarkPunct (mkText (mkPhr (mkUtt now_Adv)) exclMarkPunct))
+```
+```txt
+where ? here . when ? now !
+```
+
+## fullStopPunct-Punct
+```gf
+mkText (mkPhr yes_Utt) fullStopPunct
+```
+```txt
+yes .
+```
+
+## questMarkPunct-Punct
+```gf
+mkText (mkPhr yes_Utt) questMarkPunct
+```
+```txt
+yes ?
+```
+
+## exclMarkPunct-Punct
+```gf
+mkText (mkPhr yes_Utt) exclMarkPunct
+```
+```txt
+yes !
+```
+
+## mkPhr-PConj-Utt-Voc-Phr
+```gf
+mkPhr but_PConj (mkUtt (mkImp sleep_V)) (mkVoc (mkNP i_Pron friend_N))
+```
+```txt
+but sleep , my friend
+```
+
+## mkPhr-S-Phr
+```gf
+mkPhr (mkS futureTense negativePol (mkCl she_NP sleep_V))
+```
+```txt
+she won't sleep
+```
+
+## mkPhr-Cl-Phr
+```gf
+mkPhr (mkCl she_NP sleep_V)
+```
+```txt
+she sleeps
+```
+
+## mkPhr-QS-Phr
+```gf
+mkPhr (mkQS conditionalTense (mkQCl (mkCl she_NP sleep_V)))
+```
+```txt
+would she sleep
+```
+
+## mkPhr-Imp-Phr
+```gf
+mkPhr (mkImp sleep_V)
+```
+```txt
+sleep
+```
+
+## mkPConj-Conj-PConj
+```gf
+mkPhr (mkPConj and_Conj) (mkUtt now_Adv)
+```
+```txt
+and now
+```
+
+## mkVoc-NP-Voc
+```gf
+mkPhr yes_Utt (mkVoc (mkNP i_Pron friend_N))
+```
+```txt
+yes , my friend
+```
+
+## mkUtt-S-Utt
+```gf
+mkUtt (mkS pastTense (mkCl she_NP sleep_V))
+```
+```txt
+she slept
+```
+
+## mkUtt-Cl-Utt
+```gf
+mkUtt (mkCl she_NP sleep_V)
+```
+```txt
+she sleeps
+```
+
+## mkUtt-QS-Utt
+```gf
+mkUtt (mkQS pastTense negativePol (mkQCl who_IP sleep_V))
+```
+```txt
+who didn't sleep
+```
+
+## mkUtt-QCl-Utt
+```gf
+mkUtt (mkQCl who_IP sleep_V)
+```
+```txt
+who sleeps
+```
+
+## mkUtt-ImpForm-Pol-Imp-Utt
+```gf
+mkUtt pluralImpForm negativePol (mkImp (mkVP man_N))
+```
+```txt
+don't be men
+```
+
+## mkUtt-IP-Utt
+```gf
+mkUtt who_IP
+```
+```txt
+who
+```
+
+## mkUtt-IAdv-Utt
+```gf
+mkUtt why_IAdv
+```
+```txt
+why
+```
+
+## mkUtt-NP-Utt
+```gf
+mkUtt (mkNP this_Det man_N)
+```
+```txt
+this man
+```
+
+## mkUtt-Adv-Utt
+```gf
+mkUtt here_Adv
+```
+```txt
+here
+```
+
+## mkUtt-VP-Utt
+```gf
+mkUtt (mkVP sleep_V)
+```
+```txt
+to sleep
+```
+
+## mkUtt-CN-Utt
+```gf
+mkUtt (mkCN beer_N)
+```
+```txt
+beer
+```
+
+## mkUtt-AP-Utt
+```gf
+mkUtt (mkAP good_A)
+```
+```txt
+good
+```
+
+## mkUtt-Card-Utt
+```gf
+mkUtt (mkCard (mkNumeral n5_Unit))
+```
+```txt
+five
+```
+
+## lets_Utt-VP-Utt
+```gf
+mkPhr (lets_Utt (mkVP sleep_V))
+```
+```txt
+let's sleep
+```
+
+## positivePol-Pol
+```gf
+mkUtt (mkS positivePol (mkCl she_NP sleep_V))
+```
+```txt
+she sleeps
+```
+
+## negativePol-Pol
+```gf
+mkUtt (mkS negativePol (mkCl she_NP sleep_V))
+```
+```txt
+she doesn't sleep
+```
+
+## simultaneousAnt-Ant
+```gf
+mkUtt (mkS simultaneousAnt (mkCl she_NP sleep_V))
+```
+```txt
+she sleeps
+```
+
+## anteriorAnt-Ant
+```gf
+mkUtt (mkS anteriorAnt (mkCl she_NP sleep_V))
+```
+```txt
+she has slept
+```
+
+## presentTense-Tense
+```gf
+mkUtt (mkS presentTense (mkCl she_NP sleep_V))
+```
+```txt
+she sleeps
+```
+
+## pastTense-Tense
+```gf
+mkUtt (mkS pastTense (mkCl she_NP sleep_V))
+```
+```txt
+she slept
+```
+
+## futureTense-Tense
+```gf
+mkUtt (mkS futureTense (mkCl she_NP sleep_V))
+```
+```txt
+she will sleep
+```
+
+## conditionalTense-Tense
+```gf
+mkUtt (mkS conditionalTense (mkCl she_NP sleep_V))
+```
+```txt
+she would sleep
+```
+
+## singularImpForm-ImpForm
+```gf
+mkUtt singularImpForm (mkImp (mkVP man_N))
+```
+```txt
+be a man
+```
+
+## pluralImpForm-ImpForm
+```gf
+mkUtt pluralImpForm (mkImp (mkVP man_N))
+```
+```txt
+be men
+```
+
+## politeImpForm-ImpForm
+```gf
+mkUtt politeImpForm (mkImp (mkVP man_N))
+```
+```txt
+be a man
+```
+
+## mkS-Tense-Ant-Pol-Cl-S
+```gf
+mkUtt (mkS conditionalTense anteriorAnt negativePol (mkCl she_NP sleep_V))
+```
+```txt
+she wouldn't have slept
+```
+
+## mkS-Conj-S-S-S
+```gf
+mkUtt (mkS and_Conj (mkS (mkCl she_NP sleep_V)) (mkS (mkCl i_NP run_V)))
+```
+```txt
+she sleeps and I run
+```
+
+## mkS-Conj-ListS-S
+```gf
+mkUtt (mkS and_Conj (mkListS (mkS (mkCl she_NP sleep_V)) (mkListS (mkS (mkCl i_NP run_V)) (mkS (mkCl (mkNP youSg_Pron) walk_V)))))
+```
+```txt
+she sleeps , I run and you walk
+```
+
+## mkS-Adv-S-S
+```gf
+mkUtt (mkS today_Adv (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+today she sleeps
+```
+
+## mkCl-NP-V-Cl
+```gf
+mkUtt (mkCl she_NP sleep_V)
+```
+```txt
+she sleeps
+```
+
+## mkCl-NP-V2-NP-Cl
+```gf
+mkUtt (mkCl she_NP love_V2 he_NP)
+```
+```txt
+she loves him
+```
+
+## mkCl-NP-V3-NP-NP-Cl
+```gf
+mkUtt (mkCl she_NP send_V3 it_NP he_NP)
+```
+```txt
+she sends it to him
+```
+
+## mkCl-NP-VV-VP-Cl
+```gf
+mkUtt (mkCl she_NP want_VV (mkVP sleep_V))
+```
+```txt
+she wants to sleep
+```
+
+## mkCl-NP-VS-S-Cl
+```gf
+mkUtt (mkCl she_NP say_VS (mkS (mkCl i_NP sleep_V)))
+```
+```txt
+she says that I sleep
+```
+
+## mkCl-NP-VQ-QS-Cl
+```gf
+mkUtt (mkCl she_NP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))
+```
+```txt
+she wonders who sleeps
+```
+
+## mkCl-NP-VA-A-Cl
+```gf
+mkUtt (mkCl she_NP become_VA old_A)
+```
+```txt
+she becomes old
+```
+
+## mkCl-NP-VA-AP-Cl
+```gf
+mkUtt (mkCl she_NP become_VA (mkAP very_AdA old_A))
+```
+```txt
+she becomes very old
+```
+
+## mkCl-NP-V2A-NP-A-Cl
+```gf
+mkUtt (mkCl she_NP paint_V2A it_NP red_A)
+```
+```txt
+she paints it red
+```
+
+## mkCl-NP-V2A-NP-AP-Cl
+```gf
+mkUtt (mkCl she_NP paint_V2A it_NP (mkAP red_A))
+```
+```txt
+she paints it red
+```
+
+## mkCl-NP-V2S-NP-S-Cl
+```gf
+mkUtt (mkCl she_NP answer_V2S he_NP (mkS (mkCl we_NP sleep_V)))
+```
+```txt
+she answers to him that we sleep
+```
+
+## mkCl-NP-V2Q-NP-QS-Cl
+```gf
+mkUtt (mkCl she_NP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))
+```
+```txt
+she asks him who sleeps
+```
+
+## mkCl-NP-V2V-NP-VP-Cl
+```gf
+mkUtt (mkCl she_NP beg_V2V he_NP (mkVP sleep_V))
+```
+```txt
+she begs him to sleep
+```
+
+## mkCl-NP-A-Cl
+```gf
+mkUtt (mkCl she_NP old_A)
+```
+```txt
+she is old
+```
+
+## mkCl-NP-A-NP-Cl
+```gf
+mkUtt (mkCl she_NP old_A he_NP)
+```
+```txt
+she is older than he
+```
+
+## mkCl-NP-A2-NP-Cl
+```gf
+mkUtt (mkCl she_NP married_A2 he_NP)
+```
+```txt
+she is married to him
+```
+
+## mkCl-NP-AP-Cl
+```gf
+mkUtt (mkCl she_NP (mkAP very_AdA old_A))
+```
+```txt
+she is very old
+```
+
+## mkCl-NP-NP-Cl
+```gf
+mkUtt (mkCl she_NP (mkNP the_Det woman_N))
+```
+```txt
+she is the woman
+```
+
+## mkCl-NP-N-Cl
+```gf
+mkUtt (mkCl she_NP woman_N)
+```
+```txt
+she is a woman
+```
+
+## mkCl-NP-CN-Cl
+```gf
+mkUtt (mkCl she_NP (mkCN old_A woman_N))
+```
+```txt
+she is an old woman
+```
+
+## mkCl-NP-Adv-Cl
+```gf
+mkUtt (mkCl she_NP here_Adv)
+```
+```txt
+she is here
+```
+
+## mkCl-NP-VP-Cl
+```gf
+mkUtt (mkCl she_NP (mkVP always_AdV (mkVP sleep_V)))
+```
+```txt
+she always sleeps
+```
+
+## mkCl-N-Cl
+```gf
+mkUtt (mkCl house_N)
+```
+```txt
+there is a house
+```
+
+## mkCl-CN-Cl
+```gf
+mkUtt (mkCl (mkCN old_A house_N))
+```
+```txt
+there is an old house
+```
+
+## mkCl-NP-Cl
+```gf
+mkUtt (mkCl (mkNP many_Det house_N)  )
+```
+```txt
+there are many houses
+```
+
+## mkCl-NP-RS-Cl
+```gf
+mkUtt (mkCl she_NP (mkRS (mkRCl which_RP (mkVP sleep_V))))
+```
+```txt
+it is she that sleeps
+```
+
+## mkCl-Adv-S-Cl
+```gf
+mkUtt (mkCl here_Adv (mkS (mkCl she_NP sleep_V)) )
+```
+```txt
+it is here that she sleeps
+```
+
+## mkCl-V-Cl
+```gf
+mkUtt (mkCl rain_V0 )
+```
+```txt
+it rains
+```
+
+## mkCl-VP-Cl
+```gf
+mkUtt (mkCl (progressiveVP (mkVP rain_V0)))
+```
+```txt
+it is raining
+```
+
+## mkCl-SC-VP-Cl
+```gf
+mkUtt (mkCl (mkSC (mkS (mkCl she_NP sleep_V))) (mkVP good_A))
+```
+```txt
+that she sleeps is good
+```
+
+## genericCl-VP-Cl
+```gf
+mkUtt (mkS (genericCl (mkVP sleep_V))              )
+```
+```txt
+one sleeps
+```
+
+## mkVP-V-VP
+```gf
+mkUtt (mkVP sleep_V)
+```
+```txt
+to sleep
+```
+
+## mkVP-V2-NP-VP
+```gf
+mkUtt (mkVP love_V2 he_NP)
+```
+```txt
+to love him
+```
+
+## mkVP-V3-NP-NP-VP
+```gf
+mkUtt (mkVP send_V3 it_NP he_NP)
+```
+```txt
+to send it to him
+```
+
+## mkVP-VV-VP-VP
+```gf
+mkUtt (mkVP want_VV (mkVP sleep_V))
+```
+```txt
+to want to sleep
+```
+
+## mkVP-VS-S-VP
+```gf
+mkUtt (mkVP know_VS (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+to know that she sleeps
+```
+
+## mkVP-VQ-QS-VP
+```gf
+mkUtt (mkVP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))
+```
+```txt
+to wonder who sleeps
+```
+
+## mkVP-VA-AP-VP
+```gf
+mkUtt (mkVP become_VA (mkAP red_A))
+```
+```txt
+to become red
+```
+
+## mkVP-V2A-NP-AP-VP
+```gf
+mkUtt (mkVP paint_V2A it_NP (mkAP red_A))
+```
+```txt
+to paint it red
+```
+
+## mkVP-V2S-NP-S-VP
+```gf
+mkUtt (mkVP answer_V2S he_NP (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+to answer to him that she sleeps
+```
+
+## mkVP-V2Q-NP-QS-VP
+```gf
+mkUtt (mkVP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))
+```
+```txt
+to ask him who sleeps
+```
+
+## mkVP-V2V-NP-VP-VP
+```gf
+mkUtt (mkVP beg_V2V he_NP (mkVP sleep_V))
+```
+```txt
+to beg him to sleep
+```
+
+## mkVP-A-VP
+```gf
+mkUtt (mkVP old_A)
+```
+```txt
+to be old
+```
+
+## mkVP-A-NP-VP
+```gf
+mkUtt (mkVP old_A he_NP)
+```
+```txt
+to be older than he
+```
+
+## mkVP-A2-NP-VP
+```gf
+mkUtt (mkVP married_A2 he_NP)
+```
+```txt
+to be married to him
+```
+
+## mkVP-AP-VP
+```gf
+mkUtt (mkVP (mkAP very_AdA old_A))
+```
+```txt
+to be very old
+```
+
+## mkVP-N-VP
+```gf
+mkUtt (mkVP woman_N)
+```
+```txt
+to be a woman
+```
+
+## mkVP-CN-VP
+```gf
+mkUtt (mkVP (mkCN old_A woman_N))
+```
+```txt
+to be an old woman
+```
+
+## mkVP-NP-VP
+```gf
+mkUtt (mkVP (mkNP the_Det woman_N))
+```
+```txt
+to be the woman
+```
+
+## mkVP-Adv-VP
+```gf
+mkUtt (mkVP here_Adv)
+```
+```txt
+to be here
+```
+
+## mkVP-VP-Adv-VP
+```gf
+mkUtt (mkVP (mkVP sleep_V) here_Adv)
+```
+```txt
+to sleep here
+```
+
+## mkVP-AdV-VP-VP
+```gf
+mkUtt (mkVP always_AdV (mkVP sleep_V))
+```
+```txt
+to always sleep
+```
+
+## mkVP-VPSlash-NP-VP
+```gf
+mkUtt (mkVP (mkVPSlash paint_V2A (mkAP black_A)) it_NP)
+```
+```txt
+to paint it black
+```
+
+## mkVP-VPSlash-VP
+```gf
+mkUtt (mkVP (mkVPSlash paint_V2A (mkAP black_A)))
+```
+```txt
+to paint itself black
+```
+
+## mkVP-Comp-VP
+```gf
+mkUtt (mkVP (mkComp (mkAP warm_A)))
+```
+```txt
+to be warm
+```
+
+## reflexiveVP-V2-VP
+```gf
+mkUtt (reflexiveVP love_V2)
+```
+```txt
+to love itself
+```
+
+## mkVP-VPSlash-VP
+```gf
+mkUtt (reflexiveVP (mkVPSlash paint_V2A (mkAP black_A)))
+```
+```txt
+to paint itself black
+```
+
+## passiveVP-V2-VP
+```gf
+mkUtt (passiveVP love_V2)
+```
+```txt
+to be loved
+```
+
+## passiveVP-V2-NP-VP
+```gf
+mkUtt (passiveVP love_V2 she_NP)
+```
+```txt
+to be loved by her
+```
+
+## progressiveVP-VP-VP
+```gf
+mkUtt (progressiveVP (mkVP sleep_V))
+```
+```txt
+to be sleeping
+```
+
+## mkComp-AP-Comp
+```gf
+mkUtt (mkVP (mkComp (mkAP old_A)))
+```
+```txt
+to be old
+```
+
+## mkComp-NP-Comp
+```gf
+mkUtt (mkVP (mkComp (mkNP this_Det man_N)))
+```
+```txt
+to be this man
+```
+
+## mkComp-Adv-Comp
+```gf
+mkUtt (mkVP (mkComp here_Adv))
+```
+```txt
+to be here
+```
+
+## mkSC-S-SC
+```gf
+mkSC (mkS (mkCl she_NP sleep_V))
+```
+```txt
+that she sleeps
+```
+
+## mkSC-QS-SC
+```gf
+mkSC (mkQS (mkQCl who_IP sleep_V))
+```
+```txt
+who sleeps
+```
+
+## mkSC-VP-SC
+```gf
+mkSC (mkVP sleep_V)
+```
+```txt
+to sleep
+```
+
+## mkImp-VP-Imp
+```gf
+mkUtt (mkImp (mkVP (mkVP come_V) (mkAdv to_Prep (mkNP i_Pron house_N))))
+```
+```txt
+come to my house
+```
+
+## mkImp-V-Imp
+```gf
+mkUtt (mkImp come_V)
+```
+```txt
+come
+```
+
+## mkImp-V2-NP-Imp
+```gf
+mkUtt (mkImp buy_V2 it_NP)
+```
+```txt
+buy it
+```
+
+## mkNP-Quant-N-NP
+```gf
+mkUtt (mkNP this_Quant man_N)
+```
+```txt
+this man
+```
+
+## mkNP-Quant-CN-NP
+```gf
+mkUtt (mkNP this_Quant (mkCN old_A man_N))
+```
+```txt
+this old man
+```
+
+## mkNP-Quant-Num-CN-NP
+```gf
+mkUtt (mkNP this_Quant (mkNum (mkNumeral n5_Unit)) (mkCN old_A man_N))
+```
+```txt
+these five old men
+```
+
+## mkNP-Quant-Num-N-NP
+```gf
+mkUtt (mkNP this_Quant (mkNum (mkNumeral n5_Unit)) man_N)
+```
+```txt
+these five men
+```
+
+## mkNP-Det-CN-NP
+```gf
+mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit))) (mkCN old_A man_N))
+```
+```txt
+the five old men
+```
+
+## mkNP-Det-N-NP
+```gf
+mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit))) man_N)
+```
+```txt
+the five men
+```
+
+## mkNP-Numeral-CN-NP
+```gf
+mkUtt (mkNP (mkNumeral (n5_Unit)) (mkCN old_A man_N))
+```
+```txt
+five old men
+```
+
+## mkNP-Numeral-N-NP
+```gf
+mkUtt (mkNP (mkNumeral (n5_Unit)) man_N)
+```
+```txt
+five men
+```
+
+## mkNP-Digits-CN-NP
+```gf
+mkUtt (mkNP (mkDigits n5_Dig (mkDigits n1_Dig)) (mkCN old_A man_N))
+```
+```txt
+5 Predef.BIND 1 old men
+```
+
+## mkNP-Digits-N-NP
+```gf
+mkUtt (mkNP (mkDigits n5_Dig (mkDigits n1_Dig)) man_N)
+```
+```txt
+5 Predef.BIND 1 men
+```
+
+## mkNP-Pron-CN-NP
+```gf
+mkUtt (mkNP i_Pron (mkCN old_A man_N))
+```
+```txt
+my old man
+```
+
+## mkNP-Pron-N-NP
+```gf
+mkUtt (mkNP i_Pron man_N)
+```
+```txt
+my man
+```
+
+## mkNP-PN-NP
+```gf
+mkUtt (mkNP paris_PN)
+```
+```txt
+Paris
+```
+
+## mkNP-Pron-NP
+```gf
+mkUtt (mkNP we_Pron)
+```
+```txt
+we
+```
+
+## mkNP-Quant-NP
+```gf
+mkUtt (mkNP this_Quant)
+```
+```txt
+this
+```
+
+## mkNP-Quant-Num-NP
+```gf
+mkUtt (mkNP this_Quant (mkNum (mkNumeral n5_Unit)))
+```
+```txt
+these five
+```
+
+## mkNP-Det-NP
+```gf
+mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit)) (mkOrd good_A)))
+```
+```txt
+the five best
+```
+
+## mkNP-CN-NP
+```gf
+mkUtt (mkNP (mkCN old_A beer_N))
+```
+```txt
+old beer
+```
+
+## mkNP-N-NP
+```gf
+mkUtt (mkNP beer_N)
+```
+```txt
+beer
+```
+
+## mkNP-Predet-NP-NP
+```gf
+mkUtt (mkNP only_Predet (mkNP this_Det woman_N))
+```
+```txt
+only this woman
+```
+
+## mkNP-NP-V2-NP
+```gf
+mkUtt (mkNP (mkNP the_Det man_N) see_V2)
+```
+```txt
+the man seen
+```
+
+## mkNP-NP-Adv-NP
+```gf
+mkUtt (mkNP (mkNP paris_PN) today_Adv)
+```
+```txt
+Paris today
+```
+
+## mkNP-NP-RS-NP
+```gf
+mkUtt (mkNP (mkNP john_PN) (mkRS (mkRCl which_RP (mkVP walk_V))))
+```
+```txt
+John , that walks pre {[]; [] / strs {","; "."};
+```
+
+## mkNP-Conj-NP-NP-NP
+```gf
+mkUtt (mkNP or_Conj (mkNP this_Det woman_N) (mkNP john_PN))
+```
+```txt
+this woman or John
+```
+
+## mkNP-Conj-ListNP-NP
+```gf
+mkUtt (mkNP or_Conj (mkListNP (mkNP this_Det woman_N) (mkListNP (mkNP john_PN) i_NP)))
+```
+```txt
+this woman , John or I
+```
+
+## i_NP-NP
+```gf
+mkUtt i_NP
+```
+```txt
+I
+```
+
+## you_NP-NP
+```gf
+mkUtt you_NP
+```
+```txt
+you
+```
+
+## youPol_NP-NP
+```gf
+mkUtt youPol_NP
+```
+```txt
+you
+```
+
+## he_NP-NP
+```gf
+mkUtt he_NP
+```
+```txt
+he
+```
+
+## she_NP-NP
+```gf
+mkUtt she_NP
+```
+```txt
+she
+```
+
+## it_NP-NP
+```gf
+mkUtt it_NP
+```
+```txt
+it
+```
+
+## we_NP-NP
+```gf
+mkUtt we_NP
+```
+```txt
+we
+```
+
+## youPl_NP-NP
+```gf
+mkUtt youPl_NP
+```
+```txt
+you
+```
+
+## they_NP-NP
+```gf
+mkUtt they_NP
+```
+```txt
+they
+```
+
+## mkDet-Quant-Det
+```gf
+mkUtt (mkNP (mkDet this_Quant))
+```
+```txt
+this
+```
+
+## this_NP-NP
+```gf
+mkUtt this_NP
+```
+```txt
+this
+```
+
+## that_NP-NP
+```gf
+mkUtt that_NP
+```
+```txt
+that
+```
+
+## these_NP-NP
+```gf
+mkUtt these_NP
+```
+```txt
+these
+```
+
+## those_NP-NP
+```gf
+mkUtt those_NP
+```
+```txt
+those
+```
+
+## mkDet-Quant-Card-Det
+```gf
+mkUtt (mkNP (mkDet this_Quant (mkCard (mkNumeral n5_Unit))))
+```
+```txt
+these five
+```
+
+## mkDet-Quant-Ord-Det
+```gf
+mkUtt (mkNP (mkDet the_Quant (mkOrd (mkNumeral n5_Unit))))
+```
+```txt
+the fifth
+```
+
+## mkDet-Quant-Num-Ord-Det
+```gf
+mkUtt (mkNP (mkDet the_Quant (mkNum (mkNumeral n5_Unit)) (mkOrd good_A)))
+```
+```txt
+the five best
+```
+
+## mkDet-Quant-Num-Det
+```gf
+mkUtt (mkNP (mkDet this_Quant pluralNum))
+```
+```txt
+these
+```
+
+## mkDet-Card-Det
+```gf
+mkUtt (mkNP (mkDet (mkCard (mkNumeral n5_Unit))))
+```
+```txt
+five
+```
+
+## mkUtt (mkNP (mkDet (mkNumeral n5_Unit)))
+```gf
+five
+```
+
+## mkDet-Pron-Det
+```gf
+mkUtt (mkNP (mkDet i_Pron))
+```
+```txt
+mine
+```
+
+## mkDet-Pron-Num-Det
+```gf
+mkUtt (mkNP (mkDet i_Pron  (mkNum (mkNumeral n5_Unit))))
+```
+```txt
+my five
+```
+
+## the_Det-Det
+```gf
+mkUtt (mkNP the_Det house_N)
+```
+```txt
+the house
+```
+
+## a_Det-Det
+```gf
+mkUtt (mkNP a_Det house_N)
+```
+```txt
+a house
+```
+
+## theSg_Det-Det
+```gf
+mkUtt (mkNP theSg_Det house_N)
+```
+```txt
+the house
+```
+
+## thePl_Det-Det
+```gf
+mkUtt (mkNP thePl_Det house_N)
+```
+```txt
+the houses
+```
+
+## aSg_Det-Det
+```gf
+mkUtt (mkNP aSg_Det woman_N)
+```
+```txt
+a woman
+```
+
+## aPl_Det-Det
+```gf
+mkUtt (mkNP aPl_Det woman_N)
+```
+```txt
+women
+```
+
+## this_Det-Det
+```gf
+mkUtt (mkNP this_Det woman_N)
+```
+```txt
+this woman
+```
+
+## that_Det-Det
+```gf
+mkUtt (mkNP that_Det woman_N)
+```
+```txt
+that woman
+```
+
+## these_Det-Det
+```gf
+mkUtt (mkNP these_Det woman_N)
+```
+```txt
+these women
+```
+
+## those_Det-Det
+```gf
+mkUtt (mkNP those_Det woman_N)
+```
+```txt
+those women
+```
+
+## mkQuant-Pron-Quant
+```gf
+mkUtt (mkNP (mkQuant i_Pron) house_N)
+```
+```txt
+my house
+```
+
+## the_Quant-Quant
+```gf
+mkUtt (mkNP the_Quant house_N)
+```
+```txt
+the house
+```
+
+## a_Quant-Quant
+```gf
+mkUtt (mkNP a_Quant house_N)
+```
+```txt
+a house
+```
+
+## mkNum-Numeral-Num
+```gf
+mkNum (mkNumeral (tenfoldSub100 n2_Unit))
+```
+```txt
+table
+```
+
+## mkNum-Digits-Num
+```gf
+mkNum (mkDigits n2_Dig (mkDigits n1_Dig))
+```
+```txt
+2 Predef.BIND 1
+```
+
+## mkNum-Card-Num
+```gf
+mkNum (mkCard almost_AdN (mkCard (mkNumeral n5_Unit)))
+```
+```txt
+almost five
+```
+
+## mkNum-AdN-Card-Num
+```gf
+mkNum (mkCard almost_AdN (mkCard (mkNumeral n5_Unit)))
+```
+```txt
+almost five
+```
+
+## mkCard-Numeral-Card
+```gf
+mkUtt (mkCard (mkNumeral n7_Unit))
+```
+```txt
+seven
+```
+
+## mkOrd-A-Ord
+```gf
+mkUtt (mkAP (mkOrd small_A))
+```
+```txt
+smallest
+```
+
+## mkAdN-CAdv-AdN
+```gf
+mkUtt (mkCard (mkAdN more_CAdv) (mkCard (mkNumeral n8_Unit)))
+```
+```txt
+more than eight
+```
+
+## mkNumeral-Sub1000-Numeral
+```gf
+mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))
+```
+```txt
+nine hundred and table
+```
+
+## mkNumeral-Sub1000-Sub1000-Numeral
+```gf
+mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit)) (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))
+```
+```txt
+nine hundred and table
+```
+
+## thousandfoldNumeral-Sub1000-Numeral
+```gf
+mkUtt (mkCard (thousandfoldNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))
+```
+```txt
+nine hundred and table
+```
+
+## mkSub1000-Sub100-Sub1000
+```gf
+mkUtt (mkCard (mkNumeral (mkSub1000 (mkSub100 n9_Unit n9_Unit))))
+```
+```txt
+table
+```
+
+## mkSub1000-Unit-Sub1000
+```gf
+mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit)))
+```
+```txt
+nine hundred
+```
+
+## mkSub1000-Unit-Sub100-Sub1000
+```gf
+mkUtt (mkCard (mkNumeral (mkSub1000 n9_Unit (mkSub100 n9_Unit n9_Unit))))
+```
+```txt
+nine hundred and table
+```
+
+## mkSub100-Unit-Sub100
+```gf
+mkUtt (mkCard (mkNumeral (mkSub100 n8_Unit)))
+```
+```txt
+eight
+```
+
+## mkSub100-Unit-Unit-Sub100
+```gf
+mkUtt (mkCard (mkNumeral (mkSub100 n8_Unit n3_Unit)))
+```
+```txt
+table
+```
+
+## tenfoldSub100-Unit-Sub100
+```gf
+mkUtt (mkCard (mkNumeral (mkSub100 n8_Unit)))
+```
+```txt
+eight
+```
+
+## n1_Unit-Unit
+```gf
+mkUtt (mkCard (mkNumeral n1_Unit))
+```
+```txt
+one
+```
+
+## n2_Unit-Unit
+```gf
+mkUtt (mkCard (mkNumeral n2_Unit))
+```
+```txt
+two
+```
+
+## n3_Unit-Unit
+```gf
+mkUtt (mkCard (mkNumeral n3_Unit))
+```
+```txt
+three
+```
+
+## n4_Unit-Unit
+```gf
+mkUtt (mkCard (mkNumeral n4_Unit))
+```
+```txt
+four
+```
+
+## n5_Unit-Unit
+```gf
+mkUtt (mkCard (mkNumeral n5_Unit))
+```
+```txt
+five
+```
+
+## n6_Unit-Unit
+```gf
+mkUtt (mkCard (mkNumeral n6_Unit))
+```
+```txt
+six
+```
+
+## n7_Unit-Unit
+```gf
+mkUtt (mkCard (mkNumeral n7_Unit))
+```
+```txt
+seven
+```
+
+## n8_Unit-Unit
+```gf
+mkUtt (mkCard (mkNumeral n8_Unit))
+```
+```txt
+eight
+```
+
+## n9_Unit-Unit
+```gf
+mkUtt (mkCard (mkNumeral n9_Unit))
+```
+```txt
+nine
+```
+
+## mkDigits-Dig-Digits
+```gf
+mkUtt (mkCard (mkDigits n4_Dig))
+```
+```txt
+4
+```
+
+## mkDigits-Dig-Digits-Digits
+```gf
+mkUtt (mkCard (mkDigits n1_Dig (mkDigits n2_Dig (mkDigits n3_Dig (mkDigits n3_Dig (mkDigits n4_Dig (mkDigits n8_Dig (mkDigits n6_Dig))))))))
+```
+```txt
+1 Predef.BIND , Predef.BIND 2 Predef.BIND 3 Predef.BIND 3 Predef.BIND , Predef.BIND 4 Predef.BIND 8 Predef.BIND 6
+```
+
+## mkCN-N-CN
+```gf
+mkUtt (mkCN house_N )
+```
+```txt
+house
+```
+
+## mkCN-N2-NP-CN
+```gf
+mkUtt (mkCN mother_N2 (mkNP the_Det king_N))
+```
+```txt
+mother of the king
+```
+
+## mkCN-N3-NP-NP-CN
+```gf
+mkUtt (mkCN distance_N3 (mkNP this_Det city_N) (mkNP paris_PN) )
+```
+```txt
+distance from this city to Paris
+```
+
+## mkCN-N2-CN
+```gf
+mkUtt (mkCN mother_N2)
+```
+```txt
+mother
+```
+
+## mkCN-N3-CN
+```gf
+mkUtt (mkCN distance_N3)
+```
+```txt
+distance
+```
+
+## mkCN-A-N-CN
+```gf
+mkUtt (mkCN big_A house_N  )
+```
+```txt
+big house
+```
+
+## mkCN-A-CN-CN
+```gf
+mkUtt (mkCN big_A (mkCN blue_A house_N))
+```
+```txt
+big blue house
+```
+
+## mkCN-AP-N-CN
+```gf
+mkUtt (mkCN (mkAP very_AdA big_A) house_N  )
+```
+```txt
+very big house
+```
+
+## mkCN-AP-CN-CN
+```gf
+mkUtt (mkCN (mkAP very_AdA big_A) (mkCN blue_A house_N)  )
+```
+```txt
+very big blue house
+```
+
+## mkCN-N-RS-CN
+```gf
+mkUtt (mkCN man_N (mkRS (mkRCl which_RP she_NP love_V2)))
+```
+```txt
+man that she loves
+```
+
+## mkCN-CN-RS-CN
+```gf
+mkUtt (mkCN (mkCN old_A man_N) (mkRS (mkRCl which_RP she_NP love_V2)) )
+```
+```txt
+old man that she loves
+```
+
+## mkCN-N-Adv-CN
+```gf
+mkUtt (mkCN house_N (mkAdv on_Prep (mkNP the_Det hill_N)))
+```
+```txt
+house on the hill
+```
+
+## mkCN-CN-Adv-CN
+```gf
+mkUtt (mkCN (mkCN big_A house_N) (mkAdv on_Prep (mkNP the_Det hill_N)))
+```
+```txt
+big house on the hill
+```
+
+## mkCN-CN-S-CN
+```gf
+mkUtt (mkCN (mkCN rule_N) (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+rule that she sleeps
+```
+
+## mkCN-CN-QS-CN
+```gf
+mkUtt (mkCN (mkCN question_N) (mkQS (mkQCl (mkCl she_NP sleep_V))))
+```
+```txt
+question if she sleeps
+```
+
+## mkCN-CN-VP-CN
+```gf
+mkUtt (mkCN (mkCN reason_N) (mkVP sleep_V))
+```
+```txt
+reason to sleep
+```
+
+## mkCN-CN-SC-CN
+```gf
+mkUtt (mkCN (mkCN reason_N) (mkVP sleep_V))
+```
+```txt
+reason to sleep
+```
+
+## mkCN-N-NP-CN
+```gf
+mkUtt (mkCN king_N (mkNP john_PN) )
+```
+```txt
+king John
+```
+
+## mkCN-CN-NP-CN
+```gf
+mkUtt (mkCN (mkCN old_A king_N) (mkNP john_PN))
+```
+```txt
+old king John
+```
+
+## mkAP-A-AP
+```gf
+mkUtt (mkAP warm_A)
+```
+```txt
+warm
+```
+
+## mkAP-A-NP-AP
+```gf
+mkUtt (mkAP warm_A (mkNP paris_PN))
+```
+```txt
+warmer than Paris
+```
+
+## mkAP-A2-NP-AP
+```gf
+mkUtt (mkAP married_A2 she_NP )
+```
+```txt
+married to her
+```
+
+## mkAP-A2-AP
+```gf
+mkUtt (mkAP married_A2)
+```
+```txt
+married
+```
+
+## mkAP-AP-S-AP
+```gf
+mkUtt (mkCl (mkVP (mkAP (mkAP good_A) (mkS (mkCl she_NP sleep_V)))))
+```
+```txt
+it is good that she sleeps
+```
+
+## mkAP-AP-QS-AP
+```gf
+mkUtt (mkCl (mkVP (mkAP (mkAP uncertain_A) (mkQS (mkQCl who_IP sleep_V)))))
+```
+```txt
+it is uncertain who sleeps
+```
+
+## mkAP-AP-VP-AP
+```gf
+mkUtt (mkCl she_NP (mkAP (mkAP ready_A) (mkVP sleep_V)))
+```
+```txt
+she is ready to sleep
+```
+
+## mkAP-AP-SC-AP
+```gf
+mkUtt (mkCl she_NP (mkAP (mkAP ready_A) (mkSC (mkVP sleep_V))))
+```
+```txt
+she is ready to sleep
+```
+
+## mkAP-AdA-A-AP
+```gf
+mkUtt (mkAP very_AdA old_A)
+```
+```txt
+very old
+```
+
+## mkAP-AdA-AP-AP
+```gf
+mkUtt (mkAP very_AdA (mkAP very_AdA old_A))
+```
+```txt
+very very old
+```
+
+## mkAP-Conj-AP-AP-AP
+```gf
+mkUtt (mkAP or_Conj (mkAP old_A) (mkAP young_A))
+```
+```txt
+old or young
+```
+
+## mkAP-Conj-ListAP-AP
+```gf
+mkUtt (mkAP and_Conj (mkListAP (mkAP old_A) (mkListAP (mkAP big_A) (mkAP warm_A))))
+```
+```txt
+old , big and warm
+```
+
+## mkAP-Ord-AP
+```gf
+mkUtt (mkAP (mkOrd old_A))
+```
+```txt
+oldest
+```
+
+## mkAP-CAdv-AP-NP-AP
+```gf
+mkUtt (mkAP as_CAdv (mkAP old_A) she_NP)
+```
+```txt
+as old as she
+```
+
+## reflAP-A2-AP
+```gf
+mkUtt (reflAP married_A2)
+```
+```txt
+married to itself
+```
+
+## comparAP-A-AP
+```gf
+mkUtt (comparAP warm_A)
+```
+```txt
+warmer
+```
+
+## mkAdv-A-Adv
+```gf
+mkUtt (mkAdv warm_A)
+```
+```txt
+warmly
+```
+
+## mkAdv-Prep-NP-Adv
+```gf
+mkUtt (mkAdv in_Prep (mkNP the_Det house_N))
+```
+```txt
+in the house
+```
+
+## mkAdv-Subj-S-Adv
+```gf
+mkUtt (mkAdv when_Subj (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+when she sleeps
+```
+
+## mkAdv-CAdv-A-NP-Adv
+```gf
+mkUtt (mkAdv more_CAdv warm_A he_NP  )
+```
+```txt
+more warmly than he
+```
+
+## mkAdv-CAdv-A-S-Adv
+```gf
+mkUtt (mkAdv more_CAdv warm_A (mkS (mkCl he_NP run_V))  )
+```
+```txt
+more warmly than he runs
+```
+
+## mkAdv-AdA-Adv-Adv
+```gf
+mkUtt (mkAdv very_AdA (mkAdv warm_A) )
+```
+```txt
+very warmly
+```
+
+## mkAdv-Conj-Adv-Adv-Adv
+```gf
+mkUtt (mkAdv and_Conj here_Adv now_Adv)
+```
+```txt
+here and now
+```
+
+## mkAdv-Conj-ListAdv-Adv
+```gf
+mkUtt (mkAdv and_Conj (mkListAdv (mkAdv with_Prep she_NP) (mkListAdv here_Adv now_Adv)))
+```
+```txt
+with her , here and now
+```
+
+## mkQS-Tense-Ant-Pol-QCl-QS
+```gf
+mkUtt (mkQS conditionalTense anteriorAnt negativePol (mkQCl who_IP sleep_V))
+```
+```txt
+who wouldn't have slept
+```
+
+## mkQS-Cl-QS
+```gf
+mkUtt (mkQS (mkCl she_NP sleep_V))
+```
+```txt
+does she sleep
+```
+
+## mkQCl-Cl-QCl
+```gf
+mkUtt (mkQCl (mkCl she_NP sleep_V))
+```
+```txt
+does she sleep
+```
+
+## mkQCl-IP-VP-QCl
+```gf
+mkUtt (mkQCl who_IP (mkVP (mkVP sleep_V) here_Adv))
+```
+```txt
+who sleeps here
+```
+
+## mkQCl-IP-V-QCl
+```gf
+mkUtt (mkQCl who_IP sleep_V)
+```
+```txt
+who sleeps
+```
+
+## mkQCl-IP-V2-NP-QCl
+```gf
+mkUtt (mkQCl who_IP love_V2 she_NP)
+```
+```txt
+who loves her
+```
+
+## mkQCl-IP-V3-NP-NP-QCl
+```gf
+mkUtt (mkQCl who_IP send_V3 it_NP she_NP)
+```
+```txt
+who sends it to her
+```
+
+## mkQCl-IP-VV-VP-QCl
+```gf
+mkUtt (mkQCl who_IP want_VV (mkVP sleep_V))
+```
+```txt
+who wants to sleep
+```
+
+## mkQCl-IP-VS-S-QCl
+```gf
+mkUtt (mkQCl who_IP say_VS (mkS (mkCl i_NP sleep_V)))
+```
+```txt
+who says that I sleep
+```
+
+## mkQCl-IP-VQ-QS-QCl
+```gf
+mkUtt (mkQCl who_IP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))
+```
+```txt
+who wonders who sleeps
+```
+
+## mkQCl-IP-VA-A-QCl
+```gf
+mkUtt (mkQCl who_IP become_VA old_A)
+```
+```txt
+who becomes old
+```
+
+## mkQCl-IP-VA-AP-QCl
+```gf
+mkUtt (mkQCl who_IP become_VA (mkAP very_AdA old_A))
+```
+```txt
+who becomes very old
+```
+
+## mkQCl-IP-V2A-NP-A-QCl
+```gf
+mkUtt (mkQCl who_IP paint_V2A it_NP red_A)
+```
+```txt
+who paints it red
+```
+
+## mkQCl-IP-V2A-NP-AP-QCl
+```gf
+mkUtt (mkQCl who_IP paint_V2A it_NP (mkAP very_AdA red_A))
+```
+```txt
+who paints it very red
+```
+
+## mkQCl-IP-V2S-NP-S-QCl
+```gf
+mkUtt (mkQCl who_IP answer_V2S he_NP (mkS (mkCl we_NP sleep_V)))
+```
+```txt
+who answers to him that we sleep
+```
+
+## mkQCl-IP-V2Q-NP-QS-QCl
+```gf
+mkUtt (mkQCl who_IP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))
+```
+```txt
+who asks him who sleeps
+```
+
+## mkQCl-IP-V2V-NP-VP-QCl
+```gf
+mkUtt (mkQCl who_IP beg_V2V he_NP (mkVP sleep_V))
+```
+```txt
+who begs him to sleep
+```
+
+## mkQCl-IP-A-QCl
+```gf
+mkUtt (mkQCl who_IP old_A)
+```
+```txt
+who is old
+```
+
+## mkQCl-IP-A-NP-QCl
+```gf
+mkUtt (mkQCl who_IP old_A he_NP)
+```
+```txt
+who is older than he
+```
+
+## mkQCl-IP-A2-NP-QCl
+```gf
+mkUtt (mkQCl who_IP married_A2 he_NP)
+```
+```txt
+who is married to him
+```
+
+## mkQCl-IP-AP-QCl
+```gf
+mkUtt (mkQCl who_IP (mkAP very_AdA old_A))
+```
+```txt
+who is very old
+```
+
+## mkQCl-IP-NP-QCl
+```gf
+mkUtt (mkQCl who_IP (mkNP the_Det woman_N))
+```
+```txt
+who is the woman
+```
+
+## mkQCl-IP-N-QCl
+```gf
+mkUtt (mkQCl who_IP woman_N)
+```
+```txt
+who is a woman
+```
+
+## mkQCl-IP-CN-QCl
+```gf
+mkUtt (mkQCl who_IP (mkCN old_A woman_N))
+```
+```txt
+who is an old woman
+```
+
+## mkQCl-IP-Adv-QCl
+```gf
+mkUtt (mkQCl who_IP here_Adv)
+```
+```txt
+who is here
+```
+
+## mkQCl-IP-VP-QCl
+```gf
+mkUtt (mkQCl who_IP (mkVP always_AdV (mkVP sleep_V)))
+```
+```txt
+who always sleeps
+```
+
+## mkQCl-IAdv-Cl-QCl
+```gf
+mkUtt (mkQCl why_IAdv (mkCl she_NP sleep_V)     )
+```
+```txt
+why does she sleep
+```
+
+## mkQCl-Prep-IP-Cl-QCl
+```gf
+mkUtt (mkQCl with_Prep who_IP (mkCl she_NP sleep_V)      )
+```
+```txt
+with whom does she sleep
+```
+
+## mkQCl-IAdv-NP-QCl
+```gf
+mkUtt (mkQCl where_IAdv she_NP )
+```
+```txt
+where is she
+```
+
+## mkQCl-IComp-NP-QCl
+```gf
+mkUtt (mkQCl (mkIComp who_IP) (mkNP this_Det man_N))
+```
+```txt
+who is this man
+```
+
+## mkQCl-IP-QCl
+```gf
+mkUtt (mkQCl (mkIP which_IQuant city_N))
+```
+```txt
+which city is there
+```
+
+## mkQCl-IP-NP-V2-QCl
+```gf
+mkUtt (mkQCl who_IP she_NP)
+```
+```txt
+who is her
+```
+
+## mkQCl-IP-ClSlash-QCl
+```gf
+mkUtt (mkQCl who_IP (mkClSlash (mkClSlash she_NP love_V2) today_Adv))
+```
+```txt
+whom does she love today
+```
+
+## mkIP-IDet-CN-IP
+```gf
+mkUtt (mkIP (mkIDet which_IQuant (mkNum (mkNumeral n5_Unit))) (mkCN big_A city_N)    )
+```
+```txt
+which five big cities
+```
+
+## mkIP-IDet-N-IP
+```gf
+mkUtt (mkIP (mkIDet which_IQuant (mkNum (mkNumeral n5_Unit))) city_N    )
+```
+```txt
+which five cities
+```
+
+## mkIP-IDet-IP
+```gf
+mkUtt (mkIP (mkIDet which_IQuant (mkNum (mkNumeral n5_Unit))))
+```
+```txt
+which five
+```
+
+## mkIP-IQuant-CN-IP
+```gf
+mkUtt (mkIP which_IQuant (mkCN big_A city_N)    )
+```
+```txt
+which big city
+```
+
+## mkIP-IQuant-Num-CN-IP
+```gf
+mkUtt (mkIP which_IQuant (mkNum (mkNumeral n5_Unit)) (mkCN big_A city_N)    )
+```
+```txt
+which five big cities
+```
+
+## mkIP-IQuant-N-IP
+```gf
+mkUtt (mkIP which_IQuant city_N)
+```
+```txt
+which city
+```
+
+## mkIP-IP-Adv-IP
+```gf
+mkUtt (mkIP who_IP (mkAdv in_Prep (mkNP paris_PN)))
+```
+```txt
+who in Paris
+```
+
+## what_IP-IP
+```gf
+mkUtt what_IP
+```
+```txt
+what
+```
+
+## who_IP-IP
+```gf
+mkUtt who_IP
+```
+```txt
+who
+```
+
+## mkIAdv-Prep-IP-IAdv
+```gf
+mkUtt (mkIAdv in_Prep (mkIP which_IQuant city_N))
+```
+```txt
+in which city
+```
+
+## mkIAdv-IAdv-Adv-IAdv
+```gf
+mkUtt (mkIAdv where_IAdv (mkAdv in_Prep (mkNP paris_PN))  )
+```
+```txt
+where in Paris
+```
+
+## mkIDet-IQuant-Num-IDet
+```gf
+mkUtt (mkIP (mkIDet which_IQuant pluralNum) house_N)
+```
+```txt
+which houses
+```
+
+## mkIDet-IQuant-IDet
+```gf
+mkUtt (mkIP (mkIDet which_IQuant) house_N      )
+```
+```txt
+which house
+```
+
+## which_IDet-IDet
+```gf
+mkUtt (mkIP which_IDet house_N)
+```
+```txt
+which house
+```
+
+## whichPl_IDet-IDet
+```gf
+mkUtt (mkIP whichPl_IDet house_N)
+```
+```txt
+which houses
+```
+
+## mkRS-Tense-Ant-Pol-RCl-RS
+```gf
+mkUtt (mkCN woman_N (mkRS conditionalTense anteriorAnt negativePol (mkRCl which_RP sleep_V)))
+```
+```txt
+woman that wouldn't have slept
+```
+
+## mkRS-RCl-RS
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP sleep_V)))
+```
+```txt
+woman that sleeps
+```
+
+## mkRS-Conj-RS-RS-RS
+```gf
+mkUtt (mkCN woman_N (mkRS or_Conj (mkRS (mkRCl which_RP sleep_V)) (mkRS (mkRCl which_RP we_NP love_V2))))
+```
+```txt
+woman that sleeps or that we love
+```
+
+## mkRCl-RP-VP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkVP (mkVP sleep_V) here_Adv))))
+```
+```txt
+woman that sleeps here
+```
+
+## mkRCl-RP-V-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP sleep_V)))
+```
+```txt
+woman that sleeps
+```
+
+## mkRCl-RP-V2-NP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP love_V2 he_NP)))
+```
+```txt
+woman that loves him
+```
+
+## mkRCl-RP-V3-NP-NP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP send_V3 it_NP he_NP)))
+```
+```txt
+woman that sends it to him
+```
+
+## mkRCl-RP-VV-VP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP want_VV (mkVP sleep_V))))
+```
+```txt
+woman that wants to sleep
+```
+
+## mkRCl-RP-VS-S-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP say_VS (mkS (mkCl i_NP sleep_V)))))
+```
+```txt
+woman that says that I sleep
+```
+
+## mkRCl-RP-VQ-QS-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP wonder_VQ (mkQS (mkQCl who_IP sleep_V)))))
+```
+```txt
+woman that wonders who sleeps
+```
+
+## mkRCl-RP-VA-A-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP become_VA old_A)))
+```
+```txt
+woman that becomes old
+```
+
+## mkRCl-RP-VA-AP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP become_VA (mkAP very_AdA old_A))))
+```
+```txt
+woman that becomes very old
+```
+
+## mkRCl-RP-V2A-NP-A-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP paint_V2A it_NP red_A)))
+```
+```txt
+woman that paints it red
+```
+
+## mkRCl-RP-V2A-NP-AP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP paint_V2A it_NP (mkAP very_AdA red_A))))
+```
+```txt
+woman that paints it very red
+```
+
+## mkRCl-RP-V2S-NP-S-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP answer_V2S he_NP (mkS (mkCl we_NP sleep_V)))))
+```
+```txt
+woman that answers to him that we sleep
+```
+
+## mkRCl-RP-V2Q-NP-QS-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP ask_V2Q he_NP (mkQS (mkQCl who_IP sleep_V)))))
+```
+```txt
+woman that asks him who sleeps
+```
+
+## mkRCl-RP-V2V-NP-VP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP beg_V2V he_NP (mkVP sleep_V))))
+```
+```txt
+woman that begs him to sleep
+```
+
+## mkRCl-RP-A-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP old_A)))
+```
+```txt
+woman that is old
+```
+
+## mkRCl-RP-A-NP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP old_A he_NP)))
+```
+```txt
+woman that is older than he
+```
+
+## mkRCl-RP-A2-NP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP married_A2 he_NP)))
+```
+```txt
+woman that is married to him
+```
+
+## mkRCl-RP-AP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkAP very_AdA old_A))))
+```
+```txt
+woman that is very old
+```
+
+## mkRCl-RP-NP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkNP the_Det woman_N))))
+```
+```txt
+woman that is the woman
+```
+
+## mkRCl-RP-N-RCl
+```gf
+mkUtt (mkCN student_N (mkRS (mkRCl which_RP woman_N)))
+```
+```txt
+student that is a woman
+```
+
+## mkRCl-RP-CN-RCl
+```gf
+mkUtt (mkCN student_N (mkRS (mkRCl which_RP (mkCN old_A woman_N))))
+```
+```txt
+student that is an old woman
+```
+
+## mkRCl-RP-Adv-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP here_Adv)))
+```
+```txt
+woman that is here
+```
+
+## mkRCl-RP-VP-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkVP always_AdV (mkVP sleep_V)))))
+```
+```txt
+woman that always sleeps
+```
+
+## mkRCl-RP-NP-V2-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP we_NP love_V2)))
+```
+```txt
+woman that we love
+```
+
+## mkRCl-RP-ClSlash-RCl
+```gf
+mkUtt (mkCN woman_N (mkRS (mkRCl which_RP (mkClSlash (mkClSlash she_NP love_V2) today_Adv))))
+```
+```txt
+woman that she loves today
+```
+
+## which_RP-RP
+```gf
+which_RP
+```
+```txt
+which
+```
+
+## mkRP-Prep-NP-RP-RP
+```gf
+mkRP in_Prep (mkNP all_Predet (mkNP the_Quant pluralNum city_N)) which_RP
+```
+```txt
+all the cities in which
+```
+
+## mkSSlash-Temp-Pol-ClSlash-SSlash
+```gf
+mkSSlash (mkTemp pastTense anteriorAnt) negativePol (mkClSlash she_NP (mkVPSlash see_V2))
+```
+```txt
+she hadn't seen
+```
+
+## mkClSlash-NP-VPSlash-ClSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash see_V2)))
+```
+```txt
+whom does she see
+```
+
+## mkClSlash-NP-V2-ClSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP see_V2))
+```
+```txt
+whom does she see
+```
+
+## mkClSlash-NP-VV-V2-ClSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP want_VV see_V2))
+```
+```txt
+whom does she want to see
+```
+
+## mkClSlash-Cl-Prep-ClSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash (mkCl she_NP sleep_V) with_Prep))
+```
+```txt
+whom does she sleep with
+```
+
+## mkClSlash-ClSlash-Adv-ClSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash (mkClSlash she_NP see_V2) today_Adv))
+```
+```txt
+whom does she see today
+```
+
+## mkClSlash-NP-VS-SSlash-ClSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP know_VS (mkSSlash (mkTemp pastTense anteriorAnt) negativePol (mkClSlash we_NP (mkVPSlash see_V2)))))
+```
+```txt
+whom does she know that we hadn't seen
+```
+
+## mkVPSlash-V2-VPSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash see_V2)))
+```
+```txt
+whom does she see
+```
+
+## mkVPSlash-V3-NP-VPSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash send_V3 it_NP))  )
+```
+```txt
+whom does she send it to
+```
+
+## mkVPSlash-V2A-AP-VPSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash paint_V2A (mkAP red_A)))  )
+```
+```txt
+whom does she paint red
+```
+
+## mkVPSlash-V2Q-QS-VPSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash ask_V2Q (mkQS (mkQCl where_IAdv (mkCl i_NP sleep_V)))))   )
+```
+```txt
+whom does she ask where I sleep
+```
+
+## mkVPSlash-V2S-S-VPSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash answer_V2S (mkS (mkCl i_NP sleep_V))))   )
+```
+```txt
+whom does she answer that I sleep to
+```
+
+## mkVPSlash-V2V-VP-VPSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash beg_V2V (mkVP sleep_V))))
+```
+```txt
+whom does she beg to sleep
+```
+
+## mkVPSlash-VV-VPSlash-VPSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash want_VV (mkVPSlash see_V2))))
+```
+```txt
+whom does she want to see
+```
+
+## mkVPSlash-V2V-NP-VPSlash-VPSlash
+```gf
+mkUtt (mkQCl who_IP (mkClSlash she_NP (mkVPSlash beg_V2V i_NP (mkVPSlash see_V2))))
+```
+```txt
+whom does she beg me to see
+```
+
+## above_Prep-Prep
+```gf
+mkUtt (mkAdv above_Prep it_NP)
+```
+```txt
+above it
+```
+
+## after_Prep-Prep
+```gf
+mkUtt (mkAdv after_Prep it_NP)
+```
+```txt
+after it
+```
+
+## all_Predet-Predet
+```gf
+mkUtt (mkNP all_Predet (mkNP thePl_Det man_N))
+```
+```txt
+all the men
+```
+
+## almost_AdA-AdA
+```gf
+mkUtt (mkAP almost_AdA red_A)
+```
+```txt
+almost red
+```
+
+## almost_AdN-AdN
+```gf
+mkUtt (mkCard almost_AdN (mkCard (mkNumeral n8_Unit))    )
+```
+```txt
+almost eight
+```
+
+## although_Subj-Subj
+```gf
+mkUtt (mkAdv although_Subj (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+although she sleeps
+```
+
+## always_AdV-AdV
+```gf
+always_AdV
+```
+```txt
+always
+```
+
+## and_Conj-Conj
+```gf
+mkUtt (mkAdv and_Conj here_Adv now_Adv)
+```
+```txt
+here and now
+```
+
+## because_Subj-Subj
+```gf
+mkUtt (mkAdv because_Subj (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+because she sleeps
+```
+
+## before_Prep-Prep
+```gf
+mkUtt (mkAdv before_Prep it_NP)
+```
+```txt
+before it
+```
+
+## behind_Prep-Prep
+```gf
+mkUtt (mkAdv behind_Prep it_NP)
+```
+```txt
+behind it
+```
+
+## between_Prep-Prep
+```gf
+mkUtt (mkAdv between_Prep (mkNP and_Conj you_NP i_NP))
+```
+```txt
+between you and me
+```
+
+## both7and_DConj-Conj
+```gf
+mkUtt (mkAdv both7and_DConj here_Adv there_Adv)
+```
+```txt
+both here and there
+```
+
+## but_PConj-PConj
+```gf
+but_PConj
+```
+```txt
+but
+```
+
+## by8agent_Prep-Prep
+```gf
+mkUtt (mkAdv by8agent_Prep it_NP)
+```
+```txt
+by it
+```
+
+## by8means_Prep-Prep
+```gf
+mkUtt (mkAdv by8means_Prep it_NP)
+```
+```txt
+by it
+```
+
+## can8know_VV-VV
+```gf
+mkUtt (mkVP can8know_VV (mkVP sleep_V))
+```
+```txt
+to be able to sleep
+```
+
+## can_VV-VV
+```gf
+mkUtt (mkVP can_VV (mkVP sleep_V))
+```
+```txt
+to be able to sleep
+```
+
+## during_Prep-Prep
+```gf
+mkUtt (mkAdv during_Prep it_NP)
+```
+```txt
+during it
+```
+
+## either7or_DConj-Conj
+```gf
+mkUtt (mkAdv either7or_DConj here_Adv there_Adv)
+```
+```txt
+either here or there
+```
+
+## every_Det-Det
+```gf
+mkUtt (mkNP every_Det woman_N)
+```
+```txt
+every woman
+```
+
+## everybody_NP-NP
+```gf
+mkUtt everybody_NP
+```
+```txt
+everybody
+```
+
+## everything_NP-NP
+```gf
+mkUtt everything_NP
+```
+```txt
+everything
+```
+
+## everywhere_Adv-Adv
+```gf
+mkUtt (everywhere_Adv)
+```
+```txt
+everywhere
+```
+
+## few_Det-Det
+```gf
+mkUtt (mkNP few_Det woman_N)
+```
+```txt
+few women
+```
+
+## for_Prep-Prep
+```gf
+mkUtt (mkAdv for_Prep it_NP)
+```
+```txt
+for it
+```
+
+## from_Prep-Prep
+```gf
+mkUtt (mkAdv from_Prep it_NP)
+```
+```txt
+from it
+```
+
+## he_Pron-Pron
+```gf
+mkUtt (mkNP he_Pron)
+```
+```txt
+he
+```
+
+## here_Adv-Adv
+```gf
+mkUtt (here_Adv)
+```
+```txt
+here
+```
+
+## here7to_Adv-Adv
+```gf
+mkUtt (here7to_Adv)
+```
+```txt
+to here
+```
+
+## here7from_Adv-Adv
+```gf
+mkUtt (here7from_Adv)
+```
+```txt
+from here
+```
+
+## how_IAdv-IAdv
+```gf
+mkUtt how_IAdv
+```
+```txt
+how
+```
+
+## how8many_IDet-IDet
+```gf
+mkUtt (mkIP how8many_IDet house_N)
+```
+```txt
+how many houses
+```
+
+## how8much_IAdv-IAdv
+```gf
+mkUtt how8much_IAdv
+```
+```txt
+how much
+```
+
+## i_Pron-Pron
+```gf
+mkUtt (mkNP i_Pron)
+```
+```txt
+I
+```
+
+## if_Subj-Subj
+```gf
+mkUtt (mkAdv if_Subj (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+if she sleeps
+```
+
+## in8front_Prep-Prep
+```gf
+mkUtt (mkAdv in8front_Prep it_NP)
+```
+```txt
+in front of it
+```
+
+## in_Prep-Prep
+```gf
+mkUtt (mkAdv in_Prep it_NP)
+```
+```txt
+in it
+```
+
+## it_Pron-Pron
+```gf
+mkUtt (mkNP it_Pron)
+```
+```txt
+it
+```
+
+## less_CAdv-CAdv
+```gf
+less_CAdv
+```
+```txt
+less
+```
+
+## many_Det-Det
+```gf
+mkUtt (mkNP many_Det house_N)
+```
+```txt
+many houses
+```
+
+## more_CAdv-CAdv
+```gf
+more_CAdv
+```
+```txt
+more
+```
+
+## most_Predet-Predet
+```gf
+most_Predet
+```
+```txt
+most
+```
+
+## much_Det-Det
+```gf
+mkUtt (mkNP much_Det wine_N)
+```
+```txt
+much wine
+```
+
+## must_VV-VV
+```gf
+must_VV
+```
+```txt
+have to
+```
+
+## no_Utt-Utt
+```gf
+no_Utt
+```
+```txt
+no
+```
+
+## on_Prep-Prep
+```gf
+mkUtt (mkAdv on_Prep it_NP)
+```
+```txt
+on it
+```
+
+## only_Predet-Predet
+```gf
+only_Predet
+```
+```txt
+only
+```
+
+## or_Conj-Conj
+```gf
+mkUtt (mkAdv or_Conj here_Adv there_Adv)
+```
+```txt
+here or there
+```
+
+## otherwise_PConj-PConj
+```gf
+otherwise_PConj
+```
+```txt
+otherwise
+```
+
+## part_Prep-Prep
+```gf
+mkUtt (mkAdv part_Prep it_NP)
+```
+```txt
+of it
+```
+
+## please_Voc-Voc
+```gf
+please_Voc
+```
+```txt
+please
+```
+
+## possess_Prep-Prep
+```gf
+mkUtt (mkAdv possess_Prep it_NP)
+```
+```txt
+of it
+```
+
+## quite_Adv-AdA
+```gf
+quite_Adv
+```
+```txt
+quite
+```
+
+## she_Pron-Pron
+```gf
+mkUtt (mkNP she_Pron)
+```
+```txt
+she
+```
+
+## so_AdA-AdA
+```gf
+mkUtt (mkAP so_AdA warm_A)
+```
+```txt
+so warm
+```
+
+## someSg_Det-Det
+```gf
+mkUtt (mkNP someSg_Det wine_N)
+```
+```txt
+some wine
+```
+
+## somePl_Det-Det
+```gf
+mkUtt (mkNP somePl_Det woman_N)
+```
+```txt
+some women
+```
+
+## somebody_NP-NP
+```gf
+mkUtt somebody_NP
+```
+```txt
+somebody
+```
+
+## something_NP-NP
+```gf
+mkUtt something_NP
+```
+```txt
+something
+```
+
+## somewhere_Adv-Adv
+```gf
+mkUtt (somewhere_Adv)
+```
+```txt
+somewhere
+```
+
+## that_Quant-Quant
+```gf
+mkUtt (mkNP that_Quant house_N)
+```
+```txt
+that house
+```
+
+## that_Subj-Subj
+```gf
+mkUtt (mkAdv that_Subj (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+that she sleeps
+```
+
+## there_Adv-Adv
+```gf
+mkUtt (there_Adv)
+```
+```txt
+there
+```
+
+## there7to_Adv-Adv
+```gf
+mkUtt (there7to_Adv)
+```
+```txt
+there
+```
+
+## there7from_Adv-Adv
+```gf
+mkUtt (there7from_Adv)
+```
+```txt
+from there
+```
+
+## therefore_PConj-PConj
+```gf
+therefore_PConj
+```
+```txt
+therefore
+```
+
+## they_Pron-Pron
+```gf
+mkUtt (mkNP they_Pron)
+```
+```txt
+they
+```
+
+## this_Quant-Quant
+```gf
+mkUtt (mkNP this_Quant house_N)
+```
+```txt
+this house
+```
+
+## through_Prep-Prep
+```gf
+mkUtt (mkAdv through_Prep it_NP)
+```
+```txt
+through it
+```
+
+## to_Prep-Prep
+```gf
+mkUtt (mkAdv to_Prep it_NP)
+```
+```txt
+to it
+```
+
+## too_AdA-AdA
+```gf
+mkUtt (mkAP too_AdA warm_A)
+```
+```txt
+too warm
+```
+
+## under_Prep-Prep
+```gf
+mkUtt (mkAdv under_Prep it_NP)
+```
+```txt
+under it
+```
+
+## very_AdA-AdA
+```gf
+mkUtt (mkAP very_AdA warm_A)
+```
+```txt
+very warm
+```
+
+## want_VV-VV
+```gf
+mkUtt (mkVP want_VV (mkVP sleep_V))
+```
+```txt
+to want to sleep
+```
+
+## we_Pron-Pron
+```gf
+mkUtt (mkNP we_Pron)
+```
+```txt
+we
+```
+
+## whatPl_IP-IP
+```gf
+mkUtt (whatPl_IP)
+```
+```txt
+what
+```
+
+## whatSg_IP-IP
+```gf
+mkUtt (whatSg_IP)
+```
+```txt
+what
+```
+
+## when_IAdv-IAdv
+```gf
+mkUtt when_IAdv
+```
+```txt
+when
+```
+
+## when_Subj-Subj
+```gf
+mkUtt (mkAdv when_Subj (mkS (mkCl she_NP sleep_V)))
+```
+```txt
+when she sleeps
+```
+
+## where_IAdv-IAdv
+```gf
+mkUtt where_IAdv
+```
+```txt
+where
+```
+
+## which_IQuant-IQuant
+```gf
+mkUtt (mkIP which_IQuant house_N)
+```
+```txt
+which house
+```
+
+## whoPl_IP-IP
+```gf
+mkUtt (whoPl_IP)
+```
+```txt
+who
+```
+
+## whoSg_IP-IP
+```gf
+mkUtt (whoSg_IP)
+```
+```txt
+who
+```
+
+## why_IAdv-IAdv
+```gf
+mkUtt why_IAdv
+```
+```txt
+why
+```
+
+## with_Prep-Prep
+```gf
+mkUtt (mkAdv with_Prep it_NP)
+```
+```txt
+with it
+```
+
+## without_Prep-Prep
+```gf
+mkUtt (mkAdv without_Prep it_NP)
+```
+```txt
+without it
+```
+
+## yes_Utt-Utt
+```gf
+yes_Utt
+```
+```txt
+yes
+```
+
+## youSg_Pron-Pron
+```gf
+mkUtt (mkNP youSg_Pron)
+```
+```txt
+you
+```
+
+## youPl_Pron-Pron
+```gf
+mkUtt (mkNP youPl_Pron)
+```
+```txt
+you
+```
+
+## youPol_Pron-Pron
+```gf
+mkUtt (mkNP youPol_Pron)
+```
+```txt
+you
+```
+
+## no_Quant-Quant
+```gf
+mkUtt (mkNP no_Quant house_N)
+```
+```txt
+no house
+```
+
+## not_Predet-Predet
+```gf
+mkUtt (mkNP not_Predet everybody_NP)
+```
+```txt
+not everybody
+```
+
+## if_then_Conj-Conj
+```gf
+mkUtt (mkAdv if_then_Conj here_Adv there_Adv)
+```
+```txt
+if here then there
+```
+
+## at_least_AdN-AdN
+```gf
+mkUtt (mkCard at_least_AdN (mkCard (mkNumeral n8_Unit)))
+```
+```txt
+at least eight
+```
+
+## at_most_AdN-AdN
+```gf
+mkUtt (mkCard at_most_AdN (mkCard (mkNumeral n8_Unit)))
+```
+```txt
+at most eight
+```
+
+## nobody_NP-NP
+```gf
+mkUtt nobody_NP
+```
+```txt
+nobody
+```
+
+## nothing_NP-NP
+```gf
+mkUtt nothing_NP
+```
+```txt
+nothing
+```
+
+## except_Prep-Prep
+```gf
+mkUtt (mkAdv except_Prep it_NP)
+```
+```txt
+except it
+```
+
+## as_CAdv-CAdv
+```gf
+as_CAdv
+```
+```txt
+as
+```
+
+## have_V2-V2
+```gf
+mkUtt (mkVP have_V2 it_NP)
+```
+```txt
+to have it
+```

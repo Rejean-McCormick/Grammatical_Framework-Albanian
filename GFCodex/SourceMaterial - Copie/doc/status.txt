@@ -1,0 +1,163 @@
+The Status of the GF Resource Grammar Library
+Aarne Ranta
+%%date
+
+%!Encoding:utf8
+
+The following table gives the languages currently available in the
+GF Resource Grammar Library.
+
+
+Corrections and additions are welcome! Notice that only those parts of implementations
+that are currently available via https://github.com/GrammaticalFramework/gf-rgl/
+are marked in the table
+
+
+|| ISO  | Language     | Parad | Lex | Lang | API | Symb | Irreg | Dict | WN | tested | publ | authors          ||
+| Afr   | Afrikaans    | ++    | +   | +    | +   | -    | -     | -    | -  | -      | -    | *LP,LM            |
+| Amh   | Amharic      | ++    | +   | +    | -   | -    | -     | -    | -  | -      | +    | *MK               |
+| Ara   | Arabic       | +     | +   | +    | +   | +    | -     | -    | -  | +      | +    | AD,*IL            |
+| Bul   | Bulgarian    | +     | +   | +    | +   | +    | +     | +    | +  | ++     | +    | *KA               |
+| Cat   | Catalan      | ++    | +   | +    | +   | +    | +     | -    | +  | ++     | -    | *JS,*IL           |
+| Chi   | Chinese      | ++    | +   | +    | +   | -    | -     | +    | +  | -      | +    | ZL,*AR,*CP,QH     |
+| Cze   | Czech        | +     | +   | +    | +   | -    | -     | -    | -  | +      | -    | *AR,*MM           |
+| Dan   | Danish       | ++    | +   | +    | +   | +    | +     | -    | -  | +      | -    | *AR               |
+| Dut   | Dutch        | ++    | +   | +    | +   | +    | +     | -    | +  | +      | -    | *AR,FJ            |
+| Eng   | English      | ++    | +   | +    | +   | +    | +     | +    | +  | ++     | +    | *AR,BB,KA         |
+| Est   | Estonian     | ++    | +   | +    | +   | -    | -     | +    | +  | +      | +    | *KK,*IL           |
+| Eus   | Basque       | ++    | +   | +    | +   | -    | -     | -    | -  | -      | +    | *IL               |
+| Fin   | Finnish      | ++    | +   | +    | +   | +    | -     | +    | +  | ++     | +    | *AR,*IL           |
+| Fre   | French       | ++    | +   | +    | +   | +    | +     | +    | -  | ++     | -    | *AR,RE            |
+| Ger   | German       | ++    | +   | +    | +   | +    | +     | +    | -  | ++     | -    | *AR,HH,EG         |
+| Gre   | Greek(mod)   | ++    | +   | +    | +   | -    | -     | -    | -  | -      | +    | *IP               |
+| Grc   | Greek(anc)   | -     | -   | -    | -   | -    | -     | -    | -  | -      | +    | *HLe              |
+| Heb   | Hebrew       | -     | -   | -    | -   | -    | -     | -    | -  | -      | +    | *DD               |
+| Hin   | Hindi        | ++    | +   | +    | +   | +    | -     | -    | -  | +      | +    | *SV,*KP,MH,AR,PK  |
+| Hun   | Hungarian    | ++    | +   | +    | +   | +    | -     | -    | -  | +      | -    | *IL,*JJ           |
+| Ice   | Icelandic    | ++    | +   | +    | +   | -    | -     | -    | -  | -      | +    | *BT               |
+| Ina   | Interlingua  | ++    | +   | +    | -   | -    | -     | -    | -  | -      | -    | JB                |
+| Ita   | Italian      | ++    | +   | +    | +   | +    | -     | -    | +  | ++     | -    | *AR,*RE,GP        |
+| Jpn   | Japanese     | ++    | +   | +    | +   | -    | -     | -    | -  | +      | +    | *LZ               |
+| Kor   | Korean       | ++    | +   | +    | +   | +    | -     | -    | -  | +      | -    | *IL               |
+| Lat   | Latin        | -     | -   | -    | -   | -    | -     | +    | -  | -      | -    | *AR,*HLa          |
+| Lav   | Latvian      | ++    | +   | +    | +   | -    | -     | -    | -  | +      | +    | *NG,*PP           |
+| Mlt   | Maltese      | ++    | +   | +    | +   | +    | -     | -    | -  | -      | +    | *JC               |
+| Mon   | Mongolian    | ++    | +   | +    | +   | -    | -     | +    | -  | -      | +    | *NE               |
+| Nep   | Nepali       | ++    | +   | +    | -   | -    | -     | -    | -  | -      | +    | *DS               |
+| Nno   | Norwegian(n) | ++    | +   | +    | +   | +    | +     | -    | -  | -      | -    | *SRE              |
+| Nor   | Norwegian(b) | ++    | +   | +    | +   | +    | +     | -    | -  | +      | -    | *AR               |
+| Pes   | Persian      | +     | +   | +    | +   | -    | -     | -    | -  | +      | +    | SV,EA,SM,*IL      |
+| Pnb   | Punjabi      | +     | +   | +    | +   | +    | -     | -    | -  | -      | +    | *SV,MH            |
+| Pol   | Polish       | +     | +   | +    | +   | +    | -     | -    | -  | +      | +    | IN,*AS            |
+| Por   | Portuguese   | ++    | +   | +    | +   | +    | +     | +    | +  | +      | +    | *BC               |
+| Ron   | Romanian     | ++    | +   | +    | +   | +    | -     | -    | -  | +      | +    | *RE               |
+| Rus   | Russian      | ++    | +   | +    | +   | -    | -     | +    | -  | -      | +    | JK,NF,*RS         |
+| Slk   | Slovak       | +     | +   | +    | +   | -    | -     | -    | -  | +      | -    | *AR,*MM,SČ        |
+| Slv   | Slovene      | ++    | +   | +    | +   | -    | -     | -    | +  | +      | -    | *KA,AE            |
+| Snd   | Sindhi       | ++    | +   | +    | +   | +    | -     | -    | -  | -      | +    | *SV,*JD           |
+| Som   | Somali       | +     | -   | -    | -   | -    | -     | -    | -  | -      | -    | *IL               |
+| Spa   | Spanish      | ++    | +   | +    | +   | +    | +     | -    | +  | ++     | -    | *AR,IA,TS,*IL     |
+| Swa   | Swahili      | +     | +   | -    | -   | -    | -     | -    | -  | -      | +    | *WN,JM,BK         |
+| Swe   | Swedish      | ++    | +   | +    | +   | +    | +     | +    | +  | ++     | +    | *MA,*AR,MF        |
+| Tha   | Thai         | ++    | +   | +    | +   | +    | -     | -    | +  | +      | -    | *AR,CK            |
+| Tur   | Turkish      | ++    | +   | -    | -   | -    | -     | +    | +  | -      | -    | *SC,KA            |
+| Urd   | Urdu         | ++    | +   | +    | +   | +    | -     | -    | -  | +      | +    | *SV,MH            |
+
+ISO = 3-letter ISO language code, used in library file names
+(mostly ISO 639-2 B (bibliographic))
+
+Parad = ``Paradigms`` file complete for major POS, ++ means with smart paradigms
+
+Lex = the resource ``Lexicon`` (nearly) complete
+
+Lang = the resource ``Syntax`` (nearly) complete
+
+API = the ``Syntax`` compiles
+
+Symb = the ``Symbolic`` API complete
+
+Irreg = the ``Irreg`` module with irregular verbs exists
+
+Dict = the ``Dict`` module, large-scale morphological lexicon, exists
+
+WN = [WordNet https://cloud.grammaticalframework.org/wordnet] lexicon exists
+
+tested = tested in some applications, ++ means extensively tested with no major issues
+
+publ = publications available, see [RGL publication list ./rgl-publications.html]
+
+authors = main contributors, * means still active
+(ready to fix bugs, answer to questions, etc)
+
+
+===Author codes===
+
+AB Ansu Berg,
+AD Ali El Dada,
+AE Anna Ehrlemark,
+AR Aarne Ranta,
+AS Adam Slaski,
+BB Björn Bringert,
+BC Bruno Cuconato,
+BK Benson Kituku,
+BT Bjarki Traustason,
+CK Chotiros Kairoje,
+CP Chen Peng,
+DD Dana Dannélls,
+DS Dinesh Simk,
+EA Elnaz Abolahrar,
+EG Erzsébet Galgóczy
+FJ Femke Johansson,
+HH Harald Hammarström,
+HLa Herbert Lange,
+HLe Hans Leiss,
+GP Gabriele Paganelli,
+IA Ingrid Andersson,
+IL Inari Listenmaa,
+IN Ilona Novak,
+IP Ioanna Papadopoulou,
+JB Jean-Philippe Bernardy,
+JC John J. Camilleri,
+JD Jherna Devi,
+JJ Julia Jansson,
+JK Janna Khegai,
+JM Juliet Mutahi,
+JS Jordi Saludes,
+KA Krasimir Angelov,
+KK Kaarel Kaljurand,
+KP Kuchi Prasad,
+LM Laurette Marais,
+LP Laurette Pretorius,
+LZ Liza Zimina,
+MA Malin Ahlberg,
+MF Markus Forsberg,
+MK Markos Kassa Gobena,
+MH Muhammad Humayoun,
+MM Michal Měchura,
+NE Nyamsuren Erdenebadrakh,
+NF Nick Frolov,
+NG Normunds Gruzitis,
+QH Qiao Haiyan,
+RE Ramona Enache,
+RS Roman Suzi,
+PP Peteris Paikens,
+SC Server Cimen,
+SČ Slavomír Čéplö,
+SM Sofy Moradi,
+SRE Stian Rødven Eide,
+SV Shafqat Virk,
+TH Therese Söderberg,
+WN Wanjiku Ng'ang'a,
+ZL Zhuo Lin Qiqige
+
+
+
+==Rules==
+
+Only components available at https://github.com/GrammaticalFramework/gf-rgl/ are indicated in the table.
+
+If you want to work on a language already in the table, please be kind and contact the
+active authors of it.
+
+Feel free to start a new language that is not yet in the table - but let us know and
+contribute some code as soon as you can!

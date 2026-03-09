@@ -1,0 +1,4967 @@
+==== VOLUME META ====
+generated_at: 2026-02-25T14:09:52.494366
+title: FOLDER: latin
+root_dir: C:\MyCode\GFCodex\RGL_Source_Code
+file_count: 30
+total_size_mb: 0.1522
+home: 00_START_HERE.instructions.md
+prev_volume: RGL_Source_Code_20260225_140951_33_lithuanian.txt
+next_volume: RGL_Source_Code_20260225_140951_35_english.txt
+prev_title: lithuanian
+next_title: english
+short_title: latin
+
+==== FILE_INDEX ====
+ENTRY id=70a4d8956d30 path="latin/AdjectiveLat.gf" kind=source size=1606 lines=53 chunks=0
+ENTRY id=7b5ae0bbe206 path="latin/AdverbLat.gf" kind=source size=1273 lines=37 chunks=0
+ENTRY id=29679d3366b8 path="latin/AllLat.gf" kind=source size=128 lines=6 chunks=0
+ENTRY id=01b38822beb4 path="latin/AllLatAbs.gf" kind=source size=126 lines=7 chunks=0
+ENTRY id=635be9fa7fc9 path="latin/BackwardLat.gf" kind=source size=2065 lines=76 chunks=0
+ENTRY id=de24ac483161 path="latin/CatLat.gf" kind=source size=2759 lines=101 chunks=0
+ENTRY id=20d4c921b7b1 path="latin/ConjunctionLat.gf" kind=source size=5814 lines=168 chunks=0
+ENTRY id=f92a07c00c0a path="latin/ConstructionLat.gf" kind=source size=234 lines=5 chunks=0
+ENTRY id=eb6e0e18316a path="latin/DocumentationLat.gf" kind=source size=48 lines=2 chunks=0
+ENTRY id=294afe055246 path="latin/ExtendLat.gf" kind=source size=10870 lines=264 chunks=0
+ENTRY id=02c81b21d11c path="latin/ExtraLat.gf" kind=source size=5252 lines=133 chunks=0
+ENTRY id=c4f2e692cf28 path="latin/ExtraLatAbs.gf" kind=source size=1351 lines=56 chunks=0
+ENTRY id=4a92d57cc8b9 path="latin/GrammarLat.gf" kind=source size=291 lines=19 chunks=0
+ENTRY id=2dc572172222 path="latin/IdiomLat.gf" kind=source size=985 lines=29 chunks=0
+ENTRY id=db0cea977aea path="latin/LangLat.gf" kind=source size=240 lines=13 chunks=0
+ENTRY id=2ea7740f04cc path="latin/MissingLat.gf" kind=source size=4145 lines=80 chunks=0
+ENTRY id=b241872ae331 path="latin/MorphoLat.gf" kind=source size=24951 lines=731 chunks=3
+ENTRY id=2df9cefffd1e path="latin/NounLat.gf" kind=source size=4966 lines=187 chunks=0
+ENTRY id=427c36c03e7e path="latin/NumeralLat.gf" kind=source size=7760 lines=234 chunks=0
+ENTRY id=b7ecc4558df7 path="latin/OverloadLat.gf" kind=source size=64 lines=1 chunks=0
+ENTRY id=c827d46332c6 path="latin/ParadigmsLat.gf" kind=source size=6178 lines=176 chunks=0
+ENTRY id=9744df3f812b path="latin/PhraseLat.gf" kind=source size=1458 lines=41 chunks=0
+ENTRY id=6c998c4a8cf0 path="latin/QuestionLat.gf" kind=source size=1795 lines=70 chunks=0
+ENTRY id=cf458b9e4193 path="latin/README.md" kind=markdown size=190 lines=9 chunks=0
+ENTRY id=e9ede00921bb path="latin/RelativeLat.gf" kind=source size=2550 lines=78 chunks=0
+ENTRY id=a3a26ffa28c0 path="latin/ResLat.gf" kind=source size=57041 lines=1578 chunks=5
+ENTRY id=d4ca4c445fc2 path="latin/SentenceLat.gf" kind=source size=2826 lines=85 chunks=0
+ENTRY id=155a3d73a0d2 path="latin/StructuralLat.gf" kind=source size=6090 lines=130 chunks=0
+ENTRY id=ada9ebe38d5d path="latin/SymbolLat.gf" kind=source size=1931 lines=66 chunks=0
+ENTRY id=f600d9bcf415 path="latin/VerbLat.gf" kind=source size=4607 lines=132 chunks=0
+
+==== FILES ====
+
+----- FILE BEGIN -----
+path="latin/AdjectiveLat.gf"
+id=70a4d8956d30
+kind=source
+size=1606
+lines=53
+chunks=0
+----
+concrete AdjectiveLat of Adjective = CatLat ** open ResLat, Prelude in {
+
+
+  lin
+--  PositA : A -> AP ; -- warm
+    PositA  a = 
+      { s = \\ag  => a.s ! Posit ! ag };
+
+--  ComparA : A -> NP -> AP ; -- warmer than I
+    ComparA a np = {
+      s = \\ag => a.s ! Compar ! ag ++ "quam" ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! Nom ; 
+      } ;
+
+-- ComplA2 : A2 -> NP -> AP ; -- married to her
+    ComplA2 a np = {
+      s = \\ag => a.s ! Posit ! ag ++ a.c.s ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! a.c.c ; 
+      } ;
+
+--  ReflA2 : A2 -> AP -- married to myself
+    ReflA2 a = {
+      s = \\ag => a.s ! Posit ! ag ++ a.c.s ++
+	table { Acc => "memet" ; _ => "egomet" } ! a.c.c;
+      } ;
+
+--  UseA2   : A2 -> AP ;        -- married
+    UseA2 = PositA ;
+
+--  UseComparA : A  -> AP ;     -- warmer
+    UseComparA a =
+      { s = \\ag  => a.s ! Compar ! ag };
+    
+--  CAdvAP  : CAdv -> AP -> NP -> AP ; -- as cool as John
+    CAdvAP cadv ap np =
+      { s = \\ag => cadv.s ++ ap.s ! ag ++ cadv.p ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! Nom } ;
+    
+-- The superlative use is covered in $Ord$.
+
+--  AdjOrd  : Ord -> AP ;       -- warmest
+    AdjOrd a = { s = table { Ag g n c => a.s ! g ! n ! c } } ;
+    
+--  SentAP : AP -> SC -> AP ; -- good that she is here
+    SentAP ap sc =
+      { s = \\a => ap.s ! a ++ sc.s } ;
+
+    
+--  AdAP    : AdA -> AP -> AP ; -- very warm
+    AdAP ada ap =
+      { s = \\agr => ada.s ++ ap.s ! agr } ;
+
+--  AdvAP   : AP -> Adv -> AP ; -- warm by nature
+    AdvAP ap adv =
+      { s = \\ag => ap.s ! ag ++ adv.s ! Posit} ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/AdverbLat.gf"
+id=7b5ae0bbe206
+kind=source
+size=1273
+lines=37
+chunks=0
+----
+concrete AdverbLat of Adverb = CatLat ** open ResLat, Prelude, ParadigmsLat in
+  {
+
+  lin
+
+--  PositAdvAdj : A -> Adv ;                 -- warmly
+    PositAdvAdj a = a.adv ;
+
+--  PrepNP : Prep -> NP -> Adv ;        -- in the house
+    PrepNP prep np =
+      mkAdv (prep.s ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! prep.c ) ;
+
+
+--  ComparAdvAdj  : CAdv -> A -> NP -> Adv ; -- more warmly than John
+    ComparAdvAdj cadv a np =
+      mkAdv (cadv.s ++ a.adv.s ! Compar ++ cadv.p ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! Nom) ;
+
+--  ComparAdvAdjS : CAdv -> A -> S  -> Adv ; -- more warmly than he runs
+    ComparAdvAdjS cadv a s =
+      mkAdv (cadv.s ++ a.adv.s ! Compar ++ cadv.p ++ defaultSentence s ! SOV ) ;
+
+--  AdAdv  : AdA -> Adv -> Adv ;             -- very quickly
+    AdAdv ada adv = mkAdv (ada.s ++ (adv.s ! Posit) ) ;
+
+--  PositAdAAdj : A -> AdA ;                 -- extremely
+    PositAdAAdj a =
+      { s = a.adv.s ! Posit } ;
+    
+-- Subordinate clauses can function as adverbs.
+
+--  SubjS  : Subj -> S -> Adv ;              -- when she sleeps
+    SubjS subj s = mkAdv (subj.s ++ defaultSentence s ! SOV ) ;
+    
+--  AdnCAdv : CAdv -> AdN ;                  -- less (than five)
+    AdnCAdv cadv = {s = cadv.s ++ cadv.p} ;
+--
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/AllLat.gf"
+id=29679d3366b8
+kind=source
+size=128
+lines=6
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete AllLat of AllLatAbs = 
+  LangLat,
+  ExtendLat
+  ** open ExtraLat in {} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/AllLatAbs.gf"
+id=01b38822beb4
+kind=source
+size=126
+lines=7
+chunks=0
+----
+--# -path=.:../abstract:../common:prelude
+
+abstract AllLatAbs = 
+  Lang,
+  IrregLatAbs-[can_VV,go_V],
+  ExtraLatAbs
+  ** {} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/BackwardLat.gf"
+id=635be9fa7fc9
+kind=source
+size=2065
+lines=76
+chunks=0
+----
+--concrete BackwardLat of Backward = CatLat ** open ResLat in {
+--
+--  flags optimize=all_subs ;
+--
+--  lin
+--
+---- A repository of obsolete constructs, needed for backward compatibility.
+---- They create spurious ambiguities if used in combination with Lang.
+--
+---- from Verb 19/4/2008
+--
+--    ComplV2 v np = insertObj (\\_ => v.c2 ++ np.s ! Acc) (predV v) ;
+--    ComplV3 v np np2 = 
+--      insertObj (\\_ => v.c2 ++ np.s ! Acc ++ v.c3 ++ np2.s ! Acc) (predV v) ;
+--    ComplV2V v np vp = 
+--      insertObj (\\a => infVP v.isAux vp a)
+--        (insertObj (\\_ => v.c2 ++ np.s ! Acc) (predV v)) ;
+--    ComplV2S v np s = 
+--      insertObj (\\_ => conjThat ++ s.s)
+--        (insertObj (\\_ => v.c2 ++ np.s ! Acc) (predV v)) ;
+--    ComplV2Q v np q = 
+--      insertObj (\\_ => q.s ! QIndir) 
+--        (insertObj (\\_ => v.c2 ++ np.s ! Acc) (predV v)) ;
+--    ComplV2A v np ap = 
+--      insertObj (\\_ => v.c2 ++ np.s ! Acc ++ ap.s ! np.a) (predV v) ;
+--
+--    ReflV2 v = insertObj (\\a => v.c2 ++ reflPron ! a) (predV v) ;
+--
+---- from Sentence 19/4/2008
+--
+--    SlashV2 np v2 = 
+--      mkClause (np.s ! Nom) np.a (predV v2) ** {c2 = v2.c2} ;
+--
+--    SlashVVV2 np vv v2 = 
+--      mkClause (np.s ! Nom) np.a 
+--        (insertObj (\\a => infVP vv.isAux (predV v2) a) (predVV vv))  **
+--        {c2 = v2.c2} ;
+--
+---- from Noun 19/4/2008
+--
+--    NumInt n = {s = n.s ; n = Pl} ; 
+--    OrdInt n = {s = n.s ++ "th"} ; --- DEPRECATED
+--
+--    DetSg quant ord = {
+--      s = quant.s ! Sg ++ ord.s ; 
+--      n = Sg
+--      } ;
+--
+--    DetPl quant num ord = {
+--      s = quant.s ! num.n ++ num.s ++ ord.s ; 
+--      n = num.n
+--      } ;
+--
+--    NoNum = {s = []; n = Pl } ;
+--
+--    DefArt = {s = \\_ => artDef} ;
+--
+--    IndefArt = {
+--      s = table {
+--        Sg => artIndef ; 
+--        Pl => []
+--        }
+--      } ;
+--
+--    MassDet = {s = \\_ => []} ;
+--
+--
+--
+---- from Structural 19/4/2008
+--
+--    that_NP = regNP "that" Sg ;
+--    these_NP = regNP "these" Pl ;
+--    this_NP = regNP "this" Sg ;
+--    those_NP = regNP "those" Pl ;
+--
+--}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/CatLat.gf"
+id=de24ac483161
+kind=source
+size=2759
+lines=101
+chunks=0
+----
+concrete CatLat of Cat = CommonX-[Adv] ** open ResLat, ParamX, Prelude in {
+
+  flags optimize=all_subs ;
+
+  lincat
+
+---- Tensed/Untensed
+--
+    S  = Sentence ;
+    QS = {s : QForm => Str} ;
+    RS = { s : Gender => Number => Str } ; -- Sentence ;
+--    RS = {s : Agr => Str ; c : Case} ; -- c for it clefts
+--    SSlash = {s : Str ; c2 : Str} ;
+--
+---- Sentence
+--
+    Cl = Clause ;
+    ClSlash = Clause ;
+    Imp = {s : Polarity => VImpForm => Str} ;
+--
+---- Question
+    --
+    -- TO FIX
+    QCl = Clause ** { q : Str } ; 
+    IP = {s : Case => Str ; n : Number} ;
+    IComp = {s : Str} ;    
+    IDet = Determiner ; --{s : Str ; n : Number} ;
+    IQuant = {s : Agr => Str} ;
+--
+---- Relative
+--
+    RCl = { s : Gender => Number => Clause };
+--      s : ResLat.Tense => Anteriority => CPolarity => Agr => Str ; 
+--      c : Case
+--      } ;
+    RP = {s : Agr => Str } ;
+--
+---- Verb
+--
+    VP = ResLat.VerbPhrase ;
+    VPSlash = ResLat.ObjectVerbPhrase ; -- VP ** {c2 : Preposition} ;
+    Comp = {s : Agr => Str} ; 
+--
+---- Adjective
+--
+--    AP = Adjective ** {isPre : Bool} ; ---- {s : Agr => Str ; isPre : Bool} ; 
+    AP = AdjectivePhrase ;
+ 
+--
+---- Noun
+--
+    CN = ResLat.CommonNoun ;
+    NP = ResLat.NounPhrase ;
+    Pron = ResLat.Pronoun ;
+    Det = Determiner ;
+    Predet = {s : Str} ;
+    Ord = { s : Gender => Number => Case => Str } ;
+    Num  = {s : Gender => Case => Str ; n : Number} ;
+    Card = {s : Gender => Case => Str ; n : Number} ;
+    Quant = Quantifier ;
+--
+---- Numeral
+--
+    Numeral = ResLat.TNumeral ;
+    Digits  = {s : Str ; unit : Unit} ;
+    Decimal = {s : Str ; unit : Unit ; hasDot : Bool} ;
+--
+---- Structural
+--
+    Conj = ResLat.Conjunction; --{s1,s2 : Str ; n : Number} ;
+    Subj = {s : Str} ;
+    Prep = ResLat.Preposition ;
+--
+---- Open lexical classes, e.g. Lexicon
+
+    V, VS, VQ, VA = ResLat.Verb ; -- = {s : VForm => Str} ;
+    V2, V2A, V2Q, V2S = Verb2 ;
+    V3 = Verb3 ;
+    VV = ResLat.VV ;
+    V2V = Verb ** {c2 : Str ; isAux : Bool} ;
+
+    A = Adjective ;
+    Adv = Adverb ;
+    
+    N = Noun ;
+    N2 = Noun ** { c : Prep } ;
+    N3 = Noun ** { c : Prep ; c2 : Prep } ;
+    PN, LN = { s : Case => Str ; n : Number ; g : Gender } ;
+    GN = { s : Str ; g : Sex } ;
+    SN = { s : Sex => Str ; pl : Str } ;
+    A2 = Adjective ** { c : Prep} ;
+
+  linref
+    NP = \np -> combineNounPhrase np ! PronNonDrop ! APreN ! DPostN ! Nom ; 
+    VP = \vp -> vp.adv ++ vp.inf !  VInfActPres ++ vp.obj ++ vp.compl ! Ag Masc Sg Nom ;
+    S = \s -> defaultSentence s ! SOV ;
+    V, VS, VQ, VA, VV = \v -> v.act ! (VAct VSim (VPres VInd) Sg P1) ;
+    V2, V2A, V2Q, V2S = \v -> v.act ! (VAct VSim (VPres VInd) Sg P1) ;
+    Pron = \p -> p.pers.s ! PronNonDrop ! PronNonRefl ! Nom ;
+    Conj = \c -> c.s1 ++ c.s2 ++ c.s3 ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/ConjunctionLat.gf"
+id=20d4c921b7b1
+kind=source
+size=5814
+lines=168
+chunks=0
+----
+concrete ConjunctionLat of Conjunction = 
+  CatLat ** open ResLat, StructuralLat, Coordination, Prelude, ParadigmsLat in {
+--
+--  flags optimize=all_subs ;
+    --
+
+  lin
+    -- ConjS    : Conj -> ListS -> S ;       -- he walks and she runs
+    -- TO FIX
+    -- ConjS conj ss = { s = \\_ => conjunctDistrX conj (ss.l ! conj.c) ; sadv = lin Adv { s = []} ; neg = ss.neg } ;
+    ConjS conj ss = {
+--      s = \\apos => coord conj.c { init = (ss.s ! conj.c).init ! SPreS ! apos ! CPreV ! SOV ;
+      --	last = (ss.s ! conj.c).last ! SPreS ! apos ! CPreV ! SOV} ;
+      s = \\apos => conj.s1 ++ (ss.s ! conj.c).init ! SAPreS ! apos ! DPreN ! VReg ! CPreV ! SOV  ++ conj.s2 ++
+	(ss.s ! conj.c).last ! SAPreS ! apos ! DPreN ! VReg ! CPreV ! SOV ++ conj.s3 ;
+      o = \\_ => [] ;
+      v = \\_ => [] ;
+      neg = \\_ => [] ;
+      compl = [] ;
+      p = ss.p ;
+      sadv = [] ;
+      t = ss.t ;
+      det = { s, sp = \\_ => [] } ;
+      } ;
+
+    -- ConjAdv  : Conj -> ListAdv -> Adv ;   -- here or there
+--    ConjAdv conj ss = mkAdv (conjunctDistrSS conj (ss.l ! conj.c) ).s ;
+
+    -- ConjNP   : Conj -> ListNP -> NP ;     -- she or we
+    ConjNP conj nps =
+      {
+    	-- s = case conj.c of {
+    	--   Et => case nps.isBase of {
+        --     False => (conjunctDistrTable Case conj (nps.l ! Et)).s ;
+        --     True => \\c => conj.s1 ++ (nps.l ! Et).s1 ! c ++ conj.s2 ++ (nps.l ! Et).s2 ! c
+    	--     } ;
+    	--   c => (conjunctDistrTable Case conj (nps.l ! Et)).s
+    	--   } ;
+	s = \\pd,ca =>  conj.s1 ++ (nps.s ! conj.c).init ! pd ! APreN ! DPreN ! ca ++ conj.s2 ++ (nps.s ! conj.c).last ! pd ! APreN ! DPreN ! ca ++ conj.s3;
+    	n = case conj.c of { Et => Pl ; _ => nps.n } ;
+      	g = nps.g ;
+      	p = nps.p ;
+      	adv = "" ;
+      	preap , postap = { s = \\_ => "" };
+    	det = { s , sp = \\_ => ""} ;
+      } ;
+
+    -- ConjAP   : Conj -> ListAP -> AP ;
+--    ConjAP conj ss = conjunctDistrTable Agr conj (ss.l ! conj.c) ;
+
+    --
+--    DConjS = conjunctDistrSS ;
+--    DConjAdv = conjunctDistrSS ;
+--
+--    ConjNP conj ss = conjunctTable Case conj ss ** {
+--      a = conjAgr (agrP3 conj.n) ss.a 
+--      } ;
+--    DConjNP conj ss = conjunctDistrTable Case conj ss ** {
+--      a = conjAgr (agrP3 conj.n) ss.a
+--      } ;
+--    DConjAP conj ss = conjunctDistrTable Agr conj ss ** {
+--      isPre = ss.isPre
+--      } ;
+---}
+    --
+
+    -- ConjRS : Conj -> ListRS -> RS
+    ConjRS conj rss = { s = \\g,n => conj.s1 ++ (rss.s ! conj.c).init ! g ! n ++ conj.s2 ++ (rss.s ! conj.c).last ! g ! n++ conj.s3 };
+
+  ---- These fun's are generated from the list cat's.
+    --
+
+    -- BaseS : S -> S -> ListS
+   BaseS x y = {
+     s = \\c => { init = combineSentence x ; last = combineSentence y }
+     } ;
+    
+    -- ConsS : S -> ListS -> ListS
+    -- TO FIX
+    -- ConsS x xs = { l = \\_ => consrSS bindComma (ss (x.s ! PreS)) (xs.l ! Comma) };
+    ConsS s ss = {
+      s = \\co =>
+    	{ init = \\s,a,d,v,c,o => coord co { init = (ss.s ! co).init ! s ! a ! d ! v ! c ! o ; last = (ss.s ! co).last ! s ! a ! d ! v ! c ! o } ;
+          last = combineSentence s }
+      } ;
+
+    -- BaseAdv : Adv -> Adv -> ListAdv
+   BaseAdv x y =
+     {
+       s = \\_ => { init = x.s ! Posit ; last = y.s ! Posit }
+     } ;
+
+    -- ConsAdv : Adv -> ListAdv -> ListAdv
+   ConsAdv x xs =
+     {
+       --       s = \\_ => consrSS bindComma (ss (x.s ! Posit)) (xs.l ! Comma)
+       s = \\c => { init = coord c (xs.s ! c) ; last = x.s ! Posit }
+     } ;
+
+    -- -- BaseNP : NP -> NP -> ListNP ;      -- John, Mary
+    BaseNP x y = {
+      --      s = \\c => twoTable Case x y ;
+      s = \\c => { init = combineNounPhrase x ; last = combineNounPhrase y } ;
+      g = Neutr ; -- Trying to avoid trouble by choosing a gender
+      n = matchNumber x.n y.n ;
+      p = P3 ;
+      isBase = True ;
+      } ; 
+
+    -- -- ConsNP : NP -> ListNP -> ListNP ;  -- John, Mary, Bill
+    ConsNP x xs = {
+      --      s = \\_ => consrTable Case bindComma x ( xs.s ! Comma );
+      s = \\co => { init = \\pd,ap,dp,ca => coord co { init = (xs.s ! co).init ! pd ! ap ! dp ! ca ; last = (xs.s ! co).last ! pd ! ap ! dp ! ca} ; last = combineNounPhrase x } ;
+      n = matchNumber x.n xs.n ;
+      g = xs.g ;
+      p = xs.p ;
+      isBase = False ;
+      } ;
+    
+    -- -- BaseAP : AP -> AP -> ListAP
+    -- BaseAP x y = { l = \\c => twoTable Agr x y };
+
+    -- -- ConsAP : AP -> ListAP -> ListAP
+    -- ConsAP x xs =
+    --   { l = \\_ => consrTable Agr and_Conj.s2 x (xs.l ! Comma ) } ;
+
+    -- BaseRS : RS -> RS -> ListRS ;
+    BaseRS rs1 rs2 = { s = \\co => { init = rs1.s ; last = rs2.s }} ;
+    
+    -- ConsRS : RS -> List RS -> ListRS ;
+    ConsRS rs rss = { s = \\co => { init = rs.s ; last = \\g,n =>  coord co { init = (rss.s ! co).init ! g ! n ; last = (rss.s ! co).last ! g ! n } } } ;
+    
+
+--
+  lincat
+    [S] = { s : Coordinator => {init,last : SAdvPos => AdvPos => DetPos => VPos => ComplPos => Order => Str} } ; -- TO FIX
+    [Adv] = { s: Coordinator => {init,last : Str}} ;
+    [NP] = { s : Coordinator => {init,last : PronDropForm => AdvPos => DetPos => Case => Str} ; g : Gender ; n : Number ; p : Person ; isBase : Bool } ;
+    [AP] = {s : Coordinator => {init,last : Agr => Str } } ;
+    [RS] = { s : Coordinator => { init, last : Gender => Number => Str }} ;
+  oper
+    -- Generates a new number value given two number values.
+    --   Pl if any of the two is Pl
+    --   Sg otherwise
+    matchNumber : Number -> Number -> Number = \n1,n2 ->
+      case <n1,n2> of {
+	<Pl,_> => Pl ;
+	<_,Pl> => Pl ;
+	<_,_> => Sg
+      } ;
+    
+    coord : Coordinator -> {init : Str ; last : Str} -> Str =
+      \c,l ->
+      l.init ++
+      table {
+	Aut => "aut" ;
+	Et => "et" ;
+	Sed => "sed" ;
+	Si => "si" ;
+	Vel => "vel" ;
+	Comma => bindComma ;
+	Colon => ":" ;
+	Empty => "" ;
+	Missing => nonExist
+      } ! c
+      ++ l.last ;
+--
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/ConstructionLat.gf"
+id=f92a07c00c0a
+kind=source
+size=234
+lines=5
+chunks=0
+----
+--# -path=.:api
+concrete ConstructionLat of Construction = CatLat ** 
+  open SyntaxLat, SymbolicLat, ParadigmsLat, 
+       (L = LexiconLat), (E = ExtraLat), (G = GrammarLat), (I = IrregLat), (R = ResLat), (N = NounLat), Prelude in {
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/DocumentationLat.gf"
+id=eb6e0e18316a
+kind=source
+size=48
+lines=2
+chunks=0
+----
+concrete DocumentationLat of Documentation = {
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/ExtendLat.gf"
+id=294afe055246
+kind=source
+size=10870
+lines=264
+chunks=0
+----
+--1 Extensions of core RGL syntax (the Grammar module)
+
+-- This module defines syntax rules that are not yet implemented in all
+-- languages, and perhaps never implementable either. But all rules are given
+-- a default implementation in common/ExtendFunctor.gf so that they can be included
+-- in the library API. The default implementations are meant to be overridden in each
+-- xxxxx/ExtendXxx.gf when the work proceeds.
+--
+-- This module is aimed to replace the original Extra.gf, which is kept alive just
+-- for backwardcommon compatibility. It will also replace translator/Extensions.gf
+-- and thus eliminate the often duplicated work in those two modules.
+--
+-- (c) Aarne Ranta 2017-08-20 under LGPL and BSD
+
+
+concrete ExtendLat of Extend = CatLat ** open ResLat in {
+
+  lin
+    -- GenNP       : NP -> Quant ;       -- this man's
+    GenNP np = { s = \\_ => combineNounPhrase np ! PronNonDrop ! APostN ! DPreN ! Gen ; sp = \\_ => ""} ;
+--     GenIP       : IP -> IQuant ;      -- whose
+--     GenRP       : Num -> CN -> RP ;   -- whose car
+
+-- -- In case the first two are not available, the following applications should in any case be.
+
+--     GenModNP    : Num -> NP -> CN -> NP ; -- this man's car(s)
+--     GenModIP    : Num -> IP -> CN -> IP ; -- whose car(s)
+
+--     CompBareCN  : CN -> Comp ;        -- (is) teacher
+
+--     StrandQuestSlash : IP -> ClSlash -> QCl ;   -- whom does John live with
+--     StrandRelSlash   : RP -> ClSlash -> RCl ;   -- that he lives in
+--     EmptyRelSlash    : ClSlash       -> RCl ;   -- he lives in
+
+
+-- -- $VP$ conjunction, separate categories for finite and infinitive forms (VPS and VPI, respectively)
+-- -- covering both in the same category leads to spurious VPI parses because VPS depends on many more tenses
+
+--   cat
+--     VPS ;           -- finite VP's with tense and polarity
+--     [VPS] {2} ;
+--     VPI ;
+--     [VPI] {2} ;     -- infinitive VP's (TODO: with anteriority and polarity)
+
+--   fun
+--     MkVPS      : Temp -> Pol -> VP -> VPS ;  -- hasn't slept
+--     ConjVPS    : Conj -> [VPS] -> VPS ;      -- has walked and won't sleep
+--     PredVPS    : NP   -> VPS -> S ;          -- she [has walked and won't sleep]
+
+--     MkVPI      : VP -> VPI ;                 -- to sleep (TODO: Ant and Pol)
+--     ConjVPI    : Conj -> [VPI] -> VPI ;      -- to sleep and to walk
+--     ComplVPIVV : VV   -> VPI -> VP ;         -- must sleep and walk
+
+-- -- the same for VPSlash, taking a complement with shared V2 verbs
+
+--   cat
+--     VPS2 ;        -- have loved (binary version of VPS)
+--     [VPS2] {2} ;  -- has loved, hates"
+--     VPI2 ;        -- to love (binary version of VPI)
+--     [VPI2] {2} ;  -- to love, to hate
+
+--   fun
+--     MkVPS2    : Temp -> Pol -> VPSlash -> VPS2 ;  -- has loved
+--     ConjVPS2  : Conj -> [VPS2] -> VPS2 ;          -- has loved and now hates
+--     ComplVPS2 : VPS2 -> NP -> VPS ;               -- has loved and now hates that person
+
+--     MkVPI2    : VPSlash -> VPI2 ;                 -- to love
+--     ConjVPI2  : Conj -> [VPI2] -> VPI2 ;          -- to love and hate
+--     ComplVPI2 : VPI2 -> NP -> VPI ;               -- to love and hate that person
+
+--   fun
+--     ProDrop : Pron -> Pron ;  -- unstressed subject pronoun becomes empty: "am tired"
+
+--     ICompAP : AP -> IComp ;   -- "how old"
+--     IAdvAdv : Adv -> IAdv ;   -- "how often"
+
+--     CompIQuant : IQuant -> IComp ;   -- which (is it) [agreement to NP]
+
+--     PrepCN     : Prep -> CN -> Adv ; -- by accident [Prep + CN without article]
+
+--   -- fronted/focal constructions, only for main clauses
+
+--   fun
+--     FocusObj : NP  -> SSlash  -> Utt ;   -- her I love
+--     FocusAdv : Adv -> S       -> Utt ;   -- today I will sleep
+--     FocusAdV : AdV -> S       -> Utt ;   -- never will I sleep
+--     FocusAP  : AP  -> NP      -> Utt ;   -- green was the tree
+
+--   -- participle constructions
+--     PresPartAP    : VP -> AP ;   -- (the man) looking at Mary
+--     EmbedPresPart : VP -> SC ;   -- looking at Mary (is fun)
+
+    --     PastPartAP      : VPSlash -> AP ;         -- lost (opportunity) ; (opportunity) lost in space
+    PastPartAP vp = { s = \\ag => vp.part ! VPassPerf ! ag ++ vp.adv ++ vp.c.s} ; -- TODO
+--     PastPartAgentAP : VPSlash -> NP -> AP ;   -- (opportunity) lost by the company
+
+-- -- this is a generalization of Verb.PassV2 and should replace it in the future.
+
+    --     PassVPSlash : VPSlash -> VP ; -- be forced to sleep
+    PassVPSlash vp = vp ** {
+      s = \\a => case a of { VAct _ t n p => vp.pass ! VPass t n p } ;
+      } ;
+
+-- -- the form with an agent may result in a different linearization
+-- -- from an adverbial modification by an agent phrase.
+
+--     PassAgentVPSlash : VPSlash -> NP -> VP ;  -- be begged by her to go
+
+-- -- publishing of the document
+
+--     NominalizeVPSlashNP : VPSlash -> NP -> NP ;
+
+-- -- counterpart to ProgrVP, for VPSlash
+
+--     ProgrVPSlash : VPSlash -> VPSlash;
+
+-- -- existential for mathematics
+
+--     ExistsNP : NP -> Cl ;  -- there exists a number / there exist numbers
+
+-- -- existentials with a/no variation
+
+--     ExistCN       : CN -> Cl ;  -- there is a car / there is no car
+--     ExistMassCN   : CN -> Cl ;  -- there is beer / there is no beer
+--     ExistPluralCN : CN -> Cl ;  -- there are trees / there are no trees
+
+-- -- generalisation of existential, with adverb as a parameter
+--     AdvIsNP : Adv -> NP -> Cl ;  -- here is the tree / here are the trees
+--     AdvIsNPAP : Adv -> NP -> AP -> Cl ; -- here are the instructions documented
+
+-- -- infinitive for purpose AR 21/8/2013
+
+--     PurposeVP : VP -> Adv ;  -- to become happy
+
+-- -- object S without "that"
+
+--     ComplBareVS  : VS  -> S  -> VP ;       -- say she runs
+--     SlashBareV2S : V2S -> S  -> VPSlash ;  -- answer (to him) it is good
+
+--     ComplDirectVS : VS -> Utt -> VP ;      -- say: "today"
+--     ComplDirectVQ : VQ -> Utt -> VP ;      -- ask: "when"
+
+-- -- front the extraposed part
+
+--     FrontComplDirectVS : NP -> VS -> Utt -> Cl ;      -- "I am here", she said
+--     FrontComplDirectVQ : NP -> VQ -> Utt -> Cl ;      -- "where", she asked
+
+-- -- proper structure of "it is AP to VP"
+
+--     PredAPVP : AP -> VP -> Cl ;      -- it is good to walk
+
+-- -- to use an AP as CN or NP without CN
+
+    --     AdjAsCN : AP -> CN ;   -- a green one ; en grön (Swe)
+    --     AdjAsNP : AP -> NP ;   -- green (is good)
+    AdjAsNP ap = {
+      s = \\_,c => ap.s ! (Ag Neutr Sg c) ;
+      adv = "" ;
+      det = { s, sp = \\_ => "" } ;
+      g = Neutr ;
+      n = Sg ;
+      p = P3 ;
+      postap = { s = \\_ => "" } ;
+      preap = { s = \\_ => "" } ;
+      } ;
+
+-- -- infinitive complement for IAdv
+
+--     PredIAdvVP : IAdv -> VP -> QCl ; -- how to walk?
+
+-- -- alternative to EmbedQS. For English, EmbedQS happens to work,
+-- -- because "what" introduces question and relative. The default linearization
+-- -- could be e.g. "the thing we did (was fun)".
+
+--     EmbedSSlash : SSlash -> SC  ;   -- what we did (was fun)
+
+-- -- reflexive noun phrases: a generalization of Verb.ReflVP, which covers just reflexive pronouns
+-- -- This is necessary in languages like Swedish, which have special reflexive possessives.
+-- -- However, it is also needed in application grammars that want to treat "brush one's teeth" as a one-place predicate.
+
+--   cat
+--     RNP ;     -- reflexive noun phrase, e.g. "my family and myself"
+--     RNPList ; -- list of reflexives to be coordinated, e.g. "my family, myself, everyone"
+
+-- -- Notice that it is enough for one NP in RNPList to be RNP.
+
+--   fun
+--     ReflRNP : VPSlash -> RNP -> VP ;   -- love my family and myself
+
+--     ReflPron : RNP ;                   -- myself
+--     ReflPoss : Num -> CN -> RNP ;      -- my car(s)
+
+--     PredetRNP : Predet -> RNP -> RNP ; -- all my brothers
+
+--     ConjRNP : Conj -> RNPList -> RNP ;  -- my family, John and myself
+
+--     Base_rr_RNP : RNP -> RNP -> RNPList ;       -- my family, myself
+--     Base_nr_RNP : NP  -> RNP -> RNPList ;       -- John, myself
+--     Base_rn_RNP : RNP -> NP  -> RNPList ;       -- myself, John
+--     Cons_rr_RNP : RNP -> RNPList -> RNPList ;   -- my family, myself, John
+--     Cons_nr_RNP : NP  -> RNPList -> RNPList ;   -- John, my family, myself
+-- ----    Cons_rn_RNP : RNP -> ListNP  -> RNPList ;   -- myself, John, Mary
+
+
+-- --- from Extensions
+
+--   ComplGenVV  : VV -> Ant -> Pol -> VP  -> VP ;         -- want not to have slept
+-- ----  SlashV2V    : V2V -> Ant -> Pol -> VPS -> VPSlash ;   -- force (her) not to have slept
+
+--   CompoundN   : N -> N  -> N ;      -- control system / controls system / control-system
+--   CompoundAP  : N -> A  -> AP ;     -- language independent / language-independent
+
+--   GerundCN    : VP -> CN ;          -- publishing of the document (can get a determiner)
+--   GerundNP    : VP -> NP ;          -- publishing the document (by nature definite)
+--   GerundAdv   : VP -> Adv ;         -- publishing the document (prepositionless adverb)
+
+--   WithoutVP   : VP -> Adv ;         -- without publishing the document
+--   ByVP        : VP -> Adv ;         -- by publishing the document
+--   InOrderToVP : VP -> Adv ;         -- (in order) to publish the document
+
+--   ApposNP : NP -> NP -> NP ;        -- Mr Macron, the president of France,
+
+--   AdAdV       : AdA -> AdV -> AdV ;           -- almost always
+--   UttAdV      : AdV -> Utt ;                  -- always(!)
+--   PositAdVAdj : A -> AdV ;                    -- (that she) positively (sleeps)
+
+--   CompS       : S -> Comp ;                   -- (the fact is) that she sleeps
+--   CompQS      : QS -> Comp ;                  -- (the question is) who sleeps
+--   CompVP      : Ant -> Pol -> VP -> Comp ;    -- (she is) to go
+
+-- -- very language-specific things
+
+-- -- Eng
+--   UncontractedNeg : Pol ;      -- do not, etc, as opposed to don't
+--   UttVPShort : VP -> Utt ;     -- have fun, as opposed to "to have fun"
+--   ComplSlashPartLast : VPSlash -> NP -> VP ; -- set it apart, as opposed to "set apart it"
+
+-- -- Romance
+--   DetNPMasc : Det -> NP ;
+--   DetNPFem  : Det -> NP ;
+
+--   UseComp_estar : Comp -> VP ; -- (Cat, Spa, Por) "está cheio" instead of "é cheio"
+
+--   SubjRelNP : NP -> RS -> NP ; -- Force RS in subjunctive: lo que les *resulte* mejor
+
+--   iFem_Pron      : Pron ; -- I (Fem)
+--   youFem_Pron    : Pron ; -- you (Fem)
+--   weFem_Pron     : Pron ; -- we (Fem)
+--   youPlFem_Pron  : Pron ; -- you plural (Fem)
+--   theyFem_Pron   : Pron ; -- they (Fem)
+--   youPolFem_Pron : Pron ; -- you polite (Fem)
+--   youPolPl_Pron  : Pron ; -- you polite plural (Masc)
+--   youPolPlFem_Pron : Pron ; -- you polite plural (Fem)
+
+-- -- German
+--   UttAccNP : NP -> Utt ; -- him (accusative)
+--   UttDatNP : NP -> Utt ; -- him (dative)
+--   UttAccIP : IP -> Utt ; -- whom (accusative)
+--   UttDatIP : IP -> Utt ; -- whom (dative)
+
+
+   TPastSimple = {s = []} ** {t = Past} ;   --# notpresent
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/ExtraLat.gf"
+id=02c81b21d11c
+kind=source
+size=5252
+lines=133
+chunks=0
+----
+concrete ExtraLat of ExtraLatAbs =
+  CatLat, ConjunctionLat ** 
+  open ResLat, ParadigmsLat, RelativeLat, NounLat, Prelude in {
+  lincat CS = SAdvPos => AdvPos => DetPos => VPos => ComplPos => Order => Str ;
+	 TestRS = { s : Gender => Number => SAdvPos => AdvPos => DetPos => VPos => ComplPos => Order => Str } ;
+  lin
+    useS s = combineSentence s ;
+    -- PastPartAP      : VPSlash -> AP ;         -- lost (opportunity) ; (opportunity) lost in space
+--    PastPartAP vp = { s = vp.part ! VPassPerf } ;
+    
+    -- UsePronNonDrop p = -- Pron -> NP
+    --   p.pers **
+    --   {
+    -- 	p = p.p ;
+    -- 	s = \\_ => p.pers.s ! PronNonDrop ! PronNonRefl ;
+    -- 	adv = "" ;
+    -- 	preap, postap = { s = \\_ => "" } ;
+    -- 	det = { s = \\_,_ => "" ; sp = \\_,_ => "" ; n = p.pers.n } ;
+    --   } ;
+    
+    AdjCNPre ap cn =  -- AP -> CN -> CN
+      addAdjToCN (lin AP ap) (lin CN cn) Post ;
+
+    -- -- ConjNP   : Conj -> ListNP -> NP ;     -- she or we
+    -- ConjNPque conj nps = 
+    --   {
+    -- 	s = case conj.c of {
+    -- 	  Et => case nps.isBase of {
+    --         False => \\cse => coord conj.c {init = (nps.s ! Et).init ! cse ; last = (nps.s ! Et).last ! cse } ;-- (conjunctDistrTable Case conj (nps.s ! Et)).s ;
+    --         True => \\cse => (nps.s ! Et).init ! cse ++ (nps.s ! Et).last ! cse ++ BIND ++ "que" 
+    -- 	    } ;
+    -- 	  c => \\cse => coord conj.c {init = (nps.s ! c).init ! cse ; last = (nps.s ! c).last ! cse } -- (conjunctDistrTable Case conj (nps.l ! Et)).s
+    -- 	  } ;
+    -- 	n = case conj.c of { Et => Pl ; _ => nps.n } ;
+    --   	g = nps.g ;
+    --   	p = nps.p ;
+    --   	adv = nps.adv ;
+    --   	preap = nps.preap ;
+    -- 	postap = nps.postap ;
+    -- 	det = { s = \\_,_ => "" ; sp = \\_,_ => "" ; n = nps.n };
+    --   } ;
+
+    everybodyFem_NP = regNP  "quisque" "quemque" "cuiusque" "cuique" "quoque" "quisque" Fem Sg ;-- regNP "quisquae" Sg ; -- L...
+    somebodyFem_NP = regNP "aliquis" "aliquem" "alicuius" "clicui" "aliquo" "aliquis" Fem Sg ; -- Bayer-Lindauer 60.1
+    nobodyFem_NP = regNP "nemo" "neminem" "neminis" "nemini" "nemine" "nemo" Fem Sg ; -- Bayer Lindauer 60.4
+    
+    Nom_Prep = mkPrep "" Nom ;
+    Gen_Prep = mkPrep "" Gen ;
+    Acc_Prep = mkPrep "" Acc ;
+    Dat_Prep = mkPrep "" Dat ;
+    Abl_Prep = mkPrep "" Abl ;
+    inAbl_Prep = mkPrep "in" Abl ;
+    onAbl_Prep = mkPrep "in" Abl ; -- L...
+
+    -- UttS_SVO : S -> Utt
+    UttS_SVO s = { s = defaultSentence s ! SVO };
+    -- UttS_VInS : S -> Utt
+    UttS_VInS s = { s = combineSentence s ! SAPreS ! APreV ! DPostN ! VInS ! CPostV ! SVO } ;
+
+    TestRCl t p cl = {
+      s = \\g,n => combineSentence (combineClause (t.s++p.s) (cl.s ! g ! n) t.t t.a p.p VQFalse) ;
+      } ;
+    
+    -- UseRCl_OSV : Temp -> Pol -> RCl -> RS ;
+    UseRCl_OSV t p cl = {
+      s = \\g,n => combineSentence (combineClause (t.s++p.s) (cl.s ! g ! n) t.t t.a p.p VQFalse) ! SAPreO ! APreV ! DPreN ! VReg ! CPostV ! OSV ;
+    } ;
+    -- UseRCl_OVS : Temp -> Pol -> RCl -> RS ;
+    UseRCl_OVS t p cl = {
+      s = \\g,n => combineSentence (combineClause (t.s++p.s) (cl.s ! g ! n) t.t t.a p.p VQFalse) ! SAPreO ! APreV ! DPreN ! VReg ! CPostV ! OVS  ; -- SAPreO APreV DPreN VReg CPostV OVS
+      } ;
+    -- UseRCl_SOV : Temp -> Pol -> RCl -> RS ;
+    UseRCl_SOV t p cl = {
+      s = \\g,n => combineSentence (combineClause (t.s++p.s) (cl.s ! g ! n) t.t t.a p.p VQFalse) ! SAPreS ! APreV ! DPreN ! VReg ! CPostV ! SOV  ;
+    } ;
+    -- UseRCl_SVO : Temp -> Pol -> RCl -> RS ;
+    UseRCl_SVO t p cl = {
+      s = \\g,n => combineSentence (combineClause (t.s++p.s) (cl.s ! g ! n) t.t t.a p.p VQFalse) ! SAPreS ! APreV ! DPreN ! VReg ! CPostV ! SVO  ;
+    } ;
+    --  PrepNP_DPostN : Prep -> NP -> Adv ;        -- in the house
+    PrepNP_DPostN prep np =
+      mkAdv (prep.s ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPostN ! prep.c ) ;
+
+    -- ApposCN_DPostN : CN -> NP -> CN
+    ApposCN_DPostN cn np =
+      cn **
+      {
+	s = \\n,c => cn.s ! n ! c ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPostN ! c ;
+      } ; -- massable = cn.massable } ;
+
+    --  CompNP_DPostN   : NP  -> Comp ;            -- (be) the man
+    CompNP np = {s = \\_ =>
+		   (combineNounPhrase np) ! PronNonDrop ! DPostN ! Nom
+      } ;
+
+    --  DetNP_Fem   : Det -> NP ;  -- these five
+    DetNP_Fem det = {
+      s = \\_ => det.s ! Fem ;
+      g = Fem ;
+      n = det.n ;
+      p = P3 ;
+      adv = "" ;
+      preap, postap = { s = \\_ => "" } ;
+      det = { s,sp = \\_ => "" ; n = det.n } ;
+      } ;
+
+    --     AdjAsNP_Fem : AP -> NP ;   -- green (is good)
+    AdjAsNP_Fem ap = {
+      s = \\_,c => ap.s ! (Ag Fem Sg c) ;
+      adv = "" ;
+      det = { s, sp = \\_ => "" } ;
+      g = Fem ;
+      n = Sg ;
+      p = P3 ;
+      postap = { s = \\_ => "" } ;
+      preap = { s = \\_ => "" } ;
+      } ;
+
+    -- PredVP_VP_Ellipsis : NP -> VP -> Cl
+    PredVP_VP_Ellipsis np  = 
+      mkClause np emptyVP ;
+
+    --  SlashVP_VP_Ellipsis  : NP -> VPSlash -> ClSlash ;      -- (whom) he sees
+    SlashVP_VP_Ellipsis np = 
+      mkClause np emptyVP ;
+
+    -- FunRP_RP_Ellipsis : Prep -> NP -> RP ;
+    FunRP_RP_Ellipsis p np = FunRP p np (lin RP { s = \\_ => "" }) ;
+
+    RelNP_NP_Ellipsis rs = RelNP emptyNP rs ;
+    
+    comma_Conj = mkConj "" "," "" Pl Comma ;
+} 
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/ExtraLatAbs.gf"
+id=c4f2e692cf28
+kind=source
+size=1351
+lines=56
+chunks=0
+----
+abstract ExtraLatAbs =
+  Conjunction
+  ** {
+  cat CS ;
+      TestRS ;
+  fun
+    useS : S -> CS ;
+    -- do not drop pronouns
+    UsePronNonDrop : Pron -> NP ;
+
+    -- add adjective before the noun
+    AdjCNPre : AP -> CN -> CN ;
+
+    -- handle conjunction with suffix
+    ConjNPque : Conj -> ListNP -> NP ;
+
+    -- Alternative form for female noun phrase
+    everybodyFem_NP : NP ;
+    somebodyFem_NP : NP ;
+    nobodyFem_NP : NP ;
+    
+    
+    -- Some empty prepositions to enforce cases
+    Nom_Prep : Prep ;
+    Gen_Prep : Prep ;
+    Acc_Prep : Prep ;
+    Dat_Prep : Prep ;
+    Abl_Prep : Prep ;
+
+    -- Preposition with alternate case
+    inAbl_Prep : Prep ;
+    onAbl_Prep : Prep ;
+
+    -- Add other word orders
+    UttS_SVO : S -> Utt ;
+    UttS_VInS : S -> Utt ;
+    TestRCl : Temp -> Pol -> RCl -> TestRS ;
+    UseRCl_OSV : Temp -> Pol -> RCl -> RS ;
+    UseRCl_OVS : Temp -> Pol -> RCl -> RS ;
+    UseRCl_SOV : Temp -> Pol -> RCl -> RS ;
+    UseRCl_SVO : Temp -> Pol -> RCl -> RS ;
+
+    PrepNP_DPostN : Prep -> NP -> Adv ;
+    ApposCN_DPostN : CN -> NP -> CN ;
+
+    -- More genders
+    DetNP_Fem   : Det -> NP ;
+    AdjAsNP_Fem : AP -> NP ;
+
+    -- Ellipsis
+    PredVP_VP_Ellipsis : NP -> Cl ;
+    SlashVP_VP_Ellipsis  : NP -> ClSlash ;
+    FunRP_RP_Ellipsis : Prep -> NP -> RP ;
+    RelNP_NP_Ellipsis : RS -> NP ;
+    comma_Conj : Conj ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/GrammarLat.gf"
+id=4a92d57cc8b9
+kind=source
+size=291
+lines=19
+chunks=0
+----
+--# -path=.:../abstract:../common:prelude
+
+concrete GrammarLat of Grammar = 
+  NounLat, 
+  VerbLat, 
+  AdjectiveLat,
+  AdverbLat,
+  NumeralLat,
+  SentenceLat,
+  QuestionLat,
+  RelativeLat,
+  ConjunctionLat,
+  PhraseLat,
+  TextX-[Adv],
+  TenseX-[Adv],
+  StructuralLat
+--  IdiomLat
+  ** {
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/IdiomLat.gf"
+id=2dc572172222
+kind=source
+size=985
+lines=29
+chunks=0
+----
+concrete IdiomLat of Idiom = CatLat ** open Prelude, ResLat in {
+--
+--  flags optimize=all_subs ;
+--
+--  lin
+--    ImpersCl vp = mkClause "it" (agrP3 Sg) vp ;
+--    GenericCl vp = mkClause "one" (agrP3 Sg) vp ;
+--
+--    CleftNP np rs = mkClause "it" (agrP3 Sg) 
+--      (insertObj (\\_ => rs.s ! np.a)
+--        (insertObj (\\_ => combineNounPhrase np ! PronNonDrop ! rs.c) (predAux auxBe))) ;
+--
+--    CleftAdv ad s = mkClause "it" (agrP3 Sg) 
+--      (insertObj (\\_ => conjThat ++ s.s)
+--        (insertObj (\\_ => ad.s) (predAux auxBe))) ;
+--
+--    ExistNP np = 
+--      mkClause "there" (agrP3 (fromAgr np.a).n) 
+--        (insertObj (\\_ => combineNounPhrase np ! PronNonDrop ! Acc) (predAux auxBe)) ;
+--
+--    ExistIP ip = 
+--      mkQuestion (ss (ip.s ! Nom)) 
+--        (mkClause "there" (agrP3 ip.n) (predAux auxBe)) ;
+--
+--    ProgrVP vp = insertObj (\\a => vp.ad ++ vp.prp ++ vp.s2 ! a) (predAux auxBe) ;
+--
+--    ImpPl1 vp = {s = "let's" ++ infVP True vp (AgP1 Pl)} ;
+--
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/LangLat.gf"
+id=db0cea977aea
+kind=source
+size=240
+lines=13
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete LangLat of Lang = 
+  GrammarLat,
+  ParadigmsLat,
+  LexiconLat
+--  ConstructionLat
+  ,DocumentationLat --# notpresent
+  ** {
+
+flags startcat = Phr ; unlexer = text ; lexer = text ;
+
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/MissingLat.gf"
+id=2ea7740f04cc
+kind=source
+size=4145
+lines=80
+chunks=0
+----
+resource MissingLat = open GrammarLat, Prelude in {
+
+-- temporary definitions to enable the compilation of RGL API
+oper AdNum : AdN -> Card -> Card = notYet "AdNum" ;
+oper AddAdvQVP : QVP -> IAdv -> QVP = notYet "AddAdvQVP" ;
+oper AdjDAP : DAP -> AP -> DAP = notYet "AdjDAP" ;
+oper AdvCN : CN -> Adv -> CN = notYet "AdvCN" ;
+oper AdvIAdv : IAdv -> Adv -> IAdv = notYet "AdvIAdv" ;
+oper AdvIP : IP -> Adv -> IP = notYet "AdvIP" ;
+oper AdvQVP : VP -> IAdv -> QVP = notYet "AdvQVP" ;
+oper AdvSlash : ClSlash -> Adv -> ClSlash = notYet "AdvSlash" ;
+oper BaseAP : AP -> AP -> ListAP = notYet "BaseAP" ;
+oper BaseAdV : AdV -> AdV -> ListAdV = notYet "BaseAdV" ;
+oper BaseCN : CN -> CN -> ListCN = notYet "BaseCN" ;
+oper BaseDAP : DAP -> DAP -> ListDAP = notYet "BaseDAP" ;
+oper BaseIAdv : IAdv -> IAdv -> ListIAdv = notYet "BaseIAdv" ;
+oper CleftAdv : Adv -> S -> Cl = notYet "CleftAdv" ;
+oper CleftNP : NP -> RS -> Cl = notYet "CleftNP" ;
+oper CompIP : IP -> IComp = notYet "CompIP" ;
+oper ComplN2 : N2 -> NP -> CN = notYet "ComplN2" ;
+oper ComplN3 : N3 -> NP -> N2 = notYet "ComplN3" ;
+oper ComplSlashIP : VPSlash -> IP -> QVP = notYet "ComplSlashIP" ;
+oper ConjAP : Conj -> ListAP -> AP = notYet "ConjAP" ;
+oper ConjAdV : Conj -> ListAdV -> AdV = notYet "ConjAdV" ;
+oper ConjAdv : Conj -> ListAdv -> Adv = notYet "ConjAdv" ;
+oper ConjCN : Conj -> ListCN -> CN = notYet "ConjCN" ;
+oper ConjDet : Conj -> ListDAP -> Det = notYet "ConjDet" ;
+oper ConjIAdv : Conj -> ListIAdv -> IAdv = notYet "ConjIAdv" ;
+-- Error: No type found for ConjNPque
+oper ConsAP : AP -> ListAP -> ListAP = notYet "ConsAP" ;
+oper ConsAdV : AdV -> ListAdV -> ListAdV = notYet "ConsAdV" ;
+oper ConsCN : CN -> ListCN -> ListCN = notYet "ConsCN" ;
+oper ConsDAP : DAP -> ListDAP -> ListDAP = notYet "ConsDAP" ;
+oper ConsIAdv : IAdv -> ListIAdv -> ListIAdv = notYet "ConsIAdv" ;
+oper DetDAP : Det -> DAP = notYet "DetDAP" ;
+oper DetQuantOrd : Quant -> Num -> Ord -> Det = notYet "DetQuantOrd" ;
+oper EmbedQS : QS -> SC = notYet "EmbedQS" ;
+oper EmbedS : S -> SC = notYet "EmbedS" ;
+oper EmbedVP : VP -> SC = notYet "EmbedVP" ;
+oper ExistIP : IP -> QCl = notYet "ExistIP" ;
+oper ExistNP : NP -> Cl = notYet "ExistNP" ;
+oper ExtAdvS : Adv -> S -> S = notYet "ExtAdvS" ;
+oper ExtAdvVP : VP -> Adv -> VP = notYet "ExtAdvVP" ;
+oper GenericCl : VP -> Cl = notYet "GenericCl" ;
+oper IdetCN : IDet -> CN -> IP = notYet "IdetCN" ;
+oper IdetIP : IDet -> IP = notYet "IdetIP" ;
+oper IdetQuant : IQuant -> Num -> IDet = notYet "IdetQuant" ;
+oper ImpPl1 : VP -> Utt = notYet "ImpPl1" ;
+oper ImpVP : VP -> Imp = notYet "ImpVP" ;
+oper ImpersCl : VP -> Cl = notYet "ImpersCl" ;
+oper NumDigits : Digits -> Card = notYet "NumDigits" ;
+oper OrdDigits : Digits -> Ord = notYet "OrdDigits" ;
+oper OrdNumeralSuperl : Numeral -> A -> Ord = notYet "OrdNumeralSuperl" ;
+oper OrdSuperl : A -> Ord = notYet "OrdSuperl" ;
+oper PPartNP : NP -> V2 -> NP = notYet "PPartNP" ;
+oper PartNP : CN -> NP -> CN = notYet "PartNP" ;
+oper PossNP : CN -> NP -> CN = notYet "PossNP" ;
+oper PredSCVP : SC -> VP -> Cl = notYet "PredSCVP" ;
+oper PrepIP : Prep -> IP -> IAdv = notYet "PrepIP" ;
+oper ProgrVP : VP -> VP = notYet "ProgrVP" ;
+oper QuestQVP : IP -> QVP -> QCl = notYet "QuestQVP" ;
+oper QuestSlash : IP -> ClSlash -> QCl = notYet "QuestSlash" ;
+oper ReflVP : VPSlash -> VP = notYet "ReflVP" ;
+oper RelCN : CN -> RS -> CN = notYet "RelCN" ;
+oper RelCl : Cl -> RCl = notYet "RelCl" ;
+oper RelS : S -> RS -> S = notYet "RelS" ;
+oper SSubjS : S -> Subj -> S -> S = notYet "SSubjS" ;
+oper SentCN : CN -> SC -> CN = notYet "SentCN" ;
+oper SlashV2S : V2S -> S -> VPSlash = notYet "SlashV2S" ;
+oper SlashV2V : V2V -> VP -> VPSlash = notYet "SlashV2V" ;
+oper SlashV2VNP : V2V -> NP -> VPSlash -> VPSlash = notYet "SlashV2VNP" ;
+oper SlashVS : NP -> VS -> SSlash -> ClSlash = notYet "SlashVS" ;
+oper SlashVV : VV -> VPSlash -> VPSlash = notYet "SlashVV" ;
+oper Use2N3 : N3 -> N2 = notYet "Use2N3" ;
+oper Use3N3 : N3 -> N2 = notYet "Use3N3" ;
+-- Error: No type found for UsePronNonDrop
+oper UseSlash : Temp -> Pol -> ClSlash -> SSlash = notYet "UseSlash" ;
+oper VPSlashPrep : VP -> Prep -> VPSlash = notYet "VPSlashPrep" ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/MorphoLat.gf"
+id=b241872ae331
+kind=source
+size=24951
+lines=731
+chunks=3
+
+--- CHUNK BEGIN ---
+id=b241872ae331:1-350
+start=1
+end=350
+----
+--# -path=.:../prelude
+
+--1 A Simple Latin Resource Morphology.
+
+-- Herbert Lange 2013
+
+-- This resource morphology contains definitions needed in the resource
+-- syntax. To build a lexicon, it is better to use $ParadigmsLat$, which
+-- gives a higher-level access to this module.
+
+resource MorphoLat = ParamX, ResLat ** open Prelude, Predef in {
+--
+--  flags optimize=all ;
+--
+
+----2 Phonology
+oper
+  -- sounds and sound changes
+  vowel : pattern Str = #( "a" | "e" | "o" | "u" | "y" );
+  semivowel : pattern Str = #( "j" | "w" );
+--  consonant : pattern Str = #( "p" | "b" | "f" | "v" | "m" | "t" | "d" | "s" | "z" | "n" | "r" | "c" | "g" | "l" | "q" | "qu" | "h" );
+  stop : pattern Str = #( "p" | "b" | "t" | "d" | "c" | "q" | "q" ); 
+  fricative : pattern Str = #( "f" | "v" | "s" | "z" | "h" );
+  nasal : pattern Str = #( "m" | "n" );
+  liquid : pattern Str = #( "r" | "l" );
+--  consonant : pattern Str = #(#stop | #fricative | #nasal | #liquid ); -- not working
+----2 Nouns  
+    
+-- declensions
+oper
+
+  -- a-Declension
+  noun1 : Str -> Noun = \mensa ->
+    let 
+      mensae = mensa + "e" ;
+      mensis = init mensa + "is" ;
+    in
+    mkNoun 
+      mensa (mensa +"m") mensae mensae mensa mensa
+      mensae (mensa + "s") (mensa + "rum") mensis
+      Fem ;
+
+  -- o-Declension
+  noun2us : Str -> Noun = \servus ->
+    let
+      serv = Predef.tk 2 servus ;
+      servum = serv + "um" ;
+      servi = serv + "i" ;
+      servo = serv + "o" ;
+    in
+    mkNoun 
+      servus servum servi servo servo (serv + "e")
+      servi (serv + "os") (serv + "orum") (serv + "is")
+      Masc ;
+
+  noun2er : Str -> Str -> Noun = \liber,libri ->
+    let
+      libr : Str = Predef.tk 1 libri;
+      librum = libr + "um" ;
+      libri = libr + "i" ;
+      libro = libr + "o" ;
+    in
+    mkNoun 
+      liber librum libri libro libro liber
+      libri ( libr + "os" ) ( libr + "orum" ) ( libr + "is" )
+      Masc ;
+
+  noun2um : Str -> Noun = \bellum ->
+    let
+      bell = Predef.tk 2 bellum ;
+      belli = bell + "i" ;
+      bello = bell + "o" ;
+      bella = bell + "a" ;
+    in
+    mkNoun 
+      bellum bellum belli bello bello (bell + "um")
+      bella bella (bell + "orum") (bell + "is")
+      Neutr ;
+
+  -- Consonant declension
+  noun3c : Str -> Str -> Gender -> Noun = \rex,regis,g ->
+    let
+      reg : Str = Predef.tk 2 regis ;
+      regemes : Str * Str = case g of {
+	Masc | Fem => < reg + "em" , reg + "es" > ;
+	Neutr => < rex , reg + "a" > 
+	} ;
+    in
+    mkNoun
+      rex regemes.p1 ( reg + "is" ) ( reg + "i" ) ( reg + "e" ) rex
+      regemes.p2 regemes.p2 ( reg + "um" ) ( reg + "ibus" ) 
+      g ;
+
+  -- i-declension
+  noun3i : Str -> Str -> Gender -> Noun = \ars,artis,g ->
+    let 
+      art : Str = Predef.tk 2 artis ;
+      artemes : Str * Str = case g of {
+	Masc | Fem => < art + "em" , art + "es" > ;
+	Neutr => case art of {
+	  _ + #consonant + #consonant => < ars , art + "a" > ; -- maybe complete fiction but may be working
+	  _ => < ars , art + "ia" > -- Bayer-Lindauer 32 4
+	  }
+	} ;
+      arte : Str = case ars of {
+	_ + ( "e" | "al" | "ar" ) => art + "i" ;
+	_ => art + "e"
+	};
+    in
+    mkNoun
+      ars artemes.p1 ( art + "is" ) ( art + "i" ) arte ars
+      artemes.p2 artemes.p2 ( art + "ium" ) ( art + "ibus" ) 
+      g ;
+
+  -- u-Declension
+
+  noun4us : Str -> Noun = \fructus -> 
+    let
+      fructu = init fructus ;
+      fruct  = init fructu
+    in
+    mkNoun
+      fructus (fructu + "m") fructus (fructu + "i") fructu fructus
+      fructus fructus (fructu + "um") (fruct + "ibus")
+      Masc ;
+  
+  noun4u : Str -> Noun = \cornu -> 
+    let
+      corn = init cornu ;
+      cornua = cornu + "a"
+    in
+    mkNoun
+      cornu cornu (cornu + "s") cornu cornu cornu
+      cornua cornua (cornu + "um") (corn + "ibus")
+      Neutr ;
+
+  -- e-Declension
+  noun5 : Str -> Noun = \res -> 
+    let
+      re = init res ;
+      rei = re + "i"
+    in
+    mkNoun
+      res (re+ "m") rei rei re res
+      res res (re + "rum") (re + "bus")
+      Fem ;
+
+  -- smart paradigms
+
+  noun_ngg : Str -> Str -> Gender -> Noun = \verbum,verbi,g -> 
+    let s : Noun = case <verbum,verbi> of {
+      <_    + "a"             , _ + "ae"> => noun1 verbum ;
+      <_    + "us"            , _ + "i" > => noun2us verbum ;
+      <_    + "um"            , _ + "i" > => noun2um verbum ;
+      <_    + ( "er" | "ir" ) , _ + "i" > => noun2er verbum verbi ;
+      <_    + "us"            , _ + "us"> => noun4us verbum ;
+      <_    + "u"             , _ + "us"> => noun4u verbum ;
+      <_    + "es"            , _ + "ei"> => noun5 verbum ;
+      <semi + "bos"           , _       > => prefixNoun semi (noun3 "bos" "bovis" Masc) ;
+      _  => noun3 verbum verbi g
+      }
+    in  
+    nounWithGender g s ;
+
+  noun : Str -> Noun = \verbum -> 
+    case verbum of {
+      _ + "a"  => noun1 verbum ;
+      _ + "us" => noun2us verbum ;
+      _ + "um" => noun2um verbum ;
+      _ + ( "er" | "ir" ) => noun2er verbum ( (Predef.tk 2 verbum) + "ri" ) ;
+      _ + "u"  => noun4u verbum ;
+      _ + "es" => noun5 verbum ;
+      semi + "bos" => prefixNoun semi (noun_ngg "bos" "bovis" Masc) ;
+      _  => Predef.error ("3rd declinsion cannot be applied to just one noun form " ++ verbum)
+      } ;
+  
+
+  noun12 : Str -> Noun = \verbum -> 
+    case verbum of {
+      _ + "a"  => noun1 verbum ;
+      _ + "us" => noun2us verbum ;
+      _ + "um" => noun2um verbum ;
+      _ + ( "er" | "ir" | "ur" | "tr") => 
+	let
+	  puer = verbum ; 
+	  pue = Predef.tk 1 puer ; 
+	  e = case puer of {
+	    -- Exception of nouns where e is part of the word stem Bayer-Lindauer 27 4.2
+	    "puer" | "socer" | "gener" | "vesper" => "e" ;
+	    -- Exception of adjectives where e is part of the word stem 31 3.2
+	    ("asper" | "miser" | "tener" | "frugifer") + _ => "e";
+	    -- "liber" => ( "e"  | "" ) ; conflicting with noun liber
+	    _ + "tr" => "t";
+	    _ => ""
+	    } ;
+	  pu = Predef.tk 1 pue ;
+	in noun2er verbum ( pu + e + "ri" );
+      _  => Predef.error ("noun12 does not apply to" ++ verbum)
+    } ;
+
+  noun3 : Str -> Str -> Gender -> Noun = \rex,regis,g ->
+    let
+      reg : Str = Predef.tk 2 regis ;
+    in
+    case <rex,reg> of {
+      -- Bos has to many exceptions to be handled correctly
+      < "bos" , "bov" > => mkNoun "bos" "bovem" "bovis" "bovi" "bove" "bos" "boves" "boves" "boum" "bobus" g;
+      -- Some exceptions with no fitting rules
+      < "nix" , _ > => noun3i rex regis g; -- L...
+      < ( "sedes" | "canis" | "iuvenis" | "mensis" | "sal" ) , _ > => noun3c rex regis g ;  -- Bayer-Lindauer 31 3 and Exercitia Latina 32 b), sal must be handled here because it will be handled wrongly by the next rule 
+      < _ + ( "e" | "al" | "ar" ) , _ > => noun3i rex regis g ; -- Bayer-Lindauer 32 2.3
+      < _ + "ter", _ + "tr" > => noun3c rex regis g ; -- might not be right but seems fitting for Bayer-Lindauer 31 2.2 
+      < _ , _ + #consonant + #consonant > => noun3i rex regis g ; -- Bayer-Lindauer 32 2.2
+      < _ + ( "is" | "es" ) , _ > => 
+	if_then_else 
+	  Noun 
+	  -- assumption based on Bayer-Lindauer 32 2.1
+	  ( pbool2bool ( Predef.eqInt ( Predef.length rex ) ( Predef.length regis ) ) ) 
+	  ( noun3i rex regis g ) 
+	  ( noun3c rex regis g ) ;
+      _ => noun3c rex regis g
+    } ;
+
+
+----3 Proper names
+
+----2 Determiners
+
+----2 Pronouns
+
+----2 Adjectives
+oper
+  comp_super : Noun -> ( Agr => Str ) * ( Agr => Str ) = 
+    \bonus ->
+    case bonus.s!Sg!Gen of {
+      -- Exception Bayer-Lindauer 50 1
+      "boni" => < comp "meli" , table { Ag g n c => table Gender [ (noun2us "optimus").s ! n ! c ; (noun1 "optima").s ! n ! c ; (noun2um "optimum").s ! n ! c ] ! g } > ;
+      "mali" => < comp "pei" , super "pessus" > ;
+      "magni" => < comp "mai" , table { Ag g n c => table Gender [ (noun2us "maximus").s ! n ! c ; (noun1 "maxima").s ! n ! c ; (noun2um "maximum").s ! n ! c ] ! g } > ;
+      "parvi" => < comp "mini" , table { Ag g n c => table Gender [ (noun2us "minimus").s ! n ! c ; (noun1 "minima").s ! n ! c ; (noun2um "minimum").s ! n ! c ] ! g } >;
+      --Exception Bayer-Lindauer 50.3
+      "novi" => < comp "recenti" , super "recens" > ;
+      "feri" => < comp "feroci" , super "ferox" > ;
+      "sacris" => < comp "sancti" , super "sanctus" >;
+      "frugiferi" => < comp "fertilis" , super "fertilis" > ;
+      "veti" => < comp "vetusti" , super "vetustus" >;
+      "inopis" => < comp "egentis" , super "egens" >;
+      -- Default Case use Singular Genetive to determine comparative
+      sggen => < comp sggen , super (bonus.s!Sg!Nom) >
+    } ;
+  
+  comp : Str -> ( Agr => Str ) = \boni -> -- Bayer-Lindauer 46 2
+    case boni of {
+      bon + ( "i" | "is" ) => 
+	table
+	{
+	  Ag ( Fem | Masc ) Sg c => table Case [ bon + "ior" ; 
+			       bon + "iorem" ; 
+			       bon + "ioris" ; 
+			       bon + "iori" ; 
+			       bon + "iore"; 
+			       bon + "ior" ] ! c ;
+	  Ag ( Fem | Masc ) Pl c => table Case [ bon + "iores" ; 
+			       bon + "iores" ; 
+			       bon + "iorum" ; 
+			       bon + "ioribus" ; 
+			       bon + "ioribus" ; 
+			       bon + "iores" ] ! c ;
+	  Ag Neutr Sg c => table Case [ bon + "ius" ; 
+			       bon + "ius" ; 
+			       bon + "ioris" ; 
+			       bon + "iori" ; 
+			       bon + "iore" ; 
+			       bon + "ius" ] ! c ;
+	  Ag Neutr Pl c => table Case [ bon + "iora" ; 
+			       bon + "iora" ; 
+			       bon + "iorum" ; 
+			       bon + "ioribus" ; 
+			       bon + "ioribus" ; 
+			       bon + "iora" ] ! c 
+	} ;
+      _ => \\_ => nonExist -- Default case
+    } ;
+  
+  super : Str -> ( Agr => Str ) = \bonus ->
+    let
+      prefix : Str = case bonus of {
+	ac + "er" => bonus ; -- Bayer-Lindauer 48 2
+	faci + "lis" => faci + "l" ; -- Bayer-Lindauer 48 3
+	feli + "x" => feli + "c" ; -- Bayer-Lindauer 48 1
+	ege + "ns" => ege + "nt" ; -- Bayer-Lindauer 48 1
+	bon + ( "us" | "is") => bon ; -- Bayer-Lindauer 48 1
+	_ => nonExist -- default case
+	};
+      suffix : Str = case bonus of {
+	ac + "er" => "rim" ; -- Bayer-Lindauer 48 2
+	faci + "lis" => "lim" ; -- Bayer-Lindauer 48 3
+	_ => "issim" -- Bayer-Lindauer 48 1
+	};
+    in
+    table {
+      Ag Fem n c => (noun1 ( prefix + suffix + "a" )).s ! n ! c ;
+      Ag Masc n c => (noun2us ( prefix + suffix + "us" )).s ! n ! c;
+      Ag Neutr n c => (noun2um ( prefix + suffix + "um" )).s ! n ! c
+    } ;
+
+  adj12 : Str -> Adjective = \bonus ->
+    let
+      bon : Str = case bonus of {
+	-- Exceptions Bayer-Lindauer 41 3.2
+	("asper" | "liber" | "miser" | "tener" | "frugifer") => bonus ;
+	-- Usual cases
+	pulch + "er" => pulch + "r" ;
+	bon + "us" => bon ;
+	cam + "ur" => cam ;
+	dime + "tr" => bonus ; 
+	_ => Predef.error ("adj12 does not apply to" ++ bonus)
+	} ; 
+      nbonus = (noun12 bonus) ;
+      compsup : ( Agr => Str ) * ( Agr => Str ) = 
+	-- Bayer-Lindauer 50 4
+	case bonus of {
+	  (_ + #vowel + "us" ) |
+	    (_ + "r" + "us" ) => 
+	    < table { Ag g n c => table Gender [ ( noun12 bonus ).s ! n ! c ; ( noun12 ( bon + "a" ) ).s ! n ! c ; ( noun12 ( bon + "um" ) ).s ! n ! c ] ! g } ,
+	    table { Ag g n c => table Gender [ ( noun12 bonus ).s ! n ! c ; ( noun12 ( bon + "a" ) ).s ! n ! c ; ( noun12 ( bon + "um" ) ).s ! n ! c ] ! g } > ;
+	  _ => comp_super nbonus
+	};
+      advs : Str * Str = 
+	case bonus of {
+	  -- Bayer-Lindauer 50 4
+	  idon + #vowel + "us" => < "magis" , "maxime" > ;
+	  _ => < "" , "" >
+	}
+    in
+    mkAdjective 
+    nbonus 
+    (noun1 (bon + "a")) 
+    (noun2um (bon + "um")) 
+    < compsup.p1 , advs.p1 > 
+    < compsup.p2 , advs.p2 >
+    (bon + "o") (bon + "ius") (bon + "issimo") ; 
+
+  adj3x : (_,_ : Str) -> Adjective = \acer,acris -> -- FISHY??
+   let
+     ac = Predef.tk 2 acer ;
+     acrise : Str * Str = case acer of {
+       _ + "er" => <ac + "ris", ac + "re"> ; 
+       _ + "is" => <acer      , ac + "e"> ;
+       _        => <acer      , acer> 
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=b241872ae331:351-700
+start=351
+end=700
+----
+       } ;
+     nacer = (noun3adj acer acris Masc) ;
+     compsuper = comp_super nacer;
+   in
+   mkAdjective 
+    nacer
+    (noun3adj acrise.p1 acris Fem) 
+    (noun3adj acrise.p2 acris Neutr) 
+    < compsuper.p1 , "" >
+    < compsuper.p2 , "" >
+    (ac + "riter") (ac + "rius") (ac + "rissimo") ; 
+
+  adjgre : Str -> Str -> Str -> Adjective = \bonus,bona,bonum ->
+    let
+      first : Str -> Agr => Str =
+	\stem ->
+	table { Ag Masc Sg Nom => stem + "os" ;
+		Ag (Masc | Neutr) Sg Gen => stem + "ou" ;
+		Ag (Masc | Neutr) Sg Dat => stem + "oi" ;
+		Ag (Masc | Neutr) Sg Acc => stem + "on" ;
+		Ag Masc Sg Voc => stem + "e" ;
+		Ag Fem Sg (Nom | Voc) => stem + "a" ;
+		Ag Fem Sg Gen => stem + "as" ;
+		Ag Fem Sg Dat => stem + "ai" ;
+		Ag Fem Sg Acc => stem + "an" ;
+		Ag Neutr Sg (Nom | Voc) => stem + "on" ;
+		Ag Masc Pl (Nom | Voc) => stem + "oi" ;
+		Ag (Masc | Fem | Neutr) Pl Gen => stem + "on" ;
+		Ag (Masc | Neutr) Pl Dat => stem + "ois" ;
+		Ag Masc Pl Acc => stem + "ous" ;
+		Ag Fem Pl (Nom | Voc) => stem + "ai" ;
+		Ag Fem Pl Dat => stem + "ais" ;
+		Ag Fem Pl Acc => stem + "as" ;
+		Ag Neutr Pl (Nom | Acc | Voc) => stem + "a" ;
+		Ag _ _ Abl => nonExist
+	} ;
+      second : Str -> Agr => Str =
+	\stem ->
+	table { Ag (Masc | Fem) Sg Nom => stem + "os" ;
+		Ag (Masc | Fem | Neutr) Sg Gen => stem + "ou" ;
+		Ag (Masc | Fem | Neutr) Sg Dat => stem + "oi" ;
+		Ag (Masc | Fem | Neutr) Sg Acc => stem + "on" ;
+		Ag (Masc | Fem) Sg Voc => stem + "e" ;
+		Ag Neutr Sg (Nom | Voc) => stem + "on" ;
+		Ag (Masc | Fem) Pl (Nom | Voc) => stem + "oi";
+		Ag (Masc | Fem | Neutr) Pl Gen => stem + "on" ;
+		Ag (Masc | Fem | Neutr) Pl Dat => stem + "ois" ;
+		Ag (Masc | Fem) Pl Acc => stem + "ous" ;
+		Ag Neutr Pl (Nom | Acc | Voc) => stem + "a" ;
+		Ag _ _ Abl => nonExist
+	} ;
+      third : Str -> Agr => Str =
+	\stem ->
+	table { Ag (Masc | Fem | Neutr) Sg (Nom | Voc) => stem + "es" ;
+		Ag (Masc | Fem | Neutr) Sg Gen => stem + "ous" ;
+		Ag (Masc | Fem | Neutr) Sg Dat => stem + "ei" ;
+		Ag (Masc | Fem) Sg Acc => stem + "e" ;
+		Ag Neutr Sg Acc => stem + "es" ;
+		Ag (Masc | Fem) Pl (Nom | Acc | Voc) => "eis" ;
+		Ag (Masc | Fem | Neutr) Pl Gen => "on" ;
+		Ag (Masc | Fem | Neutr) Pl Dat => "esi" ;
+		Ag Neutr Pl (Nom | Acc | Voc ) => "e" ;
+		Ag _ _ Abl => nonExist
+	} ;
+    in
+    { s = case <bonus,bona,bonum> of {
+	<agi + "os"    , _ + "a" , _ + "on"> =>
+	  table { Posit => first agi ;
+		  Compar => first (agi + "oter") ;
+		  Super => first (agi + "otat")
+	  } ;
+	<arctic + "os" , _ + "e" , _ + "on"> =>
+	  table { Posit => second arctic ;
+		  Compar => second (arctic + "oter") ;
+		  Super => second (arctic + "otat")
+	  } ;
+	<akapn + "os"  , _ + "os", _ + "on"> =>
+	  table { Posit => second akapn ;
+		  Compar => second (akapn + "oter") ;
+		  Super => second (akapn + "otat")
+	  } ;
+	<isoscel + "es", _ + "es", _ + "es"> =>
+	  table { Posit => third isoscel ;
+		  Compar => first (isoscel + "oter") ;
+		  Super => first (isoscel + "otat")
+	  } ;
+	<amethystiz + "on", _ + "ousa", _ + "on"> => 
+	  table { Posit => table { Ag g Sg c => first amethystiz ! Ag g Sg c ;
+				   Ag g Pl c => third amethystiz ! Ag g Sg c
+		    } ;
+		  Compar => \\_ => nonExist ;
+		  Super => \\_ => nonExist
+	  };	    
+	_ => error ("Greek adjective " ++ bonus ++ bona ++ bonum ) -- { s = \\_,_ => "" ; adv = \\_ => ""} ;
+	} ;
+      adv = mkAdverb bonus
+    } ;
+-- smart paradigms
+
+  adj123 : Str -> Str -> Adjective = \bonus,boni -> 
+    case <bonus,boni> of {
+      <_ + ("us" | "er"), _ + "i" > => adj12 bonus ;
+      <_ + ("us" | "er"), _ + "is"> => adj3x bonus boni ;
+      <_                , _ + "is"> => adj3x bonus boni ;
+      <_ + "is"         , _ + "e" > => adj3x bonus boni ;
+      <_ + "is"         , _ + "os"> => adj3x bonus boni ;
+      --      <_ + "os"         , _ + "on"> => adjgre bonus boni boni ;
+      <bon + "on"       , _ + "os"> => adjgre bonus (bon + "ousa") bonus ;
+      _ => Predef.error ("adj123: not applicable to" ++ bonus ++ boni)
+    } ;
+
+  adj : Str -> Adjective = \bonus ->
+    case bonus of {
+      _ + ("us" | "er") => adj12 bonus ;
+      facil + "is"      => adj3x bonus bonus ;
+      feli  + "x"       => adj3x bonus (feli + "cis") ;
+      _                 => adj3x bonus (bonus + "is") ---- any example?
+    } ;
+  
+  adjfull : (bonus,bona,bonum : Str) -> Adjective = \bonus,bona,bonum ->
+    case <bonus,bona,bonum> of {
+      <_ + ("er"|"us"|"ur"|"tr"), _ + "a"  , _ + "um"> => adj12 bonus ;
+      <_ + ("er"|"is"), _ + "is" , _ + "e" > => adj3x bonus bonum ; -- FISHY?
+      <_ + "ior"      , _ + "ior", _ + "ius"> => adj3x bonus bonum ; -- FISHY?
+      <_ + "os"       , _ + "os" , _ + "on"> => adjgre bonus bona bonum ;
+      <_ + "es"       , _ + "es" , _ + "es"> => adjgre bonus bona bonum ;
+      <_ + "os"       , _ + ("e"|"a")  , _ + "on"> => adjgre bonus bona bonum ;
+      _ => Predef.error ("Not supported" ++ bonus ++ bona ++ bonum)
+    } ;
+
+----3 Verbs
+
+-- 1./a-conjugation
+
+  verb1 : Str -> Verb = \laudare ->
+    let
+      lauda = Predef.tk 2 laudare ;
+      laud = init lauda ;
+      laudav = lauda + "v" ;
+      pres_stem = lauda ;
+      pres_ind_base = lauda ;
+      pres_conj_base = laud + "e" ;
+      impf_ind_base = lauda + "ba" ;
+      impf_conj_base = lauda + "re" ;
+      fut_I_base = lauda + "bi" ;
+      imp_base = lauda ;
+      perf_stem = laudav ;
+      perf_ind_base = laudav ;
+      perf_conj_base = laudav + "eri" ;
+      pqperf_ind_base = laudav + "era" ;
+      pqperf_conj_base = laudav + "isse" ;
+      fut_II_base = laudav + "eri" ;
+      part_stem = lauda + "t" ;
+    in
+    mkVerb laudare pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base
+    perf_stem perf_ind_base perf_conj_base pqperf_ind_base pqperf_conj_base fut_II_base part_stem ;
+
+-- 2./e-conjugation
+
+  verb2 : Str -> Verb = \monere ->
+    let
+      mone = Predef.tk 2 monere ;
+      mon = init mone ;
+      monu = mon + "u" ;
+      pres_stem = mone ;
+      pres_ind_base = mone ;
+      pres_conj_base = mone + "a" ;
+      impf_ind_base = mone + "ba" ;
+      impf_conj_base = mone + "re" ;
+      fut_I_base = mone + "bi" ;
+      imp_base = mone ;
+      perf_stem = monu ;
+      perf_ind_base = monu ;
+      perf_conj_base = monu + "eri" ;
+      pqperf_ind_base = monu + "era" ;
+      pqperf_conj_base = monu + "isse" ;
+      fut_II_base = monu + "eri" ;
+      part_stem = mon + "it" ;
+    in
+    mkVerb monere pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base
+    perf_stem perf_ind_base perf_conj_base pqperf_ind_base pqperf_conj_base fut_II_base part_stem ;
+
+-- 3./Consonant conjugation
+
+  verb3c : ( regere,rexi,rectus : Str ) -> Verb = \regere,rexi,rectus ->
+    let
+      rege = Predef.tk 2 regere ;
+      reg = init rege ;
+      rex = init rexi ;
+      rect = Predef.tk 2 rectus ;
+      pres_stem = reg ;
+      pres_ind_base = reg ;
+      pres_conj_base = reg + "a" ;
+      impf_ind_base = reg + "eba" ;
+      impf_conj_base = reg + "ere" ;
+      fut_I_base = rege ;
+      imp_base = reg ;
+      perf_stem = rex ;
+      perf_ind_base = rex ;
+      perf_conj_base = rex + "eri" ;
+      pqperf_ind_base = rex + "era" ;
+      pqperf_conj_base = rex + "isse" ;
+      fut_II_base = rex + "eri" ;
+      part_stem = rect ;
+    in
+    mkVerb regere pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base
+    perf_stem perf_ind_base perf_conj_base pqperf_ind_base pqperf_conj_base fut_II_base part_stem ;
+
+-- 3./i-conjugation
+
+  verb3i : ( capere,cepi,captus : Str ) -> Verb = \capere,cepi,captus ->
+    let
+      cape = Predef.tk 2 capere ;
+      cap = init cape ;
+      capi = cap + "i" ;
+      cep = init cepi ;
+      capt = Predef.tk 2 captus ;
+      pres_stem = capi ;
+      pres_ind_base = capi ;
+      pres_conj_base = capi + "a" ;
+      impf_ind_base = capi + "eba" ;
+      impf_conj_base = cape + "re" ;
+      fut_I_base = capi + "e" ;
+      imp_base = cap ;
+      perf_stem = cep ;
+      perf_ind_base = cep ;
+      perf_conj_base = cep + "eri" ;
+      pqperf_ind_base = cep + "era" ;
+      pqperf_conj_base = cep + "isse" ;
+      fut_II_base = cep + "eri" ;
+      part_stem = capt ;
+    in
+    mkVerb capere pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base
+    perf_stem perf_ind_base perf_conj_base pqperf_ind_base pqperf_conj_base fut_II_base part_stem ;
+
+-- 4./i-conjugation
+
+  verb4 : Str -> Verb = \audire ->
+    let
+      audi = Predef.tk 2 audire ;
+      audiv = audi + "v" ;
+      pres_stem = audi ;
+      pres_ind_base = audi ;
+      pres_conj_base = audi + "a" ;
+      impf_ind_base = audi + "eba" ;
+      impf_conj_base = audi + "re" ;
+      fut_I_base = audi +"e" ;
+      imp_base = audi ;
+      perf_stem = audiv ;
+      perf_ind_base = audiv ;
+      perf_conj_base = audiv + "eri" ;
+      pqperf_ind_base = audiv + "era" ;
+      pqperf_conj_base = audiv + "isse" ;
+      fut_II_base = audiv + "eri" ;
+      part_stem = audi + "t" ;
+    in
+    mkVerb audire pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base
+    perf_stem perf_ind_base perf_conj_base pqperf_ind_base pqperf_conj_base fut_II_base part_stem ;
+
+-- deponent verb
+
+-- 1./a-conjugation
+  deponent1 : Str -> Verb = \hortari ->
+    let
+      horta = Predef.tk 2 hortari ;
+      hort = init horta ;
+      pres_stem = horta ;
+      pres_ind_base = horta ;
+      pres_conj_base = hort + "e" ;
+      impf_ind_base = horta + "ba" ;
+      impf_conj_base = horta + "re" ;
+      fut_I_base = horta + "bi" ;
+      imp_base = horta ;
+      part_stem = horta + "t" ;
+    in
+    mkDeponent hortari pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base part_stem ;
+
+-- 2./e-conjugation
+  deponent2 : Str -> Verb = \vereri ->
+    let
+      vere = Predef.tk 2 vereri ;
+      ver = init vere ;
+      pres_stem = vere ;
+      pres_ind_base = vere ;
+      pres_conj_base = vere + "a" ;
+      impf_ind_base = vere + "ba" ;
+      impf_conj_base = vere + "re" ;
+      fut_I_base = vere + "bi" ;
+      imp_base = vere ;
+      part_stem = ver + "it" ;
+    in
+    mkDeponent vereri pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base part_stem ;
+
+-- 3./Consonant conjugation
+  deponent3c : ( sequi,sequor,secutus : Str ) -> Verb = \sequi,sequor,secutus ->
+    let
+      sequ = Predef.tk 2 sequor ;
+      secu = Predef.tk 3 secutus ; 
+      pres_stem = sequ ;
+      pres_ind_base = sequ ;
+      pres_conj_base = sequ + "a" ;
+      impf_ind_base = sequ + "eba" ;
+      impf_conj_base = sequ + "ere" ;
+      fut_I_base = sequ + "e" ;
+      imp_base = sequi ;
+      part_stem = secu + "t" ;
+    in
+    mkDeponent sequi pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base part_stem ;
+
+-- 3./i-conjugation
+  deponent3i : ( pati,patior,passus : Str ) -> Verb = \pati,patior,passus ->
+    let
+      pat = init pati ;
+      pass = Predef.tk 2 passus ; 
+      pres_stem = pati ;
+      pres_ind_base = pati ;
+      pres_conj_base = pati + "a" ;
+      impf_ind_base = pati + "eba" ;
+      impf_conj_base = pat + "ere" ;
+      fut_I_base = pati + "e" ;
+      imp_base = pati ;
+      part_stem = pass ;
+    in
+    mkDeponent pati pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base part_stem ;
+
+-- 4./i-conjugation
+  deponent4 : Str -> Verb = \largiri ->
+    let
+      largi = Predef.tk 2 largiri ; 
+      pres_stem = largi ;
+      pres_ind_base = largi ;
+      pres_conj_base = largi + "a" ;
+      impf_ind_base = largi + "eba" ;
+      impf_conj_base = largi + "re" ;
+      fut_I_base = largi + "e" ;
+      imp_base = largi ;
+      part_stem = largi + "t" ;
+    in
+    mkDeponent largiri pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base imp_base part_stem ;
+
+-- smart paradigms
+
+  verb_ippp : (iacere,iacio,ieci,iactus : Str) -> Verb = 
+    \iacere,iacio,ieci,iactus ->
+    case iacere of {
+      _ + "ari" => deponent1 iacere ;
+      _ + "eri" => deponent2 iacere ;
+      _ + "iri" => deponent4 iacere ;
+      _ + "i" => case iacio of {
+  	_ + "ior" => deponent3i iacere iacio iactus ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=b241872ae331:701-731
+start=701
+end=731
+----
+  	_ => deponent3c iacere iacio iactus
+  	} ;
+      _ + "are" => verb1 iacere ;
+      _ + "ire" => verb4 iacere ; -- ieci iactus ;
+      _ + "ere" => case iacio of {
+  	_ + #consonant + "o" => verb3c iacere ieci iactus ; -- Bayer-Lindauer 74 1
+  	_ + "eo" => verb2 iacere ;
+  	_ + ( "i" | "u" ) + "o" => verb3i iacere ieci iactus ; -- Bayer-Linduaer 74 1
+  	_ => verb3c iacere ieci iactus
+  	} ;
+      ab + "esse" => prefixVerb ab esseAux ;
+      circum + "ferre" => prefixVerb circum ferreAux ; 
+      _ => Predef.error ("verb_ippp: illegal infinitive form" ++ iacere) 
+    } ;
+
+  verb : (iacere : Str) -> Verb = 
+    \iacere ->
+    case iacere of {
+      _ + "ari" => deponent1 iacere ;
+      _ + "eri" => deponent2 iacere ;
+      _ + "iri" => deponent4 iacere ;
+      _ + "are" => verb1 iacere ;
+      _ + "ire" => let iaci = Predef.tk 2 iacere 
+        in verb4 iacere ; -- (iaci + "vi") (iaci + "tus") ;
+      _ + "ere" => verb2 iacere ;
+      circum + "ferre" => prefixVerb circum ferreAux ;
+      ab + "esse" => prefixVerb ab esseAux ;
+      prae + "posse" => prefixVerb prae posseAux ;
+      _ => Predef.error ("verb: illegal infinitive form" ++ iacere) 
+    } ;
+}
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/NounLat.gf"
+id=2df9cefffd1e
+kind=source
+size=4966
+lines=187
+chunks=0
+----
+concrete NounLat of Noun = CatLat ** open ResLat, Prelude, ConjunctionLat in {
+
+  flags optimize=all_subs ;
+
+  lin
+--  DetCN   : Det -> CN -> NP ;   -- the man
+    DetCN det cn =
+      {
+	s = \\_,c => cn.s ! det.n ! c ;
+	n = det.n ; g = cn.g ; p = P3 ;
+	adv = cn.adv ;
+	preap = cn.preap ;
+	postap = cn.postap ;
+	det = { s = det.s ! cn.g ; sp = det.sp ! cn.g } ; 
+      } ;
+
+--  UsePN   : PN -> NP ;          -- John
+    UsePN pn =
+      pn **
+      {
+	s = \\_ => pn.s ;
+	p = P3 ;
+	adv = "" ;
+	preap, postap = { s = \\_ => "" } ;
+	det = { s,sp = \\_ => "" ; n = Sg }
+      } ;
+
+--  UsePron : Pron -> NP ;        -- he
+    UsePron p =
+      p.pers **
+      {
+	p = p.p ;
+	s = \\pd,c => p.pers.s ! pd ! PronNonRefl ! c;
+	adv = "" ;
+	preap, postap = { s = \\_ => "" } ;
+	det = { s,sp = \\_ => "" ; n = p.pers.n } ;	
+      } ;
+    
+--  PredetNP : Predet -> NP -> NP ; -- only the man
+    PredetNP predet np =
+      np ** {
+	det = { s = \\c => predet.s ++ np.det.s ! c ; sp = np.det.sp }
+      } ;
+
+--  PPartNP : NP -> V2  -> NP ;    -- the man seen
+--    PPartNP np v2 = {
+--      s = \\c => (combineNounPhrase np) ! PronNonDrop ! c ++ v2.s ! VPPart ;
+--      a = np.a
+--      } ;
+    --
+
+--  AdvNP   : NP -> Adv -> NP ;    -- Paris today
+    AdvNP np adv = np ** { adv = np.adv ++ (adv.s ! Posit) } ;
+      -- {
+      -- s = \\pd,c => combineNounPhrase np ! pd ! c ;
+      -- g = np.g ; n = np.n; p = np.p ;
+      -- adv = cc2 np.adv adv ;
+      -- preap = np.preap ;
+      -- postap = np.postap ;
+      -- det = np.det;
+      -- } ;
+
+--    ExtAdvNP: NP -> Adv -> NP ;    -- boys, such as ..
+    ExtAdvNP = AdvNP ;
+
+--  RelNP   : NP -> RS  -> NP ;    -- Paris, which is here
+    RelNP np rs = np ** { adv = bindComma ++ rs.s ! np.g ! np.n ++ np.adv } ;
+
+--  DetNP   : Det -> NP ;  -- these five
+    DetNP det = {
+      s = \\_ => det.s ! Neutr ;
+      g = Neutr ;
+      n = det.n ;
+      p = P3 ;
+      adv = "" ;
+      preap, postap = { s = \\_ => "" } ;
+      det = { s,sp = \\_ => "" ; n = det.n } ;
+    } ;
+--
+--    DetQuantOrd quant num ord = {
+--      s  = quant.s ! num.hasCard ! num.n ++ num.s ++ ord.s ; 
+--      sp = quant.sp ! num.hasCard ! num.n ++ num.s ++ ord.s ; 
+--      n  = num.n
+--      } ;
+--
+    DetQuant quant num = {
+      s  = \\g,c => quant.s  ! Ag g num.n c ++ num.s ! g ! c ;
+      sp = \\g,c => quant.sp ! Ag g num.n c ;
+      n  = num.n
+      } ;
+
+
+
+    PossPron p = { s = \\a => p.poss.s ! PronNonRefl ! a ; sp = \\_ => "" } ;
+--      s = \\_,_ => p.s ! Gen ;
+--      sp = \\_,_ => p.sp 
+--      } ;
+--
+    NumSg = {s = \\_,_ => [] ; n = Sg} ;
+    NumPl = {s = \\_,_ => [] ; n = Pl} ;
+
+    NumCard n = n ;
+--
+--    NumDigits n = {s = n.s ! NCard ; n = n.n} ;
+    --    OrdDigits n = {s = n.s ! NOrd} ;
+    --
+  lin
+    -- NumNumeral : Numeral -> Card ;  -- fifty-one
+    NumNumeral numeral = { s = numeral.s ; n = numeral.n } ;
+    -- OrdNumeral : Numeral -> Ord ;  -- fifty-first
+    OrdNumeral numeral = { s = numeral.ord } ;
+--
+--    AdNum adn num = {s = adn.s ++ num.s ; n = num.n} ;
+--
+--    OrdSuperl a = {s = a.s ! AAdj Superl} ;
+
+    DefArt = {
+      s = \\_ => [] ;
+      sp = \\_ => [] ;
+      } ;
+
+    IndefArt = {
+      s = \\_ => [] ;
+      sp = \\_ => [] ;
+      } ;
+
+    MassNP cn =
+      cn ** {
+	s = \\_ => cn.s ! Sg ;
+	-- s = case cn.massable of { True => cn.s ! Sg ; False => \\_ => nonExist } ;
+	n = Sg ;
+	p = P3 ;
+	det = { s,sp = \\_ => "" ; n = Sg } ;
+      };
+
+    UseN n = -- N -> CN
+  lin CN ( n ** {preap, postap = {s = \\_ => "" } ; adv = "" }) ; -- massable = n.massable } ) ; 
+      
+      UseN2 n2 = -- N2 -> CN
+  lin CN ( n2 ** {preap, postap = {s = \\_ => "" } ; adv = "" }) ; -- massable = n2.massable } ) ; 
+  -----b    UseN3 n = n ;
+--
+--    Use2N3 f = {
+--      s = \\n,c => f.s ! n ! Nom ;
+--      g = f.g ;
+--      c2 = f.c2
+--      } ;
+--
+--    Use3N3 f = {
+--      s = \\n,c => f.s ! n ! Nom ;
+--      g = f.g ;
+--      c2 = f.c3
+--      } ;
+--
+--    ComplN2 f x = {s = \\n,c => f.s ! n ! Nom ++ f.c2 ++ x.s ! c ; g = f.g} ;
+--    ComplN3 f x = {
+--      s = \\n,c => f.s ! n ! Nom ++ f.c2 ++ x.s ! c ;
+--      g = f.g ;
+--      c2 = f.c3
+--      } ;
+
+  lin
+    -- by default add adjective after the noun, otherwise use AdjCNPre
+    AdjCN ap cn =  -- AP -> CN -> CN
+      addAdjToCN (lin AP ap) (lin CN cn) Post ;
+
+--    RelCN cn rs = {
+--      s = \\n,c => cn.s ! n ! c ++ rs.s ! agrgP3 n cn.g ;
+--      g = cn.g
+--      } ;
+
+--    AdvCN cn ad = {s = \\n,c => cn.s ! n ! c ++ ad.s ; g = cn.g} ;
+
+--    SentCN cn sc = {s = \\n,c => cn.s ! n ! c ++ sc.s ; g = cn.g} ;
+    --
+    -- ApposCN : CN -> NP -> CN
+    ApposCN cn np =
+      cn **
+      {
+	s = \\n,c => cn.s ! n ! c ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! c ;
+      } ; -- massable = cn.massable } ;
+
+    -- CountNP : Det -> NP -> NP ;    -- three of them, some of the boys
+    CountNP det np = np ** {
+      det = { s = \\c => det.s ! np.g ! c ++ np.det.s ! c ; sp = \\c => det.sp ! np.g ! c ++ np.det.sp ! c } ;
+      }; 
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/NumeralLat.gf"
+id=427c36c03e7e
+kind=source
+size=7760
+lines=234
+chunks=0
+----
+concrete NumeralLat of Numeral = CatLat, ParamX[Number] ** open ParadigmsLat, Prelude, ResLat, Predef in {
+  lincat 
+    Digit      = TDigit ;
+    Sub10      = TNumeral ;
+    Sub100     = TNumeral ;
+    Sub1000    = TNumeral ;
+    Sub1000000 = TNumeral ;
+
+  lin
+    num x = x ;
+    n2 = lin Digit ( mkDigit "duo"      "duodecim"      "viginti"      "ducenti"      "secundus" "triginta"     Yes ) ;
+    n3 = lin Digit ( mkDigit "tres"     "tredecim"      "triginta"     "trecenti"     "tertius"  "quadraginta"  Yes ) ;
+    n4 = lin Digit ( mkDigit "quattuor" "quattuordecim" "quadraginta"  "quadringenti" "quartus"  "quinquaginta" Yes ) ;
+    n5 = lin Digit ( mkDigit "quinque"  "quindecim"     "quinquaginta" "quingenti"    "quintus"  "sexaginta"    Yes ) ;
+    n6 = lin Digit ( mkDigit "sex"      "sedecim"       "sexaginta"    "sescenti"     "sextus"   "septuaginta"  Yes ) ;
+    n7 = lin Digit ( mkDigit "septem"   "septendecim"   "septuaginta"  "septingenti"  "septimus" "octoginta"    Yes ) ;
+    n8 = lin Digit ( mkDigit "octo"     "duodeviginti"  "octoginta"    "octingenti"   "ocatvus"  "nonaginta"    No8 ) ;
+    n9 = lin Digit ( mkDigit "novem"    "undeviginti"   "nonaginta"    "nongenti"     "nonus"    "centum"       No9 ) ;
+
+    -- 1
+    pot01 = {
+      s = n1.s ! one ;
+      d = { num, ord = n1.s } ;
+      n = singular ;
+      below8 = n1.below8 ;
+      ord = n1.ord ! one
+      }  ;
+   -- d * 1
+   pot0 d = {
+     s = d.s ! one ;
+     d = { num,ord = table {
+	     thousand => \\g,c => d.s ! one ! g ! c ++ d.s ! thousand ! g ! c ;
+	     u => \\g,c => d.s ! u ! g ! c
+	     }
+       };
+     n = plural ;
+     below8 = d.below8 ;
+     ord = d.ord ! one ;
+     } ;
+     -- 10
+   pot110 = {
+     s = n1.s ! ten ;
+     d = { num, ord = table {
+	     thousand => \\g,c => n1.s ! ten ! g ! c ++ n1.s ! thousand ! g ! c ;
+	     u => \\g,c => n1.s ! u ! g ! c
+	     }
+       };
+     n = singular ;
+     below8 = Yes ;
+     ord = n1.ord ! ten
+     }  ;
+     -- 11
+   pot111 = pot1to19 n1 ;
+   -- 10 + d
+   pot1to19 d = {
+     s = d.s ! eleven ;
+     d = { num, ord = table {
+	     thousand => \\g,c => d.s ! eleven ! g ! c ++ n1.s ! thousand ! g ! c ;
+	     u => \\g,c => d.s ! u ! g ! c
+	     }
+       };
+     n = plural ;
+     below8 = Ign ;
+     ord = n1.ord ! eleven
+     } ;
+   -- coercion of 1..9
+   pot0as1 n = n ;
+   -- d * 10
+   pot1 d = {
+     s = d.s ! ten ;
+     d = { num, ord = table {
+	     thousand => \\g,c => d.s ! ten ! g ! c ++ n1.s ! thousand ! g ! c ;
+	     u => \\g,c => d.s ! u ! g ! c
+	     }
+       };
+     n = plural ;
+     below8 = Yes ;
+     ord = d.ord ! ten
+     } ;
+   -- d * 10 + n
+   pot1plus d n =
+     let
+       newS : Gender => Case => Str = \\g,c => case n.below8 of {
+	 No8 => "duo" ++ Prelude.BIND ++ "de" ++ Prelude.BIND ++ d.tenNext ;
+	 No9 => "un"  ++ Prelude.BIND ++ "de" ++ Prelude.BIND ++ d.tenNext ;
+	 _ => d.s ! ten ! g ! c ++ n.s ! g ! c 
+	 } in
+     {
+     s = newS ;
+     d = { num, ord = table {
+	     thousand => \\g,c => newS ! g ! c ++ n1.s ! thousand ! g ! c ;
+	     u => \\g,c => n.d.num ! u ! g ! c
+	     }
+       };
+     below8 = Ign ;
+     n = plural ;
+     ord = \\_,_,_ => nonExist -- TODO
+     } ;
+   -- coercion of 1..99
+   pot1as2 n = n ;
+   -- m * 100
+   pot2 n = {
+     s = n.d.num ! hundred ;
+     d = { num, ord = table {
+	     thousand => \\g,c => n.d.num ! hundred ! g ! c ++ n1.s ! thousand ! g ! c ;
+	     u => \\g,c => n.d.num ! u ! g ! c
+	     }
+       };
+     n = plural ;
+     below8 = Yes ;
+     ord = \\_,_,_ => nonExist -- TODO
+     } ;
+   -- d * 100 + n
+   pot2plus d n =
+     let
+       newS : Gender => Case => Str = \\g,c => d.d.num ! hundred ! g ! c ++ "et" ++ n.s ! g ! c 
+     in
+     {
+       s = newS ;
+       d = { num, ord = table {
+	       thousand => \\g,c => newS ! g ! c ++ n1.s ! thousand ! g ! c ;
+	       u => \\g,c => n.d.num ! u ! g ! c
+	       }
+	 };
+       below8 = Ign ;
+       n = plural;
+       ord = \\_,_,_ => nonExist -- TODO
+     } ;
+   -- coercion of 1..999
+   pot2as3 n = n ;
+     -- m * 1000
+   pot3 n = {
+     s = \\g,c => n.s ! g ! c ++ n.d.num ! thousand ! g ! c ;
+     d = { num,ord = table {
+	     thousand => \\g,c => n.s ! g ! c ++ n.d.num ! thousand ! g ! c ;
+	     u => \\g,c => n.d.num ! u ! g ! c
+	     }
+       } ;
+     below8 = Ign ;
+     n = plural ;
+     ord = \\_,_,_ => nonExist -- TODO
+     } ;
+
+   -- d * 1000 + n
+   pot3plus d n = {
+     s = \\g,c => d.d.num ! thousand ! g ! c ++ "et" ++ n.s ! g ! c ;
+     d = n.d ; -- ???
+     below8 = Ign ;
+     n = plural ;
+     ord = \\_,_,_ => nonExist -- TODO
+     } ;
+
+  oper
+    mkDigit : (ones, eleven, tens, hundreds, ord : Str) -> Str -> Below8 -> TDigit =
+      \ones, eleven, tens, hundreds, ord ->
+      case <tens,hundreds> of {
+      	<"decem",_> => fullDigit ones eleven tens hundreds ord "decimus" "centesimus" ;
+      	<"viginti",_> => fullDigit ones eleven tens hundreds ord "vicesimus" "ducentesimus" ;
+      	<"triginta",_> => fullDigit ones eleven tens hundreds ord "tricesimus" "trecentesimus" ;
+      	<quadra + "ginta",quadringent + "i"> => fullDigit ones eleven tens hundreds ord (quadra + "gesimus") (quadringent + "esimus") ;
+	_ => Predef.error "Invalid number"
+      } ;
+    fullDigit : (ones, eleven, tens, hundreds, ord1,ord10,ord100, tenNext : Str) -> Below8 -> TDigit =
+      \ones, eleven, tens, hundreds, ord1,ord10,ord100,tenNext,b8 ->
+      { s = table { one => cardFlex ones ;
+		    eleven => cardFlex eleven ; 
+		    ten => cardFlex tens ;
+		    hundred => cardFlex hundreds ;
+		    thousand => cardFlex "milia" ;
+		    ten_thousand => \\_,_ => nonExist ;
+		    hundred_thousand => \\_,_ => nonExist
+	  } ;
+--    	n = case ones of { "unus" => singular ; _ => plural } ;
+	   ord = 
+	     table { one => ordFlex ord1 ;
+		     eleven => \\_,_,_ => nonExist ;
+		     ten => ordFlex ord10 ;
+		     hundred => ordFlex ord100 ;
+		     thousand => \\_,_,_ => nonExist ;
+		     ten_thousand => \\_,_,_ => nonExist ;
+		     hundred_thousand => \\_,_,_ => nonExist
+	     } ;
+	tenNext = tenNext ;
+	below8 = b8 
+      } ;    
+    n1 : Digit = lin Digit ( fullDigit "unus" "decem" "undecim" "primus" "decimus" "centesimus" "millesimus" "viginti" Yes ) ;
+
+-- numerals as sequences of digits
+
+  lincat 
+    Dig = TDig ;
+
+  lin
+    IDig d = {s = d.s ! one; unit = ten} ;
+
+    IIDig d i = {
+      s = d.s ! i.unit ++ i.s ;
+      unit = inc i.unit
+    } ;
+
+    D_0 = mkDig ""     ""      ""     ""     ""       ""       "" ;
+    D_1 = mkDig "I"    "XI"    "X"    "C"    "M"      "(X)"    "(C)" ;
+    D_2 = mkDig "II"   "XII"   "XX"   "CC"   "MM"     "(XX)"   "(CC)" ;
+    D_3 = mkDig "III"  "XIII"  "XXX"  "CCC"  "MMM"    "(XXX)"  "(CCC)" ;
+    D_4 = mkDig "IV"   "XIV"   "XL"   "CD"   "(IV)"   "(XL)"   "(CD)" ;
+    D_5 = mkDig "V"    "XV"    "L"    "D"    "(V)"    "(L)"    "(D)" ;
+    D_6 = mkDig "VI"   "XVI"   "LX"   "DC"   "(VI)"   "(LX)"   "(DC)" ;
+    D_7 = mkDig "VII"  "XVII"  "LXX"  "DCC"  "(VII)"  "(LXX)"  "(DCC)" ;
+    D_8 = mkDig "VIII" "XVIII" "LXXX" "DCCC" "(VIII)" "(LXXX)" "(DCCC)" ;
+    D_9 = mkDig "IX"   "XIX"   "XC"   "CM"    "(IX)"   "(XC)"   "(CM)" ;
+
+    PosDecimal d = d ** {hasDot=False} ;
+
+  oper
+    TDig = {
+      s : Unit => Str
+    } ;
+
+    mkDig : Str -> Str -> Str -> Str -> Str -> Str -> Str -> TDig = 
+      \one,eleven,ten,hundred,thousand,ten_thousand,hundred_thousand -> {
+          s = table Unit [one;eleven;ten;hundred;thousand;ten_thousand;hundred_thousand]
+        } ;
+        
+    inc : Unit -> Unit = \u ->
+      case u of {
+        one              => ten ;
+	eleven           => hundred ;
+        ten              => hundred ;
+        hundred          => thousand ;
+        thousand         => ten_thousand ;
+        ten_thousand     => hundred_thousand ;
+        hundred_thousand => hundred_thousand
+      } ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/OverloadLat.gf"
+id=b7ecc4558df7
+kind=source
+size=64
+lines=1
+chunks=0
+----
+--resource OverloadLat = Overload with (Grammar = GrammarLat) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/ParadigmsLat.gf"
+id=c827d46332c6
+kind=source
+size=6178
+lines=176
+chunks=0
+----
+--# -path=.:../abstract:../prelude:../common
+
+--1 Latin Lexical Paradigms
+--
+-- Aarne Ranta 2008, Extended Herbert Lange 2013
+--
+-- This is an API for the user of the resource grammar 
+-- for adding lexical items. It gives functions for forming
+-- expressions of open categories: nouns, adjectives, verbs.
+-- 
+-- Closed categories (determiners, pronouns, conjunctions) are
+-- accessed through the resource syntax API, $Structural.gf$. 
+
+resource ParadigmsLat = open 
+  (Predef=Predef), 
+  Prelude,
+  CatLat,
+  MorphoLat,
+  ResLat
+  in {
+
+--2 Parameters 
+--
+-- To abstract over gender names, we define the following identifiers.
+
+oper
+  masculine : Gender = Masc ;
+  feminine  : Gender = Fem ;
+  neuter    : Gender = Neutr ;
+  nom : Case = Nom ;
+  acc : Case = Acc ;
+  gen : Case = Gen ;
+  dat : Case = Dat ;
+  abl : Case = Abl ;
+  voc : Case = ResLat.Voc ;
+
+  plural : Number = Pl ;
+  singular : Number = Sg ;
+  missing : Coordinator = Missing ;
+  
+  mkN = overload {
+    mkN : (verbum : Str) -> N 
+      = \n -> lin N ( noun n ) ;
+    mkN : (verbum, verbi : Str) -> Gender -> N 
+      = \x,y,z -> lin N ( noun_ngg x y z ) ;
+  } ;
+  
+  pluralN : N -> N = \n -> lin N (ResLat.pluralNoun n) ;
+  singularN : N -> N = \n -> lin N (ResLat.singularNoun n) ;
+  constN : Str -> Gender-> N = \s,g -> lin N (ResLat.constNoun s g);
+  
+  mkA = overload {
+    mkA : (verbum : Str) -> A -- Nominative masculine
+      = \n -> lin A ( adj n ** {isPre = False } ) ;
+    mkA : (verbum, verbi : Str) -> A -- Nominative and Genitive masculine
+      = \x,y -> lin A ( adj123 x y ** {isPre = False } ) ;
+    -- mkA : (bonus,bona,bonum : N) -> A 
+    --   = \x,y,z -> 
+    --   let compsup = comp_super x ;
+    -- 	  advs : Str * Str = 
+    -- 	    case x.s!Sg!Nom of {
+    -- 	      -- Bayer-Lindauer 50 4
+    -- 	      idon + #vowel + "us" => < "magis" , "maxime" > ;
+    -- 	      _ => < "" , "" >
+    -- 	    };
+    --   in
+    --   lin A ( mkAdjective x y z < compsup.p1 , advs.p2 > < compsup.p2 , advs.p2> ** {isPre = False } ) ;
+    mkA : (bonus,bona,bonum : Str) -> A -- Nominative masculine, feminine and neuter
+      = \x,y,z -> lin A (adjfull x y z ) ;
+    mkA : (verbum : Str) -> (comparable : Bool) -> A
+      = \n,b -> lin A ( case b of {
+	True => adj n ;
+	False => let a = adj n in { s = table { Posit => a.s ! Posit ; _ => \\_ => nonExist } ; adv = a.adv }
+      } ** { isPre = False } )
+  } ;
+  constA : Str -> A = \s -> lin A (ResLat.constAdj s) ;
+
+  mkV = overload {
+    mkV : (tacere : Str) -> V
+      = \v -> lin V ( verb v ) ; 
+    mkV : (iacere,iacio,ieci,iactus : Str) -> V
+      = \v,x,y,z -> lin V ( verb_ippp v x y z ) ; 
+    mkV : (iacere,iacio,ieci : Str) -> V
+      = \v,x,y -> lin V ( verb_ippp v x y nonExist ) ;
+  } ;
+
+  V0 : Type = V;
+  mkV0 = overload {
+    mkV0 : V -> V0 = \v -> lin V v ; -- Same as in english, don't know if it's working
+    mkV0 : Str -> V0 = \v -> lin V (impersonalVerb v) ;
+    } ;
+  
+  mkV2 = overload {
+    mkV2 : (amare : Str) -> V2
+      = \v -> lin V2 ( verb v ** { c = lin Prep ( mkPrep "" Acc ) } ) ; 
+    mkV2 : (facere : V) -> V2
+      = \v -> lin V2 ( v ** { c = lin Prep ( mkPrep "" Acc ) } ) ; 
+    mkV2 : V -> Prep -> V2
+      = \v,p -> lin V2 ( v ** { c = p } ) ; 
+    } ;
+
+  constV : Str -> Verb = \s -> lin V (ResLat.constVerb s) ;
+
+  mkAdv = overload {
+    mkAdv : Str -> Adv
+      = \s -> lin Adv (mkAdverb s) ;
+    mkAdv : (pos,comp,super : Str) -> Adv
+      = \p,c,s -> lin Adv (mkFullAdverb p c s);
+    mkAdv : (pos,comp : Str) -> Adv
+      = \p,c -> lin Adv (mkFullAdverb p c nonExist);
+    };
+  
+  mkAdV : Str -> AdV
+    = \s -> lin AdV {s=s} ;
+  mkAdA : Str -> AdA
+    = \s -> lin AdA {s=s} ;
+  mkAdN : Str -> AdN
+    = \s -> lin AdN {s=s} ;
+
+
+  mkConj = overload {
+    mkConj : Str -> Str -> Str -> Number -> Coordinator -> Conjunction = mkConjunction ;
+    mkConj : Str -> Str -> Number -> Coordinator -> Conjunction = \s1,s2,n,c -> mkConjunction s1 s2 [] n c ;
+    mkConj : Str -> Coordinator -> Conjunction = \s,c -> mkConjunction [] s [] Sg c ;
+  } ;
+
+  mkPrep : Str -> Case -> Prep  = \s,c -> lin Prep (mkPreposition s c) ;
+
+  mkPron = mkPronoun ;
+
+  -- mkNum = overload {
+  --   mkNum : Str -> Str -> Str -> Str -> Num = \s1,s2,s3,s4 -> lin Num (mkNumeral s1 s2 s3 s4 );
+  --   mkNum : Str -> Str -> Str -> Str -> Str -> Str -> Num = \s1,s2,s3,s4,s5,s6 -> lin Num (fullNumeral s1 s2 s3 s4 s5 s6 ) ;
+  --   } ;
+
+-- To be implemented, just place holders
+  mkPN : N -> Number -> PN = \noun,num -> lin PN (noun ** { s = noun.s ! num ; n = num } ) ;
+  mkN2 : N -> Prep -> N2 = \n,p -> lin N2 ( n ** { c = p } );
+  mkN3 : N -> Prep -> Prep -> N3 = \n,p1,p2 -> lin N3 ( n **{ c = p1 ; c2 = p2 } ) ;
+  mkV2S : V -> Prep -> V2S = \v,p -> lin V2S ( v ** { c = p } ) ;
+  mkV2Q : V -> Prep -> V2Q = \v,p -> lin V2Q ( v ** { c = p } ) ;
+  mkV2V : V -> Str -> Bool -> V2V = \v,s,b -> lin V2V ( v ** { c2 = s ; isAux = b } ) ;
+  mkVV : V -> Bool -> CatLat.VV = \v,b -> lin VV ( v ** { isAux = b } ) ;
+  mkVA : V -> VA = \v -> lin VA v ;
+  mkV3 : V -> Prep -> Prep -> V3 = \v,p1,p2 -> lin V3 ( v ** { c = p1; c2 = p2 } ) ;
+  mkVQ : V -> VQ = \v -> lin VQ v ;
+  mkVS : V -> VS = \v -> lin VS v ;
+  mkV2A : V -> Prep -> V2A = \v,p -> lin V2A (v ** { c = p } ) ;
+  AS : Type = A ;
+  mkAS : A -> AS = \a -> lin AS a ;
+  mkA2 : A -> Prep -> A2 = \a,p -> lin A2 ( a ** { c = p } ) ;
+  A2V : Type = A2 ;
+  mkA2V : A -> Prep -> A2V = \a,p -> lin A2V ( lin A2 ( a ** { c = p } ) ) ;
+  AV : Type = A ;
+  mkAV : A -> AV = \a -> lin AV a ;
+
+  mkLN : N -> Number -> LN = \noun,num -> lin LN (noun ** { s = noun.s ! num ; n = num } ) ;
+
+  mkGN = overload {
+    mkGN : Str -> GN = \s -> lin GN {s = s ; g = Male};   -- default gender male
+    mkGN : Str -> Sex -> GN = \s,g -> lin GN {s = s ; g = g} ; -- set other gender
+    } ;
+
+  mkSN = overload {
+    mkSN : Str -> SN = \s -> lin SN {s = \\_=>s; pl = s};   -- default gender utrum
+    mkSN : Str -> Str -> Str -> SN =
+      \male,female,pl -> lin SN {s  = table {Male => male;
+                                             Female => female} ;
+                                 pl = pl
+                                } ;
+    } ;
+
+  mkInterj : Str -> Interj
+    = \s -> lin Interj {s=s} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/PhraseLat.gf"
+id=9744df3f812b
+kind=source
+size=1458
+lines=41
+chunks=0
+----
+concrete PhraseLat of Phrase = CatLat ** open Prelude, ResLat in {
+  lin
+    PhrUtt pconj utt voc = {s = pconj.s ++ utt.s ++ voc.s} ;
+    --
+-- UttS : S -> Utt
+    UttS s = { s = defaultSentence s ! SOV };
+
+--  UttQS : QS -> Utt
+    UttQS qs = {s = qs.s ! QDir } ;
+--  UttImpSg : Pol -> Imp -> Utt
+    UttImpSg pol imp = {s = pol.s ++ imp.s ! pol.p ! VImp1 Sg } ;
+--  UttImpPl : Pol -> Imp -> Utt 
+    UttImpPl pol imp = {s = pol.s ++ imp.s ! pol.p ! VImp1 Pl } ;
+--  UttImpPol : Pol -> Imp -> Utt
+    UttImpPol pol imp = UttImpSg pol imp ;
+--  UttIP : IP -> Utt
+    UttIP ip = {s = ip.s ! Nom} ; --- Acc also
+--  UttIAdv : IAdv -> Utt
+    UttIAdv iadv = iadv ;
+--  UttNP : NP -> Utt
+    UttNP np = {s = np.adv ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! Nom} ;
+--  UttVP : VP -> Utt
+    UttVP vp = ss (vp.inf ! VInfActPres) ;
+
+--  UttAdv : Adv -> Utt
+    UttAdv adv = ss (adv.s ! Posit) ;
+--  UttAP : AP -> Utt
+    UttAP ap = ss (ap.s ! Ag Masc Sg Nom );
+--  UttCard : Card -> Utt
+    UttCard card = ss (card.s ! Masc ! Nom);
+--  UttCN : CN -> Utt
+    UttCN cn = ss (cn.s ! Sg ! Nom) ;
+--  UttInterj : Interj -> Utt
+    UttInterj interj = interj ;
+    NoPConj = {s = []} ;
+    PConjConj conj = {s = conj.s2} ; ---
+--
+    NoVoc = {s = []} ;
+    VocNP np = {s = bindComma ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! ResLat.Voc} ; ---- what is the compiler error here? AR 1/2/2014 -- answer: clash with the type name Voc 3/2
+--
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/QuestionLat.gf"
+id=6c998c4a8cf0
+kind=source
+size=1795
+lines=70
+chunks=0
+----
+concrete QuestionLat of Question = CatLat ** open ResLat, IrregLat, Prelude in {
+
+--  flags optimize=all_subs ;
+  --`
+  lin
+    --   QuestCl : Cl -> QCl ;            -- does John walk
+    QuestCl cl = cl ** {
+      v = \\t,a,_,ap => cl.v ! t ! a ! VQTrue ! ap ;
+      q = ""
+      } ;
+    
+    --  QuestVP     : IP -> VP -> QCl ;      -- who walks
+    QuestVP ip vp =
+      {
+	s = \\_ => "" ;
+	adv = "" ;
+	neg = \\_,_ => "" ;
+	o = \\_ => vp.obj ;
+	q = ip.s ! Nom ;
+	v = \\t,a,_,ap => vp.s ! VAct (anteriorityToVAnter a) (tenseToVTense t) ip.n P3 ! VQFalse ;
+	compl = vp.compl ! Ag Masc ip.n Nom ; -- default gender masculine
+	det = { s, sp = \\_ => [] ; n = ip.n } ;
+      } ; 
+
+    --  QuestSlash  : IP -> ClSlash -> QCl ; -- whom does John love
+    -- TO FIX
+
+    -- QuestIAdv : 	IAdv -> Cl -> QCl
+    QuestIAdv iadv cl = cl ** { q = iadv.s } ;
+
+    -- QuestIComp : IComp -> NP -> QCl ;
+    QuestIComp icomp np = 
+      {
+	s = \\_ => "" ;
+	adv = "" ;
+	neg = \\_,_ => "" ;
+	o = \\_ => combineNounPhrase np ! PronNonDrop ! APostN ! DPreN ! Nom ; -- Should probably not go into the object field
+	q = icomp.s ;
+	v = \\t,a,_,ap => esseAux.act ! VAct (anteriorityToVAnter a) (tenseToVTense t) np.n P3 ;
+	det = { s , sp = \\_=> [] ; n = Sg } ; -- default number singilar
+	compl = "" ;
+      } ;
+--
+--
+--    PrepIP p ip = {s = p.s ++ ip.s ! Acc} ;
+--
+--    AdvIP ip adv = {
+--      s = \\c => ip.s ! c ++ adv.s ;
+--      n = ip.n
+--      } ;
+-- 
+--    IdetCN idet cn = {
+--      s = \\c => idet.s ++ cn.s ! idet.n ! c ; 
+--      n = idet.n
+--      } ;
+--
+--    IdetIP idet = {
+--      s = \\c => idet.s ; 
+--      n = idet.n
+--      } ;
+--
+--    IdetQuant idet num = {
+--      s = idet.s ! num.n ++ num.s ; 
+--      n = num.n
+--      } ;
+--
+    CompIAdv a = a ;
+--    CompIP p = ss (p.s ! Nom) ;
+--
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/README.md"
+id=cf458b9e4193
+kind=markdown
+size=190
+lines=9
+chunks=0
+----
+GF-latin
+========
+
+The latin part of the GF Ressource library
+
+License
+=======
+See license of Grammatical Framework 
+https://raw.githubusercontent.com/GrammaticalFramework/GF/master/LICENSE
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/RelativeLat.gf"
+id=e9ede00921bb
+kind=source
+size=2550
+lines=78
+chunks=0
+----
+concrete RelativeLat of Relative = CatLat ** open ResLat in {
+--
+--  flags optimize=all_subs ;
+--
+  lin
+--
+--    RelCl cl = {
+--      s = \\t,a,p,_ => "such" ++ "that" ++ cl.s ! t ! a ! p ! ODir ; 
+--      c = Nom
+--      } ;
+--
+    RelVP rp vp = { s = \\g,n => mkClause (emptyNP ** { s = \\_,c => rp.s ! (Ag g n c) ; g = g ; n = n } ) vp };
+--      s = \\t,ant,b,ag => 
+--        let 
+--          agr = case rp.a of {
+--            RNoAg => ag ;
+--            RAg a => a
+--            } ;
+--          cl = mkClause (rp.s ! RC (fromAgr agr).g Nom) agr vp
+--        in
+--        cl.s ! t ! ant ! b ! ODir ;
+--      c = Nom
+--      } ;
+--
+---- Pied piping: "at which we are looking". Stranding and empty
+---- relative are defined in $ExtraLat.gf$ ("that we are looking at", 
+---- "we are looking at").
+    --
+    -- RelSlash : RP -> ClSlash -> RCl ;
+    RelSlash rp slash = { s = \\g,n => slash ** { adv = rp.s ! Ag g n Gen } } ; -- abuse adverbs again
+--      s = \\t,a,p,agr => 
+--          slash.c2 ++ rp.s ! RPrep (fromAgr agr).g ++ slash.s ! t ! a ! p ! ODir ;
+--      c = Acc
+--
+    FunRP p np rp = {
+      s = \\a => case a of { Ag g n c => rp.s ! a ++ p.s ++ (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! Acc };
+      -- s = \\c => (combineNounPhrase np) ! PronNonDrop ! Acc ++ p.s ++ rp.s ! RPrep (fromAgr np.a).g ;
+      -- a = RAg np.a
+      } ;
+--
+    IdRP = {
+      s = table {
+	Ag Masc           Sg (Nom | Voc) => "qui" ;
+	Ag Fem            Sg (Nom | Voc) => "quae" ;
+	Ag Neutr          Sg (Nom | Voc) => "quod" ;
+	Ag _              Sg Gen => "cuius" ;
+	Ag _              Sg Dat => "cui" ;
+	Ag Masc           Sg Acc => "quem" ;
+	Ag Fem            Sg Acc => "quam" ;
+	Ag Neutr          Sg Acc => "quod" ;
+	Ag (Masc | Neutr) Sg Abl => "quo" ;
+	Ag Fem            Sg Abl => "qua" ;
+	Ag Masc           Pl (Nom | Voc) => "qui" ;
+	Ag (Fem  | Neutr) Pl (Nom | Voc) => "quae" ;
+	Ag (Masc | Neutr) Pl Gen => "quorum" ;
+	Ag Fem            Pl Gen => "quarum" ;
+	Ag _              Pl Dat => "quibus" ;
+	Ag Masc           Pl Acc => "quos" ;
+	Ag Fem            Pl Acc => "quas" ;
+	Ag Neutr          Pl Acc => "quae" ;
+	Ag _              Pl Abl => "cui"
+	}
+      }
+      ;
+--      let varr : Str -> Str = \x -> variants {x ; "that"} --- for bwc
+--      in {
+--      s = table {
+--        RC _ Gen => "whose" ; 
+--        RC Neutr _  => varr "which" ;
+--        RC _ Acc    => varr "whom" ;
+--        RC _ Nom    => varr "who" ;
+--        RPrep Neutr => "which" ;
+--        RPrep _     => "whom"
+--        } ;
+--      a = RNoAg
+--      } ;
+--
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/ResLat.gf"
+id=a3a26ffa28c0
+kind=source
+size=57041
+lines=1578
+chunks=5
+
+--- CHUNK BEGIN ---
+id=a3a26ffa28c0:1-350
+start=1
+end=350
+----
+--# -path=.:../abstract:../common:../prelude
+
+--1 Latin auxiliary operations.
+
+resource ResLat = ParamX ** open Prelude, Predef, (C=CommonX) in {
+
+param
+  Case = Nom | Acc | Gen | Dat | Abl | Voc ;
+  Gender = Masc | Fem | Neutr ;
+--  Degree = DPos | DComp | DSup ;
+
+  oper
+    consonant : pattern Str = #( "p" | "b" | "f" | "v" | "m" | "t" | "d" | "s" | "z" | "n" | "r" | "c" | "g" | "l" | "q" | "qu" | "h" );
+
+    Noun : Type = {s : Number => Case => Str ; g : Gender } ; -- massable : Bool } ;
+    NounPhrase : Type = 
+      {
+	s : PronDropForm => Case => Str ; 
+	g : Gender ; 
+	n : Number ; 
+	p : Person ;
+	adv : Str ;
+	preap : {s : Agr => Str } ;
+	postap : {s : Agr => Str } ;
+	det : { s, sp : Case => Str } ; 
+      } ;
+  param
+    -- Parameters to determine word order
+    -- top level order, e.g. subject verb object
+    Order = SVO | VSO | VOS | OSV | OVS | SOV ;
+    -- determiner position in a noun phrase, e.g. before or after noun
+    DetPos = DPreN | DPostN ;
+    -- verb position, eithe regular or interleaved in the subject
+    VPos = VReg | VInS ;
+    -- (verb-modifying) adverb position
+    AdvPos = APreS | APreV | APreO | APreNeg | AInV | AInS | APreN | APostN ; -- | InO
+    -- verb complement position in relation to verb
+    ComplPos = CPreV | CPostV ;
+    -- sentence adverb position
+    SAdvPos = SAPreS | SAPreV | SAPreO | SAPreNeg ;
+  param
+    Agr = Ag Gender Number Case ; -- Agreement for NP et al.
+  oper
+    Adjective : Type = {
+      s : Degree => Agr => Str ; 
+--      comp_adv : Str ; 
+      --      super_adv : Str
+      adv : Adverb ;
+      } ;
+    CommonNoun : Type = 
+    {
+      s : Number => Case => Str ; 
+      g : Gender ;
+      adv : Str ;
+      preap : {s : Agr => Str } ;
+      postap : {s : Agr => Str }
+	--	massable : Bool
+      } ;
+    
+-- nouns
+  useCNasN : CommonNoun -> Noun = \cn ->
+    {
+      s = cn.s ;
+      g = cn.g
+--      massable = cn.massable;
+    } ;
+
+  pluralNoun : Noun -> Noun = \n ->
+    { 
+      s = table {
+	Pl => n.s ! Pl ;
+	Sg => \\_ => nonExist -- no singular forms
+	};
+      g = n.g ;
+      preap = n.preap ;
+      postap = n.postap
+--      massable = n.massable ;
+    };
+
+  singularNoun : Noun -> Noun = \n ->
+    lin N { 
+      s = table {
+	Sg => n.s ! Sg ;
+	Pl => \\_ => nonExist -- no plural forms
+	};
+      g = n.g ;
+      preap = n.preap ;
+      postap = n.postap 
+--      massable = n.massable ;
+    };
+  constNoun : Str -> Gender -> Noun = \s,g ->
+    { s = \\_,_ => s ; g = g } ;
+
+  param
+    AdjPos = Pre | Post ;
+  oper
+    addAdjToCN : AdjectivePhrase -> CommonNoun -> AdjPos -> CommonNoun = \ap,cn,pos ->
+      {
+	s = cn.s ;
+	postap = case pos of { Pre => cn.postap ; Post => { s = \\a => ap.s ! a ++ cn.postap.s ! a } } ;
+	preap = case pos of { Pre => { s = \\a => ap.s ! a ++ cn.preap.s ! a } ; Post => cn.preap } ;
+	g = cn.g ;
+	adv = cn.adv 
+--	massable = cn.massable
+      } ;
+	  
+  mkNoun : (n1,_,_,_,_,_,_,_,_,n10 : Str) -> Gender -> Noun =
+    \sn,sa,sg,sd,sab,sv,pn,pa,pg,pd,g -> {
+--  mkNoun : (n1,_,_,_,_,_,_,_,_,n10 : Str) -> Gender -> Bool -> Noun = 
+    --\sn,sa,sg,sd,sab,sv,pn,pa,pg,pd,g,m -> {
+      s = table {
+	Sg => table {
+          Nom => sn ;
+          Acc => sa ;
+          Gen => sg ;
+          Dat => sd ;
+          Abl => sab ;
+          Voc => sv
+          } ;
+	Pl => table {
+          Nom | Voc => pn ;
+          Acc => pa ;
+          Gen => pg ;
+          Dat | Abl => pd
+          }
+	} ;
+      g = g
+--      massable = m
+    } ;
+  
+-- to change the default gender
+
+  nounWithGender : Gender -> Noun -> Noun = \g,n ->
+    {s = n.s ; g = g } ; -- massable = n.massable ;} ;
+
+  -- nounMassable : Bool -> Noun -> Noun = \m,n ->
+  --   {s = n.s ; g = n.g ; massable = m } ;
+
+  prefixNoun : Str -> Noun -> Noun =
+    \p,n ->
+    { s = \\num,cas => addPrefix p (n.s ! num ! cas) ; g = n.g };
+    
+    
+  regNP : (_,_,_,_,_,_ : Str) -> Gender -> Number -> NounPhrase = 
+    \nom,acc,gen,dat,abl,voc,g,n ->
+    {
+      s = \\_ => table Case [ nom ; acc ; gen ; dat ; abl ; voc ] ;
+      g = g ;
+      n = n ;
+      p = P3;
+      adv = "" ;
+      preap, postap = { s = \\_ => "" } ;
+      det = { s,sp = \\_ => "" ; n = n} ;
+    } ;
+  
+  dummyNP : Str -> NounPhrase = \s -> regNP s s s s s s Masc Sg ;
+	  
+  emptyNP : NounPhrase = { s = \\_,_ => ""; g = Masc; n = Sg; p = P3 ; adv = "" ; preap, postap = { s = \\_ => "" } ; det = { s , sp = \\_ => "" ; n = Sg } ;};
+
+  combineNounPhrase : NounPhrase -> PronDropForm => AdvPos => DetPos => Case => Str = \np ->
+    let detpren : DetPos -> { s , sp : Case => Str}  = \dp -> case dp of { DPreN => np.det ; _ => { s, sp = \\_ => [] } } ;
+	detpostn : DetPos -> { s , sp : Case => Str}  = \dp -> case dp of { DPostN => np.det ; _ => { s, sp = \\_ => [] } } ;
+	apren : AdvPos -> Str = \ap -> case ap of { APreN => np.adv ; _ => [] } ;
+	apostn : AdvPos -> Str = \ap -> case ap of { APostN => np.adv ; _ => [] } ;
+    in
+    \\pd,ap,dp,c => apren ap ++ (detpren dp).s ! c ++ np.preap.s ! (Ag np.g np.n c) ++ np.s ! pd ! c ++ np.postap.s ! (Ag np.g np.n c) ++ (detpren dp).sp ! c ++ (detpostn dp).s ! c ++ apostn ap ; 
+-- also used for adjectives and so on
+
+-- adjectives
+
+  AdjectivePhrase : Type = { 
+	s : Agr => Str ;
+--	isPre : Bool ; -- should have no use in latin because adjectives can appear variably before and after nouns
+    } ;
+  
+  mkAdjective : (bonus,bona,bonum : Noun) -> 
+    ( (Agr => Str) * Str ) -> 
+    ( (Agr => Str) * Str ) ->
+    (bono,bonius,bonissimo : Str) ->
+    Adjective = 
+    \bonus,bona,bonum,melior,optimus,bono,bonius,bonissimo ->
+    {
+      s = table {
+	Posit => table {
+	  Ag Masc  n c => bonus.s ! n ! c ;
+	  Ag Fem   n c => bona.s  ! n ! c ;
+	  Ag Neutr n c => bonum.s ! n ! c 
+	  } ;
+	Compar => melior.p1 ;
+	Superl => optimus.p1 
+	} ;
+      comp_adv = melior.p2 ;
+      super_adv = optimus.p2 ;
+      adv = { s = table { Posit => bono ; Compar => bonius ; Superl => bonissimo } };
+    } ;
+
+
+  noun3adj : Str -> Str -> Gender -> Noun = \audax,audacis,g ->
+    let 
+      audac   = Predef.tk 2 audacis ;
+      audacem = case g of {Neutr => audax ; _ => audac + "em"} ;
+      audaces = case g of {Neutr => audac +"ia" ; _ => audac + "es"} ;
+      audaci  = audac + "i" ;
+    in
+    mkNoun
+      audax audacem (audac + "is") audaci audaci audax
+      audaces audaces (audac + "ium") (audac + "ibus") 
+      g ;
+
+  regAdj : Str -> Gender => Number => Case => Str = \s ->
+    case s of {
+	un + "us" => \\g,n,c => un + (regAdjSuffixes s g n c)
+    } ;
+
+  regAdjSuffixes : Str -> Gender -> Number -> Case -> Str = \str,g,n,c ->
+    case <g,n,c> of {
+      <Masc ,Sg,Nom> => "us" ;
+      <Masc ,Sg,Gen> => "i" ;
+      <Masc ,Sg,Dat> => "o" ;
+      <Masc ,Sg,Acc> => "um" ;
+      <Masc ,Sg,Abl> => "o" ;
+      <Masc ,Sg,Voc> => case str of { _ + "ius" => "i" ; _ => "e" } ;
+      <Masc ,Pl,Nom> => "i" ;
+      <Masc ,Pl,Gen> => "orum" ;
+      <Masc ,Pl,Dat> => "is" ;
+      <Masc ,Pl,Acc> => "os" ;
+      <Masc ,Pl,Abl> => "is" ;
+      <Masc ,Pl,Voc> => "i" ;
+      <Neutr,Sg,Nom> => "um" ;
+      <Neutr,Sg,Gen> => "i" ;
+      <Neutr,Sg,Dat> => "o" ;
+      <Neutr,Sg,Acc> => "um" ;
+      <Neutr,Sg,Abl> => "o" ;
+      <Neutr,Sg,Voc> => "um";
+      <Neutr,Pl,Nom> => "a" ;
+      <Neutr,Pl,Gen> => "orum" ;
+      <Neutr,Pl,Dat> => "is" ;
+      <Neutr,Pl,Acc> => "os" ;
+      <Neutr,Pl,Abl> => "is" ;
+      <Neutr,Pl,Voc> => "a" ;
+      <Fem  ,Sg,Nom> => "a" ;
+      <Fem  ,Sg,Gen> => "ae" ;
+      <Fem  ,Sg,Dat> => "ae" ;
+      <Fem  ,Sg,Acc> => "am" ;
+      <Fem  ,Sg,Abl> => "a" ;
+      <Fem  ,Sg,Voc> => "a";
+      <Fem  ,Pl,Nom> => "ae" ;
+      <Fem  ,Pl,Gen> => "arum" ;
+      <Fem  ,Pl,Dat> => "is" ;
+      <Fem  ,Pl,Acc> => "as" ;
+      <Fem  ,Pl,Abl> => "is" ;
+      <Fem  ,Pl,Voc> => "ae" 
+    } ;
+    
+  emptyAdj : Adjective = 
+    { s = \\_,_ => "" ; comp_adv = "" ; super_adv = "" ; adv = { s = \\_ => "" } } ; 
+
+  constAdj : Str -> Adjective = \a ->
+    { s = \\_,_ => a ; comp_adv = "" ; super_adv = "" ; adv = { s = \\_ => "" } } ; 
+
+  -- verbs
+
+param 
+  VActForm  = VAct VAnter VTense Number Person ;
+  VPassForm = VPass VTense Number Person ; -- No anteriority because perfect forms are built using participle
+  VInfForm  = VInfActPres | VInfActPerf Gender | VInfActFut Gender | VInfPassPres | VInfPassPerf Gender | VinfPassFut ;
+  VImpForm  = VImp1 Number | VImp2 Number Person ;
+  VGerund   = VGenAcc | VGenGen |VGenDat | VGenAbl ;
+  VSupine   = VSupAcc | VSupAbl ;
+  VPartForm = VActPres | VActFut | VPassPerf ;
+
+  VAnter = VAnt | VSim ;
+  VTense = VPres VMood | VImpf VMood | VFut ; 
+  VMood  = VInd | VConj ;
+
+  VQForm = VQTrue | VQFalse ; -- Question suffix should be added to the Verb
+  
+  oper
+  VerbPhrase : Type = {
+    s : VActForm => VQForm => Str ;
+    pass : VPassForm => VQForm => Str ;
+    part : VPartForm => Agr => Str ;
+    inf : VInfForm => Str ;
+    imp : VImpForm => Str ;
+    obj : Str ;
+    compl : Agr => Str ; -- general complement. Agr might be ignored except for adjectives
+    adv : Str
+    } ;
+
+  ObjectVerbPhrase : Type = VerbPhrase ** {c : Preposition} ;
+
+  emptyVP : VerbPhrase = {
+    s = \\_,_ => "" ;
+    pass = \\_,_ => "" ;
+    part = \\_,_ => "" ;
+    inf = \\_ => "" ;
+    imp = \\_ => "" ;
+    obj = "";
+    compl = \\_ => "" ;
+    adv = ""
+    } ;
+  
+  Verb : Type = {
+    act   : VActForm => Str ;
+    pass  : VPassForm => Str ;
+    inf   : VInfForm => Str ;
+    imp   : VImpForm => Str ;
+    ger   : VGerund => Str ;
+    geriv : Agr => Str ; 
+    sup   : VSupine => Str ;
+    part  : VPartForm =>Agr => Str ;
+    } ;
+
+  Verb2 : Type = Verb ** { c : Preposition };
+  Verb3 : Type = Verb ** { c : Preposition ; c2 : Preposition };
+  
+  VV : Type = Verb ** { isAux : Bool } ;
+
+  tenseToVTense : Tense -> VTense = 
+    \t ->
+    case t of
+    {
+      Pres => VPres VInd ;
+      Past => VImpf VInd ;
+      Fut => VFut ;
+      Cond => VPres VConj -- don't know what to do
+    } ;
+  
+  anteriorityToVAnter : Anteriority -> VAnter = 
+    \a ->
+    case a of
+    {
+      Simul => VSim ;
+      Anter => VAnt
+    } ;
+
+  useVV : VV -> Verb = \vv ->
+    {
+      act = vv.act ;
+      pass = vv.pass ;
+      inf = vv.inf ;
+      imp = vv.imp ;
+      ger = vv.ger ;
+      geriv = vv.geriv ;
+      sup = vv.sup ;
+      part = vv.part ;
+    } ;
+
+  useVPasV : VerbPhrase -> Verb = \vp ->
+    {
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=a3a26ffa28c0:351-700
+start=351
+end=700
+----
+      act = \\a => vp.obj ++ vp.s ! a ! VQFalse;
+      pass = \\_ => nonExist ;
+      --      inf = \\a => vp.obj ++ vp.inf ! a ;
+      inf = vp.inf ;
+      imp = vp.imp ;
+      ger = \\_ => nonExist ;
+      geriv = \\_ => nonExist ;
+      sup = \\_ => nonExist ;
+      part = \\_,_ => nonExist ;
+    } ;
+
+  mkVerb : 
+    (regere,reg,regi,rega,regeba,regere,rege,regi,rex,rex,rexeri,rexera,rexisse,rexeri,rect : Str) 
+    -> Verb = 
+    \inf_act_pres,pres_stem,pres_ind_base,pres_conj_base,impf_ind_base,impf_conj_base,fut_I_base,imp_base,
+    perf_stem,perf_ind_base,perf_conj_base,pqperf_ind_base,pqperf_conj_base,fut_II_base,part_stem -> 
+    let
+      fill : Str * Str * Str = case pres_stem of {
+	_ + ( "a" | "e" ) => < "" , "" , "" > ;
+	_ + #consonant => < "e" , "u" , "i" > ;
+	_ => < "e" , "u" , "" >
+	} ;
+    in 
+    {
+      act = 
+	table {
+          VAct VSim (VPres VInd)  Sg P1 => -- Present Indicative
+	    ( case pres_ind_base of {
+		_ + "a" =>  ( init pres_ind_base ) ;
+		-- | _ + "ui" =>  ( init pres_ind_base ) ;
+		_ => pres_ind_base
+		}
+	    ) + "o" ; --actPresEnding Sg P1 ;
+	  VAct VSim (VPres VInd)  Pl P3 => -- Present Indicative
+	    pres_ind_base + fill.p2 + actPresEnding Pl P3 ;
+          VAct VSim (VPres VInd)  n  p  =>  -- Present Indicative
+	    pres_ind_base + fill.p3 + actPresEnding n p ;
+          VAct VSim (VPres VConj) n  p  => -- Present Conjunctive
+	    pres_conj_base + actPresEnding n p ; 
+          VAct VSim (VImpf VInd)  n  p  => -- Imperfect Indicative
+	    impf_ind_base + actPresEnding n p ; 
+          VAct VSim (VImpf VConj) n  p  => -- Imperfect Conjunctive
+	    impf_conj_base + actPresEnding n p ; 
+          VAct VSim VFut          Sg P1 => -- Future I
+	    case fut_I_base of {
+	      _ + "bi" => ( init fut_I_base ) + "o" ;
+	      _  => ( init fut_I_base ) + "a" + actPresEnding Sg P1 
+	    } ;
+	  VAct VSim VFut          Pl P3 => -- Future I
+	    ( case fut_I_base of {
+		_ + "bi" => ( init fut_I_base ) + "u";
+		_ => fut_I_base
+		} 
+	    ) + actPresEnding Pl P3 ;
+          VAct VSim VFut          n  p  => -- Future I
+	    fut_I_base + actPresEnding n p ; 
+          VAct VAnt (VPres VInd)  n  p  => -- Prefect Indicative
+	    perf_ind_base + actPerfEnding n p ; 
+          VAct VAnt (VPres VConj) n  p  => -- Prefect Conjunctive
+	    perf_conj_base + actPresEnding n p ; 
+          VAct VAnt (VImpf VInd)  n  p  => -- Plusperfect Indicative
+	    pqperf_ind_base + actPresEnding n p ; 
+          VAct VAnt (VImpf VConj) n  p  => -- Plusperfect Conjunctive
+	    pqperf_conj_base + actPresEnding n p ; 
+          VAct VAnt VFut          Sg P1 => -- Future II 
+	    ( init fut_II_base ) + "o" ; 
+          VAct VAnt VFut          n  p  => -- Future II 
+	    fut_II_base + actPresEnding n p 
+        } ;
+      pass = 
+	table {
+	  VPass (VPres VInd)  Sg P1 => -- Present Indicative
+	    ( case pres_ind_base of
+		{
+		  _ + "a" => (init pres_ind_base ) ;
+		  _ => pres_ind_base
+		}
+	    )  + "o" + passPresEnding Sg P1 ;
+	  VPass (VPres VInd)  Sg P2 => -- Present Indicative
+	    ( case imp_base of {
+		_ + #consonant => 
+		  ( case pres_ind_base of {
+		      _ + "i" => ( init pres_ind_base ) ;
+		      _ => pres_ind_base 
+		      }
+		  ) + "e" ;
+		_ => pres_ind_base 
+		}
+	    ) + passPresEnding Sg P2 ;
+	  VPass (VPres VInd)  Pl P3 => -- Present Indicative
+	    pres_ind_base + fill.p2 + passPresEnding Pl P3 ;
+	  VPass (VPres VInd)  n  p  => -- Present Indicative
+	    pres_ind_base + fill.p3 + passPresEnding n p ;
+	  VPass (VPres VConj) n  p  => -- Present Conjunctive
+	    pres_conj_base + passPresEnding n p ;
+	  VPass (VImpf VInd)  n  p  => -- Imperfect Indicative
+	    impf_ind_base + passPresEnding n p ;
+	  VPass (VImpf VConj) n  p  => -- Imperfect Conjunctive
+	    impf_conj_base + passPresEnding n p ;
+	  VPass VFut          Sg P1 => -- Future I
+	    ( case fut_I_base of {
+		_ + "bi" => ( init fut_I_base ) + "o" ;
+		_ => ( init fut_I_base ) + "a"
+		}
+	    ) + passPresEnding Sg P1 ;
+	  VPass VFut          Sg P2 => -- Future I
+	    ( init fut_I_base ) + "e" + passPresEnding Sg P2 ;
+	  VPass VFut          Pl P3 => -- Future I
+	    ( case fut_I_base of {
+		_ + "bi" => ( init fut_I_base ) + "u" ;
+		"eri" => "eru" ; -- handle copula properly
+		_ => fut_I_base
+		}
+	    ) + passPresEnding Pl P3 ;
+	  VPass VFut          n  p  => -- Future I
+	    fut_I_base + passPresEnding n p
+	} ;
+      inf = 
+	table {
+          VInfActPres      => -- Infinitive Active Present
+	    inf_act_pres ;
+          VInfActPerf _    => -- Infinitive Active Perfect
+	    perf_stem + "isse" ;
+	  VInfActFut Masc  => -- Infinitive Active Future
+	    part_stem + "urum" ;
+	  VInfActFut Fem   => -- Infinitive Active Future
+	    part_stem + "uram" ; 
+	  VInfActFut Neutr => -- Infinitive Active Future
+	    part_stem + "urum" ;
+	  VInfPassPres       => -- Infinitive Present Passive
+	    ( init inf_act_pres ) + "i" ;
+	  VInfPassPerf Masc  => -- Infinitive Perfect Passive
+	    part_stem + "um" ;
+	  VInfPassPerf Fem   => -- Infinitive Perfect Passive
+	    part_stem + "am" ;
+	  VInfPassPerf Neutr => -- Infinitive Perfect Passive
+	    part_stem + "um" ;
+	  VInfPassFut        => -- Infinitive Future Passive
+	    part_stem + "um"
+        } ;
+      imp = 
+	let 
+	  imp_fill : Str * Str =
+	    case imp_base of {
+	      _ + #consonant => < "e" , "i" > ;
+	      _ => < "" , "" >
+	    };
+	  in
+	table {
+	  VImp1 Sg           => -- Imperative I
+	    imp_base + imp_fill.p1 ;
+	  VImp1 Pl           => -- Imperative I
+	    imp_base + imp_fill.p2 + "te" ;
+	VImp2 Sg ( P2 | P3 ) => -- Imperative II
+	  imp_base + imp_fill.p2 + "to" ;
+	VImp2 Pl P2          => -- Imperative II
+	  imp_base +
+	  ( case imp_base of {
+	      _ + #consonant => "i" ;
+	      _ => fill.p3
+	      }
+	  ) + "tote" ;
+	VImp2 Pl P3          => -- Imperative II 
+	  pres_stem + fill.p2 + "nto" ;
+	_ => nonExist -- No imperative form
+	} ;
+      ger = 
+	table {
+	  VGenAcc => -- Gerund
+	    pres_stem + fill.p1 + "ndum" ;
+	  VGenGen => -- Gerund
+	    pres_stem + fill.p1 + "ndi" ;
+	  VGenDat => -- Gerund
+	    pres_stem + fill.p1 + "ndo" ;
+	  VGenAbl => -- Gerund
+	    pres_stem + fill.p1 + "ndo" 
+	} ;
+      geriv = 
+      	( mkAdjective
+      	    ( mkNoun ( pres_stem + fill.p1 + "ndus" ) ( pres_stem + fill.p1 + "ndum" ) ( pres_stem + fill.p1 + "ndi" ) 
+      		( pres_stem + fill.p1 + "ndo" ) ( pres_stem + fill.p1 + "ndo" ) ( pres_stem + fill.p1 + "nde" ) 
+      		( pres_stem + fill.p1 + "ndi" ) ( pres_stem + fill.p1 + "ndos" ) ( pres_stem + fill.p1 + "ndorum" ) 
+      		( pres_stem + fill.p1 + "ndis" ) 
+      		Masc )
+      	    ( mkNoun ( pres_stem + fill.p1 + "nda" ) ( pres_stem + fill.p1 + "ndam" ) ( pres_stem + fill.p1 + "ndae" ) 
+      		( pres_stem + fill.p1 + "ndae" ) ( pres_stem + fill.p1 + "nda" ) ( pres_stem + fill.p1 + "nda" ) 
+      		( pres_stem + fill.p1 + "ndae" ) ( pres_stem + fill.p1 + "ndas" ) (pres_stem + fill.p1 +"ndarum" ) 
+      		( pres_stem + fill.p1 + "ndis" ) 
+      		Fem )
+      	    ( mkNoun ( pres_stem + fill.p1 + "ndum" ) ( pres_stem + fill.p1 + "ndum" ) ( pres_stem + fill.p1 + "ndi" ) 
+      		( pres_stem + fill.p1 + "ndo" ) ( pres_stem + fill.p1 + "ndo" ) ( pres_stem + fill.p1 + "ndum" ) 
+      		( pres_stem + fill.p1 + "nda" ) ( pres_stem + fill.p1 + "nda" ) ( pres_stem + fill.p1 + "ndorum" ) 
+      		( pres_stem + fill.p1 + "ndis" ) 
+      		Neutr )
+      	    < \\_ => "" , "" > -- Comparative
+      	    < \\_ => "" , "" > -- Superlative
+	    "" "" "" -- Adverb part
+      	).s!Posit ;
+      sup = 
+	table {
+	  VSupAcc => -- Supin
+	    part_stem + "um" ;
+	  VSupAbl => -- Supin
+	    part_stem + "u" 
+	} ;
+      part= table {
+	VActPres => table {
+	  Ag ( Fem | Masc ) n c => 
+	    ( mkNoun ( pres_stem + fill.p1 + "ns" ) ( pres_stem + fill.p1 + "ntem" ) ( pres_stem + fill.p1 + "ntis" ) 
+		( pres_stem + fill.p1 + "nti" ) ( pres_stem + fill.p1 + "nte" ) ( pres_stem + fill.p1 + "ns" ) 
+		( pres_stem + fill.p1 + "ntes" ) ( pres_stem + fill.p1 + "ntes" ) ( pres_stem + fill.p1 + "ntium" ) 
+		( pres_stem + fill.p1 + "ntibus" ) 
+ 		Masc ).s ! n ! c ;
+	  Ag Neutr n c =>
+	    ( mkNoun ( pres_stem + fill.p1 + "ns" ) ( pres_stem + fill.p1 + "ns" ) ( pres_stem + fill.p1 + "ntis" ) 
+		( pres_stem + fill.p1 + "nti" ) ( pres_stem + fill.p1 + "nte" ) ( pres_stem + fill.p1 + "ns" ) 
+		( pres_stem + fill.p1 + "ntia" ) ( pres_stem + fill.p1 + "ntia" ) ( pres_stem + fill.p1 + "ntium" ) 
+		( pres_stem + fill.p1 + "ntibus" ) 
+ 		Masc ).s ! n ! c
+	} ;
+	
+	VActFut => 
+	  ( mkAdjective
+	      ( mkNoun ( part_stem + "urus" ) ( part_stem + "urum" ) ( part_stem + "uri" ) 
+		  ( part_stem + "uro" ) ( part_stem + "uro" ) ( part_stem + "ure" ) ( part_stem + "uri" ) 
+		  ( part_stem + "uros" ) ( part_stem + "urorum" ) ( part_stem + "uris" ) 
+		  Masc )
+	      ( mkNoun ( part_stem + "ura" ) ( part_stem + "uram" ) ( part_stem + "urae" ) 
+		  ( part_stem + "urae" ) ( part_stem + "ura" ) ( part_stem + "ura" )( part_stem + "urae" ) 
+		  ( part_stem + "uras" ) ( part_stem +"urarum" ) ( part_stem + "uris" ) 
+		  Fem )
+	      ( mkNoun ( part_stem + "urum" ) ( part_stem + "urum" ) ( part_stem + "uri" ) 
+		  ( part_stem + "uro" ) ( part_stem + "uro" ) ( part_stem + "urum" ) ( part_stem + "ura" ) 
+		  ( part_stem + "ura" ) ( part_stem + "urorum" ) ( part_stem + "uris" ) 
+		  Neutr )
+	      < \\_ => "" , "" >
+	      < \\_ => "" , "" >
+	      "" "" ""
+	  ).s!Posit ;
+	VPassPerf => 
+	  ( mkAdjective
+	      ( mkNoun ( part_stem + "us" ) ( part_stem + "um" ) ( part_stem + "i" ) ( part_stem + "o" ) 
+		  ( part_stem + "o" ) ( part_stem + "e" ) ( part_stem + "i" ) ( part_stem + "os" ) 
+		  ( part_stem + "orum" ) ( part_stem + "is" ) 
+		  Masc )
+	      ( mkNoun ( part_stem + "a" ) ( part_stem + "am" ) ( part_stem + "ae" ) ( part_stem + "ae" ) 
+		  ( part_stem + "a" ) ( part_stem + "a" ) ( part_stem + "ae" ) ( part_stem + "as" ) 
+		  ( part_stem + "arum" ) ( part_stem + "is" ) 
+		  Fem )
+	      ( mkNoun ( part_stem + "um" ) ( part_stem + "um" ) ( part_stem + "i" ) ( part_stem + "o" ) 
+		( part_stem + "o" ) ( part_stem + "um" ) ( part_stem + "a" ) ( part_stem + "a" ) 
+		  ( part_stem + "orum" ) ( part_stem + "is" ) 
+		  Neutr ) 
+	      < \\_ => "" , "" >
+	      < \\_ => "" , "" >
+	      "" "" ""
+	  ).s!Posit
+	}
+    } ;
+ 
+
+  mkDeponent : ( sequi,sequ,sequi,sequa,sequeba,sequere,seque,sequi,secut : Str ) -> Verb =
+    \inf_pres,pres_stem,pres_ind_base,pres_conj_base,impf_ind_base,impf_conj_base,fut_I_base,imp_base,part_stem -> 
+    let fill : Str * Str =
+	  case pres_ind_base of {
+	    _ + ( "a" | "e" ) => < "" , "" >;
+	    _ => < "u" , "e" > 
+	  }
+    in
+    {
+      act = 
+	table {
+          VAct VSim (VPres VInd)  Sg P1 => -- Present Indicative
+	    ( case pres_ind_base of {
+		_ + "a" =>  ( init pres_ind_base ) ;
+		_ => pres_ind_base
+		}
+	    ) + "o" + passPresEnding Sg P1 ;
+	  VAct VSim (VPres VInd)  Sg P2 => -- Present Indicative
+	    ( case inf_pres of {
+		_ + "ri" => pres_ind_base  ;
+		_ => ( case pres_ind_base of {
+			 _ + "i" => init pres_ind_base ;
+			 _ => pres_ind_base
+			 }
+		  ) + "e"
+		}
+	    ) + passPresEnding Sg P2 ;
+          VAct VSim (VPres VInd)  Pl P3 => -- Present Indicative
+	    pres_ind_base + fill.p1 + passPresEnding Pl P3 ;
+          VAct VSim (VPres VInd)  n  p  => -- Present Indicative
+	    pres_ind_base +
+	    ( case pres_ind_base of {
+		_ + #consonant => "i" ;
+		_ => ""
+		}
+	    ) + passPresEnding n p ;
+          VAct VSim (VPres VConj) n  p  => -- Present Conjunctive
+	    pres_conj_base + passPresEnding n p ; 
+          VAct VSim (VImpf VInd)  n  p  => -- Imperfect Indicative
+	    impf_ind_base + passPresEnding n p ;
+          VAct VSim (VImpf VConj) n  p  => -- Imperfect Conjunctive
+	    impf_conj_base + passPresEnding n p ;
+          VAct VSim VFut          Sg P1 => -- Future I
+	    (init fut_I_base ) + 
+	    ( case fut_I_base of {
+		_ + "bi" => "o" ;
+		_ => "a" 
+		}
+	    ) + passPresEnding Sg P1 ;
+	  VAct VSim VFut          Sg P2 => -- Future I
+	    ( case fut_I_base of {
+		_ + "bi" => ( init fut_I_base ) + "e" ;
+		_ => fut_I_base
+		}
+	    ) + passPresEnding Sg P2 ;
+	  VAct VSim VFut          Pl P3 => -- Future I
+	    (init fut_I_base ) + 
+	    ( case fut_I_base of {
+		_ + "bi" => "u" ;
+		_ => "e" 
+		}
+	    ) + passPresEnding Pl P3 ;
+
+          VAct VSim VFut          n  p  => -- Future I
+	    fut_I_base + passPresEnding n p ;
+          VAct VAnt (VPres VInd)  n  p  => -- Prefect Indicative
+	    nonExist ; -- Use participle
+          VAct VAnt (VPres VConj) n  p  => -- Prefect Conjunctive
+	    nonExist ; -- Use participle
+          VAct VAnt (VImpf VInd)  n  p  => -- Plusperfect Indicative
+	    nonExist ; -- Use participle
+          VAct VAnt (VImpf VConj) n  p  => -- Plusperfect Conjunctive
+	    nonExist ; -- Use participle
+          VAct VAnt VFut          n  p  => -- Future II
+	    nonExist -- Use participle
+        } ;
+      pass =
+	\\_ => nonExist ; -- no passive forms
+      inf =
+	table {
+          VInfActPres        => -- Infinitive Present Active
+	    inf_pres ;
+          VInfActPerf Masc   => -- Infinitive Perfect Active
+	    part_stem + "um" ;
+	  VInfActPerf Fem    => -- Infinitive Perfect Active
+	    part_stem + "am" ;
+	  VInfActPerf Neutr  => -- Infinitive Perfect Active
+	    part_stem + "um" ;
+	  VInfActFut Masc    => -- Infinitive Future Active
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=a3a26ffa28c0:701-1050
+start=701
+end=1050
+----
+	    part_stem + "urum" ;
+	  VInfActFut Fem     => -- Infinitive Perfect Active
+	    part_stem + "uram" ; 
+	  VInfActFut Neutr   => -- Infinitive Perfect Active
+	    part_stem + "urum" ;
+	  VInfPassPres       => -- Infinitive Present Passive
+	    nonExist ; -- no passive form
+	  VInfPassPerf _     => -- Infinitive Perfect Passive
+	    nonExist ; -- no passive form
+	  VInfPassFut        => -- Infinitive Future Passive
+	    nonExist  -- no passive form
+        } ;
+      imp = 
+	table {
+	  VImp1 Sg             => -- Imperative I
+	    ( case inf_pres of {
+		_ + "ri" => imp_base ;
+		_ => (init imp_base ) + "e" 
+		}
+	    ) + "re" ;
+	  VImp1 Pl             => -- Imperative I
+	    imp_base + "mini" ;
+	  VImp2 Sg ( P2 | P3 ) => -- Imperative II
+	    imp_base + "tor" ;
+	  VImp2 Pl P2          => -- Imperative II
+	    nonExist ; -- really no such form?
+	  VImp2 Pl P3          => -- Imperative II
+	    pres_ind_base + fill.p1 + "ntor" ;
+	  _ => nonExist -- No imperative form
+	} ;
+      ger = 
+	table {
+	  VGenAcc => -- Gerund
+	    pres_stem + fill.p2 + "ndum" ;
+	  VGenGen => -- Gerund
+	    pres_stem + fill.p2 + "ndi" ;
+	  VGenDat => -- Gerund
+	    pres_stem + fill.p2 + "ndo" ;
+	  VGenAbl => -- Gerund
+	    pres_stem + fill.p2 + "ndo" 
+	} ;
+      geriv =
+	( mkAdjective
+	    ( mkNoun ( pres_stem + fill.p2 + "ndus" ) ( pres_stem + fill.p2 + "ndum" ) 
+		( pres_stem + fill.p2 + "ndi" ) ( pres_stem + fill.p2 + "ndo" ) ( pres_stem + fill.p2 + "ndo" ) 
+		( pres_stem + fill.p2 + "nde" ) ( pres_stem + fill.p2 + "ndi" ) ( pres_stem + fill.p2 + "ndos" ) 
+		( pres_stem + fill.p2 + "ndorum" ) ( pres_stem + fill.p2 + "ndis" ) 
+		Masc )
+	    ( mkNoun ( pres_stem + fill.p2 + "nda" ) ( pres_stem + fill.p2 + "ndam" ) 
+		( pres_stem + fill.p2 + "ndae" ) ( pres_stem + fill.p2 + "ndae" ) ( pres_stem + fill.p2 + "nda" ) 
+		      ( pres_stem + fill.p2 + "nda" ) ( pres_stem + fill.p2 + "ndae" ) ( pres_stem + fill.p2 + "ndas" ) 
+		(pres_stem + fill.p2 +"ndarum" ) ( pres_stem + fill.p2 + "ndis" ) 
+		Fem )
+	    ( mkNoun ( pres_stem + fill.p2 + "ndum" ) ( pres_stem + fill.p2 + "ndum" ) 
+		( pres_stem + fill.p2 + "ndi" ) ( pres_stem + fill.p2 + "ndo" ) ( pres_stem + fill.p2 + "ndo" ) 
+		( pres_stem + fill.p2 + "ndum" ) ( pres_stem + fill.p2 + "nda" ) ( pres_stem + fill.p2 + "nda" ) 
+		( pres_stem + fill.p2 + "ndorum" ) ( pres_stem + fill.p2 + "ndis" ) 
+		      Neutr )
+	    < \\_ => "" , "" >
+	    < \\_ => "" , "" >
+	    "" "" ""
+	).s!Posit ;
+      sup = 
+	table {
+	  VSupAcc => -- Supin
+	    part_stem + "um" ;
+	  VSupAbl => -- Supin
+	    part_stem + "u" 
+	} ;
+      -- Bayer-Lindauer 44 1
+      part = table {
+	VActPres =>
+	  table {
+	    Ag ( Fem | Masc ) n c =>
+	      ( mkNoun ( pres_stem + fill.p2 + "ns" ) ( pres_stem + fill.p2 + "ntem" ) 
+		  ( pres_stem + fill.p2 + "ntis" ) ( pres_stem + fill.p2 + "nti" ) ( pres_stem + fill.p2 + "nte" ) 
+		  ( pres_stem + fill.p2 + "ns" ) ( pres_stem + fill.p2 + "ntes" ) ( pres_stem + fill.p2 + "ntes" ) 
+		  ( pres_stem + fill.p2 + "ntium" ) ( pres_stem + fill.p2 + "ntibus" ) 
+ 		  Masc ).s ! n ! c ;
+	    Ag Neutr n c => 
+	      ( mkNoun ( pres_stem + fill.p2 + "ns" ) ( pres_stem + fill.p2 + "ns" ) 
+		( pres_stem + fill.p2 + "ntis" ) ( pres_stem + fill.p2 + "nti" ) ( pres_stem + fill.p2 + "nte" ) 
+		  ( pres_stem + fill.p2 + "ns" ) ( pres_stem + fill.p2 + "ntia" ) ( pres_stem + fill.p2 + "ntia" ) 
+		  ( pres_stem + fill.p2 + "ntium" ) ( pres_stem + fill.p2 + "ntibus" ) 
+ 		  Masc ).s ! n ! c 
+	  } ;
+	VActFut => 
+	  ( mkAdjective
+	      ( mkNoun ( part_stem + "urus" ) ( part_stem + "urum" ) ( part_stem + "uri" ) 
+		  ( part_stem + "uro" ) ( part_stem + "uro" ) ( part_stem + "ure" ) ( part_stem + "uri" ) 
+		  ( part_stem + "uros" ) ( part_stem + "urorum" ) ( part_stem + "uris" ) 
+		  Masc )
+	      ( mkNoun ( part_stem + "ura" ) ( part_stem + "uram" ) ( part_stem + "urae" ) 
+		  ( part_stem + "urae" ) ( part_stem + "ura" ) ( part_stem + "ura" )( part_stem + "urae" ) 
+		  ( part_stem + "uras" ) ( part_stem +"urarum" ) ( part_stem + "uris" ) 
+		  Fem )
+	      ( mkNoun ( part_stem + "urum" ) ( part_stem + "urum" ) ( part_stem + "uri" ) 
+		  ( part_stem + "uro" ) ( part_stem + "uro" ) ( part_stem + "urum" ) ( part_stem + "ura" ) 
+		  ( part_stem + "ura" ) ( part_stem + "urorum" ) ( part_stem + "uris" ) 
+		  Neutr )
+	      < \\_ => "" , "" >
+	      < \\_ => "" , "" >
+	      "" "" ""
+	  ).s!Posit ;
+	VPassPerf =>
+	  ( mkAdjective
+	      ( mkNoun ( part_stem + "us" ) ( part_stem + "um" ) ( part_stem + "i" ) 
+		  ( part_stem + "o" ) ( part_stem + "o" ) ( part_stem + "e" ) 
+		  ( part_stem + "i" ) ( part_stem + "os" ) ( part_stem + "orum" ) 
+		  ( part_stem + "is" ) 
+		  Masc )
+	      ( mkNoun ( part_stem + "a" ) ( part_stem + "am" ) ( part_stem + "ae" ) 
+		  ( part_stem + "ae" ) ( part_stem + "a" ) ( part_stem + "a" ) 
+		  ( part_stem + "ae" ) ( part_stem + "as" ) ( part_stem + "arum" ) 
+		  ( part_stem + "is" ) 
+		  Fem )
+	      ( mkNoun ( part_stem + "um" ) ( part_stem + "um" ) ( part_stem + "i" ) 
+		  ( part_stem + "o" ) ( part_stem + "o" ) ( part_stem + "um" ) 
+		  ( part_stem + "a" ) ( part_stem + "a" ) ( part_stem + "orum" ) 
+		  ( part_stem + "is" ) 
+		  Neutr ) 
+	      < \\_ => "" , "" >
+	      < \\_ => "" , "" >
+	      "" "" ""
+	  ).s!Posit
+	}
+    } ;
+
+  -- at the moment only fills present tense
+  impersonalVerb : Str -> Verb = \s ->
+    {
+      act = table {
+	VAct VSim (VPres VInd)  Sg P1 => s ;
+	_ => nonExist
+	} ;
+      pass = \\_ => nonExist ;
+      imp = \\_ => nonExist ;
+      inf = \\_ => nonExist ;
+      ger = \\_ => nonExist ;
+      geriv = \\_ => nonExist ;
+      part = \\_,_ => nonExist ;
+      sup = \\_ => nonExist ;
+    } ;
+
+  constVerb : Str -> Verb = \s ->
+    {
+      act = table {
+	_ => s
+	} ;
+      pass = \\_ => nonExist ;
+      imp = \\_ => nonExist ;
+      inf = \\_ => nonExist ;
+      ger = \\_ => nonExist ;
+      geriv = \\_ => nonExist ;
+      part = \\_,_ => nonExist ;
+      sup = \\_ => nonExist ;
+    } ;
+  actPresEnding : Number -> Person -> Str = 
+    useEndingTable <"m", "s", "t", "mus", "tis", "nt"> ;
+
+  actPerfEnding : Number -> Person -> Str = 
+    useEndingTable <"i", "isti", "it", "imus", "istis", "erunt"> ;
+
+  passPresEnding : Number -> Person -> Str =
+    useEndingTable <"r", "ris", "tur", "mur", "mini", "ntur"> ;
+
+  passFutEnding : Str -> Number -> Person -> Str = 
+    \lauda,n,p ->
+    let endings : Str * Str * Str * Str * Str * Str = case lauda of {
+	  ( _ + "a" ) | 
+	    ( _ + "e" ) => < "bo" , "be" , "bi" , "bi" , "bi" , "bu" > ;
+	  _             => < "a"  , "e"  , "e"  , "e"  , "e"  , "e"  >
+	  }
+    in
+    (useEndingTable endings n p) + passPresEnding n p ;
+  
+  useEndingTable : (Str*Str*Str*Str*Str*Str) -> Number -> Person -> Str = 
+    \es,n,p -> case n of {
+      Sg => case p of {
+        P1 => es.p1 ;
+        P2 => es.p2 ;
+        P3 => es.p3
+        } ;
+      Pl => case p of {
+        P1 => es.p4 ;
+        P2 => es.p5 ;
+        P3 => es.p6
+        }
+      } ;
+
+
+    addPrefix : Str -> Str -> Str =
+      \prefix,verb ->
+      case <prefix,verb> of {
+	<p + "b","f"      + _ > => p + verb ;
+	<p + "b", "te"    + r > => prefix + "sti" + r;
+	<p + "b", "t"     + r > => prefix + "s" + verb;
+	<p + "b", "iact"  + r > => prefix + "iect" + r;
+	<p + "b", "iac"   + r > => prefix + "ic" + r;
+	<p + "d","capt"   + r > => p + "ccept" + r ;
+	<p + "d","ca"     + r > => p + "cci" + r ;
+	<p      ,"spe"     + r > => p + "spi" + r ;
+	<p      ,"spex"     + r > => prefix + verb;
+	<p      ,"stat"     + r > => p + "stit" + r ;
+	<p      ,"tex"     + r > => p + verb ;
+	<p      ,"te"     + r > => p + "ti" + r ;
+	<p + "d","c"      + _ >  => p + "c" + verb ;
+	<p + "d","t"      + _ >  => p + "t" + verb ;
+	<p + "d","l"      + _  > => p + "l" + verb ;
+	_ => prefix + verb
+      } ;-- TODO too simple e.g. ab+fuit = afuit
+
+    prefixVerb2 : Str -> Verb2 -> Verb2 =
+      \prefix,verb ->
+      let v = { act = verb.act ; pass = verb.pass ; inf = verb.inf ; imp = verb.imp ; ger = verb.ger ; geriv = verb.geriv ; sup = verb.sup ; part = verb.part }
+      in
+      (prefixVerb prefix v) ** { c = verb.c };
+    
+    prefixVerb : Str -> Verb -> Verb =
+      \prefix,verb ->
+      {
+	act = \\form => addPrefix prefix (verb.act ! form) ;
+	pass = \\form => addPrefix prefix (verb.pass ! form) ;
+	inf = \\form => addPrefix prefix (verb.inf ! form) ;
+	imp = \\form => addPrefix prefix (verb.imp ! form) ;
+	ger = \\form => addPrefix prefix (verb.ger ! form) ;
+	geriv = \\agr => addPrefix prefix (verb.geriv ! agr) ;
+	sup = \\form => addPrefix prefix (verb.sup ! form) ;
+	part = \\form,agr => addPrefix prefix (verb.part ! form ! agr) ;
+      } ;
+
+
+    esseAux : Verb =     -- Bayer-Lindauer 93 1
+    let
+      pres_stem = "s" ;
+      pres_ind_base = "su" ;
+      pres_conj_base = "si" ;
+      impf_ind_base = "era" ;
+      impf_conj_base = "esse" ;
+      fut_I_base = "eri" ;
+      imp_base = "es" ;
+      perf_stem = "fu" ;
+      perf_ind_base = "fu" ;
+      perf_conj_base = "fueri" ;
+      pqperf_ind_base = "fuera" ;
+      pqperf_conj_base = "fuisse" ;
+      fut_II_base = "fueri" ;
+      part_stem = "fut" ;
+      verb = mkVerb "esse" pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base
+    	imp_base perf_stem perf_ind_base perf_conj_base pqperf_ind_base pqperf_conj_base fut_II_base part_stem ;
+    in
+    {
+      act = 
+	table {
+    	  VAct VSim (VPres VInd)  n  p  => 
+	    table Number [ table Person [ "sum" ; "es" ; "est" ] ;
+    			   table Person [ "sumus" ; "estis" ; "sunt" ]
+    	    ] ! n ! p ;
+    	  a => verb.act ! a
+	};
+      pass =
+	\\_ => nonExist ; -- no passive forms 
+      inf =
+	verb.inf ;
+      imp =
+	table {
+	  VImp1 Sg => "es" ;
+	  VImp1 Pl => "este" ;
+	  VImp2 Pl P2 => "estote" ;
+	  a => verb.imp ! a
+	} ;
+      sup =
+	\\_ => nonExist ; -- no supin forms
+      ger =
+	\\_ => nonExist ; -- no gerund forms
+      geriv = 
+	\\_ => nonExist ; -- no gerundive forms
+      part = table {
+	VActFut =>
+	  verb.part ! VActFut ;
+	VActPres => 
+	  \\_ => nonExist ; -- no such participle
+	VPassPerf =>
+	  \\_ => nonExist -- no such participle
+	}
+    } ;
+
+  ferreAux : Verb =
+    let
+      pres_stem = "fer" ;
+      pres_ind_base = "fer" ;
+      pres_conj_base = "fera" ;
+      impf_ind_base = "fereba" ;
+      impf_conj_base = "ferre" ;
+      fut_I_base = "fere" ;
+      imp_base = "fer" ;
+      perf_stem = "tul" ;
+      perf_ind_base = "tul" ;
+      perf_conj_base = "tuleri" ;
+      pqperf_ind_base = "tulera" ;
+      pqperf_conj_base = "tulisse" ;
+      fut_II_base = "tuleri" ;
+      part_stem = "lat" ;
+      verb = mkVerb "ferre" pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base
+	imp_base perf_stem perf_ind_base perf_conj_base pqperf_ind_base pqperf_conj_base fut_II_base part_stem ;
+    in
+    {
+      act =
+	table {
+	  VAct VSim (VPres VInd) n p => 
+	    table Number [ table Person [ "fero" ; "fers" ; "fert" ] ;
+			   table Person [ "ferimus" ; "fertis" ; "ferunt" ] 
+	    ] ! n ! p ;
+	  a => verb.act ! a
+	} ;
+      pass = 
+	table {
+	  VPass (VPres VInd) n p => 
+	    table Number [ table Person [ "feror" ; "ferris" ; "fertur" ] ;
+			   table Person [ "ferimur" ; "ferimini" ; "feruntur" ]
+	    ] ! n ! p ;
+	  a => verb.pass ! a
+	} ;
+      inf = 
+	verb.inf ;	  
+      imp =
+	table {
+	  VImp1 n => table Number [ "fer" ; "ferte" ] ! n ;
+	  VImp2 Sg ( P2 | P3 ) => "ferto" ;
+	  VImp2 Pl P2 => "fertote" ;
+	  a => verb.imp ! a 
+	} ; 
+      sup = 
+	verb.sup ;
+      ger =
+	verb.ger ;
+      geriv =
+	verb.geriv ;
+      part = verb.part ;
+    };
+
+  posseAux : Verb =
+    let
+      pres_stem = "pos" ;
+      pres_ind_base = "pos" ;
+      pres_conj_base = "possi" ;
+      impf_ind_base = "potera" ;
+      impf_conj_base = "posse" ;
+      fut_I_base = "poteri" ;
+      imp_base = "" ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=a3a26ffa28c0:1051-1400
+start=1051
+end=1400
+----
+      perf_stem = "potu" ;
+      perf_ind_base = "potu" ;
+      perf_conj_base = "potueri" ;
+      pqperf_ind_base = "potuera" ;
+      pqperf_conj_base = "potuisse" ;
+      fut_II_base = "potueri" ;
+      part_stem = "" ;
+      verb = mkVerb "posse" pres_stem pres_ind_base pres_conj_base impf_ind_base impf_conj_base fut_I_base
+    	imp_base perf_stem perf_ind_base perf_conj_base pqperf_ind_base pqperf_conj_base fut_II_base part_stem ;
+    in
+    {
+      act =
+    	table {
+    	  VAct VSim (VPres VInd)  n  p  => 
+	    table Number [ table Person [ "possum" ; "potes" ; "potest" ] ;
+    			   table Person [ "possumus" ; "potestis" ; "possunt" ]
+    	    ] ! n ! p ;
+    	  a => verb.act ! a
+    	} ;
+      pass = 
+    	\\_ => nonExist ; -- no passive forms
+      inf = 
+	table {
+	  VInfActFut _ => nonExist ;
+	  a => verb.inf ! a
+	} ;
+      imp = 
+	\\_ => nonExist ;
+      sup = 
+	\\_ => nonExist ;
+      ger =
+	\\_ => nonExist ;
+      geriv =
+	\\_ => nonExist ;
+      part = table {
+	VActFut =>
+    	  \\_ => nonExist ; -- no such participle
+    	VActPres => 
+	  \\_ => nonExist ; -- no such participle
+    	VPassPerf =>
+    	  \\_ => nonExist -- no such participle
+	} ;
+    };
+  
+-- pronouns
+
+param
+  PronReflForm = PronRefl | PronNonRefl ;
+  PronDropForm = PronDrop | PronNonDrop ;
+--  PronIndefUsage = PronSubst | PronAdj ;
+--  PronIndefPol = PronPos | PronNeg ;
+--  PronIndefMeaning = PronSomeone | PronCertainOne | PronEvery ;
+--  PronType = PronPers PronReflForm | PronPoss PronReflForm | PronDemo | PronRelat | PronInterrog | 
+--    PronIndef PronIndefUsage PronIndefPol PronIndefMeaning ;
+
+oper
+
+  PersonalPronoun = {
+    s : PronDropForm => PronReflForm => Case => Str ;
+    g : Gender ;
+    n : Number
+    } ;
+
+  PossessivePronoun = {
+    s : PronReflForm => Agr => Str ;
+    } ;
+  
+  -- Pronoun : Type = {
+  --   pers : PronDropForm => PronReflForm => Case => Str ;
+  --   poss : PronReflForm => Agr => Str ;
+  --   g : Gender ;
+  --   n : Number ;
+  --   p : Person ;
+  --   } ;
+
+  Pronoun : Type = {
+    pers : PersonalPronoun ;
+    poss : PossessivePronoun ;
+    p : Person
+    } ;
+  
+  pronForms = overload {
+    pronForms : (_,_,_,_,_ : Str) -> Case => Str = 
+      \ego,me,mei,mihi,mee -> table Case [ego ; me ; mei ; mihi ; mee ; ego] ;
+    pronForms : (_,_,_,_,_,_ : Str) -> Case => Str = 
+      \meus,meum,mei,meo,meoo,mi -> table Case [meus ; meum ; mei ; meo ; meoo ; mi] ;
+    };
+    
+  createPronouns : Gender -> Number -> Person -> ( ( PronDropForm => PronReflForm => Case => Str ) * ( PronReflForm => Agr => Str ) ) = \g,n,p ->
+    case <g,n,p> of {
+      <_,Sg,P1> =>
+  	< 
+  	table { 
+  	  PronDrop    => \\_,_ => "" ;  
+  	  PronNonDrop => \\_ => pronForms "ego" "me" "mei" "mihi" "me" "me"
+  	},
+  	\\_ => table {
+  	  Ag Masc  Sg c => ( pronForms "meus" "meum" "mei" "meo" "meo" "mi" ) ! c ;
+  	  Ag Masc  Pl c => ( pronForms "mei" "meos" "meorum" "meis" "meis" "mei" ) ! c ;
+  	  Ag Fem   Sg c => ( pronForms "mea" "meam" "meae" "meae" "mea" "mea" ) ! c ;
+   	  Ag Fem   Pl c => ( pronForms "meae" "meas" "mearum" "meis" "meis" "meae" ) ! c ;
+  	  Ag Neutr Sg c => ( pronForms "meum" "meum" "mei" "meo" "meo" "meum" ) ! c ;
+   	  Ag Neutr Pl c => ( pronForms "mea" "mea" "meorum" "meis" "meis" "mea" ) ! c
+  	}
+  	> ;
+      <_,    Sg,P2> => 
+      	< 
+      	table {
+      	  PronDrop => \\_,_ => "" ; 
+      	  PronNonDrop => \\_ => pronForms "tu"  "te" "tui" "tibi" "te" "te" 
+      	} ,
+      	\\_ => table {
+      	  Ag Masc  Sg c => ( pronForms "tuus" "tuum" "tui" "tuo" "tu" "tue" ) ! c ;
+      	  Ag Masc  Pl c => ( pronForms "tui" "tuos" "tuorum" "tuis" "tuis" "tui" ) ! c ;
+      	  Ag Fem   Sg c => ( pronForms "tua" "tuam" "tuae" "tuae" "tua" "tua" ) ! c ;
+      	  Ag Fem   Pl c => ( pronForms "tuae" "tuas" "tuarum" "tuis" "tuis" "tuae" ) ! c ;
+      	  Ag Neutr Sg c => ( pronForms "tuum" "tuum" "tui" "tuo" "tuo" "tuum" ) ! c ;
+      	  Ag Neutr Pl c => ( pronForms "tua" "tua" "tuorum" "tuis" "tuis" "tua" ) ! c
+      	}
+      	> ;
+      <_,    Pl,P1> => 
+      	< 
+      	table { 
+      	  PronDrop => \\_,_ => "" ;
+      	  PronNonDrop => \\_ => pronForms "nos" "nos" "nostri" "nobis" "nobis" --- nostrum
+      	} , 
+      	\\_ => table {
+      	  Ag Masc  Sg c => ( pronForms "noster" "nostrum" "nostri" "nostro" "nostro" "noster" ) ! c ; 
+      	  Ag Masc  Pl c => ( pronForms "nostri" "nostros" "nostrorum" "nostris" "nostris" "nostri" ) ! c ;
+      	  Ag Fem   Sg c => ( pronForms "nostra" "nostram" "nostrae" "nostrae" "nostra" "nostra" ) ! c ;
+      	  Ag Fem   Pl c => ( pronForms "nostrae" "nostras" "nostrarum" "nostris" "nostris" "nostrae" ) ! c ;
+      	  Ag Neutr Sg c => ( pronForms "nostrum" "nostrum" "nostri" "nostro" "nostro" "nostrum" ) ! c ;
+      	  Ag Neutr Pl c => ( pronForms "nostra" "nostra" "nostrorum" "nostris" "nostris" "nostra" ) ! c
+      	}
+      	> ; 
+      <_,    Pl,P2> => 
+      	< 
+      	table {
+      	  PronDrop => \\_,_ => "" ; 
+      	  PronNonDrop => \\_ => pronForms "vos" "vos" "vestri" "vobis" "vobis"  --- vestrum
+      	} ,
+      	\\_ => table {
+      	  Ag Masc  Sg c => ( pronForms "vester" "vestrum" "vestri" "vestro" "vestro" "vester" ) ! c ;
+      	  Ag Masc  Pl c => ( pronForms "vestri" "vestros" "vestrorum" "vestris" "vestris" "vestri" ) ! c ;
+      	  Ag Fem   Sg c => ( pronForms "vestra" "vestram" "vestrae" "vestrae" "vestra" "vestra" ) ! c ;
+      	  Ag Fem   Pl c => ( pronForms "vestrae" "vestras" "vestrarum" "vestris" "vestris" "vestrae" ) ! c ;
+      	  Ag Neutr Sg c => ( pronForms "vestrum" "vestrum" "vestri" "vestro" "vestro" "vestrum" ) ! c ;
+      	  Ag Neutr Pl c => ( pronForms "vestra" "vestra" "vestrorum" "vestris" "vestris" "vestra" ) ! c
+      	}
+      	>; 
+      <_,_ ,P3> => 
+      	<
+      	table {
+      	  PronDrop => \\_,_ => "" ;
+      	  PronNonDrop =>
+      	    table { 
+      	      PronNonRefl => 
+      		case <g,n> of {
+      		  <Masc ,Sg> => pronForms "is"  "eum" "eius"  "ei" "eo" ;
+      		  <Fem  ,Sg> => pronForms "ea"  "eam" "eius"  "ei" "ea" ;
+      		  <Neutr,Sg> => pronForms "id"  "id"  "eius"  "ei" "eo" ;
+      		  <Masc ,Pl> => pronForms "ei"  "eos" "eorum" "eis" "eis" ;
+      		  <Fem  ,Pl> => pronForms "eae" "eas" "earum" "eis" "eis" ;
+      		  <Neutr,Pl> => pronForms "ea"  "ea"  "eorum" "eis" "eis"
+      		} ;
+      	      PronRefl => pronForms nonExist "se" "sui" "sibi" "se"
+      	    }
+      	} ,
+      	table {
+      	  PronNonRefl =>
+      	    \\_ => nonExist ;
+      	  PronRefl =>
+      	    table {
+      	      Ag Masc  Sg c => ( pronForms "suus" "suum" "sui" "suo" "suo" ) ! c ;
+      	      Ag Masc  Pl c => ( pronForms "sui" "suos" "suorum" "suis" "suis" ) ! c ;
+      	      Ag Fem   Sg c => ( pronForms "sua" "suam" "suae" "suae" "sua" ) ! c ;
+      	      Ag Fem   Pl c => ( pronForms "suae" "suas" "suarum" "suis" "suis" ) ! c ;
+      	      Ag Neutr Sg c => ( pronForms "suum" "suum" "sui" "suo" "suo" ) ! c ;
+      	      Ag Neutr Pl c => ( pronForms "sua" "sua" "suorum" "suis" "suis" ) ! c
+      	    }
+      	}
+      	> 
+--	;
+--      _ =>
+--    	< \\_,_,_ => "######!" , \\_,_ => "######!" > -- should never be reached
+    } ;
+
+  mkPronoun : Gender -> Number -> Person -> Pronoun = \g,n,p ->
+    let 
+      -- Personal_Form * Possesive_Form
+      prons : ( PronDropForm => PronReflForm => Case => Str ) * ( PronReflForm => Agr => Str ) =
+      createPronouns g n p ;
+    in
+    {
+     pers = { s = prons.p1 ; g = g ; n = n } ;
+     poss = { s = prons.p2 } ;
+     p = p
+    } ;
+
+-- prepositions
+
+  Preposition : Type = {s : Str ; c : Case ; isPost : Bool } ;
+
+  -- conjunctions
+param Coordinator = Aut | Et | Sed | Si | Vel | Comma | Colon | Empty | Missing ; -- Missing means not implemented yet
+oper
+  Conjunction : Type = { s1 : Str ; s2 : Str ; s3 : Str ; n : Number ; c : Coordinator } ; -- s1 is in the beginning of the coordination phrase, s2 in the middle and s3 is a potential enclitic, s is the prefered number of the coordination phrase and c is the parameter to define which string to put within the phrase
+  mkConjunction : Str -> Str -> Str -> Number -> Coordinator -> Conjunction =
+\s1,s2,s3,num,coord -> { s1 = s1; s2 = s2 ; s3 = s3 ; n = num ; c = coord } ;
+  
+  VPSlash = VerbPhrase ** {c : Preposition} ;
+
+  predV : Verb -> VerbPhrase = \v -> {
+    s = \\a,q => v.act ! a ++ case q of { VQTrue => Prelude.BIND ++ "ne"; VQFalse => "" };
+    pass = \\p,q => v.pass ! p ++ case q of { VQTrue => Prelude.BIND ++ "ne"; VQFalse => "" };
+    part = v.part;
+    imp = v.imp ;
+    inf = v.inf ;
+    obj = [] ;
+    compl = \\a => [] ;
+    adv = "" 
+  } ;
+
+  predV2 : Verb2 -> VPSlash = \v ->
+    predV v ** {c = v.c} ;
+
+  predV3 : Verb3 -> VPSlash = \v
+    -> predV v ** {c = v.c; c2 = v.c2 } ;
+
+  appPrep : Preposition -> (Case => Str) -> Str = \c,s -> c.s ++ s ! c.c ;
+
+  insertObj : NounPhrase -> Preposition -> VerbPhrase -> VerbPhrase = \np,prep,vp -> {
+    s = vp.s ;
+    pass = vp.pass ;
+    part = vp.part ;
+    imp = vp.imp ;
+    inf = vp.inf ;
+    obj = np.det.s ! prep.c ++ np.preap.s ! (Ag np.g np.n prep.c) ++ (appPrep prep (np.s ! PronNonDrop)) ++ np.postap.s ! (Ag np.g np.n prep.c) ++ np.det.sp ! prep.c ++ vp.obj ;
+    compl = vp.compl ;
+    adv = vp.adv ++ np.adv
+  } ;
+
+  insertObjc: NounPhrase -> VPSlash -> VPSlash = \np,vp -> {
+    s = vp.s ;
+    pass = vp.pass ;
+    part = vp.part ;
+    imp = vp.imp ;
+    inf = vp.inf ;
+    obj = np.det.s ! vp.c.c ++ np.preap.s ! (Ag np.g np.n vp.c.c) ++ (appPrep vp.c (np.s ! PronNonDrop)) ++ np.postap.s ! (Ag np.g np.n vp.c.c) ++ np.det.sp ! vp.c.c ++ vp.obj ;
+    compl = vp.compl ;
+    c = vp.c ;
+    adv = vp.adv ++ np.adv
+    } ;
+    
+  insertAdj : (Agr => Str) -> VerbPhrase -> VerbPhrase = \adj,vp -> {
+    s = vp.s ;
+    pass = vp.pass ;
+    part = vp.part ;
+    imp = vp.imp ;
+    inf = vp.inf ;
+    obj = vp.obj ;
+    compl = \\a => adj ! a ++ vp.compl ! a ;
+    adv = vp.adv
+  } ;
+
+  insertAdv : Adverb -> VerbPhrase -> VerbPhrase = \a,vp -> {
+    s = vp.s ;
+    pass = vp.pass ;
+    part = vp.part ;
+    imp = vp.imp ;
+    inf = vp.inf ;
+    obj = vp.obj ;
+    compl = vp.compl ;
+    adv = vp.adv ++ (a.s ! Posit)
+    } ;
+
+  -- clauses
+  Sentence =
+    {
+      s,o,neg : AdvPos => Str ; -- Subject, verbphrase, object and negation particle plus potential adverb
+      v : AdvPos => Str ;
+      sadv : Str ; -- sentence adverb¡
+      det : { s , sp : Case => Str }  ;
+      compl : Str -- verb complement
+    } ;
+
+  Clause =
+    {s : AdvPos => Str ;
+     o : AdvPos => Str ;
+     v : Tense => Anteriority => VQForm => AdvPos => Str ;
+     det : { s , sp : Case => Str } ; 
+     compl : Str ;
+     neg : Polarity => AdvPos => Str ;
+     adv : Str } ;
+  QClause = {s : Tense => Anteriority => Polarity => QForm => Str} ;
+
+  mkClause : NounPhrase -> VerbPhrase -> Clause = \np,vp ->
+    let
+      -- combines adverbs from noun phrase and verb phrase
+      adv  = np.adv ++ vp.adv ;
+      -- extracts the complement from the verb phrase
+      compl = vp.compl ! Ag np.g np.n Nom ;
+      -- helper functions to either place the adverb in the designated position
+      -- or an empty string instead
+      pres   : AdvPos -> Str = \ap -> case ap of { APreS => adv ; _ => [] } ;
+      prev   : AdvPos -> Str = \ap -> case ap of { APreV => adv ; _ => [] } ;
+      preo   : AdvPos -> Str = \ap -> case ap of { APreO => adv ; _ => [] } ;
+      preneg : AdvPos -> Str = \ap -> case ap of { APreNeg => adv ; _ => [] } ;
+      ins    : AdvPos -> Str = \ap -> case ap of { AInS  => adv ; _ => [] } ;
+      inv    : AdvPos -> Str = \ap -> case ap of { AInV  => adv ; _ => [] } ;
+    in
+    {
+      -- subject part of the clause:
+      -- advpos is the adverb position in the clause
+      s = \\advpos =>
+	pres advpos ++                       -- adverbs can be placed in the beginning of the clause
+	np.preap.s ! (Ag np.g np.n Nom) ++   -- adjectives which come before the subject noun, agreeing with it
+	ins advpos ++                            -- adverbs can be placed within the subject noun phrase
+	np.s ! PronDrop ! Nom ++                        -- the noun of the subject noun phrase in nominative
+	np.postap .s ! (Ag np.g np.n Nom) ; -- adjectives which come after the subject noun, agreeing with it
+      -- verb part of the clause:
+      -- tense and anter(ority) for the verb tense
+      -- vqf is the VQForm parameter which defines if the ordinary verbform or the quistion form with suffix "-ne" will be used
+      -- advposis the adverb position in the clause
+      -- comppos is the position of the verb complement
+      v = \\tense,anter,vqf,advpos =>
+	prev advpos ++                           -- adverbs can be placed in the before the verb phrase
+	inv advpos ++                            -- adverbs can be placed within the verb phrase
+	-- verb form with conversion between different forms of tense and aspect
+	vp.s ! VAct ( anteriorityToVAnter anter ) ( tenseToVTense tense ) np.n np.p ! vqf ; -- ++
+      det = np.det ;
+      -- verb complement
+      compl = compl ;
+      -- object part of the clause
+      o = \\advpos => preo advpos ++ vp.obj ;
+      -- optional negation particle, adverbs can be placed before the negation
+      neg = \\pol,advpos => preneg advpos ++ negation pol ;
+      adv = ""
+    } ;
+  
+  combineClause : Str -> Clause -> Tense -> Anteriority -> Polarity -> VQForm -> Sentence = \params,cl,tense,anter,pol,vqf ->
+    cl **
+    {
+      v =  \\advpos => params ++ cl.v ! tense ! anter ! vqf ! advpos ;
+      neg = cl.neg ! pol ;
+      sadv = cl.adv
+    } ;
+
+  combineSentence : Sentence -> ( SAdvPos => AdvPos => DetPos => VPos => ComplPos => Order => Str ) = \s ->
+    let
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=a3a26ffa28c0:1401-1578
+start=1401
+end=1578
+----
+      advpres   : SAdvPos -> Str = \ap -> case ap of { SAPreS =>    s.sadv ; _ => [] } ;
+      advprev   : SAdvPos -> Str = \ap -> case ap of { SAPreV =>    s.sadv ; _ => [] } ;
+      advpreo   : SAdvPos -> Str = \ap -> case ap of { SAPreO =>    s.sadv ; _ => [] } ;
+      advpreneg : SAdvPos -> Str = \ap -> case ap of { SAPreNeg =>  s.sadv ; _ => [] } ;
+      detpren : DetPos -> { s, sp : Case => Str } = \dp -> case dp of { DPreN => s.det; _ => { s,sp = \\_ => [] } } ;
+      detpostn : DetPos -> { s, sp : Case => Str } = \dp -> case dp of { DPostN => s.det ; _ => { s , sp = \\_ => [] } } ;
+      verbins : VPos -> ResLat.AdvPos => Str = \vp -> case vp of { VInS => s.v ; _ => \\_ => [] } ;
+      verbreg : VPos -> ResLat.AdvPos => Str = \vp -> case vp of { VReg => s.v ; _ => \\_ => [] } ;
+      complprev  : ComplPos -> Str = \cp -> case cp of { CPreV => s.compl ; _ => [] } ;
+      complpostv : ComplPos -> Str = \cp -> case cp of { CPostV => s.compl ; _ => [] }
+    in
+    -- sadvpos is the position of the sentence adverbial
+    -- advpos is the position of the adverb
+    -- detpos is the position of the determiner (relative to the noun)
+    -- vpos is the position of the main verb (either regular or interleaved)
+    -- complosp is the position of the verb complement
+    \\sadvpos,advpos,detpos,verbpos,complpos,order  => case order of {
+      SVO =>
+	advpres sadvpos   ++ (detpren detpos).s ! Nom ++ s.s ! advpos ++ (verbins verbpos) ! advpos ++ (detpostn detpos).s ! Nom ++ (detpren detpos).sp ! Nom ++
+	advpreneg sadvpos ++ s.neg ! advpos ++
+	advprev sadvpos   ++ (complprev complpos) ++ (verbreg verbpos) ! advpos ++ (complpostv complpos) ++
+	advpreo sadvpos   ++ s.o ! advpos;
+      VSO =>
+	advpreneg sadvpos ++ s.neg ! advpos ++
+	advprev sadvpos   ++ (complprev complpos) ++ (verbreg verbpos) ! advpos ++ (complpostv complpos) ++
+	advpres sadvpos   ++ (detpren detpos).s ! Nom ++ s.s ! advpos ++ (verbins verbpos) ! advpos ++ (detpostn detpos).s ! Nom ++ (detpren detpos).sp ! Nom ++
+	advpreo sadvpos   ++ s.o ! advpos;
+      VOS =>
+	advpreneg sadvpos ++ s.neg ! advpos ++
+	advprev sadvpos   ++ (complprev complpos) ++ (verbreg verbpos) ! advpos ++ (complpostv complpos) ++
+	advpreo sadvpos   ++ s.o ! advpos ++
+	advpres sadvpos   ++ (detpren detpos).s ! Nom ++ s.s ! advpos ++ (verbins verbpos) ! advpos ++ (detpostn detpos).s ! Nom ++ (detpren detpos).sp ! Nom ;
+      OSV =>
+	advpreo sadvpos   ++ s.o ! advpos ++
+	advpres sadvpos   ++ (detpren detpos).s ! Nom ++ s.s ! advpos ++ (verbins verbpos) ! advpos ++ (detpostn detpos).s ! Nom ++ (detpren detpos).sp ! Nom++
+	advpreneg sadvpos ++ s.neg ! advpos ++
+	advprev sadvpos   ++ (complprev complpos) ++ (verbreg verbpos) ! advpos ++ (complpostv complpos) ;
+      OVS =>
+	advpreo sadvpos   ++ s.o ! advpos ++
+	advpreneg sadvpos ++ s.neg ! advpos ++
+	advprev sadvpos   ++ (complprev complpos) ++ (verbreg verbpos) ! advpos ++ (complpostv complpos) ++
+	advpres sadvpos   ++ (detpren detpos).s ! Nom ++ s.s ! advpos ++ (verbins verbpos) ! advpos ++ (detpostn detpos).s ! Nom ++ (detpren detpos).sp ! Nom ;
+      SOV =>
+	advpres sadvpos   ++ (detpren detpos).s ! Nom ++ s.s ! advpos ++ (verbins verbpos) ! advpos ++ (detpostn detpos).s ! Nom ++ (detpren detpos).sp ! Nom ++
+	advpreo sadvpos   ++ s.o ! advpos ++
+	advpreneg sadvpos ++ s.neg ! advpos ++
+	advprev sadvpos   ++ (complprev complpos) ++ (verbreg verbpos) ! advpos ++ (complpostv complpos)
+      } ;
+
+  defaultSentence : Sentence -> Order => Str = \s -> combineSentence s ! SAPreS ! APreV ! DPreN ! VReg ! CPreV ;
+
+  negation : Polarity -> Str = \p -> case p of {
+    Pos => [] ;   
+    Neg => "non"
+  } ;
+
+-- determiners
+
+  Determiner : Type = {
+    s,sp : Gender => Case => Str ; -- sp for split determiners (not clear if really needed)
+    n : Number
+    } ;
+
+  mkDeterminer : Adjective -> Number -> Determiner = \a,n ->
+    {
+      n = n ;
+      s = \\g,c => a.s ! Posit ! Ag g n c ;
+      sp = \\_,_ => ""
+    } ;
+
+  Quantifier : Type = {
+    s,sp : Agr => Str ;
+    } ;
+
+  mkQuantifG : (_,_,_,_,_ : Str) -> (_,_,_,_ : Str) -> (_,_,_ : Str) -> 
+    Gender => Case => Str = 
+    \mn,ma,mg,md,mab, fno,fa,fg,fab, nn,ng,nab -> table {
+      Masc  => pronForms mn  ma mg md mab ;
+      Fem   => pronForms fno fa fg md fab ;
+      Neutr => pronForms nn  nn ng md nab     
+    } ;
+      
+  mkQuantifier : (sg,pl : Gender => Case => Str) -> Quantifier = \sg,pl ->
+    let 
+      ssp = 
+	table {
+	  Ag g Sg c => sg ! g ! c ; 
+	  Ag g Pl c => pl ! g ! c
+	}
+    in 
+    {
+      s  = ssp ;
+      sp = ssp 
+    } ;
+
+  hic_Quantifier = mkQuantifier
+    (mkQuantifG 
+       "hic" "hunc" "huius" "huic" "hoc"  "haec" "hanc" "huius" "hac"  "hoc" "huius" "hoc")
+    (mkQuantifG 
+       "hi" "hos" "horum" "his" "his"  "hae" "has" "harum" "his"  "haec" "horum" "his")
+    ;
+
+  ille_Quantifier = mkQuantifier
+    (mkQuantifG 
+       "ille" "illum" "illius" "illi" "illo"  
+       "illa" "illam" "illius" "illa"  
+       "illud" "illius" "illo")
+    (mkQuantifG 
+       "illi" "illos" "illorum" "illis" "illis"  
+       "illae" "illas" "illarum" "illis"  
+       "illa" "illorum" "illis")
+    ;
+
+  mkPreposition : Str -> Case -> Preposition  = \s,c ->  {s = s ; c = c; isPost = False} ;
+
+  mkPostposition : Str -> Case -> Preposition = \s,c ->  {s = s ; c = c ; isPost = True } ;
+
+  -- adverbs
+  Adverb : Type = { s : Degree => Str} ;
+  mkAdverb : Str -> Adverb = \adv ->
+    { s = table { Posit => adv ; _ => nonExist } } ;
+
+  mkFullAdverb : (pos,comp,sup : Str) -> Adverb = \p,c,s ->
+    { s = table { Posit => p ; Compar => c ; Super => s } };
+  -- numerals
+  param
+  --   CardOrd = NCard | NOrd ;
+    Unit = one | eleven | ten | hundred | thousand | ten_thousand | hundred_thousand ;
+    Below8 = Yes | No8 | No9 | Ign ;
+  oper
+    -- Numerals are by default cardinal numbers but have a field for ordinal numbers
+    TDigit : Type = { s : Unit => Gender => Case => Str ; tenNext : Str ; below8 : Below8 ; ord : Unit => Gender => Number => Case => Str } ;
+    TNumeral : Type = { s : Gender => Case => Str ; d : { num, ord : Unit => Gender => Case => Str } ; n : Number ; below8 : Below8 ; ord : Gender => Number => Case => Str } ;
+
+    -- Inflection for cardinal numbers
+    cardFlex : Str -> Gender => Case => Str =
+      \c -> case c of { "unus" => \\gen,cas => case <gen,cas> of {
+			  <Masc, Nom | Voc> => "unus" ; <Masc, Acc> => "unum" ; <Masc, Abl> => "uno" ;
+			  <Fem, Nom | Abl | Voc> => "una" ; <Fem, Acc> => "unam" ;
+			  <Neutr, Nom | Acc | Voc> => "unum" ; <Neutr, Abl> => "uno" ;
+			  <_, Gen> => "unius" ; <_, Dat> => "uni"
+			  } ;
+			"duo" => table {
+			  Masc | Neutr => table Case [ "duo" ; "duo" ; "duorum" ; "duobus" ; "duobus" ; "duo" ] ;
+			  Fem => table Case [ "duae" ; "duas" ; "duarum" ; "duabus" ; "duabus" ; "duae" ] } ;
+			"tres" => \\gen,cas => case <gen,cas> of {
+			  <Neutr, Nom | Acc | Voc > => "tria" ; <_, Nom | Acc | Voc > => "tres" ;
+			  <_, Gen> => "trium" ; <_, Dat | Abl > => "tribus"
+			  } ;
+			tre + "centi" => \\g,c => regAdj (tre + "centus") ! g ! Pl ! c ;
+			"milia" => table {
+			  _ => table Case [ "milia" ; "milia" ; "milium" ; "milibus" ; "milibus" ; "milia" ]
+			  } ;
+			_ => \\_,_ => c
+      } ;
+    ordFlex : Str -> Gender => Number => Case => Str = 
+      \o -> case o of {
+      	stem + "us" => table {
+      	  Masc => table Number [ table Case [ stem + "us" ; stem + "um" ; stem + "i" ; stem + "o" ; stem + "o" ; stem + "e" ] ;
+      				 table Case [ stem + "i" ; stem + "os" ; stem + "orum" ; stem + "is" ; stem + "is" ; stem + "i" ] ;
+      	    ];
+      	  Fem => table Number [ table Case [ stem + "a" ; stem + "am" ; stem + "ae" ; stem + "ae" ; stem + "a" ; stem + "a" ] ;
+      				table Case [ stem + "ae" ; stem + "as" ; stem + "arum" ; stem + "is" ; stem + "is" ; stem + "ae" ] ;
+      	    ] ;
+      	  Neutr => table Number [ table Case [ stem + "um" ; stem + "um" ; stem + "i" ; stem + "o" ; stem + "o" ; stem + "um" ] ;
+      				  table Case [ stem + "a" ; stem + "a" ; stem + "orum" ; stem + "is" ; stem + "is" ; stem + "a" ] ;
+      	    ]
+      	  } ;
+      	_ => error "unsupported ordinal form"
+      } ;
+      -- in
+    -- { s = cardFlex ; n = case c of { "unus" => Sg ; _ => Pl }  ; ord = ordFlex } ;
+
+    -- fixedNumeral : Str -> Str -> Numeral = \c,o ->
+    --    { s = \\_,_,_=> c ; n = Pl ; ord = \\g,n,c => (mkA o).s ! Posit ! Ag g n c} ;
+    
+
+}
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/SentenceLat.gf"
+id=d4ca4c445fc2
+kind=source
+size=2826
+lines=85
+chunks=0
+----
+concrete SentenceLat of Sentence = CatLat ** open Prelude, ResLat in {
+
+  flags optimize=all_subs ;
+
+  lin
+
+    PredVP np vp = -- NP -> VP -> Cl
+      mkClause np vp ;
+--
+--    PredSCVP sc vp = mkClause sc.s (agrP3 Sg) vp ;
+--
+--    ImpVP vp = {
+--      s = \\pol,n => 
+--        let 
+--          agr   = AgP2 (numImp n) ;
+--          verb  = infVP True vp agr ;
+--          dont  = case pol of {
+--            CNeg True => "don't" ;
+--            CNeg False => "do" ++ "not" ;
+--            _ => []
+--            }
+--        in
+--        dont ++ verb
+--    } ;
+   
+--  SlashVP  : NP -> VPSlash -> ClSlash ;      -- (whom) he sees
+    SlashVP np vp = 
+      mkClause np ( vp ** {c2 = vp.c2} ) ;
+--
+--    AdvSlash slash adv = {
+--      s  = \\t,a,b,o => slash.s ! t ! a ! b ! o ++ adv.s ;
+--      c2 = slash.c2
+--    } ;
+
+--  SlashPrep : Cl -> Prep -> ClSlash ;         -- (with whom) he walks 
+    SlashPrep cl prep = cl ** {c2 = prep.s} ;
+--
+--    SlashVS np vs slash = 
+--      mkClause (combineNounPhrase np ! PronNonDrop ! Nom) np.a 
+--        (insertObj (\\_ => conjThat ++ slash.s) (predV vs))  **
+--        {c2 = slash.c2} ;
+--
+--    EmbedS  s  = {s = conjThat ++ s.s} ;
+--    EmbedQS qs = {s = qs.s ! QIndir} ;
+--    EmbedVP vp = {s = infVP False vp (agrP3 Sg)} ; --- agr
+--
+    UseCl  t p cl = -- Temp -> Pol-> Cl -> S
+      (combineClause (t.s++p.s) cl t.t t.a p.p VQFalse) ;
+
+    -- 	UseQCl : Temp -> Pol -> QCl -> QS
+    UseQCl t p cl =
+      {
+	s = let qs = combineClause (t.s++p.s) cl t.t t.a p.p VQTrue in
+	  \\q => case q of {
+	  QDir => cl.q ++ defaultSentence qs ! SVO ; -- t.s ++ p.s ++ cl.q ++ cl.s ! PreV ++ cl.v ! t.t ! t.a ! VQTrue ! PreV ! CPostV ++ cl.o ! PreV ;
+	  QIndir => cl.q ++ defaultSentence qs ! SOV -- t.s ++ p.s ++ cl.q ++ cl.s ! PreV ++ cl.o ! PreV ++ cl.v ! t.t ! t.a ! VQTrue ! PreV ! CPostV
+	  }
+      } ;
+    -- UseRCl : Temp -> Pol -> RCl -> RS ;
+    UseRCl t p cl = {
+      s = \\g,n => defaultSentence (combineClause (t.s++p.s) (cl.s ! g ! n) t.t t.a p.p VQFalse) ! SOV ;
+--      s = \\r => t.s ++ p.s ++ cl.s ! t.t ! t.a ! ctr p.p ! r ;
+--      c = cl.c
+    } ;
+--    UseSlash t p cl = {
+--      s = t.s ++ p.s ++ cl.s ! t.t ! t.a ! ctr p.p  ! ODir ;
+--      c2 = cl.c2
+--    } ;
+--
+    -- AdvS : Adv -> S -> S
+    AdvS adv s = -- { s = s.s ; o = s.o ; v = s.v ; neg = s.neg ; t = s.t ; p = s.p ; sadv = adv.s ! Posit ++ s.sadv } ;
+      s ** { sadv = adv.s ! Posit ++ s.sadv } ;
+
+-- This covers subjunctive clauses, but they can also be added to the end.
+    --  SSubjS : S -> Subj -> S -> S ;       -- I go home if she comes
+    -- TO FIX
+--    SSubjS s1 subj s2 = { s =  \\_ => subj.s ++ s2.s ! PreS ++ s1.s ! PreS ; sadv = lin Adv (mkAdverb []) } ;
+    
+--    RelS s r = {s = s.s ! APreV ++ "," ++ r.s } ;
+--
+--  oper
+--    ctr = contrNeg True ;  -- contracted negations
+--
+}
+
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/StructuralLat.gf"
+id=155a3d73a0d2
+kind=source
+size=6090
+lines=130
+chunks=0
+----
+concrete StructuralLat of Structural = CatLat **  
+  open ResLat, ParadigmsLat, Prelude, IrregLat, (C=ConstructX) in 
+  {
+    
+  flags optimize=all ;
+	
+  lin
+  above_Prep = mkPrep "super" Abl ; -- abl. L...
+  after_Prep = mkPrep "post" Acc ; -- acc. L...
+  all_Predet = ss "cuncti" ; -- L...
+  almost_AdA, almost_AdN = ss "quasi" ; -- L...
+  although_Subj = ss "quamquam" ; -- L...
+  always_AdV = ss "semper" ; -- L...
+  and_Conj = mkConj [] "et" Pl Et ; -- L177
+-----b  and_Conj = ss "and" ** {n = Pl} ;
+  because_Subj = ss "cum" ; -- L...
+  before_Prep = mkPrep "ante" Acc ; -- acc. L...
+  behind_Prep = mkPrep "a tergo" Acc ; -- acc. L...
+  between_Prep = mkPrep "inter" Acc ; -- acc. L...
+  both7and_DConj = mkConj "et" "et" Pl Et ; --L177
+  but_PConj = ss "sed" ; -- L...
+  by8agent_Prep = mkPrep "per" Abl ; -- L...
+  by8means_Prep = mkPrep "" Abl ; -- L...
+  can8know_VV, can_VV = mkVV (mkV "scire" "scio" "scivi" "scitum") False ; --L...
+  during_Prep = mkPrep "inter" Acc ; -- L...
+  either7or_DConj = mkConj "aut" "aut" Sg Aut ; -- L177
+  everybody_NP = regNP  "quisque" "quemque" "cuiusque" "cuique" "quoque" "quisque" Masc Sg ;-- regNP "quisquae" Sg ; -- L...
+  every_Det = mkDeterminer ( mkA "omnis" ) Sg ; -- Pons
+  everything_NP = regNP "omnia" "omnia" "omnium" "omnis" "omnis" "omnia" Neutr Pl ; --regNP "omnia" Pl ; -- L...
+  everywhere_Adv = mkAdv  "ubique" ; -- L...
+  few_Det = mkDeterminer ( mkA "paulus" ) Pl ; -- L...
+-----  first_Ord = ss "first" ; DEPRECATED
+  for_Prep = mkPrep "pro" Abl ; -- abl. L...
+  from_Prep = mkPrep "de" Abl ; -- abl. L...
+  he_Pron = mkPronoun Masc Sg P3 ;
+  here_Adv = mkAdv  "hic" ; -- L...
+  here7to_Adv = mkAdv  "huc" ; -- L...
+  here7from_Adv = mkAdv  "hinc" ; -- L...
+  how_IAdv = ss "qui" ; -- L...
+  how8many_IDet = mkDeterminer (mkA "quantus" ) Pl ; -- Pons
+  how8much_IAdv = ss "quantum" ; -- L...
+  if_Subj = ss "si" ; -- L...
+  in8front_Prep = mkPrep "ante" Acc ; -- acc. L...
+  i_Pron = mkPronoun Masc Sg P1 ;
+  in_Prep = mkPrep "in" Acc ; -- L..., abl. in extra
+  it_Pron = mkPronoun Neutr Sg P3 ; 
+  less_CAdv = C.mkCAdv "minus" "quam" ; -- L...
+  many_Det = mkDeterminer ( mkA "multus" ) Pl ; -- L...
+  more_CAdv = C.mkCAdv "magis" "quam" ; -- L...
+  most_Predet = ss "plurimi" ; -- L...
+  much_Det = mkDeterminer ( mkA "multus" ) Sg ; -- L...
+  must_VV = mkVV ( mkV "debere" ) True ; -- L...
+-----b  no_Phr = ss "immo" ;
+  no_Utt = ss "non est" ; -- should be expressed by a short negated sentence L...
+  on_Prep = mkPrep "in" Acc ; -- L...
+------  one_Quant = mkDeterminer Sg "one" ; -- DEPRECATED
+  only_Predet = ss "solum" ; -- L...
+  or_Conj = mkConj [] "aut" Sg Aut ; -- L177
+  otherwise_PConj = ss "praeterea" ; -- Pons
+  part_Prep = mkPrep [] Gen ; -- Bayer-Lindauer 127
+  please_Voc = ss "queso" ; -- L...
+  possess_Prep = mkPrep [] Gen ; -- Bayer-Lindauer 125.2
+  quite_Adv = ss "admodum" ; -- actually AdA, can be expressed by comparation L...
+  she_Pron = mkPronoun Fem Sg P3 ;
+  so_AdA = ss "sic" ; -- L...
+  somebody_NP = regNP "aliquis" "aliquem" "alicuius" "clicui" "aliquo" "aliquis" Masc Sg ; -- Bayer-Lindauer 60.1
+  someSg_Det = mkDeterminer ( mkA "aliquis" ) Sg ; -- L...
+  somePl_Det = mkDeterminer ( mkA "nonnullus" ) Pl ; --L ...
+  something_NP = regNP "aliquid" "aliquid" "alicuius rei" "alicui rei" "aliqua re" "aliquid" Masc Sg ; -- Bayer-Lindauer 60.1
+  somewhere_Adv = mkAdv  "usquam" ; -- L...
+  that_Quant = ille_Quantifier ;
+  that_Subj = ss "ut" ; -- L...
+  there_Adv = mkAdv  "ibi" ; -- loc. L...
+  there7to_Adv = mkAdv  "eo" ; -- Pons
+  there7from_Adv = mkAdv  "inde" ; -- Pons
+  therefore_PConj = ss "ergo" ; -- L...
+  they_Pron = mkPronoun Masc Pl P3 ;
+  this_Quant = hic_Quantifier ;
+  through_Prep = mkPrep "per" Acc ; -- L...
+  too_AdA = ss "quoque" ; -- L...
+  to_Prep = mkPrep "ad" Acc; -- L...
+  under_Prep = mkPrep "sub" Acc ; -- L...
+  very_AdA = ss "valde" ; -- L...
+  want_VV = mkVV IrregLat.want_V True ; -- L...
+  we_Pron = mkPronoun Masc Pl P1 ;
+  whatSg_IP = { s =pronForms "quid" "quid" "cuius" "cui" "quo" ; n = Sg } ; -- only feminine or masculine Bayer-Lindauer 59.1
+  whatPl_IP = { s = \\_ => "" ; n = Pl } ; -- no plural forms Bayer-Lindauer 59.1
+  when_IAdv = ss "quando" ; -- L...
+  when_Subj = ss "si" ; -- L...
+  where_IAdv = ss "ubi" ; -- L...
+  which_IQuant = -- Bayer-Lindauer 59.1.2 and 58.1
+    { s = table { 
+	Ag Masc  Sg c => ( pronForms "qui" "quem" "cuius" "cui" "quo" ) ! c ;
+	Ag Masc  Pl c => ( pronForms "qui" "quos" "quorum" "quibus" "quibus" ) ! c ;
+	Ag Fem   Sg c => ( pronForms "quae" "quam" "cuius" "cui" "qua" ) ! c ;
+	Ag Fem   Pl c => ( pronForms "quae" "quas" "quarum" "quibus" "quibus" ) ! c ;
+	Ag Neutr Sg c => ( pronForms "quod" "quod" "cuius" "cui" "quo" ) ! c ;
+	Ag Neutr Pl c => ( pronForms "quae" "quae" "quorum" "quibus" "quibus" ) ! c
+	}
+    } ;
+-----b  whichPl_IDet = mkDeterminer Pl ["which"] ;
+-----b  whichSg_IDet = mkDeterminer Sg ["which"] ;
+  whoSg_IP = { s =pronForms "quis" "quem" "cuius" "cui" "quo" ; n = Sg } ; -- only feminine or masculine Bayer-Lindauer 59.1
+  whoPl_IP = { s = pronForms "qui" "quos" "quorum" "quibus" "quibus" ; n = Pl } ;
+
+  why_IAdv = ss "cur" ; -- L...
+  without_Prep = mkPrep "sine" Abl ; -- abl. L..
+  with_Prep = mkPrep "cum" Abl ; -- abl. L..
+  yes_Utt = ss "sane" ; -- L...
+  youSg_Pron = mkPronoun Masc Sg P2 ;
+  youPl_Pron = mkPronoun Masc Pl P2 ;
+  youPol_Pron = youSg_Pron ; -- only use singular
+
+  no_Quant = { s , sp = ( mkA "nullus" ).s ! Posit } ; -- nullus L... 
+  not_Predet = ss "non" ; -- L...
+  if_then_Conj = mkConj "si" [] Sg Si ; -- no word in s2 field L... 
+  at_least_AdN = ss "saltem" ; -- L...
+  at_most_AdN = ss "summum" ; -- Pons
+  nobody_NP = regNP "nemo" "neminem" "neminis" "nemini" "nemine" "nemo" Masc Sg ; -- Bayer Lindauer 60.4
+  nothing_NP = regNP "nihil" "nihil" "nullius rei" "nulli rei" "nulla re" "nihil" Neutr Sg ; -- Bayer-Lindauer 60.4
+  except_Prep = mkPrep "praeter" Acc ; -- L...
+
+  as_CAdv = C.mkCAdv "ita" "ut" ; -- L ...
+
+  have_V2 = mkV2 (mkV "habere") ; -- habeo, -ui, -itum 2 (Langenscheidts)
+
+  lin language_title_Utt = ss "lingua latina" ;
+
+}
+
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/SymbolLat.gf"
+id=ada9ebe38d5d
+kind=source
+size=1931
+lines=66
+chunks=0
+----
+--# -path=.:../abstract:../common
+
+concrete SymbolLat of Symbol = CatLat ** open Prelude, ResLat, ParadigmsLat, TenseX in {
+
+  lin
+    -- SymbPN : Symb -> PN ;
+    SymbPN i = {s = \\c => i.s ; g = Neutr ; n = Sg } ; --- c
+    -- IntPN : Int -> PN ;
+    IntPN i  = {s = \\c => i.s ; g = Neutr ; n = Sg } ; --- c
+    -- FloatPN : Float -> PN ;
+    FloatPN i = {s = \\c => i.s ; g = Neutr ; n = Sg } ; --- c
+    -- NumPN : Num -> PN ;
+    NumPN i = {s = \\c => i.s ! Neutr ! c; g = Neutr ; n = Pl } ; --- c
+    -- CNIntNP : CN -> Int -> NP ;
+    CNIntNP cn i = {
+      s = \\_,c => (cn.s ! Sg ! Nom ++ i.s) ;
+      g = cn.g ;
+      n = Sg ;
+      adv = [] ;
+      det = { s , sp = \\_ => [] ; n = Sg } ;
+      p = P3 ;
+      preap , postap = { s = \\_ => [] } ;
+      } ;
+    --CNSymbNP : CN -> Symb -> NP ;
+    CNSymbNP det cn xs = {
+      s = \\_,c => (cn.s ! Sg ! Nom ++ xs.s ) ;
+      g = cn.g ;
+      n = det.n ;
+      adv = [] ;
+      det = { s = det.s ! cn.g ; sp = det.sp ! cn.g } ;
+      p = P3 ;
+      preap , postap = { s = \\_ => [] } ;
+      } ;
+--    s = \\c => det.s ++ cn.s ! det.n ! c ++ xs.s ; 
+--    a = agrgP3 det.n cn.g
+--    } ;
+    --    } ;
+    
+    -- CNNumNP : CN -> Num -> NP ;
+    CNNumNP cn i = {
+      s = \\_,c => (cn.s ! Sg ! Nom ++ i.s ! cn.g ! Nom ) ;
+      g = cn.g ;
+      n = Sg ;
+      adv = [] ;
+      det = { s , sp = \\_ => [] ; n = Sg };
+      p = P3 ;
+      preap , postap = { s = \\_ => [] } ;
+      } ;
+--
+    -- SymbS : Symb -> S ;
+    SymbS sy = { s = \\_ => sy.s ; o , neg = \\_ => "" ; p = PPos ; sadv = "" ; t = TPres ; v = \\_ => "" ; compl = "" ; det = { s , sp = \\_ => [] ; n = Sg } } ;
+
+    -- SymbNum : Symb -> Num 
+    SymbNum sy = {s = \\_,_ => sy.s ; n = Pl } ;
+    -- SymbOrd : Symb -> Ord
+    SymbOrd sy = { s = \\g,n,c => sy.s } ; -- does not inflect properly
+
+lincat 
+  Symb, [Symb] = SS ;
+
+lin
+  MkSymb s = s ;
+
+  BaseSymb = infixSS "et" ;
+  ConsSymb = infixSS "et" ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latin/VerbLat.gf"
+id=f600d9bcf415
+kind=source
+size=4607
+lines=132
+chunks=0
+----
+--1 Construction rules for latin verb phrases
+concrete VerbLat of Verb = CatLat ** open (S=StructuralLat),ResLat,IrregLat,ExtraLat,Predef,Prelude in {
+
+  flags optimize=all_subs ;
+
+  lin
+--2 Complementization rules
+
+--  UseV : V -> VP
+    UseV = predV ; -- dormire
+
+--  ComplVV : VV -> VP -> VP ;  -- want to run        
+    ComplVV v vp =
+      vp ** {
+	s = \\af,qf => v.act ! af ;
+	compl = \\ag => vp.compl ! ag ++ vp.inf ! VInfActPres
+      } ;
+
+--  ComplVS : VS -> S -> VP ;  -- say that she runs
+    ComplVS vs s  = -- insertObj ( dummyNP (S.that_Subj.s ++ s.s ! PreS)) Nom_Prep (predV v) ;
+      vs ** {
+	s = \\a,q => vs.act ! a ++ case q of { VQTrue => Prelude.BIND ++ "ne"; VQFalse => "" };
+	pass = \\p,q => vs.pass ! p ++ case q of { VQTrue => Prelude.BIND ++ "ne"; VQFalse => "" };
+	compl = \\ag => defaultSentence s ! SOV ; -- s.s ! QIndir ;
+	adv = [] ;
+	obj = []
+      } ;
+--  ComplVQ : VQ -> QS -> VP ;  -- wonder who runs
+    ComplVQ vq qs  = -- insertObj (dummyNP (q.s ! QIndir)) Nom_Prep (predV v) ;
+      vq ** {
+	s = \\a,q => vq.act ! a ++ case q of { VQTrue => Prelude.BIND ++ "ne"; VQFalse => "" };
+	pass = \\p,q => vq.pass ! p ++ case q of { VQTrue => Prelude.BIND ++ "ne"; VQFalse => "" };
+	compl = \\ag => qs.s ! QIndir ;
+	adv = [] ;
+	obj = []
+      } ;
+    
+--  ComplVA : VA -> AP -> VP ;  -- they become red
+    ComplVA v ap = (predV v) ** { compl = ap.s } ;
+
+--  SlashV2a : V2 -> VPSlash ;  -- love (it)
+    SlashV2a v = lin VP (predV2 v) ;
+
+--  Slash2V3 : V3  -> NP -> VPSlash ;  -- give it (to her)
+    Slash2V3 v np = lin VP (insertObjc np (predV3 v ** { c = v.c2 } ) );
+    
+--  Slash3V3 : V3  -> NP -> VPSlash ;  -- give (it) to her
+    Slash3V3 v np = lin VP ( insertObjc np ( predV3 v ** { c = v.c} ) ) ;
+
+--  SlashV2V : V2V -> VP -> VPSlash ;  -- beg (her) to go
+--    SlashV2V v vp = insertObjc (\\a => infVP v.isAux vp a) (predVc v) ;
+
+--  SlashV2S : V2S -> S  -> VPSlash ;  -- answer (to him) that it is good
+--    SlashV2S v s  = insertObjc (\\_ => conjThat ++ s.s) (predVc v) ;
+
+--  SlashV2Q : V2Q -> QS -> VPSlash ;  -- ask (him) who came
+    SlashV2Q v q  = lin VP (insertObjc (dummyNP (q.s ! QIndir)) (predV2 v) ) ;
+
+--  SlashV2A : V2A -> AP -> VPSlash ;  -- paint (it) red
+    SlashV2A v ap = lin VP ( (predV2 v) ** { adj = ap.s } ) ; 
+
+--  ComplSlash : VPSlash -> NP -> VP ; -- love it
+    ComplSlash vp np = -- VPSlash -> NP -> VP
+      insertObj np vp.c vp ;
+
+--  SlashVV    : VV  -> VPSlash -> VPSlash ;       -- want to buy
+--    SlashVV vv vp = 
+--      insertObj (\\a => infVP vv.isAux vp a) (predVV vv) **
+--        {c2 = vp.c2} ;
+
+--  SlashV2VNP : V2V -> NP -> VPSlash -> VPSlash ; -- beg me to buy
+--    SlashV2VNP vv np vp = 
+--      insertObjPre (\\_ => vv.c2 ++ (combineNounPhrase np) ! PronNonDrop ! Acc)
+--        (insertObjc (\\a => infVP vv.isAux vp a) (predVc vv)) **
+--          {c2 = vp.c2} ;
+
+--2 Other ways of forming verb phrases
+
+--  ReflVP   : VPSlash -> VP ;         -- love himself
+--    ReflVP v = insertObjPre (\\a => v.c2 ++ reflPron ! a) v ;    
+
+--  UseComp : Comp -> VP ;            -- be warm
+    UseComp comp = 
+      insertAdj comp.s (predV be_V) ;
+
+--  PassV2   : V2 -> VP ;               -- be loved
+    PassV2 v = predV (
+      v ** {
+	act = table { VAct anter tense number person =>
+			case anter of {
+			  VSim => v.pass ! VPass tense number person ;
+			  VAnt => ""  --error "using participles is not implemented yet"
+			}
+	  } 
+	} );
+
+--  AdvVP    : VP -> Adv -> VP ;        -- sleep here
+    AdvVP vp adv = insertAdv adv vp ;
+
+--    ExtAdvVP vp adv = vp
+
+--  AdVVP    : AdV -> VP -> VP ;        -- always sleep
+    AdVVP adv vp = vp ** { adv = vp.adv ++ adv.s } ;
+
+--  AdvVPSlash : VPSlash -> Adv -> VPSlash ;  -- use (it) here
+    AdvVPSlash vp adv = vp ** { adv = (adv.s ! Posit) ++ vp.adv } ;
+    
+--  AdVVPSlash : AdV -> VPSlash -> VPSlash ;  -- always use (it)
+    AdVVPSlash adv vp = vp ** { adv = vp.adv ++ adv.s } ;
+    
+--    VPSlashPrep : VP -> Prep -> VPSlash ;  -- live in (it)
+
+    --2 Complements to copula
+
+--  CompAP   : AP  -> Comp ;            -- (be) small
+    CompAP ap = ap ;
+    
+--  CompNP   : NP  -> Comp ;            -- (be) the man
+    CompNP np = {s = \\_ =>
+		   (combineNounPhrase np) ! PronNonDrop ! APostN ! DPreN ! Nom ;
+      } ;
+
+--  CompAdv  : Adv -> Comp ;            -- (be) here
+    CompAdv a = {s = \\_ => a.s ! Posit } ;
+
+--  CompCN   : CN  -> Comp ;            -- (be) a man/men
+    CompCN cn = {s = table { Ag g n c => cn.preap.s ! Ag cn.g n Nom ++ cn.s ! n ! Nom ++ cn.postap.s ! Ag cn.g n Nom} };
+
+
+--  UseCopula : VP ;                    -- be
+    UseCopula = predV be_V ;
+}
+----- FILE END -----

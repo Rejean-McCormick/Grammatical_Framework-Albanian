@@ -1,0 +1,3098 @@
+==== VOLUME META ====
+generated_at: 2026-02-25T14:09:52.687204
+title: FOLDER: urdu
+root_dir: C:\MyCode\GFCodex\RGL_Source_Code
+file_count: 34
+total_size_mb: 0.0964
+home: 00_START_HERE.instructions.md
+prev_volume: RGL_Source_Code_20260225_140951_44_slovenian.txt
+next_volume: RGL_Source_Code_20260225_140951_46_turkish.txt
+prev_title: slovenian
+next_title: turkish
+short_title: urdu
+
+==== FILE_INDEX ====
+ENTRY id=8b241dc84985 path="urdu/AdjectiveUrd.gf" kind=source size=105 lines=3 chunks=0
+ENTRY id=311ceb9000f8 path="urdu/AdverbUrd.gf" kind=source size=94 lines=2 chunks=0
+ENTRY id=30b8a44bb917 path="urdu/AllUrd.gf" kind=source size=154 lines=6 chunks=0
+ENTRY id=ddd7958f09ef path="urdu/AllUrdAbs.gf" kind=source size=52 lines=4 chunks=0
+ENTRY id=aadf83e7df54 path="urdu/CatUrd.gf" kind=source size=101 lines=2 chunks=0
+ENTRY id=6d7030227845 path="urdu/ConjunctionUrd.gf" kind=source size=109 lines=2 chunks=0
+ENTRY id=d4191b968a39 path="urdu/ConstructionUrd.gf" kind=source size=6091 lines=160 chunks=0
+ENTRY id=46a1e0e9d9eb path="urdu/DiffUrd.gf" kind=source size=4504 lines=137 chunks=0
+ENTRY id=972546cefa63 path="urdu/DocumentationUrd.gf" kind=source size=5888 lines=138 chunks=0
+ENTRY id=1e7865b29f24 path="urdu/ExtendUrd.gf" kind=source size=178 lines=11 chunks=0
+ENTRY id=1120a93e4b5c path="urdu/ExtraUrd.gf" kind=source size=2350 lines=76 chunks=0
+ENTRY id=b339700316e6 path="urdu/ExtraUrdAbs.gf" kind=source size=172 lines=10 chunks=0
+ENTRY id=233f5446a1ea path="urdu/FullSensMathAbs.gf" kind=source size=8793 lines=327 chunks=0
+ENTRY id=1f8c08c59fd3 path="urdu/FullSensMathUrd.gf" kind=source size=19280 lines=329 chunks=0
+ENTRY id=cd38c44158cb path="urdu/GrammarUrd.gf" kind=source size=419 lines=25 chunks=0
+ENTRY id=89e8e4241c79 path="urdu/IdiomUrd.gf" kind=source size=1562 lines=40 chunks=0
+ENTRY id=6dbcda44c1c1 path="urdu/LangUrd.gf" kind=source size=236 lines=13 chunks=0
+ENTRY id=2a8f464e573b path="urdu/LinearizeAbs.gf" kind=source size=1701 lines=73 chunks=0
+ENTRY id=6c28e83704ef path="urdu/LinearizeUrd.gf" kind=source size=4740 lines=137 chunks=0
+ENTRY id=a4accedfadce path="urdu/MakeStructuralUrd.gf" kind=source size=413 lines=14 chunks=0
+ENTRY id=333d22952460 path="urdu/MorphoUrd.gf" kind=source size=18655 lines=515 chunks=2
+ENTRY id=4a22c2c1f7c8 path="urdu/NounUrd.gf" kind=source size=86 lines=2 chunks=0
+ENTRY id=c650d0def34c path="urdu/NumeralUrd.gf" kind=source size=5219 lines=130 chunks=0
+ENTRY id=1513f7d92967 path="urdu/ParadigmsUrd.gf" kind=source size=6847 lines=220 chunks=0
+ENTRY id=cecc270154f0 path="urdu/ParseUrd.gf" kind=source size=5297 lines=161 chunks=0
+ENTRY id=9e3d43700bf6 path="urdu/PhraseUrd.gf" kind=source size=94 lines=2 chunks=0
+ENTRY id=f67998196b9e path="urdu/QuestionUrd.gf" kind=source size=100 lines=2 chunks=0
+ENTRY id=b53c454c2edc path="urdu/RelativeUrd.gf" kind=source size=100 lines=2 chunks=0
+ENTRY id=57b6304b84d6 path="urdu/ResUrd.gf" kind=source size=96 lines=2 chunks=0
+ENTRY id=04728ae27584 path="urdu/SentenceUrd.gf" kind=source size=100 lines=2 chunks=0
+ENTRY id=95152529c89a path="urdu/StructuralUrd.gf" kind=source size=6978 lines=131 chunks=0
+ENTRY id=175ecf4cebce path="urdu/SymbolUrd.gf" kind=source size=156 lines=4 chunks=0
+ENTRY id=c84aab741a55 path="urdu/TextUrd.gf" kind=source size=318 lines=11 chunks=0
+ENTRY id=493259aba1ca path="urdu/VerbUrd.gf" kind=source size=86 lines=2 chunks=0
+
+==== FILES ====
+
+----- FILE BEGIN -----
+path="urdu/AdjectiveUrd.gf"
+id=8b241dc84985
+kind=source
+size=105
+lines=3
+chunks=0
+----
+concrete AdjectiveUrd of Adjective = CatUrd ** AdjectiveHindustani with
+  (ResHindustani = ResUrd) ;
+
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/AdverbUrd.gf"
+id=311ceb9000f8
+kind=source
+size=94
+lines=2
+chunks=0
+----
+concrete AdverbUrd of Adverb = CatUrd ** AdverbHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/AllUrd.gf"
+id=30b8a44bb917
+kind=source
+size=154
+lines=6
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude:../hindustani:../api
+
+concrete AllUrd of AllUrdAbs =
+  LangUrd,
+  ExtendUrd
+  ** open ExtraUrd in {} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/AllUrdAbs.gf"
+id=ddd7958f09ef
+kind=source
+size=52
+lines=4
+chunks=0
+----
+abstract AllUrdAbs =
+  Lang,
+  Extend
+  ** {} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/CatUrd.gf"
+id=aadf83e7df54
+kind=source
+size=101
+lines=2
+chunks=0
+----
+concrete CatUrd of Cat = CommonX - [Adv,AdN,SC] ** CatHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/ConjunctionUrd.gf"
+id=6d7030227845
+kind=source
+size=109
+lines=2
+chunks=0
+----
+concrete ConjunctionUrd of Conjunction = CatUrd ** ConjunctionHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/ConstructionUrd.gf"
+id=d4191b968a39
+kind=source
+size=6091
+lines=160
+chunks=0
+----
+--# -path=.:../abstract
+
+concrete ConstructionUrd of Construction = CatUrd ** 
+  open SyntaxUrd, SymbolicUrd, ParadigmsUrd, (L = LexiconUrd), (E = ExtraUrd), (G = GrammarUrd), (R = ResUrd), (S = StructuralUrd), Prelude in {
+flags coding=utf8 ;
+
+
+lin
+{-
+  hungry_VP = mkVP  (mkA "भूखा") ;
+  thirsty_VP = mkVP (mkA "प्यासा") ;
+--  tired_VP = mkVP (mkCompoundA "थका" "हुआ") ;
+--  scared_VP = mkVP (mkCompoundA "डरा" "हुआ") ;
+  ill_VP = mkVP (mkA "बीमार") ;
+  ready_VP = mkVP (mkA "तैयार") ;
+-}
+----  has_age_VP card = mkVP (mkNP <card : Card> (mkCN (mmodN L.year_N))) ;
+
+  have_name_Cl x y = mkCl (mkNP (E.GenNP x) L.name_N) (lin NP y) ;
+  married_Cl x y = mkCl (lin NP x) L.married_A2 (lin NP y) ;
+
+  what_name_QCl x = mkQCl (mkIComp whatSg_IP) (mkNP (E.GenNP x) L.name_N) ;
+----  how_old_QCl x = mkQCl (lin IAdv {s = "कितनी"}) (mkNP (E.GenNP x) (mkN "उम्र" "उम्र" "उम्र" "उम्र" "उम्र" "उम्र" feminine)) ;
+  how_far_QCl x = mkQCl (E.IAdvAdv (ParadigmsUrd.mkAdv "दूर")) (lin NP x) ;
+
+---- oper
+----  mmodN : N -> N = \noun -> lin N {s = \\n,c =>noun.s!n!c++"का" ; g =noun.g} ;
+
+-- some more things
+----  weather_adjCl ap = mkCl (mkVP (lin AP ap)) ;
+   
+----  is_right_VP = mkVP (ParadigmsUrd.mkA "right") ;
+----  is_wrong_VP = mkVP (ParadigmsUrd.mkA "wrong") ;
+
+----  n_units_AP card cn a = mkAP (lin AdA (mkUtt (mkNP <lin Card card : Card> (lin CN cn)))) (lin A a) ;
+
+
+----  bottle_of_CN np = mkCN (lin N2 (mkN2 "bottle")) (lin NP np) ;
+----  cup_of_CN    np = mkCN (lin N2 (mkN2 "cup"))    (lin NP np) ;
+----  glass_of_CN  np = mkCN (lin N2 (mkN2 "glass"))  (lin NP np) ;
+
+{-
+-- spatial deixis and motion verbs
+
+  where_go_QCl np = mkQCl where_IAdv (mkCl np (mkVP L.go_V)) ;
+  where_come_from_QCl np =  mkQCl from_where_IAdv (mkCl np (mkVP L.go_V)) ;
+  
+  go_here_VP = mkVP (mkVP L.go_V) S.here_Adv ;
+  come_here_VP = mkVP (mkVP L.come_V) S.here_Adv ;
+  come_from_here_VP = mkVP (mkVP L.come_V) (mkAdv "from here") ;
+
+  go_there_VP = mkVP (mkVP L.go_V)  S.there_Adv ;
+  come_there_VP = mkVP (mkVP L.come_V) S.there_Adv ;
+  come_from_there_VP = mkVP (mkVP L.come_V) (mkAdv "from there") ;
+
+--TODO "where did X come from" instead of "from where did X come"
+oper from_where_IAdv : IAdv = lin IAdv (ss "from where") ;
+
+-}
+
+
+lincat
+  Weekday = N ;
+  Monthday = NP ;
+  Month = N ;
+  Year = NP ;
+
+lin
+{- ----
+  weekdayPunctualAdv w = SyntaxUrd.mkAdv on_Prep (mkNP w) ;         -- on Sunday
+  weekdayHabitualAdv w = SyntaxUrd.mkAdv on_Prep (mkNP aPl_Det w) ; -- on Sundays
+  weekdayNextAdv w = SyntaxUrd.mkAdv (mkPrep "next") (mkNP w) ;     -- next Sunday
+  weekdayLastAdv w = SyntaxUrd.mkAdv (mkPrep "last") (mkNP w) ;     -- last Sunday
+
+  monthAdv m = SyntaxUrd.mkAdv in_Prep (mkNP m) ;
+  yearAdv y = SyntaxUrd.mkAdv in_Prep y ;
+  dayMonthAdv d m = ParadigmsUrd.mkAdv ("on" ++ d.s ! R.NPAcc ++ m.s ! R.Sg ! R.Nom) ; -- on 17 May
+  monthYearAdv m y = SyntaxUrd.mkAdv in_Prep (mkNP (mkCN m y)) ; -- in May 2012
+  dayMonthYearAdv d m y = ParadigmsUrd.mkAdv ("on" ++ d.s ! R.NPAcc ++ m.s ! R.Sg ! R.Nom ++ y.s ! R.NPAcc) ; -- on 17 May 2013
+-}
+  intYear = symb ;
+  intMonthday = symb ;
+
+lincat Language = PN ;
+
+lin InLanguage l = SyntaxUrd.mkAdv in_Prep (mkNP l) ; ----
+
+lin
+  weekdayN w = w ;
+  monthN m = m ;
+
+----  weekdayPN w = mkPN w ;
+----  monthPN m = mkPN m ;
+
+  languagePN l = l ;
+
+oper mkLanguage : Str -> PN = \s -> mkPN s ;
+
+----------------------------------------------
+---- lexicon of special names
+
+lin monday_Weekday = mkN "सोमवार" ;
+lin tuesday_Weekday = mkN "मंगलवार" ;
+lin wednesday_Weekday = mkN "बुधवार" ;
+lin thursday_Weekday = mkN "गुरुवार" ;
+lin friday_Weekday = mkN "शुक्रवार" ;
+lin saturday_Weekday = mkN "शनिवार" ;
+lin sunday_Weekday = mkN "रविवार" ;
+
+lin january_Month = mkN "जनवरी" ;
+lin february_Month = mkN "फ़रवरी" ;
+lin march_Month = mkN "मार्च" ;
+lin april_Month = mkN "अप्रैल" ;
+lin may_Month = mkN "मई" ;
+lin june_Month = mkN "जून" ;
+lin july_Month = mkN "जुलाई" ;
+lin august_Month = mkN "अगस्त" ;
+lin september_Month = mkN "सितम्बर" ; 
+lin october_Month = mkN "अक्टूबर" ;
+lin november_Month = mkN "नवम्बर" ;
+lin december_Month = mkN "दिसम्बर" ;
+
+lin afrikaans_Language = mkLanguage "Afrikaans" ;
+lin amharic_Language = mkLanguage "Amharic" ;
+lin arabic_Language = mkLanguage "Arabic" ;
+lin bulgarian_Language = mkLanguage "बल्गेरियाई" ;
+lin catalan_Language = mkLanguage "Catalan" ;
+lin chinese_Language = mkLanguage "चीनी" ;
+lin danish_Language = mkLanguage "Danish" ;
+lin dutch_Language = mkLanguage "Dutch" ;
+lin english_Language = mkLanguage "अंग्रेज़ी" ;
+lin estonian_Language = mkLanguage "Estonian" ;
+lin finnish_Language = mkLanguage "Finnish" ;
+lin french_Language = mkLanguage "फ्रेंच" ;
+lin german_Language = mkLanguage "जर्मन" ;
+lin greek_Language = mkLanguage "Greek" ;
+lin hebrew_Language = mkLanguage "Hebrew" ;
+lin hindi_Language = mkLanguage "हिंदी" ;
+lin japanese_Language = mkLanguage "Japanese" ;
+lin italian_Language = mkLanguage "Italian" ;
+lin latin_Language = mkLanguage "Latin" ;
+lin latvian_Language = mkLanguage "Latvian" ;
+lin maltese_Language = mkLanguage "Maltese" ;
+lin nepali_Language = mkLanguage "Nepali" ;
+lin norwegian_Language = mkLanguage "Norwegian" ;
+lin persian_Language = mkLanguage "Persian" ;
+lin polish_Language = mkLanguage "Polish" ;
+lin punjabi_Language = mkLanguage "Punjabi" ;
+lin romanian_Language = mkLanguage "Romanian" ;
+lin russian_Language = mkLanguage "Russian" ;
+lin sindhi_Language = mkLanguage "Sindhi" ;
+lin spanish_Language = mkLanguage "Spanish" ;
+lin swahili_Language = mkLanguage "Swahili" ;
+lin swedish_Language = mkLanguage "Swedish" ;
+lin thai_Language = mkLanguage "Thai" ;
+lin turkish_Language = mkLanguage "Turkish" ;
+lin urdu_Language = mkLanguage "Urdu" ;
+
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/DiffUrd.gf"
+id=46a1e0e9d9eb
+kind=source
+size=4504
+lines=137
+chunks=0
+----
+instance DiffUrd of DiffHindustani = open CommonHindustani, Prelude in {
+
+flags coding = utf8 ;
+
+oper
+
+addErgative s1 s2 = s1 ++ s2 ;
+conjThat = "کہ" ;
+  insertSubj : UPerson -> Str -> Str = \p,s -> 
+      case p of { Pers1 => s ++ "واں" ; _ => s ++ "ے"}; -- check with prasad for vn~
+      
+  agr = "اگر" ;
+  awr = "اور" ;
+  ky = "کی" ;
+  ka = "کا" ;
+  jn = "جن" ;
+  js = "جس" ;
+  jw = "جو" ;
+  kw = "کو" ;
+  mt = "مت" ;
+  nE = "نے" ;
+  nh = "نا" ;
+  sE = "سے" ;
+  waN = "واں" ; 
+  hE = "ہے" ;
+  comma = "," ;
+  indfArt = "" ; 
+  kwd = "خود" ;
+  mein = "میں" ; 
+  
+  na = "نا" ;
+  nahen = "نہیں" ;
+  xayad = "شاید" ;
+  kya = "کیا" ;
+  
+
+copula : CTense -> Number -> UPerson -> Gender -> Str = \t,n,p,g -> 
+     case <t,n,p,g> of {
+        <CPresent,Sg,Pers1,_   > => "ہوں" ;
+        <CPresent,Sg,Pers2_Casual,_   > => "ہے"; 
+        <CPresent,Sg,Pers2_Familiar,_   > => "ہو" ;
+		<CPresent,Sg,Pers2_Respect,_   > => "ہیں" ;
+        <CPresent,Sg,Pers3_Near,_   > => "ہے" ;
+        <CPresent,Sg,Pers3_Distant,_   > => "ہے" ;
+		<CPresent,Pl,Pers1,_   > => "ہیں" ;
+        <CPresent,Pl,Pers2_Casual,_   > => "ہو" ;
+        <CPresent,Pl,Pers2_Familiar,_   > => "ہو" ;
+		<CPresent,Pl,Pers2_Respect,_   > => "ہیں" ;
+        <CPresent,Pl,Pers3_Near,_   > => "ہیں" ;
+        <CPresent,Pl,Pers3_Distant,_   > => "ہیں" ;
+		<CPast,Sg,Pers1,Masc   > => "تھا" ;
+		<CPast,Sg,Pers1,Fem   > => "تھی" ;
+        <CPast,Sg,Pers2_Casual,Masc   > => "تھا" ;
+		<CPast,Sg,Pers2_Casual,Fem   > => "تھی" ;
+        <CPast,Sg,Pers2_Familiar,Masc   > => "تھا" ;
+		<CPast,Sg,Pers2_Familiar,Fem   > => "تھی" ;
+		<CPast,Sg,Pers2_Respect,Masc   > => "تھے" ;
+		<CPast,Sg,Pers2_Respect,Fem   > => "تھیں" ;
+        <CPast,Sg,Pers3_Near,Masc   > => "تھا" ;
+		<CPast,Sg,Pers3_Near,Fem   > => "تھی" ;
+        <CPast,Sg,Pers3_Distant,Masc  > => "تھا" ;
+		<CPast,Sg,Pers3_Distant,Fem  > => "تھی" ;
+		<CPast,Pl,Pers1,Masc   > => "تھے" ;
+		<CPast,Pl,Pers1,Fem   > => "تھیں" ;
+        <CPast,Pl,Pers2_Casual,Masc   > => "تھے" ;
+		<CPast,Pl,Pers2_Casual,Fem   > => "تھیں" ;
+        <CPast,Pl,Pers2_Familiar,Masc   > => "تھے" ;
+		<CPast,Pl,Pers2_Familiar,Fem   > => "تھیں" ;
+		<CPast,Pl,Pers2_Respect,Masc   > => "تھے" ;
+		<CPast,Pl,Pers2_Respect,Fem   > => "تھیں" ;
+        <CPast,Pl,Pers3_Near,Masc   > => "تھے" ;
+		<CPast,Pl,Pers3_Near,Fem   > => "تھیں" ;
+		<CPast,Pl,Pers3_Distant,Masc   > => "تھے" ;
+		<CPast,Pl,Pers3_Distant,Fem   > => "تھیں" ;
+		<CFuture,Sg,Pers1,Masc   > => "گا" ;
+		<CFuture,Sg,Pers1,Fem   > => "گی" ;
+        <CFuture,Sg,Pers2_Casual,Masc   > => "گا" ;
+		<CFuture,Sg,Pers2_Casual,Fem   > => "گی" ;
+        <CFuture,Sg,Pers2_Familiar,Masc   > => "گے" ;
+		<CFuture,Sg,Pers2_Familiar,Fem   > => "گی" ;
+		<CFuture,Sg,Pers2_Respect,Masc   > => "گے" ;
+		<CFuture,Sg,Pers2_Respect,Fem   > => "گی" ;
+        <CFuture,Sg,Pers3_Near,Masc   > => "گا" ;
+		<CFuture,Sg,Pers3_Near,Fem   > => "گی" ;
+        <CFuture,Sg,Pers3_Distant,Masc  > => "گا" ;
+		<CFuture,Sg,Pers3_Distant,Fem  > => "گی" ;
+		<CFuture,Pl,Pers1,Masc   > => "گے" ;
+		<CFuture,Pl,Pers1,Fem   > => "گی" ;
+        <CFuture,Pl,Pers2_Casual,Masc   > => "گے" ;
+		<CFuture,Pl,Pers2_Casual,Fem   > => "گی" ;
+        <CFuture,Pl,Pers2_Familiar,Masc   > => "گے" ;
+		<CFuture,Pl,Pers2_Familiar,Fem   > => "گی" ;
+		<CFuture,Pl,Pers2_Respect,Masc   > => "گے" ;
+		<CFuture,Pl,Pers2_Respect,Fem   > => "گی" ;
+        <CFuture,Pl,Pers3_Near,Masc   > => "گے" ;
+		<CFuture,Pl,Pers3_Near,Fem   > => "گے" ;
+		<CFuture,Pl,Pers3_Distant,Masc  > => "گے" ;
+		<CFuture,Pl,Pers3_Distant,Fem  > => "گی" 
+        
+        } ;
+	
+   raha : Gender -> Number -> Str = \g,n ->
+           case <g,n> of {
+	     <Masc,Sg> => "رہا";
+	     <Masc,Pl> => "رہے";
+	     <Fem,_> => "رہی"
+	     
+	     };
+
+  cka : Gender -> Number -> Str = \g,n ->
+            case <g,n> of {
+	     <Masc,Sg> => "چکا";
+	     <Masc,Pl> => "چکے";
+	     <Fem,_> => "چکی"
+	     
+	     };
+	  
+  hw : UPerson -> Number -> Str = \pp,n ->    
+	 case <pp,n> of {
+	 <Pers1,_> => "ہوں";
+	 <_,Pl>    => "ہوں";
+	 <_,_>		=> "ہو"
+	 };
+	 
+  hwa : Agr -> Str = \agr ->
+        let       n    = (fromAgr agr).n;
+		  p    = (fromAgr agr).p;
+		  g    = (fromAgr agr).g;
+	  in
+	 case <n,g> of {
+	 <Sg,Masc> => "ہوا";
+	 <Sg,Fem>    => "ہوی";
+	 <Pl,Masc>	=> "ہوے" ;
+	 <Pl,Fem>	=> "ہوی"
+	 };		 
+	 
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/DocumentationUrd.gf"
+id=972546cefa63
+kind=source
+size=5888
+lines=138
+chunks=0
+----
+concrete DocumentationUrd of Documentation = CatUrd ** open
+  ResUrd,
+  CommonHindustani,
+  HTML 
+in {
+
+lincat
+  Inflection = {t : Str; s1,s2 : Str} ;
+  Definition = {s : Str} ;
+  Document = {s : Str} ;
+  Tag = {s : Str} ;
+
+lin
+  InflectionN, InflectionN2, InflectionN3 = \noun -> {
+    t  = "n" ;
+    s1 = heading1 ("Noun" ++
+         case noun.g of {
+           Masc => "(Masc)" ;
+           Fem  => "(Fem)"
+         });
+    s2 = frameTable (
+           tr (th ""    ++ th "sg"                ++ th "pl") ++
+           tr (th "dir" ++ td (noun.s ! Sg ! Dir) ++ td (noun.s ! Pl ! Dir)) ++
+           tr (th "obl" ++ intagAttr "td" "rowspan=2" (noun.s ! Sg ! Obl) ++ td (noun.s ! Pl ! Obl)) ++
+           tr (th "voc" ++ td (noun.s ! Pl ! CommonHindustani.Voc))
+         )
+    } ;
+
+  InflectionA, InflectionA2 = \adj -> {
+    t  = "a" ;
+    s1 = heading1 "Adjective" ;
+    s2 = heading2 "Positive" ++
+         forms Posit ++
+         heading2 "Comparative" ++
+         forms Compar ++
+         heading2 "Superlative" ++
+         forms Superl
+    } where {
+        forms : Degree -> Str = \degree ->
+          frameTable (
+            tr (intagAttr "th" "colspan=2" "" ++ th "sg" ++ th "pl") ++
+            tr (intagAttr "th" "rowspan=3" "masc" ++
+                th "dir" ++ td (adj.s ! Sg ! Masc ! Dir ! degree) ++ td (adj.s ! Pl ! Masc ! Dir ! degree)) ++
+            tr (th "obl" ++ intagAttr "td" "rowspan=2" (adj.s ! Sg ! Masc ! Obl ! degree) ++ td (adj.s ! Pl ! Masc ! Obl ! degree)) ++
+            tr (th "voc" ++ td (adj.s ! Pl ! Masc ! CommonHindustani.Voc ! degree)) ++
+            tr (intagAttr "th" "rowspan=3" "fem" ++
+                th "dir" ++ td (adj.s ! Sg ! Fem ! Dir ! degree) ++ td (adj.s ! Pl ! Fem ! Dir ! degree)) ++
+            tr (th "obl" ++ intagAttr "td" "rowspan=2" (adj.s ! Sg ! Fem ! Obl ! degree) ++ td (adj.s ! Pl ! Fem ! Obl ! degree)) ++
+            tr (th "voc" ++ td (adj.s ! Pl ! Fem ! CommonHindustani.Voc ! degree))
+          ) ;
+    };
+
+  InflectionAdv = \adv -> {
+    t  = "adv" ;
+    s1 = heading1 "Adverb" ;
+    s2 = frameTable (
+            tr (th "masc" ++ td (adv.s ! Masc)) ++
+            tr (th "fem"  ++ td (adv.s ! Fem))
+          )
+    } ;
+
+  InflectionAdV, InflectionAdA, InflectionAdN = \adv -> {
+    t  = "adv" ;
+    s1 = heading1 "Adverb" ;
+    s2 = adv.s
+    } ;
+
+  InflectionPrep = \prep -> {
+    t  = "prep" ;
+    s1 = heading1 "Preposition" ;
+    s2 = frameTable (
+            tr (th "masc" ++ td (prep.s ! Masc)) ++
+            tr (th "fem"  ++ td (prep.s ! Fem))
+          )
+    } ;
+
+  InflectionV, InflectionV2, InflectionV3,
+  InflectionV2A, InflectionV2Q, InflectionV2S, InflectionV2V,
+  InflectionVA, InflectionVQ, InflectionVS, InflectionVV = \verb -> {
+    t  = "v" ;
+    s1 = heading1 "Verb" ;
+    s2 = heading2 "Root" ++
+         paragraph (verb.s ! Root) ++
+         heading2 "Present" ++
+         forms Imperf ++
+         heading2 "Past" ++
+         forms CommonHindustani.Subj ++
+         heading2 "Past Perfect" ++
+         forms Perf ++
+         heading2 "Infinitive" ++
+         frameTable (
+           tr (th ""    ++ td (verb.s ! Inf)) ++
+           tr (th "obl" ++ td (verb.s ! Inf_Obl)) ++
+           tr (th "fem" ++ td (verb.s ! Inf_Fem))
+         )
+    } where {
+        forms : VTense -> Str = \tense ->
+          frameTable (
+            tr (intagAttr "th" "colspan=2" "" ++ th "masc" ++ th "fem") ++
+            tr (intagAttr "th" "rowspan=6" "sg" ++ 
+                th "1.p"          ++ td (verb.s ! VF tense Pers1 Sg Masc) ++ 
+                                     td (verb.s ! VF tense Pers1 Sg Fem)) ++
+            tr (th "2.p casual"   ++ td (verb.s ! VF tense Pers2_Casual   Sg Masc) ++ 
+                                     td (verb.s ! VF tense Pers2_Casual   Sg Fem)) ++
+            tr (th "2.p familiar" ++ td (verb.s ! VF tense Pers2_Familiar Sg Masc) ++ 
+                                     td (verb.s ! VF tense Pers2_Familiar Sg Fem)) ++
+            tr (th "2.p respect"  ++ td (verb.s ! VF tense Pers2_Respect  Sg Masc) ++ 
+                                     td (verb.s ! VF tense Pers2_Familiar Sg Fem)) ++
+            tr (th "3.p near"     ++ td (verb.s ! VF tense Pers3_Near     Sg Masc) ++ 
+                                     td (verb.s ! VF tense Pers3_Near     Sg Fem)) ++
+            tr (th "3.p distant"  ++ td (verb.s ! VF tense Pers3_Distant  Sg Masc) ++ 
+                                     td (verb.s ! VF tense Pers3_Distant  Sg Fem)) ++
+            tr (intagAttr "th" "rowspan=6" "pl" ++
+                th "1.p"          ++ td (verb.s ! VF tense Pers1 Pl Masc) ++ 
+                                     td (verb.s ! VF tense Pers1 Pl Fem)) ++
+            tr (th "2.p casual"   ++ td (verb.s ! VF tense Pers2_Casual   Pl Masc) ++ 
+                                     td (verb.s ! VF tense Pers2_Casual   Pl Fem)) ++
+            tr (th "2.p familiar" ++ td (verb.s ! VF tense Pers2_Familiar Pl Masc) ++ 
+                                     td (verb.s ! VF tense Pers2_Familiar Pl Fem)) ++
+            tr (th "2.p respect"  ++ td (verb.s ! VF tense Pers2_Respect  Pl Masc) ++ 
+                                     td (verb.s ! VF tense Pers2_Familiar Pl Fem)) ++
+            tr (th "3.p near"     ++ td (verb.s ! VF tense Pers3_Near     Pl Masc) ++ 
+                                     td (verb.s ! VF tense Pers3_Near     Pl Fem)) ++
+            tr (th "3.p distant"  ++ td (verb.s ! VF tense Pers3_Distant  Pl Masc) ++ 
+                                     td (verb.s ! VF tense Pers3_Distant  Pl Fem))
+          )
+    } ;
+
+lin
+  NoDefinition   t     = {s=t.s};
+  MkDefinition   t d   = {s="<p><b>परिभाषा:</b>"++t.s++d.s++"</p>"};
+  MkDefinitionEx t d e = {s="<p><b>परिभाषा:</b>"++t.s++d.s++"</p><p><b>नमूना:</b>"++e.s++"</p>"};
+
+lin
+  MkDocument d i e = {s = i.s1 ++ d.s ++ i.s2 ++ paragraph e.s} ;
+  MkTag i = {s = i.t} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/ExtendUrd.gf"
+id=1e7865b29f24
+kind=source
+size=178
+lines=11
+chunks=0
+----
+--# -path=.:../common:../abstract
+
+concrete ExtendUrd of Extend =
+  CatUrd ** ExtendFunctor -
+  [
+    ComplDirectVQ, ComplDirectVS
+   ]
+  with
+    (Grammar = GrammarUrd) ** {
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/ExtraUrd.gf"
+id=1120a93e4b5c
+kind=source
+size=2350
+lines=76
+chunks=0
+----
+concrete ExtraUrd of ExtraUrdAbs = CatUrd ** 
+  open ResUrd, Coordination, Prelude, MorphoUrd, ParadigmsUrd,CommonHindustani in {
+
+flags coding = utf8 ;
+
+  lin
+ --   GenNP np = {s = \\_,_,_ => np.s ! NPC Obl ++ "کا" ; a = np.a} ;
+  GenNP np = {s = \\n,g,c => 
+     case <n,g,c> of {
+     <Sg,Masc,Obl> => np.s ! NPC Obl ++ "کے" ;
+     <Sg,Masc,_> => np.s ! NPC Obl ++ "کا" ;
+     <Pl,Masc,_> => np.s ! NPC Obl ++ "کے" ;
+     <_,Fem,_> => np.s ! NPC Obl ++ "کی"
+     };
+     
+   a = np.a} ;
+
+    each_Det = mkDet  "ہر کوی" "ہر کوی" "ہر کوی" "ہر کوی" Sg ;
+    have_V = mkV "راکھنا";
+    IAdvAdv adv = {s = "کتنی" ++ adv.s ! Masc} ;
+    ICompAP ap = {s = "کتنے" ++ ap.s ! Sg ! Masc ! Dir ! Posit} ;
+    cost_V = mkV "قیمت" ;
+    
+    -- added for causitives
+    make_CV = mkVerb "نoتہiنگ"   ** {c2 = "" };
+
+-- for VP conjunction
+
+lincat
+    VPS   = {s : Agr => Str} ;
+    [VPS] = {s1,s2 : Agr => Str} ;
+
+  lin
+    BaseVPS = twoTable Agr ;
+    ConsVPS = consrTable Agr comma ;
+
+    PredVPS np vpi = {s = np.s ! NPC Dir ++ vpi.s ! np.a} ;
+
+    MkVPS t p vp = {
+      s = \\a => 
+           
+            let 
+              verb =  vp.s ! (VPTense VPPast a) ; -- this needs to be fixed --vp.s ! t.t ! t.a ! p.p ! ODir ! a ;
+              verbf =   verb.fin ++ verb.inf ;
+            in t.s ++ p.s ++ vp.ad ++ vp.cvp ++  verbf ++ vp.obj.s ++ vp.comp ! a
+      } ;
+
+    ConjVPS = conjunctDistrTable Agr ;
+    
+--    ComplVPIVV vv vpi = 
+--      insertObj (\\a => vpi.s ! vv.typ ! a) (predVV vv) ;
+
+--PassVPSlash vps = vps ;
+
+-- in progress
+PassVPSlash vps = 
+    let 
+      aux = predV (mkV "جانا")
+    in {
+   -- s = be.s ;
+    s = table {
+      VPTense tense agr => {inf = (vps.s ! VPTense VPPast agr).inf ++ (aux.s ! VPTense tense agr).inf ;
+                            fin = (aux.s ! VPTense tense agr).fin};
+      vform                 => {inf = (vps.s ! vform).inf ++ (aux.s!vform).inf; fin = (vps.s!vform).inf}
+      };
+    obj = vps.obj ;
+      subj = vps.subj ;
+      inf = (vps.s ! VPTense VPPast (Ag Masc Sg Pers3_Distant)).inf ++ aux.inf; --this is not correct since, in this case the infinitive form will also inflect for agr i.e. khaya jana, khai jani etc
+      ad = vps.ad;
+      embComp = vps.embComp;
+      prog = vps.prog ;
+      comp = vps.comp ;
+      cvp = vps.cvp       
+   } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/ExtraUrdAbs.gf"
+id=b339700316e6
+kind=source
+size=172
+lines=10
+chunks=0
+----
+abstract ExtraUrdAbs = Extra ** {
+
+-- uncontracted negations; contracted are the default
+  fun
+
+  each_Det : Det ;
+  have_V : V;
+  cost_V : V;
+  UncNeg : Pol ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/FullSensMathAbs.gf"
+id=233f5446a1ea
+kind=source
+size=8793
+lines=327
+chunks=0
+----
+abstract FullSensMathAbs = Cat ** {
+
+
+fun actually_00148599_Adv : Adv ;
+fun again_00040170_Adv : Adv ;
+fun also_00047251_Adv : Adv ;
+fun angle_05248221_N : N ;
+fun angle_11717991_N : N ;
+fun be_01922820_V : V ;
+fun be_02046998_V : V ;
+fun be_02047807_V : V ;
+fun be_02058059_V : V ;
+fun be_02061968_V : V ;
+fun be_02090076_V : V ;
+fun be_02097262_V : V ;
+fun be_02123963_V : V ;
+fun be_02171372_V : V ;
+fun can_00169329_V2 : V2;
+fun can_01887745_V2 : V2;
+fun can_02143199_V2 : V2;
+fun certainly_00143779_Adv : Adv ;
+fun circle_00226259_N : N ;
+fun circle_06818995_N : N ;
+fun circle_11706839_N : N ;
+fun class_00669967_N : N ;
+fun class_06660972_N : N ;
+fun class_06675558_N : N ;
+fun class_06817084_N : N ;
+fun class_06818817_N : N ;
+fun condition_04988288_N : N ;
+fun condition_05649441_N : N ;
+fun condition_11744866_N : N ;
+fun condition_11745254_N : N ;
+fun congruent_00537171_A : A ;
+fun different_00463157_A : A ;
+fun different_01368552_A : A ;
+fun different_02006375_A : A ;
+fun different_02011415_A : A ;
+fun early_00782022_A : A ;
+fun early_00786798_A : A ;
+fun early_00789316_A : A ;
+fun early_01604645_A : A ;
+fun early_01681956_A : A ;
+fun enlargement_00277832_N : N ;
+fun essence_05063042_N : N ;
+fun evidently_00039137_Adv : Adv ;
+fun example_04986755_N : N ;
+fun example_05066235_N : N ;
+fun example_05076568_N : N ;
+fun example_05583436_N : N ;
+fun familiar_00927645_A : A ;
+fun familiar_00931925_A : A ;
+fun familiar_01266827_A : A ;
+fun figure_02905792_N : N ;
+fun figure_04066761_N : N ;
+fun figure_04392282_N : N ;
+fun figure_04465078_N : N ;
+fun figure_05852382_N : N ;
+fun figure_08479955_N : N ;
+fun figure_11247915_N : N ;
+fun figure_11594993_N : N ;
+fun figure_11697933_N : N ;
+fun give_00535545_V : V;
+fun give_00535545_V2 : V2;
+fun give_00582904_V : V;
+fun give_00582904_V2 : V2;
+fun give_00702793_V : V;
+fun give_00702793_V2 : V2;
+fun give_00835568_V : V;
+fun give_00835568_V2 : V2;
+fun give_00835745_V : V;
+fun give_00835745_V2 : V2;
+fun give_00835997_V : V;
+fun give_00835997_V2 : V2;
+fun give_00931017_V : V;
+fun give_00931017_V2 : V2;
+fun give_01288281_V : V;
+fun give_01288281_V2 : V2;
+fun give_01288576_V : V;
+fun give_01288576_V2 : V2;
+fun give_01302681_V : V;
+fun give_01302681_V2 : V2;
+fun give_01364175_V : V;
+fun give_01364175_V2 : V2;
+fun give_01452596_V : V;
+fun give_01452596_V2 : V2;
+fun give_01562622_V : V;
+fun give_01562622_V2 : V2;
+fun give_01732957_V : V;
+fun give_01732957_V2 : V2;
+fun give_01733775_V : V;
+fun give_01733775_V2 : V2;
+fun give_01733963_V : V;
+fun give_01733963_V2 : V2;
+fun give_01757635_V : V;
+fun give_01757635_V2 : V2;
+fun give_01761514_V : V;
+fun give_01761514_V2 : V2;
+fun give_01808261_V : V;
+fun give_01808261_V2 : V2;
+fun give_01817669_V : V;
+fun give_01817669_V2 : V2;
+fun give_01817971_V : V;
+fun give_01817971_V2 : V2;
+fun give_01818180_V : V;
+fun give_01818180_V2 : V2;
+fun give_01824373_V : V;
+fun give_01824373_V2 : V2;
+fun give_01824581_V : V;
+fun give_01824581_V2 : V2;
+fun give_01840941_V : V;
+fun give_01840941_V2 : V2;
+fun give_01844174_V : V;
+fun give_01844174_V2 : V2;
+fun give_02015420_V : V;
+fun give_02015420_V2 : V2;
+fun have_00045202_V : V;
+fun have_00045202_V2 : V2;
+fun have_00045202_VS : VS;
+fun have_00045202_V2V : V2V;
+fun have_00051113_V : V;
+fun have_00051113_V2 : V2;
+fun have_00051113_VS : VS;
+fun have_00051113_V2V : V2V;
+fun have_00051382_A : A ;
+fun have_00093460_V : V;
+fun have_00093460_V2 : V2;
+fun have_00093460_VS : VS;
+fun have_00093460_V2V : V2V;
+fun have_00093710_V : V;
+fun have_00093710_V2 : V2;
+fun have_00093710_VS : VS;
+fun have_00093710_V2V : V2V;
+fun have_00613663_V : V;
+fun have_00613663_V2 : V2;
+fun have_00613663_VS : VS;
+fun have_00613663_V2V : V2V;
+fun have_00913965_V : V;
+fun have_00913965_V2 : V2;
+fun have_00913965_VS : VS;
+fun have_00913965_V2V : V2V;
+fun have_01129196_V : V;
+fun have_01129196_V2 : V2;
+fun have_01129196_VS : VS;
+fun have_01129196_V2V : V2V;
+fun have_01364175_V : V;
+fun have_01364175_V2 : V2;
+fun have_01364175_VS : VS;
+fun have_01364175_V2V : V2V;
+fun have_01660852_V : V;
+fun have_01660852_V2 : V2;
+fun have_01660852_VS : VS;
+fun have_01660852_V2V : V2V;
+fun have_01736051_V : V;
+fun have_01736051_V2 : V2;
+fun have_01736051_VS : VS;
+fun have_01736051_V2V : V2V;
+fun have_01737140_V : V;
+fun have_01737140_V2 : V2;
+fun have_01737140_VS : VS;
+fun have_01737140_V2V : V2V;
+fun have_01737420_V : V;
+fun have_01737420_V2 : V2;
+fun have_01737420_VS : VS;
+fun have_01737420_V2V : V2V;
+fun have_01741290_V : V;
+fun have_01741290_V2 : V2;
+fun have_01741290_VS : VS;
+fun have_01741290_V2V : V2V;
+fun have_01761778_V : V;
+fun have_01761778_V2 : V2;
+fun have_01761778_VS : VS;
+fun have_01761778_V2V : V2V;
+fun have_01853541_V : V;
+fun have_01853541_V2 : V2;
+fun have_01853541_VS : VS;
+fun have_01853541_V2V : V2V;
+fun have_01869305_V : V;
+fun have_01869305_V2 : V2;
+fun have_01869305_VS : VS;
+fun have_01869305_V2V : V2V;
+fun have_02069912_V : V;
+fun have_02069912_V2 : V2;
+fun have_02069912_VS : VS;
+fun have_02069912_V2V : V2V;
+fun have_02143432_V : V;
+fun have_02143432_V2 : V2;
+fun have_02143432_VS : VS;
+fun have_02143432_V2V : V2V;
+fun have_02143852_V : V;
+fun have_02143852_V2 : V2;
+fun have_02143852_VS : VS;
+fun have_02143852_V2V : V2V;
+fun have_02163736_V : V;
+fun have_02163736_V2 : V2;
+fun have_02163736_VS : VS;
+fun have_02163736_V2V : V2V;
+fun magnification_00279232_N : N ;
+fun many_01504267_A : A ;
+fun may_02143289_V : V ;
+fun may_02144314_V : V ;
+fun measure_00390959_V : V;
+fun measure_00390959_V2 : V2;
+fun measure_00515691_V : V;
+fun measure_00515691_V2 : V2;
+fun measure_00541783_V : V;
+fun measure_00541783_V2 : V2;
+fun measure_02129527_V : V;
+fun measure_02129527_V2 : V2;
+fun more_00098278_Adv : Adv ;
+fun more_00098649_Adv : Adv ;
+fun must_02143432_V : V ;
+fun not_00023221_Adv : Adv ;
+fun note_04102992_N : N ;
+fun note_05448445_N : N ;
+fun note_05545937_N : N ;
+fun note_05655492_N : N ;
+fun note_05733414_N : N ;
+fun note_05912052_N : N ;
+fun note_11300339_N : N ;
+fun pair_06663538_N : N ;
+fun pair_06665637_N : N ;
+fun pair_11597052_N : N ;
+fun particular_00461330_A : A ;
+fun particular_00468094_A : A ;
+fun particular_01067201_A : A ;
+fun particular_01067600_A : A ;
+fun passport_05597773_N : N ;
+fun photograph_03419349_N : N ;
+fun polygon_11700594_N : N ;
+fun postcard_05547486_N : N ;
+fun property_04239634_N : N ;
+fun property_07009599_N : N ;
+fun property_11171797_N : N ;
+fun quadrilateral_00237331_A : A ;
+fun quadrilateral_11711041_N : N ;
+fun recall_00484564_V2 : V2;
+fun recall_00484564_VS : VS;
+fun recall_00629512_V2 : V2;
+fun recall_00629512_VS : VS;
+fun recall_00758350_V2 : V2;
+fun recall_00758350_VS : VS;
+fun recall_02105873_V2 : V2;
+fun recall_02105873_VS : VS;
+fun recall_04941288_N : N ;
+fun same_00349180_A : A ;
+fun same_01369136_A : A ;
+fun same_02004756_A : A ;
+fun same_02009721_A : A ;
+fun say_00594545_V : V;
+fun say_00594545_V2 : V2;
+fun say_00594545_VS : VS;
+fun say_00725486_V : V;
+fun say_00725486_V2 : V2;
+fun say_00725486_VS : VS;
+fun say_00734787_V : V;
+fun say_00734787_V2 : V2;
+fun say_00734787_VS : VS;
+fun say_00773450_V : V;
+fun say_00773450_V2 : V2;
+fun say_00773450_VS : VS;
+fun say_00774573_V : V;
+fun say_00774573_V2 : V2;
+fun say_00774573_VS : VS;
+fun say_00796572_V : V;
+fun say_00796572_V2 : V2;
+fun say_00796572_VS : VS;
+fun say_00801408_V : V;
+fun say_00801408_V2 : V2;
+fun say_00801408_VS : VS;
+fun say_02154903_V : V;
+fun say_02154903_V2 : V2;
+fun say_02154903_VS : VS;
+fun shape_00019434_N : N ;
+fun shape_04068268_N : N ;
+fun shape_04350978_N : N ;
+fun shape_04465078_N : N ;
+fun shape_05079634_N : N ;
+fun shape_12281446_N : N ;
+fun side_03671807_N : N ;
+fun side_04770574_N : N ;
+fun side_05012364_N : N ;
+fun side_06368583_N : N ;
+fun side_06729201_N : N ;
+fun side_06938144_N : N ;
+fun side_07007293_N : N ;
+fun side_07125536_N : N ;
+fun side_07125714_N : N ;
+fun similar_01368750_A : A ;
+fun similar_02013338_A : A ;
+fun similarity_04113610_N : N ;
+fun size_04375365_N : N ;
+fun size_04377763_N : N ;
+fun so_00117888_Adv : Adv ;
+fun so_00120452_Adv : Adv ;
+fun so_00145705_Adv : Adv ;
+fun so_00145869_Adv : Adv ;
+fun so_00146032_Adv : Adv ;
+fun so_00146232_Adv : Adv ;
+fun so_00146378_Adv : Adv ;
+fun square_07101061_N : N ;
+fun square_11586723_N : N ;
+fun square_11710702_N : N ;
+fun stamp_05680589_N : N ;
+fun stamp_05724826_N : N ;
+fun stamp_06675917_N : N ;
+fun stamp_11739294_N : N ;
+fun state_00695422_V2 : V2;
+fun state_00695422_VS : VS;
+fun state_00796572_V2 : V2;
+fun state_00796572_VS : VS;
+fun state_00836643_V2 : V2;
+fun state_00836643_VS : VS;
+fun therefore_00041950_Adv : Adv ;
+fun thus_00041950_Adv : Adv ;
+fun triangle_11711199_N : N ;
+fun verify_00528376_V2 : V2;
+fun verify_01981941_V2 : V2;
+fun would_02144164_V : V ;
+fun
+  of_Prep : Prep ;
+  such_as_Prep : Prep ;
+  at_Prep :Prep ;
+  but_Subj : Subj ;
+  so_PConj : PConj ;
+  also_AdV : AdV ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/FullSensMathUrd.gf"
+id=1f8c08c59fd3
+kind=source
+size=19280
+lines=329
+chunks=0
+----
+--# -path=.:../prelude:../abstract:../common:../hindustani
+concrete FullSensMathUrd of FullSensMathAbs = CatUrd ** open ParadigmsUrd, Prelude, NounUrd,ParamX,CommonHindustani in {
+flags
+coding=utf8 ;
+--lin actually_00148599_Adv = mkAdv "" ;
+lin again_00040170_Adv =  mkAdv "آیندہ" ;       -- from DictUrd
+lin also_00047251_Adv =  mkAdv "بھی" ;
+lin angle_05248221_N =  mkN "گوشہ" ;       -- from DictUrd
+lin angle_11717991_N =  mkN "گوشہ" ;       -- from DictUrd
+--lin be_01922820_V = mkV "" ;
+--lin be_02046998_V = mkV "" ;
+--lin be_02047807_V = mkV "" ;
+--lin be_02058059_V = mkV "" ;
+--lin be_02061968_V = mkV "" ;
+--lin be_02090076_V = mkV "" ;
+--lin be_02097262_V = mkV "" ;
+--lin be_02123963_V = mkV "" ;
+--lin be_02171372_V = mkV "" ;
+lin can_00169329_V2 =  mkV2 (compoundV "ٹین کا" (mkV "ڈبہ")) ;
+lin can_01887745_V2 =  mkV2 (compoundV "ٹین کا" (mkV "ڈبہ")) ;
+lin can_02143199_V2 =  mkV2 (compoundV "ٹین کا" (mkV "ڈبہ")) ;
+--lin certainly_00143779_Adv = mkAdv "" ;
+lin circle_00226259_N =  mkN "علاقہ" ;       -- from DictUrd
+lin circle_06818995_N =  mkN "علاقہ" ;       -- from DictUrd
+lin circle_11706839_N =  mkN "دائرہ" ;       -- from DictUrd
+lin class_00669967_N =  mkN "دفعہ" ;       -- from DictUrd
+lin class_06660972_N =  mkN "دفعہ" ;       -- from DictUrd
+lin class_06675558_N =  mkN "قسم" ;       -- from DictUrd
+lin class_06817084_N =  mkN "دفعہ" ;       -- from DictUrd
+lin class_06818817_N =  mkN "دفعہ" ;       -- from DictUrd
+lin condition_04988288_N =  mkN "گت" ;       -- from DictUrd
+lin condition_05649441_N =  mkN "گت" ;       -- from DictUrd
+lin condition_11744866_N =  mkN "گت" ;       -- from DictUrd
+lin condition_11745254_N =  mkN "حالت" ;       -- from DictUrd
+lin congruent_00537171_A =  mkA "مطابق" ;
+lin different_00463157_A =  mkA "علیحدہ" ;       -- from DictUrd
+lin different_01368552_A =  mkA "علیحدہ" ;       -- from DictUrd
+lin different_02006375_A =  mkA "مختلف" ;       -- from DictUrd
+lin different_02011415_A =  mkA "علیحدہ" ;       -- from DictUrd
+lin early_00782022_A =  mkA "جلدی" ;
+lin early_00786798_A =  mkA "جلدی" ;
+lin early_00789316_A =  mkA "جلدی" ;
+lin early_01604645_A =  mkA "جلدی" ;
+lin early_01681956_A =  mkA "جلدی" ;
+lin enlargement_00277832_N =  mkN "توسیع" ;       -- from DictUrd
+lin essence_05063042_N =  mkN "اصل" ;       -- from DictUrd
+--lin evidently_00039137_Adv = mkAdv "" ;
+lin example_04986755_N =  mkN "مثال" ;       -- from DictUrd
+lin example_05066235_N =  mkN "بانگی" ;       -- from DictUrd
+lin example_05076568_N =  mkN "بانگی" ;       -- from DictUrd
+lin example_05583436_N =  mkN "بانگی" ;       -- from DictUrd
+lin familiar_00927645_A =  mkA "عام" ;       -- from DictUrd
+lin familiar_00931925_A =  mkA "عام" ;       -- from DictUrd
+lin familiar_01266827_A =  mkA "عام" ;       -- from DictUrd
+lin figure_02905792_N =  mkN "عدد" ;       -- from DictUrd
+lin figure_04066761_N =  mkN "عدد" ;       -- from DictUrd
+lin figure_04392282_N =  mkN "عدد" ;       -- from DictUrd
+lin figure_04465078_N =  mkN "عدد" ;       -- from DictUrd
+lin figure_05852382_N =  mkN "عدد" ;       -- from DictUrd
+lin figure_08479955_N =  mkN "اہم شخصیت" ;       -- from DictUrd
+lin figure_11247915_N =  mkN "عدد" ;       -- from DictUrd
+lin figure_11594993_N =  mkN "عدد" ;       -- from DictUrd
+lin figure_11697933_N =  mkN "عدد" ;       -- from DictUrd
+lin give_00535545_V =  mkV "دینا" ;
+lin give_00535545_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_00582904_V =  mkV "دینا" ;
+lin give_00582904_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_00702793_V =  mkV "دینا" ;
+lin give_00702793_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_00835568_V =  mkV "دینا" ;
+lin give_00835568_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_00835745_V =  mkV "دینا" ;
+lin give_00835745_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_00835997_V =  mkV "دینا" ;
+lin give_00835997_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_00931017_V =  mkV "دینا" ;
+lin give_00931017_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01288281_V =  mkV "دینا" ;
+lin give_01288281_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01288576_V =  mkV "دینا" ;
+lin give_01288576_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01302681_V =  mkV "دینا" ;
+lin give_01302681_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01364175_V =  mkV "دینا" ;
+lin give_01364175_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01452596_V =  mkV "دینا" ;
+lin give_01452596_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01562622_V =  mkV "دینا" ;
+lin give_01562622_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01732957_V =  mkV "دینا" ;
+lin give_01732957_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01733775_V =  mkV "دینا" ;
+lin give_01733775_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01733963_V =  mkV "دینا" ;
+lin give_01733963_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01757635_V =  mkV "دینا" ;
+lin give_01757635_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01761514_V =  mkV "دینا" ;
+lin give_01761514_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01808261_V =  mkV "دینا" ;
+lin give_01808261_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01817669_V =  mkV "دینا" ;
+lin give_01817669_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01817971_V =  mkV "دینا" ;
+lin give_01817971_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01818180_V =  mkV "دینا" ;
+lin give_01818180_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01824373_V =  mkV "دینا" ;
+lin give_01824373_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01824581_V =  mkV "دینا" ;
+lin give_01824581_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01840941_V =  mkV "دینا" ;
+lin give_01840941_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_01844174_V =  mkV "دینا" ;
+lin give_01844174_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin give_02015420_V =  mkV "دینا" ;
+lin give_02015420_V2 =  mkV2 (mkV "دینا") ;       -- from DictUrd --changed
+lin have_00045202_V =  mkV "رکھنا" ;
+lin have_00045202_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_00045202_VS =  mkVS (mkV "رکھنا") ;
+--lin have_00045202_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_00051113_V =  mkV "رکھنا" ;
+lin have_00051113_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_00051113_VS =  mkVS (mkV "رکھنا") ;
+--lin have_00051113_V2V =  mkV2 (mkV "رکھنا") ;
+--lin have_00051382_A = mkA "" ;
+lin have_00093460_V =  mkV "رکھنا" ;
+lin have_00093460_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_00093460_VS =  mkVS (mkV "رکھنا") ;
+--lin have_00093460_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_00093710_V =  mkV "رکھنا" ;
+lin have_00093710_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_00093710_VS =  mkVS (mkV "رکھنا") ;
+--lin have_00093710_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_00613663_V =  mkV "رکھنا" ;
+lin have_00613663_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_00613663_VS =  mkVS (mkV "رکھنا") ;
+--lin have_00613663_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_00913965_V =  mkV "رکھنا" ;
+lin have_00913965_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_00913965_VS =  mkVS (mkV "رکھنا") ;
+--lin have_00913965_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01129196_V =  mkV "رکھنا" ;
+lin have_01129196_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01129196_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01129196_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01364175_V =  mkV "رکھنا" ;
+lin have_01364175_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01364175_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01364175_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01660852_V =  mkV "رکھنا" ;
+lin have_01660852_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01660852_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01660852_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01736051_V =  mkV "رکھنا" ;
+lin have_01736051_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01736051_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01736051_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01737140_V =  mkV "رکھنا" ;
+lin have_01737140_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01737140_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01737140_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01737420_V =  mkV "رکھنا" ;
+lin have_01737420_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01737420_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01737420_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01741290_V =  mkV "رکھنا" ;
+lin have_01741290_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01741290_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01741290_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01761778_V =  mkV "رکھنا" ;
+lin have_01761778_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01761778_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01761778_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01853541_V =  mkV "رکھنا" ;
+lin have_01853541_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01853541_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01853541_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_01869305_V =  mkV "رکھنا" ;
+lin have_01869305_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_01869305_VS =  mkVS (mkV "رکھنا") ;
+--lin have_01869305_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_02069912_V =  mkV "رکھنا" ;
+lin have_02069912_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_02069912_VS =  mkVS (mkV "رکھنا") ;
+--lin have_02069912_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_02143432_V =  mkV "رکھنا" ;
+lin have_02143432_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_02143432_VS =  mkVS (mkV "رکھنا") ;
+--lin have_02143432_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_02143852_V =  mkV "رکھنا" ;
+lin have_02143852_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_02143852_VS =  mkVS (mkV "رکھنا") ;
+--lin have_02143852_V2V =  mkV2 (mkV "رکھنا") ;
+lin have_02163736_V =  mkV "رکھنا" ;
+lin have_02163736_V2 =  mkV2 (compoundV "مالک" (mkV "ہونا")) ;       -- from DictUrd
+lin have_02163736_VS =  mkVS (mkV "رکھنا") ;
+--lin have_02163736_V2V =  mkV2 (mkV "رکھنا") ;
+lin magnification_00279232_N =  mkN "بڑائ" ;       -- from DictUrd
+--lin many_01504267_A = mkA "" ;
+--lin may_02143289_V = mkV "" ;
+--lin may_02144314_V = mkV "" ;
+lin measure_00390959_V =  mkV "پیمائش" ;
+lin measure_00390959_V2 =  mkV2 (mkV "آنکنا") ;       -- from DictUrd
+lin measure_00515691_V =  mkV "پیمائش" ;
+lin measure_00515691_V2 =  mkV2 (mkV "آنکنا") ;       -- from DictUrd
+lin measure_00541783_V =  mkV "پیمائش" ;
+lin measure_00541783_V2 =  mkV2 (mkV "آنکنا") ;       -- from DictUrd
+lin measure_02129527_V =  mkV "پیمائش" ;
+lin measure_02129527_V2 =  mkV2 (mkV "آنکنا") ;       -- from DictUrd
+lin more_00098278_Adv =  mkAdv "اور" ;
+lin more_00098649_Adv =  mkAdv "اور" ;
+--lin must_02143432_V = mkV "" ;
+lin not_00023221_Adv =  mkAdv "مت" ;       -- from DictUrd
+lin note_04102992_N =  mkN "خط" ;       -- from DictUrd
+lin note_05448445_N =  mkN "خط" ;       -- from DictUrd
+lin note_05545937_N =  mkN "خط" ;       -- from DictUrd
+lin note_05655492_N =  mkN "خط" ;       -- from DictUrd
+lin note_05733414_N =  mkN "خط" ;       -- from DictUrd
+lin note_05912052_N =  mkN "خط" ;       -- from DictUrd
+lin note_11300339_N =  mkN "خط" ;       -- from DictUrd
+lin pair_06663538_N =  mkN "جوڑا" ;       -- from DictUrd
+lin pair_06665637_N =  mkN "جوڑا" ;       -- from DictUrd
+lin pair_11597052_N =  mkN "جوڑا" ;       -- from DictUrd
+lin particular_00461330_A =  mkA "خاص" ;       -- from DictUrd
+lin particular_00468094_A =  mkA "خاص" ;       -- from DictUrd
+lin particular_01067201_A =  mkA "خاص" ;       -- from DictUrd
+lin particular_01067600_A =  mkA "خاص" ;       -- from DictUrd
+lin passport_05597773_N =  mkN "پروانہ راہداری" ;
+lin photograph_03419349_N =  mkN "فوٹوگراف" ;       -- from DictUrd
+lin polygon_11700594_N =  mkN "کثیر الزاویہ شکل" ;
+lin postcard_05547486_N =  mkN "پوسٹ کارڈ" ;
+lin property_04239634_N =  mkN "خصوصیت" ;       -- from DictUrd
+lin property_07009599_N =  mkN "جائداد" ;       -- from DictUrd
+lin property_11171797_N =  mkN "جائداد" ;       -- from DictUrd
+lin quadrilateral_00237331_A =  mkA "چوطرفہ" ;       -- from DictUrd
+lin quadrilateral_11711041_N =  mkN "چار ضلع والی شکل" ;
+lin recall_00484564_V2 =  mkV2 (compoundV "واپس" (mkV "لینا")) ;       -- from DictUrd
+lin recall_00484564_VS =  mkVS (compoundV "یاد" (mkV "کرنا")) ;
+lin recall_00629512_V2 =  mkV2 (compoundV "واپس" (mkV "لینا")) ;       -- from DictUrd
+lin recall_00629512_VS =  mkVS (compoundV "یاد" (mkV "کرنا")) ;
+lin recall_00758350_V2 =  mkV2 (compoundV "واپس" (mkV "لینا")) ;       -- from DictUrd
+lin recall_00758350_VS =  mkVS (compoundV "یاد" (mkV "کرنا")) ;
+lin recall_02105873_V2 =  mkV2 (compoundV "واپس" (mkV "لینا")) ;       -- from DictUrd
+lin recall_02105873_VS =  mkVS (compoundV "یاد" (mkV "کرنا")) ;
+lin recall_04941288_N =  mkN "یاد کرنا" ;
+lin same_00349180_A =  mkA "ایک جیسا" ;       -- from DictUrd
+lin same_01369136_A =  mkA "ایک جیسا" ;       -- from DictUrd
+lin same_02004756_A =  mkA "ایک جیسا" ;       -- from DictUrd
+lin same_02009721_A =  mkA "ایک جیسا" ;       -- from DictUrd
+lin say_00594545_V =  mkV "کہنا" ;
+lin say_00594545_V2 =  mkV2 (compoundV "عرض" (mkV "کرنا")) ;       -- from DictUrd
+lin say_00594545_VS =  mkVS (mkV "کہنا") ;
+lin say_00725486_V =  mkV "کہنا" ;
+lin say_00725486_V2 =  mkV2 (compoundV "عرض" (mkV "کرنا")) ;       -- from DictUrd
+lin say_00725486_VS =  mkVS (mkV "کہنا") ;
+lin say_00734787_V =  mkV "کہنا" ;
+lin say_00734787_V2 =  mkV2 (compoundV "عرض" (mkV "کرنا")) ;       -- from DictUrd
+lin say_00734787_VS =  mkVS (mkV "کہنا") ;
+lin say_00773450_V =  mkV "کہنا" ;
+lin say_00773450_V2 =  mkV2 (compoundV "عرض" (mkV "کرنا")) ;       -- from DictUrd
+lin say_00773450_VS =  mkVS (mkV "کہنا") ;
+lin say_00774573_V =  mkV "کہنا" ;
+lin say_00774573_V2 =  mkV2 (compoundV "عرض" (mkV "کرنا")) ;       -- from DictUrd
+lin say_00774573_VS =  mkVS (mkV "کہنا") ;
+lin say_00796572_V =  mkV "کہنا" ;
+lin say_00796572_V2 =  mkV2 (compoundV "عرض" (mkV "کرنا")) ;       -- from DictUrd
+lin say_00796572_VS =  mkVS (mkV "کہنا") ;
+lin say_00801408_V =  mkV "کہنا" ;
+lin say_00801408_V2 =  mkV2 (compoundV "عرض" (mkV "کرنا")) ;       -- from DictUrd
+lin say_00801408_VS =  mkVS (mkV "کہنا") ;
+lin say_02154903_V =  mkV "کہنا" ;
+lin say_02154903_V2 =  mkV2 (compoundV "عرض" (mkV "کرنا")) ;       -- from DictUrd
+lin say_02154903_VS =  mkVS (mkV "کہنا") ;
+lin shape_00019434_N =  mkN "ڈول" ;       -- from DictUrd
+lin shape_04068268_N =  mkN "ڈول" ;       -- from DictUrd
+lin shape_04350978_N =  mkN "ڈول" ;       -- from DictUrd
+lin shape_04465078_N =  mkN "ڈول" ;       -- from DictUrd
+lin shape_05079634_N =  mkN "ڈول" ;       -- from DictUrd
+lin shape_12281446_N =  mkN "ڈول" ;       -- from DictUrd
+lin side_03671807_N =  mkN "النگ" ;       -- from DictUrd
+lin side_04770574_N =  mkN "النگ" ;       -- from DictUrd
+lin side_05012364_N =  mkN "النگ" ;       -- from DictUrd
+lin side_06368583_N =  mkN "النگ" ;       -- from DictUrd
+lin side_06729201_N =  mkN "النگ" ;       -- from DictUrd
+lin side_06938144_N =  mkN "النگ" ;       -- from DictUrd
+lin side_07007293_N =  mkN "النگ" ;       -- from DictUrd
+lin side_07125536_N =  mkN "النگ" ;       -- from DictUrd
+lin side_07125714_N =  mkN "النگ" ;       -- from DictUrd
+lin similar_01368750_A =  mkA "ہم شکل" ;       -- from DictUrd
+lin similar_02013338_A =  mkA "ایک جیسے" ;       -- from DictUrd
+lin similarity_04113610_N =  mkN "شباہت" ;       -- from DictUrd
+lin size_04375365_N =  mkN "ڈیل" ;       -- from DictUrd
+lin size_04377763_N =  mkN "ڈیل" ;       -- from DictUrd
+--lin so_00117888_Adv = mkAdv "" ;
+--lin so_00120452_Adv = mkAdv "" ;
+--lin so_00145705_Adv = mkAdv "" ;
+--lin so_00145869_Adv = mkAdv "" ;
+--lin so_00146032_Adv = mkAdv "" ;
+--lin so_00146232_Adv = mkAdv "" ;
+--lin so_00146378_Adv = mkAdv "" ;
+lin square_07101061_N =  mkN "چوکور" ;       -- from DictUrd
+lin square_11586723_N =  mkN "چوکور" ;       -- from DictUrd
+lin square_11710702_N =  mkN "چوکور" ;       -- from DictUrd
+lin stamp_05680589_N =  mkN "مہر" ;       -- from DictUrd
+lin stamp_05724826_N =  mkN "مہر" ;       -- from DictUrd
+lin stamp_06675917_N =  mkN "مہر" ;       -- from DictUrd
+lin stamp_11739294_N =  mkN "مہر" ;       -- from DictUrd
+lin state_00695422_V2 =  mkV2 (compoundV "بیان" (mkV "کرنا")) ;       -- from DictUrd
+lin state_00695422_VS =  mkVS (mkV "حالت") ;
+lin state_00796572_V2 =  mkV2 (compoundV "بیان" (mkV "کرنا")) ;       -- from DictUrd
+lin state_00796572_VS =  mkVS (mkV "حالت") ;
+lin state_00836643_V2 =  mkV2 (compoundV "بیان" (mkV "کرنا")) ;       -- from DictUrd
+lin state_00836643_VS =  mkVS (mkV "حالت") ;
+lin therefore_00041950_Adv =  mkAdv "پس" ;
+lin thus_00041950_Adv =  mkAdv "ایسا" ;       -- from DictUrd
+lin triangle_11711199_N =  mkN "مثلث" ;       -- from DictUrd
+lin verify_00528376_V2 =  mkV2 (compoundV "حلف نامہ نتھی" (mkV "کرنا")) ;       -- from DictUrd
+lin verify_01981941_V2 =  mkV2 (compoundV "حلف نامہ نتھی" (mkV "کرنا")) ;       -- from DictUrd
+--lin would_02144164_V = mkV "" ;
+
+
+  of_Prep = mkPrep "کا" "کی" ;
+  such_as_Prep = mkPrep "جیسا کہ" "جیسا کہ" ;
+  at_Prep = mkPrep "پر" "پر" ;
+  lin but_Subj= ss "لیکن";
+  lin also_AdV = ss "بھی" ;
+  lin so_PConj = ss "اسلئے" ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/GrammarUrd.gf"
+id=cd38c44158cb
+kind=source
+size=419
+lines=25
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+ concrete GrammarUrd of Grammar = 
+  NounUrd, 
+  VerbUrd, 
+  AdjectiveUrd,
+  AdverbUrd,
+  NumeralUrd,
+  SentenceUrd,
+  QuestionUrd,
+  RelativeUrd,
+  ConjunctionUrd,
+  PhraseUrd,
+  TextUrd - [Adv,AdN,SC],
+--  TextX - [Adv,AdN],
+  StructuralUrd,
+  TenseX - [Adv,AdN,SC],
+  IdiomUrd
+  ** {
+
+flags startcat = Phr ; unlexer = text ; lexer = text ;
+
+}
+
+
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/IdiomUrd.gf"
+id=89e8e4241c79
+kind=source
+size=1562
+lines=40
+chunks=0
+----
+concrete IdiomUrd of Idiom = CatUrd ** open Prelude,Predef, ResUrd,ParamX,CommonHindustani in {
+
+  flags optimize=all_subs ;
+  flags coding = utf8;
+
+  lin
+    ImpersCl vp = mkSClause " " (agrP3 Masc Sg) vp ;
+    GenericCl vp = mkSClause "کوی" (agrP3 Masc Sg) vp ;
+
+    CleftNP np rs = 
+	 let cl = mkSClause (np.s ! NPC rs.c) (np.a) (predAux auxBe);
+	  in 
+	   {s = \\t,p,o =>  cl.s ! t ! p ! o ++ rs.s ! np.a };
+	  
+    CleftAdv ad ss = { s = \\t,b,o => ad.s ! Masc ++ ss.s};
+        
+    ExistNP np = 
+      mkSClause "" (agrP3 (fromAgr np.a).g (fromAgr np.a).n) --removed wahaN
+        (insertObj (\\_ => np.s ! NPC Dir) (predAux auxBe)) ;
+
+    ExistIP ip = 
+     let cl = mkSClause ("وہاں" ++ ip.s ! Dir) (agrP3 ip.g ip.n) (predAux auxBe); 
+	   in {
+       s = \\t,p,qf => case qf of { 
+	      QDir =>   cl.s ! t ! p ! ODir;
+          QIndir => cl.s ! t! p ! ODir
+		  }
+		};
+
+--    ProgrVP vp = insertObj (\\a => vp.obj.s ++ vp.ad ++ vp.comp ! a ++ (vp.s ! VPStem).inf ++ raha (fromAgr a).g (fromAgr a).n ) (predAux auxBe) ;
+    ProgrVP vp =  (predProg vp) ;
+
+--    ImpPl1 vp = {s = "آو" ++ infVP True vp (agrP1 Masc Pl)} ; -- inf form is not used e.g Aw swna instead Aw swyyN (Imp.fin)
+   ImpPl1 vp = {s = "آو" ++ (vp.s ! VPImp).fin} ;
+--	ImpP3 np vp = {s = np.s!NPC Dir ++ "کو" ++ (vp.s ! VPImp ).inf ++ "دو"}; here VPImp form is not correct e.g jan ko sw do, rather jan ko swnE do, and swnE is stored in vp.VPInf.fin
+  ImpP3 np vp = {s = np.s!NPC Dir ++ "کو" ++ (vp.s ! VPInf ).fin ++ "دو"};
+
+
+}
+
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/LangUrd.gf"
+id=6dbcda44c1c1
+kind=source
+size=236
+lines=13
+chunks=0
+----
+--# -path=.:../abstract:../common:../hindustani
+
+concrete LangUrd of Lang = 
+  GrammarUrd,
+  LexiconUrd
+ ,DocumentationUrd --# notpresent
+ ,ConstructionUrd
+
+  ** {
+
+flags startcat = Phr ; unlexer=unwords ; lexer=words ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/LinearizeAbs.gf"
+id=2a8f464e573b
+kind=source
+size=1701
+lines=73
+chunks=0
+----
+abstract LinearizeAbs = 
+  Tense,
+  Cat,
+  Noun - [PPartNP],
+  Adjective,
+  Numeral,
+  Symbol [PN, Symb, String, CN, Card, NP, MkSymb, SymbPN, CNNumNP],
+  Conjunction,
+  Verb - [SlashV2V, PassV2, UseCopula, ComplVV],
+  Adverb,
+  Phrase,
+  Sentence,
+  Question,
+  Relative,
+  Structural,
+  Idiom [NP, VP, Cl, Tense, ProgrVP, ExistNP],
+  Extra [NP, Quant, VPSlash, VP, GenNP, PassVPSlash,
+         Temp, Tense, Pol, Conj, VPS, ListVPS, S, Num, CN, RP, MkVPS, BaseVPS, ConsVPS, ConjVPS, PredVPS, GenRP,
+         VPI, ListVPI, VV, MkVPI, BaseVPI, ConsVPI, ConjVPI, ComplVPIVV,
+         ClSlash, RCl, EmptyRelSlash],
+  FullSensMathAbs ** {
+
+flags
+  startcat=Phr;
+
+fun CompoundCN : Num -> N -> CN -> CN ;
+    DashCN : N -> N -> N ;
+    GerundN : V -> N ;
+    GerundAP : V -> AP ;
+    PastPartAP : V2 -> AP ;
+    myself_NP : NP ;
+    yourselfSg_NP : NP ;
+    himself_NP : NP ;
+    herself_NP : NP ;
+    itself_NP : NP ;
+    ourself_NP : NP ;
+    yourselfPl_NP : NP ;
+    themself_NP : NP ;
+    themselves_NP : NP ;
+    OrdCompar : A -> Ord ;
+
+    PositAdVAdj : A -> AdV ;
+
+    UseQuantPN : Quant -> PN -> NP;
+
+    SlashV2V : V2V -> Ant -> Pol -> VP -> VPSlash ;
+    SlashVPIV2V : V2V -> Pol -> VPI -> VPSlash ;
+
+    SlashSlashV2V : V2V -> Ant -> Pol -> VPSlash -> VPSlash ;
+    
+    ComplVV : VV -> Ant -> Pol -> VP -> VP ;
+
+    PredVPosv,PredVPovs : NP -> VP -> Cl ;
+    
+    that_RP : RP ;
+
+    CompS : S -> Comp ;
+    CompQS : QS -> Comp ;
+    CompVP : Ant -> Pol -> VP -> Comp ;
+
+	VPSlashVS : VS -> VP -> VPSlash ;
+
+	UncNeg : Pol ;
+
+	PastPartRS : Ant -> Pol -> VPSlash -> RS ;
+    PresPartRS : Ant -> Pol -> VP -> RS ;
+
+	ApposNP : NP -> NP -> NP ;
+	
+	AdAdV : AdA -> AdV -> AdV ;
+
+	UttAdV : AdV -> Utt;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/LinearizeUrd.gf"
+id=6c28e83704ef
+kind=source
+size=4740
+lines=137
+chunks=0
+----
+--# -path=.:alltenses:../abstract:../english
+concrete LinearizeUrd of LinearizeAbs = 
+  TenseX - [AdN,Adv,SC,PPos,PNeg],
+--  TextX - [AdN,Adv,SC],
+  CatUrd,
+  NounUrd - [PPartNP],
+  AdjectiveUrd,
+  NumeralUrd,
+  ConjunctionUrd,
+  VerbUrd - [PassV2,ComplVV],
+  AdverbUrd,
+  PhraseUrd,
+  SentenceUrd,
+  RelativeUrd,
+  QuestionUrd,
+  StructuralUrd,
+  SymbolUrd [PN, Symb, String, CN, Card, NP, MkSymb, SymbPN, CNNumNP],
+--  StructuralUrd,
+  IdiomUrd [NP, VP, Tense, Cl, ProgrVP, ExistNP],
+  ExtraUrd [NP, Quant, VPSlash, VP, Tense, GenNP, PassVPSlash,Temp,Pol,Conj,VPS,ListVPS,S,Num, CN,
+  RP, MkVPS, BaseVPS, ConsVPS, ConjVPS, PredVPS, GenRP,VPI, VPIForm, VPIInf, VPIPresPart, ListVPI,
+  VV, MkVPI, BaseVPI, ConsVPI, ConjVPI, ComplVPIVV,ClSlash, RCl, EmptyRelSlash],
+  FullSensMathUrd **
+--  UNDictUrd ** 
+open MorphoUrd, ResUrd, ParadigmsUrd,CommonX, CommonHindustani, Prelude in {
+
+flags
+  literal=Symb ;
+
+lin
+  myself_NP = {s = \\_ => kwd ; a  = Ag Masc Sg Pers1 };
+  yourselfSg_NP = {s = \\_ => kwd ; a  = Ag Masc Sg Pers2_Respect }; --regNP "yourself" singular ;
+  himself_NP = {s = \\_ => kwd ; a  = Ag Masc Sg Pers3_Distant }; --regNP "himself" singular ;
+  herself_NP = {s = \\_ => kwd ; a  = Ag Fem Sg Pers3_Distant }; --regNP "herself" singular ;
+  itself_NP = {s = \\_ => kwd ; a  = Ag Masc Sg Pers3_Near }; --regNP "itself" singular ;
+  ourself_NP = {s = \\_ => kwd ; a  = Ag Masc Pl Pers1 }; --regNP "ourself" plural ;
+  yourselfPl_NP = {s = \\_ => kwd ; a  = Ag Masc Pl Pers2_Respect }; --regNP "yourself" plural ;
+  themself_NP = {s = \\_ => kwd ; a  = Ag Masc Pl Pers3_Distant }; --regNP "themself" plural ;
+
+  CompoundCN num noun cn = {
+    s = \\n,c => num.s  ++ cn.s ! n ! c ++ noun.s ! num.n ! Dir;
+    g = cn.g
+  } ;
+  
+  DashCN noun1 noun2 = {
+    s = \\n,c => noun1.s ! n ! Dir ++ "-" ++ noun2.s ! n ! c ;
+    g = noun2.g
+  } ;
+
+  GerundN v = {
+    s = \\n,c => v.cvp ++ v.s ! Inf ; -- v.s ! VF Imperf Pers2_Casual n Masc ++ hwa (Ag Masc n Pers2_Casual) ; --the main verb of compound verbs
+    g = Masc
+  } ;
+  
+  GerundAP v = {
+    s = \\n,g,_,_ => v.cvp ++ v.s ! VF Imperf Pers2_Casual n g ++ hwa (Ag g n Pers2_Casual) ;   
+  } ;
+
+  PastPartAP v = {
+    s = \\n,g,_,_ => v.cvp ++ v.s ! VF Imperf Pers2_Casual n g ; -- the main verb of compound versb needs to be attached here
+  } ;
+
+--  OrdCompar a = {s = \\c => a.s ! AAdj Compar c } ;
+
+  PositAdVAdj a = {s = a.s ! Sg ! Masc ! Dir ! Posit} ;
+---------------
+--SlashV2V v p vp = insertVV (infV2V v.isAux vp) (predV v) vp.embComp  ** {c2 = {s = sE ; c = VTrans}}; -- changed from VTransPost
+ComplVV v a p vp = insertTrans (insertVV (infVV v.isAux vp) (predV v) vp.embComp ) VTrans; -- changed from VTransPost
+---------------
+  
+
+  UseQuantPN q pn = {s = \\c => q.s ! Sg ! pn.g ! Dir ++ pn.s ! Dir ; a = agrP3 pn.g Sg} ;
+
+PredVPosv np vp = mkClause np vp ; --{
+{-      s = \\t,a,b,o => 
+        let 
+          verb  = vp.s ! t ! a ! b ! o ! np.a ;
+          compl = vp.s2 ! np.a
+        in
+        case o of {
+          ODir => compl ++ "," ++ np.s ! npNom ++ verb.aux ++ vp.ad ++ verb.fin ++ verb.adv ++ verb.inf ;
+          OQuest => verb.aux ++ compl ++ "," ++ np.s ! npNom ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf 
+          }
+    } ;
+-}    
+  PredVPovs np vp = mkClause np vp ; --{
+{-      s = \\t,a,b,o => 
+        let 
+          verb  = vp.s ! t ! a ! b ! o ! np.a ;
+          compl = vp.s2 ! np.a
+        in
+        case o of {
+          ODir => compl ++ verb.aux ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf ++ np.s ! npNom ;
+          OQuest => verb.aux ++ compl ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf ++ np.s ! npNom
+          }
+    } ;
+-}
+
+{-
+  SlashV2V v p vp = insertObjc (\\a => p.s ++ case p.p of {CPos => ""; _ => "not"} ++ 
+                                       v.c3 ++ 
+                                       infVP v.typ vp a)
+                               (predVc v) ;
+
+  ComplPredVP np vp = {
+      s = \\t,a,b,o => 
+        let 
+          verb  = vp.s ! t ! a ! b ! o ! np.a ;
+          compl = vp.s2 ! np.a
+        in
+        case o of {
+          ODir => compl ++ "," ++ np.s ! npNom ++ verb.aux ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf ;
+          OQuest => verb.aux ++ compl ++ "," ++ np.s ! npNom ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf 
+          }
+    } ;
+-}
+CompVP ant p vp = {s = \\a => ant.s ++ p.s ++ 
+                                infVP False vp a} ; -- check for vp.isAux
+
+  that_RP = {
+    s = \\_,_ => "kh" ;
+    a = RNoAg
+    } ;
+  --no_RP = {
+   -- s = \\_,_ => "" ;
+   -- a = RNoAg
+   -- } ;
+
+  CompS s = {s = \\_ => "kh" ++ s.s} ;
+--  CompVP vp = {s = \\a => infVP VVInf vp a} ;
+
+lin
+  PPos = {s = [] ; p = Pos} ;
+  PNeg = {s = [] ; p = Neg} ; -- contracted: don't
+  UncNeg = {s = [] ; p = Neg} ;
+    
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/MakeStructuralUrd.gf"
+id=a4accedfadce
+kind=source
+size=413
+lines=14
+chunks=0
+----
+--# -path=.:../common:../abstract
+
+resource MakeStructuralUrd = open CatUrd, ParadigmsUrd, ResUrd, MorphoUrd, NounUrd, Prelude in {
+
+oper 
+  mkSubj : Str -> CatUrd.Subj = \x -> 
+    lin Subj {s = x} ;
+  mkNP : Str -> Number -> ResUrd.NP = \s,n ->
+     MassNP (UseN (ParadigmsUrd.mkN s));
+--    lin NP (regNP s n) ;
+  mkIDet : Str -> Number -> IDet = \s,n ->
+    lin IDet {s = \\_ => s ; n = n} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/MorphoUrd.gf"
+id=333d22952460
+kind=source
+size=18655
+lines=515
+chunks=2
+
+--- CHUNK BEGIN ---
+id=333d22952460:1-350
+start=1
+end=350
+----
+--# -path=.:../../prelude
+--
+----1 A Simple Urdu Resource Morphology
+----
+----  Shafqat Virk, Aarne Ranta,2009
+----
+---- This resource morphology contains definitions needed in the resource
+---- syntax. To build a lexicon, it is better to use $ParadigmsUrd$, which
+---- gives a higher-level access to this module.
+--
+resource MorphoUrd = ResUrd ** open CommonHindustani,Prelude,Predef,ParamX in {
+
+  flags optimize=all ;
+   coding = utf8;
+
+----2 Nouns
+oper
+    mkNoun : (x1,_,_,_,_,x6 : Str) -> Gender -> Noun = 
+      \sd,so,sv,pd,po,pv,g -> {
+      s = table {
+      Sg => table {
+        Dir => sd ;
+        Obl => so ;
+        Voc => sv 
+	  } ;
+      Pl => table {
+        Dir => pd ;
+        Obl => po ;
+        Voc => pv 
+	  }
+      } ;
+
+      g = g
+      } ;
+
+    
+
+    regNoun : Str -> Noun ;
+    regNoun s = case s of {
+		     _ + "یا" => mkN05 (s);
+                 _ + ("ا"|"ع"|"ہ") =>  mkN01 (s);
+                 _ + "ی" => mkN03 (s);
+                 _ + ("اں"|"وں") => mkN04 (s);
+                 _ + "ؤ" => mkN12 (s);
+		 _ + "ت" => mkN10 s ;
+             _			  => regNoun2 (s)				 
+                 };
+	regNoun2 : Str -> Noun;
+	regNoun2 s = let c = if_then_else Bool (eq (last s) "ا" ) True (if_then_else Bool (eq (last s) "ہ") True (if_then_else Bool (eq (last s) "ع") True False))
+     in case c of {
+      False => mkN02 (s);
+	  True => mkN01 (s)
+     };	  
+	  
+    reggNoun : Str -> Gender -> Noun ;
+    reggNoun s g = let c = if_then_else Bool (eq (last s) "ا" ) True (if_then_else Bool (eq (dp 2 s) "اں") True (if_then_else Bool (eq (dp 2 s) "وں") True False))
+	 in case <s,g,c> of {
+		         <_ + "ت",Fem,_> => mkN10 (s);
+				 <_ + "ت",Masc,_> => mkN02 (s);
+				 <_ + "و",Masc,_> => mkN11 (s);
+                 <_ + "و",Fem,_> 	=> mkN07 (s);
+				 <_ + "یا",Fem,_> => mkN05 (s);
+                 <_ + "یا",Masc,_> => mkN02 (s);
+                 <_,Fem,False>		=> mkN08 (s);
+                 <_,Fem,_>		=> mkN09 (s)
+                 				 
+                 };
+    
+-- masculine nouns end with alif, choTi_hay, ain Translitration: (a, h, e)
+-- Arabic nouns ends with h. also taken as Masc
+
+     mkN01 : Str -> Noun ;
+     mkN01 lRka = let end = last (lRka) ;
+                 lRk = if_then_else Str (eq end "ع") lRka (tk 1 lRka)
+             in mkNoun (lRka)     (lRk+"ے")  (lRk+"ے")
+                       (lRk+"ے")  (lRk+"وں") (lRk+"و")
+                       Masc ;
+
+-- masculine nouns does not end with a, h, e, an
+
+     mkN02 : Str -> Noun ;
+     mkN02 mrd = let mrdwN = mrd+"وں" ;
+              mrdw  = tk 1 mrdwN
+              in mkNoun mrd mrd   mrd
+                      mrd mrdwN mrdw
+                      Masc ;
+
+-- feminine Nouns end with y
+
+     mkN03 : Str -> Noun ;
+     mkN03 krsy = let krsyaN  = krsy+"اں" ;
+		 krsywN  = krsy+"وں" ;
+		 krsyw   = tk 1 krsywN
+             in mkNoun krsy   krsy   krsy
+                       krsyaN krsywN krsyw
+                       Fem ;
+
+-- feminine nouns end with a, aN, wN
+     mkN04 : Str -> Noun ;
+     mkN04 n = case last n of {
+     "ا" => let bla = n
+        in mkNoun bla          bla         bla
+                  (bla+"ئیں") (bla+"ؤں") (bla+"ؤ")
+                  Fem ;
+      _   => let maN = n ; -- ends with aN and wN
+            ma  = tk 1 maN
+        in mkNoun maN         maN        maN
+                  (ma+"ئیں") (ma+"ؤں") (ma+"ؤں")
+                  Fem 
+
+            };
+  --feminine nouns end with ya
+    
+      mkN05 : Str -> Noun ;
+      mkN05 gRya = let gRy = (tk 1 gRya)
+             in mkNoun gRya       gRya       gRya
+                       (gRya+"ں") (gRy+"وں") (gRy+"و")
+                       Fem ;
+
+-- feminine nouns end with w
+      
+      mkN07 : Str -> Noun ;
+      mkN07 khshbw =  mkNoun khshbw     khshbw         khshbw
+                            (khshbw + "ئیں") (khshbw + "ؤں") (khshbw + "ؤ")
+                            Fem ;
+
+-- Loan arabic feminine nouns end with t
+-- this is a noun that shows  state, condition 
+
+      mkN10 : Str -> Noun ;
+      mkN10 ndamt = mkNoun ndamt        ndamt        ndamt
+                     (ndamt+"یں") (ndamt+"وں") (ndamt+"و")
+                     Fem ;
+-- Worst case function
+      mkN : (_,_,_,_,_,_ : Str) -> Gender -> Noun ;
+      mkN sgNom sgObl sgVoc plNom plObl plVoc g = 
+      mkNoun sgNom sgObl sgVoc plNom plObl plVoc g ;
+
+      mkN06 : Str -> Noun ;
+      mkN06 rya = mkNoun rya          rya         rya 
+                   (rya+"ئیں") (rya+"ؤں") rya
+                   Fem ;
+
+-- feminine nouns that do not end with a, N, w, wN
+     
+      mkN08 : Str -> Noun ;
+      mkN08 ktab = mkNoun ktab ktab ktab
+                    (ktab+"یں") (ktab+"وں") (ktab+"و")
+                    Fem ;
+
+-- Loan arabic feminine nouns
+     
+      mkN09 : Str -> Noun ;
+      mkN09 ahsan = mkNoun ahsan        ahsan                             ahsan
+                     (ahsan+"ات")  (ahsan+"ات") (ahsan+"و") 
+                     Fem ;
+-- (variants{ahsan+"ات";ahsan+"وں"})
+-- Loan persian maculine nouns end with w
+
+      mkN11 : Str -> Noun ;
+      mkN11 alw = mkNoun alw alw         alw
+                   alw (alw+"ؤں") (alw+"ؤ")
+                   Masc ;
+
+
+-- Loan persian maculine nouns end with w^
+
+      mkN12 : Str -> Noun ;
+      mkN12 bhao = mkNoun (bhao)      (bhao)     (bhao)
+                          (bhao)      (bhao)     (bhao)
+                    Masc ;
+
+-- Adjectives
+  compoundAdj : Str -> Str -> Adjective = \s1,s2 -> mkCompoundAdj (regAdjective s1) (regAdjective s2) ;
+   mkCompoundAdj : Adjective -> Adjective -> Adjective ;
+   mkCompoundAdj adj1 adj2 = {s = \\n,g,c,d => adj1.s ! n ! g ! c ! d ++ adj2.s ! n ! g ! c ! d} ;
+
+  regAdjective : Str -> Adjective; 
+  regAdjective x =  case x of {
+	              acch + ("ا"|"اں") => mkAdjective x  ("بہت" ++ x)          ("سب سے" ++ x)          (acch + "ے") ("بہت" ++ acch + "ے") ("سب سے" ++ acch + "ے") (acch + "ے") ("بہت" ++ acch + "ے") ("سب سے" ++ acch + "ے")
+		                                      (acch + "ی") ("بہت" ++ acch + "ی") ("سب سے" ++ acch + "ی") (acch + "ی") ("بہت" ++ acch + "ی") ("سب سے" ++ acch + "ی") (acch + "ی") ("بہت" ++ acch + "ی") ("سب سے" ++ acch + "ی")
+						      (acch +"ے")  ("بہت" ++ acch + "ے") ("سب سے" ++ acch + "ے") (acch + "ے") ("بہت" ++ acch + "ے") ("سب سے" ++ acch + "ے") (acch + "ے") ("بہت" ++ acch + "ے") ("سب سے" ++ acch + "ے")
+		                                      (acch + "ی") ("بہت" ++ acch + "ی") ("سب سے" ++ acch + "ی") (acch + "ی") ("بہت" ++ acch + "ی") ("سب سے" ++ acch + "ی") (acch + "ی") ("بہت" ++ acch + "ی") ("سب سے" ++ acch + "ی");
+									
+                        _                 => mkAdjective  x  ("بہت" ++ x)  	("سب سے" ++ x)  x ("بہت" ++ x) ("سب سے" ++ x) x ("بہت" ++ x) ("سب سے" ++ x)
+							  x  ("بہت" ++ x) 	("سب سے" ++ x) 	x ("بہت" ++ x) ("سب سے" ++ x) x ("بہت" ++ x) ("سب سے" ++ x)
+							  x  ("بہت" ++ x) 	("سب سے" ++ x)  x ("بہت" ++ x) ("سب سے" ++ x) x ("بہت" ++ x) ("سب سے" ++ x)
+							  x  ("بہت" ++ x) 	("سب سے" ++ x)  x ("بہت" ++ x) ("سب سے" ++ x) x ("بہت" ++ x) ("سب سے" ++ x)
+																 
+                            }; 
+
+
+
+----2 Determiners
+  IDeterminer = {s:Gender => Case => Str ; n : Number};
+  makeDet : Str -> Str -> Str -> Str -> Number -> Determiner = \s1,s2,s3,s4,n -> {
+   s = table {
+      Sg => table { 
+        Masc => table {_ => s1} ;
+        Fem => table {_ => s2} 
+	  } ;
+      Pl => table {
+        Masc => table { _ => s3} ;
+        Fem => table {_ => s4} 
+	  }
+      } ;
+
+      n = n
+	};	
+	
+  makeIDet : Str -> Str -> Number -> IDeterminer = \s1,s2,n -> {
+   s = table {
+        Masc => table {_ =>s1};
+	Fem  => table {_ =>s2} 
+	 };
+	 n = n
+    };
+    
+-- IQuant
+  
+makeIQuant : Str -> {s : Number => Gender => Case => Str} = \str -> {
+  s = table {
+	        Sg => table {
+				Masc => table {
+						     Dir => str ++ "سا" ;
+						      _ => str ++ "سے" 
+                             
+							 };
+				Fem => table {
+						     _ => str ++ "سی"
+							 }
+						};
+		Pl => table {
+				Masc => table {
+						     _ => str ++ "سے"
+							 };
+				Fem => table {
+						     _ => str ++ "سی"
+							 }
+					} 
+				}
+               };    
+   
+    
+-- Proposition  
+ 
+  makePrep : Str -> Str -> Preposition = \s1,s2 -> {s =
+  table {
+                Masc => s1;
+		Fem  => s2
+	 }; } **  { lock_Prep = <>};
+   
+----2 Pronouns
+   PronForm = {s:Pronoun => Str};
+   makeDemPron : (x1,x2,x3,x4,x5,x6:Str) -> PronForm = 
+    \y1,y2,y3,y4,y5,y6 -> {
+	 s = table {
+         P Sg _ Dir _ => y1;
+         P Sg _ Obl _ => y2;
+         P Sg _ Voc _ => y3;
+         P Pl _ Dir _ => y4;
+         P Pl _ Obl _ => y5;
+         P Pl _ Voc _ => y6
+         };
+      };
+
+--   DemonPronForm = {s:DemPronForm => Str};
+  mkDemonPronForm : (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12:Str) -> DemPronForm =
+  \y1,y2,y3,y4,y5,y6,y7,y8,y9,y10,y11,y12 -> {
+   s = table {
+	        Sg => table {
+				Masc => table {
+						     Dir => y1 ;
+                             Obl => y2 ;
+                             Voc => y3
+							 };
+				Fem => table {
+						     Dir => y4 ;
+                             Obl => y5 ;
+                             Voc => y6
+							 }
+						};
+			Pl => table {
+				Masc => table {
+						     Dir => y7 ;
+                             Obl => y8 ;
+                             Voc => y9
+							 };
+				Fem => table {
+						     Dir  => y10 ;
+                             Obl => y11 ;
+                             Voc => y12
+							 }
+					} 
+				}
+               };    
+   makeDemonPronForm : Str -> Str -> Str -> DemPronForm ;
+   makeDemonPronForm  yeh is inn = mkDemonPronForm 	yeh	is	"" yeh is "" yeh inn "" yeh inn "";	
+--   makePossPronForm myra myry hmara hmary = mkDemonPronForm myra myra myra myry myry myry hmara hmara hmara hmary hmary hmary;
+   
+   PersPron = {s: PersPronForm => Str};
+   
+   mkPersPron:(x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22,x23,x24,x25,x26,x27,x28,x29,x30,x31,x32,x33,x34,x35,x36:Str) -> PersPron = 
+    \y1,y2,y3,y4,y5,y6,y7,y8,y9,y10,y11,y12,y13,y14,y15,y16,y17,y18,y19,y20,y21,y22,y23,y24,y25,y26,y27,y28,y29,y30,y31,y32,y33,y34,y35,y36 -> {
+     s = 
+	  table {
+	      PPF Sg Pers1 Dir => y1;
+          PPF Sg Pers1 Obl => y2;
+	      PPF Sg Pers1 Voc => y3;
+	      PPF Sg Pers2_Casual Dir => y4;
+	      PPF Sg Pers2_Casual Obl => y5;
+          PPF Sg Pers2_Casual Voc => y6;
+	      PPF Sg Pers2_Familiar Dir => y7;
+	      PPF Sg Pers2_Familiar Obl => y8;
+	      PPF Sg Pers2_Familiar Voc => y9;
+          PPF Sg Pers2_Respect Dir => y10;
+	      PPF Sg Pers2_Respect Obl => y11;
+	      PPF Sg Pers2_Respect Voc => y12;
+	      PPF Sg Pers3_Near Dir => y13;
+          PPF Sg Pers3_Near Obl => y14;
+	      PPF Sg Pers3_Near Voc => y15;
+	      PPF Sg Pers3_Distant Dir => y16;
+	      PPF Sg Pers3_Distant Obl => y17;
+          PPF Sg Pers3_Distant Voc => y18;
+	      PPF Pl Pers1 Dir => y19;
+          PPF Pl Pers1 Obl => y20;
+	      PPF Pl Pers1 Voc => y21;
+	      PPF Pl Pers2_Casual Dir => y22;
+	      PPF Pl Pers2_Casual Obl => y23;
+          PPF Pl Pers2_Casual Voc => y24;
+	      PPF Pl Pers2_Familiar Dir => y25;
+	      PPF Pl Pers2_Familiar Obl => y26;
+	      PPF Pl Pers2_Familiar Voc => y27;
+          PPF Pl Pers2_Respect Dir => y28;
+	      PPF Pl Pers2_Respect Obl => y29;
+	      PPF Pl Pers2_Respect Voc => y30;
+	      PPF Pl Pers3_Near Dir => y31;
+          PPF Pl Pers3_Near Obl => y32;
+	      PPF Pl Pers3_Near Voc => y33;
+	      PPF Pl Pers3_Distant Dir => y34;
+	      PPF Pl Pers3_Distant Obl => y35;
+          PPF Pl Pers3_Distant Voc => y36
+		 }; 
+      };
+	  
+   makePersPron : PersPron;
+   makePersPron     = mkPersPron	"m(a)یں"	"m(o)j'|ہ"		""		"t(o)و "		"t(o)j|ہ"		"t(o)و "		"t(o)م"		"t(o)م"		"t(o)م"		"آپ"		"آپ"		"آپ"		"y(i)ہ"		"a(i)س"		""		"w(o)ہ"		"a(o)س"		""
+									"h(a)م"		"h(a)م"			""		"t(o)م" 		"t(o)م"			"t(o)م"			"t(o)م"		"t(o)م"		"t(o)م"		"آپ"		"آپ"		"آپ"		"y(i)ہ"		"a(i)ن"		""		"w(o)ہ"		"a(o)ن"		"" ;
+						
+  mkPron : (x1,x2,x3:Str) -> {s:Case => Str} = 
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=333d22952460:351-515
+start=351
+end=515
+----
+     \y1,y2,y3 -> { s =
+                      table {
+                        Dir => y1;
+                        Obl => y2;
+                        Voc => y3
+                        }
+                      };  
+                                   
+	------- PossPronForm yet to be implemented
+  
+-- IntPronForm = {s:InterrPronForm => Str};
+  IntPronForm = {s: Case => Str};
+  mkIntPronForm : (x1,x2,x3:Str) -> IntPronForm =
+  \y1,y2,y3 -> {
+   s = 
+    table {
+	            Dir => y1;
+	            Obl => y2;
+	            Voc => y3
+		 }
+	}; 
+
+----2 Adjectives
+-- defined in ResUrd
+
+----3 Verbs
+  CommonVF = {s : VTense => UPerson => Number => Gender => Str} ;
+ 
+   mkVerb : (x1: Str) -> Verb = \inf  ->
+     	 let root = (tk 2 inf); inf_obl = ((tk 1 inf) + "ے"); inf_fem = ((tk 1 inf) + "ی")
+	in { s = table {
+          
+               VF tense person number gender => (mkCmnVF root tense person number gender).s  ;
+               Inf     => inf ;
+               Root    => root ;
+               Inf_Obl => inf_obl ;
+               Inf_Fem => inf_fem 
+          
+          
+       };
+       cvp = [] 
+     } ;
+   rem_y : Str -> Str;
+   rem_y str = let b = take 1 str; yth = drop 1 str; a1	= take 4 yth; a2 = take 1 yth; 	th= if_then_else Str (eq a1 "(a)ی") (drop 5 str) (drop 2 str);	st = if_then_else Str (eq a1 "(a)ی") (b ++ "(i)"++th) (if_then_else Str (eq a2 "ی") (b ++ th)  str)
+              in rt st;
+	rt: Str -> Str;
+	rt r = r;
+   mkCmnVF : Str -> VTense -> UPerson -> Number -> Gender -> {s:Str} =
+    \root,t,p,n,g ->
+     {s = 
+      let form1 = case (last root) of {
+                  "ا"|"آ"|"و" => root + "ؤں" ;
+                  _           => root + "وں"
+                 };
+          form2 =  case (last root) of {
+                  "ا"|"آ"|"و" => root + "ئں" ;
+                  _           => root + "یں"
+                 };
+	 in
+       case <t,p,n,g> of {
+        <Subj,Pers1,Sg,_> => form1 ;
+        <Subj,Pers1,Pl,_> => form2 ;
+        <Subj,_,_,_>      => (mkImpert root p n g).s ;
+        <Perf,_,_,_>      => case root of {
+		                      "ہو" => (mkPastInd root p n g).s ;
+				      "جا" => (mkPastInd "گی" p n g).s ;
+				      "کر" => (mkPastInd "ک" p n g).s ;
+				      "دے" => (mkPastInd "د" p n g).s ;
+				      "لے" => (mkPastInd "ل" p n g).s ;
+				      _    => (mkPastInd root p n g).s };
+        <Imperf,Pers2_Familiar,Sg,Masc>         => root + "تے";
+        <Imperf,Pers2_Familiar,Sg,Fem>         => root + "تی"; --variants{root+"تی" ; root+"تیں"};	
+        <Imperf,Pers2_Familiar,Pl,Masc>         => root + "تے";
+        <Imperf,Pers2_Familiar,Pl,Fem>         => root+"تیں";
+        <Imperf,Pers2_Respect,Sg,Masc>         => root + "تے";
+        <Imperf,Pers2_Respect,Sg,Fem>         => root + "تی"; --variants{root+"تی" ; root+"تیں"};	
+        <Imperf,Pers2_Respect,Pl,Masc>         => root + "تے";
+        <Imperf,Pers2_Respect,Pl,Fem>         => root+"تیں";
+		<Imperf,_,Sg,Masc>					  => root+"تا";
+		<Imperf,_,Sg,Fem>					  => root+"تی";
+		<Imperf,_,Pl,Masc>					  => root+"تے";
+		<Imperf,_,Pl,Fem>					  => root+"تیں"
+        }
+       
+     } ;
+   
+   mkPastInd : Str -> UPerson -> Number -> Gender -> {s:Str} = \root,p,n,g ->
+    {s = let roo = root ;
+             a = case (last root) of {
+                  "ا"|"آ"|"و"|"ک" => "یا" ;
+                  _           => "ا"
+                 } ;
+             y = case (last root) of {
+                  "ا"|"آ"|"و" => "ئی" ;
+                  _           => "ی"
+                 } ;
+             e = case (last root) of {
+                  "ا"|"آ"|"و"|"ک" => "ئے" ;
+                  _           => "ے"
+                 } ;
+            yN = case (last root) of {
+                  "ا"|"آ"|"و" => "ئیں" ;
+                  _           => "یں"
+                 } ;
+
+     in 
+     case <p,n,g> of {
+       <Pers1,Sg,Masc> => roo+a ;
+       <Pers1,Sg,Fem>  => roo+y ;
+       <Pers1,Pl,Masc> => roo+e ;
+       <Pers1,Pl,Fem>  => roo+yN ;
+
+       <Pers2_Casual,Sg,Masc> => roo+a ;
+       <Pers2_Casual,Sg,Fem>  => roo+y ;
+       <Pers2_Casual,Pl,Masc> => roo+e ;       
+       <Pers2_Casual,Pl,Fem>  => roo+yN ;
+
+       <Pers2_Familiar,Sg,Masc> => roo+e ;
+       <Pers2_Familiar,Sg,Fem>  => roo+y; --variants{roo+y ; roo+yN} ;
+       <Pers2_Familiar,Pl,Masc> => roo+e ;
+       <Pers2_Familiar,Pl,Fem>  => roo+yN ;       
+       
+       <Pers2_Respect,Sg,Masc>  => roo+e ;
+       <Pers2_Respect,Sg,Fem>   => roo+yN; --variants{roo+yN ; roo+y} ;
+       <Pers2_Respect,Pl,Masc>  => roo+e ;
+       <Pers2_Respect,Pl,Fem>   => roo+yN ;
+       <_,Sg,Masc>              => roo + a; 
+       <_,Sg,Fem>              => roo+y ; 
+	   <_,Pl,Masc>              => roo + e; 
+       <_,Pl,Fem>              => roo+yN 
+       
+     } ;
+    } ;
+
+   mkImpert : Str -> UPerson -> Number -> Gender -> {s:Str} = \root,p,n,g ->
+    {s = let roo =  root ;
+             w = case (last root) of {
+                  "ا"|"آ"|"و" => "ؤ" ;
+                  _           => "و"
+               } ;
+             yN = case (last root) of {
+                  "ا"|"آ"|"و" => "ئیں" ;
+                  _           => "یں" 
+               } ;
+             yE = case (last root) of {
+                  "ا"|"آ"|"و" => "ئیے" ;
+                  _           => "یے" 
+               } ;
+             e = case (last root) of {
+                  "ا"|"آ"|"و" => "ئے" ;
+                  _           => "ے" 
+               } in
+      case <p,n,g> of {
+       <Pers1,_,_>          => ""; --nonExist ;
+       <Pers2_Casual,Sg,_>  => root ;
+       <Pers2_Casual,Pl,_>  => roo+w ;
+       <Pers2_Familiar,_,_> => roo+w ;
+       <Pers2_Respect,Sg,_> => roo+w; --variants{roo+w; roo+yN; roo+yE} ;
+       <Pers2_Respect,Pl,_> => roo+yN; --variants{roo+yN; roo+yE} ;
+       <_,Sg,_>              => roo+e ; 
+       <_,Pl,_>              => roo+yN 
+      }; 
+    };       
+
+}
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/NounUrd.gf"
+id=4a22c2c1f7c8
+kind=source
+size=86
+lines=2
+chunks=0
+----
+concrete NounUrd of Noun = CatUrd ** NounHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/NumeralUrd.gf"
+id=c650d0def34c
+kind=source
+size=5219
+lines=130
+chunks=0
+----
+-- By Harald Hammarstr
+-- Modification for Urdu Shafqat Virk
+
+
+concrete NumeralUrd of Numeral = CatUrd [Numeral,Digits,Decimal] ** open ResUrd,CommonHindustani,ParamX, Prelude in {
+flags coding=utf8 ;
+
+param DForm = unit | ten ;
+param DSize = sg | r2 | r3 | r4 | r5 | r6 | r7 | r8 | r9 ;
+param Size = singl | less100 | more100 ; 
+
+oper LinDigit = {s : DForm => Str ; size : DSize ; n : Number} ;
+
+
+lincat Dig = { s:Str ; n : Number};
+lincat Digit = LinDigit ;
+lincat Sub10 = {s : DForm => Str ; size : DSize ; n : Number} ;
+lincat Sub100 = {s : Str ; size : Size ; n : Number} ;
+lincat Sub1000 = {s : Str ; s2 : Str ; size : Size ; n : Number } ; 
+lincat Sub1000000 = { s : Str ; n : Number } ;
+
+lin num x0 = 
+    {s = table {
+          NCard =>   x0.s ; 
+          NOrd =>  x0.s ++ "واں" -- need to use mkOrd x0.s but it gives linking error 
+          };
+       n = x0.n
+    } ;
+
+
+oper mkNum : Str -> Str -> DSize -> LinDigit = 
+  \do -> \bis -> \sz ->  
+  {s = table {unit => do ; ten => bis } ; 
+   size = sz ; n = Pl} ;
+
+lin n2 = mkNum "دو" "بیس" r2 ;
+lin n3 = mkNum "تین" "تیس" r3 ;
+lin n4 = mkNum "چار" "چالیس" r4 ;
+lin n5 = mkNum "پانچ" "پچاس" r5 ;
+lin n6 = mkNum "چھ" "ساٹھ" r6 ; 
+lin n7 = mkNum "سات" "ستر" r7; 
+lin n8 = mkNum "آٹھ" "اسی" r8;
+lin n9 = mkNum "نو" "نوے" r9 ;
+
+oper mkR : Str -> Str -> Str -> Str -> Str -> Str -> Str -> Str -> Str -> DSize => Str = \a1 -> \a2 -> \a3 -> \a4 -> \a5 -> \a6 -> \a7 -> \a8 -> \a9 -> table {
+  sg => a1 + "ہ" ;
+  r2 => a2 + "یس" ;
+  r3 => a3 + "تیس" ;
+  r4 => a4 + "الیس" ;
+  r5 => a5 + "ن" ;
+  r6 => a6 + "ساٹھ" ;
+  r7 => a7 + "ہتر" ;
+  r8 => a8 + "اسی" ;
+  r9 => a9 + "انوے"
+} ;
+
+oper rows : DSize => DSize => Str = table {
+  sg => mkR "گیار" "اک" "اکت" "اکت" "اکیاو" "اک" "اک" "اکی" "اکی" ; 
+  r2 => mkR "بار" "بای" "بات" "بای" "باو" "با" "با" "بای" "ب" ;
+  r3 => mkR "تیر" "تی" "تین" "تنت" "ترپ" "تری" "ت" "تر" "تر" ;
+  r4 => mkR "چود" "چوب" "چون" "چوا" "چوو" "چون" "چوہ" "چور" "چور" ;
+  r5 => mkR "پندر" "پچی" "پین" "پنتا" "پچپ" "پین" "پہ" "پچ" "پچ" ;
+  r6 => mkR "سول" "چھب" "چھت" "چھی" "چھپ" "چھیا" "چھ" "چھی" "چھی" ;
+  r7 => mkR "ستر" "ستا" "سین" "سنت" "ستاو" "ستا" "سر" "ست" "ستا" ;
+  r8 => mkR "اٹھار" "اٹھای" "اڑ" "اڑت" "اٹھاو" "اڑ" "اٹھ" "اٹھ" "اٹھ" ; 
+  r9 => table {sg => "انیس" ; r2 => "انتیس" ; r3 => "انتالیس" ; 
+               r4 => "انچاس" ; r5 => "انستھ" ; r6 => "انہتر" ; 
+               r7 => "اناسی" ; 
+               r8 => "انانوے" ; r9 => "ننانوے" } 
+} ;
+
+oper ss : Str -> {s : Str} = \s -> {s = s} ;
+
+lin pot01 = {s = table {unit => "ایک" ; _ => "دمی" } ; size = sg ; n = Sg} ;
+lin pot0 d = d ; 
+lin pot110 = {s = "دس" ; size = less100 ; n = Pl} ; 
+lin pot111 = {s = rows ! sg ! sg ; size = less100 ; n = Pl} ;
+lin pot1to19 d = {s = rows ! d.size ! sg ; size = less100 ; n = Pl} ; --changed from d.n
+lin pot0as1 n = {s = n.s ! unit ; size = table {sg => singl ; _ => less100} ! n.size ; n = n.n } ;
+
+lin pot1 d = {s = d.s ! ten ; size = less100 ; n = Pl} ; --changed from d.n
+lin pot1plus d e = {s = rows ! e.size ! d.size ; size = less100 ; n = Pl} ; --changed from d.n
+
+lin pot1as2 n = {s = n.s ; s2 = "دمی" ; size = n.size ; n = n.n} ;
+lin pot2 d = {s = (mksau (d.s ! unit) d.size) ; 
+              s2 = d.s ! unit ++ "لاکھ" ; size = more100 ; n = Pl} ; --changed from d.n
+lin pot2plus d e = 
+  {s = (mksau (d.s ! unit) d.size) ++ e.s ; 
+   s2 = (d.s ! unit) ++ "لاکھ" ++ (mkhazar e.s e.size) ; 
+   size = more100 ; n = Pl} ;
+
+lin pot2as3 n = {s = n.s ; n = n.n} ;
+lin pot3 n = {s = table { singl => ekhazar ;
+                          less100 => n.s ++ "ہزار" ; 
+                          more100 => n.s2 } ! n.size ; n = Pl} ; --changed from d.n
+lin pot3plus n m = 
+  {s = table {singl => ekhazar ;
+              less100 => n.s ++ "ہزار" ; 
+              more100 => n.s2 } ! n.size ++ m.s ; n = Pl} ; --changed from d.n
+
+lin D_0 = { s = "۰" ; n = Sg};
+lin D_1 = { s = "۱" ; n = Sg};
+lin D_2 = { s = "۲" ; n = Pl};
+lin D_3 = { s = "۳" ; n = Pl};
+lin D_4 = { s = "۴" ; n = Pl};
+lin D_5 = { s = "۵" ; n = Pl};
+lin D_6 = { s = "۶" ; n = Pl};
+lin D_7 = { s = "۷" ; n = Pl};
+lin D_8 = { s = "۸" ; n = Pl};
+lin D_9 = { s = "۹" ; n = Pl};
+lin IDig d = { s = \\_ => d.s ; n = d.n} ;
+lin IIDig d dg = { s = \\df => Prelude.glue (dg.s ! df) d.s ; n = Pl }; 
+lin PosDecimal d = d ** {hasDot=False} ;
+lin NegDecimal d = {
+      s = \\df => Prelude.glue "-" (d.s ! df) ;
+      n = Pl ;
+      hasDot=False
+      } ;
+    IFrac d i = {
+      s = \\df => d.s!df ++
+                  if_then_Str d.hasDot BIND (BIND++"."++BIND) ++
+                  i.s ;
+      n = Pl ;
+      hasDot=True
+      } ;
+
+oper ekhazar : Str = variants {"ہزار" ; "ایک" ++ "ہزار"} ; 
+oper mkhazar : Str -> Size -> Str = \s -> \sz -> table {singl => ekhazar ; _ => s ++ "ہزار"} ! sz ;
+oper mksau : Str -> DSize -> Str = \s -> \sz -> table {sg => "ایک" ++ "سو" ; _ => s ++ "سو"} ! sz ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/ParadigmsUrd.gf"
+id=1513f7d92967
+kind=source
+size=6847
+lines=220
+chunks=0
+----
+--# -path=.:../abstract:../../prelude:../common
+--
+----1 Urdu Lexical Paradigms
+
+resource ParadigmsUrd = open 
+  Predef, 
+  Prelude, 
+  MorphoUrd,
+  CatUrd,
+  CommonHindustani,
+  ParamX
+  in {
+
+--2 Parameters 
+
+oper
+  masculine : Gender ;
+  feminine : Gender ;
+  singular : Number;
+  plural : Number;
+  
+  singular = Sg ; plural = Pl;
+
+  masculine = Masc ; feminine = Fem ; --i
+
+
+--2 Nouns
+
+  mkN = overload {
+    mkN : Str -> N -- Regular nouns like lRka, gender is judged from noun ending 
+      = \s -> regNoun s ** {lock_N = <>} ;
+    mkN : Str -> Gender -> N -- nouns whose gender is irregular like Admy
+      = \s,g -> reggNoun s g ** {lock_N = <>} ;
+    mkN : (x1,_,_,_,_,x6 : Str) -> Gender -> N -- worst case 
+      = \sd,so,sv,pd,po,pv,g -> mkNoun sd so sv pd po pv g ** {lock_N = <>} ;
+    } ;
+  mkN2 : N -> Prep -> Str -> N2; -- e.g maN ky
+  mkN2 = \n,p,c -> n ** {lock_N2 = <> ; c2 = p.s ! n.g ; c3 = c } ; 
+  
+  mkN3 : N -> Prep -> Str -> Str-> N3 ; -- e.g faSlh - sE - ka
+  mkN3 = \n,p,q,r -> n ** {lock_N3 = <> ; c2 = p.s ! n.g ; c3 = q ; c4 = r} ;
+  
+
+  
+-- Compound Nouns  
+
+    mkCmpdNoun : Str -> N -> N -- e.g t-alb elm
+     = \s,noun -> {s =\\n,c => s ++ noun.s ! n ! c ; g = noun.g ; lock_N = <>};
+ 
+
+-- Proper names     
+  mkPN : Str -> PN = \s -> let n = regNoun s in {s = n.s ! Sg ; g = n.g ; lock_PN = <>} ;
+  personalPN : Str -> Str -> Str -> Str -> Str -> Str -> Str -> Number -> Gender -> UPerson -> Pron =
+    \s1,s2,s3,smp,sfp,pmp,pfp,nn,g,p -> let n = mkPron s1 s2 s3 in
+      {s = n.s ;
+       a = toAgr nn p g ;
+       ps = \\n,g => case <n,g> of {
+                        <Sg,Masc> =>smp ;
+			<Sg,Fem> => sfp ;
+			<Pl,Masc> => pmp ;
+			<Pl,Fem> => pfp } ; lock_Pron = <>};
+  demoPN : Str -> Str -> Str -> Quant = \s1,s2,s3 -> let n = makeDemonPronForm s1 s2 s3 in {s = n.s ; a = defaultAgr ; lock_Quant = <>};
+
+  mkLN : Str -> LN = \s -> lin LN {s=s} ;
+  mkSN : Str -> SN = \s -> lin SN {s=s} ;
+  mkGN : Str -> GN = \s -> lin GN {s=s} ;
+
+  mkDet : Str -> Str -> Str -> Str -> Number -> Det = \s1,s2,s3,s4,nb -> let dt = makeDet s1 s2 s3 s4 nb in {s = dt.s ; n = nb ; lock_Det = <>};
+  mkIP : (x1,x2,x3:Str) -> Number -> Gender -> IP = \s1,s2,s3,n,g -> let p = mkIntPronForm s1 s2 s3 in { s = p.s ; n = n ; g = g ;  lock_IP = <>}; 
+
+-- AdN
+  mkAdN : Str -> AdN = \s -> {s = s ; p = False ; lock_AdN = <>} ; 
+--2 Adjectives
+
+  mkA = overload {
+    mkA : Str-> A -- e.g ach'a
+      = \s -> regAdjective s ** {lock_A = <>} ;
+	mkA : Str -> Str -> A2 -- e.g sE Xady krna
+	  = \a,c -> let n = regAdjective a in {s = n.s; c2 = c} ** {lock_A2 = <>} ;
+    } ;
+  mkA2 : A -> Str -> A2 ;
+  mkA2 a str = a ** {c2=str ; lock_A2 = <>} ;
+  
+-- compound Adjectives
+  mkCompoundA : Str -> Str -> A ; -- e.g dra hwa
+  mkCompoundA s1 s2 = lin A (compoundAdj s1 s2) ;
+
+--2 Verbs
+
+  mkV : Str -> V -- regular verbs like swna
+      = \s -> mkVerb s ** {lock_V = <>} ;
+
+  mkV2 = overload {
+    mkV2 : Str -> V2 -- e.g pyna
+      = \s -> mkVerb s **  {c2 = {s = [] ; c = VTrans} ; lock_V2 = <>} ;
+    mkV2 : V -> V2 -- e.g pyna
+      = \v -> v ** {c2 = {s = [] ; c = VTrans} ; lock_V2 = <>} ;
+    mkV2 : V -> Str -> V2 -- e.g bnd krna
+      = \v,p -> v ** {c2 = {s = p ; c = VTrans} ; lock_V2 = <>} ;
+    } ;
+  dirV2 : V -> V2 = \v -> v ** {c2 = {s = [] ; c = VTrans} ; lock_V2 = <>} ;
+  
+  mkV3 : V -> Str -> Str -> V3; -- e.g bycna
+    mkV3 v p q = v ** { c2 = p ; c3 = q ; lock_V3 = <>} ;
+  mkV2V : V -> Str -> Str -> Bool -> V2V ; -- e.g eltja krna - sE - kw
+    mkV2V v s1 s2 b = v ** {isAux = b ; c1 = s1 ; c2 = s2 ; lock_V2V = <>} ;
+  dirdirV3 : V -> V3 ;
+  dirdirV3 v = v ** { c2 = [] ; c3 = [] ; lock_V3 = <>} ;
+  
+-- compund verbs
+   compoundV = overload {
+   compoundV : Str -> V -> V -- e.g barX hwna
+      = \s,v -> {s = \\vf => v.s ! vf ; cvp = s ; lock_V = <>} ;     
+   compoundV : Str -> V2 -> V -- e.g bnd krna
+     = \s,v -> {s = \\vf => v.s ! vf ; cvp = s ; lock_V = <>} ;
+   };
+ 
+oper mkVA  : V -> VA = \v -> lin VA v ;
+oper mkV2S  : V -> V2S = \v -> lin V2S v ** {c2={s = [] ; c = VTrans}} ;
+
+----2 Adverbs
+mkAdv = overload {
+  mkAdv : Str -> Adv -- e.g yhaN
+    = \str -> {s = \\_ => str ; lock_Adv = <>};
+  mkAdv : Str -> Str -> Adv
+    = \m,f -> {s = table {Masc => m ; Fem => f} ; lock_Adv = <>};
+    };
+
+mkAdV : Str -> AdV = \s -> lin AdV {s=s} ;
+
+----2 Prepositions
+
+  mkPrep : Str -> Str -> Prep ; -- e.g ka - ky
+    mkPrep s1 s2 = makePrep s1 s2 ** {lock_Prep = <>};
+    
+--3 Determiners and quantifiers
+
+--  mkQuant : overload {
+--    mkQuant : Pron -> Quant ;
+--    mkQuant : (no_sg, no_pl, none_sg, non_pl : Str) -> Quant ;
+--  } ;
+  
+--  mkQuant = overload {
+--    mkQuant : Pron -> Quant = \p -> {s = \\_,_,c => p.s!c ;a = p.a ; lock_Quant = <>};
+--    mkQuant : (no_sg, no_pl, none_sg, non_pl : Str) -> Quant = mkQuantifier;
+--  } ;
+  mkIQuant : Str -> IQuant = \s -> lin IQuant (makeIQuant s) ;
+  
+
+--2 Conjunctions
+  mkConj : overload {
+    mkConj : Str -> Conj ;                  -- and (plural agreement)
+    mkConj : Str -> Number -> Conj ;        -- or (agrement number given as argument)
+    mkConj : Str -> Str -> Conj ;           -- both ... and (plural)
+    mkConj : Str -> Str -> Number -> Conj ; -- either ... or (agrement number given as argument)
+  } ;
+ mkConj = overload {
+    mkConj : Str -> Conj = \y -> mk2Conj [] y plural ;
+    mkConj : Str -> Number -> Conj = \y,n -> mk2Conj [] y n ;
+    mkConj : Str -> Str -> Conj = \x,y -> mk2Conj x y plural ;
+    mkConj : Str -> Str -> Number -> Conj = mk2Conj ;
+  } ;
+
+  mk2Conj : Str -> Str -> Number -> Conj = \x,y,n -> 
+    lin Conj (sd2 x y ** {n = n}) ;  
+
+--  mkV0  : V -> V0 ;
+  mkVS  : V -> VS; -- e.g drna
+  mkVS v = lin VS v ;
+--  mkV2S : V -> Prep -> V2S ;
+  mkVV  : V -> VV = -- e.g cahna
+     \v ->  lin VV (v ** {isAux = False});
+    
+  mkAdA : Str -> AdA ;
+--  mkAdv x = lin Adv (ss x) ;
+--  mkAdV x = lin AdV (ss x) ;
+  mkAdA x = lin AdA (ss x) ;
+--  mkAdN x = lin AdN (ss x) ;
+
+--  mkV2V : V -> Prep -> Prep -> V2V ;
+--  mkVA  : V -> VA ;
+--  mkV2A : V -> Prep -> V2A ;
+  mkVQ  : V -> VQ ; -- e.g janna
+  mkVQ v = lin VQ v ;
+--  mkV2Q : V -> Prep -> V2Q ;
+--
+--  mkAS  : A -> AS ;
+--  mkA2S : A -> Prep -> A2S ;
+--  mkAV  : A -> AV ;
+--  mkA2V : A -> Prep -> A2V ;
+--
+---- Notice: Categories $V0, AS, A2S, AV, A2V$ are just $A$.
+---- $V0$ is just $V$; the second argument is treated as adverb.
+--
+--  V0 : Type ;
+--  AS, A2S, AV, A2V : Type ;
+--
+
+  mkInterj : Str -> Interj
+    = \s -> lin Interj {s = s} ;
+
+----.
+----2 Definitions of paradigms
+----
+---- The definitions should not bother the user of the API. So they are
+---- hidden from the document.
+--
+--  Gender = MorphoHin.Gender ; 
+--  Number = MorphoHin.Number ;
+--  Case = MorphoHin.Case ;
+--  human = Masc ; 
+--  nonhuman = Neutr ;
+--  masculine = Masc ;
+--  feminine = Fem ;
+--  singular = Sg ;
+--  plural = Pl ;
+--  nominative = Nom ;
+--  genitive = Gen ;
+  
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/ParseUrd.gf"
+id=cecc270154f0
+kind=source
+size=5297
+lines=161
+chunks=0
+----
+--# -path=.:../abstract:../english:../hindustani
+concrete ParseUrd of ParseEngAbs = 
+  TenseX - [AdN,Adv,SC,PPos,PNeg],
+--  TextX - [AdN,Adv,SC],
+  CatUrd,
+  NounUrd - [PPartNP],
+  AdjectiveUrd,
+  NumeralUrd,
+  ConjunctionUrd,
+  VerbUrd - [PassV2,ComplVV],
+  AdverbUrd,
+  PhraseUrd,
+  SentenceUrd,
+  RelativeUrd,
+  QuestionUrd,
+  SymbolUrd [PN, Symb, String, CN, Card, NP, MkSymb, SymbPN, CNNumNP],
+--  StructuralUrd,
+  IdiomUrd [NP, VP, Tense, Cl, ProgrVP, ExistNP],
+  ExtraUrd [NP, Quant, VPSlash, VP, Tense, GenNP, PassVPSlash,Temp,Pol,Conj,VPS,ListVPS,S,Num, CN,
+  RP, MkVPS, BaseVPS, ConsVPS, ConjVPS, PredVPS, GenRP,VPI, VPIForm, VPIInf, VPIPresPart, ListVPI,
+  VV, MkVPI, BaseVPI, ConsVPI, ConjVPI, ComplVPIVV,ClSlash, RCl, EmptyRelSlash],
+  DictEngUrd **
+--  UNDictUrd ** 
+open MorphoUrd, ResUrd, ParadigmsUrd,CommonX, CommonHindustani, Prelude in {
+
+flags
+  literal=Symb ;
+  coding=utf8 ;
+
+lin
+  myself_NP = {s = \\_ => kwd ; a  = Ag Masc Sg Pers1 };
+  yourselfSg_NP = {s = \\_ => kwd ; a  = Ag Masc Sg Pers2_Respect }; --regNP "yourself" singular ;
+  himself_NP = {s = \\_ => kwd ; a  = Ag Masc Sg Pers3_Distant }; --regNP "himself" singular ;
+  herself_NP = {s = \\_ => kwd ; a  = Ag Fem Sg Pers3_Distant }; --regNP "herself" singular ;
+  itself_NP = {s = \\_ => kwd ; a  = Ag Masc Sg Pers3_Near }; --regNP "itself" singular ;
+  ourself_NP = {s = \\_ => kwd ; a  = Ag Masc Pl Pers1 }; --regNP "ourself" plural ;
+  yourselfPl_NP = {s = \\_ => kwd ; a  = Ag Masc Pl Pers2_Respect }; --regNP "yourself" plural ;
+  themselves_NP = {s = \\_ => kwd ; a  = Ag Masc Pl Pers3_Distant }; --regNP "themself" plural ;
+  themself_NP = {s = \\_ => kwd ; a  = Ag Masc Sg Pers3_Distant }; --regNP "themself" plural ;
+
+  CompoundCN num noun cn = {
+    s = \\n,c => num.s  ++ cn.s ! n ! c ++ noun.s ! num.n ! Dir;
+    g = cn.g
+  } ;
+  
+  DashCN noun1 noun2 = {
+    s = \\n,c => noun1.s ! n ! Dir ++ "-" ++ noun2.s ! n ! c ;
+    g = noun2.g
+  } ;
+
+  GerundN v = {
+    s = \\n,c => v.cvp ++ v.s ! Inf ; -- v.s ! VF Imperf Pers2_Casual n Masc ++ hwa (Ag Masc n Pers2_Casual) ; --the main verb of compound verbs
+    g = Masc
+  } ;
+  
+  GerundAP v = {
+    s = \\n,g,_,_ => v.cvp ++ v.s ! VF Imperf Pers2_Casual n g ++ hwa (Ag g n Pers2_Casual) ;   
+  } ;
+
+  PastPartAP v = {
+    s = \\n,g,_,_ => v.cvp ++ v.s ! VF Imperf Pers2_Casual n g ; -- the main verb of compound versb needs to be attached here
+  } ;
+
+--  OrdCompar a = {s = \\c => a.s ! AAdj Compar c } ;
+
+  PositAdVAdj a = {s = a.s ! Sg ! Masc ! Dir ! Posit} ;
+---------------
+--SlashV2V v p vp = insertVV (infV2V v.isAux vp) (predV v) vp.embComp  ** {c2 = {s = sE ; c = VTrans}}; -- changed from VTransPost
+ComplVV v a p vp = insertTrans (insertVV (infVV v.isAux vp) (predV v) vp.embComp ) VTrans; -- changed from VTransPost
+---------------
+  
+
+  UseQuantPN q pn = {s = \\c => q.s ! Sg ! pn.g ! Dir ++ pn.s ! Dir ; a = agrP3 pn.g Sg} ;
+
+PredVPosv np vp = mkClause np vp ; --{
+{-      s = \\t,a,b,o => 
+        let 
+          verb  = vp.s ! t ! a ! b ! o ! np.a ;
+          compl = vp.s2 ! np.a
+        in
+        case o of {
+          ODir => compl ++ "," ++ np.s ! npNom ++ verb.aux ++ vp.ad ++ verb.fin ++ verb.adv ++ verb.inf ;
+          OQuest => verb.aux ++ compl ++ "," ++ np.s ! npNom ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf 
+          }
+    } ;
+-}    
+  PredVPovs np vp = mkClause np vp ; --{
+{-      s = \\t,a,b,o => 
+        let 
+          verb  = vp.s ! t ! a ! b ! o ! np.a ;
+          compl = vp.s2 ! np.a
+        in
+        case o of {
+          ODir => compl ++ verb.aux ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf ++ np.s ! npNom ;
+          OQuest => verb.aux ++ compl ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf ++ np.s ! npNom
+          }
+    } ;
+-}
+
+{-
+  SlashV2V v p vp = insertObjc (\\a => p.s ++ case p.p of {CPos => ""; _ => "not"} ++ 
+                                       v.c3 ++ 
+                                       infVP v.typ vp a)
+                               (predVc v) ;
+
+  ComplPredVP np vp = {
+      s = \\t,a,b,o => 
+        let 
+          verb  = vp.s ! t ! a ! b ! o ! np.a ;
+          compl = vp.s2 ! np.a
+        in
+        case o of {
+          ODir => compl ++ "," ++ np.s ! npNom ++ verb.aux ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf ;
+          OQuest => verb.aux ++ compl ++ "," ++ np.s ! npNom ++ verb.adv ++ vp.ad ++ verb.fin ++ verb.inf 
+          }
+    } ;
+-}
+CompVP ant p vp = {s = \\a => ant.s ++ p.s ++ 
+                                infVP False vp a} ; -- check for vp.isAux
+
+  that_RP = {
+    s = \\_,_ => "کہ" ;
+    a = RNoAg
+    } ;
+  --no_RP = {
+   -- s = \\_,_ => "" ;
+   -- a = RNoAg
+   -- } ;
+
+  CompS s = {s = \\_ => "کہ" ++ s.s} ;
+--  CompVP vp = {s = \\a => infVP VVInf vp a} ;
+
+lin
+  PPos = {s = [] ; p = Pos} ;
+  PNeg = {s = [] ; p = Neg} ; -- contracted: don't
+  UncNeg = {s = [] ; p = Neg} ;
+  
+  --VPSlashPrep vp p = vp ** {c2 = {s = p.s!Masc ; c = VTrans}} ;
+  
+  PastPartRS ant pol vps = {
+    s = \\agr => (vps.s!VPTense VPPast agr).inf ;
+    c = Dir
+    } ;
+
+  PresPartRS ant pol vp = {
+    s = \\agr => (vp.s!VPTense VPPres agr).inf ;
+    c = Dir
+  } ;
+  
+  ApposNP np1 np2 = {
+      s = \\c => np1.s!NPC Dir ++ "," ++ np2.s ! c ;
+      a = np2.a
+      } ;
+      
+  AdAdV = cc2 ;
+  
+  UttAdV adv = adv;
+  
+  CompQS qs = {s = \\_ => qs.s ! QIndir} ;
+    
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/PhraseUrd.gf"
+id=9e3d43700bf6
+kind=source
+size=94
+lines=2
+chunks=0
+----
+concrete PhraseUrd of Phrase = CatUrd ** PhraseHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/QuestionUrd.gf"
+id=f67998196b9e
+kind=source
+size=100
+lines=2
+chunks=0
+----
+concrete QuestionUrd of Question = CatUrd ** QuestionHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/RelativeUrd.gf"
+id=b53c454c2edc
+kind=source
+size=100
+lines=2
+chunks=0
+----
+concrete RelativeUrd of Relative = CatUrd ** RelativeHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/ResUrd.gf"
+id=57b6304b84d6
+kind=source
+size=96
+lines=2
+chunks=0
+----
+instance ResUrd of ResHindustani = DiffUrd ** open CommonHindustani, Prelude, Predef in {
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/SentenceUrd.gf"
+id=04728ae27584
+kind=source
+size=100
+lines=2
+chunks=0
+----
+concrete SentenceUrd of Sentence = CatUrd ** SentenceHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/StructuralUrd.gf"
+id=95152529c89a
+kind=source
+size=6978
+lines=131
+chunks=0
+----
+concrete StructuralUrd of Structural = CatUrd ** 
+  open MorphoUrd, ParadigmsUrd, Prelude, NounUrd,ParamX,CommonHindustani in {
+
+  flags optimize=all ;
+  coding = utf8;
+
+  lin
+  above_Prep = mkPrep ["کے اوپر"] ["کے اوپر"] ;
+  after_Prep = mkPrep ["کے بعد"] ["کے بعد"] ;
+  all_Predet = ss "تمام" ;
+  almost_AdA, almost_AdN = mkAdN "تقریبا" ;
+  although_Subj = ss "اگرچہ" ;
+  always_AdV = ss "ہمیشہ" ;
+  and_Conj = sd2 [] "اور" ** {n = Pl} ;
+  because_Subj = ss "کیونکہ" ;
+  before_Prep = mkPrep ["سے پہلے"] ["سے پہلے"] ;
+  behind_Prep = mkPrep ["کے پیچھے"] ["کے پیچھے"] ;
+  between_Prep = mkPrep "درمیاں" "درمیاں" ;
+  both7and_DConj = sd2 "دونوں" "اور" ** {n = Pl} ;
+  but_PConj = ss "لیکن" ;
+  by8agent_Prep = mkPrep "سے" "" ;
+  by8means_Prep = mkPrep "پر" "" ;
+  can8know_VV,can_VV = mkV "سکنا" ** { isAux = True} ;
+  during_Prep = mkPrep ["کے درمیاں"] ["کے درمیاں"] ;
+  either7or_DConj = sd2 "کوی ایک" "یا" ** {n = Sg} ;
+  everybody_NP =  MassNP (UseN (ParadigmsUrd.mkN "ہر کوی" "ہر کوی" "ہر کوی" "ہر کوی" "ہر کوی" "ہر کوی" Masc )); -- not a good way coz need to include NounUrd
+  every_Det = mkDet "ہر" "ہر" "ہر" "ہر" Sg;
+  everything_NP = MassNP (UseN (ParadigmsUrd.mkN "ہر چیز" "ہر چیز" "ہر چیزو" "سب چیزیں" "سب چیزوں" "سب چیزو" Masc ));
+  everywhere_Adv = mkAdv "ہر جگہ" ;
+  few_Det = mkDet "چند" "چند" "چند" "چند" Pl ;
+  first_Ord = {s = "پعہلا" ; n = Sg} ; --DEPRECATED
+  for_Prep = mkPrep "کیلیے" "کیلیے" ;
+  from_Prep = mkPrep "سے" "سے" ;
+  he_Pron = personalPN "وہ" "اس" "" ["اس کا"] ["اس کی"] ["اس کے"] ["اس کی"] Sg Masc Pers3_Distant ;
+  here_Adv = mkAdv "یہاں" ;
+  here7to_Adv = mkAdv ["یہاں پر"] ;
+  here7from_Adv = mkAdv ["یہاں سے"] ;
+  how_IAdv = ss "کیسے" ;
+  how8many_IDet = makeIDet "کتنے" "کتنی" Pl ;
+  how8much_IAdv  = ss "کتنا" ;
+  if_Subj = ss "اگر" ;
+  in8front_Prep = mkPrep ["کے سامنے"] ["کے سامنے"] ;
+  i_Pron = personalPN "میں" "مجھ" "" "میرا" "میری" "میرے" "میری" Sg Masc Pers1;
+  in_Prep = mkPrep "میں" "میں" ;
+  it_Pron  = personalPN "یہ" "اس" "اس" ["اس کا"] ["اس کی"] ["اس کے"] ["اس کی"] Sg Masc Pers3_Near;
+  less_CAdv = {s = "کم" ; p = ""} ;
+  many_Det = mkDet "بہت زیادہ" "بہت زیادہ" "بہت زیادہ" "بہت زیادہ" Pl ;
+  more_CAdv = {s = "زیادہ" ; p = "سے" } ;
+  most_Predet = ss "زیادہ تر" ;
+  much_Det = mkDet "بہت" "بہت" "بہت" "بہت" Sg  ;
+--  must_VV = {
+--    s = table {
+--      VVF VInf => ["ہاvع تo"] ;
+--      VVF VPres => "مuست" ;
+--      VVF VPPart => ["ہاد تo"] ;
+--      VVF VPresPart => ["ہاviنگ تo"] ;
+--      VVF VPast => ["ہاد تo"] ;      --# notpresent
+--      VVPastNeg => ["ہادn'ت تo"] ;      --# notpresent
+--      VVPresNeg => "مuستn'ت"
+--      } ;
+--    isAux = True
+--    } ;
+-----b  no_Phr = ss "نo" ;
+  no_Utt = ss "نہیں" ;
+  on_Prep = mkPrep "پر" "پر" ;
+--  one_Quant = demoPN "ایک" "ایک" "ایک" ; -- DEPRECATED
+  only_Predet = ss "صرف" ;
+  or_Conj = sd2 [] "یا" ** {n = Sg} ;
+  otherwise_PConj = ss "یا پھر" ;
+  part_Prep = mkPrep "" "" ;
+  please_Voc = ss "مہربانی" ;
+  possess_Prep = mkPrep "کا" "کی" ;
+  quite_Adv = ss "خاموش" ;
+  she_Pron = personalPN "وہ" "اس" "وہ" ["اس کی"] ["اس کی"] ["اس کے"] ["اس کی"] Sg Fem Pers3_Distant ;
+  so_AdA = ss "اس لیے" ;
+  somebody_NP = MassNP (UseN (ParadigmsUrd.mkN "کوی" "کوی" "کوی" "کوی" "کوی" "کوی" Masc ));
+  someSg_Det = mkDet "کچھ" "کچھ" "کچھ" "کچھ" Sg ;
+  somePl_Det = mkDet "کچھ" "کچھ" "کچھ" "کچھ" Pl ;
+  something_NP = MassNP (UseN (ParadigmsUrd.mkN "کوی چیز" "کوی چیز" "کوی چیز" "کھ چیزیں" "کھ چیزوں" "کھ چیزو" Masc ));
+  somewhere_Adv = mkAdv ["کہیں پر"] ;
+  that_Quant = demoPN "وہ" "اس" "ان" ;
+  that_Subj = ss "کہ";
+  there_Adv = mkAdv "وہاں" ;
+  there7to_Adv = mkAdv ["وہاں پر"] ;
+  there7from_Adv = mkAdv ["وہاں سے"] ;
+  therefore_PConj = ss "اس لیے" ;
+  they_Pron = personalPN "وہ" "وہ" "وہ" ["ان کا"] ["ان کی"] ["ان کے"] ["ان کی"] Pl Masc Pers3_Distant ; ---- 
+  this_Quant = demoPN "یہ" "اس" "ان";      
+  through_Prep = mkPrep ["میں سے"] ["میں سے"] ;
+  too_AdA = ss "بہت" ;
+  to_Prep = mkPrep "کو" "کو" ; -- ** {lock_Prep = <>};
+  under_Prep = mkPrep "کے نیچے" "کے نیچے" ; -- ** {lock_Prep = <>};
+  very_AdA = ss "بہت" ;
+  want_VV = mkV "چاہنا" ** { isAux = False} ;
+  we_Pron = personalPN "ہم" "ہم" "ہم" "ہمارا" "ہماری" "ہمارے" "ہماری" Pl Masc Pers1 ;
+  whatSg_IP = mkIP "کیا" "کس" "کس" Sg Masc ;
+  whatPl_IP = mkIP "کیا" "کن" "کن" Pl Masc ;
+  when_IAdv = ss "کب" ;
+  when_Subj = ss "جب" ;
+  where_IAdv = ss "کہاں" ;
+--  which_IQuant = {s = \\_ => "کون سی"} ;
+  which_IQuant = mkIQuant "کون" ;
+--  whichPl_IDet = makeDet "کون سا" "کون سی" "کون سے" "کون سی" ;
+--  whichSg_IDet = makeDet "کون سا" "کون سی" "کون سے" "کون سی" ;
+  whoSg_IP = mkIP "کون" "کس" "کس" Sg Masc  ;
+  whoPl_IP = mkIP "کون" "کن" "کنہوں" Pl Masc ;
+  why_IAdv = ss "کیوں" ;
+  without_Prep = mkPrep ["کے بغیر"] ["کے بغیر"] ;
+  with_Prep = mkPrep ["کے ساتھ"] ["کے ساتھ"] ;
+--  yes_Phr = ss "ہاں" ;
+  yes_Utt = ss "ہاں" ;
+  youSg_Pron = personalPN "تو" "تو" "تو" "تیرا" "تیری" "تیرے" "تیری" Sg Masc Pers2_Casual ;
+  youPl_Pron = personalPN "تم" "تم" "تم" "تمھارا" "تمھاری" "تمھارے" "تمھاری" Pl Masc Pers2_Casual ;
+  youPol_Pron = personalPN "آپ" "آپ" "آپ" ["آپ کا"] ["آپ کی"] ["آپ کے"] ["آپ کی"] Pl Masc Pers2_Respect  ;
+  no_Quant =  demoPN " کوی نہیں" "کوی نہیں" "کوی نہیں" ; 
+  not_Predet = {s="نہیں"} ;
+  if_then_Conj = sd2 "اگر" "تو" ** {n = Sg} ; 
+  at_least_AdN = mkAdN ["کم از کم"] ;
+  at_most_AdN = mkAdN ["زیادہ سے زیادہ"];
+  nothing_NP = MassNP (UseN (ParadigmsUrd.mkN "کوی چیز نہیں" "کوی چیز نہیں" "کوی چیز نہیں" "کوی چیز نہیں" "کوی چیز نہیں" "کوی چیز نہیں" Masc )); 
+  except_Prep = mkPrep "کے سواے" "کے سواے" ;
+  nobody_NP = MassNP (UseN (ParadigmsUrd.mkN "کوی نہیں" "کوی نہیں" "کوی نہیں" "کوی نہیں" "کوی نہیں" "کوی نہیں" Masc ));  
+
+  as_CAdv = {s = "اتنا" ; p = "جتنا"} ;
+
+  have_V2 = mkV2 (mkV "رکھنا") "" ;
+
+ language_title_Utt = ss "اردو" ;
+
+}
+
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/SymbolUrd.gf"
+id=175ecf4cebce
+kind=source
+size=156
+lines=4
+chunks=0
+----
+--# -path=.:../hindustani:../abstract:../common:../prelude
+
+concrete SymbolUrd of Symbol = CatUrd ** SymbolHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/TextUrd.gf"
+id=c84aab741a55
+kind=source
+size=318
+lines=11
+chunks=0
+----
+concrete TextUrd of Text = CommonX - [Temp,TTAnt,Tense,TPres,TPast,TFut,TCond] ** {
+
+-- This works for the special punctuation marks of Urdu.
+
+  lin
+    TEmpty = {s = []} ;
+    TFullStop x xs = {s = x.s ++ "" ++ xs.s} ;
+    TQuestMark x xs = {s = x.s ++ "" ++ xs.s} ;
+    TExclMark x xs = {s = x.s ++ "" ++ xs.s} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="urdu/VerbUrd.gf"
+id=493259aba1ca
+kind=source
+size=86
+lines=2
+chunks=0
+----
+concrete VerbUrd of Verb = CatUrd ** VerbHindustani with
+  (ResHindustani = ResUrd) ;
+----- FILE END -----

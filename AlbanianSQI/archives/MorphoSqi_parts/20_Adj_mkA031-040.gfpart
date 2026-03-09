@@ -1,0 +1,203 @@
+mkA031 : Str -> A ;
+mkA031 base_1 =
+  lin A
+  { s = table {
+          Nom   => table {
+                     Masc => table { Sg => base_1 ; Pl => base_1 } ;
+                     Fem  => table { Sg => base_1+"e" ; Pl => base_1+"e" }
+                   } ;
+          Acc   => table {
+                     Masc => table { Sg => base_1 ; Pl => base_1 } ;
+                     Fem  => table { Sg => base_1+"e" ; Pl => base_1+"e" }
+                   } ;
+          Dat   => table {
+                     Masc => table { Sg => base_1 ; Pl => base_1 } ;
+                     Fem  => table { Sg => base_1+"e" ; Pl => base_1+"e" }
+                   } ;
+          Ablat => table {
+                     Masc => table { Sg => base_1 ; Pl => base_1 } ;
+                     Fem  => table { Sg => base_1+"e" ; Pl => base_1+"e" }
+                   }
+        } ;
+    clit = True
+  } ;
+
+mkA032 : Str -> A ;
+mkA032 base_1 =
+  lin A
+  { s = table {
+          Nom   => table {
+                     Masc => table { Sg => base_1 ; Pl => base_1 } ;
+                     Fem  => table { Sg => base_1 ; Pl => base_1+"a" }
+                   } ;
+          Acc   => table {
+                     Masc => table { Sg => base_1 ; Pl => base_1 } ;
+                     Fem  => table { Sg => base_1 ; Pl => base_1+"a" }
+                   } ;
+          Dat   => table {
+                     Masc => table { Sg => base_1 ; Pl => base_1 } ;
+                     Fem  => table { Sg => base_1 ; Pl => base_1+"a" }
+                   } ;
+          Ablat => table {
+                     Masc => table { Sg => base_1 ; Pl => base_1 } ;
+                     Fem  => table { Sg => base_1 ; Pl => base_1+"a" }
+                   }
+        } ;
+    clit = True
+  } ;
+
+mkA033 : Str -> A ;
+mkA033 base =
+  case base of {
+    base_1+"l"+base_2@(?+?+?+?)+"ë" => lin A
+      { s = table {
+              Nom   => table {
+                         Masc => table {
+                                   Sg => base_1+"l"+base_2+"ë" ;
+                                   Pl => base_1+"l"+base_2+"ë"
+                                 } ;
+                         Fem  => table {
+                                   Sg => base_1+base_2+"ë" ;
+                                   Pl => base_1+base_2+"a"
+                                 }
+                       } ;
+              Acc   => table {
+                         Masc => table {
+                                   Sg => base_1+"l"+base_2+"ë" ;
+                                   Pl => base_1+"l"+base_2+"ë"
+                                 } ;
+                         Fem  => table {
+                                   Sg => base_1+base_2+"ë" ;
+                                   Pl => base_1+base_2+"a"
+                                 }
+                       } ;
+              Dat   => table {
+                         Masc => table {
+                                   Sg => base_1+"l"+base_2+"ë" ;
+                                   Pl => base_1+"l"+base_2+"ë"
+                                 } ;
+                         Fem  => table {
+                                   Sg => base_1+base_2+"ë" ;
+                                   Pl => base_1+base_2+"a"
+                                 }
+                       } ;
+              Ablat => table {
+                         Masc => table {
+                                   Sg => base_1+"l"+base_2+"ë" ;
+                                   Pl => base_1+"l"+base_2+"ë"
+                                 } ;
+                         Fem  => table {
+                                   Sg => base_1+base_2+"ë" ;
+                                   Pl => base_1+base_2+"a"
+                                 }
+                       }
+            } ;
+        clit = True
+      } ;
+    _ => error "Can't apply paradigm mkA033"
+  } ;
+
+mkA034 : Str -> A ;
+mkA034 base =
+  case base of {
+    base_1+base_2@?+"m" => lin A
+      { s = table {
+              Nom   => table {
+                         Masc => table { Sg => base_1+base_2+"m" ; Pl => base_1+base_2+"m" } ;
+                         Fem  => table { Sg => base_1+"m"+base_2 ; Pl => base_1+"m"+base_2 }
+                       } ;
+              Acc   => table {
+                         Masc => table { Sg => base_1+base_2+"m" ; Pl => base_1+base_2+"m" } ;
+                         Fem  => table { Sg => base_1+"m"+base_2 ; Pl => base_1+"m"+base_2 }
+                       } ;
+              Dat   => table {
+                         Masc => table { Sg => base_1+base_2+"m" ; Pl => base_1+base_2+"m" } ;
+                         Fem  => table { Sg => base_1+"m"+base_2 ; Pl => base_1+"m"+base_2 }
+                       } ;
+              Ablat => table {
+                         Masc => table { Sg => base_1+base_2+"m" ; Pl => base_1+base_2+"m" } ;
+                         Fem  => table { Sg => base_1+"m"+base_2 ; Pl => base_1+"m"+base_2 }
+                       }
+            } ;
+        clit = True
+      } ;
+    _ => error "Can't apply paradigm mkA034"
+  } ;
+
+mkA035 : Str -> A ;
+mkA035 base =
+  case base of {
+    base_1+"u"+base_2@?+"r" => lin A
+      { s = table {
+              Nom   => table {
+                         Masc => table { Sg => base_1+"u"+base_2+"r" ; Pl => base_1+"u"+base_2+"r" } ;
+                         Fem  => table { Sg => base_1+"u"+base_2+"r" ; Pl => base_1+"u"+base_2+"r" }
+                       } ;
+              Acc   => table {
+                         Masc => table { Sg => base_1+"u"+base_2+"r" ; Pl => base_1+"u"+base_2+"r" } ;
+                         Fem  => table { Sg => base_1+"u"+base_2+"r" ; Pl => base_1+"u"+base_2+"r" }
+                       } ;
+              Dat   => table {
+                         Masc => table { Sg => base_1+"u"+base_2+"r" ; Pl => base_1+"u"+base_2+"r" } ;
+                         Fem  => table { Sg => base_1+"u"+base_2+"r" ; Pl => base_1+"u"+base_2+"r" }
+                       } ;
+              Ablat => table {
+                         Masc => table { Sg => base_1+"u"+base_2+"r" ; Pl => base_1+"u"+base_2+"r" } ;
+                         Fem  => table { Sg => base_1+"u"+base_2+"r" ; Pl => base_1+"u"+base_2+"r" }
+                       }
+            } ;
+        clit = True
+      } ;
+    _ => error "Can't apply paradigm mkA035"
+  } ;
+
+mkA036 : Str -> A ;
+mkA036 base =
+  case base of {
+    base_1+"e"+base_2@(?+?+?+?+?+?+?)+"ë"+base_3@? => lin A
+      { s = table {
+              Nom   => table {
+                         Masc => table {
+                                   Sg => base_1+"e"+base_2+"ë"+base_3 ;
+                                   Pl => base_1+"e"+base_2+"ë"+base_3
+                                 } ;
+                         Fem  => table {
+                                   Sg => base_1+"e"+base_2+base_3+"e" ;
+                                   Pl => base_1+"e"+base_2+base_3+"e"
+                                 }
+                       } ;
+              Acc   => table {
+                         Masc => table {
+                                   Sg => base_1+"e"+base_2+"ë"+base_3 ;
+                                   Pl => base_1+"e"+base_2+"ë"+base_3
+                                 } ;
+                         Fem  => table {
+                                   Sg => base_1+"e"+base_2+base_3+"e" ;
+                                   Pl => base_1+"e"+base_2+base_3+"e"
+                                 }
+                       } ;
+              Dat   => table {
+                         Masc => table {
+                                   Sg => base_1+"e"+base_2+"ë"+base_3 ;
+                                   Pl => base_1+"e"+base_2+"ë"+base_3
+                                 } ;
+                         Fem  => table {
+                                   Sg => base_1+"e"+base_2+base_3+"e" ;
+                                   Pl => base_1+"e"+base_2+base_3+"e"
+                                 }
+                       } ;
+              Ablat => table {
+                         Masc => table {
+                                   Sg => base_1+"e"+base_2+"ë"+base_3 ;
+                                   Pl => base_1+"e"+base_2+"ë"+base_3
+                                 } ;
+                         Fem  => table {
+                                   Sg => base_1+"e"+base_2+base_3+"e" ;
+                                   Pl => base_1+"e"+base_2+base_3+"e"
+                                 }
+                       }
+            } ;
+        clit = True
+      } ;
+    _ => error "Can't apply paradigm mkA036"
+  } ;

@@ -1,0 +1,3598 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Aarne Ranta" />
+  <title>Grammatical Framework Tutorial</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body class="bg-light">
+  <div class="bg-white pb-5">
+<div class="container-fluid py-5" style="max-width:1200px">
+
+<header id="title-block-header">
+<a href="../.." title="Home">
+  <img src="../../doc/Logos/gf1.svg" height="200" class="float-md-right ml-3 mb-3 bg-white" alt="GF Logo">
+</a>
+<h1 class="title">Grammatical Framework Tutorial</h1>
+<p class="author">Aarne Ranta</p>
+<p class="date">December 2010 for GF 3.2</p>
+</header>
+<p></p>
+<hr />
+<p></p>
+<ul>
+<li><a href="#toc1">Overview</a>
+<ul>
+<li><a href="#toc2">Outline</a></li>
+</ul></li>
+<li><a href="#toc3">Lesson 1: Getting Started with GF</a>
+<ul>
+<li><a href="#toc4">What GF is</a></li>
+<li><a href="#toc5">GF grammars and language processing tasks</a></li>
+<li><a href="#toc6">Getting the GF system</a></li>
+<li><a href="#toc7">Running the GF system</a></li>
+<li><a href="#toc8">A &quot;Hello World&quot; grammar</a>
+<ul>
+<li><a href="#toc9">The program: abstract syntax and concrete syntaxes</a></li>
+<li><a href="#toc10">Using grammars in the GF system</a></li>
+<li><a href="#toc11">Exercises on the Hello World grammar</a></li>
+</ul></li>
+<li><a href="#toc12">Using grammars from outside GF</a></li>
+<li><a href="#toc13">GF scripts</a></li>
+<li><a href="#toc14">What else can be done with the grammar</a></li>
+<li><a href="#toc15">Embedded grammar applications</a></li>
+</ul></li>
+<li><a href="#toc16">Lesson 2: Designing a grammar for complex phrases</a>
+<ul>
+<li><a href="#toc17">The abstract syntax Food</a></li>
+<li><a href="#toc18">The concrete syntax FoodEng</a>
+<ul>
+<li><a href="#toc19">Exercises on the Food grammar</a></li>
+</ul></li>
+<li><a href="#toc20">Commands for testing grammars</a>
+<ul>
+<li><a href="#toc21">Generating trees and strings</a></li>
+<li><a href="#toc22">Exercises on generation</a></li>
+<li><a href="#toc23">More on pipes: tracing</a></li>
+<li><a href="#toc24">Writing and reading files</a></li>
+<li><a href="#toc25">Visualizing trees</a></li>
+<li><a href="#toc26">System commands</a></li>
+</ul></li>
+<li><a href="#toc27">An Italian concrete syntax</a>
+<ul>
+<li><a href="#toc28">Exercises on multilinguality</a></li>
+</ul></li>
+<li><a href="#toc29">Free variation</a></li>
+<li><a href="#toc30">More application of multilingual grammars</a>
+<ul>
+<li><a href="#toc31">Multilingual treebanks</a></li>
+<li><a href="#toc32">Translation quiz</a></li>
+</ul></li>
+<li><a href="#toc33">Context-free grammars and GF</a>
+<ul>
+<li><a href="#toc34">The &quot;cf&quot; grammar format</a></li>
+<li><a href="#toc35">Restrictions of context-free grammars</a></li>
+</ul></li>
+<li><a href="#toc36">Modules and files</a></li>
+<li><a href="#toc37">Using operations and resource modules</a>
+<ul>
+<li><a href="#toc38">Operation definitions</a></li>
+<li><a href="#toc39">The ``resource`` module type</a></li>
+<li><a href="#toc40">Opening a resource</a></li>
+<li><a href="#toc41">Partial application</a></li>
+<li><a href="#toc42">Testing resource modules</a></li>
+</ul></li>
+<li><a href="#toc43">Grammar architecture</a>
+<ul>
+<li><a href="#toc44">Extending a grammar</a></li>
+<li><a href="#toc45">Multiple inheritance</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#toc46">Lesson 3: Grammars with parameters</a>
+<ul>
+<li><a href="#toc47">The problem: words have to be inflected</a></li>
+<li><a href="#toc48">Parameters and tables</a></li>
+<li><a href="#toc49">Inflection tables and paradigms</a>
+<ul>
+<li><a href="#toc50">Exercises on morphology</a></li>
+</ul></li>
+<li><a href="#toc51">Using parameters in concrete syntax</a>
+<ul>
+<li><a href="#toc52">Agreement</a></li>
+<li><a href="#toc53">Determiners</a></li>
+<li><a href="#toc54">Parametric vs. inherent features</a></li>
+</ul></li>
+<li><a href="#toc55">An English concrete syntax for Foods with parameters</a></li>
+<li><a href="#toc56">More on inflection paradigms</a>
+<ul>
+<li><a href="#toc57">Worst-case functions</a></li>
+<li><a href="#toc58">Smart paradigms</a></li>
+<li><a href="#toc59">Exercises on regular patterns</a></li>
+<li><a href="#toc60">Function types with variables</a></li>
+<li><a href="#toc61">Separating operation types and definitions</a></li>
+<li><a href="#toc62">Overloading of operations</a></li>
+<li><a href="#toc63">Morphological analysis and morphology quiz</a></li>
+</ul></li>
+<li><a href="#toc64">The Italian Foods grammar</a>
+<ul>
+<li><a href="#toc65">Exercises on using parameters</a></li>
+</ul></li>
+<li><a href="#toc66">Discontinuous constituents</a></li>
+<li><a href="#toc67">Strings at compile time vs. run time</a>
+<ul>
+<li><a href="#toc68">Supplementary constructs for concrete syntax</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#toc69">Lesson 4: Using the resource grammar library</a>
+<ul>
+<li><a href="#toc70">The coverage of the library</a></li>
+<li><a href="#toc71">The structure of the library</a>
+<ul>
+<li><a href="#toc72">Lexical vs. phrasal rules</a></li>
+<li><a href="#toc73">Lexical categories</a></li>
+<li><a href="#toc74">Lexical rules</a></li>
+<li><a href="#toc75">Resource lexicon</a></li>
+<li><a href="#toc76">Phrasal categories</a></li>
+<li><a href="#toc77">Syntactic combinations</a></li>
+<li><a href="#toc78">Example syntactic combination</a></li>
+</ul></li>
+<li><a href="#toc79">The resource API</a>
+<ul>
+<li><a href="#toc80">A miniature resource API: categories</a></li>
+<li><a href="#toc81">A miniature resource API: rules</a></li>
+<li><a href="#toc82">A miniature resource API: structural words</a></li>
+<li><a href="#toc83">A miniature resource API: paradigms</a></li>
+<li><a href="#toc84">A miniature resource API: more paradigms</a></li>
+<li><a href="#toc85">Exercises</a></li>
+</ul></li>
+<li><a href="#toc86">Example: English</a>
+<ul>
+<li><a href="#toc87">English example: linearization types and combination rules</a></li>
+<li><a href="#toc88">English example: lexical rules</a></li>
+<li><a href="#toc89">English example: exercises</a></li>
+</ul></li>
+<li><a href="#toc90">Functor implementation of multilingual grammars</a>
+<ul>
+<li><a href="#toc91">New language by copy and paste</a></li>
+<li><a href="#toc92">Functors: functions on the module level</a></li>
+<li><a href="#toc93">Code for the Foods functor</a></li>
+<li><a href="#toc94">Code for the LexFoods interface</a></li>
+<li><a href="#toc95">Code for a German instance of the lexicon</a></li>
+<li><a href="#toc96">Code for a German functor instantiation</a></li>
+<li><a href="#toc97">Adding languages to a functor implementation</a></li>
+<li><a href="#toc98">Example: adding Finnish</a></li>
+<li><a href="#toc99">A design pattern</a></li>
+<li><a href="#toc100">Functors: exercises</a></li>
+</ul></li>
+<li><a href="#toc101">Restricted inheritance</a>
+<ul>
+<li><a href="#toc102">A problem with functors</a></li>
+<li><a href="#toc103">Restricted inheritance: include or exclude</a></li>
+<li><a href="#toc104">The functor problem solved</a></li>
+</ul></li>
+<li><a href="#toc105">Grammar reuse</a>
+<ul>
+<li><a href="#toc106">Library exercises</a></li>
+</ul></li>
+<li><a href="#toc107">Tenses</a></li>
+</ul></li>
+<li><a href="#toc108">Lesson 5: Refining semantics in abstract syntax</a>
+<ul>
+<li><a href="#toc109">Dependent types</a>
+<ul>
+<li><a href="#toc110">A dependent type system</a></li>
+<li><a href="#toc111">Examples of devices and actions</a></li>
+<li><a href="#toc112">Linearization and parsing with dependent types</a></li>
+</ul></li>
+<li><a href="#toc113">Proof objects</a>
+<ul>
+<li><a href="#toc114">Proof-carrying documents</a></li>
+</ul></li>
+<li><a href="#toc115">Restricted polymorphism</a>
+<ul>
+<li><a href="#toc116">Example: classes for switching and dimming</a></li>
+</ul></li>
+<li><a href="#toc117">Variable bindings</a>
+<ul>
+<li><a href="#toc118">Higher-order abstract syntax</a></li>
+<li><a href="#toc119">Higher-order abstract syntax: linearization</a></li>
+<li><a href="#toc120">Eta expansion</a></li>
+<li><a href="#toc121">Parsing variable bindings</a></li>
+<li><a href="#toc122">Exercises on variable bindings</a></li>
+</ul></li>
+<li><a href="#toc123">Semantic definitions</a>
+<ul>
+<li><a href="#toc124">Computing a tree</a></li>
+<li><a href="#toc125">Definitional equality</a></li>
+<li><a href="#toc126">Judgement forms for constructors</a></li>
+<li><a href="#toc127">Exercises on semantic definitions</a></li>
+</ul></li>
+<li><a href="#toc128">Lesson 6: Grammars of formal languages</a>
+<ul>
+<li><a href="#toc129">Arithmetic expressions</a></li>
+<li><a href="#toc130">Concrete syntax: a simple approach</a></li>
+</ul></li>
+<li><a href="#toc131">Lexing and unlexing</a>
+<ul>
+<li><a href="#toc132">Most common lexers and unlexers</a></li>
+</ul></li>
+<li><a href="#toc133">Precedence and fixity</a>
+<ul>
+<li><a href="#toc134">Precedence as a parameter</a></li>
+<li><a href="#toc135">Fixities</a></li>
+<li><a href="#toc136">Exercises on precedence</a></li>
+</ul></li>
+<li><a href="#toc137">Code generation as linearization</a>
+<ul>
+<li><a href="#toc138">Programs with variables</a></li>
+<li><a href="#toc139">Exercises on code generation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#toc140">Lesson 7: Embedded grammars</a>
+<ul>
+<li><a href="#toc141">Functionalities of an embedded grammar format</a></li>
+<li><a href="#toc142">The portable grammar format</a>
+<ul>
+<li><a href="#toc143">Haskell: the EmbedAPI module</a></li>
+<li><a href="#toc144">First application: a translator</a></li>
+<li><a href="#toc145">Producing PGF for the translator</a></li>
+<li><a href="#toc146">A translator loop</a></li>
+<li><a href="#toc147">A question-answer system</a></li>
+<li><a href="#toc148">Abstract syntax of the query system</a></li>
+<li><a href="#toc149">Exporting GF datatypes to Haskell</a></li>
+<li><a href="#toc150">The question-answer function</a></li>
+<li><a href="#toc151">Converting between Haskell and GF trees</a></li>
+<li><a href="#toc152">Putting it all together: the transfer definition</a></li>
+<li><a href="#toc153">Putting it all together: the Main module</a></li>
+<li><a href="#toc154">Putting it all together: the Makefile</a></li>
+</ul></li>
+<li><a href="#toc155">Web server applications</a></li>
+<li><a href="#toc156">JavaScript applications</a>
+<ul>
+<li><a href="#toc157">Compiling to JavaScript</a></li>
+<li><a href="#toc158">Using the JavaScript grammar</a></li>
+</ul></li>
+<li><a href="#toc159">Language models for speech recognition</a>
+<ul>
+<li><a href="#toc160">More speech recognition grammar formats</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<p></p>
+<hr />
+<p></p>
+<p></p>
+<div id="toc1">
+
+</div>
+<h1 id="overview">Overview</h1>
+<p>This is a hands-on introduction to grammar writing in GF.</p>
+<p>Main ingredients of GF:</p>
+<ul>
+<li>linguistics</li>
+<li>functional programming</li>
+</ul>
+<p>Prerequisites:</p>
+<ul>
+<li>some previous experience from some programming language</li>
+<li>the basics of using computers, e.g. the use of text editors and the management of files.</li>
+<li>knowledge of Unix commands is useful but not necessary</li>
+<li>knowledge of many natural languages may add fun to experience</li>
+</ul>
+<p></p>
+<div id="toc2">
+
+</div>
+<h2 id="outline">Outline</h2>
+<p><a href="#chaptwo">Lesson 1</a>: a multilingual &quot;Hello World&quot; grammar. English, Finnish, Italian.</p>
+<p><a href="#chapthree">Lesson 2</a>: a larger grammar for the domain of food. English and Italian.</p>
+<p><a href="#chapfour">Lesson 3</a>: parameters - morphology and agreement.</p>
+<p><a href="#chapfive">Lesson 4</a>: using the resource grammar library.</p>
+<p><a href="#chapsix">Lesson 5</a>: semantics - <strong>dependent types</strong>, <strong>variable bindings</strong>, and <strong>semantic definitions</strong>.</p>
+<p><a href="#chapseven">Lesson 6</a>: implementing formal languages.</p>
+<p><a href="#chapeight">Lesson 7</a>: embedded grammar applications.</p>
+<p></p>
+<p></p>
+<div id="chaptwo">
+
+</div>
+<div id="toc3">
+
+</div>
+<h1 id="lesson-1-getting-started-with-gf">Lesson 1: Getting Started with GF</h1>
+<p>Goals:</p>
+<ul>
+<li>install and run GF</li>
+<li>write the first GF grammar: a &quot;Hello World&quot; grammar in three languages</li>
+<li>use GF for translation and multilingual generation</li>
+</ul>
+<p></p>
+<div id="toc4">
+
+</div>
+<h2 id="what-gf-is">What GF is</h2>
+<p>We use the term GF for three different things:</p>
+<ul>
+<li>a <strong>system</strong> (computer program) used for working with grammars</li>
+<li>a <strong>programming language</strong> in which grammars can be written</li>
+<li>a <strong>theory</strong> about grammars and languages</li>
+</ul>
+<p>The GF system is an implementation of the GF programming language, which in turn is built on the ideas of the GF theory.</p>
+<p>The focus of this tutorial is on using the GF programming language.</p>
+<p>At the same time, we learn the way of thinking in the GF theory.</p>
+<p>We make the grammars run on a computer by using the GF system.</p>
+<p></p>
+<div id="toc5">
+
+</div>
+<h2 id="gf-grammars-and-language-processing-tasks">GF grammars and language processing tasks</h2>
+<p>A GF program is called a <strong>grammar</strong>.</p>
+<p>A grammar defines a language.</p>
+<p>From this definition, language processing components can be derived:</p>
+<ul>
+<li><strong>parsing</strong>: to analyse the language</li>
+<li><strong>linearization</strong>: to generate the language</li>
+<li><strong>translation</strong>: to analyse one language and generate another</li>
+</ul>
+<p>In general, a GF grammar is <strong>multilingual</strong>:</p>
+<ul>
+<li>many languages in one grammar</li>
+<li>translations between them</li>
+</ul>
+<p></p>
+<div id="toc6">
+
+</div>
+<h2 id="getting-the-gf-system">Getting the GF system</h2>
+<p>Open-source free software, downloaded via the GF Homepage:</p>
+<p><a href="http://grammaticalframework.org/"><code>grammaticalframework.org</code></a></p>
+<p>There you find</p>
+<ul>
+<li>binaries for Linux, Mac OS X, and Windows</li>
+<li>source code and documentation</li>
+<li>grammar libraries and examples</li>
+</ul>
+<p>Many examples in this tutorial are <a href="http://grammaticalframework.org/examples/tutorial">online</a>.</p>
+<p>Normally you don't have to compile GF yourself. But, if you do want to compile GF from source follow the instructions in the <a href="../gf-developers.html">Developers Guide</a>.</p>
+<p></p>
+<div id="toc7">
+
+</div>
+<h2 id="running-the-gf-system">Running the GF system</h2>
+<p>Type <code>gf</code> in the Unix (or Cygwin) shell:</p>
+<pre><code>    % gf</code></pre>
+<p>You will see GF's welcome message and the prompt <code>&gt;</code>. The command</p>
+<pre><code>    &gt; help</code></pre>
+<p>will give you a list of available commands.</p>
+<p>As a common convention, we will use</p>
+<ul>
+<li><code>%</code> as a prompt that marks system commands</li>
+<li><code>&gt;</code> as a prompt that marks GF commands</li>
+</ul>
+<p>Thus you should not type these prompts, but only the characters that follow them.</p>
+<p></p>
+<div id="toc8">
+
+</div>
+<h2 id="a-hello-world-grammar">A &quot;Hello World&quot; grammar</h2>
+<p>Like most programming language tutorials, we start with a program that prints &quot;Hello World&quot; on the terminal.</p>
+<p>Extra features:</p>
+<ul>
+<li><strong>Multilinguality</strong>: the message is printed in many languages.</li>
+<li><strong>Reversibility</strong>: in addition to printing, you can <strong>parse</strong> the message and <strong>translate</strong> it to other languages.</li>
+</ul>
+<p></p>
+<div id="toc9">
+
+</div>
+<h3 id="the-program-abstract-syntax-and-concrete-syntaxes">The program: abstract syntax and concrete syntaxes</h3>
+<p>A GF program, in general, is a <strong>multilingual grammar</strong>. Its main parts are</p>
+<ul>
+<li>an <strong>abstract syntax</strong></li>
+<li>one or more <strong>concrete syntaxes</strong></li>
+</ul>
+<p>The abstract syntax defines what <strong>meanings</strong> can be expressed in the grammar</p>
+<ul>
+<li><em>Greetings</em>, where we greet a <em>Recipient</em>, which can be <em>World</em> or <em>Mum</em> or <em>Friends</em></li>
+</ul>
+<p></p>
+<p>GF code for the abstract syntax:</p>
+<pre><code>    -- a &quot;Hello World&quot; grammar
+    abstract Hello = {
+  
+      flags startcat = Greeting ;
+  
+      cat Greeting ; Recipient ;
+  
+      fun
+        Hello : Recipient -&gt; Greeting ;
+        World, Mum, Friends : Recipient ;
+    }</code></pre>
+<p>The code has the following parts:</p>
+<ul>
+<li>a <strong>comment</strong> (optional), saying what the module is doing</li>
+<li>a <strong>module header</strong> indicating that it is an abstract syntax module named <code>Hello</code></li>
+<li>a <strong>module body</strong> in braces, consisting of
+<ul>
+<li>a <strong>startcat flag declaration</strong> stating that <code>Greeting</code> is the default start category for parsing and generation</li>
+<li><strong>category declarations</strong> introducing two categories, i.e. types of meanings</li>
+<li><strong>function declarations</strong> introducing three meaning-building functions</li>
+</ul></li>
+</ul>
+<p></p>
+<p>English concrete syntax (mapping from meanings to strings):</p>
+<pre><code>    concrete HelloEng of Hello = {
+  
+      lincat Greeting, Recipient = {s : Str} ;
+  
+      lin
+        Hello recip = {s = &quot;hello&quot; ++ recip.s} ;
+        World = {s = &quot;world&quot;} ;
+        Mum = {s = &quot;mum&quot;} ;
+        Friends = {s = &quot;friends&quot;} ;
+    }</code></pre>
+<p>The major parts of this code are:</p>
+<ul>
+<li>a module header indicating that it is a concrete syntax of the abstract syntax <code>Hello</code>, itself named <code>HelloEng</code></li>
+<li>a module body in curly brackets, consisting of
+<ul>
+<li><strong>linearization type definitions</strong> stating that <code>Greeting</code> and <code>Recipient</code> are <strong>records</strong> with a <strong>string</strong> <code>s</code></li>
+<li><strong>linearization definitions</strong> telling what records are assigned to each of the meanings defined in the abstract syntax</li>
+</ul></li>
+</ul>
+<p>Notice the concatenation <code>++</code> and the record projection <code>.</code>.</p>
+<p></p>
+<p>Finnish and an Italian concrete syntaxes:</p>
+<pre><code>    concrete HelloFin of Hello = {
+      lincat Greeting, Recipient = {s : Str} ;
+      lin
+        Hello recip = {s = &quot;terve&quot; ++ recip.s} ;
+        World = {s = &quot;maailma&quot;} ;
+        Mum = {s = &quot;äiti&quot;} ;
+        Friends = {s = &quot;ystävät&quot;} ;
+    }
+  
+    concrete HelloIta of Hello = {
+      lincat Greeting, Recipient = {s : Str} ;
+      lin
+        Hello recip = {s = &quot;ciao&quot; ++ recip.s} ;
+        World = {s = &quot;mondo&quot;} ;
+        Mum = {s = &quot;mamma&quot;} ;
+        Friends = {s = &quot;amici&quot;} ;
+    }</code></pre>
+<p></p>
+<div id="toc10">
+
+</div>
+<h3 id="using-grammars-in-the-gf-system">Using grammars in the GF system</h3>
+<p>In order to compile the grammar in GF, we create four files, one for each module, named <em>Modulename</em><code>.gf</code>:</p>
+<pre><code>    Hello.gf  HelloEng.gf  HelloFin.gf  HelloIta.gf</code></pre>
+<p>The first GF command: <strong>import</strong> a grammar.</p>
+<pre><code>    &gt; import HelloEng.gf</code></pre>
+<p>All commands also have short names; here:</p>
+<pre><code>    &gt; i HelloEng.gf</code></pre>
+<p>The GF system will <strong>compile</strong> your grammar into an internal representation and show the CPU time was consumed, followed by a new prompt:</p>
+<pre><code>    &gt; i HelloEng.gf
+    - compiling Hello.gf...   wrote file Hello.gfo 8 msec
+    - compiling HelloEng.gf...   wrote file HelloEng.gfo 12 msec
+  
+    12 msec
+    &gt;</code></pre>
+<p></p>
+<p>You can use GF for <strong>parsing</strong> (<code>parse</code> = <code>p</code>)</p>
+<pre><code>    &gt; parse &quot;hello world&quot;
+    Hello World</code></pre>
+<p>Parsing takes a <strong>string</strong> into an <strong>abstract syntax tree</strong>.</p>
+<p>The notation for trees is that of <strong>function application</strong>:</p>
+<pre><code>    function argument1 ... argumentn</code></pre>
+<p>Parentheses are only needed for grouping.</p>
+<p>Parsing something that is not in grammar will fail:</p>
+<pre><code>    &gt; parse &quot;hello dad&quot;
+    The parser failed at token 2: &quot;dad&quot;
+  
+    &gt; parse &quot;world hello&quot;
+    no tree found</code></pre>
+<p></p>
+<p>You can also use GF for <strong>linearization</strong> (<code>linearize = l</code>). It takes trees into strings:</p>
+<pre><code>    &gt; linearize Hello World
+    hello world</code></pre>
+<p><strong>Translation</strong>: <strong>pipe</strong> linearization to parsing:</p>
+<pre><code>    &gt; import HelloEng.gf
+    &gt; import HelloIta.gf
+  
+    &gt; parse -lang=HelloEng &quot;hello mum&quot; | linearize -lang=HelloIta
+    ciao mamma</code></pre>
+<p>Default of the language flag (<code>-lang</code>): the last-imported concrete syntax.</p>
+<p><strong>Multilingual generation</strong>:</p>
+<pre><code>    &gt; parse -lang=HelloEng &quot;hello friends&quot; | linearize
+    terve ystävät
+    ciao amici
+    hello friends</code></pre>
+<p>Linearization is by default to all available languages.</p>
+<p></p>
+<div id="toc11">
+
+</div>
+<h3 id="exercises-on-the-hello-world-grammar">Exercises on the Hello World grammar</h3>
+<ol>
+<li><p>Test the parsing and translation examples shown above, as well as some other examples, in different combinations of languages.</p>
+<p></p></li>
+<li><p>Extend the grammar <code>Hello.gf</code> and some of the concrete syntaxes by five new recipients and one new greeting form.</p>
+<p></p></li>
+<li><p>Add a concrete syntax for some other languages you might know.</p>
+<p></p></li>
+<li><p>Add a pair of greetings that are expressed in one and the same way in one language and in two different ways in another. For instance, <em>good morning</em> and <em>good afternoon</em> in English are both expressed as <em>buongiorno</em> in Italian. Test what happens when you translate <em>buongiorno</em> to English in GF.</p>
+<p></p></li>
+<li>Inject errors in the <code>Hello</code> grammars, for example, leave out some line, omit a variable in a <code>lin</code> rule, or change the name in one occurrence of a variable. Inspect the error messages generated by GF.</li>
+</ol>
+<p></p>
+<div id="toc12">
+
+</div>
+<h2 id="using-grammars-from-outside-gf">Using grammars from outside GF</h2>
+<p>You can use the <code>gf</code> program in a Unix pipe.</p>
+<ul>
+<li>echo a GF command</li>
+<li>pipe it into GF with grammar names as arguments</li>
+</ul>
+<pre><code>    % echo &quot;l Hello World&quot; | gf HelloEng.gf HelloFin.gf HelloIta.gf</code></pre>
+<p>You can also write a <strong>script</strong>, a file containing the lines</p>
+<pre><code>    import HelloEng.gf
+    import HelloFin.gf
+    import HelloIta.gf
+    linearize Hello World</code></pre>
+<p></p>
+<div id="toc13">
+
+</div>
+<h2 id="gf-scripts">GF scripts</h2>
+<p>If we name this script <code>hello.gfs</code>, we can do</p>
+<pre><code>    $ gf --run &lt;hello.gfs
+  
+    ciao mondo
+    terve maailma
+    hello world</code></pre>
+<p>The option <code>--run</code> removes prompts, CPU time, and other messages.</p>
+<p>See <a href="#chapeight">Lesson 7</a>, for stand-alone programs that don't need the GF system to run.</p>
+<p><strong>Exercise</strong>. (For Unix hackers.) Write a GF application that reads an English string from the standard input and writes an Italian translation to the output.</p>
+<p></p>
+<div id="toc14">
+
+</div>
+<h2 id="what-else-can-be-done-with-the-grammar">What else can be done with the grammar</h2>
+<p>Some more functions that will be covered:</p>
+<ul>
+<li><strong>morphological analysis</strong>: find out the possible inflection forms of words</li>
+<li><strong>morphological synthesis</strong>: generate all inflection forms of words</li>
+<li><strong>random generation</strong>: generate random expressions</li>
+<li><strong>corpus generation</strong>: generate all expressions</li>
+<li><strong>treebank generation</strong>: generate a list of trees with their linearizations</li>
+<li><strong>teaching quizzes</strong>: train morphology and translation</li>
+<li><strong>multilingual authoring</strong>: create a document in many languages simultaneously</li>
+<li><strong>speech input</strong>: optimize a speech recognition system for a grammar</li>
+</ul>
+<p></p>
+<div id="toc15">
+
+</div>
+<h2 id="embedded-grammar-applications">Embedded grammar applications</h2>
+<p>Application programs, using techniques from <a href="#chapeight">Lesson 7</a>:</p>
+<ul>
+<li>compile grammars to new formats, such as speech recognition grammars</li>
+<li>embed grammars in Java and Haskell programs</li>
+<li>build applications using compilation and embedding:
+<ul>
+<li>voice commands</li>
+<li>spoken language translators</li>
+<li>dialogue systems</li>
+<li>user interfaces</li>
+<li>localization: render the messages printed by a program in different languages</li>
+</ul></li>
+</ul>
+<p></p>
+<p></p>
+<div id="chapthree">
+
+</div>
+<div id="toc16">
+
+</div>
+<h1 id="lesson-2-designing-a-grammar-for-complex-phrases">Lesson 2: Designing a grammar for complex phrases</h1>
+<p>Goals:</p>
+<ul>
+<li>build a larger grammar: phrases about food in English and Italian</li>
+<li>learn to write reusable library functions (&quot;operations&quot;)</li>
+<li>learn the basics of GF's module system</li>
+</ul>
+<p></p>
+<div id="toc17">
+
+</div>
+<h2 id="the-abstract-syntax-food">The abstract syntax Food</h2>
+<p>Phrases usable for speaking about food:</p>
+<ul>
+<li>the start category is <code>Phrase</code></li>
+<li>a <code>Phrase</code> can be built by assigning a <code>Quality</code> to an <code>Item</code> (e.g. <em>this cheese is Italian</em>)</li>
+<li>an<code>Item</code> is build from a <code>Kind</code> by prefixing <em>this</em> or <em>that</em> (e.g. <em>this wine</em>)</li>
+<li>a <code>Kind</code> is either <strong>atomic</strong> (e.g. <em>cheese</em>), or formed qualifying a given <code>Kind</code> with a <code>Quality</code> (e.g. <em>Italian cheese</em>)</li>
+<li>a <code>Quality</code> is either atomic (e.g. <em>Italian</em>, or built by modifying a given <code>Quality</code> with the word <em>very</em> (e.g. <em>very warm</em>)</li>
+</ul>
+<p>Abstract syntax:</p>
+<pre><code>    abstract Food = {
+  
+      flags startcat = Phrase ;
+  
+      cat
+        Phrase ; Item ; Kind ; Quality ;
+  
+      fun
+        Is : Item -&gt; Quality -&gt; Phrase ;
+        This, That : Kind -&gt; Item ;
+        QKind : Quality -&gt; Kind -&gt; Kind ;
+        Wine, Cheese, Fish : Kind ;
+        Very : Quality -&gt; Quality ;
+        Fresh, Warm, Italian, Expensive, Delicious, Boring : Quality ;
+    }</code></pre>
+<p>Example <code>Phrase</code></p>
+<pre><code>    Is (This (QKind Delicious (QKind Italian Wine))) (Very (Very Expensive))
+    this delicious Italian wine is very very expensive</code></pre>
+<p></p>
+<div id="toc18">
+
+</div>
+<h2 id="the-concrete-syntax-foodeng">The concrete syntax FoodEng</h2>
+<pre><code>    concrete FoodEng of Food = {
+  
+      lincat
+        Phrase, Item, Kind, Quality = {s : Str} ;
+  
+      lin
+        Is item quality = {s = item.s ++ &quot;is&quot; ++ quality.s} ;
+        This kind = {s = &quot;this&quot; ++ kind.s} ;
+        That kind = {s = &quot;that&quot; ++ kind.s} ;
+        QKind quality kind = {s = quality.s ++ kind.s} ;
+        Wine = {s = &quot;wine&quot;} ;
+        Cheese = {s = &quot;cheese&quot;} ;
+        Fish = {s = &quot;fish&quot;} ;
+        Very quality = {s = &quot;very&quot; ++ quality.s} ;
+        Fresh = {s = &quot;fresh&quot;} ;
+        Warm = {s = &quot;warm&quot;} ;
+        Italian = {s = &quot;Italian&quot;} ;
+        Expensive = {s = &quot;expensive&quot;} ;
+        Delicious = {s = &quot;delicious&quot;} ;
+        Boring = {s = &quot;boring&quot;} ;
+    }</code></pre>
+<p></p>
+<p>Test the grammar for parsing:</p>
+<pre><code>    &gt; import FoodEng.gf
+    &gt; parse &quot;this delicious wine is very very Italian&quot;
+    Is (This (QKind Delicious Wine)) (Very (Very Italian))</code></pre>
+<p>Parse in other categories setting the <code>cat</code> flag:</p>
+<pre><code>    p -cat=Kind &quot;very Italian wine&quot;
+    QKind (Very Italian) Wine</code></pre>
+<p></p>
+<div id="toc19">
+
+</div>
+<h3 id="exercises-on-the-food-grammar">Exercises on the Food grammar</h3>
+<ol>
+<li><p>Extend the <code>Food</code> grammar by ten new food kinds and qualities, and run the parser with new kinds of examples.</p>
+<p></p></li>
+<li><p>Add a rule that enables question phrases of the form <em>is this cheese Italian</em>.</p>
+<p></p></li>
+<li>Enable the optional prefixing of phrases with the words &quot;excuse me but&quot;. Do this in such a way that the prefix can occur at most once.</li>
+</ol>
+<p></p>
+<div id="toc20">
+
+</div>
+<h2 id="commands-for-testing-grammars">Commands for testing grammars</h2>
+<div id="toc21">
+
+</div>
+<h3 id="generating-trees-and-strings">Generating trees and strings</h3>
+<p>Random generation (<code>generate_random = gr</code>): build build a random tree in accordance with an abstract syntax:</p>
+<pre><code>    &gt; generate_random
+    Is (This (QKind Italian Fish)) Fresh</code></pre>
+<p>By using a pipe, random generation can be fed into linearization:</p>
+<pre><code>    &gt; generate_random | linearize
+    this Italian fish is fresh</code></pre>
+<p>Use the <code>number</code> flag to generate several trees:</p>
+<pre><code>    &gt; gr -number=4 | l
+    that wine is boring
+    that fresh cheese is fresh
+    that cheese is very boring
+    this cheese is Italian</code></pre>
+<p></p>
+<p>To generate <em>all</em> phrases that a grammar can produce, use <code>generate_trees = gt</code>.</p>
+<pre><code>    &gt; generate_trees | l
+    that cheese is very Italian
+    that cheese is very boring
+    that cheese is very delicious
+    ...
+    this wine is fresh
+    this wine is warm</code></pre>
+<p>The default <strong>depth</strong> is 5; the depth can be set by using the <code>depth</code> flag:</p>
+<pre><code>    &gt; generate_trees -depth=2 | l</code></pre>
+<p>What options a command has can be seen by the <code>help = h</code> command:</p>
+<pre><code>    &gt; help gr
+    &gt; help gt</code></pre>
+<p></p>
+<div id="toc22">
+
+</div>
+<h3 id="exercises-on-generation">Exercises on generation</h3>
+<ol>
+<li><p>If the command <code>gt</code> generated all trees in your grammar, it would never terminate. Why?</p>
+<p></p></li>
+<li>Measure how many trees the grammar gives with depths 4 and 5, respectively. <strong>Hint</strong>. You can use the Unix <strong>word count</strong> command <code>wc</code> to count lines.</li>
+</ol>
+<p></p>
+<div id="toc23">
+
+</div>
+<h3 id="more-on-pipes-tracing">More on pipes: tracing</h3>
+<p>Put the <strong>tracing</strong> option <code>-tr</code> to each command whose output you want to see:</p>
+<pre><code>    &gt; gr -tr | l -tr | p
+  
+    Is (This Cheese) Boring
+    this cheese is boring
+    Is (This Cheese) Boring</code></pre>
+<p>Useful for test purposes: the pipe above can show if a grammar is <strong>ambiguous</strong>, i.e. contains strings that can be parsed in more than one way.</p>
+<p><strong>Exercise</strong>. Extend the <code>Food</code> grammar so that it produces ambiguous strings, and try out the ambiguity test.</p>
+<p></p>
+<div id="toc24">
+
+</div>
+<h3 id="writing-and-reading-files">Writing and reading files</h3>
+<p>To save the outputs into a file, pipe it to the <code>write_file = wf</code> command,</p>
+<pre><code>    &gt; gr -number=10 | linearize | write_file -file=exx.tmp</code></pre>
+<p>To read a file to GF, use the <code>read_file = rf</code> command,</p>
+<pre><code>    &gt; read_file -file=exx.tmp -lines | parse</code></pre>
+<p>The flag <code>-lines</code> tells GF to read each line of the file separately.</p>
+<p>Files with examples can be used for <strong>regression testing</strong> of grammars - the most systematic way to do this is by <strong>treebanks</strong>; see <a href="#sectreebank">here</a>.</p>
+<p></p>
+<div id="toc25">
+
+</div>
+<h3 id="visualizing-trees">Visualizing trees</h3>
+<p>Parentheses give a linear representation of trees, useful for the computer.</p>
+<p>Human eye may prefer to see a visualization: <code>visualize_tree = vt</code>:</p>
+<pre><code>    &gt; parse &quot;this delicious cheese is very Italian&quot; | visualize_tree</code></pre>
+<p>The tree is generated in postscript (<code>.ps</code>) file. The <code>-view</code> option is used for telling what command to use to view the file.</p>
+<p>This works on Mac OS X:</p>
+<pre><code>    &gt; parse &quot;this delicious cheese is very Italian&quot; | visualize_tree -view=open</code></pre>
+<p>On Linux, one can use one of the following commands.</p>
+<pre><code>    &gt; parse &quot;this delicious cheese is very Italian&quot; | visualize_tree -view=eog
+    &gt; parse &quot;this delicious cheese is very Italian&quot; | visualize_tree -view=xdg-open</code></pre>
+<p><img src="mytree.png" /></p>
+<p>This command uses the program <a href="http://www.graphviz.org/">Graphviz</a>, which you might not have, but which are freely available on the web.</p>
+<p>You can save the temporary file <code>_grph.dot</code>, which the command <code>vt</code> produces.</p>
+<p>Then you can process this file with the <code>dot</code> program (from the Graphviz package).</p>
+<pre><code>    % dot -Tpng _grph.dot &gt; mytree.png</code></pre>
+<p>You can also visualize <strong>parse trees</strong>, which show categories and words instead of function symbols. The command is <code>visualize_parse = vp</code>:</p>
+<pre><code>    &gt; parse &quot;this delicious cheese is very Italian&quot; | visualize_parse</code></pre>
+<p><img src="myparse.png" /></p>
+<p></p>
+<div id="toc26">
+
+</div>
+<h3 id="system-commands">System commands</h3>
+<p>You can give a <strong>system command</strong> without leaving GF: <code>!</code> followed by a Unix command,</p>
+<pre><code>    &gt; ! dot -Tpng grphtmp.dot &gt; mytree.png
+    &gt; ! open mytree.png</code></pre>
+<p>A system command may also receive its argument from a GF pipes. It then uses the symbol <code>?</code>:</p>
+<pre><code>    &gt; generate_trees -depth=4 | ? wc -l</code></pre>
+<p>This command example returns the number of generated trees.</p>
+<p><strong>Exercise</strong>. Measure how many trees the grammar <code>FoodEng</code> gives with depths 4 and 5, respectively. Use the Unix <strong>word count</strong> command <code>wc</code> to count lines, and a system pipe from a GF command into a Unix command.</p>
+<p></p>
+<div id="toc27">
+
+</div>
+<h2 id="an-italian-concrete-syntax">An Italian concrete syntax</h2>
+<p></p>
+<div id="secanitalian">
+
+</div>
+<p>Just (?) replace English words with their dictionary equivalents:</p>
+<pre><code>    concrete FoodIta of Food = {
+  
+      lincat
+        Phrase, Item, Kind, Quality = {s : Str} ;
+  
+      lin
+        Is item quality = {s = item.s ++ &quot;è&quot; ++ quality.s} ;
+        This kind = {s = &quot;questo&quot; ++ kind.s} ;
+        That kind = {s = &quot;quel&quot; ++ kind.s} ;
+        QKind quality kind = {s = kind.s ++ quality.s} ;
+        Wine = {s = &quot;vino&quot;} ;
+        Cheese = {s = &quot;formaggio&quot;} ;
+        Fish = {s = &quot;pesce&quot;} ;
+        Very quality = {s = &quot;molto&quot; ++ quality.s} ;
+        Fresh = {s = &quot;fresco&quot;} ;
+        Warm = {s = &quot;caldo&quot;} ;
+        Italian = {s = &quot;italiano&quot;} ;
+        Expensive = {s = &quot;caro&quot;} ;
+        Delicious = {s = &quot;delizioso&quot;} ;
+        Boring = {s = &quot;noioso&quot;} ;
+    }</code></pre>
+<p></p>
+<p>Not just replacing words:</p>
+<p>The order of a quality and the kind it modifies is changed in</p>
+<pre><code>      QKind quality kind = {s = kind.s ++ quality.s} ;</code></pre>
+<p>Thus Italian says <code>vino italiano</code> for <code>Italian wine</code>.</p>
+<p>(Some Italian adjectives are put before the noun. This distinction can be controlled by parameters, which are introduced in <a href="#chapfour">Lesson 3</a>.)</p>
+<p>Multilingual grammars have yet another visualization option: <strong>word alignment</strong>, which shows what words correspond to each other. Technically, this means words that have the same smallest spanning subtrees in abstract syntax. The command is <code>align_words = aw</code>:</p>
+<pre><code>    &gt; parse &quot;this delicious cheese is very Italian&quot; | align_words</code></pre>
+<p><img src="align2.png" /></p>
+<p></p>
+<div id="toc28">
+
+</div>
+<h3 id="exercises-on-multilinguality">Exercises on multilinguality</h3>
+<ol>
+<li><p>Write a concrete syntax of <code>Food</code> for some other language. You will probably end up with grammatically incorrect linearizations - but don't worry about this yet.</p>
+<p></p></li>
+<li>If you have written <code>Food</code> for German, Swedish, or some other language, test with random or exhaustive generation what constructs come out incorrect, and prepare a list of those ones that cannot be helped with the currently available fragment of GF. You can return to your list after having worked out <a href="#chapfour">Lesson 3</a>.</li>
+</ol>
+<p></p>
+<div id="toc29">
+
+</div>
+<h2 id="free-variation">Free variation</h2>
+<p>Semantically indistinguishable ways of expressing a thing.</p>
+<p>The <strong>variants</strong> construct of GF expresses free variation. For example,</p>
+<pre><code>    lin Delicious = {s = &quot;delicious&quot; | &quot;exquisit&quot; | &quot;tasty&quot;} ;</code></pre>
+<p>By default, the <code>linearize</code> command shows only the first variant from such lists; to see them all, use the option <code>-all</code>:</p>
+<pre><code>    &gt; p &quot;this exquisit wine is delicious&quot; | l -all
+    this delicious wine is delicious
+    this delicious wine is exquisit
+    ...</code></pre>
+<p></p>
+<p>An equivalent notation for variants is</p>
+<pre><code>    lin Delicious = {s = variants {&quot;delicious&quot; ; &quot;exquisit&quot; ; &quot;tasty&quot;}} ;</code></pre>
+<p>This notation also allows the limiting case: an empty variant list,</p>
+<pre><code>    variants {}</code></pre>
+<p>It can be used e.g. if a word lacks a certain inflection form.</p>
+<p>Free variation works for all types in concrete syntax; all terms in a variant list must be of the same type.</p>
+<p></p>
+<div id="toc30">
+
+</div>
+<h2 id="more-application-of-multilingual-grammars">More application of multilingual grammars</h2>
+<div id="toc31">
+
+</div>
+<h3 id="multilingual-treebanks">Multilingual treebanks</h3>
+<p></p>
+<div id="sectreebank">
+
+</div>
+<p><strong>Multilingual treebank</strong>: a set of trees with their linearizations in different languages:</p>
+<pre><code>    &gt; gr -number=2 | l -treebank
+  
+    Is (That Cheese) (Very Boring)
+    quel formaggio è molto noioso
+    that cheese is very boring
+  
+    Is (That Cheese) Fresh
+    quel formaggio è fresco
+    that cheese is fresh</code></pre>
+<p></p>
+<div id="toc32">
+
+</div>
+<h3 id="translation-quiz">Translation quiz</h3>
+<p><code>translation_quiz = tq</code>: generate random sentences, display them in one language, and check the user's answer given in another language.</p>
+<pre><code>    &gt; translation_quiz -from=FoodEng -to=FoodIta
+  
+    Welcome to GF Translation Quiz.
+    The quiz is over when you have done at least 10 examples
+    with at least 75 % success.
+    You can interrupt the quiz by entering a line consisting of a dot (&#39;.&#39;).
+  
+    this fish is warm
+    questo pesce è caldo
+    &gt; Yes.
+    Score 1/1
+  
+    this cheese is Italian
+    questo formaggio è noioso
+    &gt; No, not questo formaggio è noioso, but
+    questo formaggio è italiano
+  
+    Score 1/2
+    this fish is expensive</code></pre>
+<p></p>
+<div id="toc33">
+
+</div>
+<h2 id="context-free-grammars-and-gf">Context-free grammars and GF</h2>
+<div id="toc34">
+
+</div>
+<h3 id="the-cf-grammar-format">The &quot;cf&quot; grammar format</h3>
+<p>The grammar <code>FoodEng</code> can be written in a BNF format as follows:</p>
+<pre><code>    Is.        Phrase  ::= Item &quot;is&quot; Quality ;
+    That.      Item    ::= &quot;that&quot; Kind ;
+    This.      Item    ::= &quot;this&quot; Kind ;
+    QKind.     Kind    ::= Quality Kind ;
+    Cheese.    Kind    ::= &quot;cheese&quot; ;
+    Fish.      Kind    ::= &quot;fish&quot; ;
+    Wine.      Kind    ::= &quot;wine&quot; ;
+    Italian.   Quality ::= &quot;Italian&quot; ;
+    Boring.    Quality ::= &quot;boring&quot; ;
+    Delicious. Quality ::= &quot;delicious&quot; ;
+    Expensive. Quality ::= &quot;expensive&quot; ;
+    Fresh.     Quality ::= &quot;fresh&quot; ;
+    Very.      Quality ::= &quot;very&quot; Quality ;
+    Warm.      Quality ::= &quot;warm&quot; ;</code></pre>
+<p>GF can convert BNF grammars into GF. BNF files are recognized by the file name suffix <code>.cf</code> (for <strong>context-free</strong>):</p>
+<pre><code>    &gt; import food.cf</code></pre>
+<p>The compiler creates separate abstract and concrete modules internally.</p>
+<p></p>
+<div id="toc35">
+
+</div>
+<h3 id="restrictions-of-context-free-grammars">Restrictions of context-free grammars</h3>
+<p>Separating concrete and abstract syntax allows three deviations from context-free grammar:</p>
+<ul>
+<li><strong>permutation</strong>: changing the order of constituents</li>
+<li><strong>suppression</strong>: omitting constituents</li>
+<li><strong>reduplication</strong>: repeating constituents</li>
+</ul>
+<p><strong>Exercise</strong>. Define the non-context-free copy language <code>{x x | x &lt;- (a|b)*}</code> in GF.</p>
+<p></p>
+<div id="toc36">
+
+</div>
+<h2 id="modules-and-files">Modules and files</h2>
+<p>GF uses suffixes to recognize different file formats:</p>
+<ul>
+<li>Source files: <em>Modulename</em><code>.gf</code></li>
+<li>Target files: <em>Modulename</em><code>.gfo</code></li>
+</ul>
+<p>Importing generates target from source:</p>
+<pre><code>    &gt; i FoodEng.gf
+    - compiling Food.gf...   wrote file Food.gfo 16 msec
+    - compiling FoodEng.gf...   wrote file FoodEng.gfo 20 msec</code></pre>
+<p>The <code>.gfo</code> format (=&quot;GF Object&quot;) is precompiled GF, which is faster to load than source GF (<code>.gf</code>).</p>
+<p>When reading a module, GF decides whether to use an existing <code>.gfo</code> file or to generate a new one, by looking at modification times.</p>
+<p></p>
+<p><strong>Exercise</strong>. What happens when you import <code>FoodEng.gf</code> for a second time? Try this in different situations:</p>
+<ul>
+<li>Right after importing it the first time (the modules are kept in the memory of GF and need no reloading).</li>
+<li>After issuing the command <code>empty</code> (<code>e</code>), which clears the memory of GF.</li>
+<li>After making a small change in <code>FoodEng.gf</code>, be it only an added space.</li>
+<li>After making a change in <code>Food.gf</code>.</li>
+</ul>
+<p></p>
+<div id="toc37">
+
+</div>
+<h2 id="using-operations-and-resource-modules">Using operations and resource modules</h2>
+<div id="toc38">
+
+</div>
+<h3 id="operation-definitions">Operation definitions</h3>
+<p>The golden rule of functional programmin:</p>
+<p><em>Whenever you find yourself programming by copy-and-paste, write a function instead.</em></p>
+<p>Functions in concrete syntax are defined using the keyword <code>oper</code> (for <strong>operation</strong>), distinct from <code>fun</code> for the sake of clarity.</p>
+<p>Example:</p>
+<pre><code>    oper ss : Str -&gt; {s : Str} = \x -&gt; {s = x} ;</code></pre>
+<p>The operation can be <strong>applied</strong> to an argument, and GF will <strong>compute</strong> the value:</p>
+<pre><code>    ss &quot;boy&quot; ===&gt; {s = &quot;boy&quot;}</code></pre>
+<p>The symbol <code>===&gt;</code> will be used for computation.</p>
+<p></p>
+<p>Notice the <strong>lambda abstraction</strong> form</p>
+<ul>
+<li><code>\</code><em>x</em> <code>-&gt;</code> <em>t</em></li>
+</ul>
+<p>This is read:</p>
+<ul>
+<li>function with variable <em>x</em> and <strong>function body</strong> <em>t</em></li>
+</ul>
+<p>For lambda abstraction with multiple arguments, we have the shorthand</p>
+<pre><code>    \x,y -&gt; t   ===  \x -&gt; \y -&gt; t</code></pre>
+<p>Linearization rules actually use syntactic sugar for abstraction:</p>
+<pre><code>    lin f x = t   ===  lin f = \x -&gt; t</code></pre>
+<p></p>
+<div id="toc39">
+
+</div>
+<h3 id="the-resource-module-type">The ``resource`` module type</h3>
+<p>The <code>resource</code> module type is used to package <code>oper</code> definitions into reusable resources.</p>
+<pre><code>    resource StringOper = {
+      oper
+        SS : Type = {s : Str} ;
+        ss : Str -&gt; SS = \x -&gt; {s = x} ;
+        cc : SS -&gt; SS -&gt; SS = \x,y -&gt; ss (x.s ++ y.s) ;
+        prefix : Str -&gt; SS -&gt; SS = \p,x -&gt; ss (p ++ x.s) ;
+    }</code></pre>
+<p></p>
+<div id="toc40">
+
+</div>
+<h3 id="opening-a-resource">Opening a resource</h3>
+<p>Any number of <code>resource</code> modules can be <strong>open</strong>ed in a <code>concrete</code> syntax.</p>
+<pre><code>    concrete FoodEng of Food = open StringOper in {
+  
+      lincat
+        S, Item, Kind, Quality = SS ;
+  
+      lin
+        Is item quality = cc item (prefix &quot;is&quot; quality) ;
+        This k = prefix &quot;this&quot; k ;
+        That k = prefix &quot;that&quot; k ;
+        QKind k q = cc k q ;
+        Wine = ss &quot;wine&quot; ;
+        Cheese = ss &quot;cheese&quot; ;
+        Fish = ss &quot;fish&quot; ;
+        Very = prefix &quot;very&quot; ;
+        Fresh = ss &quot;fresh&quot; ;
+        Warm = ss &quot;warm&quot; ;
+        Italian = ss &quot;Italian&quot; ;
+        Expensive = ss &quot;expensive&quot; ;
+        Delicious = ss &quot;delicious&quot; ;
+        Boring = ss &quot;boring&quot; ;
+    }</code></pre>
+<p></p>
+<div id="toc41">
+
+</div>
+<h3 id="partial-application">Partial application</h3>
+<p></p>
+<div id="secpartapp">
+
+</div>
+<p>The rule</p>
+<pre><code>    lin This k = prefix &quot;this&quot; k ;</code></pre>
+<p>can be written more concisely</p>
+<pre><code>    lin This = prefix &quot;this&quot; ;</code></pre>
+<p>Part of the art in functional programming: decide the order of arguments in a function, so that partial application can be used as much as possible.</p>
+<p>For instance, <code>prefix</code> is typically applied to linearization variables with constant strings. Hence we put the <code>Str</code> argument before the <code>SS</code> argument.</p>
+<p><strong>Exercise</strong>. Define an operation <code>infix</code> analogous to <code>prefix</code>, such that it allows you to write</p>
+<pre><code>    lin Is = infix &quot;is&quot; ;</code></pre>
+<p></p>
+<div id="toc42">
+
+</div>
+<h3 id="testing-resource-modules">Testing resource modules</h3>
+<p>Import with the flag <code>-retain</code>,</p>
+<pre><code>    &gt; import -retain StringOper.gf</code></pre>
+<p>Compute the value with <code>compute_concrete = cc</code>,</p>
+<pre><code>    &gt; compute_concrete prefix &quot;in&quot; (ss &quot;addition&quot;)
+    {s : Str = &quot;in&quot; ++ &quot;addition&quot;}</code></pre>
+<p></p>
+<div id="toc43">
+
+</div>
+<h2 id="grammar-architecture">Grammar architecture</h2>
+<p></p>
+<div id="secarchitecture">
+
+</div>
+<div id="toc44">
+
+</div>
+<h3 id="extending-a-grammar">Extending a grammar</h3>
+<p>A new module can <strong>extend</strong> an old one:</p>
+<pre><code>    abstract Morefood = Food ** {
+      cat
+        Question ;
+      fun
+        QIs : Item -&gt; Quality -&gt; Question ;
+        Pizza : Kind ;
+    }</code></pre>
+<p>Note that the extended grammar doesn't inherit the start category from the grammar it extends, so if you want to generate sentences with this grammar, you'll have to either add a startcat (e.g. <code>flags startcat = Question ;</code>), or in the GF shell, specify the category to <code>generate_random</code> or <code>geneate_trees</code> (e.g. <code>gr -cat=Comment</code> or <code>gt -cat=Question</code>).</p>
+<p>Parallel to the abstract syntax, extensions can be built for concrete syntaxes:</p>
+<pre><code>    concrete MorefoodEng of Morefood = FoodEng ** {
+      lincat
+        Question = {s : Str} ;
+      lin
+        QIs item quality = {s = &quot;is&quot; ++ item.s ++ quality.s} ;
+        Pizza = {s = &quot;pizza&quot;} ;
+    }</code></pre>
+<p>The effect of extension: all of the contents of the extended and extending modules are put together.</p>
+<p>In other words: the new module <strong>inherits</strong> the contents of the old module.</p>
+<p></p>
+<p>Simultaneous extension and opening:</p>
+<pre><code>    concrete MorefoodIta of Morefood = FoodIta ** open StringOper in {
+      lincat
+        Question = SS ;
+      lin
+        QIs item quality = ss (item.s ++ &quot;è&quot; ++ quality.s) ;
+        Pizza = ss &quot;pizza&quot; ;
+    }</code></pre>
+<p>Resource modules can extend other resource modules - thus it is possible to build resource hierarchies.</p>
+<p></p>
+<div id="toc45">
+
+</div>
+<h3 id="multiple-inheritance">Multiple inheritance</h3>
+<p>Extend several grammars at the same time:</p>
+<pre><code>    abstract Foodmarket = Food, Fruit, Mushroom ** {
+      fun
+        FruitKind    : Fruit    -&gt; Kind ;
+        MushroomKind : Mushroom -&gt; Kind ;
+      }</code></pre>
+<p>where</p>
+<pre><code>    abstract Fruit = {
+      cat Fruit ;
+      fun Apple, Peach : Fruit ;
+    }
+  
+    abstract Mushroom = {
+      cat Mushroom ;
+      fun Cep, Agaric : Mushroom ;
+    }</code></pre>
+<p><strong>Exercise</strong>. Refactor <code>Food</code> by taking apart <code>Wine</code> into a special <code>Drink</code> module.</p>
+<p></p>
+<p></p>
+<div id="chapfour">
+
+</div>
+<div id="toc46">
+
+</div>
+<h1 id="lesson-3-grammars-with-parameters">Lesson 3: Grammars with parameters</h1>
+<p>Goals:</p>
+<ul>
+<li>implement sophisticated linguistic structures:
+<ul>
+<li>morphology: the inflection of words</li>
+<li>agreement: rules for selecting word forms in syntactic combinations</li>
+</ul></li>
+</ul>
+<ul>
+<li>Cover all GF constructs for concrete syntax</li>
+</ul>
+<p>It is possible to skip this chapter and go directly to the next, since the use of the GF Resource Grammar library makes it unnecessary to use parameters: they could be left to library implementors.</p>
+<p></p>
+<div id="toc47">
+
+</div>
+<h2 id="the-problem-words-have-to-be-inflected">The problem: words have to be inflected</h2>
+<p>Plural forms are needed in things like</p>
+<p><em>these Italian wines are delicious</em></p>
+<p>This requires two things:</p>
+<ul>
+<li>the <strong>inflection</strong> of nouns and verbs in singular and plural</li>
+<li>the <strong>agreement</strong> of the verb to subject: the verb must have the same number as the subject</li>
+</ul>
+<p>Different languages have different types of inflection and agreement.</p>
+<ul>
+<li>Italian has also gender (masculine vs. feminine).</li>
+</ul>
+<p>In a multilingual grammar, we want to ignore such distinctions in abstract syntax.</p>
+<p><strong>Exercise</strong>. Make a list of the possible forms that nouns, adjectives, and verbs can have in some languages that you know.</p>
+<p></p>
+<div id="toc48">
+
+</div>
+<h2 id="parameters-and-tables">Parameters and tables</h2>
+<p>We define the <strong>parameter type</strong> of number in English by a new form of judgement:</p>
+<pre><code>    param Number = Sg | Pl ;</code></pre>
+<p>This judgement defines the parameter type <code>Number</code> by listing its two <strong>constructors</strong>, <code>Sg</code> and <code>Pl</code> (singular and plural).</p>
+<p>We give <code>Kind</code> a linearization type that has a <strong>table</strong> depending on number:</p>
+<pre><code>    lincat Kind = {s : Number =&gt; Str} ;</code></pre>
+<p>The <strong>table type</strong> <code>Number =&gt; Str</code> is similar a function type (<code>Number -&gt; Str</code>).</p>
+<p>Difference: the argument must be a parameter type. Then the argument-value pairs can be listed in a finite table.</p>
+<p></p>
+<p>Here is a table:</p>
+<pre><code>    lin Cheese = {
+      s = table {
+        Sg =&gt; &quot;cheese&quot; ;
+        Pl =&gt; &quot;cheeses&quot;
+      }
+    } ;</code></pre>
+<p>The table has <strong>branches</strong>, with a <strong>pattern</strong> on the left of the arrow <code>=&gt;</code> and a <strong>value</strong> on the right.</p>
+<p>The application of a table is done by the <strong>selection</strong> operator <code>!</code>.</p>
+<p>It which is computed by <strong>pattern matching</strong>: return the value from the first branch whose pattern matches the argument. For instance,</p>
+<pre><code>     table {Sg =&gt; &quot;cheese&quot; ; Pl =&gt; &quot;cheeses&quot;} ! Pl
+     ===&gt; &quot;cheeses&quot;</code></pre>
+<p></p>
+<p><strong>Case expressions</strong> are syntactic sugar:</p>
+<pre><code>    case e of {...} ===  table {...} ! e</code></pre>
+<p>Since they are familiar to Haskell and ML programmers, they can come out handy when writing GF programs.</p>
+<p></p>
+<p>Constructors can take arguments from other parameter types.</p>
+<p>Example: forms of English verbs (except <em>be</em>):</p>
+<pre><code>    param VerbForm = VPresent Number | VPast | VPastPart | VPresPart ;</code></pre>
+<p>Fact expressed: only present tense has number variation.</p>
+<p>Example table: the forms of the verb <em>drink</em>:</p>
+<pre><code>    table {
+      VPresent Sg =&gt; &quot;drinks&quot; ;
+      VPresent Pl =&gt; &quot;drink&quot; ;
+      VPast       =&gt; &quot;drank&quot; ;
+      VPastPart   =&gt; &quot;drunk&quot; ;
+      VPresPart   =&gt; &quot;drinking&quot;
+      }</code></pre>
+<p><strong>Exercise</strong>. In an earlier exercise (previous section), you made a list of the possible forms that nouns, adjectives, and verbs can have in some languages that you know. Now take some of the results and implement them by using parameter type definitions and tables. Write them into a <code>resource</code> module, which you can test by using the command <code>compute_concrete</code>.</p>
+<p></p>
+<div id="toc49">
+
+</div>
+<h2 id="inflection-tables-and-paradigms">Inflection tables and paradigms</h2>
+<p>A morphological <strong>paradigm</strong> is a formula telling how a class of words is inflected.</p>
+<p>From the GF point of view, a paradigm is a function that takes a <strong>lemma</strong> (also known as a <strong>dictionary form</strong>, or a <strong>citation form</strong>) and returns an inflection table.</p>
+<p>The following operation defines the regular noun paradigm of English:</p>
+<pre><code>    oper regNoun : Str -&gt; {s : Number =&gt; Str} = \dog -&gt; {
+      s = table {
+        Sg =&gt; dog ;
+        Pl =&gt; dog + &quot;s&quot;
+        }
+      } ;</code></pre>
+<p>The <strong>gluing</strong> operator <code>+</code> glues strings to one <strong>token</strong>:</p>
+<pre><code>    (regNoun &quot;cheese&quot;).s ! Pl  ===&gt; &quot;cheese&quot; + &quot;s&quot;  ===&gt;  &quot;cheeses&quot;</code></pre>
+<p></p>
+<p>A more complex example: regular verbs,</p>
+<pre><code>    oper regVerb : Str -&gt; {s : VerbForm =&gt; Str} = \talk -&gt; {
+      s = table {
+        VPresent Sg =&gt; talk + &quot;s&quot; ;
+        VPresent Pl =&gt; talk ;
+        VPresPart   =&gt; talk + &quot;ing&quot; ;
+        _           =&gt; talk + &quot;ed&quot;
+        }
+      } ;</code></pre>
+<p>The catch-all case for the past tense and the past participle uses a <strong>wild card</strong> pattern <code>_</code>.</p>
+<p></p>
+<div id="toc50">
+
+</div>
+<h3 id="exercises-on-morphology">Exercises on morphology</h3>
+<ol>
+<li><p>Identify cases in which the <code>regNoun</code> paradigm does not apply in English, and implement some alternative paradigms.</p>
+<p></p></li>
+<li>Implement some regular paradigms for other languages you have considered in earlier exercises.</li>
+</ol>
+<p></p>
+<div id="toc51">
+
+</div>
+<h2 id="using-parameters-in-concrete-syntax">Using parameters in concrete syntax</h2>
+<p>Purpose: a more radical variation between languages than just the use of different words and word orders.</p>
+<p>We add to the grammar <code>Food</code> two rules for forming plural items:</p>
+<pre><code>    fun These, Those : Kind -&gt; Item ;</code></pre>
+<p>We also add a noun which in Italian has the feminine case:</p>
+<pre><code>    fun Pizza : Kind ;</code></pre>
+<p>This will force us to deal with gender-</p>
+<p></p>
+<div id="toc52">
+
+</div>
+<h3 id="agreement">Agreement</h3>
+<p>In English, the phrase-forming rule</p>
+<pre><code>    fun Is : Item -&gt; Quality -&gt; Phrase ;</code></pre>
+<p>is affected by the number because of <strong>subject-verb agreement</strong>: the verb of a sentence must be inflected in the number of the subject,</p>
+<pre><code>    Is (This Pizza) Warm   ===&gt;  &quot;this pizza is warm&quot;
+    Is (These Pizza) Warm  ===&gt;  &quot;these pizzas are warm&quot;</code></pre>
+<p>It is the <strong>copula</strong> (the verb <em>be</em>) that is affected:</p>
+<pre><code>    oper copula : Number -&gt; Str = \n -&gt;
+      case n of {
+        Sg =&gt; &quot;is&quot; ;
+        Pl =&gt; &quot;are&quot;
+        } ;</code></pre>
+<p>The <strong>subject</strong> <code>Item</code> must have such a number to provide to the copula:</p>
+<pre><code>    lincat Item = {s : Str ; n : Number} ;</code></pre>
+<p>Now we can write</p>
+<pre><code>    lin Is item qual = {s = item.s ++ copula item.n ++ qual.s} ;</code></pre>
+<p></p>
+<div id="toc53">
+
+</div>
+<h3 id="determiners">Determiners</h3>
+<p>How does an <code>Item</code> subject receive its number? The rules</p>
+<pre><code>    fun This, These : Kind -&gt; Item ;</code></pre>
+<p>add <strong>determiners</strong>, either <em>this</em> or <em>these</em>, which require different <em>this pizza</em> vs. <em>these pizzas</em>.</p>
+<p>Thus <code>Kind</code> must have both singular and plural forms:</p>
+<pre><code>    lincat Kind = {s : Number =&gt; Str} ;</code></pre>
+<p>We can write</p>
+<pre><code>    lin This kind = {
+      s = &quot;this&quot; ++ kind.s ! Sg ;
+      n = Sg
+    } ;
+  
+    lin These kind = {
+      s = &quot;these&quot; ++ kind.s ! Pl ;
+      n = Pl
+    } ;</code></pre>
+<p></p>
+<p>To avoid copy-and-paste, we can factor out the pattern of determination,</p>
+<pre><code>    oper det :
+      Str -&gt; Number -&gt; {s : Number =&gt; Str} -&gt; {s : Str ; n : Number} =
+        \det,n,kind -&gt; {
+        s = det ++ kind.s ! n ;
+        n = n
+      } ;</code></pre>
+<p>Now we can write</p>
+<pre><code>    lin This  = det Sg &quot;this&quot; ;
+    lin These = det Pl &quot;these&quot; ;</code></pre>
+<p>In a more <strong>lexicalized</strong> grammar, determiners would be a category:</p>
+<pre><code>    lincat Det = {s : Str ; n : Number} ;
+    fun Det : Det -&gt; Kind -&gt; Item ;
+    lin Det det kind = {
+        s = det.s ++ kind.s ! det.n ;
+        n = det.n
+      } ;</code></pre>
+<p></p>
+<div id="toc54">
+
+</div>
+<h3 id="parametric-vs.-inherent-features">Parametric vs. inherent features</h3>
+<p><code>Kind</code>s have number as a <strong>parametric feature</strong>: both singular and plural can be formed,</p>
+<pre><code>    lincat Kind = {s : Number =&gt; Str} ;</code></pre>
+<p><code>Item</code>s have number as an <strong>inherent feature</strong>: they are inherently either singular or plural,</p>
+<pre><code>    lincat Item = {s : Str ; n : Number} ;</code></pre>
+<p>Italian <code>Kind</code> will have parametric number and inherent gender:</p>
+<pre><code>    lincat Kind = {s : Number =&gt; Str ; g : Gender} ;</code></pre>
+<p></p>
+<p>Questions to ask when designing parameters:</p>
+<ul>
+<li>existence: what forms are possible to build by morphological and other means?</li>
+<li>need: what features are expected via agreement or government?</li>
+</ul>
+<p>Dictionaries give good advice:</p>
+<p><strong>uomo</strong>, pl. <em>uomini</em>, n.m. &quot;man&quot;</p>
+<p>tells that <em>uomo</em> is a masculine noun with the plural form <em>uomini</em>. Hence, parametric number and an inherent gender.</p>
+<p>For words, inherent features are usually given as lexical information.</p>
+<p>For combinations, they are <em>inherited</em> from some part of the construction (typically the one called the <strong>head</strong>). Italian modification:</p>
+<pre><code>    lin QKind qual kind =
+      let gen = kind.g in {
+        s = table {n =&gt; kind.s ! n ++ qual.s ! gen ! n} ;
+        g = gen
+        } ;</code></pre>
+<p>Notice</p>
+<ul>
+<li><strong>local definition</strong> (<code>let</code> expression)</li>
+<li><strong>variable pattern</strong> <code>n</code></li>
+</ul>
+<p></p>
+<div id="toc55">
+
+</div>
+<h2 id="an-english-concrete-syntax-for-foods-with-parameters">An English concrete syntax for Foods with parameters</h2>
+<p>We use some string operations from the library <code>Prelude</code> are used.</p>
+<pre><code>     concrete FoodsEng of Foods = open Prelude in {
+  
+    lincat
+      S, Quality = SS ;
+      Kind = {s : Number =&gt; Str} ;
+      Item = {s : Str ; n : Number} ;
+  
+    lin
+      Is item quality = ss (item.s ++ copula item.n ++ quality.s) ;
+      This  = det Sg &quot;this&quot; ;
+      That  = det Sg &quot;that&quot; ;
+      These = det Pl &quot;these&quot; ;
+      Those = det Pl &quot;those&quot; ;
+      QKind quality kind = {s = table {n =&gt; quality.s ++ kind.s ! n}} ;
+      Wine = regNoun &quot;wine&quot; ;
+      Cheese = regNoun &quot;cheese&quot; ;
+      Fish = noun &quot;fish&quot; &quot;fish&quot; ;
+      Pizza = regNoun &quot;pizza&quot; ;
+      Very = prefixSS &quot;very&quot; ;
+      Fresh = ss &quot;fresh&quot; ;
+      Warm = ss &quot;warm&quot; ;
+      Italian = ss &quot;Italian&quot; ;
+      Expensive = ss &quot;expensive&quot; ;
+      Delicious = ss &quot;delicious&quot; ;
+      Boring = ss &quot;boring&quot; ;</code></pre>
+<p></p>
+<pre><code>    param
+      Number = Sg | Pl ;
+  
+    oper
+      det : Number -&gt; Str -&gt; {s : Number =&gt; Str} -&gt; {s : Str ; n : Number} =
+        \n,d,cn -&gt; {
+          s = d ++ cn.s ! n ;
+          n = n
+        } ;
+      noun : Str -&gt; Str -&gt; {s : Number =&gt; Str} =
+        \man,men -&gt; {s = table {
+          Sg =&gt; man ;
+          Pl =&gt; men
+          }
+        } ;
+      regNoun : Str -&gt; {s : Number =&gt; Str} =
+        \car -&gt; noun car (car + &quot;s&quot;) ;
+      copula : Number -&gt; Str =
+        \n -&gt; case n of {
+          Sg =&gt; &quot;is&quot; ;
+          Pl =&gt; &quot;are&quot;
+          } ;
+    }</code></pre>
+<p></p>
+<div id="toc56">
+
+</div>
+<h2 id="more-on-inflection-paradigms">More on inflection paradigms</h2>
+<p></p>
+<div id="secinflection">
+
+</div>
+<p>Let us extend the English noun paradigms so that we can deal with all nouns, not just the regular ones. The goal is to provide a morphology module that makes it easy to add words to a lexicon.</p>
+<p></p>
+<div id="toc57">
+
+</div>
+<h3 id="worst-case-functions">Worst-case functions</h3>
+<p>We perform <strong>data abstraction</strong> from the type of nouns by writing a a <strong>worst-case function</strong>:</p>
+<pre><code>    oper Noun : Type = {s : Number =&gt; Str} ;
+  
+    oper mkNoun : Str -&gt; Str -&gt; Noun = \x,y -&gt; {
+      s = table {
+        Sg =&gt; x ;
+        Pl =&gt; y
+        }
+      } ;
+  
+    oper regNoun : Str -&gt; Noun = \x -&gt; mkNoun x (x + &quot;s&quot;) ;</code></pre>
+<p>Then we can define</p>
+<pre><code>    lincat N = Noun ;
+    lin Mouse = mkNoun &quot;mouse&quot; &quot;mice&quot; ;
+    lin House = regNoun &quot;house&quot; ;</code></pre>
+<p>where the underlying types are not seen.</p>
+<p></p>
+<p>We are free to change the undelying definitions, e.g. add <strong>case</strong> (nominative or genitive) to noun inflection:</p>
+<pre><code>    param Case = Nom | Gen ;
+  
+    oper Noun : Type = {s : Number =&gt; Case =&gt; Str} ;</code></pre>
+<p>Now we have to redefine the worst-case function</p>
+<pre><code>    oper mkNoun : Str -&gt; Str -&gt; Noun = \x,y -&gt; {
+      s = table {
+        Sg =&gt; table {
+          Nom =&gt; x ;
+          Gen =&gt; x + &quot;&#39;s&quot;
+          } ;
+        Pl =&gt; table {
+          Nom =&gt; y ;
+          Gen =&gt; y + case last y of {
+            &quot;s&quot; =&gt; &quot;&#39;&quot; ;
+            _   =&gt; &quot;&#39;s&quot;
+          }
+        }
+      } ;</code></pre>
+<p>But up from this level, we can retain the old definitions</p>
+<pre><code>    lin Mouse = mkNoun &quot;mouse&quot; &quot;mice&quot; ;
+    oper regNoun : Str -&gt; Noun = \x -&gt; mkNoun x (x + &quot;s&quot;) ;</code></pre>
+<p></p>
+<p>In the last definition of <code>mkNoun</code>, we used a case expression on the last character of the plural, as well as the <code>Prelude</code> operation</p>
+<pre><code>    last : Str -&gt; Str ;</code></pre>
+<p>returning the string consisting of the last character.</p>
+<p>The case expression uses <strong>pattern matching over strings</strong>, which is supported in GF, alongside with pattern matching over parameters.</p>
+<p></p>
+<div id="toc58">
+
+</div>
+<h3 id="smart-paradigms">Smart paradigms</h3>
+<p>The regular <em>dog</em>-<em>dogs</em> paradigm has predictable variations:</p>
+<ul>
+<li>nouns ending with an <em>y</em>: <em>fly</em>-<em>flies</em>, except if a vowel precedes the <em>y</em>: <em>boy</em>-<em>boys</em></li>
+<li>nouns ending with <em>s</em>, <em>ch</em>, and a number of other endings: <em>bus</em>-<em>buses</em>, <em>leech</em>-<em>leeches</em></li>
+</ul>
+<p>We could provide alternative paradigms:</p>
+<pre><code>    noun_y : Str -&gt; Noun = \fly -&gt; mkNoun fly (init fly + &quot;ies&quot;) ;
+    noun_s : Str -&gt; Noun = \bus -&gt; mkNoun bus (bus + &quot;es&quot;) ;</code></pre>
+<p>(The Prelude function <code>init</code> drops the last character of a token.)</p>
+<p>Drawbacks:</p>
+<ul>
+<li>it can be difficult to select the correct paradigm</li>
+<li>it can be difficult to remember the names of the different paradigms</li>
+</ul>
+<p></p>
+<p>Better solution: a <strong>smart paradigm</strong>:</p>
+<pre><code>    regNoun : Str -&gt; Noun = \w -&gt;
+      let
+        ws : Str = case w of {
+          _ + (&quot;a&quot; | &quot;e&quot; | &quot;i&quot; | &quot;o&quot;) + &quot;o&quot; =&gt; w + &quot;s&quot; ;  -- bamboo
+          _ + (&quot;s&quot; | &quot;x&quot; | &quot;sh&quot; | &quot;o&quot;)      =&gt; w + &quot;es&quot; ; -- bus, hero
+          _ + &quot;z&quot;                           =&gt; w + &quot;zes&quot; ;-- quiz
+          _ + (&quot;a&quot; | &quot;e&quot; | &quot;o&quot; | &quot;u&quot;) + &quot;y&quot; =&gt; w + &quot;s&quot; ;  -- boy
+          x + &quot;y&quot;                           =&gt; x + &quot;ies&quot; ;-- fly
+          _                                 =&gt; w + &quot;s&quot;    -- car
+          }
+      in
+      mkNoun w ws</code></pre>
+<p>GF has <strong>regular expression patterns</strong>:</p>
+<ul>
+<li><strong>disjunctive patterns</strong> <em>P</em> <code>|</code> <em>Q</em></li>
+<li><strong>concatenation patterns</strong> <em>P</em> <code>+</code> <em>Q</em></li>
+</ul>
+<p>The patterns are ordered in such a way that, for instance, the suffix <code>&quot;oo&quot;</code> prevents <em>bamboo</em> from matching the suffix <code>&quot;o&quot;</code>.</p>
+<p></p>
+<div id="toc59">
+
+</div>
+<h3 id="exercises-on-regular-patterns">Exercises on regular patterns</h3>
+<ol>
+<li><p>The same rules that form plural nouns in English also apply in the formation of third-person singular verbs. Write a regular verb paradigm that uses this idea, but first rewrite <code>regNoun</code> so that the analysis needed to build <em>s</em>-forms is factored out as a separate <code>oper</code>, which is shared with <code>regVerb</code>.</p>
+<p></p></li>
+<li><p>Extend the verb paradigms to cover all verb forms in English, with special care taken of variations with the suffix <em>ed</em> (e.g. <em>try</em>-<em>tried</em>, <em>use</em>-<em>used</em>).</p>
+<p></p></li>
+<li>Implement the German <strong>Umlaut</strong> operation on word stems. The operation changes the vowel of the stressed stem syllable as follows: <em>a</em> to <em>ä</em>, <em>au</em> to <em>äu</em>, <em>o</em> to <em>ö</em>, and <em>u</em> to <em>ü</em>. You can assume that the operation only takes syllables as arguments. Test the operation to see whether it correctly changes <em>Arzt</em> to <em>Ärzt</em>, <em>Baum</em> to <em>Bäum</em>, <em>Topf</em> to <em>Töpf</em>, and <em>Kuh</em> to <em>Küh</em>.</li>
+</ol>
+<p></p>
+<div id="toc60">
+
+</div>
+<h3 id="function-types-with-variables">Function types with variables</h3>
+<p>In <a href="#chapsix">Lesson 5</a>, <strong>dependent function types</strong> need a notation that binds a variable to the argument type, as in</p>
+<pre><code>    switchOff : (k : Kind) -&gt; Action k</code></pre>
+<p>Function types <em>without</em> variables are actually a shorthand:</p>
+<pre><code>    PredVP : NP -&gt; VP -&gt; S</code></pre>
+<p>means</p>
+<pre><code>    PredVP : (x : NP) -&gt; (y : VP) -&gt; S</code></pre>
+<p>or any other naming of the variables.</p>
+<p></p>
+<p>Sometimes variables shorten the code, since they can share a type:</p>
+<pre><code>    octuple : (x,y,z,u,v,w,s,t : Str) -&gt; Str</code></pre>
+<p>If a bound variable is not used, it can be replaced by a wildcard:</p>
+<pre><code>    octuple : (_,_,_,_,_,_,_,_ : Str) -&gt; Str</code></pre>
+<p>A good practice is to indicate the number of arguments:</p>
+<pre><code>    octuple : (x1,_,_,_,_,_,_,x8 : Str) -&gt; Str</code></pre>
+<p>For inflection paradigms, it is handy to use heuristic variable names, looking like the expected forms:</p>
+<pre><code>    mkNoun : (mouse,mice : Str) -&gt; Noun</code></pre>
+<p></p>
+<div id="toc61">
+
+</div>
+<h3 id="separating-operation-types-and-definitions">Separating operation types and definitions</h3>
+<p>In librarues, it is useful to group type signatures separately from definitions. It is possible to divide an <code>oper</code> judgement,</p>
+<pre><code>    oper regNoun : Str -&gt; Noun ;
+    oper regNoun s = mkNoun s (s + &quot;s&quot;) ;</code></pre>
+<p>and put the parts in different places.</p>
+<p>With the <code>interface</code> and <code>instance</code> module types (see <a href="#secinterface">here</a>): the parts can even be put to different files.</p>
+<p></p>
+<div id="toc62">
+
+</div>
+<h3 id="overloading-of-operations">Overloading of operations</h3>
+<p><strong>Overloading</strong>: different functions can be given the same name, as e.g. in C++.</p>
+<p>The compiler performs <strong>overload resolution</strong>, which works as long as the functions have different types.</p>
+<p>In GF, the functions must be grouped together in <code>overload</code> groups.</p>
+<p>Example: different ways to define nouns in English:</p>
+<pre><code>    oper mkN : overload {
+      mkN : (dog : Str) -&gt; Noun ;         -- regular nouns
+      mkN : (mouse,mice : Str) -&gt; Noun ;  -- irregular nouns
+    }</code></pre>
+<p>Cf. dictionaries: if the word is regular, just one form is needed. If it is irregular, more forms are given.</p>
+<p>The definition can be given separately, or at the same time, as the types:</p>
+<pre><code>    oper mkN = overload {
+      mkN : (dog : Str) -&gt; Noun = regNoun ;
+      mkN : (mouse,mice : Str) -&gt; Noun = mkNoun ;
+    }</code></pre>
+<p><strong>Exercise</strong>. Design a system of English verb paradigms presented by an overload group.</p>
+<p></p>
+<div id="toc63">
+
+</div>
+<h3 id="morphological-analysis-and-morphology-quiz">Morphological analysis and morphology quiz</h3>
+<p>The command <code>morpho_analyse = ma</code> can be used to read a text and return for each word its analyses (in the current grammar):</p>
+<pre><code>    &gt; read_file bible.txt | morpho_analyse</code></pre>
+<p>The command <code>morpho_quiz = mq</code> generates inflection exercises.</p>
+<pre><code>    % gf alltenses/IrregFre.gfo
+  
+    &gt; morpho_quiz -cat=V
+  
+    Welcome to GF Morphology Quiz.
+    ...
+  
+    réapparaître : VFin VCondit  Pl  P2
+    réapparaitriez
+    &gt; No, not réapparaitriez, but
+    réapparaîtriez
+    Score 0/1</code></pre>
+<p></p>
+<div id="toc64">
+
+</div>
+<h2 id="the-italian-foods-grammar">The Italian Foods grammar</h2>
+<p></p>
+<div id="secitalian">
+
+</div>
+<p>Parameters include not only number but also gender.</p>
+<pre><code>  concrete FoodsIta of Foods = open Prelude in {
+  
+    param
+      Number = Sg | Pl ;
+      Gender = Masc | Fem ;</code></pre>
+<p>Qualities are inflected for gender and number, whereas kinds have a parametric number and an inherent gender. Items have an inherent number and gender.</p>
+<pre><code>    lincat
+      Phr = SS ;
+      Quality = {s : Gender =&gt; Number =&gt; Str} ;
+      Kind = {s : Number =&gt; Str ; g : Gender} ;
+      Item = {s : Str ; g : Gender ; n : Number} ;</code></pre>
+<p></p>
+<p>A Quality is an adjective, with one form for each gender-number combination.</p>
+<pre><code>    oper
+      adjective : (_,_,_,_ : Str) -&gt; {s : Gender =&gt; Number =&gt; Str} =
+        \nero,nera,neri,nere -&gt; {
+          s = table {
+            Masc =&gt; table {
+              Sg =&gt; nero ;
+              Pl =&gt; neri
+              } ;
+            Fem =&gt; table {
+              Sg =&gt; nera ;
+              Pl =&gt; nere
+              }
+            }
+        } ;</code></pre>
+<p>Regular adjectives work by adding endings to the stem.</p>
+<pre><code>      regAdj : Str -&gt; {s : Gender =&gt; Number =&gt; Str} = \nero -&gt;
+        let ner = init nero
+        in adjective nero (ner + &quot;a&quot;) (ner + &quot;i&quot;) (ner + &quot;e&quot;) ;</code></pre>
+<p></p>
+<p>For noun inflection, we are happy to give the two forms and the gender explicitly:</p>
+<pre><code>      noun : Str -&gt; Str -&gt; Gender -&gt; {s : Number =&gt; Str ; g : Gender} =
+        \vino,vini,g -&gt; {
+          s = table {
+            Sg =&gt; vino ;
+            Pl =&gt; vini
+            } ;
+          g = g
+        } ;</code></pre>
+<p>We need only number variation for the copula.</p>
+<pre><code>      copula : Number -&gt; Str =
+        \n -&gt; case n of {
+          Sg =&gt; &quot;è&quot; ;
+          Pl =&gt; &quot;sono&quot;
+          } ;</code></pre>
+<p></p>
+<p>Determination is more complex than in English, because of gender:</p>
+<pre><code>      det : Number -&gt; Str -&gt; Str -&gt; {s : Number =&gt; Str ; g : Gender} -&gt;
+          {s : Str ; g : Gender ; n : Number} =
+        \n,m,f,cn -&gt; {
+          s = case cn.g of {Masc =&gt; m ; Fem =&gt; f} ++ cn.s ! n ;
+          g = cn.g ;
+          n = n
+        } ;</code></pre>
+<p></p>
+<p>The complete set of linearization rules:</p>
+<pre><code>    lin
+      Is item quality =
+        ss (item.s ++ copula item.n ++ quality.s ! item.g ! item.n) ;
+      This  = det Sg &quot;questo&quot; &quot;questa&quot; ;
+      That  = det Sg &quot;quel&quot;   &quot;quella&quot; ;
+      These = det Pl &quot;questi&quot; &quot;queste&quot; ;
+      Those = det Pl &quot;quei&quot;   &quot;quelle&quot; ;
+      QKind quality kind = {
+        s = \\n =&gt; kind.s ! n ++ quality.s ! kind.g ! n ;
+        g = kind.g
+        } ;
+      Wine = noun &quot;vino&quot; &quot;vini&quot; Masc ;
+      Cheese = noun &quot;formaggio&quot; &quot;formaggi&quot; Masc ;
+      Fish = noun &quot;pesce&quot; &quot;pesci&quot; Masc ;
+      Pizza = noun &quot;pizza&quot; &quot;pizze&quot; Fem ;
+      Very qual = {s = \\g,n =&gt; &quot;molto&quot; ++ qual.s ! g ! n} ;
+      Fresh = adjective &quot;fresco&quot; &quot;fresca&quot; &quot;freschi&quot; &quot;fresche&quot; ;
+      Warm = regAdj &quot;caldo&quot; ;
+      Italian = regAdj &quot;italiano&quot; ;
+      Expensive = regAdj &quot;caro&quot; ;
+      Delicious = regAdj &quot;delizioso&quot; ;
+      Boring = regAdj &quot;noioso&quot; ;
+    }</code></pre>
+<p></p>
+<div id="toc65">
+
+</div>
+<h3 id="exercises-on-using-parameters">Exercises on using parameters</h3>
+<ol>
+<li><p>Experiment with multilingual generation and translation in the <code>Foods</code> grammars.</p>
+<p></p></li>
+<li><p>Add items, qualities, and determiners to the grammar, and try to get their inflection and inherent features right.</p>
+<p></p></li>
+<li><p>Write a concrete syntax of <code>Food</code> for a language of your choice, now aiming for complete grammatical correctness by the use of parameters.</p>
+<p></p></li>
+<li>Measure the size of the context-free grammar corresponding to <code>FoodsIta</code>. You can do this by printing the grammar in the context-free format (<code>print_grammar -printer=bnf</code>) and counting the lines.</li>
+</ol>
+<p></p>
+<div id="toc66">
+
+</div>
+<h2 id="discontinuous-constituents">Discontinuous constituents</h2>
+<p>A linearization record may contain more strings than one, and those strings can be put apart in linearization.</p>
+<p>Example: English particle verbs, (<em>switch off</em>). The object can appear between:</p>
+<p><em>he switched it off</em></p>
+<p>The verb <em>switch off</em> is called a <strong>discontinuous constituents</strong>.</p>
+<p>We can define transitive verbs and their combinations as follows:</p>
+<pre><code>    lincat V2 = {s : Number =&gt; Str ; part : Str} ;
+  
+    fun AppV2 : Item -&gt; V2 -&gt; Item -&gt; Phrase ;
+  
+    lin AppV2 subj v2 obj =
+      {s = subj.s ++ v2.s ! subj.n ++ obj.s ++ v2.part} ;</code></pre>
+<p><strong>Exercise</strong>. Define the language <code>a^n b^n c^n</code> in GF, i.e. any number of <em>a</em>'s followed by the same number of <em>b</em>'s and the same number of <em>c</em>'s. This language is not context-free, but can be defined in GF by using discontinuous constituents.</p>
+<p></p>
+<div id="toc67">
+
+</div>
+<h2 id="strings-at-compile-time-vs.-run-time">Strings at compile time vs. run time</h2>
+<p>Tokens are created in the following ways:</p>
+<ul>
+<li>quoted string: <code>&quot;foo&quot;</code></li>
+<li>gluing : <code>t + s</code></li>
+<li>predefined operations <code>init, tail, tk, dp</code></li>
+<li>pattern matching over strings</li>
+</ul>
+<p>Since <em>tokens must be known at compile time</em>, the above operations may not be applied to <strong>run-time variables</strong> (i.e. variables that stand for function arguments in linearization rules).</p>
+<p>Hence it is not legal to write</p>
+<pre><code>    cat Noun ;
+    fun Plural : Noun -&gt; Noun ;
+    lin Plural n = {s = n.s + &quot;s&quot;} ;</code></pre>
+<p>because <code>n</code> is a run-time variable. Also</p>
+<pre><code>    lin Plural n = {s = (regNoun n).s ! Pl} ;</code></pre>
+<p>is incorrect with <code>regNoun</code> as defined <a href="#secinflection">here</a>, because the run-time variable is eventually sent to string pattern matching and gluing.</p>
+<p></p>
+<p>How to write tokens together without a space?</p>
+<pre><code>    lin Question p = {s = p + &quot;?&quot;} ;</code></pre>
+<p>is incorrect.</p>
+<p>The way to go is to use an <strong>unlexer</strong> that creates correct spacing after linearization.</p>
+<p>Correspondingly, a <strong>lexer</strong> that e.g. analyses <code>&quot;warm?&quot;</code> into to tokens is needed before parsing. This topic will be covered in <a href="#seclexing">here</a>.</p>
+<p></p>
+<div id="toc68">
+
+</div>
+<h3 id="supplementary-constructs-for-concrete-syntax">Supplementary constructs for concrete syntax</h3>
+<h4 id="record-extension-and-subtyping">Record extension and subtyping</h4>
+<p>The symbol <code>**</code> is used for both record types and record objects.</p>
+<pre><code>    lincat V2 = Verb ** {c : Case} ;
+  
+    lin Follow = regVerb &quot;folgen&quot; ** {c = Dative} ;</code></pre>
+<p><code>V2</code> (transitive verb) becomes a <strong>subtype</strong> of <code>Verb</code>.</p>
+<p>If <em>T</em> is a subtype of <em>R</em>, an object of <em>T</em> can be used whenever an object of <em>R</em> is required.</p>
+<p><strong>Covariance</strong>: a function returning a record <em>T</em> as value can also be used to return a value of a supertype <em>R</em>.</p>
+<p><strong>Contravariance</strong>: a function taking an <em>R</em> as argument can also be applied to any object of a subtype <em>T</em>.</p>
+<p></p>
+<h4 id="tuples-and-product-types">Tuples and product types</h4>
+<p>Product types and tuples are syntactic sugar for record types and records:</p>
+<pre><code>    T1 * ... * Tn   ===   {p1 : T1 ; ... ; pn : Tn}
+    &lt;t1, ...,  tn&gt;  ===   {p1 = T1 ; ... ; pn = Tn}</code></pre>
+<p>Thus the labels <code>p1, p2,...</code> are hard-coded.</p>
+<p></p>
+<h4 id="prefix-dependent-choices">Prefix-dependent choices</h4>
+<p>English indefinite article:</p>
+<pre><code>    oper artIndef : Str =
+       pre {
+         (&quot;a&quot; | &quot;e&quot; | &quot;i&quot; | &quot;o&quot;) =&gt; &quot;an&quot; ;
+         _ =&gt; &quot;a&quot;
+       } ;
+  </code></pre>
+<p>Thus</p>
+<pre><code>    artIndef ++ &quot;cheese&quot;  ---&gt;  &quot;a&quot; ++ &quot;cheese&quot;
+    artIndef ++ &quot;apple&quot;   ---&gt;  &quot;an&quot; ++ &quot;apple&quot;</code></pre>
+<p></p>
+<p></p>
+<div id="chapfive">
+
+</div>
+<div id="toc69">
+
+</div>
+<h1 id="lesson-4-using-the-resource-grammar-library">Lesson 4: Using the resource grammar library</h1>
+<p>Goals:</p>
+<ul>
+<li>navigate in the GF resource grammar library and use it in applications</li>
+<li>get acquainted with basic linguistic categories</li>
+<li>write functors to achieve maximal sharing of code in multilingual grammars</li>
+</ul>
+<p></p>
+<div id="toc70">
+
+</div>
+<h2 id="the-coverage-of-the-library">The coverage of the library</h2>
+<p>The current 16 resource languages (GF version 3.2, December 2010) are</p>
+<ul>
+<li><code>Bul</code>garian</li>
+<li><code>Cat</code>alan</li>
+<li><code>Dan</code>ish</li>
+<li><code>Dut</code>ch</li>
+<li><code>Eng</code>lish</li>
+<li><code>Fin</code>nish</li>
+<li><code>Fre</code>nch</li>
+<li><code>Ger</code>man</li>
+<li><code>Ita</code>lian</li>
+<li><code>Nor</code>wegian</li>
+<li><code>Pol</code>ish</li>
+<li><code>Ron</code>, Romanian</li>
+<li><code>Rus</code>sian</li>
+<li><code>Spa</code>nish</li>
+<li><code>Swe</code>dish</li>
+<li><code>Urd</code>u</li>
+</ul>
+<p>The first three letters (<code>Eng</code> etc) are used in grammar module names (ISO 639-3 standard).</p>
+<p></p>
+<div id="toc71">
+
+</div>
+<h2 id="the-structure-of-the-library">The structure of the library</h2>
+<p></p>
+<div id="seclexical">
+
+</div>
+<p>Semantic grammars (up to now in this tutorial): a grammar defines a system of meanings (abstract syntax) and tells how they are expressed(concrete syntax).</p>
+<p>Resource grammars (as usual in linguistic tradition): a grammar specifies the <strong>grammatically correct combinations of words</strong>, whatever their meanings are.</p>
+<p>With resource grammars, we can achieve a wider coverage than with semantic grammars.</p>
+<p></p>
+<div id="toc72">
+
+</div>
+<h3 id="lexical-vs.-phrasal-rules">Lexical vs. phrasal rules</h3>
+<p>A resource grammar has two kinds of categories and two kinds of rules:</p>
+<ul>
+<li>lexical:
+<ul>
+<li>lexical categories, to classify words</li>
+<li><p>lexical rules, to define words and their properties</p>
+<p></p></li>
+</ul></li>
+<li>phrasal (combinatorial, syntactic):
+<ul>
+<li>phrasal categories, to classify phrases of arbitrary size</li>
+<li>phrasal rules, to combine phrases into larger phrases</li>
+</ul></li>
+</ul>
+<p>GE makes no formal distinction between these two kinds.</p>
+<p>But it is a good discipline to follow.</p>
+<p></p>
+<div id="toc73">
+
+</div>
+<h3 id="lexical-categories">Lexical categories</h3>
+<p>Two kinds of lexical categories:</p>
+<ul>
+<li><strong>closed</strong>:
+<ul>
+<li>a finite number of words</li>
+<li>seldom extended in the history of language</li>
+<li><p>structural words / function words, e.g.</p>
+<pre><code>      Conj ;     -- conjunction           e.g. &quot;and&quot;
+      Det ;      -- determiner            e.g. &quot;this&quot;</code></pre>
+<p></p></li>
+</ul></li>
+<li><strong>open</strong>:
+<ul>
+<li>new words are added all the time</li>
+<li><p>content words, e.g.</p>
+<pre><code>      N ;        -- noun         e.g. &quot;pizza&quot;
+      A ;        -- adjective    e.g. &quot;good&quot;
+      V ;        -- verb         e.g. &quot;sleep&quot;</code></pre></li>
+</ul></li>
+</ul>
+<p></p>
+<div id="toc74">
+
+</div>
+<h3 id="lexical-rules">Lexical rules</h3>
+<p>Closed classes: module <code>Syntax</code>. In the <code>Foods</code> grammar, we need</p>
+<pre><code>    this_Det, that_Det, these_Det, those_Det : Det ;
+    very_AdA  : AdA ;</code></pre>
+<p>Naming convention: word followed by the category (so we can distinguish the quantifier <em>that</em> from the conjunction <em>that</em>).</p>
+<p>Open classes have no objects in <code>Syntax</code>. Words are built as they are needed in applications: if we have</p>
+<pre><code>    fun Wine : Kind ;</code></pre>
+<p>we will define</p>
+<pre><code>    lin Wine = mkN &quot;wine&quot; ;</code></pre>
+<p>where we use <code>mkN</code> from <code>ParadigmsEng</code>:</p>
+<p></p>
+<div id="toc75">
+
+</div>
+<h3 id="resource-lexicon">Resource lexicon</h3>
+<p>Alternative concrete syntax for</p>
+<pre><code>    fun Wine : Kind ;</code></pre>
+<p>is to provide a <strong>resource lexicon</strong>, which contains definitions such as</p>
+<pre><code>    oper wine_N : N = mkN &quot;wine&quot; ;</code></pre>
+<p>so that we can write</p>
+<pre><code>    lin Wine = wine_N ;</code></pre>
+<p>Advantages:</p>
+<ul>
+<li>we accumulate a reusable lexicon</li>
+<li>we can use a <a href="#secfunctor">here</a> to speed up multilingual grammar implementation</li>
+</ul>
+<p></p>
+<div id="toc76">
+
+</div>
+<h3 id="phrasal-categories">Phrasal categories</h3>
+<p>In <code>Foods</code>, we need just four phrasal categories:</p>
+<pre><code>    Cl ;   -- clause             e.g. &quot;this pizza is good&quot;
+    NP ;   -- noun phrase        e.g. &quot;this pizza&quot;
+    CN ;   -- common noun        e.g. &quot;warm pizza&quot;
+    AP ;   -- adjectival phrase  e.g. &quot;very warm&quot;</code></pre>
+<p>Clauses are similar to sentences (<code>S</code>), but without a fixed tense and mood; see <a href="#secextended">here</a> for how they relate.</p>
+<p>Common nouns are made into noun phrases by adding determiners.</p>
+<p></p>
+<div id="toc77">
+
+</div>
+<h3 id="syntactic-combinations">Syntactic combinations</h3>
+<p>We need the following combinations:</p>
+<pre><code>    mkCl : NP -&gt; AP -&gt; Cl ;      -- e.g. &quot;this pizza is very warm&quot;
+    mkNP : Det -&gt; CN -&gt; NP ;     -- e.g. &quot;this pizza&quot;
+    mkCN : AP -&gt; CN -&gt; CN ;      -- e.g. &quot;warm pizza&quot;
+    mkAP : AdA -&gt; AP -&gt; AP ;     -- e.g. &quot;very warm&quot;</code></pre>
+<p>We also need <strong>lexical insertion</strong>, to form phrases from single words:</p>
+<pre><code>    mkCN : N -&gt; CN ;
+    mkAP : A -&gt; AP ;</code></pre>
+<p>Naming convention: to construct a <em>C</em>, use a function <code>mk</code><em>C</em>.</p>
+<p>Heavy overloading: the current library (version 1.2) has 23 operations named <code>mkNP</code>!</p>
+<p></p>
+<div id="toc78">
+
+</div>
+<h3 id="example-syntactic-combination">Example syntactic combination</h3>
+<p>The sentence</p>
+<p><em>these very warm pizzas are Italian</em></p>
+<p>can be built as follows:</p>
+<pre><code>    mkCl
+      (mkNP these_Det
+         (mkCN (mkAP very_AdA (mkAP warm_A)) (mkCN pizza_N)))
+      (mkAP italian_AP)</code></pre>
+<p>The task now: to define the concrete syntax of <code>Foods</code> so that this syntactic tree gives the value of linearizing the semantic tree</p>
+<pre><code>    Is (These (QKind (Very Warm) Pizza)) Italian</code></pre>
+<p></p>
+<div id="toc79">
+
+</div>
+<h2 id="the-resource-api">The resource API</h2>
+<p>Language-specific and language-independent parts - roughly,</p>
+<ul>
+<li>the syntax API <code>Syntax</code><em>L</em> has the same types and functions for all languages <em>L</em></li>
+<li>the morphology API <code>Paradigms</code><em>L</em> has partly different types and functions for different languages <em>L</em></li>
+</ul>
+<p>Full API documentation on-line: the <strong>resource synopsis</strong>,</p>
+<p><a href="http://grammaticalframework.org/lib/doc/synopsis.html"><code>grammaticalframework.org/lib/doc/synopsis.html</code></a></p>
+<p></p>
+<div id="toc80">
+
+</div>
+<h3 id="a-miniature-resource-api-categories">A miniature resource API: categories</h3>
+<p>Category</p>
+<p>Explanation</p>
+<p>Example</p>
+<p><code>Cl</code></p>
+<p>clause (sentence), with all tenses</p>
+<p><em>she looks at this</em></p>
+<p><code>AP</code></p>
+<p>adjectival phrase</p>
+<p><em>very warm</em></p>
+<p><code>CN</code></p>
+<p>common noun (without determiner)</p>
+<p><em>red house</em></p>
+<p><code>NP</code></p>
+<p>noun phrase (subject or object)</p>
+<p><em>the red house</em></p>
+<p><code>AdA</code></p>
+<p>adjective-modifying adverb,</p>
+<p><em>very</em></p>
+<p><code>Det</code></p>
+<p>determiner</p>
+<p><em>these</em></p>
+<p><code>A</code></p>
+<p>one-place adjective</p>
+<p><em>warm</em></p>
+<p><code>N</code></p>
+<p>common noun</p>
+<p><em>house</em></p>
+<p></p>
+<div id="toc81">
+
+</div>
+<h3 id="a-miniature-resource-api-rules">A miniature resource API: rules</h3>
+<p>Function</p>
+<p>Type</p>
+<p>Example</p>
+<p><code>mkCl</code></p>
+<p><code>NP -&gt; AP -&gt; Cl</code></p>
+<p><em>John is very old</em></p>
+<p><code>mkNP</code></p>
+<p><code>Det -&gt; CN -&gt; NP</code></p>
+<p><em>these old man</em></p>
+<p><code>mkCN</code></p>
+<p><code>N -&gt; CN</code></p>
+<p><em>house</em></p>
+<p><code>mkCN</code></p>
+<p><code>AP -&gt; CN -&gt; CN</code></p>
+<p><em>very big blue house</em></p>
+<p><code>mkAP</code></p>
+<p><code>A -&gt; AP</code></p>
+<p><em>old</em></p>
+<p><code>mkAP</code></p>
+<p><code>AdA -&gt; AP -&gt; AP</code></p>
+<p><em>very very old</em></p>
+<p></p>
+<div id="toc82">
+
+</div>
+<h3 id="a-miniature-resource-api-structural-words">A miniature resource API: structural words</h3>
+<p>Function</p>
+<p>Type</p>
+<p>In English</p>
+<p><code>this_Det</code></p>
+<p><code>Det</code></p>
+<p><em>this</em></p>
+<p><code>that_Det</code></p>
+<p><code>Det</code></p>
+<p><em>that</em></p>
+<p><code>these_Det</code></p>
+<p><code>Det</code></p>
+<p><em>this</em></p>
+<p><code>those_Det</code></p>
+<p><code>Det</code></p>
+<p><em>that</em></p>
+<p><code>very_AdA</code></p>
+<p><code>AdA</code></p>
+<p><em>very</em></p>
+<p></p>
+<div id="toc83">
+
+</div>
+<h3 id="a-miniature-resource-api-paradigms">A miniature resource API: paradigms</h3>
+<p>From <code>ParadigmsEng</code>:</p>
+<p>Function</p>
+<p>Type</p>
+<p><code>mkN</code></p>
+<p><code>(dog : Str) -&gt; N</code></p>
+<p><code>mkN</code></p>
+<p><code>(man,men : Str) -&gt; N</code></p>
+<p><code>mkA</code></p>
+<p><code>(cold : Str) -&gt; A</code></p>
+<p>From <code>ParadigmsIta</code>:</p>
+<p>Function</p>
+<p>Type</p>
+<p><code>mkN</code></p>
+<p><code>(vino : Str) -&gt; N</code></p>
+<p><code>mkA</code></p>
+<p><code>(caro : Str) -&gt; A</code></p>
+<p></p>
+<div id="toc84">
+
+</div>
+<h3 id="a-miniature-resource-api-more-paradigms">A miniature resource API: more paradigms</h3>
+<p>From <code>ParadigmsGer</code>:</p>
+<p>Function</p>
+<p>Type</p>
+<p><code>Gender</code></p>
+<p><code>Type</code></p>
+<p><code>masculine</code></p>
+<p><code>Gender</code></p>
+<p><code>feminine</code></p>
+<p><code>Gender</code></p>
+<p><code>neuter</code></p>
+<p><code>Gender</code></p>
+<p><code>mkN</code></p>
+<p><code>(Stufe : Str) -&gt; N</code></p>
+<p><code>mkN</code></p>
+<p><code>(Bild,Bilder : Str) -&gt; Gender -&gt; N</code></p>
+<p><code>mkA</code></p>
+<p><code>(klein : Str) -&gt; A</code></p>
+<p><code>mkA</code></p>
+<p><code>(gut,besser,beste : Str) -&gt; A</code></p>
+<p>From <code>ParadigmsFin</code>:</p>
+<p>Function</p>
+<p>Type</p>
+<p><code>mkN</code></p>
+<p><code>(talo : Str) -&gt; N</code></p>
+<p><code>mkA</code></p>
+<p><code>(hieno : Str) -&gt; A</code></p>
+<p></p>
+<div id="toc85">
+
+</div>
+<h3 id="exercises">Exercises</h3>
+<p>1. Try out the morphological paradigms in different languages. Do as follows:</p>
+<pre><code>    &gt; i -path=alltenses -retain alltenses/ParadigmsGer.gfo
+    &gt; cc -table mkN &quot;Farbe&quot;
+    &gt; cc -table mkA &quot;gut&quot; &quot;besser&quot; &quot;beste&quot;</code></pre>
+<p></p>
+<div id="toc86">
+
+</div>
+<h2 id="example-english">Example: English</h2>
+<p></p>
+<div id="secenglish">
+
+</div>
+<p>We assume the abstract syntax <code>Foods</code> from <a href="#chapfour">Lesson 3</a>.</p>
+<p>We don't need to think about inflection and agreement, but just pick functions from the resource grammar library.</p>
+<p>We need a path with</p>
+<ul>
+<li>the current directory <code>.</code></li>
+<li>the directory <code>../foods</code>, in which <code>Foods.gf</code> resides.</li>
+<li>the library directory <code>present</code>, which is relative to the environment variable <code>GF_LIB_PATH</code></li>
+</ul>
+<p>Thus the beginning of the module is</p>
+<pre><code>    --# -path=.:../foods:present
+  
+    concrete FoodsEng of Foods = open SyntaxEng,ParadigmsEng in {</code></pre>
+<p></p>
+<div id="toc87">
+
+</div>
+<h3 id="english-example-linearization-types-and-combination-rules">English example: linearization types and combination rules</h3>
+<p>As linearization types, we use clauses for <code>Phrase</code>, noun phrases for <code>Item</code>, common nouns for <code>Kind</code>, and adjectival phrases for <code>Quality</code>.</p>
+<pre><code>    lincat
+      Phrase = Cl ;
+      Item = NP ;
+      Kind = CN ;
+      Quality = AP ;</code></pre>
+<p>Now the combination rules we need almost write themselves automatically:</p>
+<pre><code>    lin
+      Is item quality = mkCl item quality ;
+      This kind = mkNP this_Det kind ;
+      That kind = mkNP that_Det kind ;
+      These kind = mkNP these_Det kind ;
+      Those kind = mkNP those_Det kind ;
+      QKind quality kind = mkCN quality kind ;
+      Very quality = mkAP very_AdA quality ;</code></pre>
+<p></p>
+<div id="toc88">
+
+</div>
+<h3 id="english-example-lexical-rules">English example: lexical rules</h3>
+<p>We use resource paradigms and lexical insertion rules.</p>
+<p>The two-place noun paradigm is needed only once, for <em>fish</em> - everythins else is regular.</p>
+<pre><code>      Wine = mkCN (mkN &quot;wine&quot;) ;
+      Pizza = mkCN (mkN &quot;pizza&quot;) ;
+      Cheese = mkCN (mkN &quot;cheese&quot;) ;
+      Fish = mkCN (mkN &quot;fish&quot; &quot;fish&quot;) ;
+      Fresh = mkAP (mkA &quot;fresh&quot;) ;
+      Warm = mkAP (mkA &quot;warm&quot;) ;
+      Italian = mkAP (mkA &quot;Italian&quot;) ;
+      Expensive = mkAP (mkA &quot;expensive&quot;) ;
+      Delicious = mkAP (mkA &quot;delicious&quot;) ;
+      Boring = mkAP (mkA &quot;boring&quot;) ;
+    }</code></pre>
+<p></p>
+<div id="toc89">
+
+</div>
+<h3 id="english-example-exercises">English example: exercises</h3>
+<p>1. Compile the grammar <code>FoodsEng</code> and generate and parse some sentences.</p>
+<p>2. Write a concrete syntax of <code>Foods</code> for Italian or some other language included in the resource library. You can compare the results with the hand-written grammars presented earlier in this tutorial.</p>
+<p></p>
+<div id="toc90">
+
+</div>
+<h2 id="functor-implementation-of-multilingual-grammars">Functor implementation of multilingual grammars</h2>
+<p></p>
+<div id="secfunctor">
+
+</div>
+<div id="toc91">
+
+</div>
+<h3 id="new-language-by-copy-and-paste">New language by copy and paste</h3>
+<p>If you write a concrete syntax of <code>Foods</code> for some other language, much of the code will look exactly the same as for English. This is because</p>
+<ul>
+<li>the <code>Syntax</code> API is the same for all languages (because all languages in the resource package do implement the same syntactic structures)</li>
+<li>languages tend to use the syntactic structures in similar ways</li>
+</ul>
+<p>But lexical rules are more language-dependent.</p>
+<p>Thus, to port a grammar to a new language, you</p>
+<ol>
+<li>copy the concrete syntax of a given language</li>
+<li>change the words (strings and inflection paradigms)</li>
+</ol>
+<p>Can we avoid this programming by copy-and-paste?</p>
+<p></p>
+<div id="toc92">
+
+</div>
+<h3 id="functors-functions-on-the-module-level">Functors: functions on the module level</h3>
+<p><strong>Functors</strong> familiar from the functional programming languages ML and OCaml, also known as <strong>parametrized modules</strong>.</p>
+<p>In GF, a functor is a module that <code>open</code>s one or more <strong>interfaces</strong>.</p>
+<p>An <code>interface</code> is a module similar to a <code>resource</code>, but it only contains the <em>types</em> of <code>oper</code>s, not (necessarily) their definitions.</p>
+<p>Syntax for functors: add the keyword <code>incomplete</code>. We will use the header</p>
+<pre><code>    incomplete concrete FoodsI of Foods = open Syntax, LexFoods in</code></pre>
+<p>where</p>
+<pre><code>    interface Syntax    -- the resource grammar interface
+    interface LexFoods  -- the domain lexicon interface</code></pre>
+<p>When we moreover have</p>
+<pre><code>    instance SyntaxEng of Syntax     -- the English resource grammar
+    instance LexFoodsEng of LexFoods -- the English domain lexicon</code></pre>
+<p>we can write a <strong>functor instantiation</strong>,</p>
+<pre><code>    concrete FoodsGer of Foods = FoodsI with
+      (Syntax = SyntaxGer),
+      (LexFoods = LexFoodsGer) ;</code></pre>
+<p></p>
+<div id="toc93">
+
+</div>
+<h3 id="code-for-the-foods-functor">Code for the Foods functor</h3>
+<pre><code>    --# -path=.:../foods
+  
+    incomplete concrete FoodsI of Foods = open Syntax, LexFoods in {
+    lincat
+      Phrase = Cl ;
+      Item = NP ;
+      Kind = CN ;
+      Quality = AP ;
+    lin
+      Is item quality = mkCl item quality ;
+      This kind = mkNP this_Det kind ;
+      That kind = mkNP that_Det kind ;
+      These kind = mkNP these_Det kind ;
+      Those kind = mkNP those_Det kind ;
+      QKind quality kind = mkCN quality kind ;
+      Very quality = mkAP very_AdA quality ;
+  
+      Wine = mkCN wine_N ;
+      Pizza = mkCN pizza_N ;
+      Cheese = mkCN cheese_N ;
+      Fish = mkCN fish_N ;
+      Fresh = mkAP fresh_A ;
+      Warm = mkAP warm_A ;
+      Italian = mkAP italian_A ;
+      Expensive = mkAP expensive_A ;
+      Delicious = mkAP delicious_A ;
+      Boring = mkAP boring_A ;
+    }</code></pre>
+<p></p>
+<div id="toc94">
+
+</div>
+<h3 id="code-for-the-lexfoods-interface">Code for the LexFoods interface</h3>
+<p></p>
+<div id="secinterface">
+
+</div>
+<pre><code>    interface LexFoods = open Syntax in {
+    oper
+      wine_N : N ;
+      pizza_N : N ;
+      cheese_N : N ;
+      fish_N : N ;
+      fresh_A : A ;
+      warm_A : A ;
+      italian_A : A ;
+      expensive_A : A ;
+      delicious_A : A ;
+      boring_A : A ;
+    }</code></pre>
+<p></p>
+<div id="toc95">
+
+</div>
+<h3 id="code-for-a-german-instance-of-the-lexicon">Code for a German instance of the lexicon</h3>
+<pre><code>    instance LexFoodsGer of LexFoods = open SyntaxGer, ParadigmsGer in {
+    oper
+      wine_N = mkN &quot;Wein&quot; ;
+      pizza_N = mkN &quot;Pizza&quot; &quot;Pizzen&quot; feminine ;
+      cheese_N = mkN &quot;Käse&quot; &quot;Käsen&quot; masculine ;
+      fish_N = mkN &quot;Fisch&quot; ;
+      fresh_A = mkA &quot;frisch&quot; ;
+      warm_A = mkA &quot;warm&quot; &quot;wärmer&quot; &quot;wärmste&quot; ;
+      italian_A = mkA &quot;italienisch&quot; ;
+      expensive_A = mkA &quot;teuer&quot; ;
+      delicious_A = mkA &quot;köstlich&quot; ;
+      boring_A = mkA &quot;langweilig&quot; ;
+    }</code></pre>
+<p></p>
+<div id="toc96">
+
+</div>
+<h3 id="code-for-a-german-functor-instantiation">Code for a German functor instantiation</h3>
+<pre><code>    --# -path=.:../foods:present
+  
+    concrete FoodsGer of Foods = FoodsI with
+      (Syntax = SyntaxGer),
+      (LexFoods = LexFoodsGer) ;</code></pre>
+<p></p>
+<div id="toc97">
+
+</div>
+<h3 id="adding-languages-to-a-functor-implementation">Adding languages to a functor implementation</h3>
+<p>Just two modules are needed:</p>
+<ul>
+<li>a domain lexicon instance</li>
+<li>a functor instantiation</li>
+</ul>
+<p>The functor instantiation is completely mechanical to write.</p>
+<p>The domain lexicon instance requires some knowledge of the words of the language:</p>
+<ul>
+<li>what words are used for which concepts</li>
+<li>how the words are</li>
+<li>features such as genders</li>
+</ul>
+<p></p>
+<div id="toc98">
+
+</div>
+<h3 id="example-adding-finnish">Example: adding Finnish</h3>
+<p>Lexicon instance</p>
+<pre><code>    instance LexFoodsFin of LexFoods = open SyntaxFin, ParadigmsFin in {
+    oper
+      wine_N = mkN &quot;viini&quot; ;
+      pizza_N = mkN &quot;pizza&quot; ;
+      cheese_N = mkN &quot;juusto&quot; ;
+      fish_N = mkN &quot;kala&quot; ;
+      fresh_A = mkA &quot;tuore&quot; ;
+      warm_A = mkA &quot;lämmin&quot; ;
+      italian_A = mkA &quot;italialainen&quot; ;
+      expensive_A = mkA &quot;kallis&quot; ;
+      delicious_A = mkA &quot;herkullinen&quot; ;
+      boring_A = mkA &quot;tylsä&quot; ;
+    }</code></pre>
+<p>Functor instantiation</p>
+<pre><code>    --# -path=.:../foods:present
+  
+    concrete FoodsFin of Foods = FoodsI with
+      (Syntax = SyntaxFin),
+      (LexFoods = LexFoodsFin) ;</code></pre>
+<p></p>
+<div id="toc99">
+
+</div>
+<h3 id="a-design-pattern">A design pattern</h3>
+<p>This can be seen as a <em>design pattern</em> for multilingual grammars:</p>
+<pre><code>                        concrete DomainL*
+  
+      instance LexDomainL                 instance SyntaxL*
+  
+                   incomplete concrete DomainI
+                   /           |              \
+     interface LexDomain   abstract Domain    interface Syntax*</code></pre>
+<p>Modules marked with <code>*</code> are either given in the library, or trivial.</p>
+<p>Of the hand-written modules, only <code>LexDomainL</code> is language-dependent.</p>
+<p></p>
+<div id="toc100">
+
+</div>
+<h3 id="functors-exercises">Functors: exercises</h3>
+<p>1. Compile and test <code>FoodsGer</code>.</p>
+<p>2. Refactor <code>FoodsEng</code> into a functor instantiation.</p>
+<p>3. Instantiate the functor <code>FoodsI</code> to some language of your choice.</p>
+<p>4. Design a small grammar that can be used for controlling an MP3 player. The grammar should be able to recognize commands such as <em>play this song</em>, with the following variations:</p>
+<ul>
+<li>verbs: <em>play</em>, <em>remove</em></li>
+<li>objects: <em>song</em>, <em>artist</em></li>
+<li>determiners: <em>this</em>, <em>the previous</em></li>
+<li>verbs without arguments: <em>stop</em>, <em>pause</em></li>
+</ul>
+<p>The implementation goes in the following phases:</p>
+<ol>
+<li>abstract syntax</li>
+<li>(optional:) prototype string-based concrete syntax</li>
+<li>functor over resource syntax and lexicon interface</li>
+<li>lexicon instance for the first language</li>
+<li>functor instantiation for the first language</li>
+<li>lexicon instance for the second language</li>
+<li>functor instantiation for the second language</li>
+<li>...</li>
+</ol>
+<p></p>
+<div id="toc101">
+
+</div>
+<h2 id="restricted-inheritance">Restricted inheritance</h2>
+<div id="toc102">
+
+</div>
+<h3 id="a-problem-with-functors">A problem with functors</h3>
+<p>Problem: a functor only works when all languages use the resource <code>Syntax</code> in the same way.</p>
+<p>Example (contrived): assume that English has no word for <code>Pizza</code>, but has to use the paraphrase <em>Italian pie</em>. This is no longer a noun <code>N</code>, but a complex phrase in the category <code>CN</code>.</p>
+<p>Possible solution: change interface the <code>LexFoods</code> with</p>
+<pre><code>    oper pizza_CN : CN ;</code></pre>
+<p>Problem with this solution:</p>
+<ul>
+<li>we may end up changing the interface and the function with each new language</li>
+<li>we must every time also change the instances for the old languages to maintain type correctness</li>
+</ul>
+<p></p>
+<div id="toc103">
+
+</div>
+<h3 id="restricted-inheritance-include-or-exclude">Restricted inheritance: include or exclude</h3>
+<p>A module may inherit just a selection of names.</p>
+<p>Example: the <code>FoodMarket</code> example &quot;Rsecarchitecture:</p>
+<pre><code>    abstract Foodmarket = Food, Fruit [Peach], Mushroom - [Agaric]</code></pre>
+<p>Here, from <code>Fruit</code> we include <code>Peach</code> only, and from <code>Mushroom</code> we exclude <code>Agaric</code>.</p>
+<p>A concrete syntax of <code>Foodmarket</code> must make the analogous restrictions.</p>
+<p></p>
+<div id="toc104">
+
+</div>
+<h3 id="the-functor-problem-solved">The functor problem solved</h3>
+<p>The English instantiation inherits the functor implementation except for the constant <code>Pizza</code>. This constant is defined in the body instead:</p>
+<pre><code>    --# -path=.:../foods:present
+  
+    concrete FoodsEng of Foods = FoodsI - [Pizza] with
+      (Syntax = SyntaxEng),
+      (LexFoods = LexFoodsEng) **
+        open SyntaxEng, ParadigmsEng in {
+  
+      lin Pizza = mkCN (mkA &quot;Italian&quot;) (mkN &quot;pie&quot;) ;
+    }</code></pre>
+<p></p>
+<div id="toc105">
+
+</div>
+<h2 id="grammar-reuse">Grammar reuse</h2>
+<p>Abstract syntax modules can be used as interfaces, and concrete syntaxes as their instances.</p>
+<p>The following correspondencies are then applied:</p>
+<pre><code>    cat C         &lt;---&gt;  oper C : Type
+  
+    fun f : A     &lt;---&gt;  oper f : A
+  
+    lincat C = T  &lt;---&gt;  oper C : Type = T
+  
+    lin f = t     &lt;---&gt;  oper f : A = t</code></pre>
+<p></p>
+<div id="toc106">
+
+</div>
+<h3 id="library-exercises">Library exercises</h3>
+<p>1. Find resource grammar terms for the following English phrases (in the category <code>Phr</code>). You can first try to build the terms manually.</p>
+<p><em>every man loves a woman</em></p>
+<p><em>this grammar speaks more than ten languages</em></p>
+<p><em>which languages aren't in the grammar</em></p>
+<p><em>which languages did you want to speak</em></p>
+<p>Then translate the phrases to other languages.</p>
+<p></p>
+<div id="toc107">
+
+</div>
+<h2 id="tenses">Tenses</h2>
+<p></p>
+<div id="sectense">
+
+</div>
+<p>In <code>Foods</code> grammars, we have used the path</p>
+<pre><code>    --# -path=.:../foods</code></pre>
+<p>The library subdirectory <code>present</code> is a restricted version of the resource, with only present tense of verbs and sentences.</p>
+<p>By just changing the path, we get all tenses:</p>
+<pre><code>    --# -path=.:../foods:alltenses</code></pre>
+<p>Now we can see all the tenses of phrases, by using the <code>-all</code> flag in linearization:</p>
+<pre><code>    &gt; gr | l -all
+    This wine is delicious
+    Is this wine delicious
+    This wine isn&#39;t delicious
+    Isn&#39;t this wine delicious
+    This wine is not delicious
+    Is this wine not delicious
+    This wine has been delicious
+    Has this wine been delicious
+    This wine hasn&#39;t been delicious
+    Hasn&#39;t this wine been delicious
+    This wine has not been delicious
+    Has this wine not been delicious
+    This wine was delicious
+    Was this wine delicious
+    This wine wasn&#39;t delicious
+    Wasn&#39;t this wine delicious
+    This wine was not delicious
+    Was this wine not delicious
+    This wine had been delicious
+    Had this wine been delicious
+    This wine hadn&#39;t been delicious
+    Hadn&#39;t this wine been delicious
+    This wine had not been delicious
+    Had this wine not been delicious
+    This wine will be delicious
+    Will this wine be delicious
+    This wine won&#39;t be delicious
+    Won&#39;t this wine be delicious
+    This wine will not be delicious
+    Will this wine not be delicious
+    This wine will have been delicious
+    Will this wine have been delicious
+    This wine won&#39;t have been delicious
+    Won&#39;t this wine have been delicious
+    This wine will not have been delicious
+    Will this wine not have been delicious
+    This wine would be delicious
+    Would this wine be delicious
+    This wine wouldn&#39;t be delicious
+    Wouldn&#39;t this wine be delicious
+    This wine would not be delicious
+    Would this wine not be delicious
+    This wine would have been delicious
+    Would this wine have been delicious
+    This wine wouldn&#39;t have been delicious
+    Wouldn&#39;t this wine have been delicious
+    This wine would not have been delicious
+    Would this wine not have been delicious</code></pre>
+<p>We also see</p>
+<ul>
+<li>polarity (positive vs. negative)</li>
+<li>word order (direct vs. inverted)</li>
+<li>variation between contracted and full negation</li>
+</ul>
+<p>The list is even longer in languages that have more tenses and moods, e.g. the Romance languages.</p>
+<p></p>
+<p></p>
+<div id="chapsix">
+
+</div>
+<div id="toc108">
+
+</div>
+<h1 id="lesson-5-refining-semantics-in-abstract-syntax">Lesson 5: Refining semantics in abstract syntax</h1>
+<p>Goals:</p>
+<ul>
+<li>include semantic conditions in grammars, by using
+<ul>
+<li><strong>dependent types</strong></li>
+<li><strong>higher order abstract syntax</strong></li>
+<li>proof objects</li>
+<li><p>semantic definitions</p>
+<p></p>
+<p>These concepts are inherited from <strong>type theory</strong> (more precisely: constructive type theory, or Martin-Löf type theory).</p>
+<p></p>
+<p>Type theory is the basis <strong>logical frameworks</strong>.</p>
+<p></p>
+<p>GF = logical framework + concrete syntax.</p></li>
+</ul></li>
+</ul>
+<p></p>
+<div id="toc109">
+
+</div>
+<h2 id="dependent-types">Dependent types</h2>
+<p></p>
+<div id="secsmarthouse">
+
+</div>
+<p>Problem: to express <strong>conditions of semantic well-formedness</strong>.</p>
+<p>Example: a voice command system for a &quot;smart house&quot; wants to eliminate meaningless commands.</p>
+<p>Thus we want to restrict particular actions to particular devices - we can <em>dim a light</em>, but we cannot <em>dim a fan</em>.</p>
+<p>The following example is borrowed from the Regulus Book (Rayner &amp; al. 2006).</p>
+<p>A simple example is a &quot;smart house&quot; system, which defines voice commands for household appliances.</p>
+<p></p>
+<div id="toc110">
+
+</div>
+<h3 id="a-dependent-type-system">A dependent type system</h3>
+<p>Ontology:</p>
+<ul>
+<li>there are commands and device kinds</li>
+<li>for each kind of device, there are devices and actions</li>
+<li>a command concerns an action of some kind on a device of the same kind</li>
+</ul>
+<p>Abstract syntax formalizing this:</p>
+<pre><code>    cat
+      Command ;
+      Kind ;
+      Device Kind ; -- argument type Kind
+      Action Kind ;
+    fun
+      CAction : (k : Kind) -&gt; Action k -&gt; Device k -&gt; Command ;</code></pre>
+<p><code>Device</code> and <code>Action</code> are both dependent types.</p>
+<p></p>
+<div id="toc111">
+
+</div>
+<h3 id="examples-of-devices-and-actions">Examples of devices and actions</h3>
+<p>Assume the kinds <code>light</code> and <code>fan</code>,</p>
+<pre><code>    light, fan : Kind ;
+    dim : Action light ;</code></pre>
+<p>Given a kind, <em>k</em>, you can form the device <em>the k</em>.</p>
+<pre><code>    DKindOne  : (k : Kind) -&gt; Device k ;  -- the light</code></pre>
+<p>Now we can form the syntax tree</p>
+<pre><code>    CAction light dim (DKindOne light)</code></pre>
+<p>but we cannot form the trees</p>
+<pre><code>    CAction light dim (DKindOne fan)
+    CAction fan   dim (DKindOne light)
+    CAction fan   dim (DKindOne fan)</code></pre>
+<p></p>
+<div id="toc112">
+
+</div>
+<h3 id="linearization-and-parsing-with-dependent-types">Linearization and parsing with dependent types</h3>
+<p>Concrete syntax does not know if a category is a dependent type.</p>
+<pre><code>    lincat Action = {s : Str} ;
+    lin CAction _ act dev = {s = act.s ++ dev.s} ;</code></pre>
+<p>Notice that the <code>Kind</code> argument is suppressed in linearization.</p>
+<p>Parsing with dependent types consists of two phases:</p>
+<ol>
+<li>context-free parsing</li>
+<li><p>filtering through type checker</p>
+<p></p>
+<p>Parsing a type-correct command works as expected:</p>
+<p></p>
+<pre><code>    &gt; parse &quot;dim the light&quot;
+    CAction light dim (DKindOne light)</code></pre>
+<p>However, type-incorrect commands are rejected by the typecheck:</p>
+<pre><code>    &gt; parse &quot;dim the fan&quot;
+    The parsing is successful but the type checking failed with error(s):
+      Couldn&#39;t match expected type Device light
+         against the interred type Device fan
+      In the expression: DKindOne fan</code></pre>
+<p></p>
+<p></p>
+<p>==Polymorphism==</p>
+<p></p>
+<div id="secpolymorphic">
+
+</div>
+<p></p>
+<p>Sometimes an action can be performed on all kinds of devices.</p>
+<p></p>
+<p>This is represented as a function that takes a <code>Kind</code> as an argument and produce an <code>Action</code> for that <code>Kind</code>:</p>
+<pre><code>    fun switchOn, switchOff : (k : Kind) -&gt; Action k ;</code></pre>
+<p>Functions of this kind are called <strong>polymorphic</strong>.</p>
+<p></p>
+<p>We can use this kind of polymorphism in concrete syntax as well, to express Haskell-type library functions:</p>
+<pre><code>    oper const :(a,b : Type) -&gt; a -&gt; b -&gt; a =
+      \_,_,c,_ -&gt; c ;
+  
+    oper flip : (a,b,c : Type) -&gt; (a -&gt; b -&gt;c) -&gt; b -&gt; a -&gt; c =
+      \_,_,_,f,x,y -&gt; f y x ;</code></pre>
+<p></p>
+<p></p>
+<p>===Dependent types: exercises===</p>
+<p></p>
+<p>1. Write an abstract syntax module with above contents and an appropriate English concrete syntax. Try to parse the commands <em>dim the light</em> and <em>dim the fan</em>.</p>
+<p></p>
+<p>2. Perform random and exhaustive generation.</p>
+<p></p>
+<p>3. Add some device kinds and actions to the grammar.</p></li>
+</ol>
+<p></p>
+<div id="toc113">
+
+</div>
+<h2 id="proof-objects">Proof objects</h2>
+<p><strong>Curry-Howard isomorphism</strong> = <strong>propositions as types principle</strong>: a proposition is a type of proofs (= proof objects).</p>
+<p>Example: define the <em>less than</em> proposition for natural numbers,</p>
+<pre><code>    cat Nat ;
+    fun Zero : Nat ;
+    fun Succ : Nat -&gt; Nat ;</code></pre>
+<p>Define inductively what it means for a number <em>x</em> to be <em>less than</em> a number <em>y</em>:</p>
+<ul>
+<li><code>Zero</code> is less than <code>Succ</code> <em>y</em> for any <em>y</em>.</li>
+<li>If <em>x</em> is less than <em>y</em>, then <code>Succ</code> <em>x</em> is less than <code>Succ</code> <em>y</em>.</li>
+</ul>
+<p>Expressing these axioms in type theory with a dependent type <code>Less</code> <em>x y</em> and two functions constructing its objects:</p>
+<pre><code>    cat Less Nat Nat ;
+    fun lessZ : (y : Nat) -&gt; Less Zero (Succ y) ;
+    fun lessS : (x,y : Nat) -&gt; Less x y -&gt; Less (Succ x) (Succ y) ;</code></pre>
+<p>Example: the fact that 2 is less that 4 has the proof object</p>
+<pre><code>    lessS (Succ Zero) (Succ (Succ (Succ Zero)))
+          (lessS Zero (Succ (Succ Zero)) (lessZ (Succ Zero)))
+     : Less (Succ (Succ Zero)) (Succ (Succ (Succ (Succ Zero))))</code></pre>
+<p></p>
+<div id="toc114">
+
+</div>
+<h3 id="proof-carrying-documents">Proof-carrying documents</h3>
+<p>Idea: to be semantically well-formed, the abstract syntax of a document must contain a proof of some property, although the proof is not shown in the concrete document.</p>
+<p>Example: documents describing flight connections:</p>
+<p><em>To fly from Gothenburg to Prague, first take LH3043 to Frankfurt, then OK0537 to Prague.</em></p>
+<p>The well-formedness of this text is partly expressible by dependent typing:</p>
+<pre><code>    cat
+      City ;
+      Flight City City ;
+    fun
+      Gothenburg, Frankfurt, Prague : City ;
+      LH3043 : Flight Gothenburg Frankfurt ;
+      OK0537 : Flight Frankfurt Prague ;</code></pre>
+<p>To extend the conditions to flight connections, we introduce a category of proofs that a change is possible:</p>
+<pre><code>    cat IsPossible (x,y,z : City)(Flight x y)(Flight y z) ;</code></pre>
+<p>A legal connection is formed by the function</p>
+<pre><code>    fun Connect : (x,y,z : City) -&gt;
+      (u : Flight x y) -&gt; (v : Flight y z) -&gt;
+        IsPossible x y z u v -&gt; Flight x z ;</code></pre>
+<p></p>
+<div id="toc115">
+
+</div>
+<h2 id="restricted-polymorphism">Restricted polymorphism</h2>
+<p>Above, all Actions were either of</p>
+<ul>
+<li><strong>monomorphic</strong>: defined for one Kind</li>
+<li><strong>polymorphic</strong>: defined for all Kinds</li>
+</ul>
+<p>To make this scale up for new Kinds, we can refine this to <strong>restricted polymorphism</strong>: defined for Kinds of a certain <strong>class</strong></p>
+<p>The notion of class uses the Curry-Howard isomorphism as follows:</p>
+<ul>
+<li>a class is a <strong>predicate</strong> of Kinds --- i.e. a type depending of Kinds</li>
+<li>a Kind is in a class if there is a proof object of this type</li>
+</ul>
+<p></p>
+<div id="toc116">
+
+</div>
+<h3 id="example-classes-for-switching-and-dimming">Example: classes for switching and dimming</h3>
+<p>We modify the smart house grammar:</p>
+<pre><code>  cat
+    Switchable Kind ;
+    Dimmable   Kind ;
+  fun
+    switchable_light : Switchable light ;
+    switchable_fan   : Switchable fan ;
+    dimmable_light   : Dimmable light ;
+  
+    switchOn : (k : Kind) -&gt; Switchable k -&gt; Action k ;
+    dim      : (k : Kind) -&gt; Dimmable k -&gt; Action k ;</code></pre>
+<p>Classes for new actions can be added incrementally.</p>
+<p></p>
+<div id="toc117">
+
+</div>
+<h2 id="variable-bindings">Variable bindings</h2>
+<p></p>
+<div id="secbinding">
+
+</div>
+<p>Mathematical notation and programming languages have expressions that <strong>bind</strong> variables.</p>
+<p>Example: universal quantifier formula</p>
+<pre><code>    (All x)B(x)</code></pre>
+<p>The variable <code>x</code> has a <strong>binding</strong> <code>(All x)</code>, and occurs <strong>bound</strong> in the <strong>body</strong> <code>B(x)</code>.</p>
+<p>Examples from informal mathematical language:</p>
+<pre><code>    for all x, x is equal to x
+  
+    the function that for any numbers x and y returns the maximum of x+y
+    and x*y
+  
+    Let x be a natural number. Assume that x is even. Then x + 3 is odd.</code></pre>
+<p></p>
+<div id="toc118">
+
+</div>
+<h3 id="higher-order-abstract-syntax">Higher-order abstract syntax</h3>
+<p>Abstract syntax can use functions as arguments:</p>
+<pre><code>    cat Ind ; Prop ;
+    fun All : (Ind -&gt; Prop) -&gt; Prop</code></pre>
+<p>where <code>Ind</code> is the type of individuals and <code>Prop</code>, the type of propositions.</p>
+<p>Let us add an equality predicate</p>
+<pre><code>    fun Eq : Ind -&gt; Ind -&gt; Prop</code></pre>
+<p>Now we can form the tree</p>
+<pre><code>    All (\x -&gt; Eq x x)</code></pre>
+<p>which we want to relate to the ordinary notation</p>
+<pre><code>    (All x)(x = x)</code></pre>
+<p>In <strong>higher-order abstract syntax</strong> (HOAS), all variable bindings are expressed using higher-order syntactic constructors.</p>
+<p></p>
+<div id="toc119">
+
+</div>
+<h3 id="higher-order-abstract-syntax-linearization">Higher-order abstract syntax: linearization</h3>
+<p>HOAS has proved to be useful in the semantics and computer implementation of variable-binding expressions.</p>
+<p>How do we relate HOAS to the concrete syntax?</p>
+<p>In GF, we write</p>
+<pre><code>    fun All : (Ind -&gt; Prop) -&gt; Prop
+    lin All B = {s = &quot;(&quot; ++ &quot;All&quot; ++ B.$0 ++ &quot;)&quot; ++ B.s}</code></pre>
+<p>General rule: if an argument type of a <code>fun</code> function is a function type <code>A -&gt; C</code>, the linearization type of this argument is the linearization type of <code>C</code> together with a new field <code>$0 : Str</code>.</p>
+<p>The argument <code>B</code> thus has the linearization type</p>
+<pre><code>    {s : Str ; $0 : Str},</code></pre>
+<p>If there are more bindings, we add <code>$1</code>, <code>$2</code>, etc.</p>
+<p></p>
+<div id="toc120">
+
+</div>
+<h3 id="eta-expansion">Eta expansion</h3>
+<p>To make sense of linearization, syntax trees must be <strong>eta-expanded</strong>: for any function of type</p>
+<pre><code>    A -&gt; B</code></pre>
+<p>an eta-expanded syntax tree has the form</p>
+<pre><code>    \x -&gt; b</code></pre>
+<p>where <code>b : B</code> under the assumption <code>x : A</code>.</p>
+<p>Given the linearization rule</p>
+<pre><code>    lin Eq a b = {s = &quot;(&quot; ++ a.s ++ &quot;=&quot; ++ b.s ++ &quot;)&quot;}</code></pre>
+<p>the linearization of the tree</p>
+<pre><code>    \x -&gt; Eq x x</code></pre>
+<p>is the record</p>
+<pre><code>    {$0 = &quot;x&quot;, s = [&quot;( x = x )&quot;]}</code></pre>
+<p>Then we can compute the linearization of the formula,</p>
+<pre><code>    All (\x -&gt; Eq x x)  --&gt; {s = &quot;[( All x ) ( x = x )]&quot;}.</code></pre>
+<p>The linearization of the variable <code>x</code> is, &quot;automagically&quot;, the string <code>&quot;x&quot;</code>.</p>
+<p></p>
+<div id="toc121">
+
+</div>
+<h3 id="parsing-variable-bindings">Parsing variable bindings</h3>
+<p>GF can treat any one-word string as a variable symbol.</p>
+<pre><code>    &gt; p -cat=Prop &quot;( All x ) ( x = x )&quot;
+    All (\x -&gt; Eq x x)</code></pre>
+<p>Variables must be bound if they are used:</p>
+<pre><code>    &gt; p -cat=Prop &quot;( All x ) ( x = y )&quot;
+    no tree found</code></pre>
+<p></p>
+<div id="toc122">
+
+</div>
+<h3 id="exercises-on-variable-bindings">Exercises on variable bindings</h3>
+<p>1. Write an abstract syntax of the whole <strong>predicate calculus</strong>, with the <strong>connectives</strong> &quot;and&quot;, &quot;or&quot;, &quot;implies&quot;, and &quot;not&quot;, and the <strong>quantifiers</strong> &quot;exists&quot; and &quot;for all&quot;. Use higher-order functions to guarantee that unbounded variables do not occur.</p>
+<p>2. Write a concrete syntax for your favourite notation of predicate calculus. Use Latex as target language if you want nice output. You can also try producing boolean expressions of some programming language. Use as many parenthesis as you need to guarantee non-ambiguity.</p>
+<p></p>
+<div id="toc123">
+
+</div>
+<h2 id="semantic-definitions">Semantic definitions</h2>
+<p></p>
+<div id="secdefdef">
+
+</div>
+<p>The <code>fun</code> judgements of GF are declarations of functions, giving their types.</p>
+<p>Can we <strong>compute</strong> <code>fun</code> functions?</p>
+<p>Mostly we are not interested, since functions are seen as constructors, i.e. data forms - as usual with</p>
+<pre><code>    fun Zero : Nat ;
+    fun Succ : Nat -&gt; Nat ;</code></pre>
+<p>But it is also possible to give <strong>semantic definitions</strong> to functions. The key word is <code>def</code>:</p>
+<pre><code>    fun one : Nat ;
+    def one = Succ Zero ;
+  
+    fun twice : Nat -&gt; Nat ;
+    def twice x = plus x x ;
+  
+    fun plus : Nat -&gt; Nat -&gt; Nat ;
+    def
+      plus x Zero = x ;
+      plus x (Succ y) = Succ (Sum x y) ;</code></pre>
+<p></p>
+<div id="toc124">
+
+</div>
+<h3 id="computing-a-tree">Computing a tree</h3>
+<p>Computation: follow a chain of definition until no definition can be applied,</p>
+<pre><code>    plus one one --&gt;
+    plus (Succ Zero) (Succ Zero) --&gt;
+    Succ (plus (Succ Zero) Zero) --&gt;
+    Succ (Succ Zero)</code></pre>
+<p>Computation in GF is performed with the <code>put_term</code> command and the <code>compute</code> transformation, e.g.</p>
+<pre><code>    &gt; parse -tr &quot;1 + 1&quot; | put_term -transform=compute -tr | l
+    plus one one
+    Succ (Succ Zero)
+    s(s(0))</code></pre>
+<p></p>
+<div id="toc125">
+
+</div>
+<h3 id="definitional-equality">Definitional equality</h3>
+<p>Two trees are definitionally equal if they compute into the same tree.</p>
+<p>Definitional equality does not guarantee sameness of linearization:</p>
+<pre><code>    plus one one     ===&gt; 1 + 1
+    Succ (Succ Zero) ===&gt; s(s(0))</code></pre>
+<p>The main use of this concept is in type checking: sameness of types.</p>
+<p>Thus e.g. the following types are equal</p>
+<pre><code>    Less Zero one
+    Less Zero (Succ Zero))</code></pre>
+<p>so that an object of one also is an object of the other.</p>
+<p></p>
+<div id="toc126">
+
+</div>
+<h3 id="judgement-forms-for-constructors">Judgement forms for constructors</h3>
+<p>The judgement form <code>data</code> tells that a category has certain functions as constructors:</p>
+<pre><code>    data Nat = Succ | Zero ;</code></pre>
+<p>The type signatures of constructors are given separately,</p>
+<pre><code>    fun Zero : Nat ;
+    fun Succ : Nat -&gt; Nat ;</code></pre>
+<p>There is also a shorthand:</p>
+<pre><code>    data Succ : Nat -&gt; Nat ;    ===   fun Succ : Nat -&gt; Nat ;
+                                      data Nat = Succ ;</code></pre>
+<p>Notice: in <code>def</code> definitions, identifier patterns not marked as <code>data</code> will be treated as variables.</p>
+<p></p>
+<div id="toc127">
+
+</div>
+<h3 id="exercises-on-semantic-definitions">Exercises on semantic definitions</h3>
+<p>1. Implement an interpreter of a small functional programming language with natural numbers, lists, pairs, lambdas, etc. Use higher-order abstract syntax with semantic definitions. As concrete syntax, use your favourite programming language.</p>
+<p>2. There is no termination checking for <code>def</code> definitions. Construct an examples that makes type checking loop. Type checking can be invoked with <code>put_term -transform=solve</code>.</p>
+<p></p>
+<p></p>
+<div id="chapseven">
+
+</div>
+<div id="toc128">
+
+</div>
+<h2 id="lesson-6-grammars-of-formal-languages">Lesson 6: Grammars of formal languages</h2>
+<p>Goals:</p>
+<ul>
+<li>write grammars for formal languages (mathematical notation, programming languages)</li>
+<li>interface between formal and natural langauges</li>
+<li>implement a compiler by using GF</li>
+</ul>
+<p></p>
+<div id="toc129">
+
+</div>
+<h3 id="arithmetic-expressions">Arithmetic expressions</h3>
+<p>We construct a calculator with addition, subtraction, multiplication, and division of integers.</p>
+<pre><code>    abstract Calculator = {
+    flags startcat = Exp ;
+  
+    cat Exp ;
+  
+    fun
+      EPlus, EMinus, ETimes, EDiv : Exp -&gt; Exp -&gt; Exp ;
+      EInt : Int -&gt; Exp ;
+    }</code></pre>
+<p>The category <code>Int</code> is a built-in category of integers. Its syntax trees <strong>integer literals</strong>, i.e. sequences of digits:</p>
+<pre><code>    5457455814608954681 : Int</code></pre>
+<p>These are the only objects of type <code>Int</code>: grammars are not allowed to declare functions with <code>Int</code> as value type.</p>
+<p></p>
+<div id="toc130">
+
+</div>
+<h3 id="concrete-syntax-a-simple-approach">Concrete syntax: a simple approach</h3>
+<p>We begin with a concrete syntax that always uses parentheses around binary operator applications:</p>
+<pre><code>    concrete CalculatorP of Calculator = open Prelude in {
+  
+    lincat
+      Exp = SS ;
+    lin
+      EPlus  = infix &quot;+&quot; ;
+      EMinus = infix &quot;-&quot; ;
+      ETimes = infix &quot;*&quot; ;
+      EDiv   = infix &quot;/&quot; ;
+      EInt i = i ;
+  
+    oper
+      infix : Str -&gt; SS -&gt; SS -&gt; SS = \f,x,y -&gt;
+        ss (&quot;(&quot; ++ x.s ++ f ++ y.s ++ &quot;)&quot;) ;
+    }</code></pre>
+<p>Now we have</p>
+<pre><code>    &gt; linearize EPlus (EInt 2) (ETimes (EInt 3) (EInt 4))
+    ( 2 + ( 3 * 4 ) )</code></pre>
+<p>First problems:</p>
+<ul>
+<li>to get rid of superfluous spaces and</li>
+<li>to recognize integer literals in the parser</li>
+</ul>
+<p></p>
+<div id="toc131">
+
+</div>
+<h2 id="lexing-and-unlexing">Lexing and unlexing</h2>
+<p></p>
+<div id="seclexing">
+
+</div>
+<p>The input of parsing in GF is not just a string, but a list of <strong>tokens</strong>, returned by a <strong>lexer</strong>.</p>
+<p>The default lexer in GF returns chunks separated by spaces:</p>
+<pre><code>    &quot;(12 + (3 * 4))&quot;  ===&gt;  &quot;(12&quot;, &quot;+&quot;, &quot;(3&quot;. &quot;*&quot;. &quot;4))&quot;</code></pre>
+<p>The proper way would be</p>
+<pre><code>    &quot;(&quot;, &quot;12&quot;, &quot;+&quot;, &quot;(&quot;, &quot;3&quot;, &quot;*&quot;, &quot;4&quot;, &quot;)&quot;, &quot;)&quot;</code></pre>
+<p>Moreover, the tokens <code>&quot;12&quot;</code>, <code>&quot;3&quot;</code>, and <code>&quot;4&quot;</code> should be recognized as integer literals - they cannot be found in the grammar.</p>
+<p></p>
+<p>Lexers are invoked by flags to the command <code>put_string = ps</code>.</p>
+<pre><code>    &gt; put_string -lexcode &quot;(2 + (3 * 4))&quot;
+    ( 2 + ( 3 * 4 ) )</code></pre>
+<p>This can be piped into a parser, as usual:</p>
+<pre><code>    &gt; ps -lexcode &quot;(2 + (3 * 4))&quot; | parse
+    EPlus (EInt 2) (ETimes (EInt 3) (EInt 4))</code></pre>
+<p>In linearization, we use a corresponding <strong>unlexer</strong>:</p>
+<pre><code>    &gt; linearize EPlus (EInt 2) (ETimes (EInt 3) (EInt 4)) | ps -unlexcode
+    (2 + (3 * 4))</code></pre>
+<p></p>
+<div id="toc132">
+
+</div>
+<h3 id="most-common-lexers-and-unlexers">Most common lexers and unlexers</h3>
+<p>lexer</p>
+<p>unlexer</p>
+<p>description</p>
+<p><code>chars</code></p>
+<p><code>unchars</code></p>
+<p>each character is a token</p>
+<p><code>lexcode</code></p>
+<p><code>unlexcode</code></p>
+<p>program code conventions (uses Haskell's lex)</p>
+<p><code>lexmixed</code></p>
+<p><code>unlexmixed</code></p>
+<p>like text, but between $ signs like code</p>
+<p><code>lextext</code></p>
+<p><code>unlextext</code></p>
+<p>with conventions on punctuation and capitals</p>
+<p><code>words</code></p>
+<p><code>unwords</code></p>
+<p>(default) tokens separated by space characters</p>
+<p></p>
+<div id="toc133">
+
+</div>
+<h2 id="precedence-and-fixity">Precedence and fixity</h2>
+<p>Arithmetic expressions should be unambiguous. If we write</p>
+<pre><code>    2 + 3 * 4</code></pre>
+<p>it should be parsed as one, but not both, of</p>
+<pre><code>    EPlus (EInt 2) (ETimes (EInt 3) (EInt 4))
+    ETimes (EPlus (EInt 2) (EInt 3)) (EInt 4)</code></pre>
+<p>We choose the former tree, because multiplication has <strong>higher precedence</strong> than addition.</p>
+<p>To express the latter tree, we have to use parentheses:</p>
+<pre><code>    (2 + 3) * 4</code></pre>
+<p>The usual precedence rules:</p>
+<ul>
+<li>Integer constants and expressions in parentheses have the highest precedence.</li>
+<li>Multiplication and division have equal precedence, lower than the highest but higher than addition and subtraction, which are again equal.</li>
+<li>All the four binary operations are <strong>left-associative</strong>: <code>1 + 2 + 3</code> means the same as <code>(1 + 2) + 3</code>.</li>
+</ul>
+<p></p>
+<div id="toc134">
+
+</div>
+<h3 id="precedence-as-a-parameter">Precedence as a parameter</h3>
+<p>Precedence can be made into an inherent feature of expressions:</p>
+<pre><code>    oper
+      Prec : PType = Ints 2 ;
+      TermPrec : Type = {s : Str ; p : Prec} ;
+  
+      mkPrec : Prec -&gt; Str -&gt; TermPrec = \p,s -&gt; {s = s ; p = p} ;
+  
+    lincat
+      Exp = TermPrec ;</code></pre>
+<p>Notice <code>Ints 2</code>: a parameter type, whose values are the integers <code>0,1,2</code>.</p>
+<p>Using precedence levels: compare the inherent precedence of an expression with the expected precedence.</p>
+<ul>
+<li>if the inherent precedence is lower than the expected precedence, use parentheses</li>
+<li>otherwise, no parentheses are needed</li>
+</ul>
+<p>This idea is encoded in the operation</p>
+<pre><code>    oper usePrec : TermPrec -&gt; Prec -&gt; Str = \x,p -&gt;
+      case lessPrec x.p p of {
+        True  =&gt; &quot;(&quot; x.s &quot;)&quot; ;
+        False =&gt; x.s
+      } ;</code></pre>
+<p>(We use <code>lessPrec</code> from <code>lib/prelude/Formal</code>.)</p>
+<p></p>
+<div id="toc135">
+
+</div>
+<h3 id="fixities">Fixities</h3>
+<p>We can define left-associative infix expressions:</p>
+<pre><code>    infixl : Prec -&gt; Str -&gt; (_,_ : TermPrec) -&gt; TermPrec = \p,f,x,y -&gt;
+      mkPrec p (usePrec x p ++ f ++ usePrec y (nextPrec p)) ;</code></pre>
+<p>Constant-like expressions (the highest level):</p>
+<pre><code>    constant : Str -&gt; TermPrec = mkPrec 2 ;</code></pre>
+<p>All these operations can be found in <code>lib/prelude/Formal</code>, which has 5 levels.</p>
+<p>Now we can write the whole concrete syntax of <code>Calculator</code> compactly:</p>
+<pre><code>    concrete CalculatorC of Calculator = open Formal, Prelude in {
+  
+    flags lexer = codelit ; unlexer = code ; startcat = Exp ;
+  
+    lincat Exp = TermPrec ;
+  
+    lin
+      EPlus  = infixl 0 &quot;+&quot; ;
+      EMinus = infixl 0 &quot;-&quot; ;
+      ETimes = infixl 1 &quot;*&quot; ;
+      EDiv   = infixl 1 &quot;/&quot; ;
+      EInt i = constant i.s ;
+    }</code></pre>
+<p></p>
+<div id="toc136">
+
+</div>
+<h3 id="exercises-on-precedence">Exercises on precedence</h3>
+<p>1. Define non-associative and right-associative infix operations analogous to <code>infixl</code>.</p>
+<p>2. Add a constructor that puts parentheses around expressions to raise their precedence, but that is eliminated by a <code>def</code> definition. Test parsing with and without a pipe to <code>pt -transform=compute</code>.</p>
+<p></p>
+<div id="toc137">
+
+</div>
+<h2 id="code-generation-as-linearization">Code generation as linearization</h2>
+<p>Translate arithmetic (infix) to JVM (postfix):</p>
+<pre><code>    2 + 3 * 4
+  
+      ===&gt;
+  
+    iconst 2 : iconst 3 ; iconst 4 ; imul ; iadd</code></pre>
+<p>Just give linearization rules for JVM:</p>
+<pre><code>    lin
+      EPlus  = postfix &quot;iadd&quot; ;
+      EMinus = postfix &quot;isub&quot; ;
+      ETimes = postfix &quot;imul&quot; ;
+      EDiv   = postfix &quot;idiv&quot; ;
+      EInt i = ss (&quot;iconst&quot; ++ i.s) ;
+    oper
+      postfix : Str -&gt; SS -&gt; SS -&gt; SS = \op,x,y -&gt;
+        ss (x.s ++ &quot;;&quot; ++ y.s ++ &quot;;&quot; ++ op) ;</code></pre>
+<p></p>
+<div id="toc138">
+
+</div>
+<h3 id="programs-with-variables">Programs with variables</h3>
+<p>A <strong>straight code</strong> programming language, with <strong>initializations</strong> and <strong>assignments</strong>:</p>
+<pre><code>    int x = 2 + 3 ;
+    int y = x + 1 ;
+    x = x + 9 * y ;</code></pre>
+<p>We define programs by the following constructors:</p>
+<pre><code>    fun
+      PEmpty : Prog ;
+      PInit  : Exp -&gt; (Var -&gt; Prog) -&gt; Prog ;
+      PAss   : Var -&gt; Exp  -&gt; Prog  -&gt; Prog ;</code></pre>
+<p><code>PInit</code> uses higher-order abstract syntax for making the initialized variable available in the <strong>continuation</strong> of the program.</p>
+<p>The abstract syntax tree for the above code is</p>
+<pre><code>    PInit (EPlus (EInt 2) (EInt 3)) (\x -&gt;
+      PInit (EPlus (EVar x) (EInt 1)) (\y -&gt;
+        PAss x (EPlus (EVar x) (ETimes (EInt 9) (EVar y)))
+          PEmpty))</code></pre>
+<p>No uninitialized variables are allowed - there are no constructors for <code>Var</code>! But we do have the rule</p>
+<pre><code>    fun EVar : Var -&gt; Exp ;</code></pre>
+<p>The rest of the grammar is just the same as for arithmetic expressions <a href="#secprecedence">here</a>. The best way to implement it is perhaps by writing a module that extends the expression module. The most natural start category of the extension is <code>Prog</code>.</p>
+<p></p>
+<div id="toc139">
+
+</div>
+<h3 id="exercises-on-code-generation">Exercises on code generation</h3>
+<p>1. Define a C-like concrete syntax of the straight-code language.</p>
+<p>2. Extend the straight-code language to expressions of type <code>float</code>. To guarantee type safety, you can define a category <code>Typ</code> of types, and make <code>Exp</code> and <code>Var</code> dependent on <code>Typ</code>. Basic floating point expressions can be formed from literal of the built-in GF type <code>Float</code>. The arithmetic operations should be made polymorphic (as <a href="#secpolymorphic">here</a>).</p>
+<p>3. Extend JVM generation to the straight-code language, using two more instructions</p>
+<ul>
+<li><code>iload</code> <em>x</em>, which loads the value of the variable <em>x</em></li>
+<li><code>istore</code> <em>x</em> which stores a value to the variable <em>x</em></li>
+</ul>
+<p>Thus the code for the example in the previous section is</p>
+<pre><code>    iconst 2 ; iconst 3 ; iadd ; istore x ;
+    iload x ; iconst 1 ; iadd ; istore y ;
+    iload x ; iconst 9 ; iload y ; imul ; iadd ; istore x ;</code></pre>
+<p>4. If you made the exercise of adding floating point numbers to the language, you can now cash out the main advantage of type checking for code generation: selecting type-correct JVM instructions. The floating point instructions are precisely the same as the integer one, except that the prefix is <code>f</code> instead of <code>i</code>, and that <code>fconst</code> takes floating point literals as arguments.</p>
+<p></p>
+<p></p>
+<div id="chapeight">
+
+</div>
+<div id="toc140">
+
+</div>
+<h1 id="lesson-7-embedded-grammars">Lesson 7: Embedded grammars</h1>
+<p>Goals:</p>
+<ul>
+<li>use grammars as parts of programs written in Haskell and JavaScript</li>
+<li>implement stand-alone question-answering systems and translators based on GF grammars</li>
+<li>generate language models for speech recognition from GF grammars</li>
+</ul>
+<p></p>
+<div id="toc141">
+
+</div>
+<h2 id="functionalities-of-an-embedded-grammar-format">Functionalities of an embedded grammar format</h2>
+<p>GF grammars can be used as parts of programs written in other programming languages, to be called <strong>host languages</strong>. This facility is based on several components:</p>
+<ul>
+<li>PGF: a portable format for multilingual GF grammars</li>
+<li>a PGF interpreter written in the host language</li>
+<li>a library in the host language that enables calling the interpreter</li>
+<li>a way to manipulate abstract syntax trees in the host language</li>
+</ul>
+<p></p>
+<div id="toc142">
+
+</div>
+<h2 id="the-portable-grammar-format">The portable grammar format</h2>
+<p>The portable format is called PGF, &quot;Portable Grammar Format&quot;.</p>
+<p>This format is produced by using GF as batch compiler, with the option <code>-make</code>, from the operative system shell:</p>
+<pre><code>    % gf -make SOURCE.gf</code></pre>
+<p>PGF is the recommended format in which final grammar products are distributed, because they are stripped from superfluous information and can be started and applied faster than sets of separate modules.</p>
+<p>Application programmers have never any need to read or modify PGF files.</p>
+<p>PGF thus plays the same role as machine code in general-purpose programming (or bytecode in Java).</p>
+<p></p>
+<div id="toc143">
+
+</div>
+<h3 id="haskell-the-embedapi-module">Haskell: the EmbedAPI module</h3>
+<p>The Haskell API contains (among other things) the following types and functions:</p>
+<pre><code>    readPGF   :: FilePath -&gt; IO PGF
+  
+    linearize :: PGF -&gt; Language -&gt; Tree -&gt; String
+    parse     :: PGF -&gt; Language -&gt; Category -&gt; String -&gt; [Tree]
+  
+    linearizeAll     :: PGF -&gt; Tree -&gt; [String]
+    linearizeAllLang :: PGF -&gt; Tree -&gt; [(Language,String)]
+  
+    parseAll     :: PGF -&gt; Category -&gt; String -&gt; [[Tree]]
+    parseAllLang :: PGF -&gt; Category -&gt; String -&gt; [(Language,[Tree])]
+  
+    languages    :: PGF -&gt; [Language]
+    categories   :: PGF -&gt; [Category]
+    startCat     :: PGF -&gt; Category</code></pre>
+<p>This is the only module that needs to be imported in the Haskell application. It is available as a part of the GF distribution, in the file <code>src/PGF.hs</code>.</p>
+<p></p>
+<div id="toc144">
+
+</div>
+<h3 id="first-application-a-translator">First application: a translator</h3>
+<p>Let us first build a stand-alone translator, which can translate in any multilingual grammar between any languages in the grammar.</p>
+<pre><code>  module Main where
+  
+  import PGF
+  import System.Environment (getArgs)
+  
+  main :: IO ()
+  main = do
+    file:_ &lt;- getArgs
+    gr     &lt;- readPGF file
+    interact (translate gr)
+  
+  translate :: PGF -&gt; String -&gt; String
+  translate gr s = case parseAllLang gr (startCat gr) s of
+    (lg,t:_):_ -&gt; unlines [linearize gr l t | l &lt;- languages gr, l /= lg]
+    _ -&gt; &quot;NO PARSE&quot;</code></pre>
+<p>To run the translator, first compile it by</p>
+<pre><code>    % ghc -make -o trans Translator.hs</code></pre>
+<p>For this, you need the Haskell compiler <a href="http://www.haskell.org/ghc">GHC</a>.</p>
+<p></p>
+<div id="toc145">
+
+</div>
+<h3 id="producing-pgf-for-the-translator">Producing PGF for the translator</h3>
+<p>Then produce a PGF file. For instance, the <code>Food</code> grammar set can be compiled as follows:</p>
+<pre><code>    % gf -make FoodEng.gf FoodIta.gf</code></pre>
+<p>This produces the file <code>Food.pgf</code> (its name comes from the abstract syntax).</p>
+<p>The Haskell library function <code>interact</code> makes the <code>trans</code> program work like a Unix filter, which reads from standard input and writes to standard output. Therefore it can be a part of a pipe and read and write files. The simplest way to translate is to <code>echo</code> input to the program:</p>
+<pre><code>    % echo &quot;this wine is delicious&quot; | ./trans Food.pgf
+    questo vino è delizioso</code></pre>
+<p>The result is given in all languages except the input language.</p>
+<p></p>
+<div id="toc146">
+
+</div>
+<h3 id="a-translator-loop">A translator loop</h3>
+<p>To avoid starting the translator over and over again: change <code>interact</code> in the main function to <code>loop</code>, defined as follows:</p>
+<pre><code>  loop :: (String -&gt; String) -&gt; IO ()
+  loop trans = do
+    s &lt;- getLine
+    if s == &quot;quit&quot; then putStrLn &quot;bye&quot; else do
+      putStrLn $ trans s
+      loop trans</code></pre>
+<p>The loop keeps on translating line by line until the input line is <code>quit</code>.</p>
+<p></p>
+<div id="toc147">
+
+</div>
+<h3 id="a-question-answer-system">A question-answer system</h3>
+<p></p>
+<div id="secmathprogram">
+
+</div>
+<p>The next application is also a translator, but it adds a <strong>transfer</strong> component - a function that transforms syntax trees.</p>
+<p>The transfer function we use is one that computes a question into an answer.</p>
+<p>The program accepts simple questions about arithmetic and answers &quot;yes&quot; or &quot;no&quot; in the language in which the question was made:</p>
+<pre><code>    Is 123 prime?
+    No.
+    77 est impair ?
+    Oui.</code></pre>
+<p>We change the pure translator by giving the <code>translate</code> function the transfer as an extra argument:</p>
+<pre><code>    translate :: (Tree -&gt; Tree) -&gt; PGF -&gt; String -&gt; String</code></pre>
+<p>Ordinary translation as a special case where transfer is the identity function (<code>id</code> in Haskell).</p>
+<p>To reply in the <em>same</em> language as the question:</p>
+<pre><code>    translate tr gr = case parseAllLang gr (startCat gr) s of
+      (lg,t:_):_ -&gt; linearize gr lg (tr t)
+      _ -&gt; &quot;NO PARSE&quot;</code></pre>
+<p></p>
+<div id="toc148">
+
+</div>
+<h3 id="abstract-syntax-of-the-query-system">Abstract syntax of the query system</h3>
+<p>Input: abstract syntax judgements</p>
+<pre><code>  abstract Query = {
+  
+    flags startcat=Question ;
+  
+    cat
+      Answer ; Question ; Object ;
+  
+    fun
+      Even   : Object -&gt; Question ;
+      Odd    : Object -&gt; Question ;
+      Prime  : Object -&gt; Question ;
+      Number : Int -&gt; Object ;
+  
+      Yes : Answer ;
+      No  : Answer ;
+  }</code></pre>
+<p></p>
+<div id="toc149">
+
+</div>
+<h3 id="exporting-gf-datatypes-to-haskell">Exporting GF datatypes to Haskell</h3>
+<p>To make it easy to define a transfer function, we export the abstract syntax to a system of Haskell datatypes:</p>
+<pre><code>    % gf -make --output-format=haskell QueryEng.gf</code></pre>
+<p>The result is a file named <code>Query.hs</code>, containing a module named <code>Query</code>.</p>
+<p></p>
+<p>Output: Haskell definitions</p>
+<pre><code>  module Query where
+  import PGF
+  
+  data GAnswer =
+     GYes
+   | GNo
+  
+  data GObject = GNumber GInt
+  
+  data GQuestion =
+     GPrime GObject
+   | GOdd GObject
+   | GEven GObject
+  
+  newtype GInt = GInt Integer</code></pre>
+<p>All type and constructor names are prefixed with a <code>G</code> to prevent clashes.</p>
+<p>The Haskell module name is the same as the abstract syntax name.</p>
+<p></p>
+<div id="toc150">
+
+</div>
+<h3 id="the-question-answer-function">The question-answer function</h3>
+<p>Haskell's type checker guarantees that the functions are well-typed also with respect to GF.</p>
+<pre><code>  answer :: GQuestion -&gt; GAnswer
+  answer p = case p of
+    GOdd x   -&gt; test odd x
+    GEven x  -&gt; test even x
+    GPrime x -&gt; test prime x
+  
+  value :: GObject -&gt; Int
+  value e = case e of
+    GNumber (GInt i) -&gt; fromInteger i
+  
+  test :: (Int -&gt; Bool) -&gt; GObject -&gt; GAnswer
+  test f x = if f (value x) then GYes else GNo</code></pre>
+<p></p>
+<div id="toc151">
+
+</div>
+<h3 id="converting-between-haskell-and-gf-trees">Converting between Haskell and GF trees</h3>
+<p>The generated Haskell module also contains</p>
+<pre><code>  class Gf a where
+    gf :: a -&gt; Tree
+    fg :: Tree -&gt; a
+  
+  instance Gf GQuestion where
+    gf (GEven x1) = DTr [] (AC (CId &quot;Even&quot;)) [gf x1]
+    gf (GOdd x1) = DTr [] (AC (CId &quot;Odd&quot;)) [gf x1]
+    gf (GPrime x1) = DTr [] (AC (CId &quot;Prime&quot;)) [gf x1]
+    fg t =
+      case t of
+        DTr [] (AC (CId &quot;Even&quot;)) [x1] -&gt; GEven (fg x1)
+        DTr [] (AC (CId &quot;Odd&quot;)) [x1] -&gt; GOdd (fg x1)
+        DTr [] (AC (CId &quot;Prime&quot;)) [x1] -&gt; GPrime (fg x1)
+        _ -&gt; error (&quot;no Question &quot; ++ show t)</code></pre>
+<p>For the programmer, it is enough to know:</p>
+<ul>
+<li>all GF names are in Haskell prefixed with <code>G</code></li>
+<li><code>gf</code> translates from Haskell objects to GF trees</li>
+<li><code>fg</code> translates from GF trees to Haskell objects</li>
+</ul>
+<p></p>
+<div id="toc152">
+
+</div>
+<h3 id="putting-it-all-together-the-transfer-definition">Putting it all together: the transfer definition</h3>
+<pre><code>  module TransferDef where
+  
+  import PGF (Tree)
+  import Query   -- generated from GF
+  
+  transfer :: Tree -&gt; Tree
+  transfer = gf . answer . fg
+  
+  answer :: GQuestion -&gt; GAnswer
+  answer p = case p of
+    GOdd x   -&gt; test odd x
+    GEven x  -&gt; test even x
+    GPrime x -&gt; test prime x
+  
+  value :: GObject -&gt; Int
+  value e = case e of
+    GNumber (GInt i) -&gt; fromInteger i
+  
+  test :: (Int -&gt; Bool) -&gt; GObject -&gt; GAnswer
+  test f x = if f (value x) then GYes else GNo
+  
+  prime :: Int -&gt; Bool
+  prime x = elem x primes where
+    primes = sieve [2 .. x]
+    sieve (p:xs) = p : sieve [ n | n &lt;- xs, n `mod` p &gt; 0 ]
+    sieve [] = []</code></pre>
+<p></p>
+<div id="toc153">
+
+</div>
+<h3 id="putting-it-all-together-the-main-module">Putting it all together: the Main module</h3>
+<p>Here is the complete code in the Haskell file <code>TransferLoop.hs</code>.</p>
+<pre><code>  module Main where
+  
+  import PGF
+  import TransferDef (transfer)
+  
+  main :: IO ()
+  main = do
+    gr &lt;- readPGF &quot;Query.pgf&quot;
+    loop (translate transfer gr)
+  
+  loop :: (String -&gt; String) -&gt; IO ()
+  loop trans = do
+    s &lt;- getLine
+    if s == &quot;quit&quot; then putStrLn &quot;bye&quot; else do
+      putStrLn $ trans s
+      loop trans
+  
+  translate :: (Tree -&gt; Tree) -&gt; PGF -&gt; String -&gt; String
+  translate tr gr s = case parseAllLang gr (startCat gr) s of
+    (lg,t:_):_ -&gt; linearize gr lg (tr t)
+    _ -&gt; &quot;NO PARSE&quot;</code></pre>
+<p></p>
+<div id="toc154">
+
+</div>
+<h3 id="putting-it-all-together-the-makefile">Putting it all together: the Makefile</h3>
+<p>To automate the production of the system, we write a <code>Makefile</code> as follows:</p>
+<pre><code>  all:
+          gf -make --output-format=haskell QueryEng
+          ghc --make -o ./math TransferLoop.hs
+          strip math</code></pre>
+<p>(The empty segments starting the command lines in a Makefile must be tabs.) Now we can compile the whole system by just typing</p>
+<pre><code>    make</code></pre>
+<p>Then you can run it by typing</p>
+<pre><code>    ./math</code></pre>
+<p>Just to summarize, the source of the application consists of the following files:</p>
+<pre><code>    Makefile         -- a makefile
+    Math.gf          -- abstract syntax
+    Math???.gf       -- concrete syntaxes
+    TransferDef.hs   -- definition of question-to-answer function
+    TransferLoop.hs  -- Haskell Main module</code></pre>
+<p></p>
+<div id="toc155">
+
+</div>
+<h2 id="web-server-applications">Web server applications</h2>
+<p>PGF files can be used in web servers, for which there is a Haskell library included in <code>src/server/</code>. How to build a server for tasks like translators is explained in the <a href="../src/server/README"><code>README</code></a> file in that directory.</p>
+<p>One of the servers that can be readily built with the library (without any programming required) is <strong>fridge poetry magnets</strong>. It is an application that uses an incremental parser to suggest grammatically correct next words. Here is an example of its application to the <code>Foods</code> grammars.</p>
+<p><img src="food-magnet.png" /></p>
+<p></p>
+<div id="toc156">
+
+</div>
+<h2 id="javascript-applications">JavaScript applications</h2>
+<p>JavaScript is a programming language that has interpreters built in in most web browsers. It is therefore usable for client side web programs, which can even be run without access to the internet. The following figure shows a JavaScript program compiled from GF grammars as run on an iPhone.</p>
+<p><img src="iphone.jpg" /></p>
+<p></p>
+<div id="toc157">
+
+</div>
+<h3 id="compiling-to-javascript">Compiling to JavaScript</h3>
+<p>JavaScript is one of the output formats of the GF batch compiler. Thus the following command generates a JavaScript file from two <code>Food</code> grammars.</p>
+<pre><code>    % gf -make --output-format=js FoodEng.gf FoodIta.gf</code></pre>
+<p>The name of the generated file is <code>Food.js</code>, derived from the top-most abstract syntax name. This file contains the multilingual grammar as a JavaScript object.</p>
+<p></p>
+<div id="toc158">
+
+</div>
+<h3 id="using-the-javascript-grammar">Using the JavaScript grammar</h3>
+<p>To perform parsing and linearization, the run-time library <code>gflib.js</code> is used. It is included in <code>/src/runtime/javascript/</code>, together with some other JavaScript and HTML files; these files can be used as templates for building applications.</p>
+<p>An example of usage is <a href="../../src/runtime/javascript/translator.html"><code>translator.html</code></a>, which is in fact initialized with a pointer to the Food grammar, so that it provides translation between the English and Italian grammars:</p>
+<p><img src="food-js.png" /></p>
+<p>The grammar must have the name <code>grammar.js</code>. The abstract syntax and start category names in <code>translator.html</code> must match the ones in the grammar. With these changes, the translator works for any multilingual grammar.</p>
+<p></p>
+<div id="toc159">
+
+</div>
+<h2 id="language-models-for-speech-recognition">Language models for speech recognition</h2>
+<p>The standard way of using GF in speech recognition is by building <strong>grammar-based language models</strong>.</p>
+<p>GF supports several formats, including GSL, the formatused in the <a href="http://www.nuance.com">Nuance speech recognizer</a>.</p>
+<p>GSL is produced from GF by running <code>gf</code> with the flag <code>--output-format=gsl</code>.</p>
+<p>Example: GSL generated from <code>FoodsEng.gf</code>.</p>
+<pre><code>    % gf -make --output-format=gsl FoodsEng.gf
+    % more FoodsEng.gsl
+  
+    ;GSL2.0
+    ; Nuance speech recognition grammar for FoodsEng
+    ; Generated by GF
+  
+    .MAIN Phrase_cat
+  
+    Item_1 [(&quot;that&quot; Kind_1) (&quot;this&quot; Kind_1)]
+    Item_2 [(&quot;these&quot; Kind_2) (&quot;those&quot; Kind_2)]
+    Item_cat [Item_1 Item_2]
+    Kind_1 [&quot;cheese&quot; &quot;fish&quot; &quot;pizza&quot; (Quality_1 Kind_1)
+            &quot;wine&quot;]
+    Kind_2 [&quot;cheeses&quot; &quot;fish&quot; &quot;pizzas&quot;
+            (Quality_1 Kind_2) &quot;wines&quot;]
+    Kind_cat [Kind_1 Kind_2]
+    Phrase_1 [(Item_1 &quot;is&quot; Quality_1)
+              (Item_2 &quot;are&quot; Quality_1)]
+    Phrase_cat Phrase_1
+  
+    Quality_1 [&quot;boring&quot; &quot;delicious&quot; &quot;expensive&quot;
+               &quot;fresh&quot; &quot;italian&quot; (&quot;very&quot; Quality_1) &quot;warm&quot;]
+    Quality_cat Quality_1</code></pre>
+<p></p>
+<div id="toc160">
+
+</div>
+<h3 id="more-speech-recognition-grammar-formats">More speech recognition grammar formats</h3>
+<p>Other formats available via the <code>--output-format</code> flag include:</p>
+<p>Format</p>
+<p>Description</p>
+<p><code>gsl</code></p>
+<p>Nuance GSL speech recognition grammar</p>
+<p><code>jsgf</code></p>
+<p>Java Speech Grammar Format (JSGF)</p>
+<p><code>jsgf_sisr_old</code></p>
+<p>JSGF with semantic tags in SISR WD 20030401 format</p>
+<p><code>srgs_abnf</code></p>
+<p>SRGS ABNF format</p>
+<p><code>srgs_xml</code></p>
+<p>SRGS XML format</p>
+<p><code>srgs_xml_prob</code></p>
+<p>SRGS XML format, with weights</p>
+<p><code>slf</code></p>
+<p>finite automaton in the HTK SLF format</p>
+<p><code>slf_sub</code></p>
+<p>finite automaton with sub-automata in HTK SLF</p>
+<p>All currently available formats can be seen with <code>gf --help</code>.</p>
+</div><!-- .container -->
+</div><!-- .bg-white -->
+
+<footer class="py-5">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-6 col-sm-3">
+        <a href="../..">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <h6 class="text-muted mt-3">Get started</h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.youtube.com/watch?v=x1LFbDQhbso">Google Tech Talk</a></li>
+          <li><a href="http://cloud.grammaticalframework.org/">GF Cloud</a></li>
+          <li>
+            <a href="../../doc/tutorial/gf-tutorial.html">Tutorial</a>
+             ·
+            <a href="../../lib/doc/rgl-tutorial/index.html">RGL Tutorial</a>
+          </li>
+          <li><a href="../../doc/gf-video-tutorials.html">Video Tutorials</a></li>
+          <li><a href="../../download"><strong>Download GF</strong></a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Learn more</h6>
+        <ul class="list-unstyled">
+          <li><a href="../../gf-book">The GF Book</a></li>
+          <li><a href="../../doc/gf-refman.html">Reference Manual</a></li>
+          <li><a href="../../doc/gf-shell-reference.html">GF Shell Reference</a></li>
+          <li><a href="http://www.molto-project.eu/sites/default/files/MOLTO_D2.3.pdf">Best Practices</a></li>
+          <li><a href="../../lib/doc/synopsis/index.html"><strong>RGL Synopsis</strong></a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Develop</h6>
+        <ul class="list-unstyled">
+          <li><a href="../../doc/gf-developers.html">Developers Guide</a></li>
+          <li><a href="http://hackage.haskell.org/package/gf/docs/PGF.html">PGF library API (Haskell runtime)</a></li>
+          <li><a href="../../doc/runtime-api.html">PGF library API (C runtime)</a></li>
+          <li><a href="http://hackage.haskell.org/package/gf/docs/GF.html">GF compiler API</a></li>
+          <li><a href="../../doc/gf-editor-modes.html">Text Editor Support</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Contribute</h6>
+        <ul class="list-unstyled">
+          <li><a href="http://groups.google.com/group/gf-dev">Mailing List</a></li>
+          <li><a href="https://github.com/GrammaticalFramework/gf-core/issues">Issue Tracker</a></li>
+          <li><a href="../../doc/gf-people.html">Authors</a></li>
+          <li><a href="http://school.grammaticalframework.org/2018/">Summer School</a></li>
+        </ul>
+        <h6 class="text-muted">
+          Repositories
+          <i class="fab fa-github ml-1"></i>
+        </h6>
+        <a href="https://github.com/GrammaticalFramework/gf-core">GF</a> ·
+        <a href="https://github.com/GrammaticalFramework/gf-rgl">RGL</a> ·
+        <a href="https://github.com/GrammaticalFramework/gf-contrib">Contributions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7811807-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

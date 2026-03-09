@@ -1,0 +1,869 @@
+mkV111 : Str -> V ;
+mkV111 base_1 =
+  lin V
+  { Indicative = table {
+                   Pres => table {
+                             Sg => table {
+                                     P1 => base_1+"j" ;
+                                     P2 => base_1+"n" ;
+                                     P3 => base_1+"n"
+                                   } ;
+                             Pl => table {
+                                     P1 => base_1+"jmë" ;
+                                     P2 => base_1+"ni" ;
+                                     P3 => base_1+"jnë"
+                                   }
+                           } ;
+                   Past => table {
+                             Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                             Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                           } ;
+                   Aorist => table {
+                               Sg => table {
+                                       P1 => base_1+"va" ;
+                                       P2 => base_1+"ve" ;
+                                       P3 => base_1+"i"
+                                     } ;
+                               Pl => table {
+                                       P1 => base_1+"më" ;
+                                       P2 => base_1+"të" ;
+                                       P3 => base_1+"në"
+                                     }
+                             } ;
+                   Imperfect => table {
+                                  Sg => table {
+                                          P1 => base_1+"ja" ;
+                                          P2 => base_1+"je" ;
+                                          P3 => base_1+"nte"
+                                        } ;
+                                  Pl => table {
+                                          P1 => base_1+"nim" ;
+                                          P2 => base_1+"nit" ;
+                                          P3 => base_1+"nin"
+                                        }
+                                }
+                 } ;
+    Imperative = table {
+                   Sg => base_1 ;
+                   Pl => base_1+"ni"
+                 } ;
+    participle = base_1+"er" ;
+    pres_optative = table {
+                      Sg => table {
+                              P1 => base_1+"fsha" ;
+                              P2 => base_1+"fsh" ;
+                              P3 => base_1+"ftë"
+                            } ;
+                      Pl => table {
+                              P1 => base_1+"fshim" ;
+                              P2 => base_1+"fshi" ;
+                              P3 => base_1+"fshin"
+                            }
+                    } ;
+    perf_optative = table {
+                      Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                      Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                    } ;
+    pres_admirative = table {
+                        Sg => table {
+                                P1 => (base_1+"er")+"kam" ;
+                                P2 => (base_1+"er")+"ke" ;
+                                P3 => (base_1+"er")+"ka"
+                              } ;
+                        Pl => table {
+                                P1 => (base_1+"er")+"kemi" ;
+                                P2 => (base_1+"er")+"keni" ;
+                                P3 => (base_1+"er")+"kan"
+                              }
+                      } ;
+    imperf_admirative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        }
+  } ;
+
+
+mkV112 : Str -> V ;
+mkV112 base =
+  case base of {
+    base_1+"a"+base_2@(?+?) => lin V
+      { Indicative = table {
+                       Pres => table {
+                                 Sg => table {
+                                         P1 => base_1+"a"+base_2 ;
+                                         P2 => base_1+"e"+base_2 ;
+                                         P3 => base_1+"e"+base_2
+                                       } ;
+                                 Pl => table {
+                                         P1 => base_1+"a"+base_2+"im" ;
+                                         P2 => base_1+"i"+base_2+"ni" ;
+                                         P3 => base_1+"a"+base_2+"in"
+                                       }
+                               } ;
+                       Past => table {
+                                 Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                                 Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                               } ;
+                       Aorist => table {
+                                   Sg => table {
+                                           P1 => base_1+"o"+base_2+"a" ;
+                                           P2 => base_1+"o"+base_2+"e" ;
+                                           P3 => base_1+"o"+base_2+"i"
+                                         } ;
+                                   Pl => table {
+                                           P1 => base_1+"o"+base_2+"ëm" ;
+                                           P2 => base_1+"o"+base_2+"ët" ;
+                                           P3 => base_1+"o"+base_2+"ën"
+                                         }
+                                 } ;
+                       Imperfect => table {
+                                      Sg => table {
+                                              P1 => base_1+"i"+base_2+"ja" ;
+                                              P2 => base_1+"i"+base_2+"je" ;
+                                              P3 => base_1+"i"+base_2+"te"
+                                            } ;
+                                      Pl => table {
+                                              P1 => base_1+"i"+base_2+"nim" ;
+                                              P2 => base_1+"i"+base_2+"nit" ;
+                                              P3 => base_1+"i"+base_2+"nin"
+                                            }
+                                    }
+                     } ;
+        Imperative = table {
+                       Sg => base_1+"i"+base_2 ;
+                       Pl => base_1+"i"+base_2+"ni"
+                     } ;
+        participle = base_1+"a"+base_2+"ë" ;
+        pres_optative = table {
+                          Sg => table {
+                                  P1 => base_1+"o"+base_2+"sha" ;
+                                  P2 => base_1+"o"+base_2+"sh" ;
+                                  P3 => base_1+"o"+base_2+"të"
+                                } ;
+                          Pl => table {
+                                  P1 => base_1+"o"+base_2+"shim" ;
+                                  P2 => base_1+"o"+base_2+"shi" ;
+                                  P3 => base_1+"o"+base_2+"shin"
+                                }
+                        } ;
+        perf_optative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        } ;
+        pres_admirative = table {
+                            Sg => table {
+                                    P1 => (base_1+"a"+base_2+"ë")+"kam" ;
+                                    P2 => (base_1+"a"+base_2+"ë")+"ke" ;
+                                    P3 => (base_1+"a"+base_2+"ë")+"ka"
+                                  } ;
+                            Pl => table {
+                                    P1 => (base_1+"a"+base_2+"ë")+"kemi" ;
+                                    P2 => (base_1+"a"+base_2+"ë")+"keni" ;
+                                    P3 => (base_1+"a"+base_2+"ë")+"kan"
+                                  }
+                          } ;
+        imperf_admirative = table {
+                              Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                              Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                            }
+      };
+    _ => error "Can't apply paradigm mkV112"
+  } ;
+
+
+mkV113 : Str -> V ;
+mkV113 base =
+  case base of {
+    base_1+"ij" => lin V
+      { Indicative = table {
+                       Pres => table {
+                                 Sg => table {
+                                         P1 => base_1+"ij" ;
+                                         P2 => base_1+"in" ;
+                                         P3 => base_1+"in"
+                                       } ;
+                                 Pl => table {
+                                         P1 => base_1+"ijmë" ;
+                                         P2 => base_1+"ini" ;
+                                         P3 => base_1+"ijnë"
+                                       }
+                               } ;
+                       Past => table {
+                                 Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                                 Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                               } ;
+                       Aorist => table {
+                                   Sg => table {
+                                           P1 => base_1+"iva" ;
+                                           P2 => base_1+"ive" ;
+                                           P3 => base_1+"iu"
+                                         } ;
+                                   Pl => table {
+                                           P1 => base_1+"ivëm" ;
+                                           P2 => base_1+"ivët" ;
+                                           P3 => base_1+"ivën"
+                                         }
+                                 } ;
+                       Imperfect => table {
+                                      Sg => table {
+                                              P1 => base_1+"ija" ;
+                                              P2 => base_1+"ije" ;
+                                              P3 => base_1+"inte"
+                                            } ;
+                                      Pl => table {
+                                              P1 => base_1+"inim" ;
+                                              P2 => base_1+"init" ;
+                                              P3 => base_1+"inin"
+                                            }
+                                    }
+                     } ;
+        Imperative = table {
+                       Sg => base_1+"i" ;
+                       Pl => base_1+"ini"
+                     } ;
+        participle = base_1+"yer" ;
+        pres_optative = table {
+                          Sg => table {
+                                  P1 => (base_1+"i")+"fsha" ;
+                                  P2 => (base_1+"i")+"fsh" ;
+                                  P3 => (base_1+"i")+"ftë"
+                                } ;
+                          Pl => table {
+                                  P1 => (base_1+"i")+"fshim" ;
+                                  P2 => (base_1+"i")+"fshi" ;
+                                  P3 => (base_1+"i")+"fshin"
+                                }
+                        } ;
+        perf_optative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        } ;
+        pres_admirative = table {
+                            Sg => table {
+                                    P1 => (base_1+"yer")+"kam" ;
+                                    P2 => (base_1+"yer")+"ke" ;
+                                    P3 => (base_1+"yer")+"ka"
+                                  } ;
+                            Pl => table {
+                                    P1 => (base_1+"yer")+"kemi" ;
+                                    P2 => (base_1+"yer")+"keni" ;
+                                    P3 => (base_1+"yer")+"kan"
+                                  }
+                          } ;
+        imperf_admirative = table {
+                              Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                              Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                            }
+      };
+    _ => error "Can't apply paradigm mkV113"
+  } ;
+
+
+mkV114 : Str -> V ;
+mkV114 base_1 =
+  lin V
+  { Indicative = table {
+                   Pres => table {
+                             Sg => table {
+                                     P1 => base_1 ;
+                                     P2 => base_1 ;
+                                     P3 => base_1
+                                   } ;
+                             Pl => table {
+                                     P1 => base_1+"im" ;
+                                     P2 => base_1+"ni" ;
+                                     P3 => base_1+"in"
+                                   }
+                           } ;
+                   Past => table {
+                             Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                             Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                           } ;
+                   Aorist => table {
+                               Sg => table {
+                                       P1 => base_1+"a" ;
+                                       P2 => base_1+"e" ;
+                                       P3 => base_1+"i"
+                                     } ;
+                               Pl => table {
+                                       P1 => base_1+"ëm" ;
+                                       P2 => base_1+"ët" ;
+                                       P3 => base_1+"ën"
+                                     }
+                             } ;
+                   Imperfect => table {
+                                  Sg => table {
+                                          P1 => base_1+"ja" ;
+                                          P2 => base_1+"je" ;
+                                          P3 => base_1+"te"
+                                        } ;
+                                  Pl => table {
+                                          P1 => base_1+"nim" ;
+                                          P2 => base_1+"nit" ;
+                                          P3 => base_1+"nin"
+                                        }
+                                }
+                 } ;
+    Imperative = table {
+                   Sg => base_1 ;
+                   Pl => base_1+"ni"
+                 } ;
+    participle = base_1+"i" ;
+    pres_optative = table {
+                      Sg => table {
+                              P1 => base_1+"sha" ;
+                              P2 => base_1+"sh" ;
+                              P3 => base_1+"të"
+                            } ;
+                      Pl => table {
+                              P1 => base_1+"shim" ;
+                              P2 => base_1+"shi" ;
+                              P3 => base_1+"shin"
+                            }
+                    } ;
+    perf_optative = table {
+                      Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                      Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                    } ;
+    pres_admirative = table {
+                        Sg => table {
+                                P1 => (base_1+"i")+"kam" ;
+                                P2 => (base_1+"i")+"ke" ;
+                                P3 => (base_1+"i")+"ka"
+                              } ;
+                        Pl => table {
+                                P1 => (base_1+"i")+"kemi" ;
+                                P2 => (base_1+"i")+"keni" ;
+                                P3 => (base_1+"i")+"kan"
+                              }
+                      } ;
+    imperf_admirative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        }
+  } ;
+
+
+mkV115 : Str -> V ;
+mkV115 base_1 =
+  lin V
+  { Indicative = table {
+                   Pres => table {
+                             Sg => table {
+                                     P1 => base_1 ;
+                                     P2 => base_1 ;
+                                     P3 => base_1
+                                   } ;
+                             Pl => table {
+                                     P1 => base_1+"im" ;
+                                     P2 => base_1+"ni" ;
+                                     P3 => base_1+"in"
+                                   }
+                           } ;
+                   Past => table {
+                             Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                             Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                           } ;
+                   Aorist => table {
+                               Sg => table {
+                                       P1 => base_1+"ë" ;
+                                       P2 => base_1+"e" ;
+                                       P3 => base_1+"i"
+                                     } ;
+                               Pl => table {
+                                       P1 => base_1+"ëm" ;
+                                       P2 => base_1+"ët" ;
+                                       P3 => base_1+"ën"
+                                     }
+                             } ;
+                   Imperfect => table {
+                                  Sg => table {
+                                          P1 => base_1+"ja" ;
+                                          P2 => base_1+"je" ;
+                                          P3 => base_1+"te"
+                                        } ;
+                                  Pl => table {
+                                          P1 => base_1+"nim" ;
+                                          P2 => base_1+"nit" ;
+                                          P3 => base_1+"nin"
+                                        }
+                                }
+                 } ;
+    Imperative = table {
+                   Sg => base_1 ;
+                   Pl => base_1+"ni"
+                 } ;
+    participle = base_1+"i" ;
+    pres_optative = table {
+                      Sg => table {
+                              P1 => base_1+"sha" ;
+                              P2 => base_1+"sh" ;
+                              P3 => base_1+"të"
+                            } ;
+                      Pl => table {
+                              P1 => base_1+"shim" ;
+                              P2 => base_1+"shi" ;
+                              P3 => base_1+"shin"
+                            }
+                    } ;
+    perf_optative = table {
+                      Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                      Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                    } ;
+    pres_admirative = table {
+                        Sg => table {
+                                P1 => (base_1+"i")+"kam" ;
+                                P2 => (base_1+"i")+"ke" ;
+                                P3 => (base_1+"i")+"ka"
+                              } ;
+                        Pl => table {
+                                P1 => (base_1+"i")+"kemi" ;
+                                P2 => (base_1+"i")+"keni" ;
+                                P3 => (base_1+"i")+"kan"
+                              }
+                      } ;
+    imperf_admirative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        }
+  } ;
+
+
+mkV116 : Str -> V ;
+mkV116 base =
+  case base of {
+    base_1+"hem" => lin V
+      { Indicative = table {
+                       Pres => table {
+                                 Sg => table {
+                                         P1 => base_1+"hem" ;
+                                         P2 => base_1+"hesh" ;
+                                         P3 => base_1+"het"
+                                       } ;
+                                 Pl => table {
+                                         P1 => base_1+"hemi" ;
+                                         P2 => base_1+"heni" ;
+                                         P3 => base_1+"hen"
+                                       }
+                               } ;
+                       Past => table {
+                                 Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                                 Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                               } ;
+                       Aorist => table {
+                                   Sg => table {
+                                           P1 => base_1+"jta" ;
+                                           P2 => base_1+"jte" ;
+                                           P3 => base_1+"jti"
+                                         } ;
+                                   Pl => table {
+                                           P1 => base_1+"jtëm" ;
+                                           P2 => base_1+"jtët" ;
+                                           P3 => base_1+"jtën"
+                                         }
+                                 } ;
+                       Imperfect => table {
+                                      Sg => table {
+                                              P1 => base_1+"hesha" ;
+                                              P2 => base_1+"heshe" ;
+                                              P3 => base_1+"hej"
+                                            } ;
+                                      Pl => table {
+                                              P1 => base_1+"heshim" ;
+                                              P2 => base_1+"heshit" ;
+                                              P3 => base_1+"heshin"
+                                            }
+                                    }
+                     } ;
+        Imperative = table {
+                       Sg => base_1+"hu" ;
+                       Pl => base_1+"huni"
+                     } ;
+        participle = base_1+"jtur" ;
+        pres_optative = table {
+                          Sg => table {
+                                  P1 => base_1+"jtsha" ;
+                                  P2 => base_1+"jtsh" ;
+                                  P3 => base_1+"jttë"
+                                } ;
+                          Pl => table {
+                                  P1 => base_1+"jtshim" ;
+                                  P2 => base_1+"jtshi" ;
+                                  P3 => base_1+"jtshin"
+                                }
+                        } ;
+        perf_optative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        } ;
+        pres_admirative = table {
+                            Sg => table {
+                                    P1 => (base_1+"jtur")+"kam" ;
+                                    P2 => (base_1+"jtur")+"ke" ;
+                                    P3 => (base_1+"jtur")+"ka"
+                                  } ;
+                            Pl => table {
+                                    P1 => (base_1+"jtur")+"kemi" ;
+                                    P2 => (base_1+"jtur")+"keni" ;
+                                    P3 => (base_1+"jtur")+"kan"
+                                  }
+                          } ;
+        imperf_admirative = table {
+                              Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                              Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                            }
+      };
+    _ => error "Can't apply paradigm mkV116"
+  } ;
+
+
+mkV117 : Str -> V ;
+mkV117 base =
+  case base of {
+    base_1+base_2@(?+?+?) => lin V
+      { Indicative = table {
+                       Pres => table {
+                                 Sg => table {
+                                         P1 => base_1+base_2 ;
+                                         P2 => base_1+base_2 ;
+                                         P3 => base_1+base_2
+                                       } ;
+                                 Pl => table {
+                                         P1 => (base_1+base_2)+"im" ;
+                                         P2 => (base_1+base_2)+"ni" ;
+                                         P3 => (base_1+base_2)+"in"
+                                       }
+                               } ;
+                       Past => table {
+                                 Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                                 Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                               } ;
+                       Aorist => table {
+                                   Sg => table {
+                                           P1 => base_1+"q"+base_2+"a" ;
+                                           P2 => base_1+"q"+base_2+"e" ;
+                                           P3 => base_1+"q"+base_2+"i"
+                                         } ;
+                                   Pl => table {
+                                           P1 => base_1+"q"+base_2+"ëm" ;
+                                           P2 => base_1+"q"+base_2+"ët" ;
+                                           P3 => base_1+"q"+base_2+"ën"
+                                         }
+                                 } ;
+                       Imperfect => table {
+                                      Sg => table {
+                                              P1 => (base_1+base_2)+"ja" ;
+                                              P2 => (base_1+base_2)+"je" ;
+                                              P3 => (base_1+base_2)+"te"
+                                            } ;
+                                      Pl => table {
+                                              P1 => (base_1+base_2)+"nim" ;
+                                              P2 => (base_1+base_2)+"nit" ;
+                                              P3 => (base_1+base_2)+"nin"
+                                            }
+                                    }
+                     } ;
+        Imperative = table {
+                       Sg => base_1+base_2 ;
+                       Pl => (base_1+base_2)+"ni"
+                     } ;
+        participle = base_1+base_2+"ur" ;
+        pres_optative = table {
+                          Sg => table {
+                                  P1 => (base_1+"q"+base_2)+"sha" ;
+                                  P2 => (base_1+"q"+base_2)+"sh" ;
+                                  P3 => (base_1+"q"+base_2)+"të"
+                                } ;
+                          Pl => table {
+                                  P1 => (base_1+"q"+base_2)+"shim" ;
+                                  P2 => (base_1+"q"+base_2)+"shi" ;
+                                  P3 => (base_1+"q"+base_2)+"shin"
+                                }
+                        } ;
+        perf_optative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        } ;
+        pres_admirative = table {
+                            Sg => table {
+                                    P1 => (base_1+base_2+"ur")+"kam" ;
+                                    P2 => (base_1+base_2+"ur")+"ke" ;
+                                    P3 => (base_1+base_2+"ur")+"ka"
+                                  } ;
+                            Pl => table {
+                                    P1 => (base_1+base_2+"ur")+"kemi" ;
+                                    P2 => (base_1+base_2+"ur")+"keni" ;
+                                    P3 => (base_1+base_2+"ur")+"kan"
+                                  }
+                          } ;
+        imperf_admirative = table {
+                              Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                              Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                            }
+      };
+    _ => error "Can't apply paradigm mkV117"
+  } ;
+
+
+mkV118 : Str -> V ;
+mkV118 base =
+  case base of {
+    base_1+"ë" => lin V
+      { Indicative = table {
+                       Pres => table {
+                                 Sg => table {
+                                         P1 => base_1+"ë" ;
+                                         P2 => base_1+"ë" ;
+                                         P3 => base_1+"ë"
+                                       } ;
+                                 Pl => table {
+                                         P1 => base_1+"ëmë" ;
+                                         P2 => base_1+"ini" ;
+                                         P3 => base_1+"ënë"
+                                       }
+                               } ;
+                       Past => table {
+                                 Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                                 Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                               } ;
+                       Aorist => table {
+                                   Sg => table {
+                                           P1 => base_1+"ura" ;
+                                           P2 => base_1+"ure" ;
+                                           P3 => base_1+"uri"
+                                         } ;
+                                   Pl => table {
+                                           P1 => base_1+"urëm" ;
+                                           P2 => base_1+"urët" ;
+                                           P3 => base_1+"urën"
+                                         }
+                                 } ;
+                       Imperfect => table {
+                                      Sg => table {
+                                              P1 => base_1+"ija" ;
+                                              P2 => base_1+"ije" ;
+                                              P3 => base_1+"inte"
+                                            } ;
+                                      Pl => table {
+                                              P1 => base_1+"inim" ;
+                                              P2 => base_1+"init" ;
+                                              P3 => base_1+"inin"
+                                            }
+                                    }
+                     } ;
+        Imperative = table {
+                       Sg => base_1+"ër" ;
+                       Pl => base_1+"ini"
+                     } ;
+        participle = base_1+"ënë" ;
+        pres_optative = table {
+                          Sg => table {
+                                  P1 => (base_1+"ur")+"sha" ;
+                                  P2 => (base_1+"ur")+"sh" ;
+                                  P3 => (base_1+"ur")+"të"
+                                } ;
+                          Pl => table {
+                                  P1 => (base_1+"ur")+"shim" ;
+                                  P2 => (base_1+"ur")+"shi" ;
+                                  P3 => (base_1+"ur")+"shin"
+                                }
+                        } ;
+        perf_optative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        } ;
+        pres_admirative = table {
+                            Sg => table {
+                                    P1 => (base_1+"ënë")+"kam" ;
+                                    P2 => (base_1+"ënë")+"ke" ;
+                                    P3 => (base_1+"ënë")+"ka"
+                                  } ;
+                            Pl => table {
+                                    P1 => (base_1+"ënë")+"kemi" ;
+                                    P2 => (base_1+"ënë")+"keni" ;
+                                    P3 => (base_1+"ënë")+"kan"
+                                  }
+                          } ;
+        imperf_admirative = table {
+                              Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                              Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                            }
+      };
+    _ => error "Can't apply paradigm mkV118"
+  } ;
+
+
+mkV119 : Str -> V ;
+mkV119 base =
+  case base of {
+    base_1+"ej" => lin V
+      { Indicative = table {
+                       Pres => table {
+                                 Sg => table {
+                                         P1 => base_1+"ej" ;
+                                         P2 => base_1+"en" ;
+                                         P3 => base_1+"en"
+                                       } ;
+                                 Pl => table {
+                                         P1 => base_1+"ejmë" ;
+                                         P2 => base_1+"eni" ;
+                                         P3 => base_1+"ejnë"
+                                       }
+                               } ;
+                       Past => table {
+                                 Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                                 Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                               } ;
+                       Aorist => table {
+                                   Sg => table {
+                                           P1 => base_1+"eva" ;
+                                           P2 => base_1+"eve" ;
+                                           P3 => base_1+"evi"
+                                         } ;
+                                   Pl => table {
+                                           P1 => base_1+"evëm" ;
+                                           P2 => base_1+"evët" ;
+                                           P3 => base_1+"evën"
+                                         }
+                                 } ;
+                       Imperfect => table {
+                                      Sg => table {
+                                              P1 => base_1+"eja" ;
+                                              P2 => base_1+"eje" ;
+                                              P3 => base_1+"ente"
+                                            } ;
+                                      Pl => table {
+                                              P1 => base_1+"enim" ;
+                                              P2 => base_1+"enit" ;
+                                              P3 => base_1+"enin"
+                                            }
+                                    }
+                     } ;
+        Imperative = table {
+                       Sg => base_1+"ej" ;
+                       Pl => base_1+"eni"
+                     } ;
+        participle = base_1+"yrë" ;
+        pres_optative = table {
+                          Sg => table {
+                                  P1 => (base_1+"e")+"fsha" ;
+                                  P2 => (base_1+"e")+"fsh" ;
+                                  P3 => (base_1+"e")+"ftë"
+                                } ;
+                          Pl => table {
+                                  P1 => (base_1+"e")+"fshim" ;
+                                  P2 => (base_1+"e")+"fshi" ;
+                                  P3 => (base_1+"e")+"fshin"
+                                }
+                        } ;
+        perf_optative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        } ;
+        pres_admirative = table {
+                            Sg => table {
+                                    P1 => (base_1+"yrë")+"kam" ;
+                                    P2 => (base_1+"yrë")+"ke" ;
+                                    P3 => (base_1+"yrë")+"ka"
+                                  } ;
+                            Pl => table {
+                                    P1 => (base_1+"yrë")+"kemi" ;
+                                    P2 => (base_1+"yrë")+"keni" ;
+                                    P3 => (base_1+"yrë")+"kan"
+                                  }
+                          } ;
+        imperf_admirative = table {
+                              Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                              Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                            }
+      };
+    _ => error "Can't apply paradigm mkV119"
+  } ;
+
+
+mkV120 : Str -> V ;
+mkV120 base =
+  case base of {
+    base_1+"h"+base_2@(?+?+?) => lin V
+      { Indicative = table {
+                       Pres => table {
+                                 Sg => table {
+                                         P1 => base_1+"h"+base_2 ;
+                                         P2 => base_1+"h"+base_2 ;
+                                         P3 => base_1+"h"+base_2
+                                       } ;
+                                 Pl => table {
+                                         P1 => (base_1+"h"+base_2)+"im" ;
+                                         P2 => (base_1+"h"+base_2)+"ni" ;
+                                         P3 => (base_1+"h"+base_2)+"in"
+                                       }
+                               } ;
+                       Past => table {
+                                 Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                                 Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                               } ;
+                       Aorist => table {
+                                   Sg => table {
+                                           P1 => base_1+base_2+"a" ;
+                                           P2 => base_1+base_2+"e" ;
+                                           P3 => base_1+base_2+"i"
+                                         } ;
+                                   Pl => table {
+                                           P1 => base_1+base_2+"ëm" ;
+                                           P2 => base_1+base_2+"ët" ;
+                                           P3 => base_1+base_2+"ën"
+                                         }
+                                 } ;
+                       Imperfect => table {
+                                      Sg => table {
+                                              P1 => (base_1+"h"+base_2)+"ja" ;
+                                              P2 => (base_1+"h"+base_2)+"je" ;
+                                              P3 => (base_1+"h"+base_2)+"te"
+                                            } ;
+                                      Pl => table {
+                                              P1 => (base_1+"h"+base_2)+"nim" ;
+                                              P2 => (base_1+"h"+base_2)+"nit" ;
+                                              P3 => (base_1+"h"+base_2)+"nin"
+                                            }
+                                    }
+                     } ;
+        Imperative = table {
+                       Sg => base_1+"h"+base_2 ;
+                       Pl => (base_1+"h"+base_2)+"ni"
+                     } ;
+        participle = base_1+"h"+base_2+"ur" ;
+        pres_optative = table {
+                          Sg => table {
+                                  P1 => (base_1+base_2)+"sha" ;
+                                  P2 => (base_1+base_2)+"sh" ;
+                                  P3 => (base_1+base_2)+"të"
+                                } ;
+                          Pl => table {
+                                  P1 => (base_1+base_2)+"shim" ;
+                                  P2 => (base_1+base_2)+"shi" ;
+                                  P3 => (base_1+base_2)+"shin"
+                                }
+                        } ;
+        perf_optative = table {
+                          Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                          Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                        } ;
+        pres_admirative = table {
+                            Sg => table {
+                                    P1 => (base_1+"h"+base_2+"ur")+"kam" ;
+                                    P2 => (base_1+"h"+base_2+"ur")+"ke" ;
+                                    P3 => (base_1+"h"+base_2+"ur")+"ka"
+                                  } ;
+                            Pl => table {
+                                    P1 => (base_1+"h"+base_2+"ur")+"kemi" ;
+                                    P2 => (base_1+"h"+base_2+"ur")+"keni" ;
+                                    P3 => (base_1+"h"+base_2+"ur")+"kan"
+                                  }
+                          } ;
+        imperf_admirative = table {
+                              Sg => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist } ;
+                              Pl => table { P1 => nonExist ; P2 => nonExist ; P3 => nonExist }
+                            }
+      };
+    _ => error "Can't apply paradigm mkV120"
+  } ;

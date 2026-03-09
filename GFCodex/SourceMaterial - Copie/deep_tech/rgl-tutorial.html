@@ -1,0 +1,3177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Creating Linguistic Resources with the Grammatical Framework" />
+  <title>GF Resource Grammar Tutorial</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body class="bg-light">
+  <div class="bg-white pb-5">
+<div class="container-fluid py-5" style="max-width:1200px">
+
+<header id="title-block-header">
+<a href="../../.." title="Home">
+  <img src="../../../doc/Logos/gf1.svg" height="200" class="float-md-right ml-3 mb-3 bg-white" alt="GF Logo">
+</a>
+<h1 class="title">GF Resource Grammar Tutorial</h1>
+<p class="author">Creating Linguistic Resources with the Grammatical Framework</p>
+<p class="date">Aarne Ranta</p>
+</header>
+<h2 id="introduction">Introduction</h2>
+<p>This tutorial was given at LREC in Malta, 17 May 2010, and is an updated versions of the one used at the <a href="http://www.grammaticalframework.org/summerschool.html">GF Summer School 2009</a>. It was first presented on an on-line course in April 2009. The summer school in August 2009 had 30 participants from 20 countries. 15 new languages were started. Since that first summer school, the library has grown from 12 to over 30 languages.</p>
+<p>The goal of this tutorial is to introduce a fast way to resource grammar writing, by explaining the practical use of GF and the linguistic concepts in the resource grammar library.</p>
+<p>For more details, we recommend</p>
+<ul>
+<li>the tutorial on the <a href="http://grammaticalframework.org/">GF homepage</a></li>
+<li>the article <em>The GF Resource Grammar Library</em>, LiLT 2(2), 2009. Freely available in <a href="http://elanguage.net/journals/index.php/lilt/article/viewFile/214/158"><code>elanguage.net/journals/index.php/lilt/article/viewFile/214/158</code></a></li>
+<li><a href="http://www.grammaticalframework.org/gf-book">GF Book</a> by A. Ranta, by CSLI Publications</li>
+</ul>
+<p>The code examples in this tutorial are available at</p>
+<p><a href="https://github.com/GrammaticalFramework/gf-contrib/tree/master/lrec-tutorial"><code>https://github.com/GrammaticalFramework/gf-contrib/tree/master/lrec-tutorial</code></a>.</p>
+<p>We cannot stress enough the importance of your own work on the code examples and exercises using the GF system!</p>
+<h2 id="contents-of-the-courses-five-lessons">Contents of the course's five lessons</h2>
+<p>1. The GF system, simple multilingual grammars</p>
+<p>2. Morphological paradigms and lexica</p>
+<p>3. Building up a linguistic syntax</p>
+<p>4. Using the Resource Grammar Library in applications</p>
+<p>5. Developing a new resource grammar</p>
+<h1 id="the-gf-system-and-simple-multilingual-grammars">The GF System and Simple Multilingual Grammars</h1>
+<h3 id="contents">Contents</h3>
+<p>What GF is</p>
+<p>Installing the GF system</p>
+<p>A grammar for <em>John loves Mary</em> in English, French, Latin, Dutch, Hebrew</p>
+<p>Testing grammars and building applications</p>
+<p>The scope of the Resource Grammar Library</p>
+<p>Exercises</p>
+<h2 id="gf-grammatical-framework">GF = Grammatical Framework</h2>
+<p>GF is a <strong>grammar formalism</strong>: a notation for writing grammars</p>
+<p>GF is a <strong>functional programming language</strong> with types and modules</p>
+<p>GF programs are called <strong>grammars</strong></p>
+<p>A grammar is a declarative program that defines</p>
+<ul>
+<li>parsing</li>
+<li>generation</li>
+<li>translation</li>
+</ul>
+<h3 id="multilingual-grammars">Multilingual grammars</h3>
+<p>Many languages related by a common <strong>abstract syntax</strong></p>
+<p><img src="abs-and-cnc.jpg" /></p>
+<h3 id="the-gf-program">The GF program</h3>
+<p><strong>Interpreter</strong> for testing grammars (the <strong>GF shell</strong>)</p>
+<p><strong>Compiler</strong> for converting grammars to useful formats</p>
+<ul>
+<li>PGF, Portable Grammar Format</li>
+<li>speech recognition grammars (Nuance, HTK, ...)</li>
+<li>JavaScript</li>
+</ul>
+<h3 id="the-gf-resource-grammar-library">The GF Resource Grammar Library</h3>
+<p>Morphology and basic syntax</p>
+<p>Common API for different languages</p>
+<p>Currently (May 2010) 17 languages: Bulgarian, Catalan, Danish, Dutch, English, Finnish, French, German, Interlingua, Italian, Norwegian, Polish, Romanian, Russian, Spanish, Swedish, Urdu.</p>
+<p>Under construction for at least 19 languages: Afrikaans, Amharic, Arabic, Baatonum, Esperanto, Farsi, Greek (Ancient), Hebrew, Icelandic, Japanese, Latin, Latvian, Maltese, Mongol, Portuguese, Swahili, Thai, Tswana, Turkish.</p>
+<h3 id="where-gf-is-used">Where GF is used</h3>
+<p>Natural language interfaces: WebALT, see</p>
+<p><a href="http://webalt.math.helsinki.fi/PublicFiles/CD/Screencast/TextMathEditor%20Demo.swf"><code>webalt.math.helsinki.fi/PublicFiles/CD/Screencast/TextMathEditor%20Demo.swf</code></a></p>
+<p>Dialogue systems: TALK, see <a href="http://www.youtube.com/watch?v=1bfaYHWS6zU"><code>www.youtube.com/watch?v=1bfaYHWS6zU</code></a></p>
+<p>Translation: MOLTO, see <a href="http://www.molto-project.eu"><code>www.molto-project.eu</code></a></p>
+<p><img src="molto_logo.png" /></p>
+<h3 id="gf-run-time-system">GF run-time system</h3>
+<p>PGF grammars can be <strong>embedded</strong> in Haskell, Java, and Prolog programs</p>
+<p>They can be used in <strong>web servers</strong></p>
+<ul>
+<li>fridge magnet demo: <a href="http://grammaticalframework.org:41296/fridge"><code>grammaticalframework.org:41296/fridge</code></a></li>
+<li>translator demo: <a href="http://grammaticalframework.org:41296/translate"><code>grammaticalframework.org:41296/translate</code></a></li>
+</ul>
+<p><img src="phrasebook.png" /></p>
+<h2 id="installing-and-using-the-gf-system">Installing and using the GF system</h2>
+<p>Go to the GF home page <a href="http://grammaticalframework.org" class="uri">http://grammaticalframework.org</a> and follow shortcuts to either</p>
+<ul>
+<li><em>Download</em>: download and install binaries</li>
+<li><em>Developers</em>: download sources, compile, and install</li>
+</ul>
+<p>The <em>Developers</em> method is recommended for resource grammar developers:</p>
+<ul>
+<li>latest updates and bug fixes</li>
+<li>version control system</li>
+</ul>
+<h3 id="starting-the-gf-shell">Starting the GF shell</h3>
+<p>The command <code>gf</code> starts the GF shell:</p>
+<pre><code>  $ gf
+  
+           *  *  *
+        *           *
+      *               *
+     *
+     *
+     *        * * * * * *
+     *        *         *
+      *       * * * *  *
+        *     *      *
+           *  *  *
+  
+  This is GF version 3.1.6.
+  License: see help -license.
+  Bug reports: http://code.google.com/p/grammatical-framework/issues/list
+  
+  Languages:
+  &gt;</code></pre>
+<h3 id="using-the-gf-shell-help">Using the GF shell: help</h3>
+<p>Command <code>h</code> = <code>help</code></p>
+<pre><code>    &gt; help</code></pre>
+<p>gives a list of commands with short descriptions.</p>
+<pre><code>    &gt; help parse</code></pre>
+<p>gives detailed help on the command <code>parse</code>.</p>
+<p>Commands have both short (1 or 2 letters) and long names.</p>
+<h2 id="working-with-context-free-grammars-in-gf">Working with context-free grammars in GF</h2>
+<p>These are the simplest grammars usable in GF. Example:</p>
+<pre><code>    Pred.  S  ::= NP VP ;
+    Compl. VP ::= V2 NP ;
+    John.  NP ::= &quot;John&quot; ;
+    Mary.  NP ::= &quot;Mary&quot; ;
+    Love.  V2 ::= &quot;loves&quot; ;</code></pre>
+<p>The first item in each rule is a <strong>syntactic function</strong>, used for building <strong>trees</strong>: <code>Pred</code> = predication, <code>Compl</code> = complementation.</p>
+<p>The second item is a <strong>category</strong>: S = Sentence, NP = Noun Phrase, VP = Verb Phrase, V2 = 2-place Verb.</p>
+<h3 id="importing-and-parsing">Importing and parsing</h3>
+<p>Copy or write the above grammar in file <code>zero.cf</code>.</p>
+<p>To use a grammar in GF: <code>import</code> = <code>i</code></p>
+<pre><code>    &gt; i zero.cf</code></pre>
+<p>To <strong>parse</strong> a string to a tree: <code>parse</code> = <code>p</code></p>
+<pre><code>    &gt; p &quot;John loves Mary&quot;
+    Pred John (Compl Love Mary)</code></pre>
+<p>Parsing is, by default, in category <code>S</code>. This can be overridden.</p>
+<h3 id="random-generation-linearization-and-pipes">Random generation, linearization, and pipes</h3>
+<p>Generate a random tree: <code>generate_random</code> = <code>gr</code></p>
+<pre><code>    &gt; gr
+    Pred Mary (Compl Love Mary)</code></pre>
+<p>To <strong>linearize</strong> a tree to a string: <code>linearize</code> = <code>l</code></p>
+<pre><code>    &gt; l Pred Mary (Compl Love Mary)
+    Mary loves Mary</code></pre>
+<p>To <strong>pipe</strong> a command to another one: <code>|</code></p>
+<pre><code>    &gt; gr | l
+    Mary loves Mary</code></pre>
+<h3 id="graphical-view-of-abstract-trees">Graphical view of abstract trees</h3>
+<p><img src="abstract.jpg" /></p>
+<p>In Mac:</p>
+<pre><code>  &gt; p &quot;John loves Mary&quot; | visualize_tree -view=open</code></pre>
+<p>In Ubuntu Linux:</p>
+<pre><code>  &gt; p &quot;John loves Mary&quot; | visualize_tree -view=oeg</code></pre>
+<p>You need the Graphviz program to see the view.</p>
+<h3 id="graphical-view-of-parse-trees">Graphical view of parse trees</h3>
+<p><img src="parse.jpg" /></p>
+<pre><code>  &gt; p &quot;John loves Mary&quot; | visualize_parse -view=open</code></pre>
+<h2 id="abstract-and-concrete-syntax">Abstract and concrete syntax</h2>
+<p>A context-free rule</p>
+<pre><code>    Pred. S ::= NP VP</code></pre>
+<p>defines two things:</p>
+<ul>
+<li><strong>abstract syntax</strong>: build a tree of form <code>Pred np vp</code></li>
+<li><strong>concrete syntax</strong>: this tree linearizes to a string of form <code>np vp</code></li>
+</ul>
+<p>The main idea of GF: separate these two things.</p>
+<h3 id="separating-abstract-and-concrete-syntax">Separating abstract and concrete syntax</h3>
+<p>A context-free rule is converted to two <strong>judgements</strong> in GF:</p>
+<ul>
+<li><code>fun</code>, declaring a syntactic function</li>
+<li><code>lin</code>, giving its <strong>linearization rule</strong></li>
+</ul>
+<pre><code>    Pred. S ::= NP VP  ===&gt;    fun Pred : NP -&gt; VP -&gt; S
+                               lin Pred np vp = np ++ vp</code></pre>
+<h3 id="functions-and-concatenation">Functions and concatenation</h3>
+<p><strong>Function type</strong>: <code>A -&gt; B -&gt; C</code>, read &quot;function from <code>A</code> and <code>B</code> to <code>C</code>&quot;</p>
+<p><strong>Function application</strong>: <code>f a b</code>, read &quot;<code>f</code> applied to arguments <code>a</code> and <code>b</code>&quot;</p>
+<p><strong>Concatenation</strong>: <code>x ++ y</code>, read &quot;string <code>x</code> followed by string <code>y</code>&quot;</p>
+<p>Cf. functional programming in Haskell.</p>
+<p>Notice: in GF, <code>++</code> is between <strong>token lists</strong> and therefore &quot;creates a space&quot;.</p>
+<h3 id="from-context-free-to-gf-grammars">From context-free to GF grammars</h3>
+<p>The grammar is divided to two <strong>modules</strong></p>
+<ul>
+<li>an <strong>abstract</strong> module, judgement forms <code>cat</code> and <code>fun</code></li>
+<li>a <strong>concrete</strong> module, judgement forms <code>lincat</code> and <code>lin</code></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Judgement</th>
+<th>reading</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cat</code><em>C</em></td>
+<td><em>C</em> is a category</td>
+</tr>
+<tr class="even">
+<td><code>fun</code> <em>f</em> : <em>T</em></td>
+<td><em>f</em> is a function of type <em>T</em></td>
+</tr>
+<tr class="odd">
+<td><code>lincat</code> <em>C</em> <code>=</code> <em>L</em></td>
+<td><em>C</em> has linearization type <em>L</em></td>
+</tr>
+<tr class="even">
+<td><code>lin</code> <em>f xs</em> <code>=</code> <em>t</em></td>
+<td><em>f xs</em> has linearization <em>t</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="abstract-syntax-example">Abstract syntax, example</h3>
+<pre><code>  abstract Zero = {
+    cat
+      S ; NP ; VP ; V2 ;
+    fun
+      Pred  : NP -&gt; VP -&gt; S ;
+      Compl : V2 -&gt; NP -&gt; VP ;
+      John, Mary : NP ;
+      Love : V2 ;
+  }</code></pre>
+<h3 id="concrete-syntax-english">Concrete syntax, English</h3>
+<pre><code>  concrete ZeroEng of Zero = {
+    lincat
+      S, NP, VP, V2 = Str ;
+    lin
+      Pred np vp = np ++ vp ;
+      Compl v2 np = v2 ++ np ;
+      John = &quot;John&quot; ;
+      Mary = &quot;Mary&quot; ;
+      Love = &quot;loves&quot; ;
+  }</code></pre>
+<p>Notice: <code>Str</code> (token list, &quot;string&quot;) as the only linearization type.</p>
+<h2 id="making-a-grammar-multilingual">Making a grammar multilingual</h2>
+<p>One abstract + many concretes</p>
+<p>The same system of trees can be given</p>
+<ul>
+<li>different words</li>
+<li>different word orders</li>
+<li>different linearization types</li>
+</ul>
+<h3 id="concrete-syntax-french">Concrete syntax, French</h3>
+<pre><code>  concrete ZeroFre of Zero = {
+    lincat
+      S, NP, VP, V2 = Str ;
+    lin
+      Pred np vp = np ++ vp ;
+      Compl v2 np = v2 ++ np ;
+      John = &quot;Jean&quot; ;
+      Mary = &quot;Marie&quot; ;
+      Love = &quot;aime&quot; ;
+  }</code></pre>
+<p>Just use different words</p>
+<h3 id="translation-and-multilingual-generation">Translation and multilingual generation</h3>
+<p>Import many grammars with the same abstract syntax</p>
+<pre><code>    &gt; i ZeroEng.gf ZeroFre.gf
+    Languages: ZeroEng ZeroFre</code></pre>
+<p>Translation: pipe linearization to parsing</p>
+<pre><code>    &gt; p -lang=ZeroEng &quot;John loves Mary&quot; | l -lang=ZeroFre
+    Jean aime Marie</code></pre>
+<p>Multilingual generation: linearize into all languages</p>
+<pre><code>    &gt; gr | l
+    Pred Mary (Compl Love Mary)
+    Mary loves Mary
+    Marie aime Marie</code></pre>
+<h3 id="multilingual-treebanks">Multilingual treebanks</h3>
+<p><strong>Treebank</strong>: show both trees and their linearizations</p>
+<pre><code>    &gt; gr | l -treebank
+    Zero: Pred Mary (Compl Love Mary)
+    ZeroEng: Mary loves Mary
+    ZeroFre: Marie aime Marie</code></pre>
+<h3 id="concrete-syntax-latin">Concrete syntax, Latin</h3>
+<pre><code>  concrete ZeroLat of Zero = {
+    lincat
+      S, VP, V2 = Str ;
+      NP = Case =&gt; Str ;
+    lin
+      Pred  np vp = np ! Nom ++ vp ;
+      Compl v2 np = np ! Acc ++ v2 ;
+      John = table {Nom =&gt; &quot;Ioannes&quot; ; Acc =&gt; &quot;Ioannem&quot;} ;
+      Mary = table {Nom =&gt; &quot;Maria&quot; ; Acc =&gt; &quot;Mariam&quot;} ;
+      Love = &quot;amat&quot; ;
+    param
+      Case = Nom | Acc ;
+  }</code></pre>
+<p>Different word order (SOV), different linearization type, parameters.</p>
+<h3 id="parameters-in-linearization">Parameters in linearization</h3>
+<p>Latin has <em>cases</em>: nominative for subject, accusative for object.</p>
+<ul>
+<li><em>Ioannes Mariam amat</em> &quot;John-Nom loves Mary-Acc&quot;</li>
+<li><em>Maria Ioannem amat</em> &quot;Mary-Nom loves John-Acc&quot;</li>
+</ul>
+<p><strong>Parameter type</strong> for case (just 2 of Latin's 6 cases):</p>
+<pre><code>    param Case = Nom | Acc</code></pre>
+<h3 id="table-types-and-tables">Table types and tables</h3>
+<p>The linearization type of <code>NP</code> is a <strong>table type</strong>: from <code>Case</code> to <code>Str</code>,</p>
+<pre><code>    lincat NP = Case =&gt; Str</code></pre>
+<p>The linearization of <code>John</code> is an <strong>inflection table</strong>,</p>
+<pre><code>    lin John = table {Nom =&gt; &quot;Ioannes&quot; ; Acc =&gt; &quot;Ioannem&quot;}</code></pre>
+<p>When using an NP, <strong>select</strong> (<code>!</code>) the appropriate case from the table,</p>
+<pre><code>    Pred  np vp = np ! Nom ++ vp
+    Compl v2 np = np ! Acc ++ v2</code></pre>
+<h3 id="concrete-syntax-dutch">Concrete syntax, Dutch</h3>
+<pre><code>  concrete ZeroDut of Zero = {
+    lincat
+      S, NP, VP = Str ;
+      V2 = {v : Str ; p : Str} ;
+    lin
+      Pred np vp = np ++ vp ;
+      Compl v2 np = v2.v ++ np ++ v2.p ;
+      John = &quot;Jan&quot; ;
+      Mary = &quot;Marie&quot; ;
+      Love = {v = &quot;heeft&quot; ; p = &quot;lief&quot;} ;
+  }</code></pre>
+<p>The verb <em>heeft lief</em> is a <strong>discontinuous constituent</strong>.</p>
+<h3 id="record-types-and-records">Record types and records</h3>
+<p>The linearization type of <code>V2</code> is a <strong>record type</strong> with two <strong>fields</strong></p>
+<pre><code>    lincat V2 = {v : Str ; p : Str}</code></pre>
+<p>The linearization of <code>Love</code> is a <strong>record</strong></p>
+<pre><code>    lin Love = {v = &quot;hat&quot; ; p = &quot;lieb&quot;}</code></pre>
+<p>The values of fields are picked by <strong>projection</strong> (<code>.</code>)</p>
+<pre><code>    lin Compl v2 np = v2.v ++ np ++ v2.p</code></pre>
+<h3 id="concrete-syntax-hebrew">Concrete syntax, Hebrew</h3>
+<pre><code>  concrete ZeroHeb of Zero = {
+    flags coding=utf8 ;
+    lincat
+      S = Str ;
+      NP = {s : Str ; g : Gender} ;
+      VP, V2 = Gender =&gt; Str ;
+    lin
+      Pred np vp = np.s ++ vp ! np.g ;
+      Compl v2 np = table {g =&gt; v2 ! g ++ &quot;את&quot; ++ np.s} ;
+      John = {s = &quot;ג&#39;ון&quot; ; g = Masc} ;
+      Mary = {s = &quot;מרי&quot; ; g = Fem} ;
+      Love = table {Masc =&gt; &quot;אוהב&quot; ; Fem =&gt; &quot;אוהבת&quot;} ;
+    param
+      Gender = Masc | Fem ;
+  }</code></pre>
+<p>The verb <strong>agrees</strong> to the gender of the subject.</p>
+<h3 id="variable-and-inherent-features-agreement">Variable and inherent features, agreement</h3>
+<p>NP has gender as its <strong>inherent feature</strong> - a field in the record</p>
+<pre><code>    lincat NP = {s : Str ; g : Gender}
+  
+    lin  Mary = {s = &quot;mry&quot; ; g = Fem}</code></pre>
+<p>VP has gender as its <strong>variable feature</strong> - an argument of a table</p>
+<pre><code>    lincat VP = Gender =&gt; Str</code></pre>
+<p>In predication, the VP receives the gender of the NP</p>
+<pre><code>    lin Pred np vp = np.s ++ vp ! np.g</code></pre>
+<h3 id="feature-design">Feature design</h3>
+<p>Deciding on variable and inherent features is central in GF programming.</p>
+<p>Good hint: dictionaries give forms of variable features and values of inherent ones.</p>
+<p>Example: French nouns</p>
+<ul>
+<li><em>cheval</em> pl. <em>chevaux</em> masc. noun</li>
+</ul>
+<p>From this we infer that French nouns have variable number and inherent gender</p>
+<pre><code>    lincat N = {s : Number =&gt; Str ; g : Gender}</code></pre>
+<h2 id="visualizing-trees-and-word-alignment">Visualizing trees and word alignment</h2>
+<p><img src="abstract.jpg" /> <img src="parse.jpg" /> <img src="dutparse.jpg" /></p>
+<h2 id="from-abstract-trees-to-parse-trees">From abstract trees to parse trees</h2>
+<p>Link every <strong>word</strong> with its <strong>smallest spanning subtree</strong></p>
+<p>Replace every <strong>constructor function</strong> with its <strong>value category</strong></p>
+<h3 id="generating-word-alignment">Generating word alignment</h3>
+<p>In L1 and L2: link every word with its smallest spanning subtree</p>
+<p>Delete the intervening tree, combining links directly from L1 to L2</p>
+<p><em>Notice</em>: in general, this gives <strong>phrase alignment</strong></p>
+<p><em>Notice</em>: links can be crossing, phrases can be discontinuous</p>
+<h3 id="word-alignment-via-trees">Word alignment via trees</h3>
+<p><img src="engdut.jpg" /></p>
+<pre><code>    &gt; parse &quot;John loves Mary&quot; | aw -view=open</code></pre>
+<h3 id="a-more-involved-word-alignment">A more involved word alignment</h3>
+<p><img src="clever-align.jpg" /></p>
+<h3 id="building-applications">Building applications</h3>
+<p>Compile the grammar to PGF:</p>
+<pre><code>   $ gf -make ZeroEng.gf ZeroFre.gf ZeroLat.gf ZeroGer.gf ZeroHeb.gf</code></pre>
+<p>The resulting file <code>Zero.pgf</code> can be e.g. included in fridge magnets:</p>
+<p><img src="zero-fridge.jpg" /></p>
+<h2 id="scaling-up-the-grammar">Scaling up the grammar</h2>
+<p><code>Zero.gf</code> is a tiny fragment of the Resource Grammar</p>
+<p>The current Resource Grammar has 80 categories, 200 syntactic functions, and a minimal lexicon of 500 words.</p>
+<p>Even <code>S, NP, VP, V2</code> will need richer linearization types.</p>
+<h3 id="more-to-do-on-sentences">More to do on sentences</h3>
+<p>The category <code>S</code> has to take care of</p>
+<ul>
+<li>tenses: <em>John has loved Mary</em></li>
+<li>negation: <em>John doesn't love Mary</em></li>
+<li>word order (Dutch): <em>als Jan Marie lief heeft, heeft Marie Jan lief</em></li>
+</ul>
+<p>Moreover: questions, imperatives, relative clauses</p>
+<h3 id="more-to-do-on-noun-phrases">More to do on noun phrases</h3>
+<p><code>NP</code> also involves</p>
+<ul>
+<li>pronouns: <em>I</em>, <em>you</em>, <em>she</em>, <em>we</em></li>
+<li>determiners: <em>the man</em>, <em>every place</em></li>
+</ul>
+<p>Moreover: common nouns, adjectives</p>
+<h2 id="exercises">Exercises</h2>
+<p>1. Install <code>gf</code> on your computer.</p>
+<p>2. Learn and try out the commands <code>align_words</code>, <code>empty</code>, <code>generate_random</code>, <code>generate_trees</code>, <code>help</code>, <code>import</code>, <code>linearize</code>, <code>parse</code>, <code>put_string</code>, <code>quit</code>, <code>read_file</code>, <code>translation_quiz</code>, <code>unicode_table</code>, <code>visualize_parse</code>, <code>visualize_tree</code>, <code>write_file</code>.</p>
+<p>3. Write a concrete syntax of <code>Zero</code> for yet another language (e.g. your summer school project language).</p>
+<p>4. Extend the <code>Zero</code> grammar with ten new noun phrases and verbs.</p>
+<p>5. Add to the <code>Zero</code> grammar a category <code>A</code> of adjectives and a function <code>ComplA : A -&gt; VP</code>, which forms verb phrases like <em>is old</em>.</p>
+<h1 id="morphological-paradigms-and-lexicon-building">Morphological Paradigms and Lexicon Building</h1>
+<h3 id="contents-1">Contents</h3>
+<p>Morphology, inflection, paradigm - example: English verbs</p>
+<p>Regular patterns and smart paradigms</p>
+<p>Overloaded operations</p>
+<p>Inherent features in the lexicon</p>
+<p>Building and bootstrapping a lexicon</p>
+<p>Nonconcatenative morphology: Arabic</p>
+<h2 id="morphology">Morphology</h2>
+<p><strong>Inflectional morphology</strong>: define the different <strong>forms</strong> of words</p>
+<ul>
+<li>English verb <em>sing</em> has the forms <em>sing, sings, sang, sung, singing</em></li>
+</ul>
+<p><strong>Derivational morphology</strong>: tell how new words are formed from old words</p>
+<ul>
+<li>English verb <em>sing</em> produces the noun <em>singer</em></li>
+</ul>
+<p>We could do both in GF, but concentrate now on inflectional morphology.</p>
+<h3 id="good-start-for-a-resource-grammar">Good start for a resource grammar</h3>
+<p>Complete inflection system: 1-6 weeks</p>
+<p>Comprehensive lexicon: days or weeks</p>
+<p>Morphological analysis: up to 200,000 words per second</p>
+<p>Export to SQL, XFST, ...</p>
+<h3 id="what-is-a-word">What is a word?</h3>
+<p>In abstract syntax: an object of a basic type, such as <code>Love : V2</code></p>
+<p>In concrete syntax,</p>
+<ul>
+<li>primarily: an <strong>inflection table</strong>, the collection of all forms</li>
+<li>secundarily: a string, i.e. a single form</li>
+</ul>
+<p>Thus <em>love</em>, <em>loves</em>, <em>loved</em> are</p>
+<ul>
+<li>distinct words as strings</li>
+<li>forms of the same word as an inflection table or an abstract syntax object</li>
+</ul>
+<h2 id="lexical-categories">Lexical categories</h2>
+<p><strong>Part of speech</strong> = <strong>word class</strong> = <strong>lexical category</strong></p>
+<p>In GF, a part of speech is defined as a <code>cat</code> and its associated <code>lincat</code>.</p>
+<p>In GF, there is no formal difference between lexical and other <code>cat</code>s.</p>
+<p>But in the resource grammar, we maintain a discipline of separate lexical categories.</p>
+<h3 id="the-main-lexical-categories-in-the-resource-grammar">The main lexical categories in the resource grammar</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><code>cat</code></th>
+<th>name</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>N</code></td>
+<td>noun</td>
+<td><em>house</em></td>
+</tr>
+<tr class="even">
+<td><code>A</code></td>
+<td>adjective</td>
+<td><em>small</em></td>
+</tr>
+<tr class="odd">
+<td><code>V</code></td>
+<td>verb</td>
+<td><em>sleep</em></td>
+</tr>
+<tr class="even">
+<td><code>V2</code></td>
+<td>two-place verb</td>
+<td><em>love</em></td>
+</tr>
+<tr class="odd">
+<td><code>Adv</code></td>
+<td>adverb</td>
+<td><em>today</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="typical-feature-design">Typical feature design</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><code>cat</code></th>
+<th>variable</th>
+<th>inherent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>N</code></td>
+<td>number, case</td>
+<td>gender</td>
+</tr>
+<tr class="even">
+<td><code>A</code></td>
+<td>number, case, gender, degree</td>
+<td>position</td>
+</tr>
+<tr class="odd">
+<td><code>V</code></td>
+<td>tense, number, person, ...</td>
+<td>auxiliary</td>
+</tr>
+<tr class="even">
+<td><code>V2</code></td>
+<td>as <code>V</code></td>
+<td>complement case</td>
+</tr>
+<tr class="odd">
+<td><code>Adv</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="module-structure">Module structure</h3>
+<p><strong>Resource module</strong> with inflection functions as <strong>operations</strong></p>
+<pre><code>    resource MorphoEng = {oper regV : Str -&gt; V ; ...}</code></pre>
+<p>Lexicon: abstract and concrete syntax</p>
+<pre><code>    abstract Lex = {fun Walk : V ; ...}
+  
+    concrete LexEng of Lex =
+      open MorphoEng in {lin Walk = regV &quot;walk&quot; ; ...}</code></pre>
+<p>The same resource can be used (<code>open</code>ed) in many lexica.</p>
+<p>Abstract and concrete are <strong>top-level</strong> - they define trees, parsing, linearization.</p>
+<p>Resource modules and <code>oper</code>s are not top-level - they are &quot;thrown away&quot; after compilation (i.e. not preserved in PGF).</p>
+<h2 id="example-resource-module-for-english-verb-inflection">Example: resource module for English verb inflection</h2>
+<p>Use the library module <code>Prelude</code>.</p>
+<p>Start by defining parameter types and parts of speech.</p>
+<pre><code>    resource Morpho = open Prelude in {
+  
+    param
+      VForm = VInf | VPres | VPast | VPastPart | VPresPart ;
+  
+    oper
+      Verb : Type = {s : VForm =&gt; Str} ;</code></pre>
+<p>Judgement form <code>oper</code>: <strong>auxiliary operation</strong>.</p>
+<h3 id="start-worst-case-function">Start: worst-case function</h3>
+<p>To save writing and to abstract over the <code>Verb</code>type</p>
+<pre><code>    mkVerb : (_,_,_,_,_ : Str) -&gt; Verb = \go,goes,went,gone,going -&gt; {
+      s = table {
+        VInf =&gt; go ;
+        VPres =&gt; goes ;
+        VPast =&gt; went ;
+        VPastPart =&gt; gone ;
+        VPresPart =&gt; going
+        }
+      } ;</code></pre>
+<h3 id="testing-computation-in-resource-modules">Testing computation in resource modules</h3>
+<p>Import with <code>retain</code> option</p>
+<pre><code>    &gt; i -retain Morpho.gf</code></pre>
+<p>Use command <code>cc</code> = <code>compute_concrete</code></p>
+<pre><code>    &gt; cc mkVerb &quot;use&quot; &quot;uses&quot; &quot;used&quot; &quot;used&quot; &quot;using&quot;
+    {s : Morpho.VForm =&gt; Str
+      = table Morpho.VForm {
+         Morpho.VInf =&gt; &quot;use&quot;;
+         Morpho.VPres =&gt; &quot;uses&quot;;
+         Morpho.VPast =&gt; &quot;used&quot;;
+         Morpho.VPastPart =&gt; &quot;used&quot;;
+         Morpho.VPresPart =&gt; &quot;using&quot;
+       }}</code></pre>
+<h3 id="defining-paradigms">Defining paradigms</h3>
+<p>A <strong>paradigm</strong> is an operation of type</p>
+<pre><code>    Str -&gt; Verb</code></pre>
+<p>which takes a string and returns an inflection table.</p>
+<p>Let's first define the paradigm for regular verbs:</p>
+<pre><code>    regVerb : Str -&gt; Verb = \walk -&gt;
+      mkVerb walk (walk + &quot;s&quot;) (walk + &quot;ed&quot;) (walk + &quot;ed&quot;) (walk + &quot;ing&quot;) ;</code></pre>
+<p>This will work for <em>walk</em>, <em>interest</em>, <em>play</em>.</p>
+<p>It will not work for <em>sing</em>, <em>kiss</em>, <em>use</em>, <em>cry</em>, <em>fly</em>, <em>stop</em>.</p>
+<h3 id="more-paradigms">More paradigms</h3>
+<p>For verbs ending with <em>s</em>, <em>x</em>, <em>z</em>, <em>ch</em></p>
+<pre><code>    s_regVerb : Str -&gt; Verb = \kiss -&gt;
+      mkVerb kiss (kiss + &quot;es&quot;) (kiss + &quot;ed&quot;) (kiss + &quot;ed&quot;) (kiss + &quot;ing&quot;) ;</code></pre>
+<p>For verbs ending with <em>e</em></p>
+<pre><code>    e_regVerb : Str -&gt; Verb = \use -&gt;
+      let us = init use
+      in  mkVerb use (use + &quot;s&quot;) (us + &quot;ed&quot;) (us + &quot;ed&quot;) (us + &quot;ing&quot;) ;</code></pre>
+<p>Notice:</p>
+<ul>
+<li>the <strong>local definition</strong> <code>let</code> <em>c</em> <code>=</code> <em>d</em> <code>in</code> ...</li>
+<li>the operation <code>init</code> from <code>Prelude</code>, dropping the last character</li>
+</ul>
+<h3 id="more-paradigms-still">More paradigms still</h3>
+<p>For verbs ending with <em>y</em></p>
+<pre><code>    y_regVerb : Str -&gt; Verb = \cry -&gt;
+      let cr = init cry
+      in
+      mkVerb cry (cr + &quot;ies&quot;) (cr + &quot;ied&quot;) (cr + &quot;ied&quot;) (cry + &quot;ing&quot;) ;</code></pre>
+<p>For verbs ending with <em>ie</em></p>
+<pre><code>    ie_regVerb : Str -&gt; Verb = \die -&gt;
+      let dy = Predef.tk 2 die + &quot;y&quot;
+      in
+      mkVerb die (die + &quot;s&quot;) (die + &quot;d&quot;) (die + &quot;d&quot;) (dy + &quot;ing&quot;) ;</code></pre>
+<h3 id="what-paradigm-to-choose">What paradigm to choose</h3>
+<p>If the infinitive ends with <em>s, x, z, ch</em>, choose <code>s_regRerb</code>: <em>munch</em>, <em>munches</em></p>
+<p>If the infinitive ends with <em>y</em>, choose <code>y_regRerb</code>: <em>cry</em>, <em>cries</em>, <em>cried</em></p>
+<ul>
+<li>except if a vowel comes before: <em>play</em>, <em>plays</em>, <em>played</em></li>
+</ul>
+<p>If the infinitive ends with <em>e</em>, choose <code>e_regVerb</code>: <em>use</em>, <em>used</em>, <em>using</em></p>
+<ul>
+<li>except if an <em>i</em> precedes: <em>die</em>, <em>dying</em></li>
+<li>or if an <em>e</em> precedes: <em>free</em>, <em>freeing</em></li>
+</ul>
+<h2 id="smart-paradigms">Smart paradigms</h2>
+<p>Let GF choose the paradigm by <strong>pattern matching on strings</strong></p>
+<pre><code>    smartVerb : Str -&gt; Verb = \v -&gt; case v of {
+      _ + (&quot;s&quot;|&quot;z&quot;|&quot;x&quot;|&quot;ch&quot;)      =&gt; s_regVerb v ;
+      _ + &quot;ie&quot;                    =&gt; ie_regVerb v ;
+      _ + &quot;ee&quot;                    =&gt; ee_regVerb v ;
+      _ + &quot;e&quot;                     =&gt; e_regVerb v ;
+      _ + (&quot;a&quot;|&quot;e&quot;|&quot;o&quot;|&quot;u&quot;) + &quot;y&quot; =&gt; regVerb v ;
+      _ + &quot;y&quot;                     =&gt; y_regVerb v ;
+      _                           =&gt; regVerb v
+      } ;</code></pre>
+<h3 id="pattern-matching-on-strings">Pattern matching on strings</h3>
+<p>Format: <code>case</code> <em>string</em> <code>of {</code> <em>pattern</em> <code>=&gt;</code> <em>value</em> <code>}</code></p>
+<p>Patterns:</p>
+<ul>
+<li><code>_</code> matches any string</li>
+<li>a string in quotes matches itself: <code>&quot;ie&quot;</code></li>
+<li><code>+</code> splits into substrings: <code>_ + &quot;y&quot;</code></li>
+<li><code>|</code> matches alternatives: <code>&quot;a&quot;|&quot;e&quot;|&quot;o&quot;</code></li>
+</ul>
+<p>Common practice: last pattern a catch-all <code>_</code></p>
+<h3 id="testing-the-smart-paradigm">Testing the smart paradigm</h3>
+<pre><code>  &gt; cc -all smartVerb &quot;munch&quot;
+  munch munches munched munched munching
+  
+  &gt; cc -all smartVerb &quot;die&quot;
+  die dies died died dying
+  
+  &gt; cc -all smartVerb &quot;agree&quot;
+  agree agrees agreed agreed agreeing
+  
+  &gt; cc -all smartVerb &quot;deploy&quot;
+  deploy deploys deployed deployed deploying
+  
+  &gt; cc -all smartVerb &quot;classify&quot;
+  classify classifies classified classified classifying</code></pre>
+<h3 id="the-smart-paradigm-is-not-yet-perfect">The smart paradigm is not yet perfect</h3>
+<p>Irregular verbs are obviously not covered</p>
+<pre><code>  &gt; cc -all smartVerb &quot;sing&quot;
+  sing sings singed singed singing</code></pre>
+<p>Neither are regular verbs with consonant duplication</p>
+<pre><code>  &gt; cc -all smartVerb &quot;stop&quot;
+  stop stops stoped stoped stoping</code></pre>
+<h3 id="the-final-consonant-duplication-paradigm">The final consonant duplication paradigm</h3>
+<p>Use the Prelude function <code>last</code></p>
+<pre><code>    dupRegVerb : Str -&gt; Verb = \stop -&gt;
+      let stopp = stop + last stop
+      in
+      mkVerb stop (stop + &quot;s&quot;) (stopp + &quot;ed&quot;) (stopp + &quot;ed&quot;) (stopp + &quot;ing&quot;) ;</code></pre>
+<p>String pattern: relevant consonant preceded by a vowel</p>
+<pre><code>    _ + (&quot;a&quot;|&quot;e&quot;|&quot;i&quot;|&quot;o&quot;|&quot;u&quot;) + (&quot;b&quot;|&quot;d&quot;|&quot;g&quot;|&quot;m&quot;|&quot;n&quot;|&quot;p&quot;|&quot;r&quot;|&quot;s&quot;|&quot;t&quot;)
+                                                           =&gt; dupRegVerb v ;</code></pre>
+<h3 id="testing-consonant-duplication">Testing consonant duplication</h3>
+<p>Now it works</p>
+<pre><code>    &gt; cc -all smartVerb &quot;stop&quot;
+    stop stops stopped stopped stopping</code></pre>
+<p>But what about</p>
+<pre><code>    &gt; cc -all smartVerb &quot;coat&quot;
+    coat coats coatted coatted coatting</code></pre>
+<p>Solution: a prior case for diphthongs before the last char (<code>?</code> matches one char)</p>
+<pre><code>    _ + (&quot;ea&quot;|&quot;ee&quot;|&quot;ie&quot;|&quot;oa&quot;|&quot;oo&quot;|&quot;ou&quot;) + ? =&gt; regVerb v ;</code></pre>
+<h3 id="there-is-no-waterproof-solution">There is no waterproof solution</h3>
+<p>Duplication depends on stress, which is not marked in English:</p>
+<ul>
+<li><em>omit</em> [o'mit]: <em>omitted</em>, <em>omitting</em></li>
+<li><em>vomit</em> ['vomit]: <em>vomited</em>, <em>vomiting</em></li>
+</ul>
+<p>This means that we occasionally have to give more forms than one.</p>
+<p>We knew this already for irregular verbs. And we cannot write patterns for each of them either, because e.g. <em>lie</em> can be both <em>lie, lied, lied</em> or <em>lie, lay, lain</em>.</p>
+<h3 id="a-paradigm-for-irregular-verbs">A paradigm for irregular verbs</h3>
+<p>Arguments: three forms instead of one.</p>
+<p>Pattern matching done in regular verbs can be reused.</p>
+<pre><code>    irregVerb : (_,_,_ : Str) -&gt; Verb = \sing,sang,sung -&gt;
+      let v = smartVerb sing
+      in
+      mkVerb sing (v.s ! VPres) sang sung (v.s ! VPresPart) ;</code></pre>
+<h3 id="putting-it-all-together">Putting it all together</h3>
+<p>We have three functions:</p>
+<pre><code>    smartVerb : Str -&gt; Verb
+    irregVerb : Str -&gt; Str -&gt; Str -&gt; Verb
+    mkVerb    : Str -&gt; Str -&gt; Str -&gt; Str -&gt; Str -&gt; Verb</code></pre>
+<p>As all types are different, we can use <strong>overloading</strong> and give them all the same name.</p>
+<h3 id="an-overloaded-paradigm">An overloaded paradigm</h3>
+<p>For documentation: variable names showing examples of arguments.</p>
+<pre><code>    mkV = overload {
+      mkV : (cry : Str) -&gt; Verb = smartVerb ;
+      mkV : (sing,sang,sung : Str) -&gt; Verb = irregVerb ;
+      mkV : (go,goes,went,gone,going : Str) -&gt; Verb = mkVerb ;
+    } ;</code></pre>
+<h3 id="testing-the-overloaded-paradigm">Testing the overloaded paradigm</h3>
+<pre><code>  &gt; cc -all mkV &quot;lie&quot;
+  lie lies lied lied lying
+  &gt; cc -all mkV &quot;lie&quot; &quot;lay&quot; &quot;lain&quot;
+  lie lies lay lain lying
+  &gt; cc -all mkV &quot;omit&quot;
+  omit omits omitted omitted omitting
+  &gt; cc -all mkV &quot;vomit&quot;
+  vomit vomits vomitted vomitted vomitting
+  &gt; cc -all mkV &quot;vomit&quot; &quot;vomited&quot; &quot;vomited&quot;
+  vomit vomits vomited vomited vomitting
+  &gt; cc -all mkV &quot;vomit&quot; &quot;vomits&quot; &quot;vomited&quot; &quot;vomited&quot; &quot;vomiting&quot;
+  vomit vomits vomited vomited vomiting</code></pre>
+<p>Surely we could do better for <em>vomit</em>...</p>
+<h2 id="phases-of-morphology-implementation">Phases of morphology implementation</h2>
+<p>1. Linearization type, with parametric and inherent features.</p>
+<p>2. Worst-case function.</p>
+<p>3. The set of paradigms, traditionally taking one argument each.</p>
+<p>4. Smart paradigms, with relevant numbers of arguments.</p>
+<p>5. Overloaded user function, collecting the smart paradigms.</p>
+<h3 id="other-parts-of-speech">Other parts of speech</h3>
+<p>Usually recommended order:</p>
+<p>1. Nouns, the simplest class.</p>
+<p>2. Adjectives, often using noun inflection, adding gender and degree.</p>
+<p>3. Verbs, usually the most complex class, using adjectives in participles.</p>
+<h3 id="morphophonemic-functions">Morphophonemic functions</h3>
+<p>Many operations are common to different parts of speech.</p>
+<p>Example: adding an <em>s</em> to an English noun or verb.</p>
+<pre><code>    add_s : Str -&gt; Str = \v -&gt; case v of {
+      _  + (&quot;s&quot;|&quot;z&quot;|&quot;x&quot;|&quot;ch&quot;)      =&gt; v  + &quot;es&quot; ;
+      _  + (&quot;a&quot;|&quot;e&quot;|&quot;o&quot;|&quot;u&quot;) + &quot;y&quot; =&gt; v  + &quot;s&quot; ;
+      cr + &quot;y&quot;                     =&gt; cr + &quot;ies&quot; ;
+      _                            =&gt; v  + &quot;s&quot;
+      } ;</code></pre>
+<p>This should be defined separately, not directly in verb conjunctions.</p>
+<p>Notice: pattern variable <code>cr</code> matches like <code>_</code> but gets bound.</p>
+<h2 id="building-a-lexicon">Building a lexicon</h2>
+<p>Boringly, we need abstract and concrete modules even for one language.</p>
+<pre><code>    abstract Lex = {         concrete LexEng = open Morpho in {
+      cat V ;                  lincat V = Verb ;
+      fun                      lin
+        play_V  : V ;            play_V  = mkV &quot;play&quot; ;
+        sleep_V : V ;            sleep_V = mkV &quot;sleep&quot; &quot;slept&quot; &quot;slept&quot; ;
+    }</code></pre>
+<p>Fortunately, these modules can be mechnically generated from a POS-tagged word list</p>
+<pre><code>    V play
+    V sleep slept slept</code></pre>
+<h3 id="bootstrapping-a-lexicon">Bootstrapping a lexicon</h3>
+<p>Alt 1. From a morphological POS-tagged word list: trivial</p>
+<pre><code>    V play played played
+    V sleep slept slept</code></pre>
+<p>Alt 2. From a plain word list, POS-tagged: start assuming regularity, generate, correct, and add forms by iteration</p>
+<pre><code>    V play    ===&gt;   V play played played      ===&gt;
+    V sleep          V sleep sleeped sleeped          V sleep slept slept</code></pre>
+<p>Example: Finnish nouns need 1.42 forms in average (to generate 26 forms).</p>
+<h2 id="nonconcatenative-morphology-arabic">Nonconcatenative morphology: Arabic</h2>
+<p>Semitic languages, e.g. Arabic: <em>kataba</em> has forms <em>kaAtib</em>, <em>yaktubu</em>, ...</p>
+<p>Traditional analysis:</p>
+<ul>
+<li>word = <strong>root</strong> + <strong>pattern</strong></li>
+<li>root = three consonants (<strong>radicals</strong>)</li>
+<li>pattern = function from root to string (notation: string with variables <em>F,C,L</em> for the radicals)</li>
+</ul>
+<p>Example: <em>yaktubu</em> = <em>ktb</em> + <em>yaFCuLu</em></p>
+<p>Words are datastructures rather than strings!</p>
+<h3 id="datastructures-for-arabic">Datastructures for Arabic</h3>
+<p>Roots are records of strings.</p>
+<pre><code>    Root    : Type = {F,C,L : Str} ;</code></pre>
+<p>Patterns are functions from roots to strings.</p>
+<pre><code>    Pattern : Type = Root -&gt; Str ;</code></pre>
+<p>A special case is filling: a record of strings filling the four slots in a root.</p>
+<pre><code>    Filling : Type = {F,FC,CL,L : Str} ;</code></pre>
+<p>This is enough for everything except middle consonant duplication (e.g. <em>FaCCaLa</em>).</p>
+<h3 id="applying-a-pattern">Applying a pattern</h3>
+<p>A pattern obtained from a filling intertwines the records:</p>
+<pre><code>    fill : Filling -&gt; Pattern = \p,r -&gt;
+      p.F + r.F + p.FC + r.C + p.CL + r.L + p.L ;</code></pre>
+<p>Middle consonant duplication also uses a filling but duplicates the <em>C</em> consonant of the root:</p>
+<pre><code>    dfill : Filling -&gt; Pattern = \p,r -&gt;
+      p.F + r.F + p.FC + r.C + r.C + p.CL + r.L + p.L ;</code></pre>
+<h3 id="encoding-roots-by-strings">Encoding roots by strings</h3>
+<p>This is just for the ease of programming and writing lexica.</p>
+<p>F = first letter, C = second letter, L = the rest.</p>
+<pre><code>    getRoot : Str -&gt; Root = \s -&gt; case s of {
+      F@? + C@? + L =&gt; {F = F ; C = C ; L = L} ;
+      _ =&gt; Predef.error (&quot;cannot get root from&quot; ++ s)
+      } ;</code></pre>
+<p>The <strong>as-pattern</strong> <code>x@p</code> matches <code>p</code> and binds <code>x</code>.</p>
+<p>The <strong>error function</strong> <code>Predef.error</code> stops computation and displays the string. It is a typical catch-all value.</p>
+<h3 id="encoding-patterns-by-strings">Encoding patterns by strings</h3>
+<p>Patterns are coded by using the letters <code>F</code>, <code>C</code>, <code>L</code>.</p>
+<pre><code>    getPattern : Str -&gt; Pattern = \s -&gt; case s of {
+      F + &quot;F&quot; + FC + &quot;CC&quot; + CL + &quot;L&quot; + L =&gt;
+        dfill {F = F ; FC = FC ; CL = CL ; L = L} ;
+      F + &quot;F&quot; + FC + &quot;C&quot; + CL + &quot;L&quot; + L =&gt;
+        fill {F = F ; FC = FC ; CL = CL ; L = L} ;
+      _ =&gt; Predef.error (&quot;cannot get pattern from&quot; ++ s)
+      } ;</code></pre>
+<h3 id="a-high-level-lexicon-building-function">A high-level lexicon building function</h3>
+<p>Dictionary entry: root + pattern.</p>
+<pre><code>    getWord : Str -&gt; Str -&gt; Str = \r,p -&gt;
+      getPattern p (getRoot r) ;</code></pre>
+<p>Now we can try:</p>
+<pre><code>    &gt; cc getWord &quot;ktb&quot; &quot;yaFCuLu&quot;
+    &quot;yaktubu&quot;
+    &gt; cc getWord &quot;ktb&quot; &quot;muFaCCiLu&quot;
+    &quot;mukattibu&quot;</code></pre>
+<h3 id="parameters-for-the-arabic-verb-type">Parameters for the Arabic verb type</h3>
+<p>Inflection in tense, number, person, gender.</p>
+<pre><code>    param
+      Number = Sg | Dl | Pl ;
+      Gender = Masc | Fem ;
+      Tense  = Perf | Impf ;
+      Person = Per1 | Per2 | Per3 ;</code></pre>
+<p>But not in all combinations. For instance: no first person dual.</p>
+<p>(We have omitted most tenses and moods.)</p>
+<h3 id="example-of-arabic-verb-inflection">Example of Arabic verb inflection</h3>
+<p><img src="arav.jpg" /></p>
+<h3 id="arabic-verb-type-implementation">Arabic verb type: implementation</h3>
+<p>We use an <strong>algebraic datatype</strong> to include only the meaningful combinations.</p>
+<pre><code>    param VPer =
+       Vp3   Number Gender
+     | Vp2Sg Gender
+     | Vp2Dl
+     | Vp2Pl Gender
+     | Vp1Sg
+     | Vp1Pl ;
+  
+    oper Verb : Type = {s : Tense =&gt; VPer =&gt; Str} ;</code></pre>
+<p>Thus 2*(3*2 + 2 + 1 + 2 + 1 + 1) = 26 forms, not 2*3*2*3 = 36.</p>
+<h3 id="an-arabic-verb-paradigm">An Arabic verb paradigm</h3>
+<pre><code>    pattV_u : Tense -&gt; VPer -&gt; Pattern = \t,v -&gt; getPattern (case t of {
+      Perf =&gt; case v of {
+        Vp3 Sg Masc =&gt; &quot;FaCaLa&quot; ;
+        Vp3 Sg Fem  =&gt; &quot;FaCaLato&quot; ;  -- o is the no-vowel sign (&quot;sukun&quot;)
+        Vp3 Dl Masc =&gt; &quot;FaCaLaA&quot; ;
+        -- ...
+        } ;
+      Impf =&gt; case v of {
+        -- ...
+        Vp1Sg       =&gt; &quot;A?aFoCuLu&quot; ;
+        Vp1Pl       =&gt; &quot;naFoCuLu&quot;
+        }
+     }) ;
+  
+    u_Verb : Str -&gt; Verb = \s -&gt; {
+      s = \\t,p =&gt; appPattern (getRoot s) (pattV_u t p)
+      } ;</code></pre>
+<h3 id="applying-an-arabic-paradigm">Applying an Arabic paradigm</h3>
+<p>Testing in the resource module:</p>
+<pre><code>    &gt; cc -all u_Verb &quot;ktb&quot;
+    kataba katabato katabaA katabataA katabuwA katabona katabota kataboti
+    katabotumaA katabotum katabotunv2a katabotu katabonaA yakotubu takotubu
+    yakotubaAni takotubaAni yakotubuwna yakotubna takotubu takotubiyna
+    takotubaAni takotubuwna takotubona A?akotubu nakotubu</code></pre>
+<p>Building a lexicon:</p>
+<pre><code>    fun ktb_V : V ;
+    lin ktb_V = u_Verb &quot;ktb&quot; ;</code></pre>
+<h3 id="how-we-did-the-printing-recreational-gf-hacking">How we did the printing (recreational GF hacking)</h3>
+<p>We defined a HTML printing operation</p>
+<pre><code>    oper verbTable : Verb -&gt; Str</code></pre>
+<p>and used it in a special category <code>Table</code> built by</p>
+<pre><code>    fun Tab : V -&gt; Table ;
+    lin Tab v = verbTable v ;</code></pre>
+<p>We then used</p>
+<pre><code>    &gt; l Tab ktb_V | ps -env=quotes -to_arabic | ps -to_html | wf -file=ara.html
+    &gt; ! tr &quot;\&quot;&quot; &quot; &quot; &lt;ara.html &gt;ar.html</code></pre>
+<h2 id="exercises-1">Exercises</h2>
+<p>1. Learn to use the commands <code>compute_concrete</code>, <code>morpho_analyse</code>, <code>morpho_quiz</code>.</p>
+<p>2. Try out some smart paradigms in the resource library files <code>Paradigms</code> for some languages you know (or don't know yet). Use the command <code>cc</code> for this.</p>
+<p>3. Write a morphology implementation for some word class and some paradigms in your target language. Start with feature design and finish with a smart paradigm.</p>
+<p>4. Bootstrap a GF lexicon (abstract + concrete) of 100 words in your target language.</p>
+<p>5. (Recreational GF hacking.) Write an operation similar to <code>verbTable</code> for printing nice inflection tables in HTML.</p>
+<h1 id="basics-of-a-linguistic-syntax-implementation">Basics of a Linguistic Syntax Implementation</h1>
+<h3 id="contents-2">Contents</h3>
+<p>The key categories and rules</p>
+<p>Morphology-syntax interface</p>
+<p>Examples and variations in English, Italian, French, Finnish, Swedish, German, Hindi</p>
+<p>A miniature resource grammar: Italian</p>
+<p>Module extension and dependency graphs</p>
+<p>Ergativity in Hindi/Urdu</p>
+<p><em>Don't worry if the details of this lecture feel difficult!</em> <em>Syntax <strong>is</strong> difficult and this is why resource grammars are so useful!</em></p>
+<h2 id="syntax-in-the-resource-grammar">Syntax in the resource grammar</h2>
+<p>&quot;Linguistic ontology&quot;: syntactic structures common to languages</p>
+<p>80 categories, 200 functions, which have worked for all resource languages so far</p>
+<p>Sufficient for most purposes of expressing meaning: mathematics, technical documents, dialogue systems</p>
+<p>Must be extended by language-specific rules to permit parsing of arbitrary text (ca. 10% more in English?)</p>
+<p>A lot of work, easy to get wrong!</p>
+<h2 id="the-key-categories-and-functions">The key categories and functions</h2>
+<h3 id="the-key-categories">The key categories</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><code>cat</code></th>
+<th>name</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Cl</code></td>
+<td>clause</td>
+<td><em>every young man loves Mary</em></td>
+</tr>
+<tr class="even">
+<td><code>VP</code></td>
+<td>verb phrase</td>
+<td><em>loves Mary</em></td>
+</tr>
+<tr class="odd">
+<td><code>V2</code></td>
+<td>two-place verb</td>
+<td><em>loves</em></td>
+</tr>
+<tr class="even">
+<td><code>NP</code></td>
+<td>noun phrase</td>
+<td><em>every young man</em></td>
+</tr>
+<tr class="odd">
+<td><code>CN</code></td>
+<td>common noun</td>
+<td><em>young man</em></td>
+</tr>
+<tr class="even">
+<td><code>Det</code></td>
+<td>determiner</td>
+<td><em>every</em></td>
+</tr>
+<tr class="odd">
+<td><code>AP</code></td>
+<td>adjectival phrase</td>
+<td><em>young</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-key-functions">The key functions</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><code>fun</code></th>
+<th>name</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>PredVP  : NP  -&gt; VP -&gt; Cl</code></td>
+<td>predication</td>
+<td><em>every man loves Mary</em></td>
+</tr>
+<tr class="even">
+<td><code>ComplV2 : V2  -&gt; NP -&gt; VP</code></td>
+<td>complementation</td>
+<td><em>loves Mary</em></td>
+</tr>
+<tr class="odd">
+<td><code>DetCN   : Det -&gt; CN -&gt; NP</code></td>
+<td>determination</td>
+<td><em>every man</em></td>
+</tr>
+<tr class="even">
+<td><code>AdjCN   : AP  -&gt; CN -&gt; CN</code></td>
+<td>modification</td>
+<td><em>young man</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="feature-design-1">Feature design</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><code>cat</code></th>
+<th>variable</th>
+<th>inherent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Cl</code></td>
+<td>tense</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>VP</code></td>
+<td>tense, agr</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><code>V2</code></td>
+<td>tense, agr</td>
+<td>case</td>
+</tr>
+<tr class="even">
+<td><code>NP</code></td>
+<td>case</td>
+<td>agr</td>
+</tr>
+<tr class="odd">
+<td><code>CN</code></td>
+<td>number, case</td>
+<td>gender</td>
+</tr>
+<tr class="even">
+<td><code>Det</code></td>
+<td>gender, case</td>
+<td>number</td>
+</tr>
+<tr class="odd">
+<td><code>AP</code></td>
+<td>gender, number, case</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>agr = <strong>agreement features</strong>: gender, number, person</p>
+<h2 id="predication-building-clauses">Predication: building clauses</h2>
+<h3 id="interplay-between-features">Interplay between features</h3>
+<pre><code>  param Tense, Case, Agr
+  
+  lincat Cl = {s : Tense        =&gt; Str           }
+  lincat NP = {s : Case         =&gt; Str  ; a : Agr}
+  lincat VP = {s : Tense =&gt; Agr =&gt; Str           }
+  
+  fun PredVP : NP -&gt; VP -&gt; Cl
+  
+  lin PredVP np vp = {s = \\t =&gt; np.s ! subj ++ vp.s ! t ! np.a}
+  
+  oper subj : Case</code></pre>
+<h3 id="feature-passing">Feature passing</h3>
+<p>In general, combination rules just pass features: no case analysis (<code>table</code> expressions) is performed.</p>
+<p>A special notation is hence useful:</p>
+<pre><code>    \\p,q =&gt; t    ===   table {p =&gt; table {q =&gt; t}}</code></pre>
+<p>It is similar to lambda abstraction (<code>\x,y -&gt; t</code> in a function type).</p>
+<h3 id="predication-examples">Predication: examples</h3>
+<p>English</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>np.agr</th>
+<th>present</th>
+<th>past</th>
+<th>future</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sg Per1</td>
+<td><em>I sleep</em></td>
+<td><em>I slept</em></td>
+<td><em>I will sleep</em></td>
+</tr>
+<tr class="even">
+<td>Sg Per3</td>
+<td><em>she sleeps</em></td>
+<td><em>she slept</em></td>
+<td><em>she will sleep</em></td>
+</tr>
+<tr class="odd">
+<td>Pl Per1</td>
+<td><em>we sleep</em></td>
+<td><em>we slept</em></td>
+<td><em>we will sleep</em></td>
+</tr>
+</tbody>
+</table>
+<p>Italian (&quot;I am tired&quot;, &quot;she is tired&quot;, &quot;we are tired&quot;)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>np.agr</th>
+<th>present</th>
+<th>past</th>
+<th>future</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Masc Sg Per1</td>
+<td><em>io sono stanco</em></td>
+<td><em>io ero stanco</em></td>
+<td><em>io sarò stanco</em></td>
+</tr>
+<tr class="even">
+<td>Fem Sg Per3</td>
+<td><em>lei è stanca</em></td>
+<td><em>lei era stanca</em></td>
+<td><em>lei sarà stanca</em></td>
+</tr>
+<tr class="odd">
+<td>Fem Pl Per1</td>
+<td><em>noi siamo stanche</em></td>
+<td><em>noi eravamo stanche</em></td>
+<td><em>noi saremo stanche</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="predication-variations">Predication: variations</h3>
+<p>Word order:</p>
+<ul>
+<li><em>will I sleep</em> (English), <em>è stanca lei</em> (Italian)</li>
+</ul>
+<p>Pro-drop:</p>
+<ul>
+<li><em>io sono stanco</em> vs. <em>sono stanco</em> (Italian)</li>
+</ul>
+<p>Ergativity:</p>
+<ul>
+<li>ergative case of transitive verb subject; agreement to object (Hindi)</li>
+</ul>
+<p>Variable subject case:</p>
+<ul>
+<li><em>minä olen lapsi</em> vs. <em>minulla on lapsi</em> (Finnish, &quot;I am a child&quot; (nominative) vs. &quot;I have a child&quot; (adessive))</li>
+</ul>
+<h2 id="complementation-building-verb-phrases">Complementation: building verb phrases</h2>
+<h3 id="interplay-between-features-1">Interplay between features</h3>
+<pre><code>  lincat NP = {s : Case         =&gt; Str ; a : Agr }
+  lincat VP = {s : Tense =&gt; Agr =&gt; Str           }
+  lincat V2 = {s : Tense =&gt; Agr =&gt; Str ; c : Case}
+  
+  fun ComplV2 : V2 -&gt; NP -&gt; VP
+  
+  lin ComplV2 v2 vp = {s = \\t,a =&gt; v2.s ! t ! a ++ np.s ! v2.c}</code></pre>
+<h3 id="complementation-examples">Complementation: examples</h3>
+<p>English</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>v2.case</th>
+<th>infinitive VP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Acc</td>
+<td><em>love me</em></td>
+</tr>
+<tr class="even">
+<td><em>at</em> + Acc</td>
+<td><em>look at me</em></td>
+</tr>
+</tbody>
+</table>
+<p>Finnish</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>v2.case</th>
+<th>VP, infinitive</th>
+<th>translation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accusative</td>
+<td><em>tavata minut</em></td>
+<td>&quot;meet me&quot;</td>
+</tr>
+<tr class="even">
+<td>Partitive</td>
+<td><em>rakastaa minua</em></td>
+<td>&quot;love me&quot;</td>
+</tr>
+<tr class="odd">
+<td>Elative</td>
+<td><em>pitää minusta</em></td>
+<td>&quot;like me&quot;</td>
+</tr>
+<tr class="even">
+<td>Genitive + <em>perään</em></td>
+<td><em>katsoa minun perääni</em></td>
+<td>&quot;look after me&quot;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="complementation-variations">Complementation: variations</h3>
+<p><strong>Prepositions</strong>: a two-place verb usually involves a preposition in addition case</p>
+<pre><code>    lincat V2 = {s : Tense =&gt; Agr =&gt; Str ; c : Case ; prep : Str}
+  
+    lin ComplV2 v2 vp = {s = \\t,a =&gt; v2.s ! t ! a ++ v2.prep ++ np.s ! v2.c}</code></pre>
+<p><strong>Clitics</strong>: the place of the subject can vary, as in Italian:</p>
+<ul>
+<li><em>Maria ama Giovanni</em> vs. <em>Maria mi ama</em> (&quot;Mary loves John&quot; vs. &quot;Mary loves me&quot;)</li>
+</ul>
+<h2 id="determination-building-noun-phrases">Determination: building noun phrases</h2>
+<h3 id="interplay-between-features-2">Interplay between features</h3>
+<pre><code>  lincat NP  = {s :           Case =&gt; Str ; a : Agr   }
+  lincat CN  = {s : Number =&gt; Case =&gt; Str ; g : Gender}
+  lincat Det = {s : Gender =&gt; Case =&gt; Str ; n : Number}
+  
+  fun DetCN : Det -&gt; CN -&gt; NP
+  
+  lin DetCN det cn = {
+    s = \\c =&gt; det.s ! cn.g ! c ++ cn.s ! det.n ! c ;
+    a = agr cn.g det.n Per3
+    }
+  
+  oper agr : Gender -&gt; Number -&gt; Person -&gt; Agr</code></pre>
+<h3 id="determination-examples">Determination: examples</h3>
+<p>English</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Det.num</th>
+<th>NP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sg</td>
+<td><em>every house</em></td>
+</tr>
+<tr class="even">
+<td>Pl</td>
+<td><em>these houses</em></td>
+</tr>
+</tbody>
+</table>
+<p>Italian (&quot;this wine&quot;, &quot;this pizza&quot;, &quot;those pizzas&quot;)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Det.num</th>
+<th>CN.gen</th>
+<th>NP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sg</td>
+<td>Masc</td>
+<td><em>questo vino</em></td>
+</tr>
+<tr class="even">
+<td>Sg</td>
+<td>Fem</td>
+<td><em>questa pizza</em></td>
+</tr>
+<tr class="odd">
+<td>Pl</td>
+<td>Fem</td>
+<td><em>quelle pizze</em></td>
+</tr>
+</tbody>
+</table>
+<p>Finnish (&quot;every house&quot;, &quot;these houses&quot;)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Det.num</th>
+<th>NP, nominative</th>
+<th>NP, inessive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sg</td>
+<td><em>jokainen talo</em></td>
+<td><em>jokaisessa talossa</em></td>
+</tr>
+<tr class="even">
+<td>Pl</td>
+<td><em>nämä talot</em></td>
+<td><em>näissä taloissa</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="determination-variations">Determination: variations</h3>
+<p>Systamatic number variation:</p>
+<ul>
+<li><em>this-these</em>, <em>the-the</em>, <em>il-i</em> (Italian &quot;the-the&quot;)</li>
+</ul>
+<p>&quot;Zero&quot; determiners:</p>
+<ul>
+<li><em>talo</em> (&quot;a house&quot;) vs. <em>talo</em> (&quot;the house&quot;) (Finnish)</li>
+<li><em>a house</em> vs. <em>houses</em> (English), <em>une maison</em> vs. <em>des maisons</em> (French)</li>
+</ul>
+<p>Specificity parameter of nouns:</p>
+<ul>
+<li><em>varje hus</em> vs. <em>det huset</em> (Swedish, &quot;every house&quot; vs. &quot;that house&quot;)</li>
+</ul>
+<h2 id="modification-adding-adjectives-to-nouns">Modification: adding adjectives to nouns</h2>
+<h3 id="interplay-between-features-3">Interplay between features</h3>
+<pre><code>  lincat AP  = {s : Gender =&gt; Number =&gt; Case =&gt; Str             }
+  lincat CN  = {s :           Number =&gt; Case =&gt; Str ; g : Gender}
+  
+  fun AdjCN : AP -&gt; CN -&gt; CN
+  
+  lin AdjCN ap cn = {
+    s = \\n,c =&gt; ap.s ! cn.g ! n ! c ++ cn.s ! n ! c ;
+    g = cn.g
+    }</code></pre>
+<h3 id="modification-examples">Modification: examples</h3>
+<p>English</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>CN, singular</th>
+<th>CN, plural</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>new house</em></td>
+<td><em>new houses</em></td>
+</tr>
+</tbody>
+</table>
+<p>Italian (&quot;red wine&quot;, &quot;red house&quot;)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>CN.gen</th>
+<th>CN, singular</th>
+<th>CN, plural</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Masc</td>
+<td><em>vino rosso</em></td>
+<td><em>vini rossi</em></td>
+</tr>
+<tr class="even">
+<td>Fem</td>
+<td><em>casa rossa</em></td>
+<td><em>case rosse</em></td>
+</tr>
+</tbody>
+</table>
+<p>Finnish (&quot;red house&quot;)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>CN, sg, nominative</th>
+<th>CN, sg, ablative</th>
+<th>CN, pl, essive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>punainen talo</em></td>
+<td><em>punaiselta talolta</em></td>
+<td><em>punaisina taloina</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="modification-variations">Modification: variations</h3>
+<p>The place of the adjectival phrase</p>
+<ul>
+<li>Italian: <em>casa rossa</em>, <em>vecchia casa</em> (&quot;red house&quot;, &quot;old house&quot;)</li>
+<li>English: <em>old house</em>, <em>house similar to this</em></li>
+</ul>
+<p>Specificity parameter of the adjective</p>
+<ul>
+<li>German: <em>ein rotes Haus</em> vs. <em>das rote Haus</em> (&quot;a red house&quot; vs. &quot;the red house&quot;)</li>
+</ul>
+<h2 id="lexical-insertion">Lexical insertion</h2>
+<p>To &quot;get started&quot; with each category, use words from lexicon.</p>
+<p>There are <strong>lexical insertion functions</strong> for each lexical category:</p>
+<pre><code>    UseN : N -&gt; CN
+    UseA : A -&gt; AP
+    UseV : V -&gt; VP</code></pre>
+<p>The linearization rules are often trivial, because the <code>lincat</code>s match</p>
+<pre><code>    lin UseN n = n
+    lin UseA a = a
+    lin UseV v = v</code></pre>
+<p>However, for <code>UseV</code> in particular, this will usually be more complex.</p>
+<h3 id="the-head-of-a-phrase">The head of a phrase</h3>
+<p>The inserted word is the <strong>head</strong> of the phrases built from it:</p>
+<ul>
+<li><em>house</em> is the head of <em>house</em>, <em>big house</em>, <em>big old house</em> etc</li>
+</ul>
+<p>As a rule with many exceptions and modifications,</p>
+<ul>
+<li>variable features are passed from the phrase to the head</li>
+<li>inherent features of the head are inherited by the noun</li>
+</ul>
+<p>This works for <strong>endocentric</strong> phrases: the head has the same type as the full phrase.</p>
+<h3 id="what-is-the-head-of-a-noun-phrase">What is the head of a noun phrase?</h3>
+<p>In an <code>NP</code> of form <code>Det CN</code>, is <code>Det</code> or <code>CN</code> the head?</p>
+<p>Neither, really, because features are passed in both directions:</p>
+<pre><code>    lin DetCN det cn = {
+      s = \\c =&gt; det.s ! cn.g ! c ++ cn.s ! det.n ! c ;
+      a = agr cn.g det.n Per3
+      }</code></pre>
+<p>Moreover, this <code>NP</code> is <strong>exocentric</strong>: no part is of the same type as the whole.</p>
+<h3 id="structural-words">Structural words</h3>
+<p><strong>Structural words</strong> = <strong>function words</strong>, words with special grammatical functions</p>
+<ul>
+<li>determiners: <em>the</em>, <em>this</em>, <em>every</em></li>
+<li>pronouns: <em>I</em>, <em>she</em></li>
+<li>conjunctions: <em>and</em>, <em>or</em>, <em>but</em></li>
+</ul>
+<p>Often members of <strong>closed classes</strong>, which means that new words are never (or seldom) introduces to them.</p>
+<p>Linearization types are often specific and inflection are irregular.</p>
+<h2 id="a-miniature-resource-grammar-for-italian">A miniature resource grammar for Italian</h2>
+<p>We divide it to five modules - much fewer than the full resource!</p>
+<pre><code>  abstract Grammar                         -- syntactic cats and funs
+  
+  abstract Lang = Grammar **...            -- test lexicon added to Grammar
+  
+  resource ResIta                          -- resource for Italian
+  
+  concrete GrammarIta of Grammar = open ResIta in...      -- Italian syntax
+  
+  concrete LangIta of Lang = GrammarIta ** open ResIta in... -- It. lexicon</code></pre>
+<h3 id="extension-vs.-opening">Extension vs. opening</h3>
+<p><strong>Module extension</strong>: <code>N = M1, M2, M3 ** {...}</code></p>
+<ul>
+<li>module <code>N</code> <strong>inherits</strong> all judgements from <code>M1,M2,M3</code></li>
+</ul>
+<p>Module opening: <code>N = open R1, R2, R3 in {...}</code></p>
+<ul>
+<li>module <code>N</code> can use all judgements from <code>R1,R2,R3</code> (but doesn't inherit them)</li>
+</ul>
+<h3 id="module-dependencies">Module dependencies</h3>
+<p><img src="langdep.png" /></p>
+<p><em>rectangle = abstract, solid ellipse = concrete, dashed ellipse = resource</em></p>
+<h3 id="producing-the-dependency-graph">Producing the dependency graph</h3>
+<p>Using the command <code>dg</code> = <code>dependency_graph</code> and graphviz</p>
+<pre><code>    &gt; i -retain LangIta.gf
+    &gt; dependency_graph
+    wrote graph in file _gfdepgraph.dot
+    &gt; ! dot -Tjpg _gfdepgraph.dot &gt;testdep.jpg</code></pre>
+<p>Before calling <code>dot</code>, removed the module <code>Predef</code> to save space.</p>
+<h3 id="the-module-grammar">The module Grammar</h3>
+<pre><code>  abstract Grammar = {
+    cat
+      Cl ; NP ; VP ; AP ; CN ; Det ; N ; A ; V ; V2 ;
+    fun
+      PredVP  : NP  -&gt; VP -&gt; Cl ;
+      ComplV2 : V2  -&gt; NP -&gt; VP ;
+      DetCN   : Det -&gt; CN -&gt; NP ;
+      ModCN   : CN  -&gt; AP -&gt; CN ;
+  
+      UseV    : V -&gt; VP ;
+      UseN    : N -&gt; CN ;
+      UseA    : A -&gt; AP ;
+  
+      a_Det, the_Det : Det ; this_Det, these_Det : Det ;
+      i_NP, she_NP, we_NP : NP ;
+  }</code></pre>
+<h3 id="parameters">Parameters</h3>
+<p>Parameters are defined in <code>ResIta.gf</code>. Just 11 of the 56 verb forms.</p>
+<pre><code>    Number = Sg | Pl ;
+    Gender = Masc | Fem ;
+    Case   = Nom | Acc | Dat ;
+    Aux    = Avere | Essere ;   -- the auxiliary verb of a verb
+    Tense  = Pres | Perf ;
+    Person = Per1 | Per2 | Per3 ;
+  
+    Agr = Ag Gender Number Person ;
+  
+    VForm = VInf | VPres Number Person | VPart Gender Number ;</code></pre>
+<h2 id="italian-verb-phrases">Italian verb phrases</h2>
+<h3 id="tense-and-agreement-of-a-verb-phrase-in-syntax">Tense and agreement of a verb phrase, in syntax</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><code>UseV arrive_V</code></th>
+<th>Pres</th>
+<th>Perf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ag Masc Sg Per1</td>
+<td><em>arrivo</em></td>
+<td><em>sono arrivato</em></td>
+</tr>
+<tr class="even">
+<td>Ag Fem Sg Per1</td>
+<td><em>arrivo</em></td>
+<td><em>sono arrivata</em></td>
+</tr>
+<tr class="odd">
+<td>Ag Masc Sg Per2</td>
+<td><em>arrivi</em></td>
+<td><em>sei arrivato</em></td>
+</tr>
+<tr class="even">
+<td>Ag Fem Sg Per2</td>
+<td><em>arrivi</em></td>
+<td><em>sei arrivata</em></td>
+</tr>
+<tr class="odd">
+<td>Ag Masc Sg Per3</td>
+<td><em>arriva</em></td>
+<td><em>è arrivato</em></td>
+</tr>
+<tr class="even">
+<td>Ag Fem Sg Per3</td>
+<td><em>arriva</em></td>
+<td><em>è arrivata</em></td>
+</tr>
+<tr class="odd">
+<td>Ag Masc Pl Per1</td>
+<td><em>arriviamo</em></td>
+<td><em>siamo arrivati</em></td>
+</tr>
+<tr class="even">
+<td>Ag Fem Pl Per1</td>
+<td><em>arriviamo</em></td>
+<td><em>siamo arrivate</em></td>
+</tr>
+<tr class="odd">
+<td>Ag Masc Pl Per2</td>
+<td><em>arrivate</em></td>
+<td><em>siete arrivati</em></td>
+</tr>
+<tr class="even">
+<td>Ag Fem Pl Per2</td>
+<td><em>arrivate</em></td>
+<td><em>siete arrivate</em></td>
+</tr>
+<tr class="odd">
+<td>Ag Masc Pl Per3</td>
+<td><em>arrivano</em></td>
+<td><em>sono arrivati</em></td>
+</tr>
+<tr class="even">
+<td>Ag Fem Pl Per3</td>
+<td><em>arrivano</em></td>
+<td><em>sono arrivate</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-forms-of-a-verb-in-morphology">The forms of a verb, in morphology</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><code>arrive_V</code></th>
+<th>form</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VInf</td>
+<td><em>arrivare</em></td>
+</tr>
+<tr class="even">
+<td>VPres Sg Per1</td>
+<td><em>arrivo</em></td>
+</tr>
+<tr class="odd">
+<td>VPres Sg Per2</td>
+<td><em>arrivi</em></td>
+</tr>
+<tr class="even">
+<td>VPres Sg Per3</td>
+<td><em>arriva</em></td>
+</tr>
+<tr class="odd">
+<td>VPres Pl Per1</td>
+<td><em>arriviamo</em></td>
+</tr>
+<tr class="even">
+<td>VPres Pl Per2</td>
+<td><em>arrivate</em></td>
+</tr>
+<tr class="odd">
+<td>VPres Pl Per3</td>
+<td><em>arrivano</em></td>
+</tr>
+<tr class="even">
+<td>VPart Masc Sg</td>
+<td><em>arrivato</em></td>
+</tr>
+<tr class="odd">
+<td>VPart Fem Sg</td>
+<td><em>arrivata</em></td>
+</tr>
+<tr class="even">
+<td>VPart Masc Pl</td>
+<td><em>arrivati</em></td>
+</tr>
+<tr class="odd">
+<td>VPart Fem Pl</td>
+<td><em>arrivate</em></td>
+</tr>
+</tbody>
+</table>
+<p>Inherent feature: <code>aux</code> is <em>essere</em>.</p>
+<h3 id="the-verb-phrase-type">The verb phrase type</h3>
+<p>Lexical insertion maps <code>V</code> to <code>VP</code>.</p>
+<p>Two possibilities for <code>VP</code>: either close to <code>Cl</code>,</p>
+<pre><code>    lincat VP = {s : Tense =&gt; Agr =&gt; Str}</code></pre>
+<p>or close to <code>V</code>, just adding a clitic and an object to verb,</p>
+<pre><code>    lincat VP = {v : Verb ; clit : Str ; obj : Str} ;</code></pre>
+<p>We choose the latter. It is more efficient in parsing.</p>
+<h3 id="verb-phrase-formation">Verb phrase formation</h3>
+<p>Lexical insertion is trivial.</p>
+<pre><code>    lin UseV v = {v = v ; clit, obj = []}</code></pre>
+<p>Complementation assumes <code>NP</code> has a clitic and an ordinary object part.</p>
+<pre><code>    lin ComplV2 =
+      let
+        nps = np.s ! v2.c
+      in {
+        v = {s = v2.s ; aux = v2.aux} ;
+        clit = nps.clit ;
+        obj  = nps.obj
+        }</code></pre>
+<h2 id="italian-noun-phrases">Italian noun phrases</h2>
+<p>Being clitic depends on case</p>
+<pre><code>    lincat NP = {s : Case =&gt; {clit,obj : Str} ; a : Agr} ;</code></pre>
+<p>Examples:</p>
+<pre><code>    lin she_NP = {
+       s = table {
+         Nom =&gt; {clit = []   ; obj = &quot;lei&quot;} ;
+         Acc =&gt; {clit = &quot;la&quot; ; obj = []} ;
+         Dat =&gt; {clit = &quot;le&quot; ; obj = []}
+         } ;
+       a = Ag Fem Sg Per3
+       }
+    lin John_NP = {
+       s = table {
+         Nom | Acc =&gt; {clit = [] ; obj = &quot;Giovanni&quot;} ;
+         Dat       =&gt; {clit = [] ; obj = &quot;a Giovanni&quot;}
+         } ;
+       a = Ag Fem Sg Per3
+       }</code></pre>
+<h3 id="noun-phrases-alternatively">Noun phrases: alternatively</h3>
+<p>Use a feature instead of separate fields,</p>
+<pre><code>    lincat NP = {s : Case =&gt; {s : Str ; isClit : Bool} ; a : Agr} ;</code></pre>
+<p>The use of separate fields is more efficient and scales up better to multiple clitic positions.</p>
+<h3 id="determination">Determination</h3>
+<p>No surprises</p>
+<pre><code>    lincat Det = {s : Gender =&gt; Case =&gt; Str ; n : Number} ;
+  
+    lin DetCN det cn = {
+      s = \\c =&gt; {obj = det.s ! cn.g ! c ++ cn.s ! det.n ; clit = []} ;
+      a = Ag cn.g det.n Per3
+      } ;</code></pre>
+<h3 id="building-determiners">Building determiners</h3>
+<p>Often from adjectives:</p>
+<pre><code>    lin this_Det  = adjDet (mkA &quot;questo&quot;) Sg ;
+    lin these_Det = adjDet (mkA &quot;questo&quot;) Pl ;
+  
+    oper prepCase : Case -&gt; Str = \c -&gt; case c of {
+      Dat =&gt; &quot;a&quot; ;
+      _ =&gt; []
+      } ;
+  
+    oper adjDet : Adj -&gt; Number -&gt; Determiner = \adj,n -&gt; {
+      s = \\g,c =&gt; prepCase c ++ adj.s ! g ! n ;
+      n = n
+      } ;</code></pre>
+<p>Articles: see <code>GrammarIta.gf</code></p>
+<h3 id="adjectival-modification">Adjectival modification</h3>
+<p>Recall the inherent feature for position</p>
+<pre><code>    lincat AP = {s : Gender =&gt; Number =&gt; Str ; isPre : Bool} ;
+  
+    lin ModCN cn ap = {
+      s = \\n =&gt; preOrPost ap.isPre (ap.s ! cn.g ! n) (cn.s ! n) ;
+      g = cn.g
+      } ;</code></pre>
+<p>Obviously, separate pre- and post- parts could be used instead.</p>
+<h3 id="italian-morphology">Italian morphology</h3>
+<p>Complex but mostly great fun:</p>
+<pre><code>    regNoun : Str -&gt; Noun = \vino -&gt; case vino of {
+      fuo + c@(&quot;c&quot;|&quot;g&quot;) + &quot;o&quot; =&gt; mkNoun vino (fuo + c + &quot;hi&quot;) Masc ;
+      ol  + &quot;io&quot; =&gt; mkNoun vino (ol + &quot;i&quot;) Masc ;
+      vin + &quot;o&quot;  =&gt; mkNoun vino (vin + &quot;i&quot;) Masc ;
+      cas + &quot;a&quot;  =&gt; mkNoun vino (cas + &quot;e&quot;) Fem ;
+      pan + &quot;e&quot;  =&gt; mkNoun vino (pan + &quot;i&quot;) Masc ;
+      _ =&gt; mkNoun vino vino Masc
+      } ;</code></pre>
+<p>See <code>ResIta</code> for more details.</p>
+<h2 id="predication-at-last">Predication, at last</h2>
+<p>Place the object and the clitic, and select the verb form.</p>
+<pre><code>    lin PredVP np vp =
+        let
+          subj = (np.s ! Nom).obj ;
+          obj  = vp.obj ;
+          clit = vp.clit ;
+          verb = table {
+            Pres =&gt; agrV vp.v np.a ;
+            Perf =&gt; agrV (auxVerb vp.v.aux) np.a ++ agrPart vp.v np.a
+            }
+        in {
+          s = \\t =&gt; subj ++ clit ++ verb ! t ++ obj
+        } ;</code></pre>
+<h3 id="selection-of-verb-form">Selection of verb form</h3>
+<p>We need it for the present tense</p>
+<pre><code>    oper agrV : Verb -&gt; Agr -&gt; Str = \v,a -&gt; case a of {
+      Ag _ n p =&gt; v.s ! VPres n p
+      } ;</code></pre>
+<p>The participle agrees to the subject, if the auxiliary is <em>essere</em></p>
+<pre><code>    oper agrPart : Verb -&gt; Agr -&gt; Str = \v,a -&gt; case v.aux of {
+      Avere  =&gt; v.s ! VPart Masc Sg ;
+      Essere =&gt; case a of {
+        Ag g n _ =&gt; v.s ! VPart g n
+        }
+      } ;</code></pre>
+<h2 id="to-do">To do</h2>
+<p>Full details of the core resource grammar are in <code>ResIta</code> (150 loc) and <code>GrammarIta</code> (80 loc).</p>
+<p>One thing is not yet done correctly: agreement of participle to accusative clitic object: now it gives <em>io la ho amato</em>, and not <em>io la ho amata</em>.</p>
+<p>This is left as an exercise!</p>
+<h2 id="ergativity-in-hindiurdu">Ergativity in Hindi/Urdu</h2>
+<p>Normally, the subject is nominative and the verb agrees to the subject.</p>
+<p>However, in the perfective tense:</p>
+<ul>
+<li>the subject of a transitive verb is in an ergative &quot;case&quot; (particle <em>ne</em>)</li>
+<li>the verb agrees to the object</li>
+</ul>
+<p>Example: &quot;the boy/girl eats the apple/bread&quot;</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>subj</th>
+<th>obj</th>
+<th>gen. present</th>
+<th>perfective</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Masc</td>
+<td>Masc</td>
+<td><em>ladka: seb Ka:ta: hai</em></td>
+<td><em>ladke ne seb Ka:ya:</em></td>
+</tr>
+<tr class="even">
+<td>Masc</td>
+<td>Fem</td>
+<td><em>ladka: roTi: Ka:ta: hai</em></td>
+<td><em>ladke ne roTi: Ka:yi:</em></td>
+</tr>
+<tr class="odd">
+<td>Fem</td>
+<td>Masc</td>
+<td><em>ladki: seb Ka:ti: hai</em></td>
+<td><em>ladki: ne seb Ka:ya:</em></td>
+</tr>
+<tr class="even">
+<td>Fem</td>
+<td>Fem</td>
+<td><em>ladki: roTi: Ka:ti: hai</em></td>
+<td><em>ladki: ne roTi: Ka:yi:</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="a-hindi-clause-in-different-tenses">A Hindi clause in different tenses</h3>
+<p><img src="hindi.jpg" /></p>
+<h2 id="exercises-2">Exercises</h2>
+<p>1. Learn the commands <code>dependency_graph</code>, <code>print_grammar</code>, system escape <code>!</code>, and system pipe <code>?</code>.</p>
+<p>2. Write tables of examples of the key syntactic functions for your target languages, trying to include all possible forms.</p>
+<p>3. Implement <code>Grammar</code> and <code>Lang</code> for your target language.</p>
+<p>4. Even if you don't know Italian, you <em>may</em> try this: add a parameter or something in <code>GrammarIta</code> to implement the rule that the participle in the perfect tense agrees in gender and number with an accusative clitic. Test this with the sentences <em>lei la ha amata</em> and <em>lei ci ha amati</em> (where the current grammar now gives <em>amato</em> in both cases).</p>
+<p>5. Learn some linguistics! My favourite book is <em>Introduction to Theoretical Linguistics</em> by John Lyons (Cambridge 1968, at least 14 editions).</p>
+<h1 id="using-the-resource-grammar-library-in-applications">Using the Resource Grammar Library in Applications</h1>
+<h3 id="contents-3">Contents</h3>
+<p>Software libraries: programmer's vs. users view</p>
+<p>Semantic vs. syntactic grammars</p>
+<p>Example of semantic grammar and its implementation</p>
+<p>Interfaces and parametrized modules</p>
+<p>Free variation</p>
+<p>Overview of the Resource Grammar API</p>
+<h2 id="software-libraries">Software libraries</h2>
+<p>Collections of reusable functions/types/classes</p>
+<p>API = <strong>Application Programmer's Interface</strong></p>
+<ul>
+<li>show enough to enable use</li>
+<li>hide details</li>
+</ul>
+<p>Example: maps (lookup tables, hash maps) in Haskell, C++, Java, ...</p>
+<pre><code>    type Map
+    lookup : key -&gt; Map -&gt; val
+    update : key -&gt; val -&gt; Map -&gt; Map</code></pre>
+<p>Hidden: the definition of the type <code>Map</code> and of the functions <code>lookup</code> and <code>update</code>.</p>
+<h3 id="advantages-of-software-libraries">Advantages of software libraries</h3>
+<p>Programmers have</p>
+<ul>
+<li>less code to write (e.g. <em>how</em> to look up)</li>
+<li>less techniques to learn (e.g. efficient Map datastructures)</li>
+</ul>
+<p>Improvements and bug fixes can be inherited</p>
+<h3 id="grammars-as-software-libraries">Grammars as software libraries</h3>
+<p>Smart paradigms as API for morphology</p>
+<pre><code>    mkN : (talo : Str) -&gt; N</code></pre>
+<p>Abstract syntax as API for syntactic combinations</p>
+<pre><code>    PredVP  : NP -&gt; VP -&gt; Cl
+    ComplV2 : V2 -&gt; NP -&gt; VP
+    NumCN   : Num -&gt; CN -&gt; NP</code></pre>
+<h2 id="using-the-library-natural-language-output">Using the library: natural language output</h2>
+<p>Task: in an email program, generate phrases saying <em>you have n message</em>(<em>s</em>)</p>
+<p>Problem: avoid <em>you have one messages</em></p>
+<p>Solution: use the library</p>
+<pre><code>    PredVP youSg_NP (ComplV2 have_V2 (NumCN two_Num (UseN (mkN &quot;message&quot;))))
+    ===&gt; you have two messages
+  
+    PredVP youSg_NP (ComplV2 have_V2 (NumCN one_Num (UseN (mkN &quot;message&quot;))))
+    ===&gt; you have one message</code></pre>
+<h3 id="software-localization">Software localization</h3>
+<p>Adapt the email program to Italian, Finnish, Arabic...</p>
+<pre><code>    PredVP youSg_NP (ComplV2 have_V2 (NumCN two_Num (UseN (mkN &quot;messaggio&quot;))))
+    ===&gt; hai due messaggi
+  
+    PredVP youSg_NP (ComplV2 have_V2 (NumCN two_Num (UseN (mkN &quot;viesti&quot;))))
+    ===&gt; sinulla on kaksi viestiä
+  
+    PredVP youSg_NP (ComplV2 have_V2 (NumCN two_Num (UseN (mkN &quot;risaAlat.u.&quot;))))
+    ===&gt; sinulla on kaksi viestiä</code></pre>
+<p>The new languages are more complex than English - but only internally, not on the API level!</p>
+<h3 id="correct-number-in-arabic">Correct number in Arabic</h3>
+<p><img src="arabnum.jpg" /></p>
+<p>(From &quot;Implementation of the Arabic Numerals and their Syntax in GF&quot; by Ali Dada, ACL workshop on Arabic, Prague 2007)</p>
+<h3 id="use-cases-for-grammar-libraries">Use cases for grammar libraries</h3>
+<p>Grammars need <em>very</em> much <em>very</em> special knowledge, and a <em>lot</em> of work - thus an excellent topic for a software library!</p>
+<p>Some applications where grammars have shown to be useful:</p>
+<ul>
+<li>software localization</li>
+<li>natural language generation (from formalized content)</li>
+<li>technical translation</li>
+<li>spoken dialogue systems</li>
+</ul>
+<h2 id="two-kinds-of-grammarians">Two kinds of grammarians</h2>
+<p><strong>Application grammarians</strong> vs. <strong>resource grammarians</strong></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>grammarian</th>
+<th>applications</th>
+<th>resources</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>expertise</td>
+<td>application domain</td>
+<td>linguistics</td>
+</tr>
+<tr class="even">
+<td>programming skills</td>
+<td>programming in general</td>
+<td>GF programming</td>
+</tr>
+<tr class="odd">
+<td>language skills</td>
+<td>practical use</td>
+<td>theoretical knowledge</td>
+</tr>
+</tbody>
+</table>
+<p>We want a <strong>division of labour</strong>.</p>
+<h3 id="two-kinds-of-grammars">Two kinds of grammars</h3>
+<p><strong>Application grammars</strong> vs. <strong>resource grammars</strong></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>grammar</th>
+<th>application</th>
+<th>resource</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>abstract syntax</td>
+<td>semantic</td>
+<td>syntactic</td>
+</tr>
+<tr class="even">
+<td>concrete syntax</td>
+<td>using resource API</td>
+<td>parameters, tables, records</td>
+</tr>
+<tr class="odd">
+<td>lexicon</td>
+<td>idiomatic, technical</td>
+<td>just for testing</td>
+</tr>
+<tr class="even">
+<td>size</td>
+<td>small or bigger</td>
+<td>big</td>
+</tr>
+</tbody>
+</table>
+<p>A.k.a. <strong>semantic grammars</strong> vs. <strong>syntactic grammars</strong>.</p>
+<h2 id="meaning-preserving-translation">Meaning-preserving translation</h2>
+<p>Translation must preserve meaning.</p>
+<p>It need not preserve syntactic structure.</p>
+<p>Sometimes it is even impossible:</p>
+<ul>
+<li><em>John likes Mary</em> in Italian is <em>Maria piace a Giovanni</em></li>
+</ul>
+<p>The abstract syntax in the semantic grammar is a logical predicate:</p>
+<pre><code>    fun Like : Person -&gt; Person -&gt; Fact
+    lin Like x y = x ++ &quot;likes&quot; ++ y         -- English
+    lin Like x y = y ++ &quot;piace&quot; ++ &quot;a&quot; ++ x  -- Italian</code></pre>
+<h3 id="translation-and-resource-grammar">Translation and resource grammar</h3>
+<p>To get all grammatical details right, we use resource grammar and not strings</p>
+<pre><code>    lincat Person = NP ; Fact = Cl ;
+  
+    lin Like x y = PredVP x (ComplV2 like_V2 y)     -- Engligh
+    lin Like x y = PredVP y (ComplV2 piacere_V2 x)  -- Italian</code></pre>
+<p>From syntactic point of view, we perform <strong>transfer</strong>, i.e. structure change.</p>
+<p>GF has <strong>compile-time transfer</strong>, and uses interlingua (semantic abstrac syntax) at run time.</p>
+<h3 id="domain-semantics">Domain semantics</h3>
+<p>&quot;Semantics of English&quot;, or of any other natural language as a whole, has never been built.</p>
+<p>It is more feasible to have semantics of <strong>fragments</strong> - of small, well-understood parts of natural language.</p>
+<p>Such languages are called <strong>domain languages</strong>, and their semantics, <strong>domain semantics</strong>.</p>
+<p>Domain semantics = <strong>ontology</strong> in the Semantic Web terminology.</p>
+<h3 id="examples-of-domain-semantics">Examples of domain semantics</h3>
+<p>Expressed in various formal languages</p>
+<ul>
+<li>mathematics, in predicate logic</li>
+<li>software functionality, in UML/OCL</li>
+<li>dialogue system actions, in SISR</li>
+<li>museum object descriptions, in OWL</li>
+</ul>
+<p>GF abstract syntax can be used for any of these!</p>
+<h2 id="example-abstract-syntax-for-a-face-community">Example: abstract syntax for a &quot;Face&quot; community</h2>
+<p>What messages can be expressed on the community page?</p>
+<pre><code>  abstract Face = {
+  
+  flags startcat = Message ;
+  
+  cat
+    Message ; Person ; Object ; Number ;
+  fun
+    Have : Person -&gt; Number -&gt; Object -&gt; Message ;  -- p has n o&#39;s
+    Like : Person -&gt; Object -&gt; Message ;            -- p likes o
+    You : Person ;
+    Friend, Invitation : Object ;
+    One, Two, Hundred : Number ;
+  }</code></pre>
+<p>Notice the <code>startcat</code> flag, as the start category isn't <code>S</code>.</p>
+<h3 id="presenting-the-resource-grammar">Presenting the resource grammar</h3>
+<p>In practice, the abstract syntax of Resource Grammar is inconvenient</p>
+<ul>
+<li>too deep structures, too much code to write</li>
+<li>too many names to remember</li>
+</ul>
+<p>We do the same as in morphology: overloaded operations, named <code>mk</code><em>C</em> where <em>C</em> is the value category.</p>
+<p>The resource defines e.g.</p>
+<pre><code>    mkCl : NP -&gt; V2 -&gt; NP -&gt; Cl = \subj,verb,obj -&gt;
+      PredVP subj (ComplV2 verb obj)
+    mkCl : NP -&gt; V -&gt; Cl = \subj,verb -&gt;
+      PredVP subj (UseV verb)</code></pre>
+<h3 id="relevant-part-of-resource-grammar-api-for-face">Relevant part of Resource Grammar API for &quot;Face&quot;</h3>
+<p>These functions (some of which are structural words) are used.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mkCl : NP -&gt; V2 -&gt; NP -&gt; Cl</code></td>
+<td><em>John loves Mary</em></td>
+</tr>
+<tr class="even">
+<td><code>mkNP : Numeral -&gt; CN -&gt; NP</code></td>
+<td><em>five cars</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkNP : Quant -&gt; CN -&gt; NP</code></td>
+<td><em>that car</em></td>
+</tr>
+<tr class="even">
+<td><code>mkNP : Pron -&gt; NP</code></td>
+<td><em>we</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkCN : N -&gt; CN</code></td>
+<td><em>car</em></td>
+</tr>
+<tr class="even">
+<td><code>this_Quant : Quant</code></td>
+<td><em>this, these</em></td>
+</tr>
+<tr class="odd">
+<td><code>youSg_Pron : Pron</code></td>
+<td><em>you</em> (singular)</td>
+</tr>
+<tr class="even">
+<td><code>n1_Numeral, n2_Numeral : Numeral</code></td>
+<td><em>one, two</em></td>
+</tr>
+<tr class="odd">
+<td><code>n100_Numeral : Numeral</code></td>
+<td><em>one hundred</em></td>
+</tr>
+<tr class="even">
+<td><code>have_V2 : V2</code></td>
+<td><em>have</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="concrete-syntax-for-english">Concrete syntax for English</h3>
+<p>How are messages expressed by using the library?</p>
+<pre><code>  concrete FaceEng of Face = open SyntaxEng, ParadigmsEng in {
+  lincat
+    Message = Cl ;
+    Person = NP ;
+    Object = CN ;
+    Number = Numeral ;
+  lin
+    Have p n o = mkCl p have_V2 (mkNP n o) ;
+    Like p o = mkCl p like_V2 (mkNP this_Quant o) ;
+    You = mkNP youSg_Pron ;
+    Friend = mkCN friend_N ;
+    Invitation = mkCN invitation_N ;
+    One = n1_Numeral ;
+    Two = n2_Numeral ;
+    Hundred = n100_Numeral ;
+  oper
+    like_V2 = mkV2 &quot;like&quot; ;
+    invitation_N = mkN &quot;invitation&quot; ;
+    friend_N = mkN &quot;friend&quot; ;
+  }</code></pre>
+<h3 id="concrete-syntax-for-finnish">Concrete syntax for Finnish</h3>
+<p>How are messages expressed by using the library?</p>
+<pre><code>  concrete FaceFin of Face = open SyntaxFin, ParadigmsFin in {
+  lincat
+    Message = Cl ;
+    Person = NP ;
+    Object = CN ;
+    Number = Numeral ;
+  lin
+    Have p n o = mkCl p have_V2 (mkNP n o) ;
+    Like p o = mkCl p like_V2 (mkNP this_Quant o) ;
+    You = mkNP youSg_Pron ;
+    Friend = mkCN friend_N ;
+    Invitation = mkCN invitation_N ;
+    One = n1_Numeral ;
+    Two = n2_Numeral ;
+    Hundred = n100_Numeral ;
+  oper
+    like_V2 = mkV2 &quot;pitää&quot; elative ;
+    invitation_N = mkN &quot;kutsu&quot; ;
+    friend_N = mkN &quot;ystävä&quot; ;
+  }</code></pre>
+<h2 id="functors-and-interfaces">Functors and interfaces</h2>
+<p>English and Finnish: the same combination rules, only different words!</p>
+<p>Can we avoid repetition of the <code>lincat</code> and <code>lin</code> code? Yes!</p>
+<p>New module type: <strong>functor</strong>, a.k.a. <strong>incomplete</strong> or <strong>parametrized</strong> module</p>
+<pre><code>    incomplete concrete FaceI of Face = open Syntax, LexFace in ...</code></pre>
+<p>A functor may open <strong>interfaces</strong>.</p>
+<p>An interface has <code>oper</code> declarations with just a type, no definition.</p>
+<p>Here, <code>Syntax</code> and <code>LexFace</code> are interfaces.</p>
+<h3 id="the-domain-lexicon-interface">The domain lexicon interface</h3>
+<p><code>Syntax</code> is the Resource Grammar interface, and gives</p>
+<ul>
+<li>combination rules</li>
+<li>structural words</li>
+</ul>
+<p>Content words are not given in <code>Syntax</code>, but in a <strong>domain lexicon</strong></p>
+<pre><code>  interface LexFace = open Syntax in {
+  
+  oper
+    like_V2 : V2 ;
+    invitation_N : N ;
+    friend_N : N ;
+  }</code></pre>
+<h3 id="concrete-syntax-functor-facei">Concrete syntax functor &quot;FaceI&quot;</h3>
+<pre><code>  incomplete concrete FaceI of Face = open Syntax, LexFace in {
+  
+  lincat
+    Message = Cl ;
+    Person = NP ;
+    Object = CN ;
+    Number = Numeral ;
+  lin
+    Have p n o = mkCl p have_V2 (mkNP n o) ;
+    Like p o = mkCl p like_V2 (mkNP this_Quant o) ;
+    You = mkNP youSg_Pron ;
+    Friend = mkCN friend_N ;
+    Invitation = mkCN invitation_N ;
+    One = n1_Numeral ;
+    Two = n2_Numeral ;
+    Hundred = n100_Numeral ;
+  }</code></pre>
+<h3 id="an-english-instance-of-the-domain-lexicon">An English instance of the domain lexicon</h3>
+<p>Define the domain words in English</p>
+<pre><code>  instance LexFaceEng of LexFace = open SyntaxEng, ParadigmsEng in {
+  
+  oper
+    like_V2 = mkV2 &quot;like&quot; ;
+    invitation_N = mkN &quot;invitation&quot; ;
+    friend_N = mkN &quot;friend&quot; ;
+  }</code></pre>
+<h3 id="put-everything-together-functor-instantiation">Put everything together: functor instantiation</h3>
+<p>Instantiate the functor <code>FaceI</code> by giving instances to its interfaces</p>
+<pre><code>  --# -path=.:present
+  
+  concrete FaceEng of Face = FaceI with
+    (Syntax = SyntaxEng),
+    (LexFace = LexFaceEng) ;</code></pre>
+<p>Also notice the domain search path.</p>
+<h3 id="porting-the-grammar-to-finnish">Porting the grammar to Finnish</h3>
+<p>1. Domain lexicon: use Finnish paradigms and words</p>
+<pre><code>  instance LexFaceFin of LexFace = open SyntaxFin, ParadigmsFin in {
+  oper
+    like_V2 = mkV2 (mkV &quot;pitää&quot;) elative ;
+    invitation_N = mkN &quot;kutsu&quot; ;
+    friend_N = mkN &quot;ystävä&quot; ;
+  }</code></pre>
+<p>2. Functor instantiation: mechanically change <code>Eng</code> to <code>Fin</code></p>
+<pre><code>  --# -path=.:present
+  
+  concrete FaceFin of Face = FaceI with
+    (Syntax = SyntaxFin),
+    (LexFace = LexFaceFin) ;</code></pre>
+<h2 id="modules-of-a-domain-grammar-face-community">Modules of a domain grammar: &quot;Face&quot; community</h2>
+<p>1. Abstract syntax, <code>Face</code></p>
+<p>2. Parametrized concrete syntax: <code>FaceI</code></p>
+<p>3. Domain lexicon interface: <code>LexFace</code></p>
+<p>4. For each language <em>L</em>: domain lexicon instance <code>LexFace</code><em>L</em></p>
+<p>5. For each language <em>L</em>: concrete syntax instantiation <code>Face</code><em>L</em></p>
+<h3 id="module-dependency-graph">Module dependency graph</h3>
+<p><img src="facemod.jpg" /></p>
+<p><em>red = to do, orange = to do (trivial), blue = to do (once), green = library</em></p>
+<h3 id="porting-the-grammar-to-italian">Porting the grammar to Italian</h3>
+<p>1. Domain lexicon: use Italian paradigms and words</p>
+<pre><code>  instance LexFaceIta of LexFace = open SyntaxIta, ParadigmsIta in {
+  oper
+    like_V2 = mkV2 (mkV (piacere_64 &quot;piacere&quot;)) dative ;
+    invitation_N = mkN &quot;invito&quot; ;
+    friend_N = mkN &quot;amico&quot; ;
+  }</code></pre>
+<p>2. Functor instantiation: <strong>restricted inheritance</strong>, excluding <code>Like</code></p>
+<pre><code>  concrete FaceIta of Face = FaceI - [Like] with
+    (Syntax = SyntaxIta),
+    (LexFace = LexFaceIta) ** open SyntaxIta in {
+  lin Like p o =
+    mkCl (mkNP this_Quant o) like_V2 p ;
+  }</code></pre>
+<h2 id="free-variation">Free variation</h2>
+<p>There can be <em>many</em> ways of expressing a given semantic structure.</p>
+<p>This can be expressed by the <strong>variant</strong> operator <code>|</code>.</p>
+<pre><code>  fun BuyTicket : City -&gt; City -&gt; Request
+  
+  lin BuyTicket x y =
+    ((&quot;I want&quot; ++ (((&quot;to buy&quot; | []) ++ (&quot;a ticket&quot;)) | &quot;to go&quot;))
+     |
+    ((&quot;can you&quot; | [] ) ++ &quot;give me&quot; ++ &quot;a ticket&quot;)
+     |
+    []) ++
+    &quot;from&quot; ++ x ++ &quot;to&quot; ++y</code></pre>
+<p>The variants can of course be resource grammar expressions as well.</p>
+<h2 id="overview-of-the-resource-grammar-api">Overview of the resource grammar API</h2>
+<p>For the full story, see the <strong>resource grammar synopsis</strong> in</p>
+<p><a href="http://grammaticalframework.org/lib/doc/synopsis.html"><code>grammaticalframework.org/lib/doc/synopsis.html</code></a></p>
+<p>Main division:</p>
+<ul>
+<li><code>Syntax</code>, common to all languages</li>
+<li><code>Paradigms</code><em>L</em>, specific to language <em>L</em></li>
+</ul>
+<h3 id="main-categories-and-their-dependencies">Main categories and their dependencies</h3>
+<p><img src="categories.jpg" /></p>
+<h3 id="categories-of-complex-phrases">Categories of complex phrases</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Explanation</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Text</code></td>
+<td>sequence of utterances</td>
+<td><em>Does John walk? Yes.</em></td>
+</tr>
+<tr class="even">
+<td><code>Utt</code></td>
+<td>utterance</td>
+<td><em>does John walk</em></td>
+</tr>
+<tr class="odd">
+<td><code>Imp</code></td>
+<td>imperative</td>
+<td><em>don't walk</em></td>
+</tr>
+<tr class="even">
+<td><code>S</code></td>
+<td>sencence (fixed tense)</td>
+<td><em>John wouldn't walk</em></td>
+</tr>
+<tr class="odd">
+<td><code>QS</code></td>
+<td>question sentence</td>
+<td><em>who hasn't walked</em></td>
+</tr>
+<tr class="even">
+<td><code>Cl</code></td>
+<td>clause (variable tense)</td>
+<td><em>John walks</em></td>
+</tr>
+<tr class="odd">
+<td><code>QCl</code></td>
+<td>question clause</td>
+<td><em>who doesn't walk</em></td>
+</tr>
+<tr class="even">
+<td><code>VP</code></td>
+<td>verb phrase</td>
+<td><em>love her</em></td>
+</tr>
+<tr class="odd">
+<td><code>AP</code></td>
+<td>adjectival phrase</td>
+<td><em>very young</em></td>
+</tr>
+<tr class="even">
+<td><code>CN</code></td>
+<td>common noun phrase</td>
+<td><em>young man</em></td>
+</tr>
+<tr class="odd">
+<td><code>Adv</code></td>
+<td>adverbial phrase</td>
+<td><em>in the house</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="lexical-categories-for-building-predicates">Lexical categories for building predicates</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Cat</th>
+<th>Explanation</th>
+<th>Compl</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>A</code></td>
+<td>one-place adjective</td>
+<td>-</td>
+<td><em>smart</em></td>
+</tr>
+<tr class="even">
+<td><code>A2</code></td>
+<td>two-place adjective</td>
+<td><code>NP</code></td>
+<td><em>married</em> (<em>to her</em>)</td>
+</tr>
+<tr class="odd">
+<td><code>Adv</code></td>
+<td>adverb</td>
+<td>-</td>
+<td><em>here</em></td>
+</tr>
+<tr class="even">
+<td><code>N</code></td>
+<td>common noun</td>
+<td>-</td>
+<td><em>man</em></td>
+</tr>
+<tr class="odd">
+<td><code>N2</code></td>
+<td>relational noun</td>
+<td><code>NP</code></td>
+<td><em>friend</em> (<em>of John</em>)</td>
+</tr>
+<tr class="even">
+<td><code>NP</code></td>
+<td>noun phrase</td>
+<td>-</td>
+<td><em>the boss</em></td>
+</tr>
+<tr class="odd">
+<td><code>V</code></td>
+<td>one-place verb</td>
+<td>-</td>
+<td><em>sleep</em></td>
+</tr>
+<tr class="even">
+<td><code>V2</code></td>
+<td>two-place verb</td>
+<td><code>NP</code></td>
+<td><em>love</em> (<em>her</em>)</td>
+</tr>
+<tr class="odd">
+<td><code>V3</code></td>
+<td>three-place verb</td>
+<td><code>NP</code>, <code>NP</code></td>
+<td><em>show</em> (<em>it to me</em>)</td>
+</tr>
+<tr class="even">
+<td><code>VS</code></td>
+<td>sentence-complement verb</td>
+<td><code>S</code></td>
+<td><em>say</em> (<em>that I run</em>)</td>
+</tr>
+<tr class="odd">
+<td><code>VV</code></td>
+<td>verb-complement verb</td>
+<td><code>VP</code></td>
+<td><em>want</em> (<em>to run</em>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="functions-for-building-predication-clauses">Functions for building predication clauses</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Fun</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; V -&gt; Cl</code></td>
+<td><em>John walks</em></td>
+</tr>
+<tr class="even">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; V2 -&gt; NP -&gt; Cl</code></td>
+<td><em>John loves her</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; V3 -&gt; NP -&gt; NP -&gt; Cl</code></td>
+<td><em>John sends it to her</em></td>
+</tr>
+<tr class="even">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; VV -&gt; VP -&gt; Cl</code></td>
+<td><em>John wants to walk</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; VS -&gt; S -&gt; Cl</code></td>
+<td><em>John says that it is good</em></td>
+</tr>
+<tr class="even">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; A -&gt; Cl</code></td>
+<td><em>John is old</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; A -&gt; NP -&gt; Cl</code></td>
+<td><em>John is older than Mary</em></td>
+</tr>
+<tr class="even">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; A2 -&gt; NP -&gt; Cl</code></td>
+<td><em>John is married to her</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; AP -&gt; Cl</code></td>
+<td><em>John is very old</em></td>
+</tr>
+<tr class="even">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; N -&gt; Cl</code></td>
+<td><em>John is a man</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; CN -&gt; Cl</code></td>
+<td><em>John is an old man</em></td>
+</tr>
+<tr class="even">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; NP -&gt; Cl</code></td>
+<td><em>John is the man</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkCl</code></td>
+<td><code>NP -&gt; Adv -&gt; Cl</code></td>
+<td><em>John is here</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="noun-phrases-and-common-nouns">Noun phrases and common nouns</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Fun</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mkNP</code></td>
+<td><code>Quant -&gt; CN -&gt; NP</code></td>
+<td><em>this man</em></td>
+</tr>
+<tr class="even">
+<td><code>mkNP</code></td>
+<td><code>Numeral -&gt; CN -&gt; NP</code></td>
+<td><em>five men</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkNP</code></td>
+<td><code>PN -&gt; NP</code></td>
+<td><em>John</em></td>
+</tr>
+<tr class="even">
+<td><code>mkNP</code></td>
+<td><code>Pron -&gt; NP</code></td>
+<td><em>we</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkNP</code></td>
+<td><code>Quant -&gt; Num -&gt; CN -&gt; NP</code></td>
+<td><em>these (five) man</em></td>
+</tr>
+<tr class="even">
+<td><code>mkCN</code></td>
+<td><code>N -&gt; CN</code></td>
+<td><em>man</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkCN</code></td>
+<td><code>A -&gt; N -&gt; CN</code></td>
+<td><em>old man</em></td>
+</tr>
+<tr class="even">
+<td><code>mkCN</code></td>
+<td><code>AP -&gt; CN -&gt; CN</code></td>
+<td><em>very old Chinese man</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkNum</code></td>
+<td><code>Numeral -&gt; Num</code></td>
+<td><em>five</em></td>
+</tr>
+<tr class="even">
+<td><code>n100_Numeral</code></td>
+<td><code>Numeral</code></td>
+<td><em>one hundred</em></td>
+</tr>
+<tr class="odd">
+<td><code>plNum</code></td>
+<td><code>Num</code></td>
+<td>(plural)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="questions-and-interrogatives">Questions and interrogatives</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Fun</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mkQCl</code></td>
+<td><code>Cl -&gt; QCl</code></td>
+<td><em>does John walk</em></td>
+</tr>
+<tr class="even">
+<td><code>mkQCl</code></td>
+<td><code>IP -&gt; V -&gt; QCl</code></td>
+<td><em>who walks</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkQCl</code></td>
+<td><code>IP -&gt; V2 -&gt; NP -&gt; QCl</code></td>
+<td><em>who loves her</em></td>
+</tr>
+<tr class="even">
+<td><code>mkQCl</code></td>
+<td><code>IP -&gt; NP -&gt; V2 -&gt; QCl</code></td>
+<td><em>whom does she love</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkQCl</code></td>
+<td><code>IP -&gt; AP -&gt; QCl</code></td>
+<td><em>who is old</em></td>
+</tr>
+<tr class="even">
+<td><code>mkQCl</code></td>
+<td><code>IP -&gt; NP -&gt; QCl</code></td>
+<td><em>who is the boss</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkQCl</code></td>
+<td><code>IP -&gt; Adv -&gt; QCl</code></td>
+<td><em>who is here</em></td>
+</tr>
+<tr class="even">
+<td><code>mkQCl</code></td>
+<td><code>IAdv -&gt; Cl -&gt; QCl</code></td>
+<td><em>where does John walk</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkIP</code></td>
+<td><code>CN -&gt; IP</code></td>
+<td><em>which car</em></td>
+</tr>
+<tr class="even">
+<td><code>who_IP</code></td>
+<td><code>IP</code></td>
+<td><em>who</em></td>
+</tr>
+<tr class="odd">
+<td><code>why_IAdv</code></td>
+<td><code>IAdv</code></td>
+<td><em>why</em></td>
+</tr>
+<tr class="even">
+<td><code>where_IAdv</code></td>
+<td><code>IAdv</code></td>
+<td><em>where</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="sentence-formation-tense-and-polarity">Sentence formation, tense, and polarity</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Fun</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mkS</code></td>
+<td><code>Cl -&gt; S</code></td>
+<td><em>he walks</em></td>
+</tr>
+<tr class="even">
+<td><code>mkS</code></td>
+<td><code>(Tense)-&gt;(Ant)-&gt;(Pol)-&gt;Cl -&gt; S</code></td>
+<td><em>he wouldn't have walked</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkQS</code></td>
+<td><code>QCl -&gt; QS</code></td>
+<td><em>does he walk</em></td>
+</tr>
+<tr class="even">
+<td><code>mkQS</code></td>
+<td><code>(Tense)-&gt;(Ant)-&gt;(Pol)-&gt;QCl -&gt; QS</code></td>
+<td><em>wouldn't he have walked</em></td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>conditionalTense</code></td>
+<td><code>Tense</code></td>
+<td>(<em>he would walk</em>)</td>
+</tr>
+<tr class="even">
+<td><code>futureTense</code></td>
+<td><code>Tense</code></td>
+<td>(<em>he will walk</em>)</td>
+</tr>
+<tr class="odd">
+<td><code>pastTense</code></td>
+<td><code>Tense</code></td>
+<td>(<em>he walked</em>)</td>
+</tr>
+<tr class="even">
+<td><code>presentTense</code></td>
+<td><code>Tense</code></td>
+<td>(<em>he walks</em>) [default]</td>
+</tr>
+<tr class="odd">
+<td><code>anteriorAnt</code></td>
+<td><code>Ant</code></td>
+<td>(<em>he has walked</em>)</td>
+</tr>
+<tr class="even">
+<td><code>negativePol</code></td>
+<td><code>Pol</code></td>
+<td>(<em>he doesn't walk</em>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="utterances-and-imperatives">Utterances and imperatives</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Fun</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mkUtt</code></td>
+<td><code>Cl -&gt; Utt</code></td>
+<td><em>he walks</em></td>
+</tr>
+<tr class="even">
+<td><code>mkUtt</code></td>
+<td><code>S -&gt; Utt</code></td>
+<td><em>he didn't walk</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkUtt</code></td>
+<td><code>QS -&gt; Utt</code></td>
+<td><em>who didn't walk</em></td>
+</tr>
+<tr class="even">
+<td><code>mkUtt</code></td>
+<td><code>Imp -&gt; Utt</code></td>
+<td><em>walk</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkImp</code></td>
+<td><code>V -&gt; Imp</code></td>
+<td><em>walk</em></td>
+</tr>
+<tr class="even">
+<td><code>mkImp</code></td>
+<td><code>V2 -&gt; NP -&gt; Imp</code></td>
+<td><em>find it</em></td>
+</tr>
+<tr class="odd">
+<td><code>mkImp</code></td>
+<td><code>AP -&gt; Imp</code></td>
+<td><em>be brave</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="more">More</h3>
+<p>Texts: <em>Who walks? John. Where? Here!</em></p>
+<p>Relative clauses: <em>man who owns a donkey</em></p>
+<p>Adverbs: <em>in the house</em></p>
+<p>Subjunction: <em>if a man owns a donkey</em></p>
+<p>Coordination: <em>John and Mary are English or American</em></p>
+<h2 id="exercises-3">Exercises</h2>
+<p>1. Compile and make available the resource grammar library, latest version. Compilation is by <code>make</code> in <code>GF/lib/src</code>. Make it available by setting <code>GF_LIB_PATH</code> to <code>GF/lib</code>.</p>
+<p>2. Compile and test the grammars <code>face/Face</code><em>L</em> (available in course source files).</p>
+<p>3. Write a concrete syntax of <code>Face</code> for some other resource language by adding a domain lexicon and a functor instantiation.</p>
+<p>4. Add functions to <code>Face</code> and write their concrete syntax for at least some language.</p>
+<p>5. Design your own domain grammar and implement it for some languages.</p>
+<h1 id="developing-a-gf-resource-grammar">Developing a GF Resource Grammar</h1>
+<h3 id="contents-4">Contents</h3>
+<p>Module structure</p>
+<p>Statistics</p>
+<p>How to start building a new language</p>
+<p>How to test a resource grammar</p>
+<p>The Assignment</p>
+<h2 id="the-principal-module-structure">The principal module structure</h2>
+<p><img src="syntax.jpg" /></p>
+<p><em>solid = API, dashed = internal, ellipse = abstract+concrete, rectangle = resource/instance, diamond = interface, green = given, blue = mechanical, red = to do</em></p>
+<h3 id="division-of-labour">Division of labour</h3>
+<p>Written by the resource grammarian:</p>
+<ul>
+<li>concrete of the row from <code>Structural</code> to <code>Verb</code></li>
+<li>concrete of <code>Cat</code> and <code>Lexicon</code></li>
+<li><code>Paradigms</code></li>
+<li>abstract and concrete of <code>Extra</code>, <code>Irreg</code></li>
+</ul>
+<p>Already given or derived mechanically:</p>
+<ul>
+<li>all abstract modules except <code>Extra</code>, <code>Irreg</code></li>
+<li>concrete of <code>Common</code>, <code>Grammar</code>, <code>Lang</code>, <code>All</code></li>
+<li><code>Constructors</code>, <code>Syntax</code>, <code>Try</code></li>
+</ul>
+<h3 id="roles-of-modules-library-api">Roles of modules: Library API</h3>
+<p><code>Syntax</code>: syntactic combinations and structural words</p>
+<p><code>Paradigms</code>: morphological paradigms</p>
+<p><code>Try</code>: (almost) everything put together</p>
+<p><code>Constructors</code>: syntactic combinations only</p>
+<p><code>Irreg</code>: irregularly inflected words (mostly verbs)</p>
+<h3 id="roles-of-modules-top-level-grammar">Roles of modules: Top-level grammar</h3>
+<p><code>Lang</code>: common syntax and lexicon</p>
+<p><code>All</code>: common grammar plus language-dependent extensions</p>
+<p><code>Grammar</code>: common syntax</p>
+<p><code>Structural</code>: lexicon of structural words</p>
+<p><code>Lexicon</code>: test lexicon of 300 content words</p>
+<p><code>Cat</code>: the common type system</p>
+<p><code>Common</code>: concrete syntax mostly common to languages</p>
+<h3 id="roles-of-modules-phrase-categories">Roles of modules: phrase categories</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>module</th>
+<th>scope</th>
+<th>value categories</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Adjective</code></td>
+<td>adjectives</td>
+<td><code>AP</code></td>
+</tr>
+<tr class="even">
+<td><code>Adverb</code></td>
+<td>adverbial phrases</td>
+<td><code>AdN, Adv</code></td>
+</tr>
+<tr class="odd">
+<td><code>Conjunction</code></td>
+<td>coordination</td>
+<td><code>Adv, AP, NP, RS, S</code></td>
+</tr>
+<tr class="even">
+<td><code>Idiom</code></td>
+<td>idiomatic expressions</td>
+<td><code>Cl, QCl, VP, Utt</code></td>
+</tr>
+<tr class="odd">
+<td><code>Noun</code></td>
+<td>noun phrases and nouns</td>
+<td><code>Card, CN, Det, NP, Num, Ord</code></td>
+</tr>
+<tr class="even">
+<td><code>Numeral</code></td>
+<td>cardinals and ordinals</td>
+<td><code>Digit, Numeral</code></td>
+</tr>
+<tr class="odd">
+<td><code>Phrase</code></td>
+<td>suprasentential phrases</td>
+<td><code>PConj, Phr, Utt, Voc</code></td>
+</tr>
+<tr class="even">
+<td><code>Question</code></td>
+<td>questions and interrogatives</td>
+<td><code>IAdv, IComp, IDet, IP, QCl</code></td>
+</tr>
+<tr class="odd">
+<td><code>Relative</code></td>
+<td>relat. clauses and pronouns</td>
+<td><code>RCl, RP</code></td>
+</tr>
+<tr class="even">
+<td><code>Sentence</code></td>
+<td>clauses and sentences</td>
+<td><code>Cl, Imp, QS, RS, S, SC, SSlash</code></td>
+</tr>
+<tr class="odd">
+<td><code>Text</code></td>
+<td>many-phrase texts</td>
+<td><code>Text</code></td>
+</tr>
+<tr class="even">
+<td><code>Verb</code></td>
+<td>verb phrases</td>
+<td><code>Comp, VP, VPSlash</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="type-discipline-and-consistency">Type discipline and consistency</h3>
+<p><strong>Producers</strong>: each phrase category module is the producer of value categories listed on previous slide.</p>
+<p><strong>Consumers</strong>: all modules may use any categories as argument types.</p>
+<p><strong>Contract</strong>: the module <code>Cat</code> defines the type system common for both consumers and producers.</p>
+<p>Different grammarians may safely work on different producers.</p>
+<p>This works even for mutual dependencies of categories:</p>
+<pre><code>    Sentence.UseCl  : Temp -&gt; Pol -&gt; Cl -&gt; S  -- S uses Cl
+    Sentence.PredVP : VP -&gt; NP -&gt; Cl          --        uses VP
+    Verb.ComplVS    : VS -&gt; S -&gt; VP           --             uses S</code></pre>
+<h3 id="auxiliary-modules">Auxiliary modules</h3>
+<p><code>resource</code> modules provided by the library:</p>
+<ul>
+<li><code>Prelude</code> and <code>Predef</code>: string operations, booleans</li>
+<li><code>Coordination</code>: generic formation of list conjunctions</li>
+<li><code>ParamX</code>: commonly used parameter, such as <code>Number = Sg | Pl</code></li>
+</ul>
+<p><code>resource</code> modules up to the grammarian to write:</p>
+<ul>
+<li><code>Res</code>: language specific parameter types, morphology, VP formation</li>
+<li><code>Morpho</code>, <code>Phono</code>,...: possible division of <code>Res</code> to more modules</li>
+</ul>
+<h3 id="dependencies">Dependencies</h3>
+<p>Most phrase category modules:</p>
+<pre><code>    concrete VerbGer of Verb = CatGer ** open ResGer, Prelude in ...</code></pre>
+<p>Conjunction:</p>
+<pre><code>    concrete ConjunctionGer of Conjunction = CatGer **
+      open Coordination, ResGer, Prelude in ...</code></pre>
+<p>Lexicon:</p>
+<pre><code>    concrete LexiconGer of Lexicon = CatGer **
+      open ParadigmsGer, IrregGer in {</code></pre>
+<h3 id="functional-programming-style">Functional programming style</h3>
+<p>The Golden Rule: <em>Whenever you find yourself programming by copy and paste, write a function instead!</em></p>
+<ul>
+<li><p>Repetition inside one definition: use a <code>let</code> expression</p>
+<p></p></li>
+<li><p>Repetition inside one module: define an <code>oper</code> in the same module</p>
+<p></p></li>
+<li><p>Repetition in many modules: define an <code>oper</code> in the <code>Res</code> module</p>
+<p></p></li>
+<li>Repetition of an entire module: write a functor</li>
+</ul>
+<h3 id="functors-in-the-resource-grammar-library">Functors in the Resource Grammar Library</h3>
+<p>Used in families of languages</p>
+<ul>
+<li>Romance: Catalan, French, Italian, Spanish</li>
+<li>Scandinavian: Danish, Norwegian, Swedish</li>
+</ul>
+<p>Structure:</p>
+<ul>
+<li><code>Common</code>, a common resource for the family</li>
+<li><code>Diff</code>, a minimal interface extended by interface <code>Res</code></li>
+<li><code>Cat</code> and phrase structure modules are functors over <code>Res</code></li>
+<li><code>Idiom</code>, <code>Structural</code>, <code>Lexicon</code>, <code>Paradigms</code> are ordinary modules</li>
+</ul>
+<h3 id="example-diffromance">Example: DiffRomance</h3>
+<p>Words and morphology are of course different, in ways we haven't tried to formalize.</p>
+<p>In syntax, there are just eight parameters that fundamentally make the difference:</p>
+<p>Prepositions that fuse with the article (Fre, Spa <em>de</em>, <em>a</em>; Ita also <em>con</em>, <em>da</em>, <em>in</em>, <em>su</em>).</p>
+<pre><code>    param Prepos ;</code></pre>
+<p>Which types of verbs exist, in terms of auxiliaries. (Fre, Ita <em>avoir</em>, <em>être</em>, and refl; Spa only <em>haber</em> and refl).</p>
+<pre><code>    param VType ;</code></pre>
+<p>Derivatively, if/when the participle agrees to the subject. (Fre <em>elle est partie</em>, Ita <em>lei è partita</em>, Spa not)</p>
+<pre><code>    oper partAgr : VType -&gt; VPAgr ;</code></pre>
+<p>Whether participle agrees to foregoing clitic. (Fre <em>je l'ai vue</em>, Spa <em>yo la he visto</em>)</p>
+<pre><code>    oper vpAgrClit : Agr -&gt; VPAgr ;</code></pre>
+<p>Whether a preposition is repeated in conjunction (Fre <em>la somme de 3 et de 4</em>, Ita <em>la somma di 3 e 4</em>).</p>
+<pre><code>    oper conjunctCase : NPForm -&gt; NPForm ;</code></pre>
+<p>How infinitives and clitics are placed relative to each other (Fre <em>la voir</em>, Ita <em>vederla</em>). The <code>Bool</code> is used for indicating if there are any clitics.</p>
+<pre><code>    oper clitInf : Bool -&gt; Str -&gt; Str -&gt; Str ;</code></pre>
+<p>To render pronominal arguments as clitics and/or ordinary complements. Returns <code>True</code> if there are any clitics.</p>
+<pre><code>    oper pronArg : Number -&gt; Person -&gt; CAgr -&gt; CAgr -&gt; Str * Str * Bool ;</code></pre>
+<p>To render imperatives (with their clitics etc).</p>
+<pre><code>    oper mkImperative : Bool -&gt; Person -&gt; VPC -&gt; {s : Polarity =&gt; AAgr =&gt; Str} ;</code></pre>
+<h3 id="pros-and-cons-of-functors">Pros and cons of functors</h3>
+<p><code>+</code> intellectual satisfaction: linguistic generalizations</p>
+<p><code>+</code> code can be shared: of syntax code, 75% in Romance and 85% in Scandinavian</p>
+<p><code>+</code> bug fixes and maintenance can often be shared as well</p>
+<p><code>+</code> adding a new language of the same family can be very easy</p>
+<p><code>-</code> difficult to get started with proper abstractions</p>
+<p><code>-</code> new languages may require extensions of interfaces</p>
+<p>Workflow: don't start with a functor, but do one language normally, and refactor it to an interface, functor, and instance.</p>
+<h3 id="suggestions-about-functors-for-new-languages">Suggestions about functors for new languages</h3>
+<p>Romance: Portuguese probably using functor, Romanian probably independent</p>
+<p>Germanic: Dutch maybe by functor from German, Icelandic probably independent</p>
+<p>Slavic: Bulgarian and Russian are not functors, maybe one for Western Slavic (Czech, Slovak, Polish) and Southern Slavic (Bulgarian)</p>
+<p>Fenno-Ugric: Estonian maybe by functor from Finnish</p>
+<p>Indo-Aryan: Hindi and Urdu most certainly via a functor</p>
+<p>Semitic: Arabic, Hebrew, Maltese probably independent</p>
+<h2 id="effort-statistics-completed-languages">Effort statistics, completed languages</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>language</th>
+<th>syntax</th>
+<th>morpho</th>
+<th>lex</th>
+<th>total</th>
+<th>months</th>
+<th>started</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>common</em></td>
+<td>413</td>
+<td>-</td>
+<td>-</td>
+<td>413</td>
+<td>2</td>
+<td>2001</td>
+</tr>
+<tr class="even">
+<td><em>abstract</em></td>
+<td>729</td>
+<td>-</td>
+<td>468</td>
+<td>1197</td>
+<td>24</td>
+<td>2001</td>
+</tr>
+<tr class="odd">
+<td>Bulgarian</td>
+<td>1200</td>
+<td>2329</td>
+<td>502</td>
+<td>4031</td>
+<td>3</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td>English</td>
+<td>1025</td>
+<td>772</td>
+<td>506</td>
+<td>2303</td>
+<td>6</td>
+<td>2001</td>
+</tr>
+<tr class="odd">
+<td>Finnish</td>
+<td>1471</td>
+<td>1490</td>
+<td>703</td>
+<td>3664</td>
+<td>6</td>
+<td>2003</td>
+</tr>
+<tr class="even">
+<td>German</td>
+<td>1337</td>
+<td>604</td>
+<td>492</td>
+<td>2433</td>
+<td>6</td>
+<td>2002</td>
+</tr>
+<tr class="odd">
+<td>Russian</td>
+<td>1492</td>
+<td>3668</td>
+<td>534</td>
+<td>5694</td>
+<td>18</td>
+<td>2002</td>
+</tr>
+<tr class="even">
+<td><em>Romance</em></td>
+<td>1346</td>
+<td>-</td>
+<td>-</td>
+<td>1346</td>
+<td>10</td>
+<td>2003</td>
+</tr>
+<tr class="odd">
+<td>Catalan</td>
+<td>521</td>
+<td>*9000</td>
+<td>518</td>
+<td>*10039</td>
+<td>4</td>
+<td>2006</td>
+</tr>
+<tr class="even">
+<td>French</td>
+<td>468</td>
+<td>1789</td>
+<td>514</td>
+<td>2771</td>
+<td>6</td>
+<td>2002</td>
+</tr>
+<tr class="odd">
+<td>Italian</td>
+<td>423</td>
+<td>*7423</td>
+<td>500</td>
+<td>*8346</td>
+<td>3</td>
+<td>2003</td>
+</tr>
+<tr class="even">
+<td>Spanish</td>
+<td>417</td>
+<td>*6549</td>
+<td>516</td>
+<td>*7482</td>
+<td>3</td>
+<td>2004</td>
+</tr>
+<tr class="odd">
+<td><em>Scandinavian</em></td>
+<td>1293</td>
+<td>-</td>
+<td>-</td>
+<td>1293</td>
+<td>4</td>
+<td>2005</td>
+</tr>
+<tr class="even">
+<td>Danish</td>
+<td>262</td>
+<td>683</td>
+<td>486</td>
+<td>1431</td>
+<td>2</td>
+<td>2005</td>
+</tr>
+<tr class="odd">
+<td>Norwegian</td>
+<td>281</td>
+<td>676</td>
+<td>488</td>
+<td>1445</td>
+<td>2</td>
+<td>2005</td>
+</tr>
+<tr class="even">
+<td>Swedish</td>
+<td>280</td>
+<td>717</td>
+<td>491</td>
+<td>1488</td>
+<td>4</td>
+<td>2001</td>
+</tr>
+<tr class="odd">
+<td>total</td>
+<td>12545</td>
+<td>*36700</td>
+<td>6718</td>
+<td>*55963</td>
+<td>103</td>
+<td>2001</td>
+</tr>
+</tbody>
+</table>
+<p>Lines of source code in April 2009, rough estimates of person months. * = generated code.</p>
+<h2 id="how-to-start-building-a-language-e.g.-marathi">How to start building a language, e.g. Marathi</h2>
+<p>1. Create a directory <code>GF/lib/src/marathi</code></p>
+<p>2. Check out the ISO 639-3 language code: <code>Mar</code></p>
+<p>3. Copy over the files from the closest related language, e.g. <code>hindi</code></p>
+<p>4. Rename files <code>marathi/*Hin.gf</code> to <code>marathi/*Mar.gf</code></p>
+<p>5. Change imports of <code>Hin</code> modules to imports of <code>Mar</code> modules</p>
+<p>6. Comment out every line between <em>header</em> <code>{</code> and the final <code>}</code></p>
+<p>7. Now you can import your (empty) grammar: <code>i marathi/LangMar.gf</code></p>
+<h3 id="suggested-order-for-proceeding-with-a-language">Suggested order for proceeding with a language</h3>
+<p>1. <code>ResMar</code>: parameter types needed for nouns</p>
+<p>2. <code>CatMar</code>: <code>lincat N</code></p>
+<p>3. <code>ParadigmsMar</code>: some regular noun paradigms</p>
+<p>4. <code>LexiconMar</code>: some words that the new paradigms cover</p>
+<p>5. (1.-4.) for <code>V</code>, maybe with just present tense</p>
+<p>6. <code>ResMar</code>: parameter types needed for <code>Cl, CN, Det, NP, Quant, VP</code></p>
+<p>7. <code>CatMar</code>: <code>lincat Cl, CN, Det, NP, Quant, VP</code></p>
+<p>8. <code>NounMar</code>: <code>lin DetCN, DetQuant</code></p>
+<p>9. <code>VerbMar</code>: <code>lin UseV</code></p>
+<p>10. <code>SentenceMar</code>: <code>lin PredVP</code></p>
+<h3 id="character-encoding-for-non-ascii-languages">Character encoding for non-ASCII languages</h3>
+<p>GF internally: 32-bit unicode</p>
+<p>Generated files (<code>.gfo</code>, <code>.pgf</code>): UTF-8</p>
+<p>Source files: whatever you want, but use a flag if not isolatin-1.</p>
+<p>UTF-8 and cp1251 (Cyrillic) are possible in strings, but not in identifiers. The module must contain</p>
+<pre><code>    flags coding = utf8 ;  -- OR coding = cp1251</code></pre>
+<p><strong>Transliterations</strong> are available for many alphabets (see <code>help unicode_table</code>).</p>
+<h3 id="using-transliteration">Using transliteration</h3>
+<p>This is what you have to add in <code>GF/src/GF/Text/Transliterations.hs</code></p>
+<pre><code>    transHebrew :: Transliteration
+    transHebrew = mkTransliteration allTrans allCodes where
+      allTrans = words $
+        &quot;A  b  g  d  h  w  z  H  T  y  K  k  l  M  m  N &quot; ++
+        &quot;n  S  O  P  p  Z. Z  q  r  s  t  -  -  -  -  - &quot; ++
+        &quot;w2 w3 y2 g1 g2&quot;
+      allCodes = [0x05d0..0x05f4]</code></pre>
+<p>Also edit a couple of places in <code>GF/src/GF/Command/Commands.hs</code>.</p>
+<p>You can later convert the file to UTF-8 (see <code>help put_string</code>).</p>
+<h3 id="diagnosis-methods-along-the-way">Diagnosis methods along the way</h3>
+<p>Make sure you have a compilable <code>LangMar</code> at all times!</p>
+<p>Use the GF command <code>pg -missing</code> to check which functions are missing.</p>
+<p>Use the GF command <code>gr -cat=C | l -table</code> to test category C</p>
+<h3 id="regression-testing-with-a-treebank">Regression testing with a treebank</h3>
+<p>Build and maintain a <strong>treebank</strong>: a set of trees with their linearizations:</p>
+<p>1. Create a file <code>test.trees</code> with just trees, one by line.</p>
+<p>2. Linearize each tree to all forms, possibly with English for comparison.</p>
+<pre><code>   &gt; i english/LangEng.gf
+   &gt; i marathi/LangMar.gf
+   &gt; rf -lines -tree -file=test.trees |
+       l -all -treebank | wf -file=test.treebank</code></pre>
+<p>3. Create a <strong>gold standard</strong> <code>gold.treebank</code> from <code>test.treebank</code> by manually correcting the Marathi linearizations.</p>
+<p>4. Compare with the Unix command <code>diff test.treebank gold.treebank</code></p>
+<p>5. Rerun (2.) and (4.) after every change in concrete syntax; extend the tree set and the gold standard after every new implemented function.</p>
+<h3 id="sources">Sources</h3>
+<p>A <em>good</em> grammar book</p>
+<ul>
+<li>lots of inflection paradigms</li>
+<li>reasonable chapter on syntax</li>
+<li>traditional terminology for grammatical concepts</li>
+</ul>
+<p>A <em>good</em> dictionary</p>
+<ul>
+<li>inflection information about words</li>
+<li>verb subcategorization (i.e. case and preposition of complements)</li>
+</ul>
+<p>Wikipedia article on the language</p>
+<p>Google as &quot;gold standard&quot;: is it <em>rucola</em> or <em>ruccola</em>?</p>
+<p>Google translation for suggestions (can't be trusted, though!)</p>
+<h3 id="compiling-the-library">Compiling the library</h3>
+<p>The current development library sources are in <code>GF/lib/src</code>.</p>
+<p>Use <code>make</code> in this directory to compile the libraries.</p>
+<p>Use <code>runghc Make lang api langs=Mar</code> to compile just the language <code>Mar</code>.</p>
+<h2 id="assignment-a-good-start">Assignment: a good start</h2>
+<p>1. Build a directory and a set of files for your target language.</p>
+<p>2. Implement some categories, morphological paradigms, and syntax rules.</p>
+<p>3. Give the <code>lin</code> rules of at least 100 entries in <code>Lexicon</code>.</p>
+<p>4. Send us: your source files and a treebank of 100 trees with linearizations in English and your target language. These linearizations should be correct, and directly generated from your grammar implementation.</p>
+</div><!-- .container -->
+</div><!-- .bg-white -->
+
+<footer class="py-5">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-6 col-sm-3">
+        <a href="../../..">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <h6 class="text-muted mt-3">Get started</h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.youtube.com/watch?v=x1LFbDQhbso">Google Tech Talk</a></li>
+          <li><a href="http://cloud.grammaticalframework.org/">GF Cloud</a></li>
+          <li>
+            <a href="../../../doc/tutorial/gf-tutorial.html">Tutorial</a>
+             ·
+            <a href="../../../lib/doc/rgl-tutorial/index.html">RGL Tutorial</a>
+          </li>
+          <li><a href="../../../doc/gf-video-tutorials.html">Video Tutorials</a></li>
+          <li><a href="../../../download"><strong>Download GF</strong></a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Learn more</h6>
+        <ul class="list-unstyled">
+          <li><a href="../../../gf-book">The GF Book</a></li>
+          <li><a href="../../../doc/gf-refman.html">Reference Manual</a></li>
+          <li><a href="../../../doc/gf-shell-reference.html">GF Shell Reference</a></li>
+          <li><a href="http://www.molto-project.eu/sites/default/files/MOLTO_D2.3.pdf">Best Practices</a></li>
+          <li><a href="../../../lib/doc/synopsis/index.html"><strong>RGL Synopsis</strong></a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Develop</h6>
+        <ul class="list-unstyled">
+          <li><a href="../../../doc/gf-developers.html">Developers Guide</a></li>
+          <li><a href="http://hackage.haskell.org/package/gf/docs/PGF.html">PGF library API (Haskell runtime)</a></li>
+          <li><a href="../../../doc/runtime-api.html">PGF library API (C runtime)</a></li>
+          <li><a href="http://hackage.haskell.org/package/gf/docs/GF.html">GF compiler API</a></li>
+          <li><a href="../../../doc/gf-editor-modes.html">Text Editor Support</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Contribute</h6>
+        <ul class="list-unstyled">
+          <li><a href="http://groups.google.com/group/gf-dev">Mailing List</a></li>
+          <li><a href="https://github.com/GrammaticalFramework/gf-core/issues">Issue Tracker</a></li>
+          <li><a href="../../../doc/gf-people.html">Authors</a></li>
+          <li><a href="http://school.grammaticalframework.org/2018/">Summer School</a></li>
+        </ul>
+        <h6 class="text-muted">
+          Repositories
+          <i class="fab fa-github ml-1"></i>
+        </h6>
+        <a href="https://github.com/GrammaticalFramework/gf-core">GF</a> ·
+        <a href="https://github.com/GrammaticalFramework/gf-rgl">RGL</a> ·
+        <a href="https://github.com/GrammaticalFramework/gf-contrib">Contributions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7811807-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

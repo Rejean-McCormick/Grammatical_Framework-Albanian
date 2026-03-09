@@ -1,0 +1,125 @@
+==== VOLUME META ====
+generated_at: 2026-02-25T14:12:39.096661
+title: ROOT FILES
+root_dir: C:\MyCode\GFCodex\Codex_MD
+file_count: 2
+total_size_mb: 0.0038
+home: 00_START_HERE.instructions.md
+next_volume: Codex_MD_20260225_141239_02_00_manifest.txt
+prev_title: 
+next_title: 00_manifest
+short_title: Root
+
+==== FILE_INDEX ====
+ENTRY id=ae2f0f969d66 path="00_ROUTER.md" kind=markdown size=3546 lines=78 chunks=0
+ENTRY id=b4a0cb6bd504 path="README.md" kind=markdown size=446 lines=10 chunks=0
+
+==== FILES ====
+
+----- FILE BEGIN -----
+path="00_ROUTER.md"
+id=ae2f0f969d66
+kind=markdown
+size=3546
+lines=78
+chunks=0
+----
+# 00_ROUTER
+
+Deterministic navigation rules for this Codex_MD. Use this file as the first lookup step.
+
+## Folder map
+
+### RGL API (primary for constructors, constants, signatures)
+- **Function / constant signature**: `03_rgl_api/by_function/<NAME>.md`
+- **Module index**: `03_rgl_api/by_module/<MODULE>.md`
+- **Type overview + producers/consumers**: `03_rgl_api/by_type/Type_<TYPE>.md`
+- **Indexes**:
+  - `03_rgl_api/Functions_Index.md`
+  - `03_rgl_api/by_type/Types_Index.md`
+
+### Examples
+- **English example set**: `06_examples/api-examples-Eng.md`
+
+### GF language + tooling (use only when you need language mechanics, not RGL constructors)
+- **GF language reference**: `01_gf_language/gf-refman.md`
+- **GF tutorial**: `01_gf_language/gf-tutorial.md`
+- **GF shell**: `02_gf_shell/gf-shell-reference.md`
+
+### Paradigms (language-specific morphology helpers)
+- **Paradigms per language**: `04_paradigms/Paradigms_<LANG>.md`
+- **RGL tutorial**: `04_paradigms/rgl-tutorial.md`
+
+### Machine index
+- `00_manifest/manifest.json` (functions, overloads, modules, types, signature paths)
+
+## Lookup procedure
+
+### A) You have a function/constant name (e.g., mkNP, it_NP, want_VV)
+1. Open `03_rgl_api/by_function/<NAME>.md`.
+2. If the page is an overload index, choose the overload file `03_rgl_api/by_function/<NAME>__NN.md` whose:
+   - `Args` match the required input categories/types, and
+   - `Returns` matches the required output type.
+3. Use the `Module:` field for import targeting or for searching the module index.
+
+### B) You have a type (e.g., NP, Cl, VP, Tense, Text)
+1. Open `03_rgl_api/by_type/Type_<TYPE>.md`.
+2. Prefer constructors from **Producers** (they return the desired type).
+3. Use **Consumers** only when you need to supply this type as an argument to build something else.
+
+### C) You need to know what to import / where a constructor lives
+1. If you already have a function page: use its `Module:` value.
+2. Otherwise open `03_rgl_api/by_module/<MODULE>.md` and pick a signature from the list.
+
+### D) You need a concrete usage example
+1. Search in `06_examples/api-examples-Eng.md` for the constructor name.
+2. If not found, use the `Example:` field on the function/overload page (when present).
+
+### E) You need GF syntax or shell behavior (not RGL constructors)
+- Language mechanics: `01_gf_language/gf-refman.md`
+- Tutorial narrative: `01_gf_language/gf-tutorial.md`
+- Shell commands: `02_gf_shell/gf-shell-reference.md`
+
+## Disambiguation rules
+
+### Types vs constants vs functions
+- **Type**: typically short category names like `NP`, `Cl`, `VP`, `AP`, `CN`, `Tense`, `Text`.
+  - Go to: `03_rgl_api/by_type/Type_<TYPE>.md`
+- **Constant / constructor**: often includes an underscore or lexical name, e.g. `it_NP`, `that_Det`, `Paris_PN`, `want_VV`, `mkCl`, `mkNP`.
+  - Go to: `03_rgl_api/by_function/<NAME>.md`
+
+### Overloads (critical)
+- Never choose overloads by name alone.
+- Choose overload by matching the **full** `Type:` signature:
+  - argument sequence (left of arrows) and return type (rightmost).
+- If multiple overloads still match, prefer the one whose `Module:` aligns with the target language/module context.
+
+## Output expectations
+When selecting a constructor, return:
+- the chosen overload page path (if overloaded),
+- the `Type:` signature,
+- the `Module:` name,
+- and the GF expression to use.
+
+Do not include unrelated manuals/tutorial content unless the task requires GF syntax rules rather than RGL constructor selection.
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="README.md"
+id=b4a0cb6bd504
+kind=markdown
+size=446
+lines=10
+chunks=0
+----
+# Codex_MD
+
+- `03_rgl_api/by_function/`: function/constant signatures (overload-safe)
+- `03_rgl_api/by_module/`: signatures grouped by module
+- `03_rgl_api/by_type/`: types with meaning + producer/consumer signatures
+- `04_paradigms/`: paradigms sections + rgl-tutorial
+- `01_gf_language/`: gf-refman + gf-tutorial
+- `02_gf_shell/`: gf shell reference
+- `06_examples/`: English API examples
+- `00_manifest/manifest.json`: machine index
+----- FILE END -----

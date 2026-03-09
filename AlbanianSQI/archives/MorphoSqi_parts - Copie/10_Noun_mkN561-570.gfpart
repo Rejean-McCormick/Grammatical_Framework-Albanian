@@ -1,0 +1,107 @@
+oper
+  -- masc o-stem oblique sg indefinite: -u after velars, -i elsewhere
+  oblSgMasc_ui : Str -> Str = \st ->
+    case st of {
+      _ + "k" => st + "u" ;
+      _ + "g" => st + "u" ;
+      _ + "h" => st + "u" ;
+      _       => st + "i"
+    } ;
+
+  dropFinalSchwa : Str -> Str = \s ->
+    case s of { st + "ë" => st ; _ => s } ;
+
+  -- fem -e definite nom.sg: stem+j+a would double j (pamj+ja), so use -a after j
+  defNomFemE : Str -> Str = \st ->
+    case st of { _ + "j" => st + "a" ; _ => st + "ja" } ;
+
+mkN561 : Str -> N ;
+mkN561 base =
+  case base of {
+    stem + "i" => lin N
+      { s = table {
+              Indef => table {
+                         Nom => table {
+                                  Sg => stem ;
+                                  Pl => stem + "ë"
+                                } ;
+                         Acc => table {
+                                  Sg => stem ;
+                                  Pl => stem + "ë"
+                                } ;
+                         Dat => table {
+                                  Sg => oblSgMasc_ui stem ;
+                                  Pl => stem + "ëve"
+                                } ;
+                         Ablat => table {
+                                    Sg => oblSgMasc_ui stem ;
+                                    Pl => stem + "ësh"
+                                  }
+                       } ;
+              Def => table {
+                       Nom => table {
+                                Sg => stem + "i" ;
+                                Pl => stem + "ët"
+                              } ;
+                       Acc => table {
+                                Sg => stem + "in" ;
+                                Pl => stem + "ët"
+                              } ;
+                       Dat => table {
+                                Sg => stem + "it" ;
+                                Pl => stem + "ëve"
+                              } ;
+                       Ablat => table {
+                                  Sg => stem + "it" ;
+                                  Pl => stem + "ëve"
+                                }
+                     }
+            } ;
+        g = Masc
+      };
+    _ => error "Can't apply paradigm mkN561"
+  } ;
+
+mkN562 : Str -> N ;
+mkN562 base_1 =
+  let st = dropFinalSchwa base_1 in
+  lin N
+  { s = table {
+          Indef => table {
+                     Nom => table { Sg => base_1 ; Pl => nonExist } ;
+                     Acc => table { Sg => base_1 ; Pl => nonExist } ;
+                     Dat => table { Sg => st + "i" ; Pl => nonExist } ;
+                     Ablat => table { Sg => st + "i" ; Pl => nonExist }
+                   } ;
+          Def => table {
+                   Nom => table { Sg => st + "ët" ; Pl => nonExist } ;
+                   Acc => table { Sg => st + "ët" ; Pl => nonExist } ;
+                   Dat => table { Sg => st + "it" ; Pl => nonExist } ;
+                   Ablat => table { Sg => st + "it" ; Pl => nonExist }
+                 }
+        } ;
+    g = Masc  -- neuter-like class, but keeping Masc since N only has Masc/Fem here
+  } ;
+
+mkN563 : Str -> N ;
+mkN563 base =
+  case base of {
+    st + "e" => lin N
+      { s = table {
+              Indef => table {
+                         Nom => table { Sg => st + "e" ; Pl => st + "e" } ;
+                         Acc => table { Sg => st + "e" ; Pl => st + "e" } ;
+                         Dat => table { Sg => st + "eje" ; Pl => st + "eve" } ;
+                         Ablat => table { Sg => st + "eje" ; Pl => st + "esh" }
+                       } ;
+              Def => table {
+                       Nom => table { Sg => defNomFemE st ; Pl => st + "et" } ;
+                       Acc => table { Sg => st + "en" ; Pl => st + "et" } ;
+                       Dat => table { Sg => st + "es" ; Pl => st + "eve" } ;
+                       Ablat => table { Sg => st + "es" ; Pl => st + "eve" }
+                     }
+            } ;
+        g = Fem
+      };
+    _ => error "Can't apply paradigm mkN563"
+  } ;

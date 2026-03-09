@@ -1,0 +1,233 @@
+mkN241 : Str -> N ;
+mkN241 base_1 =
+  lin N
+  (let sg = base_1+"r" ;
+       pl = base_1+"j"
+   in {
+    s = table {
+      Indef => table {
+        Nom   => table { Sg => sg ; Pl => pl } ;
+        Acc   => table { Sg => sg ; Pl => pl } ;
+        Dat   => table { Sg => base_1+"ri" ; Pl => base_1+"jve" } ;
+        Ablat => table { Sg => base_1+"ri" ; Pl => base_1+"jsh" }
+      } ;
+      Def => table {
+        Nom   => table { Sg => base_1+"ri" ; Pl => base_1+"jtë" } ;
+        Acc   => table { Sg => base_1+"rin" ; Pl => base_1+"jtë" } ;
+        Dat   => table { Sg => base_1+"rit" ; Pl => base_1+"jve" } ;
+        Ablat => table { Sg => base_1+"rit" ; Pl => base_1+"jve" }
+      }
+    } ;
+    g = Masc
+  }) ;
+
+mkN242 : Str -> N ;
+mkN242 base_1 =
+  lin N
+  { s = table {
+          Indef => table {
+                     Nom   => table { Sg => base_1 ; Pl => base_1 } ;
+                     Acc   => table { Sg => base_1 ; Pl => base_1 } ;
+                     Dat   => table { Sg => base_1+"i" ; Pl => base_1+"ve" } ;
+                     Ablat => table { Sg => base_1+"i" ; Pl => base_1+"ish" }
+                   } ;
+          Def => table {
+                   Nom   => table { Sg => base_1+"i" ; Pl => base_1+"t" } ;
+                   Acc   => table { Sg => base_1+"in" ; Pl => base_1+"t" } ;
+                   Dat   => table { Sg => base_1+"it" ; Pl => base_1+"ve" } ;
+                   Ablat => table { Sg => base_1+"it" ; Pl => base_1+"ve" }
+                 }
+        } ;
+    g = Masc
+  } ;
+
+mkN243 : Str -> N ;
+mkN243 base_1 =
+  lin N
+  (let pl = base_1+"j" ;
+       plDef = base_1+"jtë"
+   in {
+    s = table {
+      Indef => table {
+        Nom   => table { Sg => base_1 ; Pl => pl } ;
+        Acc   => table { Sg => base_1 ; Pl => pl } ;
+        Dat   => table { Sg => base_1+"i" ; Pl => base_1+"jve" } ;
+        Ablat => table { Sg => base_1+"i" ; Pl => base_1+"jsh" }
+      } ;
+      Def => table {
+        Nom   => table { Sg => base_1+"i" ; Pl => plDef } ;
+        Acc   => table { Sg => base_1+"in" ; Pl => plDef } ;
+        Dat   => table { Sg => base_1+"it" ; Pl => base_1+"jve" } ;
+        Ablat => table { Sg => base_1+"it" ; Pl => base_1+"jve" }
+      }
+    } ;
+    g = Masc
+  }) ;
+
+mkN244 : Str -> N ;
+mkN244 base =
+  case base of {
+    "b"+base_1+"nor" => lin N
+      (let sg = "b"+base_1+"nor" ;
+           pl = "b"+base_1+"norë" ;
+           sgDef = "b"+base_1+"nori" ;
+           plDef = "b"+base_1+"norët"
+       in {
+        s = table {
+          Indef => table {
+            Nom   => table { Sg => sg ; Pl => pl } ;
+            Acc   => table { Sg => sg ; Pl => pl } ;
+            Dat   => table { Sg => sg+"i" ; Pl => "b"+base_1+"norëve" } ;
+            Ablat => table { Sg => sg+"i" ; Pl => "b"+base_1+"norësh" }
+          } ;
+          Def => table {
+            Nom   => table { Sg => sgDef ; Pl => plDef } ;
+            Acc   => table { Sg => "b"+base_1+"norin" ; Pl => plDef } ;
+            Dat   => table { Sg => "b"+base_1+"norit" ; Pl => "b"+base_1+"norëve" } ;
+            Ablat => table { Sg => "b"+base_1+"norit" ; Pl => "b"+base_1+"norëve" }
+          }
+        } ;
+        g = Masc
+      }) ;
+    _ => error "Can't apply paradigm mkN244"
+  } ;
+
+mkN245 : Str -> N ;
+mkN245 base_1 =
+  lin N
+  (let pl = base_1+"nj" ; plDef = base_1+"njtë" in {
+    s = table {
+      Indef => table {
+        Nom   => table { Sg => base_1 ; Pl => pl } ;
+        Acc   => table { Sg => base_1 ; Pl => pl } ;
+        Dat   => table { Sg => base_1+"ri" ; Pl => base_1+"njve" } ;
+        Ablat => table { Sg => base_1+"ri" ; Pl => base_1+"njsh" }
+      } ;
+      Def => table {
+        Nom   => table { Sg => base_1+"ri" ; Pl => plDef } ;
+        Acc   => table { Sg => base_1+"rin" ; Pl => plDef } ;
+        Dat   => table { Sg => base_1+"rit" ; Pl => base_1+"njve" } ;
+        Ablat => table { Sg => base_1+"rit" ; Pl => base_1+"njve" }
+      }
+    } ;
+    g = Masc
+  }) ;
+
+mkN246 : Str -> N ;
+mkN246 base =
+  case base of {
+    base_1+"ë" => lin N
+      { s = table {
+              Indef => table {
+                         Nom => table { Sg => base_1+"ë" ; Pl => base_1+"ë" } ;
+                         Acc => table { Sg => base_1+"ë" ; Pl => base_1+"ë" } ;
+                         Dat => table { Sg => base_1+"eje" ; Pl => base_1+"ëve" } ;
+                         Ablat => table { Sg => base_1+"eje" ; Pl => base_1+"ësh" }
+                       } ;
+              Def => table {
+                       Nom => table { Sg => base_1+"a" ; Pl => base_1+"ët" } ;
+                       Acc => table { Sg => base_1+"ën" ; Pl => base_1+"ët" } ;
+                       Dat => table { Sg => base_1+"ës" ; Pl => base_1+"ëve" } ;
+                       Ablat => table { Sg => base_1+"ës" ; Pl => base_1+"ëve" }
+                     }
+            } ;
+        g = Masc
+      };
+    _ => error "Can't apply paradigm mkN246"
+  } ;
+
+mkN247 : Str -> N ;
+mkN247 base_1 =
+  lin N
+  (let pl = base_1+"je" ;
+       plDef = base_1+"jet"
+   in {
+    s = table {
+      Indef => table {
+        Nom   => table { Sg => base_1 ; Pl => pl } ;
+        Acc   => table { Sg => base_1 ; Pl => pl } ;
+        Dat   => table { Sg => base_1+"u" ; Pl => base_1+"jeve" } ;
+        Ablat => table { Sg => base_1+"u" ; Pl => base_1+"jesh" }
+      } ;
+      Def => table {
+        Nom   => table { Sg => base_1+"u" ; Pl => plDef } ;
+        Acc   => table { Sg => base_1+"un" ; Pl => plDef } ;
+        Dat   => table { Sg => base_1+"ut" ; Pl => base_1+"jeve" } ;
+        Ablat => table { Sg => base_1+"ut" ; Pl => base_1+"jeve" }
+      }
+    } ;
+    g = Masc
+  }) ;
+
+mkN248 : Str -> N ;
+mkN248 base =
+  case base of {
+    base_1+"r" => lin N
+      { s = table {
+              Indef => table {
+                         Nom => table { Sg => base_1+"r" ; Pl => base_1+"j" } ;
+                         Acc => table { Sg => base_1+"r" ; Pl => base_1+"j" } ;
+                         Dat => table { Sg => base_1+"ri" ; Pl => base_1+"jve" } ;
+                         Ablat => table { Sg => base_1+"ri" ; Pl => base_1+"jsh" }
+                       } ;
+              Def => table {
+                       Nom => table { Sg => base_1+"ri" ; Pl => base_1+"jt" } ;
+                       Acc => table { Sg => base_1+"rin" ; Pl => base_1+"jt" } ;
+                       Dat => table { Sg => base_1+"rit" ; Pl => base_1+"jve" } ;
+                       Ablat => table { Sg => base_1+"rit" ; Pl => base_1+"jve" }
+                     }
+            } ;
+        g = Masc
+      };
+    _ => error "Can't apply paradigm mkN248"
+  } ;
+
+mkN249 : Str -> N ;
+mkN249 base =
+  case base of {
+    base_1+"ë" => lin N
+      (let sg = base_1+"ë" ;
+           pl = base_1+"a" ;
+           plDef = base_1+"at"
+       in {
+        s = table {
+          Indef => table {
+            Nom   => table { Sg => sg ; Pl => pl } ;
+            Acc   => table { Sg => sg ; Pl => pl } ;
+            Dat   => table { Sg => base_1+"e" ; Pl => base_1+"ave" } ;
+            Ablat => table { Sg => base_1+"e" ; Pl => base_1+"ash" }
+          } ;
+          Def => table {
+            Nom   => table { Sg => base_1+"a" ; Pl => plDef } ;
+            Acc   => table { Sg => base_1+"ën" ; Pl => plDef } ;
+            Dat   => table { Sg => base_1+"ës" ; Pl => base_1+"ave" } ;
+            Ablat => table { Sg => base_1+"ës" ; Pl => base_1+"ave" }
+          }
+        } ;
+        g = Fem
+      }) ;
+    _ => error "Can't apply paradigm mkN249"
+  } ;
+
+mkN250 : Str -> N ;
+mkN250 base =
+  case base of {
+    base_1@(?+?)+"e"+base_2 => lin N
+      { s = table {
+              Indef => table {
+                         Nom => table { Sg => base_1+"e"+base_2 ; Pl => base_1+"a"+base_2+"ë" } ;
+                         Acc => table { Sg => base_1+"e"+base_2 ; Pl => base_1+"a"+base_2+"ë" } ;
+                         Dat => table { Sg => base_1+"e"+base_2+"i" ; Pl => base_1+"a"+base_2+"ëve" } ;
+                         Ablat => table { Sg => base_1+"e"+base_2+"i" ; Pl => base_1+"a"+base_2+"ësh" }
+                       } ;
+              Def => table {
+                       Nom => table { Sg => base_1+"e"+base_2+"i" ; Pl => base_1+"a"+base_2+"ët" } ;
+                       Acc => table { Sg => base_1+"e"+base_2+"in" ; Pl => base_1+"a"+base_2+"ët" } ;
+                       Dat => table { Sg => base_1+"e"+base_2+"it" ; Pl => base_1+"a"+base_2+"ëve" } ;
+                       Ablat => table { Sg => base_1+"e"+base_2+"it" ; Pl => base_1+"a"+base_2+"ëve" }
+                     }
+            } ;
+        g = Masc
+      };
+    _ => error "Can't apply paradigm mkN250"
+  } ;

@@ -1,0 +1,69 @@
+# RGL Types
+
+- Types: 64
+
+## Index
+- [`A`](Type_A.md) — one-place adjective
+- [`A2`](Type_A2.md) — two-place adjective
+- [`AdA`](Type_AdA.md) — adjective-modifying adverb
+- [`AdN`](Type_AdN.md) — numeral-modifying adverb
+- [`AdV`](Type_AdV.md) — adverb directly attached to verb
+- [`Adv`](Type_Adv.md) — verb-phrase-modifying adverb
+- [`Ant`](Type_Ant.md) — anteriority
+- [`AP`](Type_AP.md) — adjectival phrase
+- [`CAdv`](Type_CAdv.md) — comparative adverb
+- [`Card`](Type_Card.md) — cardinal number
+- [`Cl`](Type_Cl.md) — declarative clause, with all tenses
+- [`CN`](Type_CN.md) — common noun (without determiner)
+- [`Comp`](Type_Comp.md) — complement of copula, such as AP
+- [`Conj`](Type_Conj.md) — conjunction
+- [`DAP`](Type_DAP.md) — determiner with adjective
+- [`Det`](Type_Det.md) — determiner phrase
+- [`Digits`](Type_Digits.md) — cardinal or ordinal in digits
+- [`IAdv`](Type_IAdv.md) — interrogative adverb
+- [`IComp`](Type_IComp.md) — interrogative complement of copula
+- [`IDet`](Type_IDet.md) — interrogative determiner
+- [`Imp`](Type_Imp.md) — imperative
+- [`Interj`](Type_Interj.md) — interjection
+- [`IP`](Type_IP.md) — interrogative pronoun
+- [`N`](Type_N.md) — common noun
+- [`N2`](Type_N2.md) — relational noun
+- [`N3`](Type_N3.md) — three-place relational noun
+- [`NP`](Type_NP.md) — noun phrase (subject or object)
+- [`Num`](Type_Num.md) — number determining element
+- [`Numeral`](Type_Numeral.md) — cardinal or ordinal in words
+- [`Ord`](Type_Ord.md) — ordinal number (used in Det)
+- [`PConj`](Type_PConj.md) — phrase-beginning conjunction
+- [`Phr`](Type_Phr.md) — phrase in a text
+- [`PN`](Type_PN.md) — proper name
+- [`Pol`](Type_Pol.md) — polarity
+- [`Predet`](Type_Predet.md) — predeterminer (prefixed Quant)
+- [`Prep`](Type_Prep.md) — preposition, or just case
+- [`Pron`](Type_Pron.md) — personal pronoun
+- [`QCl`](Type_QCl.md) — question clause, with all tenses
+- [`QS`](Type_QS.md) — question
+- [`Quant`](Type_Quant.md) — quantifier ('nucleus' of Det)
+- [`RCl`](Type_RCl.md) — relative clause, with all tenses
+- [`RP`](Type_RP.md) — relative pronoun
+- [`RS`](Type_RS.md) — relative
+- [`S`](Type_S.md) — declarative sentence
+- [`SC`](Type_SC.md) — embedded sentence or question
+- [`Subj`](Type_Subj.md) — subjunction
+- [`Temp`](Type_Temp.md) — temporal and aspectual features
+- [`Tense`](Type_Tense.md) — tense
+- [`Text`](Type_Text.md) — text consisting of several phrases
+- [`Utt`](Type_Utt.md) — sentence, question, word...
+- [`V`](Type_V.md) — one-place verb
+- [`V2`](Type_V2.md) — two-place verb
+- [`V2A`](Type_V2A.md) — verb with NP and AP complement
+- [`V2Q`](Type_V2Q.md) — verb with NP and Q complement
+- [`V2S`](Type_V2S.md) — verb with NP and S complement
+- [`V2V`](Type_V2V.md) — verb with NP and V complement
+- [`V3`](Type_V3.md) — three-place verb
+- [`VA`](Type_VA.md) — adjective-complement verb
+- [`Voc`](Type_Voc.md) — vocative or "please"
+- [`VP`](Type_VP.md) — verb phrase
+- [`VPSlash`](Type_VPSlash.md) — verb phrase missing complement
+- [`VQ`](Type_VQ.md) — question-complement verb
+- [`VS`](Type_VS.md) — sentence-complement verb
+- [`VV`](Type_VV.md) — verb-phrase-complement verb

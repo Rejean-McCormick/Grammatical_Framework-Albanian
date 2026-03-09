@@ -1,0 +1,2848 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Aarne Ranta, Krasimir Angelov" />
+  <title>GF Language Reference Manual</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body class="bg-light">
+  <div class="bg-white pb-5">
+<div class="container-fluid py-5" style="max-width:1200px">
+
+<header id="title-block-header">
+<a href=".." title="Home">
+  <img src="../doc/Logos/gf1.svg" height="200" class="float-md-right ml-3 mb-3 bg-white" alt="GF Logo">
+</a>
+<h1 class="title">GF Language Reference Manual</h1>
+<p class="author">Aarne Ranta, Krasimir Angelov</p>
+<p class="date">June 2014, GF 3.6</p>
+</header>
+<nav id="TOC">
+  <!-- pandoc < 2.0 -->
+  <ul>
+  <li><a href="#overview-of-gf">Overview of GF</a></li>
+  <li><a href="#the-module-system">The module system</a><ul>
+  <li><a href="#top-level-and-supplementary-module-structure">Top-level and supplementary module structure</a></li>
+  <li><a href="#compilation-units">Compilation units</a></li>
+  <li><a href="#names">Names</a></li>
+  <li><a href="#the-structure-of-a-module">The structure of a module</a></li>
+  <li><a href="#module-types-headers-and-bodies">Module types, headers, and bodies</a></li>
+  <li><a href="#digression-the-logic-of-module-types">Digression: the logic of module types</a></li>
+  <li><a href="#inheritance">Inheritance</a></li>
+  <li><a href="#opening">Opening</a></li>
+  <li><a href="#name-resolution">Name resolution</a></li>
+  <li><a href="#functor-instantiations">Functor instantiations</a></li>
+  <li><a href="#completeness">Completeness</a></li>
+  </ul></li>
+  <li><a href="#judgements">Judgements</a><ul>
+  <li><a href="#overview-of-the-forms-of-judgement">Overview of the forms of judgement</a></li>
+  <li><a href="#category-declarations-cat">Category declarations, cat</a></li>
+  <li><a href="#hypotheses-and-contexts">Hypotheses and contexts</a></li>
+  <li><a href="#function-declarations-fun">Function declarations, fun</a></li>
+  <li><a href="#function-definitions-def">Function definitions, def</a></li>
+  <li><a href="#data-constructor-definitions-data">Data constructor definitions, data</a></li>
+  <li><a href="#the-semantic-status-of-an-abstract-syntax-function">The semantic status of an abstract syntax function</a></li>
+  <li><a href="#linearization-type-definitions-lincat">Linearization type definitions, lincat</a></li>
+  <li><a href="#linearization-definitions-lin">Linearization definitions, lin</a></li>
+  <li><a href="#linearization-default-definitions-lindef">Linearization default definitions, lindef</a></li>
+  <li><a href="#linearization-reference-definitions-linref">Linearization reference definitions, linref</a></li>
+  <li><a href="#printname-definitions-printname-cat-and-printname-fun">Printname definitions, printname cat and printname fun</a></li>
+  <li><a href="#parameter-type-definitions-param">Parameter type definitions, param</a></li>
+  <li><a href="#parameter-values">Parameter values</a></li>
+  <li><a href="#operation-definitions-oper">Operation definitions, oper</a></li>
+  <li><a href="#operation-overloading">Operation overloading</a></li>
+  <li><a href="#flag-definitions-flags">Flag definitions, flags</a></li>
+  </ul></li>
+  <li><a href="#types-and-expressions">Types and expressions</a><ul>
+  <li><a href="#overview-of-expression-forms">Overview of expression forms</a></li>
+  <li><a href="#the-functional-fragment-expressions-in-abstract-syntax">The functional fragment: expressions in abstract syntax</a></li>
+  <li><a href="#conversions">Conversions</a></li>
+  <li><a href="#syntax-trees">Syntax trees</a></li>
+  <li><a href="#predefined-types-in-abstract-syntax">Predefined types in abstract syntax</a></li>
+  <li><a href="#overview-of-expressions-in-concrete-syntax">Overview of expressions in concrete syntax</a></li>
+  <li><a href="#values-canonical-forms-and-run-time-variables">Values, canonical forms, and run-time variables</a></li>
+  <li><a href="#token-lists-tokens-and-strings">Token lists, tokens, and strings</a></li>
+  <li><a href="#records-and-record-types">Records and record types</a></li>
+  <li><a href="#subtyping">Subtyping</a></li>
+  <li><a href="#list-categories">List categories</a></li>
+  <li><a href="#tables-and-table-types">Tables and table types</a></li>
+  <li><a href="#pattern-matching">Pattern matching</a></li>
+  <li><a href="#free-variation">Free variation</a></li>
+  <li><a href="#local-definitions">Local definitions</a></li>
+  <li><a href="#function-applications-in-concrete-syntax">Function applications in concrete syntax</a></li>
+  <li><a href="#reusing-top-level-grammars-as-resources">Reusing top-level grammars as resources</a></li>
+  <li><a href="#predefined-concrete-syntax-types">Predefined concrete syntax types</a></li>
+  <li><a href="#predefined-concrete-syntax-operations">Predefined concrete syntax operations</a></li>
+  </ul></li>
+  <li><a href="#flags-and-pragmas">Flags and pragmas</a><ul>
+  <li><a href="#some-flags-and-their-values">Some flags and their values</a></li>
+  <li><a href="#compiler-pragmas">Compiler pragmas</a></li>
+  </ul></li>
+  <li><a href="#alternative-grammar-input-formats">Alternative grammar input formats</a><ul>
+  <li><a href="#old-gf-without-modules">Old GF without modules</a></li>
+  <li><a href="#context-free-grammars">Context-free grammars</a></li>
+  <li><a href="#extended-bnf-grammars">Extended BNF grammars</a></li>
+  <li><a href="#example-based-grammars">Example-based grammars</a></li>
+  </ul></li>
+  <li><a href="#the-grammar-of-gf">The grammar of GF</a></li>
+  <li><a href="#the-lexical-structure-of-gf">The lexical structure of GF</a><ul>
+  <li><a href="#identifiers">Identifiers</a></li>
+  <li><a href="#literals">Literals</a></li>
+  <li><a href="#reserved-words-and-symbols">Reserved words and symbols</a></li>
+  <li><a href="#comments">Comments</a></li>
+  </ul></li>
+  <li><a href="#the-syntactic-structure-of-gf">The syntactic structure of GF</a></li>
+  </ul>
+</nav>
+<p>This document is a reference manual to the GF programming language. GF, Grammatical Framework, is a special-purpose programming language, designed to support definitions of grammars.</p>
+<p>This document is not an introduction to GF; such introduction can be found in the GF tutorial available on line on the GF web page,</p>
+<p><a href="http://grammaticalframework.org"><code>grammaticalframework.org</code></a></p>
+<p>This manual covers only the language, not the GF compiler or interactive system. We will however make some references to different compiler versions, if they involve changes of behaviour having to do with the language specification.</p>
+<p>This manual is meant to be fully compatible with GF version 3.0. Main discrepancies with version 2.8 are indicated, as well as with the reference article on GF,</p>
+<p>A. Ranta, &quot;Grammatical Framework. A Type Theoretical Grammar Formalism&quot;, <em>The Journal of Functional Programming</em> 14(2), 2004, pp. 145-189.</p>
+<p>This article will referred to as &quot;the JFP article&quot;.</p>
+<p>As metalinguistic notation, we will use the symbols</p>
+<ul>
+<li><em>a</em> === <em>b</em> to say that <em>a</em> is syntactic sugar for <em>b</em></li>
+<li><em>a</em> ==&gt; <em>b</em> to say that <em>a</em> is computed (or compiled) to <em>b</em></li>
+</ul>
+<h2 id="overview-of-gf">Overview of GF</h2>
+<p>GF is a typed functional language, borrowing many of its constructs from ML and Haskell: algebraic datatypes, higher-order functions, pattern matching. The module system bears resemblance to ML (functors) but also to object-oriented languages (inheritance). The type theory used in the abstract syntax part of GF is inherited from logical frameworks, in particular ALF (&quot;Another Logical Framework&quot;; in a sense, GF is Yet Another ALF). From ALF comes also the use of dependent types, including the use of explicit type variables instead of Hindley-Milner polymorphism.</p>
+<p>The look and feel of GF is close to Java and C, due to the use of curly brackets and semicolons in structuring the code; the expression syntax, however, follows Haskell in using juxtaposition for function application and parentheses only for grouping.</p>
+<p>To understand the constructs of GF, and especially their limitations in comparison to general-purpose programming languages, it is essential to keep in mind that GF is a special-purpose and non-turing-complete language. Every GF program is ultimately compiled to a <strong>multilingual grammar</strong>, which consists of an <strong>abstract syntax</strong> and a set of <strong>concrete syntaxes</strong>. The abstract syntax defines a system of <strong>syntax trees</strong>, and each concrete syntax defines a mapping from those syntax trees to <strong>nested tuples</strong> of strings and integers. This mapping is <strong>compositional</strong>, i.e. <strong>homomorphic</strong>, and moreover <strong>reversible</strong>: given a nested tuple, there exists an effective way of finding the set of syntax trees that map to this tuple. The procedure of applying the mapping to a tree to produce a tuple is called <strong>linearization</strong>, and the reverse search procedure is called <strong>parsing</strong>. It is ultimately the requirement of reversibility that restricts GF to be less than turing-complete. This is reflected in restrictions to recursion in concrete syntax. Tree formation in abstract syntax, however, is fully recursive.</p>
+<p>Even though run-time GF grammars manipulate just nested tuples, at compile time these are represented by the more fine-grained labelled records and finite functions over algebraic datatypes. This enables the programmer to write on a higher abstraction level, and also adds type distinctions and hence raises the level of checking of programs.</p>
+<h2 id="the-module-system">The module system</h2>
+<h3 id="top-level-and-supplementary-module-structure">Top-level and supplementary module structure</h3>
+<p>The big picture of GF as a programming language for multilingual grammars explains its principal module structure. Any GF grammar must have an abstract syntax module; it can in addition have any number of concrete syntax modules matching that abstract syntax. Before going to details, we give a simple example: a module defining the <strong>category</strong> <code>A</code> of adjectives and one adjective-forming <strong>function</strong>, the zero-place function <code>Even</code>. We give the module the name <code>Adj</code>. The GF code for the module looks as follows:</p>
+<pre><code>    abstract Adj = {
+      cat A ;
+      fun Even : A ;
+    }</code></pre>
+<p>Here are two concrete syntax modules, one intended for mapping the trees to English, the other to Swedish. The mapping is defined by <code>lincat</code> definitions assigning a <strong>linearization type</strong> to each category, and <code>lin</code> definitions assigning a <strong>linearization</strong> to each function.</p>
+<pre><code>    concrete AdjEng of Adj = {
+      lincat A = {s : Str} ;
+      lin Even = {s = &quot;even&quot;} ;
+    }
+
+    concrete AdjSwe of Adj = {
+      lincat A = {s : AForm =&gt; Str} ;
+      lin Even = {s = table {
+        ASg Utr   =&gt; &quot;jämn&quot; ;
+        ASg Neutr =&gt; &quot;jämnt&quot; ;
+        APl       =&gt; &quot;jämna&quot;
+        }
+      } ;
+      param AForm = ASg Gender | APl ;
+      param Gender = Utr | Neutr ;
+    }</code></pre>
+<p>These examples illustrate the main ideas of multilingual grammars:</p>
+<ul>
+<li>the concrete syntax must match the abstract syntax:
+<ul>
+<li>every <code>cat</code> is given a <code>lincat</code></li>
+<li>every <code>fun</code> is given a <code>lin</code></li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li>the concrete syntax is internally coherent:
+<ul>
+<li>the <code>lin</code> rules respect the types defined by <code>lincat</code> rules</li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li>concrete syntaxes are independent of each other
+<ul>
+<li>they can use different <code>lincat</code> and <code>lin</code> definitions</li>
+<li>they can define their own <strong>parameter types</strong> (<code>param</code>)</li>
+</ul></li>
+</ul>
+<p>The first two ideas form the core of the <strong>static checking</strong> of GF grammars, eliminating the possibility of run-time errors in linearization and parsing. The third idea gives GF the expressive power needed to map abstract syntax to vastly different languages.</p>
+<p>Abstract and concrete modules are called <strong>top-level grammar modules</strong>, since they are the ones that remain in grammar systems at run time. However, in order to support <strong>modular grammar engineering</strong>, GF provides much more module structure than strictly required in top-level grammars.</p>
+<p><strong>Inheritance</strong>, also known as <strong>extension</strong>, means that a module can inherit the contents of one or more other modules to which new judgements are added, e.g.</p>
+<pre><code>    abstract MoreAdj = Adj ** {
+      fun Odd : A ;
+    }</code></pre>
+<p><strong>Resource modules</strong> define parameter types and <strong>operations</strong> usable in several concrete syntaxes,</p>
+<pre><code>    resource MorphoFre = {
+      param Number = Sg | Pl ;
+      param Gender = Masc | Fem ;
+      oper regA : Str -&gt; {s : Gender =&gt; Number =&gt; Str} =
+        \fin -&gt; {
+          s = table {
+            Masc =&gt; table {Sg =&gt; fin ; Pl =&gt; fin + &quot;s&quot;} ;
+            Fem  =&gt; table {Sg =&gt; fin + &quot;e&quot; ; Pl =&gt; fin + &quot;es&quot;}
+          }
+        } ;
+    }</code></pre>
+<p>By <strong>opening</strong>, a module can use the contents of a resource module without inheriting them, e.g.</p>
+<pre><code>    concrete AdjFre of Adj = open MorphoFre in {
+      lincat A = {s : Gender =&gt; Number =&gt; Str} ;
+      lin Even = regA &quot;pair&quot; ;
+    }</code></pre>
+<p><strong>Interfaces</strong> and <strong>instances</strong> separate the contents of a resource module to type signatures and definitions, in a way analogous to abstract vs. concrete modules, e.g.</p>
+<pre><code>    interface Lexicon = {
+      oper Adjective : Type ;
+      oper even_A : Adjective ;
+    }
+
+    instance LexiconEng of Lexicon = {
+      oper Adjective = {s : Str} ;
+      oper even_A = {s = &quot;even&quot;} ;
+    }</code></pre>
+<p><strong>Functors</strong> i.e. <strong>parametrized modules</strong> i.e. <strong>incomplete modules</strong>, defining a concrete syntax in terms of an interface.</p>
+<pre><code>    incomplete concrete AdjI of Adj = open Lexicon in {
+      lincat A = Adjective ;
+      lin Even = even_A ;
+    }</code></pre>
+<p>A functor can be <strong>instantiated</strong> by providing instances of its open interfaces.</p>
+<pre><code>    concrete AdjEng of Adj = AdjI with (Lexicon = LexiconEng) ;</code></pre>
+<h3 id="compilation-units">Compilation units</h3>
+<p>The compilation unit of GF source code is a file that contains a module. Judgements outside modules are supported only for backward compatibility, as explained <a href="#oldgf">here</a>. Every source file, suffixed <code>.gf</code>, is compiled to a &quot;GF object file&quot;, suffixed <code>.gfo</code> (as of GF Version 3.0 and later). For runtime grammar objects used for parsing and linearization, a set of <code>.gfo</code> files is linked to a single file suffixed <code>.pgf</code>. While <code>.gf</code> and <code>.gfo</code> files may contain modules of any kinds, a <code>.pgf</code> file always contains a multilingual grammar with one abstract and a set of concrete syntaxes.</p>
+<p>The following diagram summarizes the files involved in the compilation process.</p>
+<p><code>module1.gf module2.gf ... modulen.gf</code></p>
+<p>==&gt;</p>
+<p><code>module1.gfo module2.gfo ... modulen.gfo</code></p>
+<p>==&gt;</p>
+<p>grammar.pgf</p>
+<p>Both <code>.gf</code> and <code>.gfo</code> files are written in the GF source language; <code>.pgf</code> files are written in a lower-level format. The process of translating <code>.gf</code> to <code>.gfo</code> consists of <strong>name resolution</strong>, <strong>type annotation</strong>, <strong>partial evaluation</strong>, and <strong>optimization</strong>. There is a great advantage in the possibility to do this separately for GF modules and saving the result in <code>.gfo</code> files. The partial evaluation phase, in particular, is time and memory consuming, and GF libraries are therefore distributed in <code>.gfo</code> to make their use less arduous.</p>
+<p><em>In GF before version 3.0, the object files are in a format called <code>.gfc</code>,</em> <em>and the multilingual runtime grammar is in a format called <code>.gfcm</code>.</em></p>
+<p>The standard compiler has a built-in <strong>make facility</strong>, which finds out what other modules are needed when compiling an explicitly given module. This facility builds a dependency graph and decides which of the involved modules need recompilation (from <code>.gf</code> to <code>.gfo</code>), and for which the GF object can be used directly.</p>
+<h3 id="names">Names</h3>
+<p>Each module <em>M</em> defines a set of <strong>names</strong>, which are visible in <em>M</em> itself, in all modules extending <em>M</em> (unless excluded, as explained <a href="#restrictedinheritance">here</a>), and all modules opening <em>M</em>. These names can stand for abstract syntax categories and functions, parameter types and parameter constructors, and operations. All these names live in the same <strong>name space</strong>, which means that a name entering a module more than once due to inheritance or opening can lead to a <strong>conflict</strong>. It is specified <a href="#renaming">here</a> how these conflicts are resolved.</p>
+<p>The names of modules live in a name space separate from the other names. Even here, all names must be distinct in a set of files compiled to a multilingual grammar. In particular, even files residing in different directories must have different names, since GF has no notion of hierarchic module names.</p>
+<p>Lexically, names belong to the class of <strong>identifiers</strong>. An idenfifier is a letter followed by any number of letters, digits, undercores (<code>_</code>) and primes (<code>'</code>). Upper- and lower-case letters are treated as distinct. Nothing dictates the choice of upper or lower-case initials, but the standard libraries follow conventions similar to Haskell:</p>
+<ul>
+<li>upper case is used for modules, abstract syntax categories and functions, parameter types and constructors, and type synonyms</li>
+<li>lower case is used for non-type-valued operations and for variables</li>
+</ul>
+<p><span id="identifiers"></span></p>
+<p>&quot;Letters&quot; as mentioned in the identifier syntax include all 7-bit ASCII letters. Iso-latin-1 and Unicode letters are supported in varying degrees by different tools and platforms, and are hence not recommended in identifiers.</p>
+<h3 id="the-structure-of-a-module">The structure of a module</h3>
+<p>Modules of all types have the following structure:</p>
+<p><em>moduletype</em> <em>name</em> <code>=</code> <em>extends</em> <em>opens</em> <em>body</em></p>
+<p>The part of the module preceding the body is its <strong>header</strong>. The header defines the type of the module and tells what other modules it inherits and opens. The body consists of the judgements that introduce all the new names defined by the module.</p>
+<p>Any of the parts <em>extends</em>, <em>opens</em>, and <em>body</em> may be empty. If they are all filled, delimiters and keywords separate the parts in the following way:</p>
+<p><em>moduletype</em> <em>name</em> <code>=</code> <em>extends</em> <code>**</code> <code>open</code> <em>opens</em> <code>in</code> <code>{</code> <em>body</em> <code>}</code></p>
+<p>The part <em>moduletype</em> <em>name</em> looks slightly different if the type is <code>concrete</code> or <code>instance</code>: the <em>name</em> intrudes between the type keyword and the name of the module being implemented and which really belongs to the type of the module:</p>
+<p><code>concrete</code> <em>name</em> <code>of</code> <em>abstractname</em></p>
+<p>The only exception to the schema of functor syntax is functor instantiations: the instantiation list is given in a special way between <em>extends</em> and <em>opens</em>:</p>
+<p><code>incomplete concrete</code> <em>name</em> <code>of</code> <em>abstractname</em> <code>=</code> <em>extends</em> <code>**</code> <em>functorname</em> <code>with</code> <em>instantiations</em> <code>**</code> <code>open</code> <em>opens</em> <code>in</code> <code>{</code> <em>body</em> <code>}</code></p>
+<p>Logically, the part &quot;<em>functorname</em> <code>with</code> <em>instantiations</em>&quot; should really be one of the <em>extends</em>. This is also shown by the fact that it can have restricted inheritance (concept defined <a href="#restrictedinheritance">here</a>).</p>
+<h3 id="module-types-headers-and-bodies">Module types, headers, and bodies</h3>
+<p>The <em>extends</em> and <em>opens</em> parts of a module header are lists of module names (with possible qualifications, as defined below <a href="#qualifiednames">here</a>). The first step of type checking a module consists of verifying that these names stand for modules of approptiate module types. As a rule of thumb,</p>
+<ul>
+<li>the <em>extends</em> of a module must have the same <em>moduletype</em></li>
+<li>the <em>opens</em> of a module must be of type <code>resource</code></li>
+</ul>
+<p>However, the precise rules are a little more fine-grained, because of the presence of interfaces and their instances, and the possibility to reuse abstract and concrete modules as resources. The following table gives, for all module types, the possible module types of their <em>extends</em> and <em>opens</em>, as well as the forms of judgement legal in that module type.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">module type</th>
+<th style="text-align: left;">extends</th>
+<th style="text-align: left;">opens</th>
+<th style="text-align: left;">body</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>abstract</code></td>
+<td style="text-align: left;">abstract</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>cat, fun, def, data</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>concrete of</code> <em>abstract</em></td>
+<td style="text-align: left;">concrete</td>
+<td style="text-align: left;">resource*</td>
+<td style="text-align: left;"><code>lincat, cat, oper, param</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>resource</code></td>
+<td style="text-align: left;">resource*</td>
+<td style="text-align: left;">resource*</td>
+<td style="text-align: left;"><code>oper, param</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>interface</code></td>
+<td style="text-align: left;">resource+</td>
+<td style="text-align: left;">resource*</td>
+<td style="text-align: left;"><code>oper, param</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>instance of</code> <em>interface</em></td>
+<td style="text-align: left;">resource*</td>
+<td style="text-align: left;">resource*</td>
+<td style="text-align: left;"><code>oper, param</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>incomplete</code> concrete</td>
+<td style="text-align: left;">concrete+</td>
+<td style="text-align: left;">resource+</td>
+<td style="text-align: left;"><code>lincat, cat, oper, param</code></td>
+</tr>
+</tbody>
+</table>
+<p>The table uses the following shorthands for lists of module types:</p>
+<ul>
+<li>resource*: resource, instance, concrete</li>
+<li>resource+: resource*, interface, abstract</li>
+<li>concrete+: concrete, incomplete concrete</li>
+</ul>
+<p>The legality of judgements in the body is checked before the judgements themselves are checked.</p>
+<p>The forms of judgement are explained <a href="#judgementforms">here</a>.</p>
+<h3 id="digression-the-logic-of-module-types">Digression: the logic of module types</h3>
+<p>Why are the legality conditions of opens and extends so complicated? The best way to grasp them is probably to consider a simplified logical model of the module system, replacing modules by types and functions. This model could actually be developed towards treating modules in GF as first-class objects; so far, however, this step has not been motivated by any practical needs.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">module</th>
+<th style="text-align: left;">object and type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">abstract A = B</td>
+<td style="text-align: left;">A = B : type</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">concrete C of A = B</td>
+<td style="text-align: left;">C = B : A -&gt; S</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">interface I = B</td>
+<td style="text-align: left;">I = B : type</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">instance J of I = B</td>
+<td style="text-align: left;">J = B : I</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">incomplete concrete C of A = open I in B</td>
+<td style="text-align: left;">C = B : I -&gt; A -&gt; S</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">concrete K of A = C with (I=J)</td>
+<td style="text-align: left;">K = B(J) : A -&gt; S</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">resource R = B</td>
+<td style="text-align: left;">R = B : I</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">concrete C of A = open R in B</td>
+<td style="text-align: left;">C = B(R) : A -&gt; S</td>
+</tr>
+</tbody>
+</table>
+<p>A further step of defining modules as first-class objects would use GADTs and record types:</p>
+<ul>
+<li>an abstract syntax is a Generalized Algebraic Datatype (GADT)</li>
+<li>the target type <code>S</code> of concrete syntax is the type of nested tuples over strings and integers</li>
+<li>an interface is a labelled record type</li>
+<li>an instance is a record of the type defined by the interface</li>
+<li>a functor, with a module body opening an interface, is a function on its instances</li>
+<li>the instantiation of a functor is an application of the function to some instance</li>
+<li>a resource is a typed labelled record, putting together an interface and an instance of it</li>
+<li>the body of a module opening a resource is as a function on the interface implicit in the resource; this function is immediately applied to the instance defined in the resource</li>
+</ul>
+<p>Slightly unexpectedly, interfaces and instances are easier to understand in this way than resources - a resource is, indeed, more complex, since it fuses together an interface and an instance.</p>
+<p><span id="openabstract"></span></p>
+<p>When an abstract is used as an interface and a concrete as its instance, they are actually reinterpreted so that they match the model. Then the abstract is no longer a GADT, but a system of <em>abstract</em> datatypes, with a record field of type <code>Type</code> for each category, and a function among these types for each abstract syntax function. A concrete syntax instantiates this record with linearization types and linearizations.</p>
+<h3 id="inheritance">Inheritance</h3>
+<p>After checking that the <em>extends</em> of a module are of appropriate module types, the compiler adds the inherited judgements to the judgements included in the body. The inherited judgements are not copied entirely, but their names with links to the inherited module. Conflicts may arise in this process: a name can have two definitions in the combined pool of inherited and added judgements. Such a conflict is always an error: GF provides no way to redefine an inherited constant.</p>
+<p>Simple as the definition of a conflict may sound, it has to take care of the inheritance hierarchy. A very common pattern of inheritance is the <strong>diamond</strong>: inheritance from two modules which themselves inherit a common base module. Assume that the base module defines a name <code>f</code>:</p>
+<pre><code>            N
+          /   \
+        M1     M2
+          \   /
+          Base {f}</code></pre>
+<p>Now, <code>N</code> inherits <code>f</code> from both <code>M1</code> and <code>M2</code>, so is there a conflict? The answer in GF is <em>no</em>, because the &quot;two&quot; <code>f</code>'s are in the end the same: the one defined in <code>Base</code>. The situation is thus simpler than in <strong>multiple inheritance</strong> in languages like C++, because definitions in GF are <strong>immutable</strong>: neither <code>M1</code> nor <code>M2</code> can possibly have changed the definition of <code>f</code> given in <code>Base</code>. In practice, the compiler manages inheritance through hierarchy in a very simple way, by just always creating a link not to the immediate parent, but the original ancestor; this ancestor can be read from the link provided by the immediate parent. Here is how links are created from source modules by the compiler:</p>
+<pre><code>    Base {f}
+    M1 {m1}   ===&gt;  M1 {Base.f, m1}
+    M2 {m2}   ===&gt;  M2 {Base.f, m2}
+    N  {n}    ===&gt;  N  {Base.f, M1.m1, M2.m2, n}</code></pre>
+<p><span id="restrictedinheritance"></span></p>
+<p>Inheritance can be <strong>restricted</strong>. This means that a module can be specified as inheriting <em>only</em> explicitly listed constants, or all constants <em>except</em> ones explicitly listed. The syntax uses constant names in brackets, prefixed by a minus sign in the case of an exclusion list. In the following configuration, N inherits <code>a,b,c</code> from <code>M1</code>, and all names but <code>d</code> from <code>M2</code></p>
+<pre><code>    N = M1 {a,b,c}, M2-{d}</code></pre>
+<p>Restrictions are performed as a part of inheritance linking, module by module: the link is created for a constant if and only if it is both included in the module and compatible with the restriction. Thus, for instance, an inadvertent usage can exclude a constant from one module but inherit it from another one. In the following configuration, <code>f</code> is inherited via <code>M1</code>, if <code>M1</code> inherits it.</p>
+<pre><code>    N = M1 [a,b,c], M2-[f]</code></pre>
+<p>Unintended inheritance may cause problems later in compilation, in the judgement-level dependency analysis phase. For instance, suppose a function <code>f</code> has category <code>C</code> as its type in <code>M</code>, and we only include <code>f</code>. The exclusion has the effect of creating an ill-formed module:</p>
+<pre><code>    abstract M = {cat C ; fun f : C ;}
+    M [f]   ===&gt; {fun f : C ;}</code></pre>
+<p>One might expect inheritance restriction to be transitive: if an included constant <em>b</em> depends on some other constant <em>a</em>, then <em>a</em> should be included automatically. However, this rule would leave to hard-to-detect inheritances. And it could only be applied later in the compilation phase, when the compiler has not only collected the names defined, but also resolved the names used in definitions.</p>
+<p>Yet another pitfall with restricted inheritance is that it must be stated for each module separately. For instance, a concrete syntax of an abstract must exclude all those names that the abstract does, and a functor instantiation must replicate all restrictions of the functor.</p>
+<h3 id="opening">Opening</h3>
+<p>Opening makes constants from other modules usable in judgements, without inheriting them. This means that, unlike inheritance, opening is not transitive.</p>
+<p><span id="qualifiednames"></span></p>
+<p>Opening cannot be restricted as inheritance can, but it can be <strong>qualified</strong>. This means that the names from the opened modules cannot be used as such, but only as prefixed by a qualifier and a dot (<code>.</code>). The qualifier can be any identifier, including the name of the module. Here is an example of an <em>opens</em> list:</p>
+<pre><code>    open A, (X = XSLTS), (Y = XSLTS), B</code></pre>
+<p>If <code>A</code> defines the constant <code>a</code>, it can be accessed by the names</p>
+<pre><code>    a  A.a</code></pre>
+<p>If <code>XSLTS</code> defines the constant <code>x</code>, it can be accessed by the names</p>
+<pre><code>    X.x  Y.x  XSLTS.x</code></pre>
+<p>Thus qualification by real module name is always possible, and one and the same module can be qualified in different ways at the same time (the latter can be useful if you want to be able to change the implementations of some constants to a different resource later). Since the qualification with real module name is always possible, it is not possible to &quot;swap&quot; the names of modules locally:</p>
+<pre><code>    open (A=B), (B=A) -- NOT POSSIBLE!</code></pre>
+<p>The list of qualifiers names and module names in a module header may thus not contain any duplicates.</p>
+<h3 id="name-resolution">Name resolution</h3>
+<p><span id="renaming"></span></p>
+<p><strong>Name resolution</strong> is the compiler phase taking place after inheritance linking. It qualifies all names occurring in the definition parts of judgements (that is, just excluding the defined names themselves) with the names of the modules they come from. If a name can come from different modules (that is, not from their common ancestor), a conflict is reported; this decision is hence not dependent on e.g. types, which are known only at a later phase.</p>
+<p>Qualification of names is the main device for avoiding conflicts in name resolution. No other information is used, such as priorities between modules. However, if a name is defined in different opened modules but never used in the module body, a conflict does not arise: conflicts arise only when names are used. Also in this respect, opening is thus different from inheritance, where conflicts are checked independently of use.</p>
+<p>As usual, inner scope has priority in name resolution. This means that if an identifier is in scope as a bound variable, it will not be interpreted as a constant, unless qualified by a module name (variable bindings are explained <a href="#variablebinding">here</a>).</p>
+<h3 id="functor-instantiations">Functor instantiations</h3>
+<p>We have dealt with the principles of module headers, inheritance, and names in a general way that applies to all module types. The exception is functor instantiations, that have an extra part of the instantiating equations, assigning an instance to every interface. Here is a typical example, displaying the full generality:</p>
+<pre><code>    concrete FoodsEng of Foods = PhrasesEng **
+      FoodsI-[Pizza] with
+        (Syntax = SyntaxEng),
+        (LexFoods = LexFoodsEng) **
+      open SyntaxEng, ParadigmsEng in {
+        lin Pizza = mkCN (mkA &quot;Italian&quot;) (mkN &quot;pie&quot;) ;
+    }</code></pre>
+<p>(The example is modified from Section 5.9 in the GF Tutorial.)</p>
+<p>The instantiation syntax is similar to qualified <em>opens</em>. The left-hand-side names must be interfaces, the right-hand-side names their instances. (Recall that <code>abstract</code> can be use as <code>interface</code> and <code>concrete</code> as its <code>instance</code>.) Inheritance from the functor can be restricted, typically in the purpose of defining some excluded functions in language-specific ways in the module body.</p>
+<h3 id="completeness">Completeness</h3>
+<p>(This section refers to the forms of judgement introduced <a href="#judgementforms">here</a>.)</p>
+<p>A <code>concrete</code> is complete with respect to an <code>abstract</code>, if it contains a <code>lincat</code> definition for every <code>cat</code> declaration, and a <code>lin</code> definition for every <code>fun</code> declaration.</p>
+<p>The same completeness criterion applies to functor instantiations. It is not possible to use a partial functor instantiation, leading to another functor.</p>
+<p>Functors do not need to be complete in the sense concrete modules need. The missing definitions can then be provided in the body of each functor instantiation.</p>
+<p>A <code>resource</code> is complete, if all its <code>oper</code> and <code>param</code> judgements have a definition part. While a <code>resource</code> must be complete, an <code>interface</code> need not. For an <code>interface</code>, it is the definition parts of judgements are optional.</p>
+<p>An <code>instance</code> is complete with respect to an <code>interface</code>, if it gives the definition parts of all <code>oper</code> and <code>param</code> judgements that are omitted in the <code>interface</code>. Giving definitions to judgements that have already been defined in the <code>interface</code> is illegal. Type signatures, on the other hand, can be repeated if the same types are used.</p>
+<p>In addition to completing the definitions in an <code>interface</code>, its instance may contain other judgements, but these must all be complete with definitions.</p>
+<p>Here is an example of an instance and its interface showing the above variations:</p>
+<pre><code>    interface Pos = {
+      param Case ;                 -- no definition
+      param Number = Sg | Pl ;     -- definition given
+      oper Noun : Type = {         -- relative definition given
+        s : Number =&gt; Case =&gt; Str
+      } ;
+      oper regNoun : Str -&gt; Noun ; -- no definition
+    }
+
+    instance PosEng of Pos = {
+      param Case = Nom | Gen ;     -- definition of Case
+                                   -- Number and Noun inherited
+      oper regNoun = \dog -&gt; {     -- type of regNoun inherited
+        s = table {                -- definition of regNoun
+          Sg =&gt; table {
+            Nom =&gt; dog
+            -- etc
+          }
+        } ;
+      oper house_N : Noun =        -- new definition
+        regNoun &quot;house&quot; ;
+    }</code></pre>
+<h2 id="judgements">Judgements</h2>
+<h3 id="overview-of-the-forms-of-judgement">Overview of the forms of judgement</h3>
+<p><span id="judgementforms"></span></p>
+<p>A module body in GF is a set of <strong>judgements</strong>. Judgements are definitions or declarations, sometimes combinations of the two; the common feature is that every judgement introduces a name, which is available in the module and whenever the module is extended or opened.</p>
+<p>There are several different <strong>forms of judgement</strong>, identified by different <strong>judgement keywords</strong>. Here is a list of all these forms, together with syntax descriptions and the types of modules in which each form can occur. The table moreover indicates whether the judgement has a default value, and whether it contributes to the <strong>name base</strong>, i.e. introduces a new name to the scope.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">judgement</th>
+<th style="text-align: left;">where</th>
+<th style="text-align: left;">module</th>
+<th style="text-align: left;">default</th>
+<th style="text-align: left;">base</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>cat</code> C G</td>
+<td style="text-align: left;">G context</td>
+<td style="text-align: left;">abstract</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>fun</code> f : A</td>
+<td style="text-align: left;">A type</td>
+<td style="text-align: left;">abstract</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>def</code> f ps = t</td>
+<td style="text-align: left;">f fun, ps patterns, t term</td>
+<td style="text-align: left;">abstract</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>data</code> C = f <code>|</code> ... <code>|</code> g</td>
+<td style="text-align: left;">C cat, f...g fun</td>
+<td style="text-align: left;">abstract</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>lincat</code> C = T</td>
+<td style="text-align: left;">C cat, T type</td>
+<td style="text-align: left;">concrete*</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>lin</code> f = t</td>
+<td style="text-align: left;">f fun, t term</td>
+<td style="text-align: left;">concrete*</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>lindef</code> C = t</td>
+<td style="text-align: left;">C cat, t term</td>
+<td style="text-align: left;">concrete*</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>linref</code> C = t</td>
+<td style="text-align: left;">C cat, t term</td>
+<td style="text-align: left;">concrete*</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>printname cat</code> C = t</td>
+<td style="text-align: left;">C cat, t term</td>
+<td style="text-align: left;">concrete*</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>printname fun</code> f = t</td>
+<td style="text-align: left;">f fun, t term</td>
+<td style="text-align: left;">concrete*</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>param</code> P = C<code>|</code> ... <code>|</code> D</td>
+<td style="text-align: left;">C...D constructors</td>
+<td style="text-align: left;">resource*</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>oper</code> f : T = t</td>
+<td style="text-align: left;">T type, t term</td>
+<td style="text-align: left;">resource*</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>flags</code> o = v</td>
+<td style="text-align: left;">o flag, v value</td>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">N/A</td>
+</tr>
+</tbody>
+</table>
+<p>Judgements that have default values are rarely used, except <code>lincat</code> and <code>flags</code>, which often need values different from the defaults.</p>
+<p>Introducing a name twice in the same module is an error. In other words, all judgements that have a &quot;yes&quot; in the name base column, must have distinct identifiers on their left-hand sides.</p>
+<p>All judgement end with semicolons (<code>;</code>).</p>
+<p>In addition to the syntax given in the table, many of the forms have syntactic sugar. This sugar will be explained below in connection to each form. There are moreover two kinds of syntactic sugar common to all forms:</p>
+<ul>
+<li>the judgement keyword is shared between consecutive judgements until a new keyword appears: <code>keyw J ; K ;</code> === <code>keyw J ; keyw K ;</code></li>
+<li>the right-hand sides of colon (<code>:</code>) and equality (<code>=</code>) can be shared, by using comma (<code>,</code>) as separator of left-hand sides, which must consist of identifiers <code>c,d : T</code> === <code>c : T ; d : T ;</code> <code>c,d = t</code> === <code>c = t ; d = t ;</code></li>
+</ul>
+<p>These conventions, like all syntactic sugar, are performed at an early compilation phase, directly after parsing. This means that e.g.</p>
+<pre><code>    lin f,g = \x -&gt; x ;</code></pre>
+<p>can be correct even though <code>f</code> and <code>g</code> required different function types.</p>
+<p>Within a module, judgements can occur in any order. In particular, a name can be used before it is introduced.</p>
+<p>The explanations of judgement forms refer to the notions of <strong>type</strong> and <strong>term</strong> (the latter also called <strong>expression</strong>). These notions will be explained in detail <a href="#expressions">here</a>.</p>
+<h3 id="category-declarations-cat">Category declarations, cat</h3>
+<p><span id="catjudgements"></span></p>
+<p>Category declarations</p>
+<p><code>cat</code> <em>C</em> <em>G</em></p>
+<p>define the <strong>basic types</strong> of abstract syntax. A basic type is formed from a category by giving values to all variables in the <strong>context</strong> <em>G</em>. If the context is empty, the basic type looks the same as the category itself. Otherwise, application syntax is used:</p>
+<p><em>C</em> <em>a</em><sub>1</sub>...<em>a</em><sub>n</sub></p>
+<h3 id="hypotheses-and-contexts">Hypotheses and contexts</h3>
+<p><span id="contexts"></span></p>
+<p>A context is a sequence of <strong>hypotheses</strong>, i.e. variable-type pairs. A hypothesis is written</p>
+<p><code>(</code> <em>x</em> <code>:</code> <em>T</em> <code>)</code></p>
+<p>and a sequence does not have any separator symbols. As syntactic sugar,</p>
+<ul>
+<li>variables can share a type, <code>(</code> <em>x,y</em> <code>:</code> <em>T</em> <code>)</code> === <code>(</code> <em>x</em> <code>:</code> <em>T</em> <code>)</code> <code>(</code> <em>y</em> <code>:</code> <em>T</em> <code>)</code></li>
+<li>a <strong>wildcard</strong> can be used for a variable not occurring in types later in the context, <code>(</code> <code>_</code> <code>:</code> <em>T</em> <code>)</code> === <code>(</code> <em>x</em> <code>:</code> <em>T</em> <code>)</code></li>
+<li>if the variable does not occur later, it can be omitted altogether, and parentheses are not used, <em>T</em> === <code>(</code> <em>x</em> <code>:</code> <em>T</em> <code>)</code> But if <em>T</em> is more complex than an identifier, it needs parentheses to be separated from the rest of the context.</li>
+</ul>
+<p>An abstract syntax has <strong>dependent types</strong>, if any of its categories has a non-empty context.</p>
+<h3 id="function-declarations-fun">Function declarations, fun</h3>
+<p>Function declarations,</p>
+<p><code>fun</code> <em>f</em> <code>:</code> <em>T</em></p>
+<p>define the <strong>syntactic constructors</strong> of abstract syntax. The type <em>T</em> of <em>f</em> is built built from basic types (formed from categories) by using the function type constructor <code>-&gt;</code>. Thus its form is</p>
+<p>(<em>x</em><sub>1</sub> <code>:</code> <em>A</em><sub>1</sub>) <code>-&gt;</code> ... <code>-&gt;</code> (<em>x</em><sub>n</sub> <code>:</code> <em>A</em><sub>n</sub>) <code>-&gt;</code> <em>B</em></p>
+<p>where <em>Ai</em> are types, called the <strong>argument types</strong>, and <em>B</em> is a basic type, called the <strong>value type</strong> of <em>f</em>. The <strong>value category</strong> of <em>f</em> is the category that forms the type <em>B</em>.</p>
+<p>A <strong>syntax tree</strong> is formed from <em>f</em> by applying it to a full list of arguments, so that the result is of a basic type.</p>
+<p>A <strong>higher-order function</strong> is one that has a function type as an argument. The concrete syntax of GF does not support displaying the bound variables of functions of higher than second order, but they are legal in abstract syntax.</p>
+<p>An abstract syntax is <strong>context-free</strong>, if it has neither dependent types nor higher-order functions. Grammars with context-free abstract syntax are an important subclass of GF, with more limited complexity than full GF. Whether the <em>concrete</em> syntax is context-free in the sense of the Chomsky hierarchy is independent of the context-freeness of the abstract syntax.</p>
+<h3 id="function-definitions-def">Function definitions, def</h3>
+<p>Function definitions,</p>
+<p><code>def</code> <em>f</em> <em>p</em><sub>1</sub> ... <em>p</em><sub>n</sub> <code>=</code> <em>t</em></p>
+<p>where <em>f</em> is a <code>fun</code> function and <em>p</em><sub>i</sub># are patterns, impose a relation of <strong>definitional equality</strong> on abstract syntax trees. They form the basis of <strong>computation</strong>, which is used when comparing whether two types are equal; this notion is relevant only if the types are dependent. Computation can also be used for the <strong>normalization</strong> of syntax trees, which applies even in context-free abstract syntax.</p>
+<p>The set of <code>def</code> definitions for <em>f</em> can be scattered around the module in which <em>f</em> is introduced as a function. The compiler builds the set of pattern equations in the order in which the equations appear; this order is significant in the case of overlapping patterns. All equations must appear in the same module in which <em>f</em> itself declared.</p>
+<p>The syntax of patterns will be specified <a href="#patternmatching">here</a>, commonly for abstract and concrete syntax. In abstract syntax, <strong>constructor patterns</strong> are those of the form</p>
+<p><em>C</em> <em>p</em><sub>1</sub> ... <em>p</em><sub>n</sub></p>
+<p>where <em>C</em> is declared as <code>data</code> for some abstract syntax category (see next section). A <strong>variable pattern</strong> is either an identifier or a wildcard.</p>
+<p>A common pitfall is to forget to declare a constructor as data, which causes it to be interpreted as a variable pattern in definitions.</p>
+<p>Computation is performed by applying definitions and beta conversions, and in general by using <strong>pattern matching</strong>. Computation and pattern matching are explained commonly for abstract and concrete syntax <a href="#patternmatching">here</a>.</p>
+<p>In contrast to concrete syntax, abstract syntax computation is completely <strong>symbolic</strong>: it does not produce a value, but just another term. Hence it is not an error to have incomplete systems of pattern equations for a function. In addition, the definitions can be <strong>recursive</strong>, which means that computation can fail to terminate; this can never happen in concrete syntax.</p>
+<h3 id="data-constructor-definitions-data">Data constructor definitions, data</h3>
+<p>A data constructor definition,</p>
+<p><code>data</code> <em>C</em> <code>=</code> <em>f</em><sub>1</sub> <code>|</code> ... <code>|</code> <em>f</em><sub>n</sub></p>
+<p>defines the functions <em>f1</em>...<em>fn</em> to be <strong>constructors</strong> of the category <em>C</em>. This means that they are recognized as constructor patterns when used in function definitions.</p>
+<p>In order for the data constructor definition to be correct, <em>f</em><sub>1</sub>...<em>f</em><sub>n</sub> must be functions with <em>C</em> as their value category.</p>
+<p>The complete set of constructors for a category <em>C</em> is the union of all its data constructor definitions. Thus a category can be &quot;extended&quot; by new constructors afterwards. However, all these constructor definitions must appear in the same module in which the category is itself defined.</p>
+<p>There is syntactic sugar for declaring a function as a constructor at the same time as introducing it:</p>
+<p><code>data</code> <em>f</em> : <em>A</em><sub>1</sub> <code>-&gt;</code> ... <code>-&gt;</code> <em>A</em><sub>n</sub> <code>-&gt;</code> <em>C</em> <em>t</em><sub>1</sub> ... <em>t</em><sub>m</sub></p>
+<p>===</p>
+<p><code>fun</code> <em>f</em> : <em>A</em><sub>1</sub> <code>-&gt;</code> ... <code>-&gt;</code> <em>A</em><sub>n</sub> <code>-&gt;</code> <em>C</em> <em>t</em><sub>1</sub> ... <em>t</em><sub>m</sub> ; <code>data</code> <em>C</em> = <em>f</em></p>
+<h3 id="the-semantic-status-of-an-abstract-syntax-function">The semantic status of an abstract syntax function</h3>
+<p>There are three possible statuses for a function declared in a <code>fun</code> judgement:</p>
+<ul>
+<li>primitive notion: the default status</li>
+<li>constructor: the function appears on the right-hand side in <code>data</code> judgement</li>
+<li>defined: the function has a <code>def</code> definition</li>
+</ul>
+<p>The &quot;constructor&quot; and &quot;defined&quot; statuses are in contradiction with each other, whereas the primitive notion status is overridden by any of the two others.</p>
+<p>This distinction is relevant for the semantics of abstract syntax, not for concrete syntax. It shows in the way patterns are treated in equations in <code>def</code> definitions: a constructor in a pattern matches only itself, whereas any other name is treated as a variable pattern, which matches anything.</p>
+<h3 id="linearization-type-definitions-lincat">Linearization type definitions, lincat</h3>
+<p>A linearization type definition,</p>
+<p><code>lincat</code> <em>C</em> <code>=</code> <em>T</em></p>
+<p>defines the type of linearizations of trees whose type has category <em>C</em>. Type dependences have no effect on the linearization type.</p>
+<p>The type <em>T</em> must be a <strong>legal linearization type</strong>, which means that it is a <em>record type</em> whose fields have either parameter types, the type Str of strings, or table or record types of these. In particular, function types may not appear in <em>T</em>. A detailed explanation of types in concrete syntax will be given <a href="#cnctypes">here</a>.</p>
+<p>If <em>K</em> is the concrete syntax of an abstract syntax <em>A</em>, then <em>K</em> must define the linearization type of all categories declared in <em>A</em>. However, the definition can be omitted from the source code, in which case the default type <code>{s : Str}</code> is used.</p>
+<h3 id="linearization-definitions-lin">Linearization definitions, lin</h3>
+<p>A linearization definition,</p>
+<p><code>lin</code> <em>f</em> <code>=</code> <em>t</em></p>
+<p>defines the linearizations function of function <em>f</em>, i.e. the function used for linearizing trees formed by <em>f</em>.</p>
+<p>The type of <em>t</em> must be the homomorphic image of the type of <em>f</em>. In other words, if</p>
+<p><code>fun</code> <em>f</em> <code>:</code> <em>A</em><sub>1</sub> <code>-&gt;</code> ... <code>-&gt;</code> <em>A</em><sub>n</sub> <code>-&gt;</code> <em>A</em></p>
+<p>then</p>
+<p><code>lin</code> <em>f</em> <code>:</code> <em>A</em><sub>1</sub>* <code>-&gt;</code> ... <code>-&gt;</code> <em>A</em><sub>n</sub>* <code>-&gt;</code> <em>A</em>*</p>
+<p>where the type <em>T</em>* is defined as follows depending on <em>T</em>:</p>
+<ul>
+<li>(<em>C</em> <em>t</em><sub>1</sub> ... <em>t</em><sub>n</sub>)* = <em>T</em>, if <code>lincat</code> <em>C</em> <code>=</code> <em>T</em></li>
+<li>(<em>B</em><sub>1</sub> <code>-&gt;</code> ... <code>-&gt;</code> <em>B</em><sub>m</sub> <code>-&gt;</code> <em>B</em>)* = <em>B</em>* <code>** {$0,...,$m : Str}</code></li>
+</ul>
+<p>The second case is relevant for higher-order functions only. It says that the linearization type of the value type is extended by adding a string field for each argument types; these fields store the variable symbol used for the binding of each variable.</p>
+<p><span id="HOAS"></span></p>
+<p>Since the arguments of a function argument are treated as bare strings, orders higher than the second are irrelevant for concrete syntax.</p>
+<p>There is syntactic sugar for binding the variables of the linearization of a function on the left-hand side:</p>
+<p><code>lin</code> <em>f</em> <em>p</em> <code>=</code> <em>t</em> === <code>lin</code> <em>f</em> <code>= \</code><em>p</em> <code>-&gt;</code> <em>t</em></p>
+<p>The pattern <em>p</em> must be either a variable or a wildcard (<code>_</code>); this is what the syntax of lambda abstracts (<code>\p -&gt; t</code>) requires.</p>
+<h3 id="linearization-default-definitions-lindef">Linearization default definitions, lindef</h3>
+<p><span id="lindefjudgements"></span></p>
+<p>A linearization default definition,</p>
+<p><code>lindef</code> <em>C</em> <code>=</code> <em>t</em></p>
+<p>defines the default linearization of category <em>C</em>, i.e. the function applicable to a string to make it into an object of the linearization type of <em>C</em>.</p>
+<p>Linearization defaults are invoked when linearizing variable bindings in higher-order abstract syntax. A variable symbol is then presented as a string, which must be converted to correct type in order for the linearization not to fail with an error.</p>
+<p>The other use of the defaults is for linearizing metavariables and abstract functions without linearization in the concrete syntax. In the first case the default linearization is applied to the string <code>&quot;?X&quot;</code> where <code>X</code> is the unique index of the metavariable, and in the second case the string is <code>&quot;[f]&quot;</code> where <code>f</code> is the name of the abstract function with missing linearization.</p>
+<p>Usually, linearization defaults are generated by using the default rule that &quot;uses the symbol itself for every string, and the first value of the parameter type for every parameter&quot;. The precise definition is by structural recursion on the type:</p>
+<ul>
+<li>default(Str,s) = s</li>
+<li>default(P,s) = #1(P)</li>
+<li>default(P =&gt; T,s) = <code>\\_ =&gt;</code> default(T,s)</li>
+<li>default(<code>{</code>... ; r : R ; ...<code>}</code>,s) = <code>{</code>... ; r : default(R,s) ; ...<code>}</code></li>
+</ul>
+<p>The notion of the first value of a parameter type (#1(P)) is defined <a href="#paramvalues">below</a>.</p>
+<h3 id="linearization-reference-definitions-linref">Linearization reference definitions, linref</h3>
+<p><span id="linrefjudgements"></span></p>
+<p>A linearization reference definition,</p>
+<p><code>linref</code> <em>C</em> <code>=</code> <em>t</em></p>
+<p>defines the reference linearization of category <em>C</em>, i.e. the function applicable to an object of the linearization type of <em>C</em> to make it into a string.</p>
+<p>The reference linearization is always applied to the top-level node of the abstract syntax tree. For example when we linearize the tree <code>f x1 x2 .. xn</code>, then we first apply <code>f</code> to its arguments which gives us an object of the linearization type of its category. After that we apply the reference linearization for the same category to get a string out of the object. This is particularly useful when the linearization type of <em>C</em> contains discontious constituents. In this case usually the reference linearization glues the constituents together to produce an intuitive linearization string.</p>
+<p>The reference linearization is also used for linearizing metavariables which stand in function position. For example the tree <code>f (? x1 x2 .. xn)</code> is linearized as follows. Each of the arguments <code>x1 x2 .. xn</code> is linearized, and after that the reference linearization of the its category is applied to the output of the linearization. The result is a sequence of <code>n</code> strings which are concatenated into a single string. The final string is the input to the default linearization of the category for the argument of <code>f</code>. After applying the default linearization we get an object that we could safely pass to <code>f</code>.</p>
+<p>Usually, linearization references are generated by using the rule that &quot;picks the first string in the linearization type&quot;. The precise definition is by structural recursion on the type:</p>
+<ul>
+<li>reference(Str,o) = Just o</li>
+<li>reference(P,s) = Nothing</li>
+<li>reference(P =&gt; T,o) = reference(T,o ! #1(P)) || reference(T,o ! #2(P)) || ... || reference(T,o ! #n(P))</li>
+<li>reference({r1 : R1; ... rn : Rn},o) = reference(R1, o.r1) || reference(R2, o.r2) || ... || reference(Rn, o.rn)</li>
+</ul>
+<p>Here each call to reference returns either <code>(Just o)</code> or <code>Nothing</code>. When we compute the reference for a table or a record then we pick the reference for the first expression for which the recursive call gives us <code>Just</code>. If we get <code>Nothing</code> for all of them then the final result is <code>Nothing</code> too.</p>
+<h3 id="printname-definitions-printname-cat-and-printname-fun">Printname definitions, printname cat and printname fun</h3>
+<p>A category printname definition,</p>
+<p><code>printname cat</code> <em>C</em> <code>=</code> <em>s</em></p>
+<p>defines the printname of category <em>C</em>, i.e. the name used in some abstract syntax information shown to the user.</p>
+<p>Likewise, a function printname definition,</p>
+<p><code>printname fun</code> <em>f</em> <code>=</code> <em>s</em></p>
+<p>defines the printname of function <em>f</em>, i.e. the name used in some abstract syntax information shown to the user.</p>
+<p>The most common use of printnames is in the interactive syntax editor, where printnames are displayed in menus. It is possible e.g. to adapt them to each language, or to embed HTML tooltips in them (as is used in some HTML-based editor GUIs).</p>
+<p>Usually, printnames are generated automatically from the symbol and/or concrete syntax information.</p>
+<h3 id="parameter-type-definitions-param">Parameter type definitions, param</h3>
+<p><span id="paramjudgements"></span></p>
+<p>A parameter type definition,</p>
+<p><code>param</code> <em>P</em> <code>=</code> <em>C</em><sub>1</sub> <em>G</em><sub>1</sub> <code>|</code> ... <code>|</code> <em>C</em><sub>n</sub> <em>G</em><sub>n</sub></p>
+<p>defines a parameter type <em>P</em> with the <strong>parameter constructors</strong> <em>C</em><sub>1</sub>...<em>C</em><sub>n</sub>, with their respective contexts <em>G</em><sub>1</sub>...<em>G</em><sub>n</sub>.</p>
+<p><span id="paramtypes"></span></p>
+<p>Contexts have the same syntax as in <code>cat</code> judgements, explained <a href="#catjudgements">here</a>. Since dependent types are not available in parameter type definitions, the use of variables is never necessary. The types in the context must themselves be <strong>parameter types</strong>, which are defined as follows:</p>
+<ul>
+<li>Given the judgement <code>param</code> <em>P</em> ..., <em>P</em> is a parameter type.</li>
+<li>A record type of parameter types is a parameter type.</li>
+<li><code>Ints</code> <em>n</em> (an initial segment of integers) is a parameter type.</li>
+</ul>
+<p>The names defined by a parameter type definition include both the type name <em>P</em> and the constructor names <em>C</em><sub>i</sub>. Therefore all these names must be distinct in a module.</p>
+<p>A parameter type may not be recursive, i.e. <em>P</em> itself may not occur in the contexts of its constructors. This restriction extends to mutual recursion: we say that <em>P</em> <strong>depends</strong> on the types that occur in the contexts of its constructors and on all types that those types depend on, and state that <em>P</em> may not depend on itself.</p>
+<p>In an <code>interface module</code>, it is possible to declare a parameter type without defining it,</p>
+<p><code>param</code> <em>P</em> <code>;</code></p>
+<h3 id="parameter-values">Parameter values</h3>
+<p><span id="paramvalues"></span></p>
+<p>All parameter types are finite, and the GF compiler will internally compute them to <strong>lists of parameter values</strong>. These lists are formed by traversing the <code>param</code> definitions, usually respecting the order of constructors in the source code. For records, bibliographical sorting is applied. However, both the order of traversal of <code>param</code> definitions and the order of fields in a record are specified in a compiler-internal way, which means that the programmer should not rely on any particular order.</p>
+<p>The order of the list of parameter values can affect the program in two cases:</p>
+<ul>
+<li>in the default <code>lindef</code> definition (<a href="#lindefjudgements">here</a>), the first value is chosen</li>
+<li>in course-of-value tables (<a href="#tables">here</a>), the compiler-internal order is followed</li>
+</ul>
+<p>The first usage implies that, if <code>lindef</code> definitions are essential for the application, they should be given manually. The second usage implies that course-of-value tables should be avoided in hand-written GF code.</p>
+<p>In run-time grammar generation, all parameter values are translated to integers denotions positions in these parameter lists.</p>
+<h3 id="operation-definitions-oper">Operation definitions, oper</h3>
+<p>An operation definition,</p>
+<p><code>oper</code> <em>h</em> <code>:</code> <em>T</em> <code>=</code> <em>t</em></p>
+<p>defines an <strong>operation</strong> <em>h</em> of type <em>T</em>, with the computation rule</p>
+<p><em>h</em> ==&gt; <em>t</em></p>
+<p>The type <em>T</em> can be any concrete syntax type, including function types of any order. The term <em>t</em> must have the type <em>T</em>, as defined <a href="#expressions">here</a>.</p>
+<p>As syntactic sugar, the type can be omitted,</p>
+<p><code>oper</code> <em>h</em> <code>=</code> <em>t</em></p>
+<p>which works in two cases</p>
+<ul>
+<li>the type can be inferred from <em>t</em> (compiler-dependent)</li>
+<li>the definition occurs in an <code>instance</code> and the type is given in the <code>interface</code></li>
+</ul>
+<p>It is also possible to give the type and the definition separately:</p>
+<p><code>oper</code> <em>h</em> <code>:</code> <em>T</em> ; <code>oper</code> <em>h</em> <code>=</code> <em>t</em> === <code>oper</code> <em>h</em> <code>:</code> <em>T</em> <code>=</code> <em>t</em></p>
+<p>The order of the type part and the definition part is free, and there can be other judgements in between. However, they must occur in the same <code>resource</code> module for it to be complete (as defined <a href="#completeness">here</a>). In an <code>interface</code> module, it is enough to give the type.</p>
+<p>When only the definition is given, it is possible to use a shorthand similar to <code>lin</code> judgements:</p>
+<p><code>oper</code> <em>h</em> <em>p</em> <code>=</code> <em>t</em> === <code>oper</code> <em>h</em> <code>=</code> <code>\</code><em>p</em> <code>-&gt;</code> <em>t</em></p>
+<p>The pattern <em>p</em> is either a variable or a wildcard (<code>_</code>).</p>
+<p>Operation definitions may not be recursive, not even mutually recursive. This condition ensures that functions can in the end be eliminated from concrete syntax code (as explained <a href="#functionelimination">here</a>).</p>
+<h3 id="operation-overloading">Operation overloading</h3>
+<p><span id="overloading"></span></p>
+<p>One and the same operation name <em>h</em> can be used for different operations, which have to have different types. For each call of <em>h</em>, the type checker selects one of these operations depending on what type is expected in the context of the call. The syntax of overloaded operation definitions is</p>
+<p><code>oper</code> <em>h</em> <code>= overload {</code><em>h</em> : <em>T</em><sub>1</sub> = <em>t</em><sub>1</sub> ; ... ; <em>h</em> : <em>T</em><sub>n</sub> = <em>t</em><sub>n</sub><code>}</code></p>
+<p>Notice that <em>h</em> must be the same in all cases. This format can be used to give the complete implementation; to give just the types, e.g. in an interface, one can use the form</p>
+<p><code>oper</code> <em>h</em> <code>: overload {</code><em>h</em> : <em>T</em><sub>1</sub> ; ... ; <em>h</em> : <em>T</em><sub>n</sub><code>}</code></p>
+<p>The implementation of this operation typing is given by a judgement of the first form. The order of branches need not be the same.</p>
+<h3 id="flag-definitions-flags">Flag definitions, flags</h3>
+<p>A flag definition,</p>
+<p><code>flags</code> <em>o</em> <code>=</code> <em>v</em></p>
+<p>sets the value of the flag <em>o</em>, to be used when compiling or using the module.</p>
+<p>The flag <em>o</em> is an identifier, and the value <em>v</em> is either an identifier or a quoted string.</p>
+<p>Flags are a kind of metadata, which do not strictly belong to the GF language. For instance, compilers do not necessarily check the consistency of flags, or the meaningfulness of their values. The inheritance of flags is not well-defined; the only certain rule is that flags set in the module body override the settings from inherited modules.</p>
+<p>Here are some flags commonly included in grammars.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">flag</th>
+<th style="text-align: left;">value</th>
+<th style="text-align: left;">description</th>
+<th style="text-align: left;">module</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>coding</code></td>
+<td style="text-align: left;">character encoding</td>
+<td style="text-align: left;">encoding used in string literals</td>
+<td style="text-align: left;">concrete</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>startcat</code></td>
+<td style="text-align: left;">category</td>
+<td style="text-align: left;">default target of parsing</td>
+<td style="text-align: left;">abstract</td>
+</tr>
+</tbody>
+</table>
+<p>The possible values of these flags are specified <a href="#flagvalues">here</a>. Note that the <code>lexer</code> and <code>unlexer</code> flags are deprecated. If you need their functionality, you should use supply them to GF shell commands like so:</p>
+<pre><code>put_string -lextext &quot;страви, напої&quot; | parse</code></pre>
+<p>A summary of their possible values can be found at the <a href="http://www.grammaticalframework.org/doc/gf-shell-reference.html">GF shell reference</a>.</p>
+<h2 id="types-and-expressions">Types and expressions</h2>
+<h3 id="overview-of-expression-forms">Overview of expression forms</h3>
+<p><span id="expressions"></span></p>
+<p>Like many dependently typed languages, GF makes no syntactic distinction between expressions and types. An illegal use of a type as an expression or vice versa comes out as a type error. Whether a variable, for instance, stands for a type or an expression value, can only be resolved from its context of use.</p>
+<p>One practical consequence of the common syntax is that global and local definitions (<code>oper</code> judgements and <code>let</code> expressions, respectively) work in the same way for types and expressions. Thus it is possible to abbreviate a type occurring in a type expression:</p>
+<pre><code>    let A = {s : Str ; b : Bool} in A -&gt; A -&gt; A</code></pre>
+<p>Type and other expressions have a system of <strong>precedences</strong>. The following table summarizes all expression forms, from the highest to the lowest precedence. Some expressions are moreover left- or right-associative.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">prec</th>
+<th style="text-align: left;">expression example</th>
+<th style="text-align: left;">explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>c</code></td>
+<td style="text-align: left;">constant or variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>Type</code></td>
+<td style="text-align: left;">the type of types</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>PType</code></td>
+<td style="text-align: left;">the type of parameter types</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>Str</code></td>
+<td style="text-align: left;">the type of strings/token lists</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>&quot;foo&quot;</code></td>
+<td style="text-align: left;">string literal</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>123</code></td>
+<td style="text-align: left;">integer literal</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>0.123</code></td>
+<td style="text-align: left;">floating point literal</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>?</code></td>
+<td style="text-align: left;">metavariable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>[]</code></td>
+<td style="text-align: left;">empty token list</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>[C a b]</code></td>
+<td style="text-align: left;">list category</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>[&quot;foo bar&quot;]</code></td>
+<td style="text-align: left;">token list</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>{&quot;s : Str ; n : Num}</code></td>
+<td style="text-align: left;">record type</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>{&quot;s = &quot;foo&quot; ; n = Sg}</code></td>
+<td style="text-align: left;">record</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>&lt;Sg,Fem,Gen&gt;</code></td>
+<td style="text-align: left;">tuple</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>&lt;n : Num&gt;</code></td>
+<td style="text-align: left;">type-annotated expression</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6 left</td>
+<td style="text-align: left;"><code>t.r</code></td>
+<td style="text-align: left;">projection or qualification</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5 left</td>
+<td style="text-align: left;"><code>f a</code></td>
+<td style="text-align: left;">function application</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><code>table {Sg =&gt; [] ; _ =&gt; &quot;xs&quot;}</code></td>
+<td style="text-align: left;">table</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><code>table P [a ; b ; c]</code></td>
+<td style="text-align: left;">course-of-values table</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><code>case n of {Sg =&gt; [] ; _ =&gt; &quot;xs&quot;}</code></td>
+<td style="text-align: left;">case expression</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><code>variants {&quot;color&quot; ; &quot;colour&quot;}</code></td>
+<td style="text-align: left;">free variation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><code>pre {vowel =&gt; &quot;an&quot; ; _ =&gt; &quot;a&quot;}</code></td>
+<td style="text-align: left;">prefix-dependent choice</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4 left</td>
+<td style="text-align: left;"><code>t ! v</code></td>
+<td style="text-align: left;">table selection</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4 left</td>
+<td style="text-align: left;"><code>A * B</code></td>
+<td style="text-align: left;">tuple type</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4 left</td>
+<td style="text-align: left;"><code>R ** {b : Bool}</code></td>
+<td style="text-align: left;">record (type) extension</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3 left</td>
+<td style="text-align: left;"><code>t + s</code></td>
+<td style="text-align: left;">token gluing</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2 left</td>
+<td style="text-align: left;"><code>t ++ s</code></td>
+<td style="text-align: left;">token list concatenation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1 right</td>
+<td style="text-align: left;"><code>\x,y -&gt; t</code></td>
+<td style="text-align: left;">function abstraction (&quot;lambda&quot;)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1 right</td>
+<td style="text-align: left;"><code>\\x,y =&gt; t</code></td>
+<td style="text-align: left;">table abstraction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1 right</td>
+<td style="text-align: left;"><code>(x : A) -&gt; B</code></td>
+<td style="text-align: left;">dependent function type</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1 right</td>
+<td style="text-align: left;"><code>A -&gt; B</code></td>
+<td style="text-align: left;">function type</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1 right</td>
+<td style="text-align: left;"><code>P =&gt; T</code></td>
+<td style="text-align: left;">table type</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1 right</td>
+<td style="text-align: left;"><code>let x = v in t</code></td>
+<td style="text-align: left;">local definition</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><code>t where {x = v}</code></td>
+<td style="text-align: left;">local definition</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><code>in M.C &quot;foo&quot;</code></td>
+<td style="text-align: left;">rule by example</td>
+</tr>
+</tbody>
+</table>
+<p>Any expression in parentheses (<code>(</code><em>exp</em><code>)</code>) is in the highest precedence class.</p>
+<h3 id="the-functional-fragment-expressions-in-abstract-syntax">The functional fragment: expressions in abstract syntax</h3>
+<p><span id="functiontype"></span></p>
+<p>The expression syntax is the same in abstract and concrete syntax, although only a part of the syntax is actually usable in well-typed expressions in abstract syntax. An abstract syntax is essentially used for defining a set of types and a set of functions between those types. Therefore it needs essentially the <strong>functional fragment</strong> of the syntax. This fragment comprises two kinds of types:</p>
+<ul>
+<li><strong>basic types</strong>, of form <em>C a1...an</em> where
+<ul>
+<li><code>cat</code> <em>C</em> (<em>x</em><sub>1</sub> : <em>A</em><sub>1</sub>)...(<em>x</em><sub>n</sub> : <em>A</em><sub>n</sub>), including the predefined categories <code>Int</code>, <code>Float</code>, and <code>String</code> explained <a href="#predefabs">here</a></li>
+<li><em>a</em><sub>1</sub> : <em>A</em><sub>1</sub>,...,<em>a</em><sub>n</sub> : <em>A</em><sub>n</sub>{<em>x</em><sub>1</sub> = <em>a</em><sub>1</sub>,...,<em>x</em><sub>n-1</sub>=<em>a</em><sub>n-1</sub>}</li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>function types</strong>, of form (<em>x</em> : <em>A</em>) <code>-&gt;</code> <em>B</em>, where
+<ul>
+<li><em>A</em> is a type</li>
+<li><em>B</em> is a type possibly depending on <em>x</em> : <em>A</em></li>
+</ul></li>
+</ul>
+<p>When defining basic types, we used the notation <em>t</em>{<em>x</em><sub>1</sub> = <em>t</em><sub>1</sub>,...,<em>x</em><sub>n</sub>=<em>t</em><sub>n</sub>} for the <strong>substitution</strong> of values to variables. This is a metalevel notation, which denotes a term that is formed by replacing the free occurrences of each variable <em>x</em><sub>i</sub> by <em>t</em><sub>i</sub>.</p>
+<p>These types have six kinds of expressions:</p>
+<ul>
+<li><strong>constants</strong>, <em>f</em> : <em>A</em> where
+<ul>
+<li><code>fun</code> <em>f</em> : <em>A</em></li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>literals</strong> for integers, floats, and strings (defined in <a href="#predefabs">here</a>)</li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>variables</strong>, <em>x</em> : <em>A</em> where
+<ul>
+<li><em>x</em> has been introduced by a binding</li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>applications</strong>, <em>f a</em> : <em>B</em>{<em>x</em>=<em>a</em>}, where
+<ul>
+<li><em>f</em> : (<em>x</em> : <em>A</em>) <code>-&gt;</code> <em>B</em></li>
+<li><em>a</em> : <em>A</em></li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>abstractions</strong>, <code>\</code><em>x</em> <code>-&gt;</code> <em>b</em> : (<em>x</em> : <em>A</em>) <code>-&gt;</code> <em>B</em>, where
+<ul>
+<li><em>b</em> : <em>B</em> possibly depending on <em>x</em> : <em>A</em></li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>metavariables</strong>, <code>?</code>, as introduced in intermediate phases of incremental type checking; metavariables are not permitted in GF source code</li>
+</ul>
+<p><span id="variablebinding"></span></p>
+<p>The notion of <strong>binding</strong> is defined for occurrences of variables in subexpressions as follows:</p>
+<ul>
+<li>in (<em>x</em> : <em>A</em>) <code>-&gt;</code> <em>B</em>, <em>x</em> is bound in <em>B</em></li>
+<li>in <code>\</code><em>x</em> <code>-&gt;</code> <em>b</em>, <em>x</em> is bound in <em>b</em></li>
+<li>in <code>def</code> <em>f</em> <em>p</em><sub>1</sub> ... <em>p</em><sub>n</sub> = <em>t</em>, any pattern variable introduced in any <em>pi</em> is bound in <em>t</em> (as defined <a href="#patternmatching">here</a>)</li>
+</ul>
+<p>As syntactic sugar, function types have sharing of types and suppression of variables, in the same way as contexts (defined <a href="#contexts">here</a>):</p>
+<ul>
+<li>variables can share a type, <code>(</code> <em>x,y</em> <code>:</code> <em>A</em> <code>)</code> <code>-&gt;</code> <em>B</em> === <code>(</code> <em>x</em> <code>:</code> <em>A</em> <code>) -&gt; (</code> <em>y</em> <code>:</code> <em>A</em> <code>) -&gt;</code> <em>B</em></li>
+<li>a <strong>wildcard</strong> can be used for a variable not occurring later in the type, <code>(</code> <code>_</code> <code>:</code> <em>A</em> <code>) -&gt;</code> <em>B</em> === <code>(</code> <em>x</em> <code>:</code> <em>T</em> <code>) -&gt;</code> <em>B</em></li>
+<li>if the variable does not occur later, it can be omitted altogether, and parentheses are not used, <em>A</em> <code>-&gt;</code> <em>B</em> === <code>(</code> <em>_</em> <code>:</code> <em>A</em> <code>) -&gt;</code> <em>B</em></li>
+</ul>
+<p>There is analogous syntactic sugar for constant functions,</p>
+<p><code>\</code><em>_</em> <code>-&gt;</code> <em>t</em> === <code>\</code><em>x</em> <code>-&gt;</code> <em>t</em></p>
+<p>where <em>x</em> does not occur in <em>t</em>, and for multiple lambda abstractions:</p>
+<p><code>\</code><em>p,q</em> <code>-&gt;</code> <em>t</em> === <code>\</code><em>p</em> <code>-&gt;</code> <code>\</code><em>q</em> <code>-&gt;</code> <em>t</em></p>
+<p>where <em>p</em> and <em>q</em> are variables or wild cards (<code>_</code>).</p>
+<h3 id="conversions">Conversions</h3>
+<p>Among expressions, there is a relation of <strong>definitional equality</strong> defined by four <strong>conversion rules</strong>:</p>
+<ul>
+<li><strong>alpha conversion</strong>: <code>\</code><em>x</em> <code>-&gt;</code> <em>b</em> = <code>\</code><em>y</em> <code>-&gt;</code> <em>b</em>{<em>x</em>=<em>y</em>}</li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>beta conversion</strong>: (<code>\</code><em>x</em> <code>-&gt;</code> <em>b</em>) <em>a</em> = <em>b</em>{<em>x</em>=<em>a</em>}</li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>delta conversion</strong>: <em>f</em> <em>a</em><sub>1</sub> ... <em>a</em><sub>n</sub> = <em>tg</em>, if
+<ul>
+<li>there is a definition <code>def</code> <em>f</em> <em>p</em><sub>1</sub> ... <em>p</em><sub>n</sub> = <em>t</em></li>
+<li>this definition is the first for <em>f</em> that matches the sequence <em>a</em><sub>1</sub> .... <em>a</em><sub>n</sub>, with the substitution <em>g</em></li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>eta conversion</strong>: <em>c</em> = <code>\</code><em>x</em> <code>-&gt;</code> <em>c x</em>, if <em>c</em> : (<em>x</em> : <em>A</em>) <code>-&gt;</code> <em>B</em></li>
+</ul>
+<p>Pattern matching substitution used in delta conversion is defined <a href="#patternmatching">here</a>.</p>
+<p>An expression is in <strong>beta-eta-normal form</strong> if</p>
+<ul>
+<li>it has no subexpressions to which beta conversion applies (beta normality)</li>
+<li>each constant or variable whose type is a function type must be <strong>eta-expanded</strong>, i.e. made into an abstract equal to it by eta conversion (eta normality)</li>
+</ul>
+<p>Notice that the iteration of eta expansion would lead to an expression not in beta-normal form.</p>
+<h3 id="syntax-trees">Syntax trees</h3>
+<p><span id="syntaxtrees"></span></p>
+<p>The <strong>syntax trees</strong> defined by an abstract syntax are well-typed expressions of basic types in beta-eta normal form. Linearization defined in concrete syntax applies to all and only these expressions.</p>
+<p>There is also a direct definition of syntax trees, which does not refer to beta and eta conversions: keeping in mind that a type always has the form</p>
+<p>(<em>x</em><sub>1</sub> : <em>A</em><sub>1</sub>) <code>-&gt;</code> ... <code>-&gt;</code> (<em>x</em><sub>n</sub> : <em>A</em><sub>n</sub>) <code>-&gt;</code> <em>B</em></p>
+<p>where <em>Ai</em> are types and <em>B</em> is a basic type, a syntax tree is an expression</p>
+<p><em>b</em> <em>t</em><sub>1</sub> ... <em>t</em><sub>n</sub> : <em>B'</em></p>
+<p>where</p>
+<ul>
+<li><em>B'</em> is the basic type <em>B</em>{<em>x</em><sub>1</sub> = <em>t</em><sub>1</sub>,...,<em>x</em><sub>n</sub> = <em>t</em><sub>n</sub>}</li>
+<li><code>fun</code> <em>b</em> : (<em>x</em><sub>1</sub> : <em>A</em><sub>1</sub>) <code>-&gt;</code> ... <code>-&gt;</code> (<em>x</em><sub>n</sub> : <em>A</em><sub>n</sub>) <code>-&gt;</code> <em>B</em></li>
+<li>each <em>t</em><sub>i</sub> has the form <code>\</code><em>z</em><sub>1</sub>,...,<em>z</em><sub>m</sub> <code>-&gt;</code> <em>c</em> where <em>A</em><sub>i</sub> is (<em>y</em><sub>1</sub> : <em>B</em><sub>1</sub>) <code>-&gt;</code> ... <code>-&gt;</code> (<em>y</em><sub>m</sub> : <em>B</em><sub>m</sub>) <code>-&gt;</code> <em>B</em></li>
+</ul>
+<h3 id="predefined-types-in-abstract-syntax">Predefined types in abstract syntax</h3>
+<p><span id="predefabs"></span></p>
+<p>GF provides three predefined categories for abstract syntax, with predefined expressions:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">category</th>
+<th style="text-align: left;">expressions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>Int</code></td>
+<td style="text-align: left;">integer literals, e.g. <code>123</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>Float</code></td>
+<td style="text-align: left;">floating point literals, e.g. <code>12.34</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: left;">string literals, e.g. <code>&quot;foo&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<p>These categories take no arguments, and they can be used as basic types in the same way as if they were introduced in <code>cat</code> judgements. However, it is not legal to define <code>fun</code> functions that have any of these types as value type: their only well-typed expressions are literals as defined in the above table.</p>
+<h3 id="overview-of-expressions-in-concrete-syntax">Overview of expressions in concrete syntax</h3>
+<p><span id="cnctypes"></span></p>
+<p>Concrete syntax is about defining mappings from abstract syntax trees to <strong>concrete syntax objects</strong>. These objects comprise</p>
+<ul>
+<li>records</li>
+<li>tables</li>
+<li>strings</li>
+<li>parameter values</li>
+</ul>
+<p>Thus functions are not concrete syntax objects; however, the mappings themselves are expressed as functions, and the source code of a concrete syntax can use functions under the condition that they can be eliminated from the final compiled grammar (which they can; this is one of the fundamental properties of compilation, as explained in more detail in the <em>JFP</em> article).</p>
+<p>Concrete syntax thus has the same function types and expression forms as abstract syntax, specified <a href="#functiontype">here</a>. The basic types defined by categories (<code>cat</code> judgements) are available via grammar reuse explained <a href="#reuse">here</a>; this also comprises the predefined categories <code>Float</code> and <code>String</code>.</p>
+<h3 id="values-canonical-forms-and-run-time-variables">Values, canonical forms, and run-time variables</h3>
+<p>In abstract syntax, the conversion rules fiven <a href="#conversions">here</a> define a computational relation among expressions, but there is no separate notion of a <strong>value</strong> of computation: the value (the end point) of a computation chain is simply an expression to which no more conversions apply. In general, we are interested in expressions that satisfy the conditions of being syntax trees (as defined <a href="#syntaxtrees">here</a>), but there can be many computationally equivalent syntax trees which nonetheless are distinct syntax trees and hence have different linearizations. The main use of computation in abstract syntax is to compare types in dependent type checking.</p>
+<p>In concrete syntax, the notion of values is central. At run time, we want to compute the values of linearizations; at compile time, we want to perform <strong>partial evaluation</strong>, which computes expressions as far as possible. To specify what happens in computation we therefore have to distinguish between <strong>canonical forms</strong> and other forms of expressions. The canonical forms are defined separately for each form of type, whereas the other forms may usually produce expressions of any type.</p>
+<p><span id="linexpansion"></span> <span id="runtimevariables"></span></p>
+<p>What is done at compile time is the elimination of any noncanonical forms, except for those depending on <strong>run-time variables</strong>. Run-time variables are the same as the <strong>argument variables</strong> of linearization rules, i.e. the variables <em>x</em><sub>1</sub>,...,<em>x</em><sub>n</sub> in</p>
+<p><code>lin</code> <em>f</em> <code>= \</code> <em>x</em><sub>1</sub>,...,<em>x</em><sub>n</sub> <code>-&gt;</code> <em>t</em></p>
+<p>where</p>
+<p><code>fun</code> <em>f</em> <code>:</code> (<em>x</em><sub>1</sub> : <em>A</em><sub>1</sub>) <code>-&gt;</code> ... <code>-&gt;</code> (<em>x</em><sub>n</sub> : <em>A</em><sub>n</sub>) <code>-&gt;</code> <em>B</em></p>
+<p>Notice that this definition refers to the <strong>eta-expanded</strong> linearization term, which has one abstracted variable for each argument type of <em>f</em>. These variables are not necessarily explicit in GF source code, but introduced by the compiler.</p>
+<p>Since certain expression forms should be eliminated in compilation but cannot be eliminated if run-time variables appear in them, errors can appear late in compilation. This is an issue with the following expression forms:</p>
+<ul>
+<li>gluing (<code>s + t</code>), defined <a href="#gluing">here</a></li>
+<li>pattern matching on strings, defined <a href="#patternmatching">here</a></li>
+<li>predefined string operations, defined <a href="#predefcnc">here</a> (those taking <code>Str</code> arguments)</li>
+</ul>
+<h3 id="token-lists-tokens-and-strings">Token lists, tokens, and strings</h3>
+<p><span id="strtype"></span></p>
+<p>The most prominent basic type is <code>Str</code>, the type of <strong>token lists</strong>. This type is often sloppily referred to as the type of <strong>strings</strong>; but it should be kept in mind that the objects of <code>Str</code> are <em>lists</em> of strings rather than single strings.</p>
+<p>Expressions of type <code>Str</code> have the following canonical forms:</p>
+<ul>
+<li><strong>tokens</strong>, i.e. <strong>string literals</strong>, in double quotes, e.g. <code>&quot;foo&quot;</code></li>
+<li><strong>the empty token list</strong>, <code>[]</code></li>
+<li><strong>concatenation</strong>, <em>s</em> <code>++</code> <em>t</em>, where <em>s,t</em> : <code>Str</code></li>
+<li><strong>prefix-dependent choice</strong>, <code>pre {p1 =&gt; s1 ; ... ; pn =&gt; sn ; _ =&gt; s }</code>, where
+<ul>
+<li><em>s</em>, <em>s</em><sub>1</sub>,...,<em>s</em><sub>n</sub>, <em>p</em><sub>1</sub>,...,<em>p</em><sub>n</sub> : <code>Str</code></li>
+</ul></li>
+</ul>
+<p>For convenience, the notation is overloaded so that tokens are identified with singleton token lists, and there is no separate type of tokens (this is a change from the <em>JFP</em> article). The notion of a token is still important for compilation: all tokens introduced by the grammar must be known at compile time. This, in turn, is required by the parsing algorithms used for parsing with GF grammars.</p>
+<p>In addition to string literals, tokens can be formed by a specific non-canonical operator:</p>
+<ul>
+<li><strong>gluing</strong>, <em>s</em> <code>+</code> <em>t</em>, where <em>s,t</em> : <code>Str</code></li>
+</ul>
+<p><span id="gluing"></span></p>
+<p>Being noncanonical, gluing is equipped with a computation rule: string literals are glued by forming a new string literal, and empty token lists can be ignored:</p>
+<ul>
+<li><code>&quot;foo&quot; + &quot;bar&quot;</code> ==&gt; <code>&quot;foobar&quot;</code></li>
+<li><em>t</em> <code>+ []</code> ==&gt; <em>t</em></li>
+<li><code>[] +</code> <em>t</em> ==&gt; <em>t</em></li>
+</ul>
+<p>Since tokens must be known at compile time, the operands of gluing may not depend on run-time variables, as defined <a href="#runtimevariables">here</a>.</p>
+<p>As syntactic sugar, token lists can be given as bracketed string literals, where spaces separate tokens:</p>
+<ul>
+<li><strong>token lists</strong>, <code>[&quot;one two three&quot;]</code> === <code>&quot;one&quot; ++ &quot;two&quot; ++ &quot;three&quot;</code></li>
+</ul>
+<p>Notice that there are no empty tokens, but the expression <code>[]</code> can be used in a context requiring a token, in particular in gluing expression below. Since <code>[]</code> denotes an empty token list, the following computation laws are valid:</p>
+<ul>
+<li><em>t</em> <code>++ []</code> ==&gt; <em>t</em></li>
+<li><code>[] ++</code> <em>t</em> ==&gt; <em>t</em></li>
+</ul>
+<p>Moreover, concatenation and gluing are associative:</p>
+<ul>
+<li>s <code>+</code> (t <code>+</code> u) ==&gt; s <code>+</code> t <code>+</code> u</li>
+<li>s <code>++</code> (t <code>++</code> u) ==&gt; s <code>++</code> t <code>++</code> u</li>
+</ul>
+<p>For the programmer, associativity and the empty token laws mean that the compiler can use them to simplify string expressions. It also means that these laws are respected in pattern matching on strings.</p>
+<p>A prime example of prefix-dependent choice operation is the following approximative expression for the English indefinite article:</p>
+<pre><code>  pre {
+    (&quot;a&quot; | &quot;e&quot; | &quot;i&quot; | &quot;o&quot;) =&gt; &quot;an&quot; ;
+    _ =&gt; &quot;a&quot;
+  } ;</code></pre>
+<p>This expression can be computed in the context of a subsequent token:</p>
+<ul>
+<li><code>pre {p1 =&gt; s1 ; ... ; pn =&gt; sn ; _ =&gt; s } ++ t</code> ==&gt;
+<ul>
+<li><em>s</em><sub>i</sub> for the first <em>i</em> such that the prefix <em>p</em><sub>i</sub> matches <em>t</em>, if it exists</li>
+<li><em>s</em> otherwise</li>
+</ul></li>
+</ul>
+<p>The <strong>matching prefix</strong> is defined by comparing the string with the prefix of the token. If the prefix is a variant list of strings, then it matches the token if any of the strings in the list matches it.</p>
+<p>The computation rule can sometimes be applied at compile time, but it general, prefix-dependent choices need to be passed to the run-time grammar, because they are not given a subsequent token to compare with, or because the subsequent token depends on a run-time variable.</p>
+<p>The prefix-dependent choice expression itself may not depend on run-time variables.</p>
+<p><em>There is an older syntax for prefix-dependent choice, namely: <code>pre { s ; s1 / p1 ; ... ; sn / pn}</code>. This syntax will not accept strings as patterns.</em></p>
+<p><em>In GF prior to 3.0, a specific type</em> <code>Strs</code> <em>is used for defining prefixes,</em> <em>instead of just</em> <code>variants</code> <em>of</em> <code>Str</code>.</p>
+<h3 id="records-and-record-types">Records and record types</h3>
+<p>A <strong>record</strong> is a collection of objects of possibly different types, accessible by <strong>projections</strong> from the record with <strong>labels</strong> pointing to these objects. A record is also itself an object, whose type is a <strong>record type</strong>. Record types have the form</p>
+<p><code>{</code> <em>r</em><sub>1</sub> : <em>A</em><sub>1</sub> <code>;</code> ... <code>;</code> <em>r</em><sub>n</sub> : <em>A</em><sub>n</sub> <code>}</code></p>
+<p>where <em>n</em> &gt;= 0, each <em>A</em><sub>i</sub> is a type, and the labels <em>r</em><sub>i</sub> are distinct. A record of this type has the form</p>
+<p><code>{</code> <em>r</em><sub>1</sub> = <em>a</em><sub>1</sub> <code>;</code> ... <code>;</code> <em>r</em><sub>n</sub> = <em>a</em><sub>n</sub> <code>}</code></p>
+<p>where each #aii : &quot;Aii. A limiting case is the <strong>empty record type</strong> <code>{}</code>, which has the object <code>{}</code>, the <strong>empty record</strong>.</p>
+<p>The <strong>fields</strong> of a record type are its parts of the form <em>r</em> : <em>A</em>, also called <strong>typings</strong>. The <strong>fields</strong> of a record are of the form <em>r</em> = <em>a</em>, also called <strong>value assignments</strong>. Value assignments may optionally indicate the type, as in <em>r</em> : <em>A</em> = <em>a</em>.</p>
+<p>The order of fields in record types and records is insignificant: two record types (or records) are equal if they have the same fields, in any order, and a record is an object of a record type, if it has type-correct value assignments for all fields of the record type. The latter definition implies the even stronger principle of <strong>record subtyping</strong>: a record can have any type that has some subset of its fields. This principle is explained further <a href="#subtyping">here</a>.</p>
+<p>All fields in a record must have distinct labels. Thus it is not possible e.g. to &quot;redefine&quot; a field &quot;later&quot; in a record.</p>
+<p>Lexically, labels are identifiers (defined <a href="#identifiers">here</a>). This is with the exception of the labels selecting bound variables in the linearization of higher-order abstract syntax, which have the form <code>$</code><em>i</em> for an integer <em>i</em>, as specified <a href="#HOAS">here</a>. In source code, these labels should not appear in records fields, but only in selections.</p>
+<p>Labels occur only in syntactic positions where they cannot be confused with constants or variables. Therefore it is safe to write, as in <code>Prelude</code>,</p>
+<pre><code>    ss : Str -&gt; {s : Str} = \s -&gt; {s = s} ;</code></pre>
+<p>A <strong>projection</strong> is an expression of the form</p>
+<p><em>t</em>.<em>r</em></p>
+<p>where <em>t</em> must be a record and <em>r</em> must be a label defined in it. The type of the projection is the type of that field. The computation rule for projection returns the value assigned to that field:</p>
+<p><code>{</code> ... <code>;</code> <em>r</em> = <em>a</em> <code>;</code> ... <code>}.</code><em>r</em> ==&gt; <em>a</em></p>
+<p>Notice that the dot notation <em>t</em>.<em>r</em> is also used for qualified names as specified <a href="#qualifiednames">here</a>. This ambiguity follows tradition and convenience. It is resolved by the following rules (before type checking):</p>
+<ol type="1">
+<li>if <em>t</em> is a bound variable or a constant in scope, <em>t</em>.<em>r</em> is type-checked as a projection</li>
+<li>otherwise, <em>t</em>.<em>r</em> is type-checked as a qualified name</li>
+</ol>
+<p>As syntactic sugar, types and values can be shared:</p>
+<ul>
+<li><code>{</code> ... <code>;</code> <em>r,s</em> : <em>A</em> <code>;</code> ... <code>}</code> === <code>{</code> ... <code>;</code> <em>r</em> : <em>A</em> <code>;</code> <em>s</em> : <em>A</em> <code>;</code> ... <code>}</code></li>
+<li><code>{</code> ... <code>;</code> <em>r,s</em> = <em>a</em> <code>;</code> ... <code>}</code> === <code>{</code> ... <code>;</code> <em>r</em> = <em>a</em> <code>;</code> <em>s</em> = <em>a</em> <code>;</code> ... <code>}</code></li>
+</ul>
+<p>Another syntactic sugar are <strong>tuple types</strong> and <strong>tuples</strong>, which are translated by endowing their unlabelled fields by the labels <code>p1</code>, <code>p2</code>,... in the order of appearance of the fields:</p>
+<ul>
+<li><em>A</em><sub>1</sub> <code>*</code> ... <code>*</code> <em>A</em><sub>n</sub> === <code>{</code> <code>p1</code> : <em>A</em><sub>1</sub> <code>;</code> ... <code>;</code> <code>pn</code> : <em>A</em><sub>n</sub> <code>}</code></li>
+<li><code>&lt;</code><em>a</em><sub>1</sub> <code>,</code> ... <code>,</code> <em>a</em><sub>n</sub> <code>&gt;</code> === <code>{</code> <code>p1</code> = <em>a</em><sub>1</sub><code>;</code> ... <code>;</code> <code>pn</code> = <em>a</em><sub>n</sub> <code>}</code></li>
+</ul>
+<p>A <strong>record extension</strong> is formed by adding fields to a record or a record type. The general syntax involves two expressions,</p>
+<p><em>R</em> <code>**</code> <em>S</em></p>
+<p>The result is a record type or a record with a union of the fields of <em>R</em> and <em>S</em>. It is therefore well-formed if</p>
+<ul>
+<li>both <em>R</em> and <em>S</em> are either records or record types</li>
+<li>the labels in <em>R</em> and <em>S</em> are disjoint, if <em>R</em> and <em>S</em> are record types</li>
+</ul>
+<p>(Since GF version 3.6) If <em>R</em> and <em>S</em> are record objects, then the labels in them need not be disjoint. Labels defined in <em>S</em> are then given priority, so that record extensions in fact works as <strong>record update</strong>. A common pattern of using this feature is</p>
+<pre><code>  lin F x ... = x ** {r = ... x.r ...}</code></pre>
+<p>where <code>x</code> is a record with many fields, just one of which is updated. Following the normal binding conditions, <code>x.r</code> on the right hand side still refers to the old value of the <code>r</code> field.</p>
+<h3 id="subtyping">Subtyping</h3>
+<p>The possibility of having superfluous fields in a record forms the basis of the <strong>subtyping</strong> relation. That <em>A</em> is a subtype of <em>B</em> means that <em>a : A</em> implies <em>a : B</em>. This is clearly satisfied for records with superfluous fields:</p>
+<ul>
+<li>if <em>R</em> is a record type without the label <em>r</em>, then <em>R</em> <code>** {</code> <em>r</em> : <em>A</em> <code>}</code> is a subtype of <em>R</em></li>
+</ul>
+<p>The GF grammar compiler extends subtyping to function types by <strong>covariance</strong> and <strong>contravariance</strong>:</p>
+<ul>
+<li>covariance: if <em>A</em> is a subtype of <em>B</em>, then <em>C</em> <code>-&gt;</code> <em>A</em> is a subtype of <em>C</em> <code>-&gt;</code> <em>B</em></li>
+<li>contravariance: if <em>A</em> is a subtype of <em>B</em>, then <em>B</em> <code>-&gt;</code> <em>C</em> is a subtype of <em>A</em> <code>-&gt;</code> <em>C</em></li>
+</ul>
+<p>The logic of these rules is natural: if a function is returns a value in a subtype, then this value is <em>a fortiori</em> in the supertype. If a function is defined for some type, then it is <em>a fortiori</em> defined for any subtype.</p>
+<p>In addition to the well-known principles of record subtyping and co- and contravariance, GF implements subtyping for initial segments of integers:</p>
+<ul>
+<li>if <em>m</em> &lt; <em>n</em>, then <code>Ints</code> <em>m</em> is a subtype of <code>Ints</code> <em>n</em></li>
+<li><code>Ints</code> <em>n</em> is a subtype of <code>Integer</code></li>
+</ul>
+<p>As the last rule, subtyping is transitive:</p>
+<ul>
+<li>if <em>A</em> is a subtype of <em>B</em> and <em>B</em> is a subtype of <em>C</em>, then <em>A</em> is a subtype of <em>C</em>.</li>
+</ul>
+<h3 id="list-categories">List categories</h3>
+<p><span id="lists"></span></p>
+<p>Since categories of lists of elements of another category are a common idiom, the following syntactic sugar is available:</p>
+<pre><code>cat [C] {n}</code></pre>
+<p>abbreviates a set of three judgements:</p>
+<p>cat ListC ; fun BaseC : C -&gt; ... -&gt; C -&gt; ListC ; --n C’s fun ConsC : C -&gt; ListC -&gt; ListC</p>
+<p>The functions <code>BaseC</code> and <code>ConsC</code> are automatically generated in the abstract syntax, but their linearizations, as well as the linearization type of <code>ListC</code>, must be defined manually. The type expression <code>[C]</code> is in all contexts interchangeable with <code>ListC</code>.</p>
+<p>More information on lists in GF can be found <a href="https://inariksit.github.io/gf/2021/02/22/lists.html">here</a>.</p>
+<h3 id="tables-and-table-types">Tables and table types</h3>
+<p><span id="tables"></span></p>
+<p>One of the most characteristic constructs of GF is <strong>tables</strong>, also called <strong>finite functions</strong>. That these functions are finite means that it is possible to finitely enumerate all argument-value pairs; this, in turn, is possible because the argument types are finite.</p>
+<p>A <strong>table type</strong> has the form</p>
+<p><em>P</em> <code>=&gt;</code> <em>T</em></p>
+<p>where <em>P</em> must be a parameter type in the sense defined <a href="#paramtypes">here</a>, whereas <em>T</em> can be any type.</p>
+<p>Canonical expressions of table types are <strong>tables</strong>, of the form</p>
+<p><code>table</code> <code>{</code> <em>V</em><sub>1</sub> <code>=&gt;</code> <em>t</em><sub>1</sub> ; ... ; <em>V</em><sub>n</sub> <code>=&gt;</code> <em>t</em><sub>n</sub> <code>}</code></p>
+<p>where <em>V</em><sub>1</sub>,...,<em>V</em><sub>n</sub> is the complete list of the parameter values of the argument type <em>P</em> (defined <a href="#paramvalues">here</a>), and each <em>t</em><sub>i</sub> is an expression of the value type <em>T</em>.</p>
+<p>In addition to explicit enumerations, tables can be given by <strong>pattern matching</strong>,</p>
+<p><code>table</code> <code>{</code><em>p</em><sub>1</sub> <code>=&gt;</code> <em>t</em><sub>1</sub> ; ... ; <em>p</em><sub>m</sub> <code>=&gt;</code> <em>t</em><sub>m</sub><code>}</code></p>
+<p>where <em>p</em><sub>1</sub>,....,<em>p</em><sub>m</sub> is a list of patterns that covers all values of type <em>P</em>. Each pattern <em>p</em><sub>i</sub> may bind some variables, on which the expression <em>t</em><sub>i</sub> may depend. A complete account of patterns and pattern matching is given <a href="#patternmatching">here</a>.</p>
+<p>A <strong>course-of-values table</strong> omits the patterns and just lists all values. It uses the enumeration of all values of the argument type <em>P</em> to pair the values with arguments:</p>
+<p><code>table</code> <em>P</em> <code>[</code><em>t</em><sub>1</sub> ; ... ; <em>t</em><sub>n</sub><code>]</code></p>
+<p>This format is not recommended for GF source code, since the ordering of parameter values is not specified and therefore a compiler-internal decision.</p>
+<p>The argument type can be indicated in ordinary tables as well, which is sometimes helpful for type inference:</p>
+<p><code>table</code> <em>P</em> <code>{</code> ... <code>}</code></p>
+<p>The <strong>selection</strong> operator <code>!</code>, applied to a table <em>t</em> and to an expression <em>v</em> of its argument type</p>
+<p><em>t</em> <code>!</code> <em>v</em></p>
+<p>returns the first pattern matching result from <em>t</em> with <em>v</em>, as defined <a href="#patternmatching">here</a>. The order of patterns is thus significant as long as the patterns contain variables or wildcards. When the compiler reorders the patterns following the enumeration of all values of the argument type, this order no longer matters, because no overlap remains between patterns.</p>
+<p>The GF compiler performs <strong>table expansion</strong>, i.e. an analogue of eta expansion defined <a href="#conversions">here</a>, where a table is applied to all values to its argument type:</p>
+<p><em>t</em> : <em>P</em> <code>=&gt;</code> <em>T</em> ==&gt; <code>table</code> <em>P</em> <code>[</code><em>t</em> <code>!</code> <em>V</em><sub>1</sub> ; ... ; <em>t</em> <code>!</code> <em>V</em><sub>n</sub><code>]</code></p>
+<p>As syntactic sugar, one-branch tables can be written in a way similar to lambda abstractions:</p>
+<p><code>\\</code><em>p</em> <code>=&gt;</code> <em>t</em> === <code>table {</code><em>p</em> <code>=&gt;</code> <em>t</em> <code>}</code></p>
+<p>where <em>p</em> is either a variable or a wildcard (<code>_</code>). Multiple bindings can be abbreviated:</p>
+<p><code>\\</code><em>p,q</em> <code>=&gt;</code> <em>t</em> === <code>\\</code><em>p</em> <code>=&gt;</code> <code>\\</code><em>q</em> <code>=&gt;</code> <em>t</em></p>
+<p><strong>Case expressions</strong> are syntactic sugar for selections:</p>
+<p><code>case</code> <em>e</em> <code>of {</code>...<code>}</code> === <code>table {</code>...<code>} !</code> <em>e</em></p>
+<h3 id="pattern-matching">Pattern matching</h3>
+<p><span id="patternmatching"></span></p>
+<p>We will list all forms of patterns that can be used in table branches. We define their <strong>variable bindings</strong> and <strong>matching substitutions</strong>.</p>
+<p>We start with the patterns available for all parameter types, as well as for the types <code>Integer</code> and <code>Str</code>.</p>
+<ul>
+<li>A constructor pattern <em>C</em> <em>p</em><sub>1</sub>...<em>p</em><sub>n</sub> binds the union of all variables bound in the subpatterns <em>p</em><sub>1</sub>,...,<em>p</em><sub>n</sub>. It matches any value <em>C</em> <em>V</em><sub>1</sub>...<em>V</em><sub>n</sub> where each <em>p</em><sub>i</sub># matches <em>V</em><sub>i</sub>, and the matching substitution is the union of these substitutions.</li>
+<li>A record pattern <code>{</code> <em>r</em><sub>1</sub> <code>=</code> <em>p</em><sub>1</sub> <code>;</code> ... <code>;</code> <em>r</em><sub>n</sub> <code>=</code> <em>p</em><sub>n</sub> <code>}</code> binds the union of all variables bound in the subpatterns <em>p</em><sub>1</sub>,...,<em>p</em><sub>n</sub>. It matches any value <code>{</code> <em>r</em><sub>1</sub> <code>=</code> <em>V</em><sub>1</sub> <code>;</code> ... <code>;</code> <em>r</em><sub>n</sub> <code>=</code> <em>V</em><sub>n</sub> <code>;</code> ...<code>}</code> where each <em>p</em><sub>i</sub># matches <em>V</em><sub>i</sub>, and the matching substitution is the union of these substitutions.</li>
+<li>A variable pattern <em>x</em> (identifier other than parameter constructor) binds the variable <em>x</em>. It matches any value <em>V</em>, with the substitution {<em>x</em> = <em>V</em>}.</li>
+<li>The wild card <code>_</code> binds no variables. It matches any value, with the empty substitution.</li>
+<li>A disjunctive pattern <em>p</em> <code>|</code> <em>q</em> binds the intersection of the variables bound by <em>p</em> and <em>q</em>. It matches anything that either <em>p</em> or <em>q</em> matches, with the first substitution starting with <em>p</em> matches, from which those variables that are not bound by both patterns are removed.</li>
+<li>A negative pattern <code>-</code> <em>p</em> binds no variables. It matches anything that <em>p</em> does <em>not</em> match, with the empty substitution.</li>
+<li>An alias pattern <em>x</em> <code>@</code> <em>p</em> binds <em>x</em> and all the variables bound by <em>p</em>. It matches any value <em>V</em> that <em>p</em> matches, with the same substition extended by {<em>x</em> = <em>V</em>}.</li>
+</ul>
+<p>The following patterns are only available for the type <code>Str</code>:</p>
+<ul>
+<li>A string literal pattern, e.g. <code>&quot;s&quot;</code>, binds no variables. It matches the same string, with the empty substitution.</li>
+<li>A concatenation pattern, <em>p</em> <code>+</code> <em>q</em>, binds the union of variables bound by <em>p</em> and <em>q</em>. It matches any string that consists of a prefix matching <em>p</em> and a suffix matching <em>q</em>, with the union of substitutions corresponding to the first match (see below).</li>
+<li>A repetition pattern <em>p</em><code>*</code> binds no variables. It matches any string that can be decomposed into strings that match <em>p</em>, with the empty substitution.</li>
+</ul>
+<p>The following pattern is only available for the types <code>Integer</code> and <code>Ints</code> <em>n</em>:</p>
+<ul>
+<li>An integer literal pattern, e.g. <code>214</code>, binds no variables. It matches the same integer, with the empty substitution.</li>
+</ul>
+<p>All patterns must be <strong>linear</strong>: the same pattern variable may occur only once in them. This is what makes it straightforward to speak about unions of binding sets and substitutions.</p>
+<p>Pattern matching is performed in the order in which the branches appear in the source code: the branch of the first matching pattern is followed. In concrete syntax, the type checker reject sets of patterns that are not exhaustive, and warns for completely overshadowed patterns. It also checks the type correctness of patterns with respect to the argument type. In abstract syntax, only type correctness is checked, no exhaustiveness or overshadowing.</p>
+<p>It follows from the definition of record pattern matching that it can utilize partial records: the branch</p>
+<pre><code>    {g = Fem} =&gt; t</code></pre>
+<p>in a table of type <code>{g : Gender ; n : Number} =&gt; T</code> means the same as</p>
+<pre><code>    {g = Fem ; n = _} =&gt; t</code></pre>
+<p>Variables in regular expression patterns are always bound to the <strong>first match</strong>, which is the first in the sequence of binding lists. For example:</p>
+<ul>
+<li><code>x + &quot;e&quot; + y</code> matches <code>&quot;peter&quot;</code> with <code>x = &quot;p&quot;, y = &quot;ter&quot;</code></li>
+<li><code>x + &quot;er&quot;*</code> matches <code>&quot;burgerer&quot;</code> with <code>x = &quot;burg&quot;</code></li>
+</ul>
+<h3 id="free-variation">Free variation</h3>
+<p>An expressions of the form</p>
+<p><code>variants</code> <code>{</code><em>t</em><sub>1</sub> ; ... ; <em>t</em><sub>n</sub><code>}</code></p>
+<p>where all <em>t</em><sub>i</sub> are of the same type <em>T</em>, has itseld type <em>T</em>. This expression presents <em>t</em><sub>i</sub>,...,<em>t</em><sub>n</sub> as being in <strong>free variation</strong>: the choice between them is not determined by semantics or parameters. A limiting case is</p>
+<p><code>variants {}</code></p>
+<p>which encodes a rule saying that there is no way to express a certain thing, e.g. that a certain inflectional form does not exist.</p>
+<p>A common wisdom in linguistics is that &quot;there is no free variation&quot;, which refers to the situation where <em>all</em> aspects are taken into account. For instance, the English negation contraction could be expressed as free variation,</p>
+<pre><code>    variants {&quot;don&#39;t&quot; ; &quot;do&quot; ++ &quot;not&quot;}</code></pre>
+<p>if only semantics is taken into account, but if stylistic aspects are included, then the proper formulation might be with a parameter distinguishing between informal and formal style:</p>
+<pre><code>    case style of {Informal =&gt; &quot;don&#39;t&quot; ; Formal =&gt; &quot;do&quot; ++ &quot;not&quot;}</code></pre>
+<p>Since there is not way to choose a particular element from a ``variants` list, free variants is normally not adequate in libraries, nor in grammars meant for natural language generation. In application grammars meant to parse user input, free variation is a way to avoid cluttering the abstract syntax with semantically insignificant distinctions and even to tolerate some grammatical errors.</p>
+<p>Permitting <code>variants</code> in all types involves a major modification of the semantics of GF expressions. All computation rules have to be lifted to deal with lists of expressions and values. For instance,</p>
+<p><em>t</em> <code>!</code> <code>variants</code> <code>{</code><em>t</em><sub>1</sub> ; ... ; <em>t</em><sub>n</sub><code>}</code> ==&gt; <code>variants</code> <code>{</code><em>t</em> <code>!</code> <em>t</em><sub>1</sub> ; ... ; <em>t</em> <code>!</code> <em>t</em><sub>n</sub><code>}</code></p>
+<p>This is done in such a way that variation does not distribute to records (or other product-like structures). For instance, variants of records,</p>
+<pre><code>    variants {{s = &quot;Auto&quot; ; g = Neutr} ; {s = &quot;Wagen&quot; ; g = Masc}}</code></pre>
+<p>is <em>not</em> the same as a record of variants,</p>
+<pre><code>    {s = variants {&quot;Auto&quot; ; &quot;Wagen&quot;} ; g = variants {Neutr ; Masc}}</code></pre>
+<p>Variants of variants are flattened,</p>
+<p><code>variants</code> <code>{</code>...; <code>variants</code> <code>{</code><em>t</em><sub>1</sub> ;...; <em>t</em><sub>n</sub><code>}</code> ;...<code>}</code> ==&gt; <code>variants</code> <code>{</code>...; <em>t</em><sub>1</sub> ;...; <em>t</em><sub>n</sub> ;...<code>}</code></p>
+<p>and singleton variants are eliminated,</p>
+<p><code>variants</code> <code>{</code><em>t</em><code>}</code> ==&gt; <em>t</em></p>
+<h3 id="local-definitions">Local definitions</h3>
+<p>A <strong>local definition</strong>, i.e. a <strong>let expression</strong> has the form</p>
+<p><code>let</code> <em>x</em> : <em>T</em> = <em>t</em> <code>in</code> <em>e</em></p>
+<p>The type of <em>x</em> must be <em>T</em>, which also has to be the type of <em>t</em>. Computation is performed by substituting <em>t</em> for <em>x</em> in <em>e</em>:</p>
+<p><code>let</code> <em>x</em> : <em>T</em> = <em>t</em> <code>in</code> <em>e</em> ==&gt; <em>e</em> {<em>x</em> = <em>t</em>}</p>
+<p>As syntactic sugar, the type can be omitted if the type checker is able to infer it:</p>
+<p><code>let</code> <em>x</em> = <em>t</em> <code>in</code> <em>e</em></p>
+<p>It is possible to compress several local definitions into one block:</p>
+<p><code>let</code> <em>x</em> : <em>T</em> = <em>t</em> <code>;</code> <em>y</em> : <em>U</em> = <em>u</em> <code>in</code> <em>e</em> === <code>let</code> <em>x</em> : <em>T</em> = <em>t</em> <code>in</code> <code>let</code> <em>y</em> : <em>U</em> = <em>u</em> <code>in</code> <em>e</em></p>
+<p>Another notational variant is a definition block appearing after the main expression:</p>
+<p><em>e</em> <code>where</code> <code>{</code>...<code>}</code> === <code>let</code> <code>{</code>...<code>}</code> <code>in</code> <em>e</em></p>
+<p>Curly brackets are obligatory in the <code>where</code> form, and can also be optionally used in the <code>let</code> form.</p>
+<p>Since a block of definitions is treated as syntactic sugar for a nested <code>let</code> expression, a constant must be defined before it is used: the scope is not mutual, as in a module body. Furthermore, unlike in <code>lin</code> and <code>oper</code> definitions, it is <em>not</em> possible to bind variables on the left of the equality sign.</p>
+<h3 id="function-applications-in-concrete-syntax">Function applications in concrete syntax</h3>
+<p><span id="functionelimination"></span></p>
+<p>Fully compiled concrete syntax may not include expressions of function types except on the outermost level of <code>lin</code> rules, as defined <a href="#linexpansion">here</a>. However, in the source code, and especially in <code>oper</code> definitions, functions are the main vehicle of code reuse and abstraction. Thus function types and functions follow the same rules as in abstract syntax, as specified <a href="#functiontype">here</a>. In particular, the application of a lambda abstract is computed by beta conversion.</p>
+<p>To ensure the elimination of functions, GF uses a special computation rule for pushing function applications inside tables, since otherwise run-time variables could block their applications:</p>
+<p>(<code>table</code> <code>{</code><em>p</em><sub>1</sub> <code>=&gt;</code> <em>f</em><sub>1</sub> ; ... ; <em>p</em><sub>n</sub> <code>=&gt;</code> <em>f</em><sub>n</sub> <code>}</code> <code>!</code> <em>e</em>) <em>a</em> ==&gt; <code>table</code> <code>{</code><em>p</em><sub>1</sub> <code>=&gt;</code> <em>f</em><sub>1</sub> <em>a</em> ; ... ; <em>p</em><sub>n</sub> <code>=&gt;</code> <em>f</em><sub>n</sub> <em>a</em><code>}</code> <code>!</code> <em>e</em></p>
+<p>Also parameter constructors with non-empty contexts, as defined <a href="#paramjudgements">here</a>, result in expressions in application form. These expressions are never a problem if their arguments are just constructors, because they can then be translated to integers corresponding to the position of the expression in the enumaration of the values of its type. However, a constructor applied to a run-time variable may need to be converted as follows:</p>
+<p><em>C</em>...<em>x</em>... ==&gt; <code>case</code> <em>x</em> of <code>{_ =&gt;</code> <em>C</em>...<em>x</em><code>}</code></p>
+<p>The resulting expression, when processed by table expansion as explained <a href="#tables">here</a>, results in <em>C</em> being applied to just values of the type of <em>x</em>, and the application thereby disappears.</p>
+<h3 id="reusing-top-level-grammars-as-resources">Reusing top-level grammars as resources</h3>
+<p><span id="reuse"></span></p>
+<p><em>This section is valid for GF 3.0, which abandons the &quot;<a href="https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html#lock-fields">lock field</a>&quot;</em> <em>discipline of GF 2.8.</em></p>
+<p>As explained <a href="#openabstract">here</a>, abstract syntax modules can be opened as interfaces and concrete syntaxes as their instances. This means that judgements are, as it were, translated in the following way:</p>
+<ul>
+<li><code>cat</code> <em>C</em> <em>G</em> ===&gt; <code>oper</code> <em>C</em> : <code>Type</code></li>
+<li><code>fun</code> <em>f</em> : <em>T</em> ===&gt; <code>oper</code> <em>f</em> : <em>T</em></li>
+<li><code>lincat</code> <em>C</em> = <em>T</em> ===&gt; <code>oper</code> <em>C</em> : <code>Type</code> = <em>C</em></li>
+<li><code>lin</code> <em>f</em> = <em>t</em> ===&gt; <code>oper</code> <em>f</em> = <em>t</em></li>
+</ul>
+<p>Notice that the value <em>T</em> of <code>lincat</code> definitions is not disclosed in the translation. This means that the type <em>C</em> remains abstract: the only ways of building an object of type <em>C</em> are the operations <em>f</em> obtained from <em>fun</em> and <em>lin</em> rules.</p>
+<p>The purpose of keeping linearization types abstract is to enforce <strong>grammar checking via type checking</strong>. This means that any well-typed operation application is also well-typed in the sense of the original grammar. If the types were disclosed, then we could for instance easily confuse all categories that have the linearization type <code>{s : Str}</code>. Yet another reason is that revealing the types makes it impossible for the library programmers to change their type definitions afterwards.</p>
+<p>Library writers may occasionally want to have access to the values of linearization types. The way to make it possible is to add an extra construction operation to a module in which the linearization type is available:</p>
+<pre><code>    oper MkC : T -&gt; C = \x -&gt; x</code></pre>
+<p>In object-oriented terms, the type <em>C</em> itself is <strong>protected</strong>, whereas <em>MkC</em> is a <strong>public constructor</strong> of <em>C</em>. Of course, it is possible to make these constructors overloaded (concept explained <a href="#overloading">here</a>), to enable easy access to special cases.</p>
+<h3 id="predefined-concrete-syntax-types">Predefined concrete syntax types</h3>
+<p><span id="predefcnc"></span></p>
+<p>The following concrete syntax types are predefined:</p>
+<ul>
+<li><code>Str</code>, the type of tokens and token lists (defined <a href="#strtype">here</a>)</li>
+<li><code>Integer</code>, the type of nonnegative integers</li>
+<li><code>Ints</code> <em>n</em>, the type of integers from <em>0</em> to <em>n</em></li>
+<li><code>Type</code>, the type of (concrete syntax) types</li>
+<li><code>PType</code>, the type of parameter types</li>
+</ul>
+<p>The last two types are, in a way, extended by user-written grammars, since new parameter types can be defined in the way shown <a href="#paramjudgements">here</a>, and every paramater type is also a type. From the point of view of the values of expressions, however, a <code>param</code> declaration does not extend <code>PType</code>, since all parameter types get compiled to initial segments of integers.</p>
+<p>Notice the difference between the concrete syntax types <code>Str</code> and <code>Integer</code> on the one hand, and the abstract syntax categories <code>String</code> and <code>Int</code>, on the other. As <em>concrete syntax</em> types, the latter are treated in the same way as any reused categories: their objects can be formed by using syntax trees (string and integer literals).</p>
+<p><em>The type name</em> <code>Integer</code> <em>replaces in GF 3.0 the name</em> <code>Int</code>, <em>to avoid confusion with the abstract syntax type and to be analogous</em> <em>with the</em> <code>Str</code> <em>vs.</em> <code>String</code> <em>distinction.</em></p>
+<h3 id="predefined-concrete-syntax-operations">Predefined concrete syntax operations</h3>
+<p>The following predefined operations are defined in the resource module <code>prelude/Predef.gf</code>. Their implementations are defined as a part of the GF grammar compiler.</p>
+<table class="table" style="width:98%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 34%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">operation</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: left;">explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>PBool</code></td>
+<td style="text-align: left;"><code>PType</code></td>
+<td style="text-align: left;"><code>PTrue | PFalse</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Error</code></td>
+<td style="text-align: left;"><code>Type</code></td>
+<td style="text-align: left;">the empty type</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Int</code></td>
+<td style="text-align: left;"><code>Type</code></td>
+<td style="text-align: left;">the type of integers</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Ints</code></td>
+<td style="text-align: left;"><code>Integer -&gt; Type</code></td>
+<td style="text-align: left;">the type of integers from 0 to n</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>error</code></td>
+<td style="text-align: left;"><code>Str -&gt; Error</code></td>
+<td style="text-align: left;">forms error message</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>length</code></td>
+<td style="text-align: left;"><code>Str -&gt; Int</code></td>
+<td style="text-align: left;">length of string</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>drop</code></td>
+<td style="text-align: left;"><code>Integer -&gt; Str -&gt; Str</code></td>
+<td style="text-align: left;">drop prefix of length</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>take</code></td>
+<td style="text-align: left;"><code>Integer -&gt; Str -&gt; Str</code></td>
+<td style="text-align: left;">take prefix of length</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>tk</code></td>
+<td style="text-align: left;"><code>Integer -&gt; Str -&gt; Str</code></td>
+<td style="text-align: left;">drop suffix of length</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dp</code></td>
+<td style="text-align: left;"><code>Integer -&gt; Str -&gt; Str</code></td>
+<td style="text-align: left;">take suffix of length</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>eqInt</code></td>
+<td style="text-align: left;"><code>Integer -&gt; Integer -&gt; PBool</code></td>
+<td style="text-align: left;">test if equal integers</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>lessInt</code></td>
+<td style="text-align: left;"><code>Integer -&gt; Integer -&gt; PBool</code></td>
+<td style="text-align: left;">test order of integers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>plus</code></td>
+<td style="text-align: left;"><code>Integer -&gt; Integer -&gt; Integer</code></td>
+<td style="text-align: left;">add integers</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>eqStr</code></td>
+<td style="text-align: left;"><code>Str -&gt; Str -&gt; PBool</code></td>
+<td style="text-align: left;">test if equal strings</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>occur</code></td>
+<td style="text-align: left;"><code>Str -&gt; Str -&gt; PBool</code></td>
+<td style="text-align: left;">test if occurs as substring</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>occurs</code></td>
+<td style="text-align: left;"><code>Str -&gt; Str -&gt; PBool</code></td>
+<td style="text-align: left;">test if any char occurs</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>show</code></td>
+<td style="text-align: left;"><code>(P : Type) -&gt; P -&gt; Str</code></td>
+<td style="text-align: left;">convert param to string</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;"><code>(P : Type) -&gt; Str -&gt; P</code></td>
+<td style="text-align: left;">convert string to param</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>toStr</code></td>
+<td style="text-align: left;"><code>(L : Type) -&gt; L -&gt; Str</code></td>
+<td style="text-align: left;">find the &quot;first&quot; string</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>nonExist</code></td>
+<td style="text-align: left;"><code>Str</code></td>
+<td style="text-align: left;">a special token marking<br />
+non-existing morphological forms</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>BIND</code></td>
+<td style="text-align: left;"><code>Str</code></td>
+<td style="text-align: left;">a special token marking<br />
+that the surrounding tokens should not<br />
+be separated by space</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>SOFT_BIND</code></td>
+<td style="text-align: left;"><code>Str</code></td>
+<td style="text-align: left;">a special token marking<br />
+that the surrounding tokens may not<br />
+be separated by space</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>SOFT_SPACE</code></td>
+<td style="text-align: left;"><code>Str</code></td>
+<td style="text-align: left;">a special token marking<br />
+that the space between the surrounding tokens<br />
+is optional</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>CAPIT</code></td>
+<td style="text-align: left;"><code>Str</code></td>
+<td style="text-align: left;">a special token marking<br />
+that the first character in the next token<br />
+should be capitalized</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ALL_CAPIT</code></td>
+<td style="text-align: left;"><code>Str</code></td>
+<td style="text-align: left;">a special token marking<br />
+that the next word should be<br />
+in all capital letters</td>
+</tr>
+</tbody>
+</table>
+<p>Compilation eliminates these operations, and they may therefore not take arguments that depend on run-time variables.</p>
+<p>The module <code>Predef</code> is included in the <em>opens</em> list of all modules, and therefore does not need to be opened explicitly.</p>
+<h2 id="flags-and-pragmas">Flags and pragmas</h2>
+<h3 id="some-flags-and-their-values">Some flags and their values</h3>
+<p><span id="flagvalues"></span></p>
+<p>The flag <code>coding</code> in concrete syntax sets the <strong>character encoding</strong> used in the grammar. Internally, GF uses unicode, and <code>.pgf</code> files are always written in UTF8 encoding. The presence of the flag <code>coding=utf8</code> prevents GF from encoding an already encoded file.</p>
+<p>The flag <code>startcat</code> in abstract syntax sets the default start category for parsing, random generation, and any other grammar operation that depends on category. Its legal values are the categories defined or inherited in the abstract syntax.</p>
+<h3 id="compiler-pragmas">Compiler pragmas</h3>
+<p><strong>Compiler pragmas</strong> are a special form of comments prefixed with <code>--#</code>. Currently GF interprets the following pragmas.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">pragma</th>
+<th style="text-align: left;">explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>-path=</code>PATH</td>
+<td style="text-align: left;">path list for searching modules</td>
+</tr>
+</tbody>
+</table>
+<p>For instance, the line</p>
+<pre><code>    --# -path=.:present:prelude:/home/aarne/GF/tmp</code></pre>
+<p>in the top of <code>FILE.gf</code> causes the GF compiler, when invoked on <code>FILE.gf</code>, to search through the current directory (<code>.</code>) and the directories <code>present</code>, <code>prelude</code>, and <code>/home/aarne/GF/tmp</code>, in this order. If a directory <code>DIR</code> is not found relative to the working directory, <code>$(GF_LIB_PATH)/DIR</code> is searched. <code>$GF_LIB_PATH</code> can be a colon-separated list of directories, in which case each directory in the list contributes to the search path expansion.</p>
+<h2 id="alternative-grammar-input-formats">Alternative grammar input formats</h2>
+<p>While the GF language as specified in this document is the most versatile and powerful way of writing GF grammars, there are several other formats that a GF compiler may make available for users, either to get started with small grammars or to semiautomatically convert grammars from other formats to GF. Here are the ones supported by GF 2.8 and 3.0.</p>
+<h3 id="old-gf-without-modules">Old GF without modules</h3>
+<p><span id="oldgf"></span></p>
+<p>Before GF compiler version 2.0, there was no module system, and all kinds of judgement could be written in all files, without any headers. This format is still available, and the compiler (version 2.8) detects automatically if a file is in the current or the old format. However, the old format is not recommended because of pure modularity and missing separate compilation, and also because libraries are not available, since the old and the new format cannot be mixed. With version 2.8, grammars in the old format can be converted to modular grammar with the command</p>
+<pre><code>    &gt; import -o FILE.gf</code></pre>
+<p>which rewrites the grammar divided into three files: an abstract, a concrete, and a resource module.</p>
+<h3 id="context-free-grammars">Context-free grammars</h3>
+<p>A quick way to write a GF grammar is to use the context-free format, also known as BNF. Files of this form are recognized by the suffix <code>.cf</code>. Rules in these files have the form</p>
+<p><em>Label</em> <code>.</code> <em>Cat</em> <code>::=</code> (<em>String</em> | <em>Cat</em>)* <code>;</code></p>
+<p>where <em>Label</em> and <em>Cat</em> are identifiers and <em>String</em> quoted strings.</p>
+<p>There is a shortcut form generating labels automatically,</p>
+<p><em>Cat</em> <code>::=</code> (<em>String</em> | <em>Cat</em>)* <code>;</code></p>
+<p>In the shortcut form, vertical bars (<code>|</code>) can be used to give several right-hand-sides at a time. An empty right-hand side means the singleton of an empty sequence, and not an empty union.</p>
+<p>Just like old-style GF files (previous section), contex-free grammar files can be converted to modular GF by using the <code>-o</code> option to the compiler in GF 2.8.</p>
+<h3 id="extended-bnf-grammars">Extended BNF grammars</h3>
+<p>Extended BNF (<code>FILE.ebnf</code>) goes one step further from the shortcut notation of previous section. The rules have the form</p>
+<p><em>Cat</em> <code>::=</code> <em>RHS</em> <code>;</code></p>
+<p>where an <em>RHS</em> can be any regular expression built from quoted strings and category symbols, in the following ways:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">RHS item</th>
+<th style="text-align: left;">explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><em>Cat</em></td>
+<td style="text-align: left;">nonterminal</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>String</em></td>
+<td style="text-align: left;">terminal</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>RHS</em> <em>RHS</em></td>
+<td style="text-align: left;">sequence</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>RHS</em> <code>|</code> <em>RHS</em></td>
+<td style="text-align: left;">alternatives</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>RHS</em> <code>?</code></td>
+<td style="text-align: left;">optional</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>RHS</em> <code>*</code></td>
+<td style="text-align: left;">repetition</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>RHS</em> <code>+</code></td>
+<td style="text-align: left;">non-empty repetition|</td>
+</tr>
+</tbody>
+</table>
+<p>Parentheses are used to override standard precedences, where <code>|</code> binds weaker than sequencing, which binds weaker than the unary operations.</p>
+<p>The compiler generates not only labels, but also new categories corresponding to the regular expression combinations actually in use.</p>
+<p>Just like <code>.cf</code> files (previous section), <code>.ebnf</code> files can be converted to modular GF by using the <code>-o</code> option to the compiler in GF 2.8.</p>
+<h3 id="example-based-grammars">Example-based grammars</h3>
+<p><strong>Example-based grammars</strong> (<code>.gfe</code>) provide a way to use resource grammar libraries without having to know the names of functions in them. The compiler works as a preprocessor, saving the result in a (<code>.gf</code>) file, which can be compiled as usual.</p>
+<p>If a library is implemented as an abstract and concrete syntax, it can be used for parsing. Calls of library functions can therefore be formed by parsing strings in the library. GF has an expression format for this,</p>
+<p><code>in</code> <em>C</em> <em>String</em></p>
+<p>where <em>C</em> is the category in which to parse (it can be qualified by the module name) and the string is the input to parser. Expressions of this form are replaced by the syntax trees that result. These trees are always type-correct. If several parses are found, all but the first one are given in comments.</p>
+<p>Here is an example, from <code>GF/examples/animal/</code>:</p>
+<pre><code>    --# -resource=../../lib/present/LangEng.gfc
+    --# -path=.:present:prelude
+
+    incomplete concrete QuestionsI of Questions = open Lang in {
+      lincat
+        Phrase = Phr ;
+        Entity = N ;
+        Action = V2 ;
+      lin
+        Who  love_V2 man_N           = in Phr &quot;who loves men&quot; ;
+        Whom man_N love_V2           = in Phr &quot;whom does the man love&quot; ;
+        Answer woman_N love_V2 man_N = in Phr &quot;the woman loves men&quot; ;
+    }</code></pre>
+<p>The <code>resource</code> pragma shows the grammar that is used for parsing the examples.</p>
+<p>Notice that the variables <code>love_V2</code>, <code>man_N</code>, etc, are actually constants in the library. In the resulting rules, such as</p>
+<pre><code>    lin Whom = \man_N -&gt; \love_V2 -&gt;
+      PhrUtt NoPConj (UttQS (UseQCl TPres ASimul PPos
+        (QuestSlash whoPl_IP (SlashV2 (DetCN (DetSg (SgQuant
+          DefArt)NoOrd)(UseN man_N)) love_V2)))) NoVoc ;</code></pre>
+<p>those constants are nonetheless treated as variables, following the normal binding conventions, as stated <a href="#renaming">here</a>.</p>
+<h2 id="the-grammar-of-gf">The grammar of GF</h2>
+<p>The following grammar is actually used in the parser of GF, although we have omitted some obsolete rules still included in the parser for backward compatibility reasons.</p>
+<p>This document was automatically generated by the <em>BNF-Converter</em>. It was generated together with the lexer, the parser, and the abstract syntax module, which guarantees that the document matches with the implementation of the language (provided no hand-hacking has taken place).</p>
+<h2 id="the-lexical-structure-of-gf">The lexical structure of GF</h2>
+<h3 id="identifiers">Identifiers</h3>
+<p>Identifiers <em>Ident</em> are unquoted strings beginning with a letter, followed by any combination of letters, digits, and the characters <code>_ '</code> reserved words excluded.</p>
+<h3 id="literals">Literals</h3>
+<p>Integer literals <em>Integer</em> are nonempty sequences of digits.</p>
+<p>String literals <em>String</em> have the form <code>&quot;</code><em>x</em><code>&quot;</code>}, where <em>x</em> is any sequence of any characters except <code>&quot;</code> unless preceded by <code>\</code>.</p>
+<p>Double-precision float literals <em>Double</em> have the structure indicated by the regular expression <code>digit+ '.' digit+ ('e' ('-')? digit+)?</code> i.e. two sequences of digits separated by a decimal point, optionally followed by an unsigned or negative exponent.</p>
+<h3 id="reserved-words-and-symbols">Reserved words and symbols</h3>
+<p>The set of reserved words is the set of terminals appearing in the grammar. Those reserved words that consist of non-letter characters are called symbols, and they are treated in a different way from those that are similar to identifiers. The lexer follows rules familiar from languages like Haskell, C, and Java, including longest match and spacing conventions.</p>
+<p>The reserved words used in GF are the following:</p>
+<ul>
+<li><code>PType</code></li>
+<li><code>Str</code></li>
+<li><code>Strs</code></li>
+<li><code>Type</code></li>
+<li><code>abstract</code></li>
+<li><code>case</code></li>
+<li><code>cat</code></li>
+<li><code>concrete</code></li>
+<li><code>data</code></li>
+<li><code>def</code></li>
+<li><code>flags</code></li>
+<li><code>fun</code></li>
+<li><code>in</code></li>
+<li><code>incomplete</code></li>
+<li><code>instance</code></li>
+<li><code>interface</code></li>
+<li><code>let</code></li>
+<li><code>lin</code></li>
+<li><code>lincat</code></li>
+<li><code>lindef</code></li>
+<li><code>linref</code></li>
+<li><code>of</code></li>
+<li><code>open</code></li>
+<li><code>oper</code></li>
+<li><code>param</code></li>
+<li><code>pre</code></li>
+<li><code>printname</code></li>
+<li><code>resource</code></li>
+<li><code>strs</code></li>
+<li><code>table</code></li>
+<li><code>transfer</code></li>
+<li><code>variants</code></li>
+<li><code>where</code></li>
+<li><code>with</code></li>
+</ul>
+<p>The symbols used in GF are the following:</p>
+<ul>
+<li><code>;</code></li>
+<li><code>=</code></li>
+<li><code>:</code></li>
+<li><code>-&gt;</code></li>
+<li><code>{</code></li>
+<li><code>}</code></li>
+<li><code>**</code></li>
+<li><code>,</code></li>
+<li><code>(</code></li>
+<li><code>)</code></li>
+<li><code>[</code></li>
+<li><code>]</code></li>
+<li><code>-</code></li>
+<li><code>.</code></li>
+<li><code>|</code></li>
+<li><code>?</code></li>
+<li><code>&lt;</code></li>
+<li><code>&gt;</code></li>
+<li><code>@</code></li>
+<li><code>!</code></li>
+<li><code>*</code></li>
+<li><code>+</code></li>
+<li><code>++</code></li>
+<li><code>\</code></li>
+<li><code>=&gt;</code></li>
+<li><code>_</code></li>
+<li><code>$</code></li>
+<li><code>/</code></li>
+</ul>
+<h3 id="comments">Comments</h3>
+<p>Single-line comments begin with <code>--</code>. Multiple-line comments are enclosed with <code>{-</code> and <code>-}</code>.</p>
+<h2 id="the-syntactic-structure-of-gf">The syntactic structure of GF</h2>
+<p>Terminal appear as <code>code</code>. The symbols <strong>-&gt;</strong> (production), <strong>|</strong> (union) and <strong>eps</strong> (empty rule) belong to the BNF notation. All other symbols are non-terminals.</p>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><em>Grammar</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>[ModDef]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[ModDef]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>ModDef</em> <em>[ModDef]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>ModDef</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>ModDef</em> <code>;</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>ComplMod</em> <em>ModType</em> <code>=</code> <em>ModBody</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>ModType</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><code>abstract</code> <em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>resource</code> <em>Ident</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>interface</code> <em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>concrete</code> <em>Ident</em> <code>of</code> <em>Ident</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>instance</code> <em>Ident</em> <code>of</code> <em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>transfer</code> <em>Ident</em> <code>:</code> <em>Open</em> <code>-&gt;</code> <em>Open</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>ModBody</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Extend</em> <em>Opens</em> <code>{</code> <em>[TopDef]</em> <code>}</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>[Included]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Included</em> <code>with</code> <em>[Open]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Included</em> <code>with</code> <em>[Open]</em> <code>**</code> <em>Opens</em> <code>{</code> <em>[TopDef]</em> <code>}</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>[Included]</em> <code>**</code> <em>Included</em> <code>with</code> <em>[Open]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>[Included]</em> <code>**</code> <em>Included</em> <code>with</code> <em>[Open]</em> <code>**</code> <em>Opens</em> <code>{</code> <em>[TopDef]</em> <code>}</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[TopDef]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>TopDef</em> <em>[TopDef]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Extend</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>[Included]</em> <code>**</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[Open]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Open</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Open</em> <code>,</code> <em>[Open]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Opens</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>open</code> <em>[Open]</em> <code>in</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Open</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>(</code> <em>QualOpen</em> <em>Ident</em> <code>)</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>(</code> <em>QualOpen</em> <em>Ident</em> <code>=</code> <em>Ident</em> <code>)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>ComplMod</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>incomplete</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>QualOpen</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[Included]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Included</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Included</em> <code>,</code> <em>[Included]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Included</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>[</code> <em>[Ident]</em> <code>]</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>-</code> <code>[</code> <em>[Ident]</em> <code>]</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Def</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>[Name]</em> <code>:</code> <em>Exp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>[Name]</em> <code>=</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Name</em> <em>[Patt]</em> <code>=</code> <em>Exp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>[Name]</em> <code>:</code> <em>Exp</em> <code>=</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>TopDef</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><code>cat</code> <em>[CatDef]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>fun</code> <em>[FunDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>data</code> <em>[FunDef]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>def</code> <em>[Def]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>data</code> <em>[DataDef]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>param</code> <em>[ParDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>oper</code> <em>[Def]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>lincat</code> <em>[PrintDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>lindef</code> <em>[Def]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>linref</code> <em>[Def]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>lin</code> <em>[Def]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>printname</code> <code>cat</code> <em>[PrintDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>printname</code> <code>fun</code> <em>[PrintDef]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>flags</code> <em>[FlagDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>CatDef</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em> <em>[DDecl]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>[</code> <em>Ident</em> <em>[DDecl]</em> <code>]</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>[</code> <em>Ident</em> <em>[DDecl]</em> <code>]</code> <code>{</code> <em>Integer</em> <code>}</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>FunDef</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>[Ident]</em> <code>:</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>DataDef</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>=</code> <em>[DataConstr]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>DataConstr</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>.</code> <em>Ident</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[DataConstr]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>DataConstr</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>DataConstr</em> <code>|</code> <em>[DataConstr]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>ParDef</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>=</code> <em>[ParConstr]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>=</code> <code>(</code> <code>in</code> <em>Ident</em> <code>)</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>ParConstr</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em> <em>[DDecl]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>PrintDef</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>[Name]</em> <code>=</code> <em>Exp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>FlagDef</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>=</code> <em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[Def]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Def</em> <code>;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Def</em> <code>;</code> <em>[Def]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[CatDef]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>CatDef</em> <code>;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>CatDef</em> <code>;</code> <em>[CatDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[FunDef]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>FunDef</em> <code>;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>FunDef</em> <code>;</code> <em>[FunDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[DataDef]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>DataDef</em> <code>;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>DataDef</em> <code>;</code> <em>[DataDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[ParDef]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>ParDef</em> <code>;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>ParDef</em> <code>;</code> <em>[ParDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[PrintDef]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>PrintDef</em> <code>;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>PrintDef</em> <code>;</code> <em>[PrintDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[FlagDef]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>FlagDef</em> <code>;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>FlagDef</em> <code>;</code> <em>[FlagDef]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[ParConstr]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>ParConstr</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>ParConstr</em> <code>|</code> <em>[ParConstr]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[Ident]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>,</code> <em>[Ident]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Name</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>[</code> <em>Ident</em> <code>]</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[Name]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Name</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Name</em> <code>,</code> <em>[Name]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>LocDef</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>[Ident]</em> <code>:</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>[Ident]</em> <code>=</code> <em>Exp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>[Ident]</em> <code>:</code> <em>Exp</em> <code>=</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[LocDef]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>LocDef</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>LocDef</em> <code>;</code> <em>[LocDef]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Exp6</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Sort</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>String</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Integer</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Double</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>?</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>[</code> <code>]</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>data</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>[</code> <em>Ident</em> <em>Exps</em> <code>]</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>[</code> <em>String</em> <code>]</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>{</code> <em>[LocDef]</em> <code>}</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>&lt;</code> <em>[TupleComp]</em> <code>&gt;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>&lt;</code> <em>Exp</em> <code>:</code> <em>Exp</em> <code>&gt;</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>(</code> <em>Exp</em> <code>)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Exp5</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Exp5</em> <code>.</code> <em>Label</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp6</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Exp4</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Exp4</em> <em>Exp5</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>table</code> <code>{</code> <em>[Case]</em> <code>}</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>table</code> <em>Exp6</em> <code>{</code> <em>[Case]</em> <code>}</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>table</code> <em>Exp6</em> <code>[</code> <em>[Exp]</em> <code>]</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>case</code> <em>Exp</em> <code>of</code> <code>{</code> <em>[Case]</em> <code>}</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>variants</code> <code>{</code> <em>[Exp]</em> <code>}</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>pre</code> <code>{</code> <em>Exp</em> <code>;</code> <em>[Altern]</em> <code>}</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>strs</code> <code>{</code> <em>[Exp]</em> <code>}</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>@</code> <em>Exp6</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp5</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Exp3</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Exp3</em> <code>!</code> <em>Exp4</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp3</em> <code>*</code> <em>Exp4</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp3</em> <code>**</code> <em>Exp4</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp4</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Exp1</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Exp2</em> <code>+</code> <em>Exp1</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp2</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Exp</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Exp1</em> <code>++</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>\</code> <em>[Bind]</em> <code>-&gt;</code> <em>Exp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>\</code> <code>\</code> <em>[Bind]</em> <code>=&gt;</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Decl</em> <code>-&gt;</code> <em>Exp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp3</em> <code>=&gt;</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>let</code> <code>{</code> <em>[LocDef]</em> <code>}</code> <code>in</code> <em>Exp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>let</code> <em>[LocDef]</em> <code>in</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp3</em> <code>where</code> <code>{</code> <em>[LocDef]</em> <code>}</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>in</code> <em>Exp5</em> <em>String</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp1</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Exp2</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Exp3</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[Exp]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp</em> <code>;</code> <em>[Exp]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Exps</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp6</em> <em>Exps</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Patt2</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><code>_</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>.</code> <em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Integer</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Double</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>String</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>{</code> <em>[PattAss]</em> <code>}</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>&lt;</code> <em>[PattTupleComp]</em> <code>&gt;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>(</code> <em>Patt</em> <code>)</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Patt1</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em> <em>[Patt]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>.</code> <em>Ident</em> <em>[Patt]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Patt2</em> <code>*</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Ident</em> <code>@</code> <em>Patt2</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>-</code> <em>Patt2</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Patt2</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Patt</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Patt</em> <code>|</code> <em>Patt1</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Patt</em> <code>+</code> <em>Patt1</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Patt1</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>PattAss</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>[Ident]</em> <code>=</code> <em>Patt</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Label</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>$</code> <em>Integer</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Sort</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><code>Type</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>PType</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>Str</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>Strs</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[PattAss]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>PattAss</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>PattAss</em> <code>;</code> <em>[PattAss]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[Patt]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Patt2</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Patt2</em> <em>[Patt]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Bind</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Ident</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><code>_</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[Bind]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Bind</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Bind</em> <code>,</code> <em>[Bind]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Decl</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><code>(</code> <em>[Bind]</em> <code>:</code> <em>Exp</em> <code>)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp4</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>TupleComp</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Exp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>PattTupleComp</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Patt</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[TupleComp]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>TupleComp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>TupleComp</em> <code>,</code> <em>[TupleComp]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[PattTupleComp]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>PattTupleComp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>PattTupleComp</em> <code>,</code> <em>[PattTupleComp]</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Case</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Patt</em> <code>=&gt;</code> <em>Exp</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[Case]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Case</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Case</em> <code>;</code> <em>[Case]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Altern</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><em>Exp</em> <code>/</code> <em>Exp</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>[Altern]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Altern</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Altern</em> <code>;</code> <em>[Altern]</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>DDecl</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><code>(</code> <em>[Bind]</em> <code>:</code> <em>Exp</em> <code>)</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>Exp6</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>[DDecl]</em></td>
+<td style="text-align: left;"><strong>-&gt;</strong></td>
+<td style="text-align: left;"><strong>eps</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>|</strong></td>
+<td style="text-align: left;"><em>DDecl</em> <em>[DDecl]</em></td>
+</tr>
+</tbody>
+</table>
+</div><!-- .container -->
+</div><!-- .bg-white -->
+
+<footer class="py-5">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-6 col-sm-3">
+        <a href="..">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <h6 class="text-muted mt-3">Get started</h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.youtube.com/watch?v=x1LFbDQhbso">Google Tech Talk</a></li>
+          <li><a href="http://cloud.grammaticalframework.org/">GF Cloud</a></li>
+          <li>
+            <a href="../doc/tutorial/gf-tutorial.html">Tutorial</a>
+             ·
+            <a href="../lib/doc/rgl-tutorial/index.html">RGL Tutorial</a>
+          </li>
+          <li><a href="../doc/gf-video-tutorials.html">Video Tutorials</a></li>
+          <li><a href="../download"><strong>Download GF</strong></a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Learn more</h6>
+        <ul class="list-unstyled">
+          <li><a href="../gf-book">The GF Book</a></li>
+          <li><a href="../doc/gf-refman.html">Reference Manual</a></li>
+          <li><a href="../doc/gf-shell-reference.html">GF Shell Reference</a></li>
+          <li><a href="http://www.molto-project.eu/sites/default/files/MOLTO_D2.3.pdf">Best Practices</a></li>
+          <li><a href="../lib/doc/synopsis/index.html"><strong>RGL Synopsis</strong></a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Develop</h6>
+        <ul class="list-unstyled">
+          <li><a href="../doc/gf-developers.html">Developers Guide</a></li>
+          <li><a href="http://hackage.haskell.org/package/gf/docs/PGF.html">PGF library API (Haskell runtime)</a></li>
+          <li><a href="../doc/runtime-api.html">PGF library API (C runtime)</a></li>
+          <li><a href="http://hackage.haskell.org/package/gf/docs/GF.html">GF compiler API</a></li>
+          <li><a href="../doc/gf-editor-modes.html">Text Editor Support</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Contribute</h6>
+        <ul class="list-unstyled">
+          <li><a href="http://groups.google.com/group/gf-dev">Mailing List</a></li>
+          <li><a href="https://github.com/GrammaticalFramework/gf-core/issues">Issue Tracker</a></li>
+          <li><a href="../doc/gf-people.html">Authors</a></li>
+          <li><a href="http://school.grammaticalframework.org/2018/">Summer School</a></li>
+        </ul>
+        <h6 class="text-muted">
+          Repositories
+          <i class="fab fa-github ml-1"></i>
+        </h6>
+        <a href="https://github.com/GrammaticalFramework/gf-core">GF</a> ·
+        <a href="https://github.com/GrammaticalFramework/gf-rgl">RGL</a> ·
+        <a href="https://github.com/GrammaticalFramework/gf-contrib">Contributions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7811807-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

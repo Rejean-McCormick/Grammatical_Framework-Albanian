@@ -1,0 +1,316 @@
+-- Put these helpers in the same module (e.g. in an oper section) before mkV101..mkV110.
+
+oper
+  mkPers : Str -> Str -> Str -> Str -> Str -> Str -> Number => Person => Str =
+    \p1sg,p2sg,p3sg,p1pl,p2pl,p3pl ->
+      table {
+        Sg => table { P1 => p1sg ; P2 => p2sg ; P3 => p3sg } ;
+        Pl => table { P1 => p1pl ; P2 => p2pl ; P3 => p3pl }
+      } ;
+
+  -- Present (thematic -oj): punoj/punon/punon/punojmë/punoni/punojnë
+  mkPresOj : Str -> Number => Person => Str =
+    \root -> mkPers (root+"oj") (root+"on") (root+"on") (root+"ojmë") (root+"oni") (root+"ojnë") ;
+
+  -- Present (-j verbs of the shkruaj/luaj type): shkruaj/shkruan/shkruan/shkruajmë/shkruani/shkruajnë
+  mkPresJ : Str -> Str -> Number => Person => Str =
+    \stemNoJ,baseJ -> mkPers baseJ (stemNoJ+"n") (stemNoJ+"n") (baseJ+"më") (stemNoJ+"ni") (baseJ+"në") ;
+
+  -- Aorist for consonant-final aorist stems: hap-a/hap-e/hap-i/hap-ëm/hap-ët/hap-ën
+  mkAorCons : Str -> Number => Person => Str =
+    \stem -> mkPers (stem+"a") (stem+"e") (stem+"i") (stem+"ëm") (stem+"ët") (stem+"ën") ;
+
+  -- Aorist for -oj verbs: punova/punove/punoi/punuam/punuat/punuan
+  mkAorOj : Str -> Number => Person => Str =
+    \root -> mkPers (root+"ova") (root+"ove") (root+"oi") (root+"uam") (root+"uat") (root+"uan") ;
+
+  -- Imperfect: stem + ja/je/nte/nim/nit/nin (puno-ja, puno-nte, shkrua-ja, shkrua-nte, etc.)
+  mkImpf : Str -> Number => Person => Str =
+    \stem -> mkPers (stem+"ja") (stem+"je") (stem+"nte") (stem+"nim") (stem+"nit") (stem+"nin") ;
+
+  -- Perfect (analytic): kam/ke/ka/kemi/keni/kanë + participle
+  mkPerf : Str -> Number => Person => Str =
+    \pple -> mkPers ("kam"+" "+pple) ("ke"+" "+pple) ("ka"+" "+pple)
+                   ("kemi"+" "+pple) ("keni"+" "+pple) ("kanë"+" "+pple) ;
+
+  -- Optative (regular -fsh- implementation): punofsha/punofsh/punoftë/punofshim/punofshi/punofshin
+  mkOptFsh : Str -> Number => Person => Str =
+    \stem -> mkPers (stem+"fsha") (stem+"fsh") (stem+"ftë") (stem+"fshim") (stem+"fshi") (stem+"fshin") ;
+
+  -- Perfect optative: paça/paç/pastë/paçim/paçi/paçin + participle
+  mkPerfOpt : Str -> Number => Person => Str =
+    \pple -> mkPers ("paça"+" "+pple) ("paç"+" "+pple) ("pastë"+" "+pple)
+                   ("paçim"+" "+pple) ("paçi"+" "+pple) ("paçin"+" "+pple) ;
+
+  -- Admirative present: shortPart + kam/ke/ka/kemi/keni/kan
+  mkAdmPres : Str -> Number => Person => Str =
+    \short -> mkPers (short+"kam") (short+"ke") (short+"ka") (short+"kemi") (short+"keni") (short+"kan") ;
+
+  -- Admirative imperfect: shortPart + kësha/këshe/kësh/këshim/këshit/këshin
+  mkAdmImpf : Str -> Number => Person => Str =
+    \short -> mkPers (short+"kësha") (short+"këshe") (short+"kësh") (short+"këshim") (short+"këshit") (short+"këshin") ;
+
+
+mkV101 : Str -> V ;
+mkV101 base =
+  case base of {
+    base_1+"ua"+base_2@?+"j" =>
+      let
+        presJ    = base_1+"ua"+base_2+"j" ;
+        stemNoJ  = base_1+"ua"+base_2 ;
+        pple     = presJ+"tur" ;
+        aorStem  = presJ+"t" ;     -- ...j + t  -> ...jt-
+        shortP   = presJ+"tu" ;    -- drop final -r from ...tur
+      in lin V {
+        Indicative = table {
+          Pres      => mkPresJ stemNoJ presJ ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorCons aorStem ;
+          Imperfect => mkImpf stemNoJ
+        } ;
+        Imperative = table { Sg => presJ ; Pl => stemNoJ+"ni" } ;
+        participle = pple ;
+        pres_optative   => mkOptFsh presJ ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV101"
+  } ;
+
+mkV102 : Str -> V ;
+mkV102 base =
+  case base of {
+    base_1+"j" =>
+      let
+        presJ    = base_1+"j" ;
+        stemNoJ  = base_1 ;
+        aorStem  = base_1+"n" ;
+        pple     = base_1+"në" ;
+        shortP   = base_1+"n" ;
+      in lin V {
+        Indicative = table {
+          Pres      => mkPresJ stemNoJ presJ ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorCons aorStem ;
+          Imperfect => mkImpf stemNoJ
+        } ;
+        Imperative = table { Sg => presJ ; Pl => stemNoJ+"ni" } ;
+        participle = pple ;
+        pres_optative   => mkOptFsh stemNoJ ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV102"
+  } ;
+
+mkV103 : Str -> V ;
+mkV103 base =
+  case base of {
+    base_1+"j" =>
+      let
+        presJ    = base_1+"j" ;
+        stemNoJ  = base_1 ;
+        aorStem  = base_1+"v" ;
+        pple     = base_1+"hë" ;
+        shortP   = base_1+"h" ;
+      in lin V {
+        Indicative = table {
+          Pres      => mkPresJ stemNoJ presJ ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorCons aorStem ;
+          Imperfect => mkImpf stemNoJ
+        } ;
+        Imperative = table { Sg => presJ ; Pl => stemNoJ+"ni" } ;
+        participle = pple ;
+        pres_optative   => mkOptFsh stemNoJ ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV103"
+  } ;
+
+mkV104 : Str -> V ;
+mkV104 base =
+  case base of {
+    base_1+"on" =>
+      let
+        root    = base_1 ;
+        impStem = root+"o" ;
+        pple    = root+"uar" ;
+        shortP  = root+"ua" ;  -- drop final -r
+      in lin V {
+        Indicative = table {
+          Pres      => mkPresOj root ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorOj root ;
+          Imperfect => mkImpf impStem
+        } ;
+        Imperative = table { Sg => root+"o" ; Pl => root+"oni" } ;
+        participle = pple ;
+        pres_optative   => mkOptFsh impStem ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV104"
+  } ;
+
+mkV105 : Str -> V ;
+mkV105 base =
+  case base of {
+    base_1+"j" =>
+      let
+        presJ    = base_1+"j" ;
+        stemNoJ  = base_1 ;
+        aorStem  = base_1+"jt" ;
+        pple     = base_1+"r" ;
+        shortP   = base_1 ;      -- drop final -r
+      in lin V {
+        Indicative = table {
+          Pres      => mkPresJ stemNoJ presJ ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorCons aorStem ;
+          Imperfect => mkImpf stemNoJ
+        } ;
+        Imperative = table { Sg => presJ ; Pl => stemNoJ+"ni" } ;
+        participle = pple ;
+        pres_optative   => mkOptFsh presJ ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV105"
+  } ;
+
+mkV106 : Str -> V ;
+mkV106 base =
+  case base of {
+    base_1+"ë" =>
+      let
+        pres1 = base_1+"ë" ;
+        pple  = base_1+"a" ;
+        shortP = base_1 ;
+      in lin V {
+        Indicative = table {
+          Pres      => mkPers pres1 pres1 pres1 (base_1+"ëmë") (base_1+"ëni") (base_1+"ënë") ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorCons base_1 ;
+          Imperfect => mkImpf base_1
+        } ;
+        Imperative = table { Sg => pres1 ; Pl => base_1+"ëni" } ;
+        participle = pple ;
+        pres_optative   => mkOptFsh base_1 ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV106"
+  } ;
+
+mkV107 : Str -> V ;
+mkV107 base =
+  case base of {
+    "n"+base_1 =>
+      let
+        pres1 = "n"+base_1 ;
+        pple  = "n"+base_1+"ur" ;
+        shortP = "n"+base_1+"u" ;  -- drop final -r
+      in lin V {
+        Indicative = table {
+          Pres      => mkPers pres1 nonExist nonExist nonExist nonExist nonExist ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorCons base_1 ;
+          Imperfect => mkImpf base_1
+        } ;
+        Imperative = table { Sg => nonExist ; Pl => nonExist } ;
+        participle = pple ;
+        pres_optative   => mkOptFsh base_1 ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV107"
+  } ;
+
+mkV108 : Str -> V ;
+mkV108 base =
+  case base of {
+    base_1+"oj" =>
+      let
+        root    = base_1 ;
+        impStem = root+"o" ;
+        aorStem = root+"oh" ;
+        pple    = root+"uar" ;
+        shortP  = root+"ua" ;
+      in lin V {
+        Indicative = table {
+          Pres      => mkPresOj root ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorCons aorStem ;
+          Imperfect => mkImpf impStem
+        } ;
+        Imperative = table { Sg => root+"o" ; Pl => root+"oni" } ;
+        participle = pple ;
+        pres_optative   => mkOptFsh impStem ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV108"
+  } ;
+
+mkV109 : Str -> V ;
+mkV109 base =
+  case base of {
+    base_1+"oj" =>
+      let
+        root    = base_1 ;
+        impStem = root+"o" ;
+        aorStem = root+"it" ;
+        pple    = root+"ir" ;
+        shortP  = root+"i" ;
+      in lin V {
+        Indicative = table {
+          Pres      => mkPresOj root ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorCons aorStem ;
+          Imperfect => mkImpf impStem
+        } ;
+        Imperative = table { Sg => root+"o" ; Pl => root+"oni" } ;
+        participle = pple ;
+        pres_optative   => mkOptFsh impStem ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV109"
+  } ;
+
+mkV110 : Str -> V ;
+mkV110 base =
+  case base of {
+    base_1+"ih"+base_2@?+"m" =>
+      let
+        pres1  = base_1+"ih"+base_2+"m" ;
+        aorStem = base_1+base_2+"v" ;
+        pple   = base_1+"y"+base_2+"r" ;
+        shortP = base_1+"y"+base_2 ; -- drop final -r
+      in lin V {
+        Indicative = table {
+          Pres      => mkPers pres1 nonExist nonExist nonExist nonExist nonExist ;
+          Past      => mkPerf pple ;
+          Aorist    => mkAorCons aorStem ;
+          Imperfect => mkPers nonExist nonExist nonExist nonExist nonExist nonExist
+        } ;
+        Imperative = table { Sg => nonExist ; Pl => nonExist } ;
+        participle = pple ;
+        pres_optative   => mkPers nonExist nonExist nonExist nonExist nonExist nonExist ;
+        perf_optative   => mkPerfOpt pple ;
+        pres_admirative => mkAdmPres shortP ;
+        imperf_admirative => mkAdmImpf shortP
+      } ;
+    _ => error "Can't apply paradigm mkV110"
+  } ;

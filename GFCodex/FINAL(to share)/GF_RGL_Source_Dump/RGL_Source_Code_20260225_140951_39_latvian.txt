@@ -1,0 +1,4623 @@
+==== VOLUME META ====
+generated_at: 2026-02-25T14:09:52.586916
+title: FOLDER: latvian
+root_dir: C:\MyCode\GFCodex\RGL_Source_Code
+file_count: 32
+total_size_mb: 0.1181
+home: 00_START_HERE.instructions.md
+prev_volume: RGL_Source_Code_20260225_140951_38_hungarian.txt
+next_volume: RGL_Source_Code_20260225_140951_40_dutch.txt
+prev_title: hungarian
+next_title: dutch
+short_title: latvian
+
+==== FILE_INDEX ====
+ENTRY id=7a27144d3ccf path="latvian/AdjectiveLav.gf" kind=source size=1732 lines=53 chunks=0
+ENTRY id=de4a1c285f37 path="latvian/AdverbLav.gf" kind=source size=1384 lines=50 chunks=0
+ENTRY id=4b895644f61d path="latvian/AllLav.gf" kind=source size=135 lines=11 chunks=0
+ENTRY id=a46df4dcb365 path="latvian/AllLavAbs.gf" kind=source size=97 lines=6 chunks=0
+ENTRY id=ce37d768aa0f path="latvian/CatLav.gf" kind=source size=2959 lines=131 chunks=0
+ENTRY id=33b336c07e76 path="latvian/CompatibilityLav.gf" kind=source size=390 lines=16 chunks=0
+ENTRY id=58623c7a046e path="latvian/ConjunctionLav.gf" kind=source size=1573 lines=60 chunks=0
+ENTRY id=755079d8c45e path="latvian/DocumentationLav.gf" kind=source size=11472 lines=181 chunks=0
+ENTRY id=504bf815a54f path="latvian/ExtendLav.gf" kind=source size=556 lines=25 chunks=0
+ENTRY id=001eae18251a path="latvian/ExtraLav.gf" kind=source size=2197 lines=94 chunks=0
+ENTRY id=a13d431d3b7b path="latvian/ExtraLavAbs.gf" kind=source size=637 lines=32 chunks=0
+ENTRY id=e49294e5a964 path="latvian/GrammarLav.gf" kind=source size=378 lines=27 chunks=0
+ENTRY id=c78d10cea197 path="latvian/IdiomLav.gf" kind=source size=1480 lines=63 chunks=0
+ENTRY id=aeda1f44e279 path="latvian/LangLav.gf" kind=source size=207 lines=14 chunks=0
+ENTRY id=683b3e27e8b7 path="latvian/MakeStructuralLav.gf" kind=source size=377 lines=18 chunks=0
+ENTRY id=6ec971acfe77 path="latvian/MorphoLav.gf" kind=source size=299 lines=11 chunks=0
+ENTRY id=c9aefe46c51f path="latvian/NamesLav.gf" kind=source size=927 lines=49 chunks=0
+ENTRY id=c3f15432bb82 path="latvian/NounLav.gf" kind=source size=6522 lines=268 chunks=0
+ENTRY id=71d793e526c2 path="latvian/NumeralLav.gf" kind=source size=3590 lines=134 chunks=0
+ENTRY id=27ee57d37c41 path="latvian/ParadigmsAdjectivesLav.gf" kind=source size=8361 lines=259 chunks=0
+ENTRY id=df0c5f5b8462 path="latvian/ParadigmsLav.gf" kind=source size=8783 lines=252 chunks=0
+ENTRY id=d4e8774777b0 path="latvian/ParadigmsNounsLav.gf" kind=source size=10695 lines=371 chunks=2
+ENTRY id=31ef142d99b0 path="latvian/ParadigmsPronounsLav.gf" kind=source size=7738 lines=296 chunks=0
+ENTRY id=fdae8351e750 path="latvian/ParadigmsVerbsLav.gf" kind=source size=20258 lines=671 chunks=2
+ENTRY id=028c1a30a512 path="latvian/PhraseLav.gf" kind=source size=882 lines=34 chunks=0
+ENTRY id=3a63bebacc5a path="latvian/QuestionLav.gf" kind=source size=1427 lines=56 chunks=0
+ENTRY id=61c8ebb02da1 path="latvian/RelativeLav.gf" kind=source size=1985 lines=70 chunks=0
+ENTRY id=e89bad2febcf path="latvian/ResLav.gf" kind=source size=4698 lines=163 chunks=0
+ENTRY id=702882090ce5 path="latvian/SentenceLav.gf" kind=source size=3497 lines=105 chunks=0
+ENTRY id=78b7ad9a689a path="latvian/StructuralLav.gf" kind=source size=7416 lines=298 chunks=0
+ENTRY id=5b2e35823e11 path="latvian/SymbolLav.gf" kind=source size=1380 lines=64 chunks=0
+ENTRY id=751e9bc3f4b7 path="latvian/VerbLav.gf" kind=source size=9816 lines=347 chunks=0
+
+==== FILES ====
+
+----- FILE BEGIN -----
+path="latvian/AdjectiveLav.gf"
+id=7a27144d3ccf
+kind=source
+size=1732
+lines=53
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete AdjectiveLav of Adjective = CatLav ** open
+  ResLav,
+  StructuralLav,
+  Prelude
+  in {
+
+flags
+  coding = utf8 ;
+
+lin
+  PositA a = { s = \\d,g,n,c => a.s ! (AAdj Posit d g n c) } ;
+
+  ComparA a np = { s = \\d,g,n,c => a.s ! (AAdj Compar d g n c) ++ "par" ++ np.s ! Acc }  |
+                 { s = \\d,g,n,c => a.s ! (AAdj Compar d g n c) ++ "nekā" ++ np.s ! Nom } ;
+
+  UseComparA a = { s = \\d,g,n,c => a.s ! (AAdj Compar d g n c) } ;
+
+  -- A2 -> NP -> AP
+  -- e.g. "married to her"
+  ComplA2 a np = {
+    s = \\d,g,n,c => case np.isPron of {
+      False => a.s ! (AAdj Posit d g n c) ++ a.prep.s ++ np.s ! (a.prep.c ! (fromAgr np.agr).num) ;
+      True  => a.prep.s ++ np.s ! (a.prep.c ! (fromAgr np.agr).num) ++ a.s ! (AAdj Posit d g n c)
+    }
+  } ;
+
+  ReflA2 a = { s = \\d,g,n,c => a.s ! (AAdj Posit d g n c) ++ a.prep.s ++ reflPron ! (a.prep.c ! n) } ;
+
+  AdAP ada ap = { s = \\d,g,n,c => ada.s ++ ap.s ! d ! g ! n ! c } ;
+
+  -- FIXME: te vajag apstākļa vārdu nevis īpašības vārdu! bet apst.v. nevar normāli no AP dabūt
+  SentAP ap sc = { s = \\d,g,n,c => ap.s ! d ! g ! n ! c ++ "," ++ sc.s } ;
+
+  -- FIXME: skaitļa agreement? noteiktība?
+  AdjOrd ord = { s = \\d,g,n,c => ord.s ! g ! c } ;
+
+  --TODO: nominatīvs var ne vienmēr būt, pie CAdv jāliek parametrs par locījumu
+  CAdvAP cadv ap np = { s = \\d,g,n,c => cadv.s ++ ap.s ! d ! g ! n ! c ++ cadv.prep ++ np.s ! Nom } ;
+
+  UseA2 a = { s = \\d,g,n,c => a.s ! (AAdj Posit d g n c) } ;
+
+  -- AP -> Adv -> AP
+  -- e.g. "warm by nature"
+  AdvAP ap adv = {
+    s = \\d,g,n,c => case adv.isPron of {
+      False => ap.s ! d ! g ! n ! c ++ adv.s ;
+      True  => adv.s ++ ap.s ! d ! g ! n ! c
+    }
+  } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/AdverbLav.gf"
+id=de4a1c285f37
+kind=source
+size=1384
+lines=50
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete AdverbLav of Adverb = CatLav ** open
+  ResLav,
+  Prelude
+  in {
+
+flags
+  coding = utf8 ;
+
+lin
+  -- A -> Adv
+  -- e.g. "warmly"
+  PositAdvAdj a = {s = a.s ! (AAdv Posit) ; isPron = False} ;
+
+  -- Prep -> NP -> Adv
+  -- e.g. "in the house"
+  -- FIXME: postpozīcijas prievārdi
+  PrepNP prep np = {s = prep.s ++ np.s ! (prep.c ! (fromAgr np.agr).num) ; isPron = np.isPron} ;
+
+  -- CAdv -> A -> NP -> Adv
+  -- e.g. "more warmly than John"
+  -- TODO: vajag arī 'ātrāks par Jāni' un 'ātrāks nekā Jānis' pie more_CAdv
+  -- TODO: vai te tiešām veido 'ātrāk par Jāni'? kurš ir pareizais adverbs? nevis 'ātrāks par Jāni'?
+  ComparAdvAdj cadv a np = {s = cadv.s ++ a.s ! (AAdv cadv.deg) ++ cadv.prep ++ np.s ! Nom ; isPron = False} ;
+
+  -- CAdv -> A -> S  -> Adv
+  -- e.g. "more warmly than he runs"
+  ComparAdvAdjS cadv a s = {s = cadv.s ++ a.s ! (AAdv cadv.deg) ++ cadv.prep ++ s.s ; isPron = False} ;
+
+  -- AdA -> Adv -> Adv
+  -- e.g. "very quickly"
+  AdAdv ada adv = {s = ada.s ++ adv.s ; isPron = False} ;
+
+  -- TODO: PositAdAAdj : A -> AdA
+
+  -- Subj -> S -> Adv
+  -- e.g. "when she sleeps"
+  SubjS subj s = {s = subj.s ++ s.s ; isPron = False} ;
+
+  -- CAdv -> AdN
+  -- e.g. "less (than five)"
+  AdnCAdv cadv = {
+    s = case cadv.deg of {
+      Posit => cadv.s ++ cadv.prep ;
+      _     => nonExist
+    }
+  } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/AllLav.gf"
+id=4b895644f61d
+kind=source
+size=135
+lines=11
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete AllLav of AllLavAbs =
+  LangLav,
+  ExtendLav
+  ** {
+
+flags
+  coding = utf8 ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/AllLavAbs.gf"
+id=a46df4dcb365
+kind=source
+size=97
+lines=6
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+abstract AllLavAbs =
+  Lang,
+  ExtraLavAbs
+  ** {}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/CatLav.gf"
+id=ce37d768aa0f
+kind=source
+size=2959
+lines=131
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+concrete CatLav of Cat = CommonX - [Adv, CAdv] ** open ResLav, Prelude in {
+
+flags
+
+  coding = utf8 ;
+  optimize = all_subs ;
+
+lincat
+
+  -- Sentences and clauses
+
+  S, QS = {s : Str} ;
+
+  RS = {s : Agreement => Str} ;
+
+  Cl = {s : VMood => Polarity => Str} ;
+
+  ClSlash = {s : VMood => Polarity => Str ; prep : Preposition} ;
+
+  SSlash = {s : Str ; prep : Preposition} ;
+
+  Imp = {s : Polarity => Number => Str} ;
+
+  -- Questions and interrogatives
+
+  QCl = {s : VMood => Polarity => Str} ;
+
+  IP = {s : Case => Str ; num : Number} ;
+
+  -- TODO: IComp = {s : Str ; agr : Agreement} ;
+
+  IDet = {s : Gender => Str ; num : Number} ;
+
+  IQuant = {s : Gender => Number => Str} ;
+
+  -- Relative clauses and pronouns
+
+  RCl = {s : VMood => Polarity => Agreement => Str} ;
+
+  RP = {s : Gender => Case => Str} ;
+
+  -- Verb phrases
+
+  VP = ResLav.VP ;
+
+  VPSlash = ResLav.VPSlash ;
+
+  Comp = {s : Agreement => Str} ;
+
+  -- Adjectival phrases
+
+  AP = {s : Definiteness => Gender => Number => Case => Str} ;
+
+  -- Nouns and noun phrases
+
+  CN = {s : Definiteness => Number => Case => Str ; gend : Gender ; isRel : Bool} ;
+
+  NP = {s : Case => Str ; agr : Agreement ; pol : Polarity ; isRel : Bool ; isPron : Bool} ;
+
+  Pron = Pronoun ;
+
+  Det = {s : Gender => Case => Str ; num : Number ; defin : Definiteness ; pol : Polarity} ;
+
+  Predet = {s : Gender => Str} ;
+
+  Quant = {s : Gender => Number => Case => Str ; defin : Definiteness ; pol : Polarity} ;
+
+  Num = {s : Gender => Case => Str ; num : Number ; hasCard : Bool} ;
+
+  Card = {s : Gender => Case => Str ; num : Number} ;
+
+  Ord = {s : Gender => Case => Str} ;
+
+  -- Numerals
+
+  Numeral = {s : CardOrd => Gender => Case => Str ; num : Number} ;
+
+  Digits = {s : CardOrd => Str ; num : Number} ;
+  Decimal = {s : CardOrd => Str ; num : Number ; hasDot : Bool} ;
+
+  -- Structural words
+
+  Conj = {s1, s2 : Str ; num : Number} ;
+
+  Subj = {s : Str} ;
+
+  Prep = Preposition ;
+
+  -- Words of open classes
+
+  V, VV, VQ, VA = Verb ;
+
+  V2, V2V, V2Q, V2A = Verb ** {rightVal : Preposition} ;
+
+  V3 = Verb ** {rightVal1, rightVal2 : Preposition} ;
+
+  VS = Verb ** {conj : Subj} ;
+
+  V2S = Verb ** {conj : Subj ; rightVal : Preposition} ;
+
+  A = Adjective ;
+
+  A2 = Adjective ** {prep : Preposition} ;
+
+  N = Noun ;
+
+  N2 = Noun ** {prep : Preposition ; isPre : Bool} ;
+
+  N3 = Noun ** {prep1, prep2 : Preposition ; isPre1, isPre2 : Bool} ;
+
+  PN,LN = ProperNoun ;
+  GN = {s : Case => Str ; gend : Gender} ;
+  SN = {s : Gender => Case => Str; pl : Case => Str} ;
+
+  -- Overriden from CommonX
+
+  Adv = {s : Str ; isPron : Bool} ;
+
+  CAdv = {s, prep : Str ; deg : Degree} ;
+  
+lindef
+  V2 = \s -> {s=\\_,_=>s; leftVal=Nom; rightVal={s=[]; c=\\_ => Acc}} ;
+  V3 = \s -> {s=\\_,_=>s; leftVal=Nom; rightVal1={s=[]; c=\\_ => Acc}; rightVal2={s=[]; c=\\_ => Dat}} ;
+
+linref
+  V2 = \v -> v.s ! Pos ! VInf ++ v.rightVal.s ;
+  V3 = \v -> v.s ! Pos ! VInf ++ v.rightVal1.s ++ v.rightVal2.s ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/CompatibilityLav.gf"
+id=33b336c07e76
+kind=source
+size=390
+lines=16
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete CompatibilityLav of Compatibility = CatLav ** open
+  Prelude,
+  ResLav
+  in {
+
+flags
+  coding = utf8 ;
+
+lin
+  -- TODO: kāpēc citās valodās (piem., Eng, Bul) kategorijai Num (NumInt) ir lauks isNum (= True)?
+  NumInt n = { s = \\_,_ => n.s ; num = Pl ; hasCard = False } ;
+  OrdInt n = { s = \\_,_ => n.s ++ SOFT_BIND ++ "." } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ConjunctionLav.gf"
+id=58623c7a046e
+kind=source
+size=1573
+lines=60
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete ConjunctionLav of Conjunction = CatLav ** open
+  Coordination,
+  ResLav,
+  Prelude
+  in {
+
+flags
+  optimize = all_subs ;
+  coding = utf8 ;
+
+lin
+
+  ConjS = conjunctDistrSS ;
+
+  ConjRS conj ss = conjunctDistrTable Agreement conj ss ;
+
+  ConjAP conj ss = conjunctDistrTable4 Definiteness Gender Number Case conj ss ;
+
+  -- Conj -> [NP] -> NP
+  -- e.g. "she or we"
+  ConjNP conj ss = conjunctDistrTable Case conj ss ** {
+    agr    = toAgr (fromAgr ss.agr).pers (conjNumber (fromAgr ss.agr).num conj.num) (fromAgr ss.agr).gend;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+
+  -- Conj -> [Adv] -> Adv
+  -- e.g. "here or there"
+  ConjAdv or xs = (conjunctDistrSS or xs) ** {isPron = False};
+
+  -- These fun's are generated from the list cat's:
+  BaseS = twoSS ;
+  ConsS = consrSS comma ;
+  BaseAdv = twoSS ;
+  ConsAdv = consrSS comma ;
+
+  BaseNP x y = twoTable Case x y ** { agr = conjAgr x.agr y.agr } ;
+  ConsNP xs x = consrTable Case comma xs x ** { agr = conjAgr xs.agr x.agr } ;
+
+  BaseAP x y = twoTable4 Definiteness Gender Number Case x y ;
+  ConsAP xs x = consrTable4 Definiteness Gender Number Case comma xs x ;
+
+  BaseRS x y = twoTable Agreement x y ;
+  ConsRS xs x = consrTable Agreement comma xs x  ;
+
+lincat
+
+  [S]   = {s1, s2 : Str} ;
+  [RS]  = {s1, s2 : Agreement => Str} ;
+  [NP]  = {s1, s2 : Case => Str ; agr : Agreement} ;
+  [AP]  = {s1, s2 : Definiteness => Gender => Number => Case => Str} ;
+  [Adv] = {s1, s2 : Str} ;
+  -- TODO: [AdV]{2}
+  -- TODO: [IAdv]{2}
+  -- TODO: [CN] {2}
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/DocumentationLav.gf"
+id=755079d8c45e
+kind=source
+size=11472
+lines=181
+chunks=0
+----
+--# -path=.:../abstract:../common
+concrete DocumentationLav of Documentation = CatLav ** open
+  ResLav,
+  Prelude,
+  HTML in {
+
+lincat
+  Inflection = {t : Str; s1,s2,s3 : Str} ;
+  Definition = {s : Str} ;
+  Document   = {s : Str} ;
+  Tag        = {s : Str} ;
+
+lin InflectionN, InflectionN2, InflectionN3 = \x -> {
+      t="n" ;
+      s1=heading1 ("Noun" ++
+                   case x.gend of {
+                     Masc => "(masculine)" ;
+                     Fem  => "(feminine)"
+                   }) ;
+      s2=frameTable (
+           tr (th ""    ++ th "Sg" ++             th "Pl") ++
+           tr (th "Nom" ++ td (x.s ! Sg ! Nom) ++ td (x.s ! Pl ! Nom)) ++
+           tr (th "Acc" ++ td (x.s ! Sg ! Acc) ++ td (x.s ! Pl ! Acc)) ++
+           tr (th "Dat" ++ td (x.s ! Sg ! Dat) ++ td (x.s ! Pl ! Dat)) ++
+           tr (th "Gen" ++ td (x.s ! Sg ! Gen) ++ td (x.s ! Pl ! Gen)) ++
+           tr (th "Loc" ++ td (x.s ! Sg ! Loc) ++ td (x.s ! Pl ! Loc)) ++
+           tr (th "Voc" ++ td (x.s ! Sg ! Voc) ++ td (x.s ! Pl ! Voc))) ;
+      s3=[]
+    } ;
+
+lin InflectionPN = \pn -> {
+      t  = "pn" ;
+      s1 = heading1 ("Proper Name" ++ "(" ++ BIND ++
+                     case pn.gend of {
+                       Masc  => "masculine";
+                       Fem   => "feminine"
+                     } ++
+                     case pn.num of {
+                       Sg => "singular";
+                       Pl => "plural"
+                     } ++
+                     BIND ++ ")") ;
+      s2 = frameTable (
+             tr (th "Nom" ++ td (pn.s ! Nom)) ++
+             tr (th "Acc" ++ td (pn.s ! Acc)) ++
+             tr (th "Dat" ++ td (pn.s ! Dat)) ++
+             tr (th "Gen" ++ td (pn.s ! Gen)) ++
+             tr (th "Loc" ++ td (pn.s ! Loc)) ++
+             tr (th "Voc" ++ td (pn.s ! Voc))) ;
+      s3=[]
+    } ;
+
+lin InflectionLN = \pn -> {
+      t  = "ln" ;
+      s1 = heading1 ("Location Name" ++ "(" ++ BIND ++
+                     case pn.gend of {
+                       Masc  => "masculine";
+                       Fem   => "feminine"
+                     } ++
+                     case pn.num of {
+                       Sg => "singular";
+                       Pl => "plural"
+                     } ++
+                     BIND ++ ")") ;
+      s2 = frameTable (
+             tr (th "Nom" ++ td (pn.s ! Nom)) ++
+             tr (th "Acc" ++ td (pn.s ! Acc)) ++
+             tr (th "Dat" ++ td (pn.s ! Dat)) ++
+             tr (th "Gen" ++ td (pn.s ! Gen)) ++
+             tr (th "Loc" ++ td (pn.s ! Loc)) ++
+             tr (th "Voc" ++ td (pn.s ! Voc))) ;
+      s3=[]
+    } ;
+
+lin InflectionGN = \pn -> {
+      t  = "ln" ;
+      s1 = heading1 ("Given Name" ++
+                     case pn.gend of {
+                       Masc  => "(masculine)";
+                       Fem   => "(feminine)"
+                     }) ;
+      s2 = frameTable (
+             tr (th "Nom" ++ td (pn.s ! Nom)) ++
+             tr (th "Acc" ++ td (pn.s ! Acc)) ++
+             tr (th "Dat" ++ td (pn.s ! Dat)) ++
+             tr (th "Gen" ++ td (pn.s ! Gen)) ++
+             tr (th "Loc" ++ td (pn.s ! Loc)) ++
+             tr (th "Voc" ++ td (pn.s ! Voc))) ;
+      s3=[]
+    } ;
+
+lin InflectionSN = \pn -> {
+      t  = "ln" ;
+      s1 = heading1 "Family Name" ;
+      s2 = frameTable (
+             tr (th "Nom" ++ td (pn.s ! Masc ! Nom)) ++
+             tr (th "Acc" ++ td (pn.s ! Masc ! Acc)) ++
+             tr (th "Dat" ++ td (pn.s ! Masc ! Dat)) ++
+             tr (th "Gen" ++ td (pn.s ! Masc ! Gen)) ++
+             tr (th "Loc" ++ td (pn.s ! Masc ! Loc)) ++
+             tr (th "Voc" ++ td (pn.s ! Masc ! Voc))) ;
+      s3=[]
+    } ;
+
+lin InflectionA, InflectionA2 = \adj -> {
+      t="a" ;
+      s1=heading1 "Adjective" ;
+      s2=frameTable (
+           tr (intagAttr "th" "rowspan=\"2\" colspan=\"2\"" "" ++ intagAttr "th" "colspan=\"2\"" "Masculine" ++ intagAttr "th" "colspan=\"2\"" "Feminine") ++
+           tr (                                     th "Sg" ++ th "Pl" ++ th "Sg" ++ th "Pl") ++
+           intagAttr "th" "colspan=\"6\"" "Positive" ++
+           tr (intagAttr "th" "rowspan=\"6\"" "Indef" ++
+               th "Nom" ++ td (adj.s ! AAdj Posit Indef Masc Sg Nom) ++ td (adj.s ! AAdj Posit Indef Masc Pl Nom) ++ td (adj.s ! AAdj Posit Indef Fem Sg Nom) ++ td (adj.s ! AAdj Posit Indef Fem Pl Nom)) ++
+           tr (th "Acc" ++ td (adj.s ! AAdj Posit Indef Masc Sg Acc) ++ td (adj.s ! AAdj Posit Indef Masc Pl Acc) ++ td (adj.s ! AAdj Posit Indef Fem Sg Nom) ++ td (adj.s ! AAdj Posit Indef Fem Pl Nom)) ++
+           tr (th "Dat" ++ td (adj.s ! AAdj Posit Indef Masc Sg Dat) ++ td (adj.s ! AAdj Posit Indef Masc Pl Dat) ++ td (adj.s ! AAdj Posit Indef Fem Sg Nom) ++ td (adj.s ! AAdj Posit Indef Fem Pl Nom)) ++
+           tr (th "Gen" ++ td (adj.s ! AAdj Posit Indef Masc Sg Gen) ++ td (adj.s ! AAdj Posit Indef Masc Pl Gen) ++ td (adj.s ! AAdj Posit Indef Fem Sg Nom) ++ td (adj.s ! AAdj Posit Indef Fem Pl Nom)) ++
+           tr (th "Loc" ++ td (adj.s ! AAdj Posit Indef Masc Sg Loc) ++ td (adj.s ! AAdj Posit Indef Masc Pl Loc) ++ td (adj.s ! AAdj Posit Indef Fem Sg Nom) ++ td (adj.s ! AAdj Posit Indef Fem Pl Nom)) ++
+           tr (th "Voc" ++ td (adj.s ! AAdj Posit Indef Masc Sg Voc) ++ td (adj.s ! AAdj Posit Indef Masc Pl Voc) ++ td (adj.s ! AAdj Posit Indef Fem Sg Nom) ++ td (adj.s ! AAdj Posit Indef Fem Pl Nom)) ++
+           tr (intagAttr "th" "rowspan=\"6\"" "Def" ++
+               th "Nom" ++ td (adj.s ! AAdj Posit Def Masc Sg Nom) ++ td (adj.s ! AAdj Posit Def Masc Pl Nom) ++ td (adj.s ! AAdj Posit Def Fem Sg Nom) ++ td (adj.s ! AAdj Posit Def Fem Pl Nom)) ++
+           tr (th "Acc" ++ td (adj.s ! AAdj Posit Def Masc Sg Acc) ++ td (adj.s ! AAdj Posit Def Masc Pl Acc) ++ td (adj.s ! AAdj Posit Def Fem Sg Nom) ++ td (adj.s ! AAdj Posit Def Fem Pl Nom)) ++
+           tr (th "Dat" ++ td (adj.s ! AAdj Posit Def Masc Sg Dat) ++ td (adj.s ! AAdj Posit Def Masc Pl Dat) ++ td (adj.s ! AAdj Posit Def Fem Sg Nom) ++ td (adj.s ! AAdj Posit Def Fem Pl Nom)) ++
+           tr (th "Gen" ++ td (adj.s ! AAdj Posit Def Masc Sg Gen) ++ td (adj.s ! AAdj Posit Def Masc Pl Gen) ++ td (adj.s ! AAdj Posit Def Fem Sg Nom) ++ td (adj.s ! AAdj Posit Def Fem Pl Nom)) ++
+           tr (th "Loc" ++ td (adj.s ! AAdj Posit Def Masc Sg Loc) ++ td (adj.s ! AAdj Posit Def Masc Pl Loc) ++ td (adj.s ! AAdj Posit Def Fem Sg Nom) ++ td (adj.s ! AAdj Posit Def Fem Pl Nom)) ++
+           tr (th "Voc" ++ td (adj.s ! AAdj Posit Def Masc Sg Voc) ++ td (adj.s ! AAdj Posit Def Masc Pl Voc) ++ td (adj.s ! AAdj Posit Def Fem Sg Nom) ++ td (adj.s ! AAdj Posit Def Fem Pl Nom)) ++
+           intagAttr "th" "colspan=\"6\"" "Comparative" ++
+           tr (intagAttr "th" "rowspan=\"6\"" "Indef" ++
+               th "Nom" ++ td (adj.s ! AAdj Compar Indef Masc Sg Nom) ++ td (adj.s ! AAdj Compar Indef Masc Pl Nom) ++ td (adj.s ! AAdj Compar Indef Fem Sg Nom) ++ td (adj.s ! AAdj Compar Indef Fem Pl Nom)) ++
+           tr (th "Acc" ++ td (adj.s ! AAdj Compar Indef Masc Sg Acc) ++ td (adj.s ! AAdj Compar Indef Masc Pl Acc) ++ td (adj.s ! AAdj Compar Indef Fem Sg Nom) ++ td (adj.s ! AAdj Compar Indef Fem Pl Nom)) ++
+           tr (th "Dat" ++ td (adj.s ! AAdj Compar Indef Masc Sg Dat) ++ td (adj.s ! AAdj Compar Indef Masc Pl Dat) ++ td (adj.s ! AAdj Compar Indef Fem Sg Nom) ++ td (adj.s ! AAdj Compar Indef Fem Pl Nom)) ++
+           tr (th "Gen" ++ td (adj.s ! AAdj Compar Indef Masc Sg Gen) ++ td (adj.s ! AAdj Compar Indef Masc Pl Gen) ++ td (adj.s ! AAdj Compar Indef Fem Sg Nom) ++ td (adj.s ! AAdj Compar Indef Fem Pl Nom)) ++
+           tr (th "Loc" ++ td (adj.s ! AAdj Compar Indef Masc Sg Loc) ++ td (adj.s ! AAdj Compar Indef Masc Pl Loc) ++ td (adj.s ! AAdj Compar Indef Fem Sg Nom) ++ td (adj.s ! AAdj Compar Indef Fem Pl Nom)) ++
+           tr (th "Voc" ++ td (adj.s ! AAdj Compar Indef Masc Sg Voc) ++ td (adj.s ! AAdj Compar Indef Masc Pl Voc) ++ td (adj.s ! AAdj Compar Indef Fem Sg Nom) ++ td (adj.s ! AAdj Compar Indef Fem Pl Nom)) ++
+           tr (intagAttr "th" "rowspan=\"6\"" "Def" ++
+               th "Nom" ++ td (adj.s ! AAdj Compar Def Masc Sg Nom) ++ td (adj.s ! AAdj Compar Def Masc Pl Nom) ++ td (adj.s ! AAdj Compar Def Fem Sg Nom) ++ td (adj.s ! AAdj Compar Def Fem Pl Nom)) ++
+           tr (th "Acc" ++ td (adj.s ! AAdj Compar Def Masc Sg Acc) ++ td (adj.s ! AAdj Compar Def Masc Pl Acc) ++ td (adj.s ! AAdj Compar Def Fem Sg Nom) ++ td (adj.s ! AAdj Compar Def Fem Pl Nom)) ++
+           tr (th "Dat" ++ td (adj.s ! AAdj Compar Def Masc Sg Dat) ++ td (adj.s ! AAdj Compar Def Masc Pl Dat) ++ td (adj.s ! AAdj Compar Def Fem Sg Nom) ++ td (adj.s ! AAdj Compar Def Fem Pl Nom)) ++
+           tr (th "Gen" ++ td (adj.s ! AAdj Compar Def Masc Sg Gen) ++ td (adj.s ! AAdj Compar Def Masc Pl Gen) ++ td (adj.s ! AAdj Compar Def Fem Sg Nom) ++ td (adj.s ! AAdj Compar Def Fem Pl Nom)) ++
+           tr (th "Loc" ++ td (adj.s ! AAdj Compar Def Masc Sg Loc) ++ td (adj.s ! AAdj Compar Def Masc Pl Loc) ++ td (adj.s ! AAdj Compar Def Fem Sg Nom) ++ td (adj.s ! AAdj Compar Def Fem Pl Nom)) ++
+           tr (th "Voc" ++ td (adj.s ! AAdj Compar Def Masc Sg Voc) ++ td (adj.s ! AAdj Compar Def Masc Pl Voc) ++ td (adj.s ! AAdj Compar Def Fem Sg Nom) ++ td (adj.s ! AAdj Compar Def Fem Pl Nom)) ++
+           intagAttr "th" "colspan=\"6\"" "Superlative" ++
+           tr (intagAttr "th" "rowspan=\"6\"" "Def" ++
+               th "Nom" ++ td (adj.s ! AAdj Superl Def Masc Sg Nom) ++ td (adj.s ! AAdj Superl Def Masc Pl Nom) ++ td (adj.s ! AAdj Superl Def Fem Sg Nom) ++ td (adj.s ! AAdj Superl Def Fem Pl Nom)) ++
+           tr (th "Acc" ++ td (adj.s ! AAdj Superl Def Masc Sg Acc) ++ td (adj.s ! AAdj Superl Def Masc Pl Acc) ++ td (adj.s ! AAdj Superl Def Fem Sg Nom) ++ td (adj.s ! AAdj Superl Def Fem Pl Nom)) ++
+           tr (th "Dat" ++ td (adj.s ! AAdj Superl Def Masc Sg Dat) ++ td (adj.s ! AAdj Superl Def Masc Pl Dat) ++ td (adj.s ! AAdj Superl Def Fem Sg Nom) ++ td (adj.s ! AAdj Superl Def Fem Pl Nom)) ++
+           tr (th "Gen" ++ td (adj.s ! AAdj Superl Def Masc Sg Gen) ++ td (adj.s ! AAdj Superl Def Masc Pl Gen) ++ td (adj.s ! AAdj Superl Def Fem Sg Nom) ++ td (adj.s ! AAdj Superl Def Fem Pl Nom)) ++
+           tr (th "Loc" ++ td (adj.s ! AAdj Superl Def Masc Sg Loc) ++ td (adj.s ! AAdj Superl Def Masc Pl Loc) ++ td (adj.s ! AAdj Superl Def Fem Sg Nom) ++ td (adj.s ! AAdj Superl Def Fem Pl Nom)) ++
+           tr (th "Voc" ++ td (adj.s ! AAdj Superl Def Masc Sg Voc) ++ td (adj.s ! AAdj Superl Def Masc Pl Voc) ++ td (adj.s ! AAdj Superl Def Fem Sg Nom) ++ td (adj.s ! AAdj Superl Def Fem Pl Nom))) ++
+           
+           heading1 "Adverb" ++
+           frameTable (
+             tr (th "Positive" ++ td (adj.s ! AAdv Posit)) ++
+             tr (th "Comparative" ++ td (adj.s ! AAdv Compar)) ++
+             tr (th "Superlative" ++ td (adj.s ! AAdv Superl))) ;
+      s3=[]
+    } ;
+
+lin InflectionAdv, InflectionAdV, InflectionAdA, InflectionAdN = \adv -> {
+      t = "adv" ;
+      s1= heading1 "Adverb" ;
+      s2= paragraph (adv.s) ;
+      s3= ""
+    } ;
+
+lin InflectionPrep = \prep -> {
+      t = "prep" ;
+      s1= heading1 "Preposition" ;
+      s2= paragraph (prep.s) ;
+      s3= ""
+    } ;
+
+lin
+  NoDefinition   t     = {s=t.s};
+  MkDefinition   t d   = {s="<p><b>Definition:</b>"++t.s++d.s++"</p>"};
+  MkDefinitionEx t d e = {s="<p><b>Definition:</b>"++t.s++d.s++"</p><p><b>Example:</b>"++e.s++"</p>"};
+
+lin
+  MkDocument d i e = {s = i.s1 ++ d.s ++ i.s2 ++ paragraph e.s} ;
+  MkTag i = {s = i.t} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ExtendLav.gf"
+id=504bf815a54f
+kind=source
+size=556
+lines=25
+chunks=0
+----
+--# -path=.:../common:../abstract
+
+concrete ExtendLav of Extend =
+  CatLav ** ExtendFunctor -
+  [
+    iFem_Pron, weFem_Pron, youFem_Pron, youPolFem_Pron, youPlFem_Pron,
+    theyFem_Pron,
+    ComplDirectVQ, ComplDirectVS
+   ]
+  with
+    (Grammar = GrammarLav) **
+  open
+    ResLav,
+    ParadigmsPronounsLav in {
+
+lin iFem_Pron = mkPronoun_I Fem ;
+    weFem_Pron = mkPronoun_We Fem ;
+
+    youFem_Pron = mkPronoun_You_Sg Fem ;
+    youPolFem_Pron = mkPronoun_You_Pol Fem ;
+    youPlFem_Pron = mkPronoun_You_Pl Fem ;
+
+    theyFem_Pron = mkPronoun_They Fem ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ExtraLav.gf"
+id=001eae18251a
+kind=source
+size=2197
+lines=94
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete ExtraLav of ExtraLavAbs = CatLav ** open
+  ParadigmsLav,
+  ParadigmsPronounsLav,
+  VerbLav,
+  ResLav,
+  Coordination
+in {
+
+flags coding = utf8 ;
+
+lin
+
+  -- NP -> CN -> CN
+  GenCN np cn = {
+    s     = \\d,n,c => np.s ! Gen ++ closeRelCl np.isRel ++ cn.s ! d ! n ! c ;
+    gend  = cn.gend ;
+    isRel = cn.isRel
+  } ;
+
+  aiz_Prep = mkPrep "aiz" Gen Dat ;
+  ap_Prep = mkPrep "ap" Acc Dat ;
+  gar_Prep = mkPrep "gar" Acc Dat ;
+  kopsh_Prep = mkPrep "kopš" Gen Dat ;
+  liidz_Prep = mkPrep "līdz" Dat Dat ;
+  pa_Prep = mkPrep "pa" Acc Dat ;
+  --par_Prep = mkPrep "par" Acc Dat ;
+  paar_Prep = mkPrep "pār" Acc Dat ;
+  pie_Prep = mkPrep "pie" Gen Dat ;
+  pret_Prep = mkPrep "pret" Acc Dat ;
+  
+  i8fem_Pron = mkPronoun_I Fem ;
+  we8fem_Pron = mkPronoun_We Fem ;
+
+  youSg8fem_Pron = mkPronoun_You_Sg Fem ;
+  youPol8fem_Pron = mkPronoun_You_Pol Fem ;
+  youPl8fem_Pron = mkPronoun_You_Pl Fem ;
+
+  they8fem_Pron = mkPronoun_They Fem ;
+  it8fem_Pron = mkPronoun_It_Sg Fem ;
+
+  have_V3 = mkV3 (mkV "būt" Dat) nom_Prep dat_Prep ;
+
+  {-
+  empty_Det num def pol = \num,def,pol -> {
+    s = \\_,_ => [] ;
+    n = num ;
+    d = def ;
+    pol = pol
+  } ;
+  -}
+
+  -- Zemāk esošās f-cijas nav ExtraLavAbs, tās ir abstract/Extra.gf
+
+  -- NP -> Quant
+  GenNP np = {
+    s = \\_,_,_ => np.s ! Gen ;
+    defin = Def ;
+    pol = np.pol
+  } ;
+
+  --ICompAP ap = { s = \\g,n => "cik" ++ ap.s ! Indef ! g ! n ! Nom } ;
+
+  IAdvAdv adv = { s = "cik" ++ adv.s } ;
+
+  -- VP conjunction:
+
+  lincat
+    VPS = { s : AgrAgr => Str } ;
+    [VPS] = { s1,s2 : AgrAgr => Str } ;
+
+  lin
+    BaseVPS = twoTable AgrAgr ;
+    ConsVPS = consrTable AgrAgr comma ;
+
+    -- NP -> VPS -> S
+    PredVPS np vps = { s = np.s ! Nom ++ vps.s ! { agr = np.agr ; pol = np.pol } } ;
+
+    -- Temp -> Pol -> VP -> VPS
+    MkVPS temp pol vp = {
+      s = \\agrAgr =>
+        temp.s ++
+        -- TODO: verb moods other than Ind
+        buildVerb vp.v (Ind temp.a temp.t) pol.p agrAgr.agr agrAgr.pol vp.rightPol ++
+        vp.compl ! agrAgr.agr
+      } ;
+    
+    -- Conj -> [VPS] -> VPS
+    ConjVPS = conjunctDistrTable AgrAgr ;
+
+  oper AgrAgr : Type = { agr : Agreement ; pol : Polarity } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ExtraLavAbs.gf"
+id=a13d431d3b7b
+kind=source
+size=637
+lines=32
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+abstract ExtraLavAbs = Extra **
+--open ResLav, Prelude in
+{
+
+  fun
+    GenCN : NP -> CN -> CN ;
+
+    aiz_Prep : Prep ;
+    ap_Prep : Prep ;
+    gar_Prep : Prep ;
+    kopsh_Prep : Prep ;
+    liidz_Prep : Prep ;
+    pa_Prep : Prep ;
+    --par_Prep : Prep ;
+    paar_Prep : Prep ;
+    pie_Prep : Prep ;
+    pret_Prep : Prep ;
+
+    i8fem_Pron : Pron ;
+    we8fem_Pron : Pron ;
+    youSg8fem_Pron : Pron ;
+    youPol8fem_Pron : Pron ;
+    youPl8fem_Pron : Pron ;
+    they8fem_Pron : Pron ;
+    it8fem_Pron : Pron ;
+
+    --empty_Det : Number -> Definiteness -> Bool -> Det ;
+
+    have_V3 : V3 ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/GrammarLav.gf"
+id=e49294e5a964
+kind=source
+size=378
+lines=27
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete GrammarLav of Grammar =
+  NounLav,
+  VerbLav,
+  AdjectiveLav,
+  AdverbLav,
+  NumeralLav,
+  SentenceLav,
+  QuestionLav,
+  RelativeLav,
+  ConjunctionLav,
+  PhraseLav,
+  TextX - [Adv,CAdv],
+  StructuralLav,
+  IdiomLav,
+  TenseX - [Adv,CAdv],
+  NamesLav
+
+  ** {
+
+flags
+  startcat = Phr ;
+  unlexer = text ;
+  lexer = text ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/IdiomLav.gf"
+id=c78d10cea197
+kind=source
+size=1480
+lines=63
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+concrete IdiomLav of Idiom = CatLav ** open
+  VerbLav,
+  ParadigmsLav,
+  ResLav,
+  Prelude
+in {
+
+flags
+
+  coding = utf8 ;
+  optimize = all_subs ;
+
+lin
+
+  ImpersCl vp =
+    let agr = AgrP3 Sg Masc
+    in {
+      s = \\mood,pol =>
+        buildVerb vp.v mood pol agr Pos vp.rightPol ++  -- Verb
+        vp.compl ! agr  -- Object(s), complements, adverbial modifiers
+    } ;
+
+  GenericCl vp =
+    let agr = AgrP3 Sg Masc
+    in {
+      s = \\mood,pol =>
+        buildVerb vp.v mood pol agr Pos vp.rightPol ++
+        vp.compl ! agr
+    } ;
+
+  ExistNP np = {
+    s = \\mood,pol => buildVerb (mkV "būt") mood pol np.agr np.pol Pos ++ np.s ! Nom
+  } ;
+
+  ExistIP ip = {
+    s = \\mood,pol => ip.s ! Nom ++ buildVerb (mkV "būt") mood pol (AgrP3 ip.num Masc) Pos Pos
+  } ;
+
+  -- FIXME: needs restriction so that only VMood Indicative _ _ Present is allowed;
+  -- can't do that on VP level...
+  ProgrVP v = v ;
+
+  ImpPl1 vp =
+    let agr = AgrP1 Pl Masc
+    in {
+      s =
+        vp.v.s ! Pos ! (VInd P1 Pl Pres) ++  -- Verb
+        vp.compl ! agr  -- Object(s), complements, adverbial modifiers
+    }
+    | { s = vp.v.s ! Pos ! (VInd P1 Pl Fut) ++ vp.compl ! agr }  --# notpresent
+    ;
+
+  ImpP3 np vp = {
+    s = "lai" ++ np.s ! Nom ++ buildVerb vp.v (Ind Simul Pres) Pos np.agr np.pol vp.rightPol ++ vp.compl ! np.agr ;
+  } ;
+
+  -- FIXME: placeholder
+  CleftNP np rs = { s = \\_,_ => nonExist } ;
+  CleftAdv ad s = { s = \\_,_ => nonExist } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/LangLav.gf"
+id=aeda1f44e279
+kind=source
+size=207
+lines=14
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete LangLav of Lang =
+  GrammarLav,
+  LexiconLav
+  ,DocumentationLav --# notpresent
+  ** {
+
+flags
+  startcat = Phr ;
+  unlexer = text ;
+  lexer = text ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/MakeStructuralLav.gf"
+id=683b3e27e8b7
+kind=source
+size=377
+lines=18
+chunks=0
+----
+--# -path=.:../common:../abstract
+
+resource MakeStructuralLav = open CatLav, ParadigmsLav, ResLav, Prelude in {
+
+flags
+  coding = utf8 ;
+
+oper
+  mkSubj : Str -> Subj = \x ->
+    lin Subj {s = x} ;
+
+  --mkNP : Str -> ParadigmsLav.Number -> NP = \s,n ->
+  --  lin NP (regNP s n) ;
+
+  mkIDet : Str -> ParadigmsLav.Number -> IDet = \s,n ->
+    lin IDet {s = \\_ => s ; n = n} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/MorphoLav.gf"
+id=6ec971acfe77
+kind=source
+size=299
+lines=11
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+-- This resource morphology contains definitions needed in the resource
+-- syntax. To build a lexicon, it is better to use $ParadigmsLav$, which
+-- gives a higher-level access to this module.
+
+resource MorphoLav = ResLav ** {
+
+flags optimize = all ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/NamesLav.gf"
+id=c9aefe46c51f
+kind=source
+size=927
+lines=49
+chunks=0
+----
+concrete NamesLav of Names = CatLav ** open Prelude, ResLav in {
+
+lin
+  GivenName gn = {
+    s = gn.s ;
+    agr    = AgrP3 Sg gn.gend ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+  MaleSurname sn = {
+    s = sn.s ! Masc ;
+    agr    = AgrP3 Sg Masc ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+  FemaleSurname sn = {
+    s = sn.s ! Fem ;
+    agr    = AgrP3 Sg Fem ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+  PlSurname sn = {
+    s = sn.pl ;
+    agr    = AgrP3 Pl Masc ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+  FullName gn sn = {
+    s = \\c => gn.s ! c ++ sn.s ! gn.gend ! c ;
+    agr    = AgrP3 Sg gn.gend ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+
+lin
+  UseLN, PlainLN = \ln -> {
+    s      = ln.s ;
+    agr    = AgrP3 ln.num ln.gend ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/NounLav.gf"
+id=c3f15432bb82
+kind=source
+size=6522
+lines=268
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+concrete NounLav of Noun = CatLav ** open ResLav, Prelude in {
+
+flags
+
+  coding = utf8 ;
+  optimize = all_subs ;
+
+lin
+
+  -- Noun phrases
+
+  -- Det -> CN -> NP
+  -- e.g. 'the man'
+  DetCN det cn = {
+    s      = \\c => det.s ! cn.gend ! c ++ cn.s ! det.defin ! det.num ! c ;
+    agr    = AgrP3 det.num cn.gend ;
+    pol    = det.pol ;
+    isRel  = cn.isRel ;
+    isPron = False
+  } ;
+
+  -- PN -> NP
+  -- e.g. 'John'
+  UsePN pn = {
+    s      = pn.s ;
+    agr    = AgrP3 pn.num pn.gend ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+
+  -- Pron -> NP
+  -- e.g. 'he'
+  UsePron pron = {
+    s      = pron.s ;
+    agr    = pron.agr ;
+    pol    = pron.pol ;
+    isRel  = False ;
+    isPron = True
+  } ;
+
+  -- Predet -> NP -> NP
+  -- e.g. 'only the man'
+  PredetNP predet np = {
+    s      = \\c => predet.s ! (fromAgr np.agr).gend ++ np.s ! c ;
+    agr    = np.agr ;
+    pol    = np.pol ;
+    isRel  = np.isRel ;
+    isPron = False
+  } ;
+
+  -- NP -> V2 -> NP
+  -- e.g. 'the man seen'
+  PPartNP np v2 = {
+    s      = \\c => v2.s ! Pos ! (VPart Pass (fromAgr np.agr).gend (fromAgr np.agr).num c) ++ np.s ! c ;
+    agr    = np.agr ;
+    pol    = np.pol ;
+    isRel  = np.isRel ;
+    isPron = False
+  } ;
+
+  -- NP -> Adv -> NP
+  -- e.g. 'Paris today'
+  AdvNP np adv = {
+    s      = \\c => np.s ! c ++ adv.s ;
+    agr    = np.agr ;
+    pol    = np.pol ;
+    isRel  = False ;
+    isPron = False
+  } ;
+
+  -- NP -> RS -> NP
+  -- e.g. 'Paris, which is here'
+  RelNP np rs = {
+    s      = \\c => np.s ! c ++ "," ++ rs.s ! np.agr ;
+    agr    = np.agr ;
+    pol    = np.pol ;
+    isRel  = True ;
+    isPron = False
+  } ;
+
+  -- CN -> NP
+  MassNP cn = {
+    s      = cn.s ! Indef ! Sg ;  -- FIXME: bet 'šis alus'? un 'zaļš alus' vs. 'zaļais alus'?
+    agr    = AgrP3 Sg cn.gend ;
+    pol    = Pos ;
+    isRel  = cn.isRel ;
+    isPron = False
+  } ;
+
+  -- Det -> NP
+  -- e.g. 'these five'
+  DetNP det = {
+    s      = \\c => det.s ! Masc ! c ;
+    agr    = AgrP3 det.num Masc ;
+    pol    = det.pol ;
+    isRel  = False ;
+    isPron = False
+  } | {
+    s      = \\c => det.s ! Fem ! c ;
+    agr    = AgrP3 det.num Fem ;
+    pol    = det.pol ;
+    isRel  = False ;
+    isPron = False
+  } ;
+
+  -- Determiners
+
+  -- Quant -> Num -> Det
+  -- e.g. 'these five'
+  DetQuant quant num = {
+    s     = \\gend,c => quant.s ! gend ! num.num ! c ++ num.s ! gend ! c ;
+    num   = num.num ;
+    defin = quant.defin ;  -- FIXME: ja ir kārtas skaitļa vārds, tad tikai noteiktās formas
+    pol   = quant.pol
+  } ;
+
+  -- Quant -> Num -> Ord -> Det
+  -- e.g. 'these five best'
+  DetQuantOrd quant num ord = {
+    s     = \\gend,c => quant.s ! gend ! num.num ! c ++ num.s ! gend ! c ++ ord.s ! gend ! c ;
+    num   = num.num ;
+    defin = quant.defin ;  -- FIXME: ja ir kārtas skaitļa vārds, tad tikai noteiktās formas
+    pol   = quant.pol
+  } ;
+
+  -- Num
+  NumSg = { s = \\_,_ => [] ; num = Sg ; hasCard = False } ;
+
+  -- Num
+  NumPl = { s = \\_,_ => [] ; num = Pl ; hasCard = False } ;
+
+  -- Card -> Num
+  NumCard card = card ** { hasCard = True } ;
+
+  -- Digits -> Card
+  -- e.g. '51'
+  NumDigits digits = { s = \\_,_ => digits.s ! NCard ; num = digits.num } ;
+  NumDecimal dec = { s = \\_,_ => dec.s ! NCard ; num = dec.num } ;
+
+  -- Numeral -> Card
+  -- e.g. 'fifty-one'
+  NumNumeral numeral = { s = numeral.s ! NCard ; num = numeral.num } ;
+
+  -- AdN -> Card -> Card
+  -- e.g. 'almost 51'
+  AdNum adn card = {
+    s   = \\gend,c => adn.s ++ card.s ! gend ! c ;
+    num = card.num
+  } ;
+
+  -- Digits -> Ord
+  -- e.g. '51st'
+  OrdDigits digits = { s = \\_,_ => digits.s ! NOrd } ;
+
+  -- Numeral -> Ord
+  -- e.g. 'fifty-first'
+  OrdNumeral numeral = { s = numeral.s ! NOrd } ;
+
+  -- A -> Ord
+  -- e.g. 'warmest'
+  OrdSuperl a = { s = \\gend,c => a.s ! (AAdj Superl Def gend Sg c) } ;
+
+  -- Quant
+  IndefArt = { s = \\_,_,_ => [] ; defin = Indef ; pol = Pos } ;
+
+  -- Quant
+  DefArt = { s = \\_,_,_ => [] ; defin = Def ; pol = Pos } ;
+
+  -- Pron -> Quant
+  PossPron pron = { s = pron.poss ; defin = Def ; pol = Pos } ;
+
+  -- Common nouns
+
+  -- N -> CN
+  -- e.g. 'house'
+  UseN n = { s = \\_ => n.s ; gend = n.gend ; isRel = False } ;
+
+  -- N2 -> NP -> CN
+  -- e.g. 'mother of the king'
+  ComplN2 n2 np = {
+    s     = \\_,num,c => preOrPost n2.isPre 
+              (n2.prep.s ++ np.s ! (n2.prep.c ! (fromAgr np.agr).num) ++ closeRelCl np.isRel) 
+              (n2.s ! num ! c) ;
+    gend  = n2.gend ;
+    isRel = False
+  } ;
+
+  -- N3 -> NP -> N2
+  -- e.g. 'distance from this city (to Paris)'
+  ComplN3 n3 np = {
+    s     = \\num,c => preOrPost n3.isPre1 
+              (n3.prep1.s ++ np.s ! (n3.prep1.c ! (fromAgr np.agr).num) ++ closeRelCl np.isRel) 
+              (n3.s ! num ! c) ;
+    gend  = n3.gend ;
+    prep  = n3.prep2 ;
+    isPre = n3.isPre2
+  } ;
+
+  -- N2 -> CN
+  -- e.g. 'mother'
+  UseN2 n2 = { s = \\_ => n2.s ; gend = n2.gend ; isRel = False } ;
+
+  -- N3 -> N2
+  -- e.g. 'distance (from this city)'
+  Use2N3 n3 = { s = n3.s ; gend = n3.gend ; prep = n3.prep1 ; isPre = n3.isPre1 } ;
+
+  -- N3 -> N2
+  -- e.g. 'distance (to Paris)'
+  Use3N3 n3 = { s = n3.s ; gend = n3.gend ; prep = n3.prep2 ; isPre = n3.isPre2 } ;
+
+  -- AP -> CN -> CN
+  -- e.g. 'big house'
+  AdjCN ap cn = {
+    s     = \\defin,num,c => ap.s ! defin ! cn.gend ! num ! c ++ cn.s ! defin ! num ! c ;
+    gend  = cn.gend ;
+    isRel = cn.isRel
+  } ;
+
+  -- CN -> RS -> CN
+  -- e.g. 'house that John bought'
+  RelCN cn rs = {
+    s     = \\defin,num,c => cn.s ! defin ! num ! c ++ "," ++ rs.s ! AgrP3 num cn.gend ;
+    gend  = cn.gend ;
+    isRel = True
+  } ;
+
+  -- CN -> Adv -> CN
+  -- e.g. 'house on the hill'
+  AdvCN cn adv = {
+    s     = \\defin,num,c => cn.s ! defin ! num ! c ++ adv.s ;
+    gend  = cn.gend ;
+    isRel = False  -- TODO: Adv arī būs jāievieš isRel lauks
+  } ;
+
+  -- CN -> SC -> CN
+  -- e.g. 'question where she sleeps'
+  SentCN cn sc = {
+    s     = \\defin,num,c => cn.s ! defin ! num ! c ++ "," ++ sc.s ;
+    gend  = cn.gend ;
+    isRel = True
+  } ;
+
+  -- Apposition
+
+  -- CN -> NP -> CN
+  -- e.g. 'city Paris', 'numbers x and y'
+  ApposCN cn np = 
+    let num : Number = (fromAgr np.agr).num in {
+      s     = \\defin,num,c => cn.s ! defin ! num ! c ++ np.s ! c ;
+      gend  = cn.gend ;
+      isRel = np.isRel
+    } ;
+
+  -- TODO: Possessive and partitive constructs
+
+  -- PossNP : CN -> NP -> CN
+  -- e.g. 'house of Paris', 'house of mine'
+
+  -- PartNP : CN -> NP -> CN
+  -- e.g. 'glass of wine'
+
+  -- CountNP : Det -> NP -> NP
+  -- e.g. 'three of them', 'some of the boys'
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/NumeralLav.gf"
+id=71d793e526c2
+kind=source
+size=3590
+lines=134
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+concrete NumeralLav of Numeral = CatLav [Numeral,Digits,Decimal] ** open ResLav, ParadigmsLav, Prelude in {
+
+flags coding = utf8 ;
+
+lincat
+
+  -- TODO: formas, kas pieprasa ģenitīvu - tūkstotis grāmatu, trīs simti meiteņu
+  Digit = { s : DForm => CardOrd => Gender => Case => Str } ;
+  Sub10 = { s : CardOrd => Gender => Case => Str ; num : Number } ;
+  Sub100 = { s : CardOrd => Gender => Case => Str ; num : Number } ;
+  Sub1000 = { s : CardOrd => Gender => Case => Str ; num : Number } ;
+  Sub1000000 = { s : CardOrd => Gender => Case => Str ; num : Number } ;
+  Sub1000000000 = { s : CardOrd => Gender => Case => Str ; num : Number } ;
+  Sub1000000000000 = { s : CardOrd => Gender => Case => Str ; num : Number } ;
+
+lin
+
+  num x = x ;
+
+  n2 = mkNumReg "divi" "otrais" Pl ;
+
+  n3 =
+    let trijs = mkNumSpec "trijs" "trešais" "trīs" "trīs" Pl
+    in {
+      s = \\f,o,g,c => case <f, o, g, c> of {
+        <DUnit, NCard, _, Nom> => "trīs" ;
+        <DUnit, NCard, _, Dat> => "trim" ;
+        <DUnit, NCard, _, Loc> => "trīs" ;
+        _ => trijs.s ! f ! o ! g ! c
+      }
+    } | {
+      s = \\f,o,g,c => case <f, o, g, c> of {
+        <DUnit, NCard, _, Nom> => "trīs" ;
+        _ => trijs.s ! f ! o ! g ! c
+    }
+  } ;
+
+  n4 = mkNumReg "četri" "ceturtais" Pl ;
+  n5 = mkNumReg "pieci" "piektais" Pl ;
+  n6 = mkNumReg "seši" "sestais" Pl ;
+  n7 = mkNumReg "septiņi" "septītais" Pl ;
+  n8 = mkNumReg "astoņi" "astotais" Pl ;
+  n9 = mkNumReg "deviņi" "devītais" Pl ;
+
+  pot01 = { s = viens.s ! DUnit } ** { num = Sg } ;
+  pot0 d = { s = d.s ! DUnit } ** { num = Pl } ;
+  pot110 = { s = viens.s ! DTen } ** { num = Pl } ;
+  pot111 = { s = viens.s ! DTeen } ** { num = Pl } ;
+  pot1to19 d = { s = d.s ! DTeen } ** { num = Pl } ;
+  pot0as1 n = { s = n.s ; num = n.num } ;
+  pot1 d = { s = d.s ! DTen } ** { num = Pl } ;
+
+  pot1plus d e = {
+    s = \\o,g,c => d.s ! DTen ! NCard ! Masc ! Nom ++ e.s ! o ! g ! c ;
+    num = e.num
+  } ;
+
+  pot1as2 n = n ;
+
+  -- FIXME: nav īsti labi, kārtas skaitlim ir jābūt 'trīssimtais' utml
+  pot2 d = {
+    s = \\o,g,c => d.s ! NCard ! Masc ! Nom ++ simts ! o ! g ! d.num ! c ;
+    num = Pl
+  } ;
+
+  pot2plus d e = {
+    s = \\o,g,c => d.s ! NCard ! Masc ! Nom ++ simts ! NCard ! Masc ! d.num ! Nom ++ e.s ! o ! g ! c ;
+    num = e.num
+  } ;
+
+  pot2as3 n = n ;
+
+  pot3 d = {
+    s = \\o,g,c => d.s ! NCard ! Masc ! Nom ++ tuukstotis ! o ! g ! d.num ! c ;
+    num = Pl
+  } ;
+
+  pot3plus d e = {
+    s = \\o,g,c => d.s ! NCard ! Masc ! Nom ++ tuukstotis ! NCard ! Masc ! d.num ! Nom ++ e.s ! o ! g ! c ;
+    num = e.num
+  } ;
+
+  pot3as4 n = n ;
+  pot4as5 n = n ;
+
+-- Numerals as sequences of digits:
+
+lincat
+  Dig = { num : Number ; s : CardOrd => Str } ;
+
+lin
+  IDig d = d ;
+
+  IIDig d i = {
+    s = \\o => d.s ! NCard ++ BIND ++ i.s ! o ;
+    num = Pl ;	-- FIXME: 1 cilvēks, 11 cilvēki, 21 cilvēks, ...
+  } ;
+
+  D_0 = mkDig "0" ;
+  D_1 = mk2Dig "1" Sg ;
+  D_2 = mkDig "2" ;
+  D_3 = mkDig "3" ;
+  D_4 = mkDig "4" ;
+  D_5 = mkDig "5" ;
+  D_6 = mkDig "6" ;
+  D_7 = mkDig "7" ;
+  D_8 = mkDig "8" ;
+  D_9 = mkDig "9" ;
+
+  PosDecimal d = d ** {hasDot=False} ;
+  NegDecimal d = {
+    s = \\o => "-" ++ BIND ++ d.s ! o ;
+    num = Pl ;
+    hasDot=False
+  } ;
+  IFrac d i = {
+    s = \\o => d.s ! NCard ++
+               if_then_Str d.hasDot BIND (BIND++"."++BIND) ++
+               i.s ! o;
+    num = Pl ;
+    hasDot=True
+    } ;
+
+oper
+  mkDig : Str -> Dig = \c -> mk2Dig c Pl ;
+
+  mk2Dig : Str -> Number -> Dig = \c,n -> lin Dig {
+    s = table { NCard => c ; NOrd => c + "." } ;
+    num = n
+  } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ParadigmsAdjectivesLav.gf"
+id=27ee57d37c41
+kind=source
+size=8361
+lines=259
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+resource ParadigmsAdjectivesLav = open ResLav, CatLav, Predef, Prelude in {
+
+flags coding = utf8 ;
+
+oper
+
+-- ADJECTIVES
+
+  -- TODO: Parameters and paradigms should be redesigned due to the many nonExist forms..?
+
+  -- To keep the code and user interface (parameters) simple, Masc lemmas are expected.
+
+  -- No parameters - default assumptions (type)
+  mkAdjective : Str -> Adjective = \lemma ->
+    case lemma of {
+      s + "ais"     => mkAdjective_Rel lemma ;
+      s + ("s"|"š") => mkAdjective_Qual lemma ;
+      s + #vowel    => mkAdjective_Indecl lemma
+    } ;
+
+  -- Specified type - no defaults
+  mkAdjectiveByType : Str -> AType -> Adjective = \lemma,type ->
+    case type of {
+      AQual   => mkAdjective_Qual lemma ;
+      ARel    => mkAdjective_Rel lemma ;
+      AIndecl => mkAdjective_Indecl lemma
+    } ;
+
+  -- Indeclinable adjective: theoretically, any #vowel ending
+  mkAdjective_Indecl : Str -> Adjective = \lemma -> {
+    s = table{
+      AAdj Superl Indef _ _ _ => nonExist ;
+      AAdj _ _ _ _ _ => lemma ;
+      AAdv d => mkAdjective_Adverb lemma ! d-- TODO - notestēt šādu keisu
+    }
+  } ;
+
+  -- Qualitative adjective: -s, -š
+  mkAdjective_Qual : Str -> Adjective = \lemma -> {
+    s = table {
+      AAdj Posit d g n c => mkAdjective_Pos lemma d ! g ! n ! c ;
+      AAdj Compar d g n c => mkAdjective_Comp lemma d ! g ! n ! c ;
+      AAdj Superl Def g n c => mkAdjective_Sup lemma ! g ! n ! c ;
+      AAdj Superl Indef _ _ _ => nonExist ;
+      AAdv d => mkAdjective_Adverb lemma ! d
+    }
+  } ;
+
+  -- Relative adjective: -ais (Def only); -s, -š (Indef and Def)
+  mkAdjective_Rel : Str -> Adjective = \lemma -> {
+    s = table {
+      AAdj Posit Def g n c => mkAdjective_Pos lemma Def ! g ! n ! c ;
+      AAdj Posit Indef g n c => case lemma of {
+        s + "ais" => mkAdjective_Pos lemma Def ! g ! n ! c ;
+        _         => mkAdjective_Pos lemma Indef ! g ! n ! c
+      } ;
+      AAdj _ _ _ _ _ => nonExist ;
+      AAdv d => mkAdjective_Adverb lemma ! d
+    }
+  };
+
+  -- TODO: Vai vajag iznest polaritāti ārpusē lai ir noliegtie kā atsevišķi īpašībasvārdi?
+  --       Praksē lielākoties pietiek ar palīgverba noliegumu?
+  -- TODO: Jāpieliek parametrs Tense: present = ziedošs, izsalkstošs; past = ziedējis, izsalcis.
+  --       Vai arī jāpadod Str "-is"/"-ošs" un pa tiešo jāizsauc mkParticiple, bet
+  --       kā šis mkA(Str) atšķirsies no citiem mkA(Str)? 
+  mkAdjective_Participle : Verb -> Voice -> Adjective = \v,p -> {
+    s = table {
+      AAdj Posit Indef g n c => v.s ! Pos ! (VPart p g n c) ;
+      _ => nonExist
+    }
+  };
+
+  -- Positive degree: -s, -š (Indef and Def); -ais (Def only)
+  -- TODO: atsaukties uz lietvārdu locīšanas tabulām?
+  mkAdjective_Pos : Str -> Definiteness -> Gender => Number => Case => Str = \lemma,defin ->
+    let stem : Str = case lemma of {
+      s + "ais" => s ;
+      _ => Predef.tk 1 lemma
+    }
+    in case defin of {
+      Indef => table {
+        Masc => table {
+          Sg => table {
+            Nom => lemma ;
+            Gen => stem + "a" ;
+            Dat => stem + "am" ;
+            Acc => stem + "u" ;
+            Loc => stem + "ā" ;
+            Voc => stem + "ais"
+          } ;
+          Pl => table {
+            Nom => stem + "i" ;
+            Gen => stem + "u" ;
+            Dat => stem + "iem" ;
+            Acc => stem + "us" ;
+            Loc => stem + "os" ;
+            Voc => stem + "ie"
+          }
+        } ;
+        Fem => table {
+          Sg => table {
+            Nom => stem + "a" ;
+            Gen => stem + "as" ;
+            Dat => stem + "ai" ;
+            Acc => stem + "u" ;
+            Loc => stem + "ā" ;
+            Voc => stem + "ā"
+          } ;
+          Pl => table {
+            Nom => stem + "as" ;
+            Gen => stem + "u" ;
+            Dat => stem + "ām" ;
+            Acc => stem + "as" ;
+            Loc => stem + "ās" ;
+            Voc => stem + "ās"
+          }
+        }
+      } ;
+      Def => table {
+        Masc => table {
+          Sg => table {
+            Nom => stem + "ais" ;
+            Gen => stem + "ā" ;
+            Dat => case stem of {s + "ēj" => stem + "am" ; _ => stem + "ajam"} ;
+            Acc => stem + "o" ;
+            Loc => case stem of {s + "ēj" => stem + "ā" ; _ => stem + "ajā"} ;
+            Voc => stem + "ais"
+          } ;
+          Pl => table {
+            Nom => stem + "ie" ;
+            Gen => stem + "o" ;
+            Dat => case stem of {s + "ēj" => stem + "iem" ; _ => stem + "ajiem"} ;
+            Acc => stem + "os" ;
+            Loc => case stem of {s + "ēj" => stem + "os" ; _ => stem + "ajos"} ;
+            Voc => stem + "ie"
+          }
+        } ;
+        Fem => table {
+          Sg => table {
+            Nom => stem + "ā" ;
+            Gen => stem + "ās" ;
+            Dat => case stem of {s + "ēj" => stem + "ai" ; _ => stem + "ajai"} ;
+            Acc => stem + "o" ;
+            Loc => case stem of {s + "ēj" => stem + "ā" ; _ => stem + "ajā"} ;
+            Voc => stem + "ā"
+          } ;
+          Pl => table {
+            Nom => stem + "ās" ;
+            Gen => stem + "o" ;
+            Dat => case stem of {s + "ēj" => stem + "ām" ; _ => stem + "ajām"} ;
+            Acc => stem + "ās" ;
+            Loc => case stem of {s + "ēj" => stem + "ās" ; _ => stem + "ajās"} ;
+            Voc => stem + "ās"
+          }
+        }
+      }
+    } ;
+
+  -- Comparative degree: Qual only
+  mkAdjective_Comp : Str -> Definiteness -> Gender => Number => Case => Str = \lemma,defin ->
+    let stem : Str = Predef.tk 1 lemma
+    in case defin of {
+      Indef => table {
+        Masc => table {
+          Sg => table {
+            Nom => stem + "āks" ;
+            Gen => stem + "āka" ;
+            Dat => stem + "ākam" ;
+            Acc => stem + "āku" ;
+            Loc => stem + "ākā" ;
+            Voc => stem + "ākais"
+          } ;
+          Pl => table {
+            Nom => stem + "āki" ;
+            Gen => stem + "āku" ;
+            Dat => stem + "ākiem" ;
+            Acc => stem + "ākus" ;
+            Loc => stem + "ākos" ;
+            Voc => stem + "ākie"
+          }
+        } ;
+        Fem => table {
+          Sg => table {
+            Nom => stem + "āka" ;
+            Gen => stem + "ākas" ;
+            Dat => stem + "ākai" ;
+            Acc => stem + "āku" ;
+            Loc => stem + "ākā" ;
+            Voc => stem + "ākā"
+          } ;
+          Pl => table {
+            Nom => stem + "ākas" ;
+            Gen => stem + "āku" ;
+            Dat => stem + "ākām" ;
+            Acc => stem + "ākas" ;
+            Loc => stem + "ākās" ;
+            Voc => stem + "ākās"
+          }
+        }
+      } ;
+      Def => table {
+        Masc => table {
+          Sg => table {
+            Nom => stem + "ākais" ;
+            Gen => stem + "ākā" ;
+            Dat => stem + "ākajam" ;
+            Acc => stem + "āko" ;
+            Loc => stem + "ākajā" ;
+            Voc => stem + "ākais"
+          } ;
+          Pl => table {
+            Nom => stem + "ākie" ;
+            Gen => stem + "āko" ;
+            Dat => stem + "ākajiem" ;
+            Acc => stem + "ākos" ;
+            Loc => stem + "ākajos" ;
+            Voc => stem + "ākie"
+          }
+        } ;
+        Fem => table {
+          Sg => table {
+            Nom => stem + "ākā" ;
+            Gen => stem + "ākās" ;
+            Dat => stem + "ākajai" ;
+            Acc => stem + "āko" ;
+            Loc => stem + "ākajā" ;
+            Voc => stem + "ākā"
+          } ;
+          Pl => table {
+            Nom => stem + "ākās" ;
+            Gen => stem + "āko" ;
+            Dat => stem + "ākajām" ;
+            Acc => stem + "ākās" ;
+            Loc => stem + "ākajās" ;
+            Voc => stem + "ākās"
+          }
+        }
+      }
+    } ;
+
+  -- Superlative degree: Qual only, Def only
+  mkAdjective_Sup : Str -> Gender => Number => Case => Str = \lemma ->
+    \\g,n,c => "vis" + (mkAdjective_Comp lemma Def) ! g ! n ! c ;
+
+  -- Adverbial form, all 3 degrees
+  mkAdjective_Adverb : Str -> Degree => Str = \lemma ->
+    let stem : Str = case lemma of {
+      s + "ais" => s ;
+      _         => Predef.tk 1 lemma
+    } in table {
+      Posit  => stem + "i" ;
+      Compar => stem + "āk" ;
+      Superl => "vis" + stem + "āk"
+    } ;
+
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ParadigmsLav.gf"
+id=df0c5f5b8462
+kind=source
+size=8783
+lines=252
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+resource ParadigmsLav = open
+  ParadigmsVerbsLav,
+  ParadigmsNounsLav,
+  ParadigmsPronounsLav,
+  ParadigmsAdjectivesLav,
+  ResLav,
+  CatLav,
+  Prelude,
+  Predef
+in {
+
+flags coding = utf8 ;
+
+oper
+
+  -- Parameters
+
+  masculine : Gender = Masc ;
+  feminine  : Gender = Fem  ;
+
+  singular : Number = Sg ;
+  plural   : Number = Pl ;
+
+  nominative : Case = Nom ;
+  genitive   : Case = Gen ;
+  dative     : Case = Dat ;
+  accusative : Case = Acc ;
+  locative   : Case = Loc ;
+
+  second_conjugation : Conjugation = C2 ;
+  third_conjugation  : Conjugation = C3 ;
+
+  active_voice  : Voice = Act  ;
+  passive_voice : Voice = Pass ;
+
+  -- Nouns
+
+  mkN = overload {
+    mkN : (lemma : Str) ->                                 N = \l       -> lin N (mkNoun l) ;
+    mkN : (lemma : Str) ->                         Bool -> N = \l,p     -> lin N (mkNounByPal l p) ;
+    mkN : (lemma : Str) -> Gender ->                       N = \l,g     -> lin N (mkNounByGend l g) ;
+    mkN : (lemma : Str) ->           Declension ->         N = \l,d     -> lin N (mkNounByDecl l d) ;
+    mkN : (lemma : Str) -> Gender ->               Bool -> N = \l,g,p   -> lin N (mkNounByGendPal l g p) ;
+    mkN : (lemma : Str) ->           Declension -> Bool -> N = \l,d,p   -> lin N (mkNounByDeclPal l d p) ;
+    mkN : (lemma : Str) -> Gender -> Declension ->         N = \l,g,d   -> lin N (mkNounByGendDecl l g d) ;
+    mkN : (lemma : Str) -> Gender -> Declension -> Bool -> N = \l,g,d,p -> lin N (mkNounByGendDeclPal l g d p) ;
+  } ;
+
+  mkPN = overload {
+    mkPN : (lemma : Str) ->           PN = \l   -> lin PN (mkProperNoun l Sg) ;
+    mkPN : (lemma : Str) -> Number -> PN = \l,n -> lin PN (mkProperNoun l n) ;
+  } ;
+
+  mkLN = overload {
+    mkLN : Str -> LN = \s -> lin LN (mkProperNoun s Sg);   -- default gender utrum
+    mkLN : Str -> Number -> LN = \s,n -> lin LN (mkProperNoun s n) ; -- set other number
+    } ;
+
+  mkGN = overload {
+    mkGN : Str -> GN = \s -> lin GN (mkProperNoun s Sg);
+    } ;
+
+  mkSN = overload {
+    mkSN : Str -> SN = \s -> lin SN {s = \\_ => (mkProperNoun s Sg).s; pl = (mkProperNoun s Sg).s};   -- default gender utrum
+    mkSN : Str -> Str -> Str -> SN = 
+      \male,female,pl -> lin SN {s  = table {Masc => (mkProperNoun male Sg).s;
+                                             Fem => (mkProperNoun female Sg).s} ;
+                                 pl = (mkProperNoun pl Sg).s
+                                } ;
+    } ;
+
+  mkN2 = overload {
+    mkN2 : N -> Prep ->         N2 = \n,p     -> lin N2 (n ** {prep = p ; isPre = True}) ;
+    mkN2 : N -> Prep -> Bool -> N2 = \n,p,pos -> lin N2 (n ** {prep = p ; isPre = pos}) ;
+  } ;
+
+  mkN3 : N -> Prep -> Prep -> N3 = \n,p1,p2 ->
+    lin N3 (n ** {prep1 = p1 ; prep2 = p2 ; isPre1 = False ; isPre2 = False}) ;
+
+  -- Adjectives
+
+  mkA = overload {
+    mkA : (lemma : Str) ->          A = \s   -> lin A (mkAdjective s) ;
+    mkA : (lemma : Str) -> AType -> A = \s,t -> lin A (mkAdjectiveByType s t) ;
+
+    mkA : (v : V) -> Voice -> A = \v,p -> lin A (mkAdjective_Participle v p) ;
+  } ;
+
+  AS, AV = A ;
+  mkAS : A -> AS = \a -> lin A a ;
+  mkAV : A -> AV = \a -> lin A a ;
+
+  mkA2 : A -> Prep -> A2 = \a,p -> lin A2 (a ** {prep = p}) ;
+
+  A2S, A2V = A2 ;
+  mkA2S : A -> Prep -> A2S = \a,p -> lin A2 (a ** {prep = p}) ;
+  mkA2V : A -> Prep -> A2V = \a,p -> lin A2 (a ** {prep = p}) ;
+
+  -- Verbs
+
+  mkV = overload {
+    mkV : Str ->         V = \s   -> lin V (mkVerb_Irreg s Nom) ;
+    mkV : Str -> Case -> V = \s,c -> lin V (mkVerb_Irreg s c) ;
+
+    mkV : Str -> Conjugation ->         V = \s,conj   -> lin V (mkVerb s conj Nom) ;
+    mkV : Str -> Conjugation -> Case -> V = \s,conj,c -> lin V (mkVerb s conj c) ;
+
+    mkV : Str -> Str -> Str ->         V = \s1,s2,s3   -> lin V (mkVerbC1 s1 s2 s3 Nom) ;
+    mkV : Str -> Str -> Str -> Case -> V = \s1,s2,s3,c -> lin V (mkVerbC1 s1 s2 s3 c) ;
+  } ;
+
+  mkV2 = overload {
+    --mkV2 : V ->         V2 = \v   -> lin V2 (v ** {rightVal = acc_Prep}) ;
+    --mkV2 : V -> Prep -> V2 = \v,p -> lin V2 (v ** {rightVal = p}) ;
+    mkV2 : V ->         V2 = \v   -> lin V2 {s = v.s ; leftVal = v.leftVal ; rightVal = acc_Prep} ;
+    mkV2 : V -> Prep -> V2 = \v,p -> lin V2 {s = v.s ; leftVal = v.leftVal ; rightVal = p} ;
+  } ;
+
+  mkVS = overload {
+    mkVS : V -> Subj ->         VS = \v,c   -> lin VS {s = v.s ; leftVal = Nom ; conj = c} ;
+    mkVS : V -> Subj -> Case -> VS = \v,c,s -> lin VS {s = v.s ; leftVal = s   ; conj = c} ;
+  } ;
+
+  mkVQ = overload {
+    mkVQ : V ->         VQ = \v   -> lin VQ {s = v.s ; leftVal = Nom} ;
+    mkVQ : V -> Case -> VQ = \v,c -> lin VQ {s = v.s ; leftVal = c} ;
+  } ;
+
+  mkVV = overload {
+    mkVV : V ->         VV = \v   -> lin VV {s = v.s ; leftVal = Nom} ;
+    mkVV : V -> Case -> VV = \v,c -> lin VV {s = v.s ; leftVal = c} ;
+  } ;
+
+  mkV3 = overload {
+    mkV3 : V ->                 V3 = \v       -> lin V3 (v ** {rightVal1 = acc_Prep ; rightVal2 = dat_Prep}) ;
+    mkV3 : V -> Prep -> Prep -> V3 = \v,p1,p2 -> lin V3 (v ** {rightVal1 = p1       ; rightVal2 = p2}) ;
+  } ;
+
+  mkVA : V -> VA = \v -> lin VA v ;
+
+  mkV2A : V -> Prep -> V2A = \v,p -> lin V2A (v ** {rightVal = p}) ;
+  mkV2Q : V -> Prep -> V2Q = \v,p -> lin V2Q (v ** {rightVal = p}) ;
+  mkV2V : V -> Prep -> V2V = \v,p -> lin V2V (v ** {rightVal = p}) ;
+
+  mkV2S : V -> Subj -> Prep -> V2S = \v,c,p -> lin V2S (v ** {conj = c ; rightVal = p}) ;
+
+  -- Prepositions
+
+  mkPrep = overload {
+    mkPrep : Str -> Case -> Case -> Prep = \p,sg,pl -> lin Prep {s = p  ; c = table {Sg => sg ; Pl => pl}} ;
+    mkPrep :                Case -> Prep = \c       -> lin Prep {s = [] ; c = \\_ => c} ;
+  } ;
+
+  nom_Prep : Prep = mkPrep Nom ;
+  gen_Prep : Prep = mkPrep Gen ;
+  dat_Prep : Prep = mkPrep Dat ;
+  acc_Prep : Prep = mkPrep Acc ;
+  loc_Prep : Prep = mkPrep Loc ;
+  
+  mkSubj : Str -> Subj = \s -> lin Subj {s=s} ;
+
+  -- Adverbs
+
+  mkAdv : Str -> Adv = \x -> lin Adv {s = x ; isPron = False} ;
+  mkAdV : Str -> AdV = \x -> lin AdV (ss x) ;
+  mkAdA : Str -> AdA = \x -> lin AdA (ss x) ;
+  mkAdN : Str -> AdN = \x -> lin AdN (ss x) ;
+
+  mkCAdv : Str -> Str -> Degree -> CAdv = \s,p,d -> lin CAdv {s = s ; prep = p ; deg = d} ;
+
+  -- Conjunctions
+
+  mkConj = overload {
+    mkConj : Str ->           Conj = \c   -> mk2Conj [] c Pl ;
+    mkConj : Str -> Number -> Conj = \c,n -> mk2Conj [] c n ;
+
+    mkConj : Str -> Str ->           Conj = \c1,c2 -> mk2Conj c1 c2 Pl ;
+    mkConj : Str -> Str -> Number -> Conj = mk2Conj ;
+  } ;
+
+  mk2Conj : Str -> Str -> Number -> Conj = \c1,c2,n -> lin Conj (sd2 c1 ("," ++ c2) ** {num = n}) ;
+
+  -- Numerals: need review (TODO)
+
+  mkNumReg : Str -> Str -> Number -> { s : DForm => CardOrd => Gender => Case => Str } =
+    \pieci,piektais,n -> mkNumSpec pieci piektais (cutStem pieci) (cutStem pieci) n ;
+
+  mkNumSpec : Str -> Str -> Str -> Str -> Number -> { s : DForm => CardOrd => Gender => Case => Str } =
+    \pieci,piektais,stem_teen,stem_ten,n ->
+      let
+        masc = mkNoun_D1 pieci ;
+        fem = mkNoun_D4 pieci Fem ;
+        ord = mkAdjective_Pos piektais Def ;
+        padsmit = mkAdjective_Pos (stem_teen + "padsmitais") Def ;
+        desmit = mkAdjective_Pos (stem_ten + "desmitais") Def ;
+      in {
+        s = table {
+          DUnit => table {
+            NCard => table {
+              Masc => table { c => masc.s ! n ! c } ;
+              Fem => table { c => fem.s ! n ! c }
+            } ;
+            NOrd => table {
+              -- FIXME: pazaudējam kārtas skaitļu daudzskaitli - 'mēs palikām piektie'
+              g => table { c => ord ! g ! Sg ! c }
+            }
+          } ;
+          DTeen => table {
+            NCard => table { g => table { c => stem_teen + "padsmit" } } ;
+            NOrd => table { g => table { c => padsmit ! g ! Sg ! c } }
+          } ;
+          DTen => table {
+            NCard => table { g => table { c => stem_ten + "desmit" } } ;
+            NOrd => table { g => table { c => desmit ! g ! Sg ! c } }
+          }
+        }
+      } ;
+
+  viens = mkNumSpec "viens" "pirmais" "vien" "" Sg ;
+
+  simts : CardOrd => Gender => Number => Case => Str =
+    let
+      card = mkNoun_D1 "simts" ;
+      ord = mkAdjective_Pos "simtais" Def ;
+    in table {
+      NCard => table {
+        _ => table { n => table { c => card.s ! n ! c } }
+      } ;
+      NOrd => table {
+        g => table { n => table { c => ord ! g ! n ! c } }
+      }
+    } ;
+
+  tuukstotis : CardOrd => Gender => Number => Case => Str =
+    let
+      card = mkNoun_D2 "tūkstotis" True ;
+      ord = mkAdjective_Pos "tūkstošais" Def ;
+    in table {
+      NCard => table {
+        _ => table { n => table { c => card.s ! n ! c } }
+      } ;
+      NOrd => table {
+        g => table { n => table { c => ord ! g ! n ! c } }
+      }
+    } ;
+
+  mkInterj : Str -> Interj
+  = \s -> lin Interj {s = s} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ParadigmsNounsLav.gf"
+id=d4e8774777b0
+kind=source
+size=10695
+lines=371
+chunks=2
+
+--- CHUNK BEGIN ---
+id=d4e8774777b0:1-350
+start=1
+end=350
+----
+--# -path=.:abstract:common:prelude
+
+resource ParadigmsNounsLav = open ResLav, CatLav, Prelude, Predef in {
+
+flags coding = utf8 ;
+
+oper
+
+  masculine : Gender = Masc ;
+  feminine  : Gender = Fem ;
+
+  -- No parameters - default assumptions (gender, declension, palatalization)
+  mkNoun : Str -> Noun = \lemma ->
+    mkNounByPal lemma True ;
+
+  mkProperNoun : Str -> Number -> ProperNoun = \lemma,num ->
+    let n = mkNoun lemma in {
+      s = \\c => n.s ! num ! c  ;
+      gend = n.gend ;
+      num = num
+    } ;
+
+{-
+  mkCardinalNumeral : Str -> CardinalNumeral = \lemma ->
+    let
+		stem : Str = cutStem lemma;
+		masc = mkNoun_D1 lemma;
+		fem = mkNoun_D4 lemma + "a" Fem
+	in {
+		s = table {
+			Masc => table {
+
+			} ;
+			Fem => table {
+			} ;
+		}
+	}
+-}
+
+  -- Specified palatalization; default gender and declension
+  mkNounByPal : Str -> Bool -> Noun = \lemma,pal ->
+    case lemma of {
+      #exception_D4 + ("a"|"as")      => mkNounByGendPal lemma Masc pal ;
+      #exception_D6 + "is"            => mkNounByGendPal lemma Masc pal ;
+      s + ("a"|"as"|"e"|"es"|"šanās") => mkNounByGendPal lemma Fem  pal ;
+      _                               => mkNounByGendPal lemma Masc pal
+    } ;
+
+  -- Specified gender; default declension and palatalization
+  mkNounByGend : Str -> Gender -> Noun = \lemma,gend ->
+    mkNounByGendPal lemma gend True ;
+
+  -- Specified gender and palatalization; default declension
+  mkNounByGendPal : Str -> Gender -> Bool -> Noun = \lemma,gend,pal ->
+    let decl : Declension = case lemma of {
+      #exception_D2_1 + "s"      => D2 ;
+      #exception_D2_1_pal + "i"  => D2 ;
+      #exception_D2_2 + "s"      => D2 ;
+      #exception_D2_2_pal + "i"  => D2 ;
+      #exception_D6 + "is"       => D6 ;
+      s + "šanās"                => DR ;
+      s + ("š"|"i")              => D1 ;
+      s + "is"                   => case gend of {Masc => D2 ; Fem  => D6} ;
+      s + "us"                   => D3 ;
+      s + "as"                   => D4 ;
+      s + "es"                   => D5 ;
+      s + "s"                    => case gend of {Masc => D1 ; Fem  => D6} ;
+      s + "a"                    => D4 ;
+      s + "e"                    => D5 ;
+      s + #vowel                 => D0 ;
+      _                          => D0
+    }
+    in mkNounByGendDeclPal lemma gend decl pal ;
+
+  -- Specified declension; default gender and palatalization
+  mkNounByDecl : Str -> Declension -> Noun = \lemma,decl ->
+    mkNounByDeclPal lemma decl True ;
+
+  -- Specified declension and palatalization; default gender
+  mkNounByDeclPal : Str -> Declension -> Bool -> Noun = \lemma,decl,pal ->
+    case decl of {
+      D0|D1|D2|D3 => mkNounByGendDeclPal lemma Masc decl pal ;
+      D4|D5|D6|DR => mkNounByGendDeclPal lemma Fem  decl pal
+    } ;
+
+  -- Specified gender and declension; default palatalization
+  mkNounByGendDecl : Str -> Gender -> Declension -> Noun = \lemma,gend,decl ->
+    mkNounByGendDeclPal lemma gend decl True ;
+
+  -- Specified gender, declension and palatalization - no defaults
+  mkNounByGendDeclPal : Str -> Gender -> Declension -> Bool -> Noun = \lemma,gend,decl,pal ->
+    case decl of {
+      D0 => mkNoun_D0 lemma gend     ;
+      D1 => mkNoun_D1 lemma          ;
+      D2 => mkNoun_D2 lemma pal      ;
+      D3 => mkNoun_D3 lemma          ;
+      D4 => mkNoun_D4 lemma gend     ;
+      D5 => mkNoun_D5 lemma gend pal ;
+      D6 => mkNoun_D6 lemma gend pal ;
+      DR => mkNoun_DR lemma
+    } ;
+
+  -- Indeclinable noun
+  -- Expected endings: #vowel
+  mkNoun_D0 : Str -> Gender -> Noun = \lemma,gend -> {
+    s = \\_,_ => lemma ;
+    gend = gend
+  } ;
+
+  -- Expected endings of a D1 lemma:
+  --   Sg: -s, -š
+  --   Pl: -i
+  --       should be provided only in the case of plural mass nouns
+  --       produces an incorrect Sg.Nom form if plural lemma is given
+  --       the incorrect Sg.Nom forms should be filtered out by a domain lexicon
+  mkNoun_D1 : Str -> Noun = \lemma ->
+    let stem : Str = cutStem lemma
+    in {
+      s = table {
+        Sg => table {
+          Nom => lemma ;
+          Gen => stem + "a" ;
+          Dat => stem + "am" ;
+          Acc => stem + "u" ;
+          Loc => stem + "ā" ;
+          Voc => stem
+        } ;
+        Pl => table {
+          Nom => stem + "i" ;
+          Gen => stem + "u" ;
+          Dat => stem + "iem" ;
+          Acc => stem + "us" ;
+          Loc => stem + "os" ;
+          Voc => stem + "i"
+        }
+      } ;
+      gend = Masc
+    } ;
+
+  -- Expected endings of a D2 lemma:
+  --   Sg: -is, -s
+  --       -s is expected only in the case of few predefined exceptions
+  --   Pl: -i
+  --       should be provided only in the case of plural mass nouns
+  --       produces an incorrect Sg.Nom form if plural lemma is given
+  --       the incorrect Sg.Nom forms should be filtered out by a domain lexicon
+  mkNoun_D2 : Str -> Bool -> Noun = \lemma,pal ->
+    let stem : Str = cutStem lemma
+    in {
+      s = table {
+        Sg => table {
+          Nom => lemma ;
+          Gen => case lemma of {#exception_D2_1 + "s" => lemma ; _ => palatalize stem pal + "a"} ;
+          Dat => stem + "im" ;
+          Acc => stem + "i" ;
+          Loc => stem + "ī" ;
+		  Voc => stem + "i"
+        } ;
+        Pl => table {
+          Nom => palatalize stem pal + "i" ;
+          Gen => palatalize stem pal + "u" ;
+          Dat => palatalize stem pal + "iem" ;
+          Acc => palatalize stem pal + "us" ;
+          Loc => palatalize stem pal + "os" ;
+		  Voc => palatalize stem pal + "i"
+        }
+      } ;
+      gend = Masc
+    } ;
+
+  -- Expected endings of a D3 lemma:
+  --   Sg: -us
+  --   Pl: -i
+  mkNoun_D3 : Str -> Noun = \lemma ->
+    let stem : Str = cutStem lemma
+    in {
+      s = table {
+        Sg => table {
+          Nom => stem + "us" ;
+          Gen => stem + "us" ;
+          Dat => stem + "um" ;
+          Acc => stem + "u" ;
+          Loc => stem + "ū" ;
+          Voc => stem + "u"
+        } ;
+        Pl => table {
+          Nom => stem + "i" ;
+          Gen => stem + "u" ;
+          Dat => stem + "iem" ;
+          Acc => stem + "us" ;
+          Loc => stem + "os" ;
+          Voc => stem + "i"
+        }
+      } ;
+      gend = Masc
+    } ;
+
+  -- Expected endings of a D4 lemma:
+  --   Sg: -a (incl. -šana)
+  --   Pl: -as (incl. -šanas)
+  mkNoun_D4 : Str -> Gender -> Noun = \lemma,gend ->
+    let stem : Str = cutStem lemma
+    in {
+      s = table {
+        Sg => table {
+          Nom => stem + "a" ;
+          Gen => stem + "as" ;
+          Dat => case gend of {Fem => stem + "ai" ; Masc => stem + "am"} ;
+          Acc => stem + "u" ;
+          Loc => stem + "ā" ;
+          Voc => stem + "a"
+        } ;
+        Pl => table {
+          Nom => stem + "as" ;
+          Gen => stem + "u" ;
+          Dat => stem + "ām" ;
+          Acc => stem + "as" ;
+          Loc => stem + "ās" ;
+          Voc => stem + "as"
+        }
+      } ;
+      gend = gend
+    } ;
+
+  -- Expected endings of a D5 lemma:
+  --   Sg: -e
+  --   Pl: -es
+  mkNoun_D5 : Str -> Gender -> Bool -> Noun = \lemma,gend,pal ->
+    let stem : Str = cutStem lemma
+    in {
+      s = table {
+        Sg => table {
+          Nom => stem + "e" ;
+          Gen => stem + "es" ;
+          Dat => case gend of {Fem => stem + "ei" ; Masc => stem + "em"} ;
+          Acc => stem + "i" ;
+          Loc => stem + "ē" ;
+          Voc => stem + "e"
+        } ;
+        Pl => table {
+          Nom => stem + "es" ;
+          Gen => palatalize stem pal + "u" ;
+          Dat => stem + "ēm" ;
+          Acc => stem + "es" ;
+          Loc => stem + "ēs" ;
+          Voc => stem + "es"
+        }
+      } ;
+      gend = gend
+    } ;
+
+  -- Expected endings of a D6 lemma:
+  --   Sg: -s
+  --   Pl: -is
+  mkNoun_D6 : Str -> Gender -> Bool -> Noun = \lemma,gend,pal ->
+    let stem : Str = cutStem lemma
+    in {
+      s = table {
+        Sg => case stem of {
+          #exception_D6 => \\_ => nonExist ;
+          _ => table {
+            Nom => stem + "s" ;
+            Gen => stem + "s" ;
+            Dat => case gend of {Fem => stem + "ij" ; Masc => stem + "im"} ;
+            Acc => stem + "i" ;
+            Loc => stem + "ī" ;
+            Voc => stem + "s"
+          }
+        } ;
+        Pl => table {
+          Nom => stem + "is" ;
+          Gen => palatalize stem pal + "u" ;
+          Dat => stem + "īm" ;
+          Acc => stem + "is" ;
+          Loc => stem + "īs" ;
+          Voc => stem + "is"
+        }
+      } ;
+      gend = gend
+    } ;
+
+  -- Reflexive noun
+  -- Expected endings: -šanās
+  mkNoun_DR : Str -> Noun = \lemma ->
+    let stem : Str = cutStem lemma
+    in {
+      s = table {
+        Sg => table {
+          Nom => stem + "šanās" ;
+          Gen => stem + "šanās" ;
+          Dat => nonExist ;
+          Acc => stem + "šanos" ;
+          Loc => nonExist ;
+          Voc => stem + "šanās"
+        } ;
+        Pl => table {
+          Nom => stem + "šanās" ;
+          Gen => stem + "šanos" ;
+          Dat => nonExist ;
+          Acc => stem + "šanās" ;
+          Loc => nonExist ;
+          Voc => stem + "šanās"
+        }
+      } ;
+      gend = Fem
+    } ;
+
+  -- Exceptions
+
+  exception_D2_1     : pattern Str = #(_ + "akmen"|"asmen"|"mēnes"|"ruden"|"sāl"|"ūden"|"ziben") ;
+  exception_D2_1_pal : pattern Str = #(_ + "akmeņ"|"asmeņ"|"mēneš"|"rudeņ"|"sāļ"|"ūdeņ"|"zibeņ") ;
+  exception_D2_2     : pattern Str = #(_ + "sun") ;
+  exception_D2_2_pal : pattern Str = #(_ + "suņ") ;
+  exception_D4       : pattern Str = #(_ + "puik") ;
+  exception_D6       : pattern Str = #(_ + "ļaud") ;
+
+
+
+  -- Auxiliaries
+
+  cutStem : Str -> Str = \lemma ->
+    case lemma of {
+      s + ("is"|"us"|"as"|"es") => s ;
+      s + "šanās" => s ;
+      _ => Predef.tk 1 lemma
+    } ;
+
+  palatalize : Str -> Bool -> Str = \stem,pal ->
+    case pal of {
+      True => case stem of {
+        s + "st" => case stem of {
+          s + (#vowel|#sonantCons) + "st" => stem ;
+          _ => doPalatalize stem
+        } ;
+        _ => doPalatalize stem
+      } ;
+      False => stem
+    } ;
+
+  doPalatalize : Str -> Str = \stem ->
+    case stem of {
+      s + c@(#doubleCons) => s + changeDoubleCons c ;
+      s + c@(#simpleCons) => s + changeSimpleCons c ;
+      s + c@(#labialCons) => s + c + "j" ;
+      _                   => stem
+    } ;
+
+  changeSimpleCons : Str -> Str = \cons ->
+    case cons of {
+      "c" => "č" ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=d4e8774777b0:351-371
+start=351
+end=371
+----
+      "d" => "ž" ;
+      "l" => "ļ" ;
+      "n" => "ņ" ;
+      "s" => "š" ;
+      "t" => "š" ;
+      "z" => "ž"
+    } ;
+
+  changeDoubleCons : Str -> Str = \cons ->
+    case cons of {
+      "ll" => "ļļ" ;
+      "ln" => "ļņ" ;
+      "nn" => "ņņ" ;
+      "sl" => "šļ" ;
+      "sn" => "šņ" ;
+      "st" => "š"  ;
+      "zl" => "žļ" ;
+      "zn" => "žņ"
+    } ;
+
+} ;
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ParadigmsPronounsLav.gf"
+id=31ef142d99b0
+kind=source
+size=7738
+lines=296
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+resource ParadigmsPronounsLav = open ResLav, CatLav, Prelude, Predef in {
+
+flags coding = utf8 ;
+
+oper
+
+  PronGend : Type = { s : Gender => Number => Case => Str } ;
+
+  -- Pronouns (incl. "determiners")
+
+  mkPronoun_I : Gender -> Pronoun = \gend -> {
+    s = table {
+      Nom => "es" ;
+      Gen => "manis" ;
+      Dat => "man" ;
+      Acc => "mani" ;
+      Loc => "manī" ;
+      Voc => nonExist
+    } ;
+    agr = AgrP1 Sg gend ;
+    poss = table {
+      Masc => table {
+        Sg => table {
+          Nom => "mans" ;
+          Gen => "mana" ;
+          Dat => "manam" ;
+          Acc => "manu" ;
+          Loc => "manā" ;
+          Voc => "mans"
+        } ;
+        Pl => table {
+          Nom => "mani" ;
+          Gen => "manu" ;
+          Dat => "maniem" ;
+          Acc => "manus" ;
+          Loc => "manos" ;
+          Voc => "mani"
+        }
+      } ;
+      Fem => table {
+        Sg => table {
+          Nom => "mana" ;
+          Gen => "manas" ;
+          Dat => "manai" ;
+          Acc => "manu" ;
+          Loc => "manā" ;
+          Voc => "mana"
+        } ;
+        Pl => table {
+          Nom => "manas" ;
+          Gen => "manu" ;
+          Dat => "manām" ;
+          Acc => "manas" ;
+          Loc => "manās" ;
+          Voc => "manas"
+        }
+      }
+    } ;
+    pol = Pos
+  } ;
+
+  mkPronoun_We : Gender -> Pronoun = \gend -> {
+    s = table {
+      Nom => "mēs" ;
+      Gen => "mūsu" ;
+      Dat => "mums" ;
+      Acc => "mūs" ;
+      Loc => "mūsos" ;
+      Voc => nonExist
+    } ;
+    agr = AgrP1 Pl gend ;
+    poss = \\_,_,_ => "mūsu" ;
+    pol = Pos
+  } ;
+
+  mkPronoun_You_Sg : Gender -> Pronoun = \gend -> {
+    s = table {
+      Nom => "tu" ;
+      Gen => "tevis" ;
+      Dat => "tev" ;
+      Acc => "tevi" ;
+      Loc => "tevī" ;
+      Voc => "tu"
+    } ;
+    agr = AgrP2 Sg gend ;
+    poss = table {
+      Masc => table {
+        Sg => table {
+          Nom => "tavs" ;
+          Gen => "tava" ;
+          Dat => "tavam" ;
+          Acc => "tavu" ;
+          Loc => "tavā" ;
+          Voc => "tavs"
+        };
+        Pl => table {
+          Nom => "tavi" ;
+          Gen => "tavu" ;
+          Dat => "taviem" ;
+          Acc => "tavus" ;
+          Loc => "tavos" ;
+          Voc => "tavi"
+        }
+      } ;
+      Fem => table {
+        Sg => table {
+          Nom => "tava" ;
+          Gen => "tavas" ;
+          Dat => "tavai" ;
+          Acc => "tavu" ;
+          Loc => "tavā" ;
+          Voc => "tava"
+        };
+        Pl => table {
+          Nom => "tavas" ;
+          Gen => "tavu" ;
+          Dat => "tavām" ;
+          Acc => "tavas" ;
+          Loc => "tavās" ;
+          Voc => "tavas"
+        }
+      }
+    } ;
+    pol = Pos
+  } ;
+
+  mkPronoun_You_Pol : Gender -> Pronoun = \gend -> {
+    s = table {
+      Nom => "Jūs" ;
+      Gen => "Jūsu" ;
+      Dat => "Jums" ;
+      Acc => "Jūs" ;
+      Loc => "Jūsos" ;
+      Voc => "Jūs"
+    } ;
+    agr = AgrP2 Pl gend ;  -- FIXME: in the case of a predicate nominal: copula=Pl, complement=Sg
+    poss = \\_,_,_ => "Jūsu" ;
+    pol = Pos
+  } ;
+
+  mkPronoun_You_Pl : Gender -> Pronoun = \gend -> {
+    s = table {
+      Nom => "jūs" ;
+      Gen => "jūsu" ;
+      Dat => "jums" ;
+      Acc => "jūs" ;
+      Loc => "jūsos" ;
+      Voc => "jūs"
+    } ;
+    agr = AgrP2 Pl gend ;
+    poss = \\_,_,_ => "jūsu" ;
+    pol = Pos
+  } ;
+
+  mkPronoun_They : Gender -> Pronoun = \gend -> {
+    s = \\c => (mkPronoun_Gend "viņš").s ! gend ! Pl ! c ;
+    agr = AgrP3 Pl gend ;
+    poss = \\_,_,_ => "viņu" ;
+    pol = Pos
+  } ;
+
+  mkPronoun_It_Sg : Gender -> Pronoun = \gend -> {
+    s = \\c => (mkPronoun_ThisThat That).s ! gend ! Sg ! c ;
+    agr = AgrP3 Sg gend ;
+    poss = \\_,_,_ => case gend of { Masc => "tā" ; Fem => "tās" } ;
+    pol = Pos
+  } ;
+
+  -- Gender=>Number=>Case P3 pronouns
+  -- Expected ending of a lemma: -s or -š (Masc=>Sg=>Nom)
+  -- Examples:
+  --   viņš (he/she)
+  --   kāds (a/some)
+  --   katrs, ikviens, jebkurš (every/everything/everyone/all)
+  --   neviens (no/nothing/noone)
+  --   viss (all)
+  --   kurš (that-relative)
+  mkPronoun_Gend : Str -> PronGend = \lemma ->
+    let stem : Str = Predef.tk 1 lemma
+    in {
+      s = table {
+        Masc => table {
+          Sg => table {
+            Nom => lemma ;
+            Gen => stem + "a" ;
+            Dat => stem + "am" ;
+            Acc => stem + "u" ;
+            Loc => stem + "ā" ;
+            Voc => nonExist
+          } ;
+          Pl => table {
+            Nom => stem + "i" ;
+            Gen => stem + "u" ;
+            Dat => stem + "iem" ;
+            Acc => stem + "us" ;
+            Loc => stem + "os" ;
+            Voc => nonExist
+          }
+        } ;
+        Fem => table {
+          Sg => table {
+            Nom => stem + "a" ;
+            Gen => stem + "as" ;
+            Dat => stem + "ai" ;
+            Acc => stem + "u" ;
+            Loc => stem + "ā" ;
+            Voc => nonExist
+          } ;
+          Pl => table {
+            Nom => stem + "as" ;
+            Gen => stem + "u" ;
+            Dat => stem + "ām" ;
+            Acc => stem + "as" ;
+            Loc => stem + "ās" ;
+            Voc => nonExist
+          }
+        }
+      } ;
+    } ;
+
+  -- A special case (paradigm) of Gender=>Number=>Case P3 pronouns
+  -- Returns the full paradigm of 'šis' (this) or 'tas' (that)
+  mkPronoun_ThisThat : ThisOrThat -> PronGend = \tot ->
+    let
+      stem  : Str = case tot of {This => "š" ; That => "t"} ;
+      suff1 : Str = case tot of {This => "i" ; That => "a"} ;
+      suff2 : Str = case tot of {This => "ī" ; That => "ā"}
+    in {
+      s = table {
+        Masc => table {
+          Sg => table {
+            Nom => stem + suff1 + "s" ;
+            Gen => stem + suff2 ;
+            Dat => stem + suff1 + "m" ;
+            Acc => stem + "o" ;
+            Loc => stem + "ajā" ;
+            Voc => nonExist
+          } ;
+          Pl => table {
+            Nom => stem + "ie" ;
+            Gen => stem + "o" ;
+            Dat => stem + "iem" ;
+            Acc => stem + "os" ;
+            Loc => stem + "ajos" ;
+            Voc => nonExist
+          }
+        } ;
+        Fem => table {
+          Sg => table {
+            Nom => stem + suff2 ;
+            Gen => stem + suff2 + "s" ;
+            Dat => stem + "ai" ;
+            Acc => stem + "o" ;
+            Loc => stem + "ajā" ;
+            Voc => nonExist
+          } ;
+          Pl => table {
+            Nom => stem + suff2 + "s" ;
+            Gen => stem + "o" ;
+            Dat => stem + suff2 + "m" ;
+            Acc => stem + suff2 + "s" ;
+            Loc => stem + "ajās" ;
+            Voc => nonExist
+          }
+        }
+      } ;
+    } ;
+
+    -- Everything, something, nothing, i.e., all that end with "kas"
+    mkPronoun_Thing : Str -> Polarity -> Pronoun = \lemma,pol ->
+    let stem : Str = Predef.tk 3 lemma
+    in {
+      s = \\c => table {
+        Nom => case stem of { "kaut" => stem ++ "kas" ; _ => stem + "kas" } ;
+        Gen => case stem of { "kaut" => stem ++ "kā" ; _ => stem + "kā" } ;
+        Dat => case stem of { "kaut" => stem ++ "kam" ; _ => stem + "kam" } ;
+        Acc => case stem of { "kaut" => stem ++ "ko" ; _ => stem + "ko" } ;
+        Loc => case stem of { "kaut" => stem ++ "kur" ; _ => stem + "kur" } ;
+        Voc => nonExist
+      } ! c ;
+      agr = AgrP3 Sg Masc ;
+      poss = \\_,_,_ => case stem of { "kaut" => stem ++ "kā" ; _ => stem + "kā" } ;
+      pol =  pol
+    } ;
+
+    -- Everybody, somebody, nobody
+    mkPronoun_Body : Str -> Polarity -> Pronoun = \lemma,pol -> {
+      s = \\c => (mkPronoun_Gend lemma).s ! Masc ! Sg ! c ;
+      agr = AgrP3 Sg Masc ;
+      poss = \\_,_,_ => (mkPronoun_Gend lemma).s ! Masc ! Sg ! Gen ;
+      pol = pol
+    } ;
+
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ParadigmsVerbsLav.gf"
+id=fdae8351e750
+kind=source
+size=20258
+lines=671
+chunks=2
+
+--- CHUNK BEGIN ---
+id=fdae8351e750:1-350
+start=1
+end=350
+----
+--# -path=.:abstract:common:prelude
+
+resource ParadigmsVerbsLav = open ResLav, CatLav, Prelude, Predef in {
+
+flags coding = utf8 ;
+
+oper
+
+  Verb_TMP : Type = {s : VForm => Str} ;
+
+  -- Second and third conjugations
+  mkVerb : Str -> Conjugation -> Case -> Verb = \lemma,conj,leftVal -> {
+    s = table {
+      Pos => (mkVerb_Pos lemma conj).s ;
+      Neg => (filter_Neg (mkVerb_Pos ("ne"+lemma) conj)).s
+    } ;
+    leftVal = leftVal
+  } ;
+
+  -- First conjugation
+  mkVerbC1 : Str -> Str -> Str -> Case -> Verb = \lemma,lemma2,lemma3,leftVal -> {
+    s = table {
+      Pos => (mkVerbC1_Pos lemma lemma2 lemma3).s ;
+      Neg => (filter_Neg (mkVerbC1_Pos ("ne"+lemma) ("ne"+lemma2) ("ne"+lemma3))).s
+    } ;
+    leftVal = leftVal
+  } ;
+
+  mkVerb_Pos : Str -> Conjugation -> Verb_TMP = \lemma,conj ->
+    case lemma of {
+      -- TODO: "ir"
+      s + ("ties") => mkReflVerb lemma conj ;
+      _            => mkRegVerb lemma conj
+    } ;
+
+  mkVerbC1_Pos : Str -> Str -> Str -> Verb_TMP = \lemma,lemma2,lemma3 ->
+    case lemma of {
+      -- TODO: "ir"
+      s + ("ties") => mkVerb_C1_Refl lemma lemma2 lemma3 ;
+      _            => mkVerb_C1 lemma lemma2 lemma3
+    } ;
+
+  mkRegVerb : Str -> Conjugation -> Verb_TMP = \lemma,conj ->
+    case conj of {
+      C2 => mkVerb_C2 lemma ;
+      C3 => mkVerb_C3 lemma
+    } ;
+
+  mkReflVerb : Str -> Conjugation -> Verb_TMP = \lemma,conj ->
+    case conj of {
+      C2 => mkVerb_C2_Refl lemma ;
+      C3 => mkVerb_C3_Refl lemma
+    } ;
+
+  filter_Neg : Verb_TMP -> Verb_TMP = \full -> {
+    s = table {
+      VDeb => nonExist ;
+      VDebRel => nonExist ;
+      x => full.s ! x
+    }
+  } ;
+
+  -- First conjugation
+  -- Ref. to lexicon.xml (revision 719): 15th paradigm
+  -- lemma1: VInf
+  -- lemma2: VInd P1 Sg Pres
+  -- lemma3: VInd P1 Sg Past
+  mkVerb_C1 : Str -> Str -> Str -> Verb_TMP = \lemma1,lemma2,lemma3 ->
+    let
+      stem1 : Str = Predef.tk 1 lemma1 ;
+      stem2 : Str = Predef.tk 1 lemma2 ;
+      stem3 : Str = Predef.tk 1 lemma3
+    in {
+      s = table {
+        VInf => lemma1 ;  -- stem1 + "t"
+
+        VInd P1 Sg Pres => lemma2 ;  -- stem2 + "u"
+        VInd P1 Sg Fut  => pal_C1_1 stem3 stem1 + "šu" ;
+        VInd P1 Sg Past => lemma3 ;  -- stem3 + "u"
+        VInd P1 Pl Pres => stem2 + "am" ;
+        VInd P1 Pl Fut  => pal_C1_1 stem3 stem1 + "sim" ;
+        VInd P1 Pl Past => stem3 + "ām" ;
+
+        VInd P2 Sg Pres => pal_C1_4 stem2 ;
+        VInd P2 Sg Fut  => pal_C1_1 stem3 stem1 + "si" ;
+        VInd P2 Sg Past => stem3 + "i" ;
+        VInd P2 Pl Pres => stem2 + "at" ;
+        VInd P2 Pl Fut  => pal_C1_1 stem3 stem1 + "siet" ;  -- ("siet"|"sit")
+        VInd P2 Pl Past => stem3 + "āt" ;
+
+        VInd P3 _ Pres => stem2 ;
+        VInd P3 _ Fut  => pal_C1_1 stem3 stem1 + "s" ;
+        VInd P3 _ Past => stem3 + "a" ;
+
+        VInd _  _ Cond => stem1 + "tu" ;
+
+        VRel Pres => stem2 + "ot" ;
+        VRel Fut  => pal_C1_1 stem3 stem1 + "šot" ;
+        VRel Past => nonExist ;
+        VRel Cond => nonExist ;
+
+        VDeb    => "jā" + stem2 ;
+        VDebRel => "jā" + stem2 + "ot" ;
+
+        VImp Sg => pal_C1_4 stem2 ;
+        VImp Pl => pal_C1_4 stem2 + "iet" ;
+
+        VPart Act  g n c => mkParticiple_IsUsi g n c (pal_C1_3 stem3) ;
+        VPart Pass g n c => mkParticiple_TsTa g n c stem1
+      }
+    } ;
+
+  -- Second conjugation
+  -- Ref. to lexicon.xml (revision 719): 16th paradigm
+  -- lemma: VInf
+  mkVerb_C2 : Str -> Verb_TMP = \lemma ->
+    let
+      stem : Str = Predef.tk 1 lemma
+    in {
+      s = table {
+        VInf => lemma ; -- stem + "t"
+
+        VInd P1 Sg Pres => stem + "ju" ;
+        VInd P1 Sg Fut  => stem + "šu" ;
+        VInd P1 Sg Past => stem + "ju" ;
+        VInd P1 Pl Pres => stem + "jam" ;
+        VInd P1 Pl Fut  => stem + "sim" ;
+        VInd P1 Pl Past => stem + "jām" ;
+
+        VInd P2 Sg Pres => stem ;
+        VInd P2 Sg Fut  => stem + "si" ;
+        VInd P2 Sg Past => stem + "ji" ;
+        VInd P2 Pl Pres => stem + "jat" ;
+        VInd P2 Pl Fut  => stem + "siet" ;  -- ("siet"|"sit")
+        VInd P2 Pl Past => stem + "jāt" ;
+
+        VInd P3 _ Pres => stem ;
+        VInd P3 _ Fut  => stem + "s" ;
+        VInd P3 _ Past => stem + "ja" ;
+
+        VInd _  _ Cond => stem + "tu" ;
+
+        VRel Pres => stem + "jot" ;
+        VRel Fut  => stem + "šot" ;
+        VRel Past => nonExist ;
+        VRel Cond => nonExist ;
+
+        VDeb    => "jā" + stem ;
+        VDebRel => "jā" + stem + "jot" ;
+
+        VImp Sg => stem ;
+        VImp Pl => stem + "jiet" ;
+
+        VPart Act  g n c => mkParticiple_IsUsi g n c (stem + "j") ;
+        VPart Pass g n c => mkParticiple_TsTa g n c stem
+      }
+    } ;
+
+  -- Third conjugation
+  -- Ref. to lexicon.xml (revision 719): 17th paradigm
+  -- lemma: VInf
+  mkVerb_C3 : Str -> Verb_TMP = \lemma ->
+    let
+      stem : Str = Predef.tk 1 lemma
+    in {
+      s = table {
+        VInf => lemma ;  -- stem + "t"
+
+        VInd P1 Sg Pres => pal_C3_1 stem + "u" ;
+        VInd P1 Sg Fut  => stem + "šu" ;
+        VInd P1 Sg Past => stem + "ju" ;
+        VInd P1 Pl Pres => pal_C3_1 stem + pal_C3_2 stem "am" ;
+        VInd P1 Pl Fut  => stem + "sim" ;
+        VInd P1 Pl Past => stem + "jām" ;
+
+        VInd P2 Sg Pres => pal_C3_1 stem + "i" ;
+        VInd P2 Sg Fut  => stem + "si" ;
+        VInd P2 Sg Past => stem + "ji" ;
+        VInd P2 Pl Pres => pal_C3_1 stem + pal_C3_2 stem "at" ;
+        VInd P2 Pl Fut  => stem + "siet" ;  -- ("siet"|"sit")
+        VInd P2 Pl Past => stem + "jāt" ;
+
+        VInd P3 _ Pres => pal_C3_5 stem ;
+        VInd P3 _ Fut  => stem + "s" ;
+        VInd P3 _ Past => stem + "ja" ;
+
+        VInd _  _ Cond => stem + "tu" ;
+
+        VRel Pres => pal_C3_1 stem + "ot" ;
+        VRel Fut  => stem + "šot" ;
+        VRel Past => nonExist ;
+        VRel Cond => nonExist ;
+
+        VDeb    => pal_C3_3 stem ;
+        VDebRel => pal_C3_3 stem + "ot" ;
+
+        VImp Sg => pal_C3_1 stem + "i" ;
+        VImp Pl => pal_C3_1 stem + "iet" ;
+
+        VPart Act  g n c => mkParticiple_IsUsi g n c (stem + "j") ;
+        VPart Pass g n c => mkParticiple_TsTa g n c stem
+      }
+    } ;
+
+  -- First conjugation: reflexive
+  -- Ref. to lexicon.xml (revision 719): 18th paradigm
+  -- lemma1: VInf
+  -- lemma2: VInd P1 Sg Pres
+  -- lemma3: VInd P1 Sg Past
+  mkVerb_C1_Refl : Str -> Str -> Str -> Verb_TMP = \lemma1,lemma2,lemma3 ->
+    let
+      stem1 : Str = Predef.tk 4 lemma1 ;
+      stem2 : Str = Predef.tk 2 lemma2 ;
+      stem3 : Str = Predef.tk 2 lemma3
+    in {
+      s = table {
+        VInf => lemma1 ;  -- stem + "ties"
+
+        VInd P1 Sg Pres => lemma2 ;  -- stem2 + "os"
+        VInd P1 Sg Fut  => pal_C1_1 stem3 stem1 + "šos" ;
+        VInd P1 Sg Past => lemma3 ;  -- stem3 + "os"
+        VInd P1 Pl Pres => stem2 + "amies" ;
+        VInd P1 Pl Fut  => pal_C1_1 stem3 stem1 + "simies" ;
+        VInd P1 Pl Past => stem3 + "āmies" ;
+
+        VInd P2 Sg Pres => pal_C1_2 stem3 stem2 + "ies" ;
+        VInd P2 Sg Fut  => pal_C1_1 stem3 stem1 + "sies" ;
+        VInd P2 Sg Past => stem3 + "ies" ;
+        VInd P2 Pl Pres => stem2 + "aties" ;
+        VInd P2 Pl Fut  => pal_C1_1 stem3 stem1 + "sieties" ;  -- ("sieties"|"sities")
+        VInd P2 Pl Past => stem3 + "āties" ;
+
+        VInd P3 _ Pres => stem2 + "as" ;
+        VInd P3 _ Fut  => pal_C1_1 stem3 stem1 + "sies" ;
+        VInd P3 _ Past => stem3 + "ās" ;
+
+        VInd _  _ Cond => stem1 + "tos" ;
+
+        VRel Pres => stem2 + "oties" ;
+        VRel Fut  => pal_C1_1 stem3 stem1 + "šoties" ;
+        VRel Past => nonExist ;
+        VRel Cond => nonExist ;
+
+        VDeb    => "jā" + stem2 + "as" ;
+        VDebRel => "jā" + stem2 + "oties" ;
+
+        VImp Sg => pal_C1_2 stem3 stem2 + "ies" ;
+        VImp Pl => pal_C1_2 stem3 stem2 + "ieties" ;
+
+        VPart Act  g n c => mkParticiple_IesUsies g n c (pal_C1_3 stem3) ;
+        VPart Pass g n c => mkParticiple_TsTa g n c stem1
+      }
+    } ;
+
+  -- Second conjugation: reflexive
+  -- Ref. to lexicon.xml (revision 719): 19th paradigm
+  -- lemma: VInf
+  mkVerb_C2_Refl : Str -> Verb_TMP = \lemma ->
+    let
+      stem : Str = Predef.tk 4 lemma
+    in {
+      s = table {
+        VInf => lemma ;  -- stem + "ties"
+
+        VInd P1 Sg Pres => stem + "jos" ;
+        VInd P1 Sg Fut  => stem + "šos" ;
+        VInd P1 Sg Past => stem + "jos" ;
+        VInd P1 Pl Pres => stem + "jamies" ;
+        VInd P1 Pl Fut  => stem + "simies" ;
+        VInd P1 Pl Past => stem + "jāmies" ;
+
+        VInd P2 Sg Pres => stem + "jies" ;
+        VInd P2 Sg Fut  => stem + "sies" ;
+        VInd P2 Sg Past => stem + "jies" ;
+        VInd P2 Pl Pres => stem + "jaties" ;
+        VInd P2 Pl Fut  => stem + "sieties" ;  -- ("sieties"|"sities")
+        VInd P2 Pl Past => stem + "jāties" ;
+
+        VInd P3 _ Pres => stem + "jas" ;
+        VInd P3 _ Fut  => stem + "sies" ;
+        VInd P3 _ Past => stem + "jās" ;
+
+        VInd _  _ Cond => stem + "tos" ;
+
+        VRel Pres => stem + "joties" ;
+        VRel Fut  => stem + "šoties" ;
+        VRel Past => nonExist ;
+        VRel Cond => nonExist ;
+
+        VDeb    => "jā" + stem + "jas" ;
+        VDebRel => "jā" + stem + "joties" ;
+
+        VImp Sg => stem + "jies" ;
+        VImp Pl => stem + "jieties" ;
+
+        VPart Act  g n c => mkParticiple_IesUsies g n c (stem + "j") ;
+        VPart Pass g n c => mkParticiple_TsTa g n c stem
+      }
+    } ;
+
+  -- Third conjugation: reflexive
+  -- Ref. to lexicon.xml (revision 719): 20th paradigm
+  -- lemma: VInf
+  mkVerb_C3_Refl : Str -> Verb_TMP = \lemma ->
+    let
+      stem : Str = Predef.tk 4 lemma
+    in {
+      s = table {
+        VInf => lemma ;  -- stem + "ties"
+
+        VInd P1 Sg Pres => pal_C3_1 stem + "os" ;
+        VInd P1 Sg Fut  => stem + "šos" ;
+        VInd P1 Sg Past => stem + "jos" ;
+        VInd P1 Pl Pres => pal_C3_4 stem + "mies" ;
+        VInd P1 Pl Fut  => stem + "simies" ;
+        VInd P1 Pl Past => stem + "jāmies" ;
+
+        VInd P2 Sg Pres => pal_C3_1 stem + "ies" ;
+        VInd P2 Sg Fut  => stem + "sies" ;
+        VInd P2 Sg Past => stem + "jies" ;
+        VInd P2 Pl Pres => pal_C3_4 stem + "ties" ;
+        VInd P2 Pl Fut  => stem + "sieties" ;  -- ("sieties"|"sities")
+        VInd P2 Pl Past => stem + "jāties" ;
+
+        VInd P3 _ Pres => pal_C3_4 stem + "s" ;
+        VInd P3 _ Fut  => stem + "sies" ;
+        VInd P3 _ Past => stem + "jās" ;
+
+        VInd _  _ Cond => stem + "tos" ;
+
+        VRel Pres => pal_C3_1 stem + "oties" ;
+        VRel Fut  => stem + "šoties" ;
+        VRel Past => nonExist ;
+        VRel Cond => nonExist ;
+
+        VDeb    => pal_C3_6 stem + "s" ;
+        VDebRel => pal_C3_6 stem + "oties" ;
+
+        VImp Sg => pal_C3_1 stem + "ies" ;
+        VImp Pl => pal_C3_1 stem + "ieties" ;
+
+        VPart Act  g n c => mkParticiple_IesUsies g n c (stem + "j") ;
+        VPart Pass g n c => mkParticiple_TsTa g n c stem
+      }
+    } ;
+
+  mkVerb_Irreg : Str -> Case -> Verb = \lemma,leftVal ->
+    case lemma of {
+      "būt"   => mkVerb_Irreg_Be leftVal ;
+      "iet"   => mkVerb_Irreg_Go leftVal ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=fdae8351e750:351-671
+start=351
+end=671
+----
+      #prefix + "iet"   => mkVerb_Irreg_Go_Prefix (Predef.tk 3 lemma) leftVal ;
+      "gulēt" => mkVerb_Irreg_Sleep leftVal
+      -- FIXME: "gulēt" should be treated as a regular verb (C3: gulēt, sēdēt etc.)
+      -- TODO: add "dot"/Give (+prefix, +refl)
+      -- TODO: multiple prefixes
+      -- TODO: move to IrregLav?
+    } ;
+
+  mkVerb_Irreg_Be : Case -> Verb = \leftVal -> {
+    s = table {
+      Pos => table {
+        VInd P1 Sg Pres => "esmu" ;
+        VInd P2 Sg Pres => "esi" ;
+        VInd P3 _  Pres => "ir" ;
+
+        VDeb => "jābūt" ;
+
+        x => (mkVerb_C1 "būt" "esu" "biju").s ! x -- the incorrect 'esu' will be overriden
+      } ;
+      Neg => table {
+        VInd P1 Sg Pres => "neesmu" ;
+        VInd P2 Sg Pres => "neesi" ;
+        VInd P3 _  Pres => "nav" ;
+
+        VDeb    => nonExist ;
+        VDebRel => nonExist ;
+
+        x => (mkVerb_C1 "nebūt" "neesu" "nebiju").s ! x -- the incorrect 'neesu' will be overriden
+      }
+    } ;
+    leftVal = leftVal
+  } ;
+
+  mkVerb_Irreg_Go : Case -> Verb = \leftVal -> mkVerb_Irreg_Go_Prefix "" leftVal ;
+
+  mkVerb_Irreg_Go_Prefix : Str -> Case -> Verb = \pref,leftVal -> {
+    s = table {
+      Pos => table {
+        VInd P3 _ Pres => pref + "iet" ;
+        VDeb => "jā" + pref + "iet" ;
+        x => (mkVerb_C1 (pref + "iet") (pref + "eju") (pref + "gāju")).s ! x
+      } ;
+      Neg => table {
+        VInd P3 _ Pres => "ne" + pref + "iet" ;
+        VDeb => nonExist ;
+        VDebRel => nonExist ;
+        x => (mkVerb_C1 ("ne" + pref + "iet") ("ne" + pref + "eju") ("ne" + pref + "gāju")).s ! x
+      }
+    } ;
+    leftVal = leftVal
+  } ;
+
+  mkVerb_Irreg_Sleep : Case -> Verb = \leftVal -> {
+    s = table {
+      Pos => table {
+        VInd P2 Sg Pres => (mkVerb_C3 "gulēt").s ! VInd P2 Sg Pres ;
+        VInd p  n  Pres => (mkVerb_C3 "guļēt").s ! VInd p n Pres ;
+
+        -- FIXME: Here and there, the incorrect 'guļēt' contains intentional palatalization
+
+        VRel Pres => (mkVerb_C3 "guļēt").s ! VRel Pres ;
+
+        VDeb => (mkVerb_C3 "guļēt").s ! VDeb ;
+
+        VDebRel => (mkVerb_C3 "guļēt").s ! VDebRel ;
+
+        x => (mkVerb_C3 "gulēt").s ! x
+      } ;
+      Neg => table {
+        VInd P2 Sg Pres => (mkVerb_C3 "negulēt").s ! VInd P2 Sg Pres ;
+        VInd p  n  Pres => (mkVerb_C3 "neguļēt").s ! VInd p n Pres ;
+
+        VRel Pres => (mkVerb_C3 "neguļēt").s ! VRel Pres ;
+
+        VDeb => nonExist ;
+
+        VDebRel => nonExist ;
+
+        x => (mkVerb_C3 "negulēt").s ! x
+      }
+    } ;
+    leftVal = leftVal
+  } ;
+
+  -- Auxiliaries: palatalization rules
+
+  -- Ref. to the Java implementation: mija6
+  -- stem3: VInd P1 Sg Past
+  -- stem1: VInf
+  pal_C1_1 : Str -> Str -> Str = \stem3,stem1 ->
+    case stem1 of {
+      s + "s" => case stem3 of {
+        _ + "d" => s + "dī" ;
+        _ + "t" => s + "tī" ;
+        _ + "s" => s + "sī" ;
+        _       => stem1
+      } ;
+      s + "z" => s + "zī" ; -- e.g. 'lauzt' => 'lauzīs'
+      _       => stem1
+    } ;
+
+  -- Ref. to the Java implementation: mija7
+  -- stem3: VInd P1 Sg Past
+  -- stem2: VInd P1 Sg Pres
+  pal_C1_2 : Str -> Str -> Str = \stem3,stem2 ->
+    case stem2 of {
+      s + "š" => case stem3 of {
+        _ + "s" => s + "s" ;
+        _       => stem2
+      } ;
+      s + "t" => case stem2 of {
+        _ + "met"  => stem2 ;
+        _ + "cērt" => stem2 ;
+        _          => s + "ti"
+      } ;
+    --s + "ž"  => s + "d" ; -- FIXME: 'laužu' => 'lauz' not 'laud'
+      s + "ļ"  => s + "l" ;
+      s + "mj" => s + "m" ;
+      s + "bj" => s + "b" ;
+      s + "pj" => s + "p" ;
+      s + "k"  => s + "c" ;
+      s + "g"  => s + "dz" ;
+      _        => stem2
+    } ;
+
+  -- Ref. to the Java implementation: mija11
+  -- stem3: VInd P1 Sg Past
+  pal_C1_3 : Str -> Str = \stem3 ->
+    case stem3 of {
+      s + "c"  => s + "k" ;
+      s + "dz" => s + "g" ;
+      _        => stem3
+    } ;
+
+  -- Ref. to the Java implementation: mija14
+  -- stem: VInd P1 Sg Pres | VInd P1 Sg Past
+  pal_C1_4 : Str -> Str = \stem ->
+    case stem of {
+      s + "k" => s + "c" ;
+      s + "t" => s + "ti" ;
+      _       => stem
+    } ;
+
+  -- Ref. to the Java implementation: mija2
+  pal_C3_1 : Str -> Str = \stem ->
+    case stem of {
+      s + "cī" => s + "k" ;
+      _        => Predef.tk 1 stem
+    } ;
+
+  -- Ref. to the Java implementation: mija2a
+  pal_C3_2 : Str -> Str -> Str = \stem,ending ->
+    case stem of {
+      _ + "ī"   => "ā" + Predef.dp 1 ending ;
+      _ + "inā" => "ā" + Predef.dp 1 ending ;
+      _         => ending
+    } ;
+
+  -- Ref. to the Java implementation: mija5
+  pal_C3_3 : Str -> Str = \stem -> "jā" + pal_C3_5 stem ;
+
+  -- Ref. to the Java implementation: mija8
+  pal_C3_4 : Str -> Str = \stem ->
+    case stem of {
+      s + "inā" => stem ;
+      s + "cī"  => s + "kā" ;
+      s + "ī"   => s + "ā" ;
+      s + "ē"   => s + "a" ;
+      _         => stem
+    } ;
+
+  -- Ref. to the Java implementation: mija9
+  pal_C3_5 : Str -> Str = \stem ->
+    case stem of {
+      s + "dā"  => Predef.tk 1 stem ;
+      s + "ā"   => s + "a" ;
+      s + "ācī" => s + "āca" ; -- e.g. 'mācīt' => 'māca'
+      s + "īcī" => s + "īca" ; -- e.g. 'mīcīt' => 'mīca'
+      s + "cī"  => s + "ka" ; -- e.g. 'sacīt' => 'saka'
+      s + "ī"   => s + "a" ;
+      _         => Predef.tk 1 stem
+    } ;
+
+  -- Ref. to the Java implementation: mija12
+  pal_C3_6 : Str -> Str = \stem ->
+    "jā" +
+    case stem of {
+      s + "cī"  => s + "kā" ;
+      s + "ī"   => s + "ā" ;
+      s + "inā" => s + "inā" ;
+      _         => Predef.tk 1 stem + "a"
+    } ;
+
+
+  -- Participles: non-declinable and partially declinable participles, nominative cases of declinable participles
+  -- Declinable participles: syntactic function - attribute => category - adjective
+  -- TODO: declinable participles => adjectives
+  -- TODO: -ot, -am, -ām; -dams/dama, -damies/damās; -ams/ama, -āms/āma
+  -- -ošs/oša ir tikai adjektīvi! Divdabji - tikai verbālās formas! (sk. Baibas sarakstu)
+
+  mkParticiple_IsUsi : Gender -> Number -> Case -> Str -> Str = \g,n,c,stem ->
+    case g of {
+      Masc => case n of {
+        Sg => case c of {
+          Nom => stem + "is" ;
+          Gen => stem + "uša" ;
+          Dat => stem + "ušam" ;
+          Acc => stem + "ušu" ;
+          Loc => stem + "ušā" ;
+          Voc => nonExist
+        } ;
+        Pl => case c of {
+          Nom => stem + "uši" ;
+          Gen => stem + "ušu" ;
+          Dat => stem + "ušiem" ;
+          Acc => stem + "ušus" ;
+          Loc => stem + "ušos" ;
+          Voc => nonExist
+        }
+      } ;
+      Fem => case n of {
+        Sg => case c of {
+          Nom => stem + "usi" ;
+          Gen => stem + "ušas" ;
+          Dat => stem + "ušai" ;
+          Acc => stem + "ušu" ;
+          Loc => stem + "ušā" ;
+          Voc => nonExist
+        } ;
+        Pl => case c of {
+          Nom => stem + "ušas" ;
+          Gen => stem + "ušu" ;
+          Dat => stem + "ušām" ;
+          Acc => stem + "ušas" ;
+          Loc => stem + "ušās" ;
+          Voc => nonExist
+        }
+      }
+    } ;
+
+  mkParticiple_TsTa : Gender -> Number -> Case -> Str -> Str = \g,n,c,stem ->
+    case g of {
+      Masc => case n of {
+        Sg => case c of {
+          Nom => stem + "ts" ;
+          Gen => stem + "ta" ;
+          Dat => stem + "tam" ;
+          Acc => stem + "tu" ;
+          Loc => stem + "tā" ;
+          Voc => nonExist     -- FIXME: -tais ?
+        } ;
+        Pl => case c of {
+          Nom => stem + "ti" ;
+          Gen => stem + "tu" ;
+          Dat => stem + "tiem" ;
+          Acc => stem + "tus" ;
+          Loc => stem + "tos" ;
+          Voc => nonExist     -- FIXME: -tie ?
+        }
+      } ;
+      Fem => case n of {
+        Sg => case c of {
+          Nom => stem + "ta" ;
+          Gen => stem + "tas" ;
+          Dat => stem + "tai" ;
+          Acc => stem + "tu" ;
+          Loc => stem + "tā" ;
+          Voc => nonExist     -- FIXME: -tā ?
+        } ;
+        Pl => case c of {
+          Nom => stem + "tas" ;
+          Gen => stem + "tu" ;
+          Dat => stem + "tām" ;
+          Acc => stem + "tas" ;
+          Loc => stem + "tās" ;
+          Voc => nonExist     -- FIXME: -tās ?
+        }
+      }
+    } ;
+
+  mkParticiple_IesUsies : Gender -> Number -> Case -> Str -> Str = \g,n,c,stem ->
+    case g of {
+      Masc => case n of {
+        Sg => case c of {
+          Nom => stem + "ies" ;
+          Gen => nonExist ;
+          Dat => nonExist ;
+          Acc => stem + "ušos" ;
+          Loc => nonExist ;
+          Voc => nonExist
+        } ;
+        Pl => case c of {
+          Nom => stem + "ušies" ;
+          Gen => stem + "ušos" ;
+          Dat => nonExist ;
+          Acc => stem + "ušos" ;
+          Loc => nonExist ;
+          Voc => nonExist
+        }
+      } ;
+      Fem => case n of {
+        Sg => case c of {
+          Nom => stem + "usies" ;
+          Gen => stem + "ušās" ;
+          Dat => nonExist ;
+          Acc => stem + "ušos" ;
+          Loc => nonExist ;
+          Voc => nonExist
+        } ;
+        Pl => case c of {
+          Nom => stem + "ušās" ;
+          Gen => stem + "ušos" ;
+          Dat => nonExist ;
+          Acc => stem + "ušos" ;
+          Loc => nonExist ;
+          Voc => nonExist
+        }
+      }
+    } ;
+
+} ;
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/PhraseLav.gf"
+id=028c1a30a512
+kind=source
+size=882
+lines=34
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+concrete PhraseLav of Phrase = CatLav ** open ResLav in {
+
+flags coding = utf8 ;
+
+lin
+
+  PhrUtt pconj utt voc = { s = pconj.s ++ utt.s ++ voc.s } ;
+
+  UttS s = { s = s.s } ;
+  UttQS qs = { s = qs.s } ;
+  UttImpSg pol imp = { s = pol.s ++ imp.s ! pol.p ! Sg } ;
+  UttImpPl pol imp = { s = pol.s ++ imp.s ! pol.p ! Pl } ;
+  UttImpPol pol imp = { s = pol.s ++ "lūdzu" ++ imp.s ! pol.p ! Pl } ;
+
+  UttNP np = { s = np.s ! Nom } ;
+  UttCN n = { s = n.s ! Indef ! Sg ! Nom } ;
+  UttAP ap = { s = ap.s ! Indef ! Masc ! Sg ! Nom } ;
+  UttAdv adv = adv ;
+
+  UttVP vp = { s = buildVP vp Pos VInf (AgrP3 Pl Masc) } ;
+
+  UttIP ip = { s = ip.s ! Nom } ;
+  UttIAdv iadv = iadv ;
+  UttCard n = { s = n.s ! Masc ! Nom } ;
+
+  NoPConj = { s = [] } ;
+  NoVoc = { s = [] } ;
+
+  VocNP np = { s = "," ++ np.s ! ResLav.Voc } ;
+  PConjConj conj = { s = conj.s2 } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/QuestionLav.gf"
+id=3a63bebacc5a
+kind=source
+size=1427
+lines=56
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete QuestionLav of Question = CatLav ** open
+  VerbLav,
+  ParadigmsLav,
+  ResLav,
+  Prelude
+in {
+
+flags
+
+  optimize = all_subs ;
+  coding = utf8 ;
+
+lin
+  QuestCl cl = { s = \\m,p => "vai" ++ cl.s ! m ! p } ;
+
+  QuestVP ip vp = { s = \\m,p => ip.s ! Nom ++ buildVerb vp.v m p (AgrP3 ip.num Masc) Pos vp.rightPol } ;
+
+  QuestSlash ip slash = { s = \\m,p => slash.prep.s ++ ip.s ! (slash.prep.c ! ip.num) ++ slash.s ! m ! p } ;
+
+  QuestIAdv iadv cl = { s = \\m,p => iadv.s ++ cl.s ! m ! p } ;
+
+  QuestIComp icomp np = { s = \\m,p => icomp.s ++ buildVerb (mkV "būt") m p np.agr np.pol Pos ++ np.s ! Nom } ;
+
+  IdetQuant idet num = {
+    s = \\g => idet.s ! g ! num.num ++ num.s ! g ! Nom ;
+    num = num.num
+  } ;
+
+  -- FIXME: quick&dirty - lai kompilētos pret RGL API
+  -- Saskaņā ar Cat.gf, Common.gf un Structural.gf nav iespējams neko saskaņot...
+  -- Identisks copy-paste ir Rus gadījumā, bet priekš Bul Krasimirs ir kaut ko paplašinājis.
+  AdvIAdv i a = ss (i.s ++ a.s) ;
+
+  AdvIP ip adv = {
+    s = \\c => ip.s ! c ++ adv.s ;
+    num = ip.num
+  } ;
+
+  PrepIP p ip = { s = p.s ++ ip.s ! (p.c ! ip.num) } ;
+
+  IdetCN idet cn = {
+    s = \\c => idet.s ! cn.gend ++ cn.s ! Def ! idet.num ! c ;
+    num = idet.num
+  } ;
+
+  IdetIP idet = {
+    s = \\c => (idet.s ! Masc) | (idet.s ! Fem) ;
+    num = idet.num
+  } ;
+
+  CompIAdv a = a ;
+  CompIP p = ss (p.s ! Nom) ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/RelativeLav.gf"
+id=61c8ebb02da1
+kind=source
+size=1985
+lines=70
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete RelativeLav of Relative = CatLav ** open
+  ResLav,
+  VerbLav,
+  Prelude
+in {
+
+flags
+  optimize = all_subs ;
+  coding = utf8 ;
+
+lin
+  RelCl cl = { s = \\m,p,_ => "ka" ++ cl.s ! m ! p } ;
+
+  -- RP -> VP -> RCl
+  RelVP rp vp = mkRelClause rp vp ;
+
+oper
+
+  -- TODO: PassV2 verbs jāsaskaņo ar objektu, nevis subjektu (by8means_Prep: AgP3 Sg Masc) - done?
+  mkRelClause : RP -> CatLav.VP -> RCl = \rp,vp ->  
+    let subjInTopic : Bool = case <vp.voice, vp.leftVal> of {
+      <Act,  Nom> => True ;
+      <Act,  _  > => False ;
+      <Pass, Acc> => False ;
+      <Pass, _  > => True
+    }
+    in lin RCl {
+      s = \\mood,pol,agr =>
+        let verb : Str = case subjInTopic of {
+          True  => buildVerb vp.v mood pol (AgrP3 (fromAgr agr).num (fromAgr agr).gend) Pos vp.rightPol ;
+          False => buildVerb vp.v mood pol vp.rightAgr                                  Pos vp.rightPol
+        } in
+        case mood of {  -- subject
+          Deb _ _ => rp.s ! Masc ! Dat ;  --# notpresent
+          _       => rp.s ! Masc ! vp.leftVal
+        } ++
+        case vp.objPron of {
+          False => verb ++ vp.compl ! agr ;
+          True  => (vp.compl ! agr ++ verb) --| (verb ++ vp.compl ! agr)
+          -- FIXME: the object should be separated from other complements that should remain on the right side
+        }
+    } ;
+
+lin
+  -- FIXME: vārdu secība - nevis 'kas mīl viņu' bet 'kas viņu mīl' (?)
+  -- FIXME: Masc varētu nebūt labi
+  RelSlash rp slash = {
+    s = \\m,p,ag => slash.prep.s ++ rp.s ! Masc ! (slash.prep.c ! Sg) ++  slash.s ! m ! p
+  } ;
+
+  -- FIXME: placeholder
+  -- TODO: jātestē, kautkas nav labi ar testpiemēru
+  FunRP p np rp = {
+    s = \\g,c => p.s ++ rp.s ! g ! c ++ np.s ! (p.c ! (fromAgr np.agr).num)
+  } ;
+
+  IdRP = {
+    s = \\_ => table {
+      Nom => "kas" ;
+      Gen => "kā" ;
+      Dat => "kam" ;
+      Acc => "ko" ;
+      Loc => "kur" ;
+      ResLav.Voc => nonExist
+    }
+  } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/ResLav.gf"
+id=e89bad2febcf
+kind=source
+size=4698
+lines=163
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+resource ResLav = ParamX ** open Prelude in {
+
+flags
+
+  optimize = all ;
+  coding = utf8 ;
+
+param
+
+  -- Nouns
+
+  Case = Nom | Gen | Dat | Acc | Loc | Voc ;
+  Gender = Masc | Fem ;
+  Declension = D0 | D1 | D2 | D3 | D4 | D5 | D6 | DR ;
+
+  -- Adjectives
+
+  Definiteness = Indef | Def ;
+  AType = AQual | ARel | AIndecl ;
+
+  AForm =
+      AAdj Degree Definiteness Gender Number Case
+    | AAdv Degree ;
+
+  -- Verbs
+
+  Voice = Act | Pass ;
+  Conjugation = C2 | C3 ;  -- C1 - "irregular" verbs
+
+  -- Verb moods:
+  --   Ind - indicative
+  --   Rel - relative (http://www.isocat.org/rest/dc/3836)
+  --   Deb - debitive (http://www.isocat.org/rest/dc/3835)
+  --   Condit - conditional
+  VMood =
+      Ind Anteriority Tense
+    | Rel Anteriority Tense  --# notpresent
+    | Deb Anteriority Tense  --# notpresent
+    | Condit Anteriority     --# notpresent
+    ;
+
+  VForm =
+      VInf
+    | VInd Person Number Tense
+    | VRel Tense
+    | VDeb
+    | VImp Number
+    | VDebRel  -- the relative subtype of debitive
+    | VPart Voice Gender Number Case ;
+
+  -- Number and gender has to be agreed in predicative nominal clauses
+  Agreement =
+      AgrP1 Number Gender
+    | AgrP2 Number Gender
+    | AgrP3 Number Gender ;
+
+  -- Other
+
+  ThisOrThat = This | That ;
+
+  CardOrd = NCard | NOrd ;
+  DForm = DUnit | DTeen | DTen ;
+
+oper
+
+  Noun : Type = {s : Number => Case => Str ; gend : Gender} ;
+
+  ProperNoun : Type = {s : Case => Str ; gend : Gender ; num : Number} ;
+  
+  Pronoun : Type = {s : Case => Str ; agr : Agreement ; poss : Gender => Number => Case => Str ; pol : Polarity} ;
+
+  Adjective : Type = {s : AForm => Str} ;
+
+  Preposition : Type = {s : Str ; c : Number => Case} ;
+
+  Verb : Type = {s : Polarity => VForm => Str ; leftVal : Case} ;
+
+  VP : Type = {
+    v        : Verb ;
+    compl    : Agreement => Str ;  -- the subject-complement agreement
+    voice    : Voice ;
+    leftVal  : Case ;              -- the left valence (typically, the subject)
+    rightAgr : Agreement ;         -- for the potential subject-verb agreement (the subject can be on the right side)
+    rightPol : Polarity ;          -- for the potential double negation
+    objPron  : Bool                -- true, if object is a Pron (for modifying the neutral word order)
+  } ;
+
+  VPSlash : Type = VP ** {rightVal : Preposition} ;  -- the right valence (typically, the object)
+
+  buildVP : VP -> Polarity -> VForm -> Agreement -> Str = \vp,pol,vf,agr ->
+    vp.v.s ! pol ! vf ++ vp.compl ! agr ;
+
+  insertObj : (Agreement => Str) -> Bool -> Bool -> VP -> VP = \obj,isPron,isPre,vp -> {
+    v        = vp.v ;
+    compl    = \\agr => case isPre of {
+                 False => vp.compl ! agr ++ obj ! agr ;
+                 True  => obj ! agr ++ vp.compl ! agr
+               } ;
+    voice    = vp.voice ;
+    leftVal  = vp.leftVal ;
+    rightAgr = vp.rightAgr ;
+    rightPol = vp.rightPol ;
+    objPron  = isPron
+  } ;
+
+  insertObjReg : (Agreement => Str) -> Bool -> VP -> VP = \obj,isPron,vp ->
+    insertObj obj isPron False vp ;
+
+  insertObjPre : (Agreement => Str) -> VP -> VP = \obj,vp ->
+    insertObj obj True True vp ;
+
+  insertObjSlash : (Agreement => Str) -> VPSlash -> VPSlash = \obj,vp ->
+    insertObj obj vp.objPron False vp ** {rightVal = vp.rightVal} ;
+
+  getInf : Verb -> Str = \v -> v.s ! Pos ! VInf ;
+
+  toAgr : Person -> Number -> Gender -> Agreement = \pers,num,gend ->
+    case pers of {
+      P1 => AgrP1 num gend ;
+      P2 => AgrP2 num gend ;
+      P3 => AgrP3 num gend
+    } ;
+
+  fromAgr : Agreement -> {pers : Person ; num : Number ; gend : Gender} = \agr ->
+    case agr of {
+      AgrP1 num gend => {pers = P1 ; num = num ; gend = gend} ;
+      AgrP2 num gend => {pers = P2 ; num = num ; gend = gend} ;
+      AgrP3 num gend => {pers = P3 ; num = num ; gend = gend}
+    } ;
+
+  conjAgr : Agreement -> Agreement -> Agreement = \agr1,agr2 ->
+    let
+      a1 = fromAgr agr1 ;
+      a2 = fromAgr agr2
+    in toAgr
+      (conjPerson a1.pers a2.pers)
+      (conjNumber a1.num a2.num)
+      (conjGender a1.gend a2.gend) ;
+
+  conjGender : Gender -> Gender -> Gender = \gend1,gend2 ->
+    case gend1 of {
+      Fem  => gend2 ;
+      Masc => Masc
+    } ;
+
+  closeRelCl : Bool -> Str = \isRel -> 
+    case isRel of {
+      True => "," ;
+      False => []
+    } ;
+
+  vowel : pattern Str = #("a"|"ā"|"e"|"ē"|"i"|"ī"|"o"|"u"|"ū") ;
+
+  simpleCons : pattern Str = #("c"|"d"|"l"|"n"|"s"|"t"|"z") ;
+  labialCons : pattern Str = #("b"|"m"|"p"|"v") ;
+  sonantCons : pattern Str = #("l"|"m"|"n"|"r"|"ļ"|"ņ") ;
+  doubleCons : pattern Str = #("ll"|"ln"|"nn"|"sl"|"sn"|"st"|"zl"|"zn") ;
+
+  prefix : pattern Str = #("aiz"|"ap"|"at"|"ie"|"iz"|"no"|"pa"|"pār"|"pie"|"sa"|"uz") ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/SentenceLav.gf"
+id=702882090ce5
+kind=source
+size=3497
+lines=105
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete SentenceLav of Sentence = CatLav ** open
+  ResLav,
+  VerbLav,
+  Prelude
+in {
+
+flags
+    optimize = all_subs ;
+    coding = utf8 ;
+
+lin
+  -- NP -> VP -> Cl
+  PredVP np vp = mkClause np vp ;
+
+  PredSCVP sc vp = mkClauseSC sc vp ;
+
+  ImpVP vp = { s = \\pol,num => vp.v.s ! pol ! (VImp num) ++ vp.compl ! (AgrP2 num Masc) } ;
+
+  SlashVP np vp = mkClause np (lin VP vp) ** { prep = vp.rightVal } ;
+
+  AdvSlash slash adv = {
+    s  = \\m,p => slash.s ! m ! p ++ adv.s ;
+    prep = slash.prep
+  } ;
+
+  SlashPrep cl prep = cl ** { prep = prep } ;
+
+  -- NP -> VS -> SSlash -> ClSlash
+  -- e.g. '(whom) she says that he loves'
+  SlashVS np vs sslash = mkClause
+    np
+    (lin VP {
+      v        = vs ;
+      compl    = \\_ => "," ++ vs.conj.s ++ sslash.s ;
+      voice    = Act ;
+      leftVal  = vs.leftVal ;
+      rightAgr = AgrP3 Sg Masc ;
+      rightPol = Pos ;
+      objPron  = False
+    }) ** { prep = sslash.prep } ;
+
+  -- ComplVS v s  = { v = v ; compl = \\_ => "," ++ v.subj.s ++ s.s } ;
+
+  -- TODO: nočekot kāpēc te ir tieši 'ka'
+  EmbedS s = { s = "ka" ++ s.s } ;
+
+  EmbedQS qs = { s = qs.s } ;
+
+  -- FIXME: vai agr ir Pl?
+  EmbedVP vp = { s = buildVP vp Pos VInf (AgrP3 Pl Masc) } ;
+
+  UseCl t p cl = { s = t.s ++ p.s ++ cl.s ! (Ind t.a t.t) ! p.p } ;
+  UseQCl t p cl = { s = t.s ++ p.s ++ cl.s ! (Ind t.a t.t) ! p.p } ;
+
+  UseRCl t p cl =
+	  { s = \\ag => t.s ++ p.s ++ cl.s ! (Ind t.a t.t) ! p.p ! ag }
+	| { s = \\ag => t.s ++ p.s ++ cl.s ! (Rel t.a t.t) ! p.p ! ag }		--# notpresent
+	;
+
+  UseSlash t p slash = { s = t.s ++ p.s ++ slash.s ! (Ind t.a t.t) ! p.p ; prep = slash.prep } ;
+
+  AdvS a s = { s = a.s ++ s.s } ;
+
+oper
+  -- TODO: PassV2 verbs jāsaskaņo ar objektu, nevis subjektu (by8means_Prep: AgP3 Sg Masc)
+  mkClause : NP -> CatLav.VP -> Cl = \np,vp ->  
+    let agr : Agreement = case <vp.voice, vp.leftVal> of {
+      <Act,  Nom> => np.agr ;
+      <Act,  _  > => vp.rightAgr ;
+      <Pass, Acc> => vp.rightAgr ;
+      <Pass, _  > => np.agr
+    }
+    in lin Cl {
+      s = \\mood,pol =>
+        case mood of {                                           -- subject
+          Deb _ _ => np.s ! Dat ;  --# notpresent
+          _       => np.s ! vp.leftVal
+        } ++
+        closeRelCl np.isRel ++                                   -- comma, if necessary
+        case vp.objPron of {
+          False =>
+            buildVerb vp.v mood pol agr np.pol vp.rightPol ++    -- verb
+            vp.compl ! np.agr ;                                  -- object(s), modifiers and other complements
+          True  =>
+            -- FIXME: the object should be separated from other complements that should remain on the right side
+            (
+              vp.compl ! np.agr ++                               -- object(s), modifiers and other complements
+              buildVerb vp.v mood pol agr np.pol vp.rightPol     -- verb
+            ) --| (
+              --buildVerb vp.v mood pol agr np.pol vp.rightPol ++  -- verb
+              --vp.compl ! np.agr                                  -- object(s), modifiers and other complements
+            --)
+        }
+    } ;
+
+  -- FIXME: quick&dirty - lai kompilētos pret RGL API
+  -- Eng: PredSCVP sc vp = mkClause sc.s (agrP3 Sg) vp
+  -- Ar SC nav iespējams neko saskaņot (sk. Cat.gf un Common.gf)
+  mkClauseSC : SC -> CatLav.VP -> Cl = \sc,vp -> lin Cl {
+    s = \\mood,pol => sc.s ++ buildVerb vp.v mood pol (AgrP3 Sg Masc) Pos vp.rightPol ++ vp.compl ! (AgrP3 Sg Masc)
+  } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/StructuralLav.gf"
+id=78b7ad9a689a
+kind=source
+size=7416
+lines=298
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+concrete StructuralLav of Structural = CatLav ** open
+  ResLav,
+  ParadigmsLav,
+  ParadigmsPronounsLav,
+  NounLav,
+  Prelude
+in {
+
+flags
+
+  optimize = all ;
+  coding = utf8 ;
+
+lin
+
+  language_title_Utt = ss "latviešu valoda" ;
+
+  yes_Utt = ss "jā" ;
+  no_Utt = ss "nē" ;
+
+  every_Det = {
+    s = (\\gend,c => (mkPronoun_Gend "ikviens").s ! gend ! Sg ! c) ;
+    num = Sg ;
+    defin = Indef ;
+    pol = Pos
+  } ;
+
+  someSg_Det = {
+    s = (\\gend,c => (mkPronoun_Gend "kāds").s ! gend ! Sg ! c) ;  --  TODO: lai atļautu arī tukšo, jāpieliek alternatīva: (\\_,_ => [])
+    num = Sg ;
+    defin = Indef ;
+    pol = Pos
+  } ;
+
+  somePl_Det = {
+    s = (\\gend,c => (mkPronoun_Gend "kāds").s ! gend ! Pl ! c) ;   --  TODO: lai atļautu arī tukšo, jāpieliek alternatīva: (\\_,_ => [])
+    num = Pl ;
+    defin = Indef ;
+    pol = Pos
+  } ;
+
+  few_Det = {
+    s = (\\gend,c => (mkPronoun_Gend "dažs").s ! gend ! Pl ! c) ;
+    num = Pl ;
+    defin = Indef ;
+    pol = Pos
+  } ;
+
+  many_Det = {
+    s = (\\gend,c => (mkPronoun_Gend "daudzs").s ! gend ! Pl ! c) ;  -- 'daudzs' izlocīsies korekti uz daudzskaitļa 'daudzi'; tomēr nesmuki...
+    num = Pl ;
+    defin = Indef ;
+    pol = Pos
+  } ;
+
+  much_Det = {
+    s = (\\gend,c => "daudz") ;  -- FIXME: piesaista ģenitīvu
+    num = Sg ;
+    defin = Indef ;
+    pol = Pos
+  } ;
+
+  this_Quant = {
+    s = (mkPronoun_ThisThat This).s ;
+    defin = Def ;
+    pol = Pos
+  } ;
+
+  that_Quant = {
+    s = (mkPronoun_ThisThat That).s ;
+    defin = Def ;
+    pol = Pos
+  } ;
+
+  no_Quant = {
+    s = (mkPronoun_Gend "neviens").s ;
+    defin = Indef ;
+    pol = Neg
+  } ;
+
+  -- P1
+
+  i_Pron = mkPronoun_I Masc ;  -- See also: ExtraLav.i8fem_Pron
+
+  we_Pron = mkPronoun_We Masc ;  -- See also: ExtraLav.we8fem_Pron
+
+  -- P2
+
+  youSg_Pron = mkPronoun_You_Sg Masc ;  -- See also: ExtraLav.youSg8fem_Pron
+
+  youPol_Pron = mkPronoun_You_Pol Masc ;  -- See also: ExtraLav.youPol8fem_Pron
+
+  youPl_Pron = mkPronoun_You_Pl Masc ;  -- See also: ExtraLav.youPl8fem_Pron
+
+  -- P3
+
+  he_Pron = {
+    s = \\c => (mkPronoun_Gend "viņš").s ! Masc ! Sg ! c ;
+    agr = AgrP3 Sg Masc ;
+    poss = \\_,_,_ => "viņa" ;
+    pol = Pos
+  } ;
+
+  she_Pron = {
+    s = \\c => (mkPronoun_Gend "viņš").s ! Fem ! Sg ! c ;
+    agr = AgrP3 Sg Fem ;
+    poss = \\_,_,_ => "viņas" ;
+    pol = Pos
+  } ;
+
+  they_Pron = mkPronoun_They Masc ;  -- See also: ExtraLav.they8fem_Pron
+
+  it_Pron = mkPronoun_It_Sg Masc ;  -- See also: ExtraLav.it8fem_Pron
+
+  -- Pronouns; their translation is very ambiguos...
+
+  above_Prep = mkPrep "virs" Gen Dat ;
+  after_Prep = mkPrep "pēc" Gen Dat ;
+  before_Prep = mkPrep "pirms" Gen Dat ;
+  behind_Prep = mkPrep "aiz" Gen Dat ;  -- taču "aiz" nav viennozīmīgi "behind"
+  between_Prep = mkPrep "starp" Acc Dat ;
+  during_Prep = mkPrep Loc ;
+  for_Prep = mkPrep "priekš" Gen Dat ;
+  from_Prep = mkPrep "no" Gen Dat ;
+  in_Prep = mkPrep Loc ;
+  in8front_Prep = mkPrep "priekšā" Dat Dat ;
+  on_Prep = mkPrep "uz" Gen Dat ;
+  through_Prep = mkPrep "caur" Acc Dat ;
+  to_Prep = mkPrep "uz" Acc Dat ;  -- See also: ExtraLav.liidz_Prep, pie_Prep
+  under_Prep = mkPrep "zem" Gen Dat ;
+  with_Prep = mkPrep "ar" Acc Dat ;
+  without_Prep = mkPrep "bez" Gen Dat ;
+  
+  by8agent_Prep = nom_Prep ; -- TODO: nom_Prep (default) vs. dat_Prep
+  by8means_Prep = mkPrep "ar" Acc Dat ;
+  except_Prep = mkPrep "izņemot" Acc Acc ; -- Acc - by default?
+  part_Prep = mkPrep Gen ; --FIXME - vajadzētu vārdu secību otrādi - pirms paskaidrojamā vārda likt
+  possess_Prep = mkPrep Gen ;  -- FIXME: vajadzētu vārdu secību otrādi - pirms paskaidrojamā vārda likt
+  
+  very_AdA = mkAdA "ļoti" ;
+  almost_AdA = mkAdA "gandrīz" ;
+  so_AdA = mkAdA "tik" ;
+  too_AdA = mkAdA "pārāk" ;
+
+  more_CAdv = (mkCAdv [] "nekā" Compar) | (mkCAdv "vairāk" "nekā" Posit) ;
+  less_CAdv = mkCAdv "mazāk" "nekā" Posit ;
+  as_CAdv = mkCAdv "tikpat" "kā" Posit ;
+
+  here_Adv = mkAdv "šeit" ;
+  there_Adv = mkAdv "tur" ;
+  everywhere_Adv = mkAdv "visur" ;
+  here7to_Adv = mkAdv ["uz šejieni"] ;
+  here7from_Adv = mkAdv ["no šejienes"] ;
+  there7to_Adv = mkAdv "uz turieni" ;
+  there7from_Adv = mkAdv "no turienes" ;
+  somewhere_Adv = mkAdv "kaut kur" ;
+  quite_Adv = mkAdv "diezgan" ;
+
+  and_Conj = mkConj "un" ;
+  or_Conj = mkConj "vai" Sg ;
+  if_then_Conj = mkConj "ja" "tad" ;
+
+  but_PConj = ss "bet" ;
+  otherwise_PConj = ss "citādi" ;
+  therefore_PConj = ss "tāpēc" ;
+
+  both7and_DConj = mkConj "gan" "gan" ;
+  either7or_DConj = mkConj ("vai" ++ "nu") "vai" Sg ;
+
+  whoSg_IP = { -- FIXME: Fem
+    s = table {
+      Nom => "kurš" ;
+      Gen => "kura" ;
+      Dat => "kuram" ;
+      Acc => "kuru" ;
+      Loc => "kurā" ;
+      ResLav.Voc => nonExist
+    } ;
+    num = Sg
+  } ;
+  
+  whoPl_IP = { -- FIXME: Fem
+    s = table {
+      Nom => "kuri" ;
+      Gen => "kuru" ;
+      Dat => "kuriem" ;
+      Acc => "kurus" ;
+      Loc => "kuros" ;
+      ResLav.Voc => nonExist
+    } ;
+    num = Pl
+  } ;
+  
+  whatSg_IP = {
+    s = table {
+      Nom => "kas" ;
+      Gen => "kā" ;
+      Dat => "kam" ;
+      Acc => "ko" ;
+      Loc => "kur" ;
+      ResLav.Voc => nonExist
+    } ;
+    num = Sg
+  } ;
+  
+  whatPl_IP = {
+    s = table {
+      Nom => "kas" ;
+      Gen => "kā" ;
+      Dat => "kam" ;
+      Acc => "ko" ;
+      Loc => "kur" ;
+      ResLav.Voc => nonExist
+    } ;
+    num = Pl
+  } ;
+
+  why_IAdv = ss "kāpēc" ;
+  how_IAdv = ss "kā" ;
+  how8much_IAdv = ss "cik" ;
+  when_IAdv = ss "kad" ;
+  where_IAdv = ss "kur" ;
+
+  which_IQuant = {
+    s = table {
+      Masc => table { Sg => "kurš"; Pl => "kuri" } ;
+      Fem => table { Sg => "kura"; Pl => "kuras" }
+    }
+  } ;
+
+  how8many_IDet = {
+    s = table { _ => "cik" } ;
+    num = Pl
+  } ;
+
+  when_Subj = ss "kad" ;
+  although_Subj = ss "kaut arī" ;
+  because_Subj = ss "jo" ;
+  if_Subj = ss "ja" ;
+  that_Subj = ss "ka" ;
+
+  all_Predet = { s = table { Masc => "visi" ; Fem => "visas" } } ; -- FIXME: cases
+  only_Predet = { s = table { _ => "tikai"} } ;
+  most_Predet = { s = table { _ => "vairums"} } ;
+
+  almost_AdN = mkAdN "gandrīz" ;
+  at_least_AdN = mkAdN "vismaz" ;
+  at_most_AdN = mkAdN "ne vairāk kā" ;
+
+  always_AdV = mkAdV "vienmēr" ;
+
+  somebody_NP = UsePron (mkPronoun_Body "kāds" Pos) ;
+  something_NP = UsePron (mkPronoun_Thing "kaut kas" Pos) ;
+  everybody_NP = UsePron (mkPronoun_Body "ikviens" Pos) ;
+  everything_NP = UsePron (mkPronoun_Thing "jebkas" Pos) ;
+  nobody_NP = UsePron (mkPronoun_Body "neviens" Neg) ;
+  nothing_NP = UsePron (mkPronoun_Thing "nekas" Neg) ;
+
+  have_V2 = mkV2 (mkV "būt" Dat) nom_Prep ;
+  --have_V3 = mkV3 (mkV "būt") Dat nom_Prep dat_Prep ;
+
+  want_VV = mkVV (mkV "vēlēties" third_conjugation) ;
+  can_VV = mkVV (mkV "varēt" third_conjugation) ;
+  can8know_VV = mkVV (mkV "varēt" third_conjugation) ;
+  must_VV = mkVV (mkV "vajadzēt" third_conjugation Dat) ;
+
+  please_Voc = ss ", lūdzu" ;
+
+oper
+  
+  reflPron : Case => Str = table {
+    Nom => nonExist ;
+    Gen => "sevis" ;
+    Dat => "sev" ;
+    Acc => "sevi" ;
+    Loc => "sevī" ;
+    ResLav.Voc => nonExist
+  } ;
+
+  lai_Subj = ss "lai" ;
+  kameer_Subj = ss "kamēr" ;
+
+  {- Netiek izmantoti; to vietā sk. ExtraLav
+  emptyPl_Det = {
+    s : Gender => Case => Str = \\_,_ => [] ;
+    num = Pl ;
+    defin = Indef
+  } ;
+  emptySg_Det = { -- TODO: analoģiski kā emptyPl_Det
+    s : Gender => Case => Str = \\_,_ => [] ;
+    num = Sg ;
+    defin = Indef
+  } ;
+  -}
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/SymbolLav.gf"
+id=5b2e35823e11
+kind=source
+size=1380
+lines=64
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete SymbolLav of Symbol = CatLav ** open
+  Prelude,
+  ResLav
+  in {
+
+flags
+  coding = utf8 ;
+
+lin
+
+  SymbPN i = {s = \\_ => i.s ; gend = Masc ; num = Sg} ;
+  IntPN i  = {s = \\_ => i.s ; gend = Masc ; num = Pl} ;
+  FloatPN i = {s = \\_ => i.s ; gend = Masc ; num = Pl} ;
+  NumPN i = {s = \\_ => i.s ! Masc ! Nom ; gend = Masc ; num = Pl} ;
+
+  -- CN -> Int -> NP
+  -- e.g. "level 53" (covered by CNNumNP)
+  CNIntNP cn i = {
+    s      = \\_ => cn.s ! Indef ! Sg ! Nom ++ i.s ;
+    agr    = AgrP3 Sg cn.gend ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+
+  -- Det -> CN -> ListSymb -> NP
+  -- e.g. "(the) (2) numbers x and y"
+  CNSymbNP det cn xs = {
+    s      = \\_ => det.s ! cn.gend ! Nom ++ cn.s ! det.defin ! det.num ! Nom ++ xs.s ;
+    agr    = AgrP3 det.num cn.gend ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+
+  -- CN -> Card -> NP
+  -- e.g. "level five", "level 5"
+  CNNumNP cn i = {
+    s      = \\_ => cn.s ! Indef ! Sg ! Nom ++ i.s ! Masc ! Nom ;
+    agr    = AgrP3 Sg cn.gend ;
+    pol    = Pos ;
+    isRel  = False ;
+    isPron = False
+  } ;
+
+  SymbS sy = sy ;
+
+  SymbNum sy = { s = \\_,_ => sy.s ; num = Pl } ;
+  SymbOrd sy = { s = \\_,_ => glue sy.s "."} ;
+
+lincat
+
+  Symb, [Symb] = SS ;
+
+lin
+
+  MkSymb s = s ;
+
+  BaseSymb = infixSS "un" ;
+  ConsSymb = infixSS "," ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="latvian/VerbLav.gf"
+id=751e9bc3f4b7
+kind=source
+size=9816
+lines=347
+chunks=0
+----
+--# -path=.:abstract:common:prelude
+
+-- TODO: module relations.
+-- VerbLav is included in many modules because of buildVerb.
+-- It needs to be reallocated somehow to ResLav.or something similar.
+-- Not so simple since morphology itself needs ResLav & friends.
+
+concrete VerbLav of Verb = CatLav ** open
+  StructuralLav,
+  ParadigmsLav,
+  ResLav,
+  ParamX,
+  Prelude
+in {
+
+flags
+
+  optimize = all_subs ;
+  coding = utf8 ;
+
+lin
+
+  -- Complementization rules
+
+  -- V -> VP
+  -- e.g. 'sleep'
+  UseV v = {
+    v        = v ;
+    compl    = \\_ => [] ;
+    voice    = Act ;
+    leftVal  = v.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False
+  } ;
+
+  -- VV -> VP -> VP
+  -- e.g. 'want to run'
+  ComplVV vv vp = {
+    v        = vv ;
+    compl    = \\agr => buildVP vp Pos VInf agr ;
+    voice    = Act ;
+    leftVal  = vv.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False
+  } ;
+
+  -- VS -> S -> VP
+  -- e.g. 'say that she runs'
+  ComplVS vs s = {
+    v        = vs ;
+    compl    = \\_ => "," ++ vs.conj.s ++ s.s ;
+    voice    = Act ;
+    leftVal  = vs.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False
+  } ;
+
+  -- VQ -> QS -> VP
+  -- e.g. 'wonder who runs'
+  ComplVQ vq qs = {
+    v        = vq ;
+    compl    = \\_ => "," ++ qs.s ;
+    voice    = Act ;
+    leftVal  = vq.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False
+  } ;
+
+  -- VA -> AP -> VP
+  -- e.g. '(they) become red'
+  ComplVA va ap = {
+    v        = va ;
+    compl    = \\agr => ap.s ! Indef ! (fromAgr agr).gend ! (fromAgr agr).num ! Nom ;
+    voice    = Act ;
+    leftVal  = va.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False
+  } ;
+
+  -- V2 -> VPSlash
+  -- e.g. 'love (it)'
+  SlashV2a v2 = {
+    v        = v2 ;
+    compl    = \\_ => [] ;      -- will be overriden
+    voice    = Act ;
+    leftVal  = v2.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;  -- will be overriden
+    rightPol = Pos ;            -- will be overriden
+    objPron  = False ;          -- will be overriden
+    rightVal = v2.rightVal
+  } ;
+
+  -- V3 -> NP -> VPSlash
+  -- e.g. 'give it (to her)'
+  Slash2V3 v3 np = insertObjSlash
+    (\\_ => v3.rightVal2.s ++ np.s ! (v3.rightVal2.c ! (fromAgr np.agr).num))
+    {
+      v        = v3 ;
+      compl    = \\_ => [] ;  -- will be overriden
+      voice    = Act ;
+      leftVal  = v3.leftVal ;
+      rightAgr = np.agr ;
+      rightPol = np.pol ;
+      objPron  = np.isPron ;
+      rightVal = v3.rightVal1
+    } ;
+  -- FIXME: "vīrietis runā par ābolus ar sievieti" ("a man talks to a woman about apples")
+  -- FIXME: the order of objects (?)
+  -- FIXME: Slash2V3 = Slash3V3 (?)
+
+  -- V3 -> NP -> VPSlash
+  -- e.g. 'give (it) to her'
+  Slash3V3 v3 np = insertObjSlash
+    (\\_ => v3.rightVal2.s ++ np.s ! (v3.rightVal2.c ! (fromAgr np.agr).num))
+    {
+      v        = v3 ;
+      compl    = \\_ => [] ;  -- will be overriden
+      voice    = Act ;
+      leftVal  = v3.leftVal ;
+      rightAgr = np.agr ;
+      rightPol = np.pol ;
+      objPron  = np.isPron ;
+      rightVal = v3.rightVal1
+    } ;
+
+  -- V2V -> VP -> VPSlash
+  -- e.g. 'beg (her) to go'
+  SlashV2V v2v vp = {
+    v        = v2v ;
+    compl    = \\agr => buildVP vp Pos VInf agr ;
+    voice    = Act ;
+    leftVal  = v2v.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False ;  -- will be overriden
+    rightVal = v2v.rightVal
+  } ;
+
+  -- V2S -> S -> VPSlash
+  -- e.g. 'answer (to him) that it is good'
+  SlashV2S v2s s = {
+    v        = v2s ;
+    compl    = \\_ => "," ++ v2s.conj.s ++ s.s ;
+    voice    = Act ;
+    leftVal  = v2s.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False ;  -- will be overriden
+    rightVal = v2s.rightVal
+  } ;
+
+  -- V2Q -> QS -> VPSlash
+  -- e.g. 'ask (him) who came'
+  SlashV2Q v2q qs = {
+    v        = v2q ;
+    compl    = \\_ => "," ++ qs.s ;
+    voice    = Act ;
+    leftVal  = v2q.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False ;  -- will be overriden
+    rightVal = v2q.rightVal
+  } ;
+
+  -- V2A -> AP -> VPSlash
+  -- e.g. 'paint (it) red'
+  SlashV2A v2a ap = {
+    v        = v2a ;
+    compl    = \\agr => ap.s ! Indef ! (fromAgr agr).gend ! (fromAgr agr).num ! Nom ;
+    voice    = Act ;
+    leftVal  = v2a.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False ;  -- will be overriden
+    rightVal = v2a.rightVal
+  } ;
+
+  -- VPSlash -> NP -> VP
+  -- e.g. 'love it'
+  ComplSlash vpslash np =
+    let agr : Agreement = np.agr in {
+      v        = vpslash.v ;
+      {-
+      compl    = \\agr => case vpslash.voice of {
+        Act  => vpslash.rightVal.s ++ np.s ! (vpslash.rightVal.c ! (fromAgr agr).num) ;
+        Pass => case vpslash.rightVal.c ! (fromAgr agr).num of {
+          Nom => np.s ! (vpslash.rightVal.c ! Sg) ;
+          _   => vpslash.rightVal.s ++ np.s ! (vpslash.rightVal.c ! (fromAgr agr).num)
+        }
+      } ++ vpslash.compl ! agr ;
+      -}
+      compl    = \\agr => vpslash.rightVal.s ++ 
+                          np.s ! (vpslash.rightVal.c ! (fromAgr agr).num) ++ 
+                          vpslash.compl ! agr ;
+      voice    = vpslash.voice ;
+      leftVal  = vpslash.leftVal ;
+      rightAgr = np.agr ;
+      rightPol = np.pol ;
+      objPron  = np.isPron ;
+      rightVal = vpslash.rightVal
+    } ;
+
+  -- VV -> VPSlash -> VPSlash
+  -- e.g. 'want to buy'
+  SlashVV vv vpslash = {
+    v        = vv ;
+    compl    = \\agr => buildVP vpslash Pos VInf agr ;
+    voice    = Act ;
+    leftVal  = vv.leftVal ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False ;  -- will be overriden
+    rightVal = nom_Prep
+  } ;
+
+  -- V2V -> NP -> VPSlash -> VPSlash
+  -- e.g. '-- beg me to buy'
+  SlashV2VNP v2v np vpslash = insertObjSlash
+    (\\_ => v2v.rightVal.s ++ np.s ! (v2v.rightVal.c ! (fromAgr np.agr).num))
+    {
+      v        = v2v ;
+      compl    = \\agr => buildVP vpslash Pos VInf agr ;
+      voice    = Act ;
+      leftVal  = v2v.leftVal ;
+      rightAgr = np.agr ;
+      rightPol = np.pol ;
+      objPron  = np.isPron ;
+      rightVal = v2v.rightVal
+    } ;
+
+  -- Other ways of forming verb phrases
+
+  -- VPSlash -> VP
+  -- e.g. 'love himself'
+  ReflVP vpslash = insertObjPre
+    (\\agr => vpslash.rightVal.s ++ reflPron ! (vpslash.rightVal.c ! (fromAgr agr).num))
+    vpslash ;
+
+  -- Comp -> VP
+  -- e.g. 'be warm'
+  UseComp comp = {
+    v        = mkV "būt" ;
+    compl    = \\agr => comp.s ! agr ;
+    voice    = Act ;
+    leftVal  = Nom ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False
+  } ;
+
+  -- V2 -> VP
+  -- e.g. 'be loved'
+  PassV2 v2 = {
+    v        = v2 ;
+    compl    = \\_ => [] ;
+    voice    = Pass ;
+    leftVal  = v2.rightVal.c ! Sg ;
+    rightAgr = AgrP3 Sg Masc ;
+    rightPol = Pos ;
+    objPron  = False
+    --rightVal = mkPrep v2.leftVal
+  } ;
+  -- TODO: val - should not be overriden in ComplSlash etc.?
+  -- TODO: val - P3 Sg Masc restriction - never used?
+  -- TODO: notestēt objNeg (kur tas tiek pārrakstīts - ComplSlash, AdvVP u.c.?)
+
+  -- VP -> Adv -> VP
+  -- e.g. 'sleep here'
+  AdvVP vp adv = insertObjReg (\\_ => adv.s) adv.isPron vp ;
+
+  -- AdV -> VP -> VP
+  -- e.g. 'always sleep'
+  AdVVP adv vp = insertObjPre (\\_ => adv.s) vp ;
+
+  -- TODO: AdvVPSlash : VPSlash -> Adv -> VPSlash
+  -- e.g. 'use (it) here'
+
+  -- TODO: AdVVPSlash : AdV -> VPSlash -> VPSlash
+  -- e.g. 'always use (it)'
+
+  -- VP -> Prep -> VPSlash
+  -- e.g. 'live in (it)'
+  VPSlashPrep vp prep = vp ** {rightVal = prep} ;
+  -- TODO: šajā brīdī ir jāignorē prep (by8agent_Prep); tas jāaizstāj ar v2.left (?)
+  -- Tad varēs dzēst ārā komentāru pie StructuralLav.by8agent_Prep (?)
+
+  -- Complements to copula
+
+  -- AP -> Comp
+  -- e.g. '(be) small'
+  CompAP ap = {s = \\agr => ap.s ! Indef ! (fromAgr agr).gend ! (fromAgr agr).num ! Nom} ;
+
+  -- NP -> Comp
+  -- e.g. '(be) the man'
+  CompNP np = {s = \\_ => np.s ! Nom} ;
+
+  -- Adv -> Comp
+  -- e.g. '(be) here'
+  CompAdv adv = {s = \\_ => adv.s} ;
+
+  -- CN -> Comp
+  -- e.g. '(be) a man/men'
+  CompCN cn = {s = \\agr => cn.s ! Indef ! (fromAgr agr).num ! Nom} ;
+
+  -- TODO: UseCopula : VP
+  -- e.g. 'be'
+
+oper
+
+  -- FIXME: the type of the participle form - depending on what?! (currently fixed)
+  buildVerb : Verb -> VMood -> Polarity -> Agreement -> Polarity -> Polarity -> Str = 
+  \v,mood,pol,agr,leftPol,rightPol ->
+    let
+      finalPol : Polarity = case <leftPol, rightPol> of {
+        <Neg, _> => Neg ;  -- double negation, if the left/right NP has a negated determiner
+        <_, Neg> => Neg ;
+        _        => pol
+      } ;
+      agr = fromAgr agr
+      ;  --# notpresent
+      part = v.s ! Pos ! (VPart Pass agr.gend agr.num Nom)  --# notpresent
+    in case mood of {
+      Ind Simul tense => v.s ! finalPol ! (VInd agr.pers agr.num tense)
+      ;  --# notpresent
+      Ind Anter tense => (mkV "būt").s ! finalPol ! (VInd agr.pers agr.num tense) ++ part ;  --# notpresent
+
+      -- FIXME(?): Rel _ Past => ...
+      Rel _     Past  => nonExist ;  --# notpresent
+      Rel Simul tense => v.s ! finalPol ! (VRel tense) ;  --# notpresent
+      Rel Anter tense => (mkV "būt").s ! finalPol ! (VRel tense) ++ part ;  --# notpresent
+
+      Deb Simul tense => (mkV "būt").s ! finalPol ! (VInd P3 Sg tense) ++  --# notpresent
+        v.s ! Pos ! VDeb ;  --# notpresent
+      Deb Anter tense => (mkV "būt").s ! finalPol ! (VInd P3 Sg tense) ++  --# notpresent
+        (mkV "būt").s ! Pos ! (VPart Pass Masc Sg Nom) ++  --# notpresent
+        v.s ! Pos ! VDeb ;  --# notpresent
+
+      Condit Simul => v.s ! finalPol ! (VInd agr.pers agr.num ParamX.Cond) ;  --# notpresent
+      Condit Anter => (mkV "būt").s ! finalPol ! (VInd agr.pers agr.num ParamX.Cond) ++ part  --# notpresent
+    } ;
+
+}
+----- FILE END -----

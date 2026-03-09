@@ -1,0 +1,4721 @@
+==== VOLUME META ====
+generated_at: 2026-02-25T14:09:52.534737
+title: FOLDER: somali
+root_dir: C:\MyCode\GFCodex\RGL_Source_Code
+file_count: 26
+total_size_mb: 0.1406
+home: 00_START_HERE.instructions.md
+prev_volume: RGL_Source_Code_20260225_140951_35_english.txt
+next_volume: RGL_Source_Code_20260225_140951_37_french.txt
+prev_title: english
+next_title: french
+short_title: somali
+
+==== FILE_INDEX ====
+ENTRY id=7fefc90ac35e path="somali/AdjectiveSom.gf" kind=source size=1543 lines=66 chunks=0
+ENTRY id=60fb3cfbe190 path="somali/AdverbSom.gf" kind=source size=955 lines=33 chunks=0
+ENTRY id=14955e23b3e2 path="somali/AllSom.gf" kind=source size=110 lines=6 chunks=0
+ENTRY id=c99c918c3728 path="somali/AllSomAbs.gf" kind=source size=91 lines=6 chunks=0
+ENTRY id=55969350f272 path="somali/CatSom.gf" kind=source size=3628 lines=131 chunks=0
+ENTRY id=92de52c9ad04 path="somali/ConjunctionSom.gf" kind=source size=3942 lines=145 chunks=0
+ENTRY id=03f707e7c37b path="somali/ConstructionSom.gf" kind=source size=3616 lines=119 chunks=0
+ENTRY id=97301f580ccf path="somali/ExtendSom.gf" kind=source size=686 lines=20 chunks=0
+ENTRY id=a0bbd93627fd path="somali/GrammarSom.gf" kind=source size=327 lines=21 chunks=0
+ENTRY id=c6c16ab0e30f path="somali/IdiomSom.gf" kind=source size=1567 lines=55 chunks=0
+ENTRY id=40c703603a7f path="somali/LangSom.gf" kind=source size=75 lines=4 chunks=0
+ENTRY id=e5537df3d2d2 path="somali/MissingSom.gf" kind=source size=25935 lines=579 chunks=2
+ENTRY id=08bb26c43568 path="somali/NamesSom.gf" kind=source size=472 lines=25 chunks=0
+ENTRY id=1b8c4baa9bb3 path="somali/NounSom.gf" kind=source size=11584 lines=353 chunks=2
+ENTRY id=f5f4e52ca0d9 path="somali/NumeralSom.gf" kind=source size=4919 lines=178 chunks=0
+ENTRY id=20a044fd0d68 path="somali/ParadigmsSom.gf" kind=source size=9011 lines=291 chunks=0
+ENTRY id=0b300a1b146f path="somali/ParamSom.gf" kind=source size=10911 lines=360 chunks=2
+ENTRY id=c07403ab6f68 path="somali/PhraseSom.gf" kind=source size=930 lines=33 chunks=0
+ENTRY id=e42ff16b5ff5 path="somali/QuestionSom.gf" kind=source size=4771 lines=131 chunks=0
+ENTRY id=519ef6c98be3 path="somali/README.md" kind=markdown size=565 lines=26 chunks=0
+ENTRY id=709d5c95649f path="somali/RelativeSom.gf" kind=source size=2427 lines=63 chunks=0
+ENTRY id=5a274f7b4505 path="somali/ResSom.gf" kind=source size=45999 lines=1192 chunks=4
+ENTRY id=82d6bac0f0f5 path="somali/SentenceSom.gf" kind=source size=2274 lines=85 chunks=0
+ENTRY id=4ba9d9e197be path="somali/StructuralSom.gf" kind=source size=5679 lines=206 chunks=0
+ENTRY id=8a665d903f83 path="somali/SymbolSom.gf" kind=source size=1024 lines=50 chunks=0
+ENTRY id=7f034c1efe29 path="somali/VerbSom.gf" kind=source size=4340 lines=175 chunks=0
+
+==== FILES ====
+
+----- FILE BEGIN -----
+path="somali/AdjectiveSom.gf"
+id=7fefc90ac35e
+kind=source
+size=1543
+lines=66
+chunks=0
+----
+concrete AdjectiveSom of Adjective = CatSom ** open ResSom, Prelude in {
+
+  flags optimize=all_subs ;
+
+  lin
+-- The principal ways of forming an adjectival phrase are
+-- positive, comparative, relational, reflexive-relational, and
+-- elliptic-relational.
+
+  -- : A  -> AP ;
+  PositA a = a ** {
+    compar = [] ;
+    } ;
+
+  -- : A  -> NP -> AP ;
+  ComparA a np = a ** {
+    s = \\af => "ka" ++ a.s ! af ;
+    compar = np.s ! Abs
+    } ;
+
+  -- : A2 -> NP -> AP ;  -- married to her
+  -- ComplA2 a2 np = a2 ** { } ;
+
+  -- : A2 -> AP ;        -- married to itself
+  -- ReflA2 a2 = a2 ** { } ;
+
+  -- : A2 -> AP ;        -- married
+  UseA2 = PositA ;
+
+  -- : A  -> AP ;     -- warmer
+  UseComparA a = a ** {
+    s = \\af => "ka" ++ a.s ! af ;
+    compar = []
+    } ;
+
+
+  -- : CAdv -> AP -> NP -> AP ; -- as cool as John
+  -- CAdvAP adv ap np = ap ** { } ;
+
+-- The superlative use is covered in $Ord$.
+
+  -- : Ord -> AP ;       -- warmest
+  AdjOrd ord = ord ** {
+    compar = []
+    } ;
+
+-- Sentence and question complements defined for all adjectival
+-- phrases, although the semantics is only clear for some adjectives.
+
+  -- : AP -> SC -> AP ;  -- good that she is here
+  SentAP  ap sc = ap ** {
+    s = \\af => ap.s ! af ++ sc.s -- TODO check
+    } ;
+
+-- An adjectival phrase can be modified by an *adadjective*, such as "very".
+
+  -- : AdA -> AP -> AP ;
+  -- AdAP ada ap = ap ** { } ;
+
+
+-- It can also be postmodified by an adverb, typically a prepositional phrase.
+
+  -- : AP -> Adv -> AP ; -- warm by nature
+  -- AdvAP  ap adv = ap ** {} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/AdverbSom.gf"
+id=60fb3cfbe190
+kind=source
+size=955
+lines=33
+chunks=0
+----
+concrete AdverbSom of Adverb = CatSom ** open ResSom, ParamSom, ParadigmsSom, Prelude in {
+
+lin
+
+  -- : A -> Adv ;
+  --PositAdvAdj adj = { } ;
+
+  -- : CAdv -> A -> NP -> Adv ; -- more warmly than John
+  -- ComparAdvAdj cadv a np = { } ;
+
+--    ComparAdvAdjS : CAdv -> A -> S  -> Adv ; -- more warmly than he runs
+
+  -- : Prep -> NP -> Adv ;
+  PrepNP = prepNP ;
+
+-- Adverbs can be modified by 'adadjectives', just like adjectives.
+
+    --AdAdv  : AdA -> Adv -> Adv ;             -- very quickly
+  AdAdv ada adv = adv ** {berri = ada.s ++ adv.berri} ;
+-- Like adverbs, adadjectives can be produced by adjectives.
+
+  -- : A -> AdA ;                 -- extremely
+--  PositAdAAdj a = { } ;
+-- Subordinate clauses can function as adverbs.
+
+    -- : Subj -> S -> Adv ;
+  SubjS subj s = mkAdv (s.s ! True) ;
+
+-- Comparison adverbs also work as numeral adverbs.
+
+    --AdnCAdv : CAdv -> AdN ;                  -- less (than five)
+    --AdnCAdv cadv = {s = } ;
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/AllSom.gf"
+id=14955e23b3e2
+kind=source
+size=110
+lines=6
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete AllSom of AllSomAbs =
+  LangSom,
+  ExtendSom
+  ** {} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/AllSomAbs.gf"
+id=c99c918c3728
+kind=source
+size=91
+lines=6
+chunks=0
+----
+--# -path=.:../abstract:../common:prelude
+
+abstract AllSomAbs =
+  Lang,
+  Extend
+  ** {} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/CatSom.gf"
+id=55969350f272
+kind=source
+size=3628
+lines=131
+chunks=0
+----
+concrete CatSom of Cat = CommonX - [Adv,IAdv] ** open ResSom, Prelude in {
+
+  flags optimize=all_subs ;
+
+  lincat
+
+--2 Sentences and clauses
+-- Constructed in SentenceSom, and also in IdiomSom
+
+    S  = ResSom.Sentence ;
+    QS = SS ;
+    RS = {s : State => GenNum => Case => Str} ;
+    -- relative sentence. Tense and polarity fixed,
+    -- but agreement may depend on the CN/NP it modifies.
+
+    Cl = ResSom.ClSlash ;
+    ClSlash = ResSom.ClSlash ;
+    SSlash  = ResSom.Sentence ; -- sentence missing NP; e.g. "she has looked at"
+    Imp     = {s : Number => Polarity => Str} ; -- imperative             e.g. "look at this"
+
+--2 Questions and interrogatives
+
+-- Constructed in QuestionSom.
+
+    QCl = ResSom.QClause ;
+    IComp = SS ;                -- interrogative complement of copula  e.g. "where"
+    IDet = ResSom.Determiner ;  -- interrogative determiner            e.g. "how many"
+    IQuant = ResSom.Quant ; -- interrogative quantifier            e.g. "which"
+    IP = ResSom.NounPhrase ** {contractSTM : Bool} ;  -- like NP but may contract with STM
+    IAdv = ResSom.IAdv ;
+
+--2 Subord clauses and pronouns
+
+    RCl = ResSom.RClause ;
+    RP = SS ;
+
+--2 Verb phrases
+
+-- Constructed in VerbSom.
+
+    VP = ResSom.VerbPhrase ;
+    VPSlash = ResSom.VPSlash ;
+    Comp = ResSom.Complement ;
+
+
+--2 Adjectival phrases
+
+-- Constructed in AdjectiveSom.
+
+    AP = ResSom.AdjPhrase ;
+
+
+--2 Nouns and noun phrases
+
+-- Constructed in NounSom.
+-- Many atomic noun phrases e.g. "everybody"
+-- are constructed in StructuralSom.
+-- The determiner structure is
+-- ``` Predet (QuantSg | QuantPl Num) Ord
+-- as defined in NounSom.
+
+    CN = ResSom.CNoun ;
+    NP = ResSom.NounPhrase ;
+    Pron = ResSom.Pronoun ; --Pronouns need enough info to turn it into NP or Quant.
+    Det = ResSom.Determiner ;
+    Predet = {s : Str ; da : DefArticle ; isPoss : Bool} ;
+    Quant = ResSom.Quant ;
+    Num = ResSom.Num ;
+    Ord = {
+      s : AForm => Str ; -- Ord can came from AP and become AP again
+      n : Number -- Ord can come from Num, which has inherent number
+      } ;
+    DAP = ResSom.Determiner ;
+
+
+--2 Numerals
+
+-- Constructed in NumeralSom.
+
+    Card = BaseNum ;
+    Numeral = ResSom.Numeral ;
+    Digits = {s : CardOrd => Str ; n : Number} ;
+    Decimal = {s : CardOrd => Str ; n : Number; hasDot : Bool} ;
+
+
+
+--2 Structural words
+
+-- Constructed in StructuralSom.
+    Conj = {s2 : State => Str ; s1 : Str ; n : Number } ;
+    Subj = SS ;
+    Prep = ResSom.Prep ;
+
+
+
+--2 Words of open classes
+
+-- These are constructed in LexiconSom and in
+-- additional lexicon modules.
+
+    VS,    -- sentence-complement verb            e.g. "claim"
+    -- TODO: eventually different lincats
+    VQ,    -- question-complement verb            e.g. "wonder"
+    VA,    -- adjective-complement verb           e.g. "look"
+    V = ResSom.Verb ;
+
+    VV = ResSom.VV ;    -- verb-phrase-complement verb         e.g. "want"
+
+    V2A,   -- verb with NP and AP complement      e.g. "paint"
+    V2V,   -- verb with NP and V complement       e.g. "cause"
+    V2S,   -- verb with NP and S complement       e.g. "tell"
+    V2Q,   -- verb with NP and Q complement       e.g. "ask"
+    V2 = ResSom.Verb2 ;
+    V3 = ResSom.Verb3 ;
+
+    A = ResSom.Adjective ;
+    A2  = ResSom.Adjective2 ;
+
+    N = ResSom.Noun ;
+    N2 = ResSom.Noun2 ;
+    N3 = ResSom.Noun3 ;
+    GN, SN, LN, PN = ResSom.PNoun ;
+
+    Adv = ResSom.Adverb ; -- Adposition of an adverbial can merge with obligatory complements of the verb.
+
+linref
+    -- Cl = linCl ;
+    VP = infVP ;
+    CN = linCN ;
+    Prep = \prep -> prep.s ! ZeroObj ++ prep.sii ++ prep.dhex ++ prep.hoostiisa ! Sg3 Masc ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/ConjunctionSom.gf"
+id=92de52c9ad04
+kind=source
+size=3942
+lines=145
+chunks=0
+----
+concrete ConjunctionSom of Conjunction =
+  CatSom ** open ResSom, Coordination, Prelude in {
+
+  flags optimize=all_subs ;
+
+    {- Conjunction for category X needs four things:
+       lincat [X]
+       lin BaseX
+       lin ConsX
+       lin ConjX
+
+    For example, if X is defined as
+
+      lincat X   = {s     : Number => Str ;   g : Gender} ;
+
+    then [X] will split its s field into two, and retain its other fields as is:
+
+      lincat [X] = {s1,s2 : Number => Str ;   g : Gender} ;
+
+    Let us look at a simple case: Adv is of type {s : Str}
+    Then [Adv] is {s1,s2 : Str}.
+    BaseAdv, ConsAdv and ConjAdv can all use functions defined in prelude/Coordination:
+
+      BaseAdv = twoSS ;
+      ConsAdv = consrSS comma ;
+      ConjAdv = conjunctSS ;
+
+    --}
+
+
+-- Adverb and other simple {s : Str} types.
+lincat
+  [Adv],[AdV],[IAdv] = {s1,s2 : Str} ;
+
+lin
+  BaseAdv, BaseAdV, BaseIAdv = twoSS ;
+  ConsAdv, ConsAdV, ConsIAdv = consrSS comma ;
+  ConjAdv, ConjAdV, ConjIAdv = conjunctDistrSS ;
+
+
+-- RS depends on state, gender and case, otherwise exactly like previous.
+-- RS can modify CNs, which are open for state, number and case, and have inherent gender.
+lincat
+  [RS] = {s1,s2 : State => Gender => Case => Str} ;
+
+lin
+  BaseRS = twoTable3 State GenNum Case ;
+  ConsRS = consrTable3 State GenNum Case comma ;
+  ConjRS = conjunctRSTable ;
+
+{-
+lincat
+  [S] = {} ;
+
+lin
+  BaseS x y = y ** { } ;
+  ConsS x xs =
+    xs ** { } ;
+  ConjS co xs = {} ;
+
+lincat
+  [AP] = {} ;
+
+lin
+  BaseAP x y = twoTable Agr x y ** y ; --choose all the other fields from second argument
+  ConsAP as a = consrTable Agr comma as a ** as ;
+  ConjAP co as = conjunctDistrTable Agr co as ** as ;
+
+lincat
+  [CN] = { } ;
+
+lin
+  BaseCN = {} ;
+  ConsCN = {} ;
+  ConjCN co cs = conjunctDistrTable Agr co cs ** cs ;
+
+lincat
+  [DAP] = Determiner ** { pref2 : Str } ;
+
+lin
+  BaseDAP x y = x ** { pref2 = y.pref } ;
+  ConsDAP xs x = xs ** { pref2 = x.pref } ;
+  ConjDet conj xs = xs ** { pref = conj.s1 ++ xs.pref ++ conj.s2 ++ xs.pref2 } ;
+-}
+
+-- Noun phrases
+lincat
+  [NP] = {s1,s2 : Case => Str} ** BaseNP ;
+
+lin
+  BaseNP x y =
+    let x' = np2objpron x ;
+        y' = np2objpron y
+     in twoTable Case x' y' ** consNP x' y' ;
+  ConsNP x xs =
+    let x' = np2objpron x
+     in consrTable Case comma x' xs ** consNP x' xs ;
+  ConjNP conj xs = conjunctNPTable conj xs ** conjNP xs conj ;
+
+oper
+
+  ConjDistr : Type = {s2 : State => Str ; s1 : Str} ;
+
+  conjunctDistrSS : ConjDistr -> ListX -> SS = \or,xs ->
+    ss (or.s1 ++ xs.s1 ++ or.s2 ! Indefinite ++ xs.s2) ;
+
+  conjunctDistrTable' :
+    (P : PType) -> ConjDistr -> ListTable P -> {s : P => Str} = \P,or,xs ->
+    {s = table P {p => or.s1 ++ xs.s1 ! p ++ or.s2 ! Indefinite ++ xs.s2 ! p}} ;
+
+  conjunctDistrTable2' :
+    (P,Q : PType) -> ConjDistr -> ListTable2 P Q -> {s : P => Q => Str} =
+    \P,Q,or,xs ->
+    {s =
+    table P {p => table Q {q => or.s1 ++ xs.s1 ! p ! q ++ or.s2 ! Indefinite ++ xs.s2 ! p ! q}}} ;
+
+ -- Like conjunctTable from prelude/Coordination.gf,
+ -- but forces the first argument into absolutive.
+  conjunctNPTable : ConjDistr -> ({s1,s2 : Case => Str} ** BaseNP) -> NP = \co,xs -> lin NP (xs ** {
+    s = \\c => co.s1 ++ xs.s1 ! Abs ++ co.s2 ! xs.st ++ xs.s2 ! c
+    }) ;
+
+  conjunctRSTable : ConjDistr -> {s1,s2 : State => GenNum => Case => Str} -> RS = \co,xs -> lin RS (xs ** {
+    s = \\st,g,c => co.s1
+                ++ xs.s1 ! st ! g ! c
+                ++ co.s2 ! st
+                ++ xs.s2 ! st ! g ! c
+    }) ;
+
+  np2objpron : NounPhrase -> NounPhrase = \np -> np ** {
+    s = objpron np
+    } ;
+
+  consNP : BaseNP -> BaseNP -> BaseNP = \x,y ->
+    x ** { agr = conjAgr x.agr (getNum y.agr) } ;
+
+  conjNP : BaseNP -> Conj -> BaseNP = \xs,conj ->
+    xs ** { agr = conjAgr xs.agr conj.nbr } ;
+
+  conjAgr : Agreement -> Number -> Agreement = \a,n ->
+    case n of { Pl => plAgr a ; _  => a } ;
+
+  conjNbr : Number -> Number -> Number = \n,m ->
+    case n of { Pl => Pl ; _ => m } ;
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/ConstructionSom.gf"
+id=03f707e7c37b
+kind=source
+size=3616
+lines=119
+chunks=0
+----
+concrete ConstructionSom of Construction = CatSom ** open ParadigmsSom in {
+
+lincat
+  Timeunit = N ;
+  Weekday = N ;
+  Monthday = NP ;
+  Month = N ;
+  Year = NP ;
+{-
+lin
+
+  timeunitAdv n time =
+  let n_card : Card   = n ;
+      n_hours_NP : NP = mkNP n_card time ;
+  in  SyntaxSom.mkAdv for_Prep n_hours_NP | mkAdv (n_hours_NP.s ! R.npNom) ;
+
+  weekdayPunctualAdv w = ;         -- on Sunday
+  weekdayHabitualAdv w = ;         -- on Sundays
+  weekdayNextAdv w =      -- next Sunday
+  weekdayLastAdv w =      -- last Sunday
+
+  monthAdv m = mkAdv in_Prep (mkNP m) ;
+  yearAdv y = mkAdv in_Prep y ;
+  dayMonthAdv d m  =  ; -- on 17 May
+  monthYearAdv m y =  ; -- in May 2012
+  dayMonthYearAdv d m y =  ; -- on 17 May 2013
+
+  intYear = symb ;
+  intMonthday = symb ;
+
+lincat Language = N ;
+
+lin InLanguage l = mkAdv ???_Prep (mkNP l) ;
+
+lin
+  weekdayN w = w ;
+  monthN m = m ;
+
+  weekdayPN w = mkPN w ;
+  monthPN m = mkPN m ;
+
+  languageCN l = mkCN l ;
+  languageNP l = mkNP l ;
+
+
+oper mkLanguage : Str -> N = \s -> mkN s ;
+
+----------------------------------------------
+---- lexicon of special names
+
+lin second_Timeunit = mkN "second" ;
+lin minute_Timeunit = mkN "minute" ;
+lin hour_Timeunit = mkN "hour" ;
+lin day_Timeunit = mkN "day" ;
+lin week_Timeunit = mkN "week" ;
+lin month_Timeunit = mkN "month" ;
+lin year_Timeunit = mkN "year" ;
+
+lin monday_Weekday = mkN "Monday" ;
+lin tuesday_Weekday = mkN "Tuesday" ;
+lin wednesday_Weekday = mkN "Wednesday" ;
+lin thursday_Weekday = mkN "Thursday" ;
+lin friday_Weekday = mkN "Friday" ;
+lin saturday_Weekday = mkN "Saturday" ;
+lin sunday_Weekday = mkN "Sunday" ;
+
+lin january_Month = mkN "January" ;
+lin february_Month = mkN "February" ;
+lin march_Month = mkN "March" ;
+lin april_Month = mkN "April" ;
+lin may_Month = mkN "May" ;
+lin june_Month = mkN "June" ;
+lin july_Month = mkN "July" ;
+lin august_Month = mkN "August" ;
+lin september_Month = mkN "September" ;
+lin october_Month = mkN "October" ;
+lin november_Month = mkN "November" ;
+lin december_Month = mkN "December" ;
+
+lin afrikaans_Language = mkLanguage "Afrikaans" ;
+lin amharic_Language = mkLanguage "Amharic" ;
+lin arabic_Language = mkLanguage "Arabic" ;
+lin bulgarian_Language = mkLanguage "Bulgarian" ;
+lin catalan_Language = mkLanguage "Catalan" ;
+lin chinese_Language = mkLanguage "Chinese" ;
+lin danish_Language = mkLanguage "Danish" ;
+lin dutch_Language = mkLanguage "Dutch" ;
+lin english_Language = mkLanguage "Euslish" ;
+lin estonian_Language = mkLanguage "Estonian" ;
+lin finnish_Language = mkLanguage "Finnish" ;
+lin french_Language = mkLanguage "French" ;
+lin german_Language = mkLanguage "German" ;
+lin greek_Language = mkLanguage "Greek" ;
+lin hebrew_Language = mkLanguage "Hebrew" ;
+lin hindi_Language = mkLanguage "Hindi" ;
+lin japanese_Language = mkLanguage "Japanese" ;
+lin italian_Language = mkLanguage "Italian" ;
+lin latin_Language = mkLanguage "Latin" ;
+lin latvian_Language = mkLanguage "Latvian" ;
+lin maltese_Language = mkLanguage "Maltese" ;
+lin nepali_Language = mkLanguage "Nepali" ;
+lin norwegian_Language = mkLanguage "Norwegian" ;
+lin persian_Language = mkLanguage "Persian" ;
+lin polish_Language = mkLanguage "Polish" ;
+lin punjabi_Language = mkLanguage "Punjabi" ;
+lin romanian_Language = mkLanguage "Romanian" ;
+lin russian_Language = mkLanguage "Russian" ;
+lin sindhi_Language = mkLanguage "Sindhi" ;
+lin spanish_Language = mkLanguage "Spanish" ;
+lin swahili_Language = mkLanguage "Swahili" ;
+lin swedish_Language = mkLanguage "Swedish" ;
+lin thai_Language = mkLanguage "Thai" ;
+lin turkish_Language = mkLanguage "Turkish" ;
+lin urdu_Language = mkLanguage "Urdu" ;
+
+—}
+}
+-}
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/ExtendSom.gf"
+id=97301f580ccf
+kind=source
+size=686
+lines=20
+chunks=0
+----
+--# -path=.:../common:../abstract
+
+concrete ExtendSom of Extend = CatSom
+  ** ExtendFunctor - [GenModNP, FocusObj, ComplDirectVS, ComplDirectVQ, ExistIPQS]
+  with (Grammar=GrammarSom)
+  ** open Prelude, ResSom, NounSom in {
+
+lin
+
+  -- : Num -> NP -> CN -> NP ; -- this man's car(s)
+  GenModNP num np cn = DetCN (DetQuant IndefArt num) (genModCN cn np) ;
+
+   -- : NP  -> SSlash  -> Utt ;   -- her I love -- Saeed p. 189-
+  FocusObj np sslash = {s = sslash.s ! False ++ objpron np ! Abs} ;
+
+  -- FocusAdv : Adv -> S       -> Utt ;   -- today I will sleep
+  -- FocusAdV : AdV -> S       -> Utt ;   -- never will I sleep
+  -- FocusAP  : AP  -> NP      -> Utt ;   -- green was the tree
+
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/GrammarSom.gf"
+id=a0bbd93627fd
+kind=source
+size=327
+lines=21
+chunks=0
+----
+concrete GrammarSom of Grammar =
+  NounSom,
+  VerbSom,
+  AdjectiveSom,
+  AdverbSom,
+  NumeralSom,
+  SentenceSom,
+  QuestionSom,
+  RelativeSom,
+  ConjunctionSom,
+  PhraseSom,
+  TextX - [Adv,IAdv],
+  StructuralSom,
+  IdiomSom,
+  TenseX - [Adv,IAdv],
+  NamesSom
+  ** {
+
+flags startcat = Phr ; unlexer = text ; lexer = text ;
+
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/IdiomSom.gf"
+id=c6c16ab0e30f
+kind=source
+size=1567
+lines=55
+chunks=0
+----
+
+--1 Idiom: Idiomatic Expressions
+
+concrete IdiomSom of Idiom = CatSom ** open Prelude, ResSom, VerbSom, NounSom, StructuralSom in {
+
+-- This module defines constructions that are formed in fixed ways,
+-- often different even in closely related languages.
+
+  lin
+
+  -- ImpersCl : VP -> Cl ;        -- it is hot
+  -- GenericCl : VP -> Cl ;        -- one sleeps
+  ImpersCl,
+  GenericCl = \vp -> predVP impersNP (passVP vp) ;
+
+{-
+    CleftNP   : NP  -> RS -> Cl ; -- it is I who did it
+    CleftAdv  : Adv -> S  -> Cl ; -- it is here she slept
+    -}
+  -- : NP -> Cl ;        -- there is a house
+  ExistNP np =
+     let vp = UseComp (CompNP np)
+      in predVP impersNP vp ;
+
+{-    ExistIP   : IP -> QCl ;       -- which houses are there
+
+-- 7/12/2012 generalizations of these
+
+    ExistNPAdv : NP -> Adv -> Cl ;    -- there is a house in Paris
+    ExistIPAdv : IP -> Adv -> QCl ;   -- which houses are there in Paris
+-}
+  -- : VP -> VP ;
+  ProgrVP vp = vp ** {
+    s = table {
+          VPres _ agr pol => vp.s ! VPres Progressive agr pol ;
+          VPast _ agr => vp.s ! VPast Progressive agr ;
+          VNegPast _ => vp.s ! VNegPast Progressive ;
+          x => vp.s ! x }
+    } ;
+
+
+  {- TODO: Saeed p. 92 and 207, optative
+  -- : VP -> Utt ;       -- let's go
+  ImpPl1 vp = { } ;
+
+  ImpP3     : NP -> VP -> Utt ; -- let John walk
+
+-- 3/12/2013 non-reflexive uses of "self"
+
+    SelfAdvVP : VP -> VP ;        -- is at home himself
+    SelfAdVVP : VP -> VP ;        -- is himself at home
+    SelfNP    : NP -> NP ;        -- the president himself (is at home)
+-}
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/LangSom.gf"
+id=40c703603a7f
+kind=source
+size=75
+lines=4
+chunks=0
+----
+concrete LangSom of Lang =
+  GrammarSom,
+  LexiconSom,
+  ConstructionSom ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/MissingSom.gf"
+id=e5537df3d2d2
+kind=source
+size=25935
+lines=579
+chunks=2
+
+--- CHUNK BEGIN ---
+id=e5537df3d2d2:1-350
+start=1
+end=350
+----
+resource MissingSom = open GrammarSom, SymbolSom, Prelude in {
+
+-- temporary definitions to enable the compilation of RGL API
+oper AdAP : AdA -> AP -> AP  = notYet "AdAP" ;
+oper AdAdv : AdA -> Adv -> Adv  = notYet "AdAdv" ;
+oper AdNum : AdN -> Card -> Card  = notYet "AdNum" ;
+oper AdVVP : AdV -> VP -> VP  = notYet "AdVVP" ;
+oper AdVVPSlash : AdV -> VPSlash -> VPSlash  = notYet "AdVVPSlash" ;
+oper AddAdvQVP : QVP -> IAdv -> QVP  = notYet "AddAdvQVP" ;
+oper AdjDAP : DAP -> AP -> DAP  = notYet "AdjDAP" ;
+oper AdjOrd : Ord -> AP  = notYet "AdjOrd" ;
+oper AdnCAdv : CAdv -> AdN  = notYet "AdnCAdv" ;
+oper AdvAP : AP -> Adv -> AP  = notYet "AdvAP" ;
+oper AdvCN : CN -> Adv -> CN  = notYet "AdvCN" ;
+oper AdvIAdv : IAdv -> Adv -> IAdv  = notYet "AdvIAdv" ;
+oper AdvIP : IP -> Adv -> IP  = notYet "AdvIP" ;
+oper AdvNP : NP -> Adv -> NP  = notYet "AdvNP" ;
+oper AdvQVP : VP -> IAdv -> QVP  = notYet "AdvQVP" ;
+oper AdvS : Adv -> S -> S  = notYet "AdvS" ;
+oper AdvSlash : ClSlash -> Adv -> ClSlash  = notYet "AdvSlash" ;
+oper ApposCN : CN -> NP -> CN  = notYet "ApposCN" ;
+oper BaseAP : AP -> AP -> ListAP  = notYet "BaseAP" ;
+oper BaseAdV : AdV -> AdV -> ListAdV  = notYet "BaseAdV" ;
+oper BaseCN : CN -> CN -> ListCN  = notYet "BaseCN" ;
+oper BaseIAdv : IAdv -> IAdv -> ListIAdv  = notYet "BaseIAdv" ;
+oper BaseS : S -> S -> ListS  = notYet "BaseS" ;
+oper CAdvAP : CAdv -> AP -> NP -> AP  = notYet "CAdvAP" ;
+oper CleftAdv : Adv -> S -> Cl  = notYet "CleftAdv" ;
+oper CleftNP : NP -> RS -> Cl  = notYet "CleftNP" ;
+oper ComparAdvAdj : CAdv -> A -> NP -> Adv  = notYet "ComparAdvAdj" ;
+oper ComparAdvAdjS : CAdv -> A -> S -> Adv  = notYet "ComparAdvAdjS" ;
+oper ComplA2 : A2 -> NP -> AP  = notYet "ComplA2" ;
+oper ComplN3 : N3 -> NP -> N2  = notYet "ComplN3" ;
+oper ComplSlashIP : VPSlash -> IP -> QVP  = notYet "ComplSlashIP" ;
+oper ComplVQ : VQ -> QS -> VP  = notYet "ComplVQ" ;
+oper ConjAP : Conj -> ListAP -> AP  = notYet "ConjAP" ;
+oper ConjAdV : Conj -> ListAdV -> AdV  = notYet "ConjAdV" ;
+oper ConjCN : Conj -> ListCN -> CN  = notYet "ConjCN" ;
+oper ConjDet : Conj -> ListDAP -> Det  = notYet "ConjDet" ;
+oper ConjIAdv : Conj -> ListIAdv -> IAdv  = notYet "ConjIAdv" ;
+oper ConjS : Conj -> ListS -> S  = notYet "ConjS" ;
+oper ConsAP : AP -> ListAP -> ListAP  = notYet "ConsAP" ;
+oper ConsAdV : AdV -> ListAdV -> ListAdV  = notYet "ConsAdV" ;
+oper ConsCN : CN -> ListCN -> ListCN  = notYet "ConsCN" ;
+oper ConsIAdv : IAdv -> ListIAdv -> ListIAdv  = notYet "ConsIAdv" ;
+oper ConsS : S -> ListS -> ListS  = notYet "ConsS" ;
+oper CountNP : Det -> NP -> NP  = notYet "CountNP" ;
+oper DefArt : Quant  = notYet "DefArt" ;
+oper DefArt : Quant  = notYet "DefArt" ;
+oper DetCN : Det -> CN -> NP  = notYet "DetCN" ;
+oper DetDAP : Det -> DAP  = notYet "DetDAP" ;
+oper DetNP : Det -> NP  = notYet "DetNP" ;
+oper DetQuant : Quant -> Num -> Det  = notYet "DetQuant" ;
+oper DetQuantOrd : Quant -> Num -> Ord -> Det  = notYet "DetQuantOrd" ;
+oper EmbedQS : QS -> SC  = notYet "EmbedQS" ;
+oper ExistIP : IP -> QCl  = notYet "ExistIP" ;
+oper ExistIPAdv : IP -> Adv -> QCl  = notYet "ExistIPAdv" ;
+oper ExistNPAdv : NP -> Adv -> Cl  = notYet "ExistNPAdv" ;
+oper ExtAdvS : Adv -> S -> S  = notYet "ExtAdvS" ;
+oper ExtAdvVP : VP -> Adv -> VP  = notYet "ExtAdvVP" ;
+oper FunRP : Prep -> NP -> RP -> RP  = notYet "FunRP" ;
+oper IdRP : RP  = notYet "IdRP" ;
+oper IdetIP : IDet -> IP  = notYet "IdetIP" ;
+oper ImpP3 : NP -> VP -> Utt  = notYet "ImpP3" ;
+oper ImpPl1 : VP -> Utt  = notYet "ImpPl1" ;
+oper NumCard : Card -> Num  = notYet "NumCard" ;
+oper NumDigits : Digits -> Card  = notYet "NumDigits" ;
+oper NumNumeral : Numeral -> Card  = notYet "NumNumeral" ;
+oper OrdDigits : Digits -> Ord  = notYet "OrdDigits" ;
+oper OrdNumeral : Numeral -> Ord  = notYet "OrdNumeral" ;
+oper OrdNumeralSuperl : Numeral -> A -> Ord  = notYet "OrdNumeralSuperl" ;
+oper OrdSuperl : A -> Ord  = notYet "OrdSuperl" ;
+oper PPartNP : NP -> V2 -> NP  = notYet "PPartNP" ;
+oper PartNP : CN -> NP -> CN  = notYet "PartNP" ;
+oper PassV2 : V2 -> VP  = notYet "PassV2" ;
+oper PositAdAAdj : A -> AdA  = notYet "PositAdAAdj" ;
+oper PositAdvAdj : A -> Adv  = notYet "PositAdvAdj" ;
+oper PossNP : CN -> NP -> CN  = notYet "PossNP" ;
+oper PossPron : Pron -> Quant  = notYet "PossPron" ;
+oper PredSCVP : SC -> VP -> Cl  = notYet "PredSCVP" ;
+oper PredetNP : Predet -> NP -> NP  = notYet "PredetNP" ;
+oper PrepIP : Prep -> IP -> IAdv  = notYet "PrepIP" ;
+oper QuestQVP : IP -> QVP -> QCl  = notYet "QuestQVP" ;
+oper ReflA2 : A2 -> AP  = notYet "ReflA2" ;
+oper RelCl : Cl -> RCl  = notYet "RelCl" ;
+oper RelS : S -> RS -> S  = notYet "RelS" ;
+oper SelfAdVVP : VP -> VP  = notYet "SelfAdVVP" ;
+oper SelfAdvVP : VP -> VP  = notYet "SelfAdvVP" ;
+oper SelfNP : NP -> NP  = notYet "SelfNP" ;
+oper SentAP : AP -> SC -> AP  = notYet "SentAP" ;
+oper SentCN : CN -> SC -> CN  = notYet "SentCN" ;
+oper SlashPrep : Cl -> Prep -> ClSlash  = notYet "SlashPrep" ;
+oper SlashV2A : V2A -> AP -> VPSlash  = notYet "SlashV2A" ;
+oper SlashV2Q : V2Q -> QS -> VPSlash  = notYet "SlashV2Q" ;
+oper SlashV2V : V2V -> VP -> VPSlash  = notYet "SlashV2V" ;
+oper SlashV2VNP : V2V -> NP -> VPSlash -> VPSlash  = notYet "SlashV2VNP" ;
+oper SlashVS : NP -> VS -> SSlash -> ClSlash  = notYet "SlashVS" ;
+oper SlashVV : VV -> VPSlash -> VPSlash  = notYet "SlashVV" ;
+oper SubjS : Subj -> S -> Adv  = notYet "SubjS" ;
+oper Use2N3 : N3 -> N2  = notYet "Use2N3" ;
+oper Use3N3 : N3 -> N2  = notYet "Use3N3" ;
+oper UseA2 : A2 -> AP  = notYet "UseA2" ;
+oper UseComparA : A -> AP  = notYet "UseComparA" ;
+oper UseN2 : N2 -> CN  = notYet "UseN2" ;
+oper UsePN : PN -> NP  = notYet "UsePN" ;
+oper UseRCl : Temp -> Pol -> RCl -> RS  = notYet "UseRCl" ;
+oper UseSlash : Temp -> Pol -> ClSlash -> SSlash  = notYet "UseSlash" ;
+oper UttCard : Card -> Utt  = notYet "UttCard" ;
+oper UttIAdv : IAdv -> Utt  = notYet "UttIAdv" ;
+oper UttIP : IP -> Utt  = notYet "UttIP" ;
+oper UttImpPl : Pol -> Imp -> Utt  = notYet "UttImpPl" ;
+oper UttImpPol : Pol -> Imp -> Utt  = notYet "UttImpPol" ;
+oper UttImpSg : Pol -> Imp -> Utt  = notYet "UttImpSg" ;
+oper UttInterj : Interj -> Utt  = notYet "UttInterj" ;
+oper UttQS : QS -> Utt  = notYet "UttQS" ;
+oper VPSlashPrep : VP -> Prep -> VPSlash  = notYet "VPSlashPrep" ;
+oper active2passive : Cl -> Cl  = notYet "active2passive" ;
+oper add_V3 : V3  = notYet "add_V3" ;
+oper after_Prep : Prep  = notYet "after_Prep" ;
+oper airplane_N : N  = notYet "airplane_N" ;
+oper alas_Interj : Interj  = notYet "alas_Interj" ;
+oper all_Predet : Predet  = notYet "all_Predet" ;
+oper almost_AdA : AdA  = notYet "almost_AdA" ;
+oper almost_AdN : AdN  = notYet "almost_AdN" ;
+oper already_Adv : Adv  = notYet "already_Adv" ;
+oper although_Subj : Subj  = notYet "although_Subj" ;
+oper always_AdV : AdV  = notYet "always_AdV" ;
+oper answer_V2S : V2S  = notYet "answer_V2S" ;
+oper apartment_N : N  = notYet "apartment_N" ;
+oper apple_N : N  = notYet "apple_N" ;
+oper art_N : N  = notYet "art_N" ;
+oper as_CAdv : CAdv  = notYet "as_CAdv" ;
+oper ashes_N : N  = notYet "ashes_N" ;
+oper ask_V2Q : V2Q  = notYet "ask_V2Q" ;
+oper at_least_AdN : AdN  = notYet "at_least_AdN" ;
+oper at_most_AdN : AdN  = notYet "at_most_AdN" ;
+oper baby_N : N  = notYet "baby_N" ;
+oper back_N : N  = notYet "back_N" ;
+oper bad_A : A  = notYet "bad_A" ;
+oper bank_N : N  = notYet "bank_N" ;
+oper bark_N : N  = notYet "bark_N" ;
+oper beautiful_A : A  = notYet "beautiful_A" ;
+oper because_Subj : Subj  = notYet "because_Subj" ;
+oper become_VA : VA  = notYet "become_VA" ;
+oper beer_N : N  = notYet "beer_N" ;
+oper before_Prep : Prep  = notYet "before_Prep" ;
+oper beg_V2V : V2V  = notYet "beg_V2V" ;
+oper behind_Prep : Prep  = notYet "behind_Prep" ;
+oper belly_N : N  = notYet "belly_N" ;
+oper between_Prep : Prep  = notYet "between_Prep" ;
+oper bike_N : N  = notYet "bike_N" ;
+oper bite_V2 : V2  = notYet "bite_V2" ;
+oper black_A : A  = notYet "black_A" ;
+oper blood_N : N  = notYet "blood_N" ;
+oper blow_V : V  = notYet "blow_V" ;
+oper blue_A : A  = notYet "blue_A" ;
+oper boat_N : N  = notYet "boat_N" ;
+oper bone_N : N  = notYet "bone_N" ;
+oper boot_N : N  = notYet "boot_N" ;
+oper boss_N : N  = notYet "boss_N" ;
+oper both7and_DConj : Conj  = notYet "both7and_DConj" ;
+oper bottle_of_CN : NP -> CN  = notYet "bottle_of_CN" ;
+oper break_V2 : V2  = notYet "break_V2" ;
+oper breast_N : N  = notYet "breast_N" ;
+oper breathe_V : V  = notYet "breathe_V" ;
+oper broad_A : A  = notYet "broad_A" ;
+oper brother_N2 : N2  = notYet "brother_N2" ;
+oper brown_A : A  = notYet "brown_A" ;
+oper burn_V : V  = notYet "burn_V" ;
+oper but_PConj : PConj  = notYet "but_PConj" ;
+oper butter_N : N  = notYet "butter_N" ;
+oper buy_V2 : V2  = notYet "buy_V2" ;
+oper by8agent_Prep : Prep  = notYet "by8agent_Prep" ;
+oper by8means_Prep : Prep  = notYet "by8means_Prep" ;
+oper camera_N : N  = notYet "camera_N" ;
+oper can8know_VV : VV  = notYet "can8know_VV" ;
+oper can_VV : VV  = notYet "can_VV" ;
+oper cap_N : N  = notYet "cap_N" ;
+oper carpet_N : N  = notYet "carpet_N" ;
+oper ceiling_N : N  = notYet "ceiling_N" ;
+oper chair_N : N  = notYet "chair_N" ;
+oper cheese_N : N  = notYet "cheese_N" ;
+oper child_N : N  = notYet "child_N" ;
+oper church_N : N  = notYet "church_N" ;
+oper clean_A : A  = notYet "clean_A" ;
+oper clever_A : A  = notYet "clever_A" ;
+oper close_V2 : V2  = notYet "close_V2" ;
+oper cloud_N : N  = notYet "cloud_N" ;
+oper coat_N : N  = notYet "coat_N" ;
+oper cold_A : A  = notYet "cold_A" ;
+oper come_V : V  = notYet "come_V" ;
+oper computer_N : N  = notYet "computer_N" ;
+oper correct_A : A  = notYet "correct_A" ;
+oper count_V2 : V2  = notYet "count_V2" ;
+oper country_N : N  = notYet "country_N" ;
+oper cousin_N : N  = notYet "cousin_N" ;
+oper cow_N : N  = notYet "cow_N" ;
+oper cup_of_CN : NP -> CN  = notYet "cup_of_CN" ;
+oper cut_V2 : V2  = notYet "cut_V2" ;
+oper day_N : N  = notYet "day_N" ;
+oper dconcat : Digits -> Digits -> Digits  = notYet "dconcat" ;
+oper die_V : V  = notYet "die_V" ;
+oper dig_V : V  = notYet "dig_V" ;
+oper digits2num : Digits -> Numeral  = notYet "digits2num" ;
+oper digits2numeral : Card -> Card  = notYet "digits2numeral" ;
+oper dirty_A : A  = notYet "dirty_A" ;
+oper distance_N3 : N3  = notYet "distance_N3" ;
+oper dn : Dig -> Digit  = notYet "dn" ;
+oper dn10 : Dig -> Sub10  = notYet "dn10" ;
+oper dn100 : Dig -> Dig -> Sub100  = notYet "dn100" ;
+oper dn1000 : Dig -> Dig -> Dig -> Sub1000  = notYet "dn1000" ;
+oper dn1000000a : Dig -> Dig -> Dig -> Dig -> Sub1000000  = notYet "dn1000000a" ;
+oper dn1000000b : Dig -> Dig -> Dig -> Dig -> Dig -> Sub1000000  = notYet "dn1000000b" ;
+oper dn1000000c : Dig -> Dig -> Dig -> Dig -> Dig -> Dig -> Sub1000000  = notYet "dn1000000c" ;
+oper do_V2 : V2  = notYet "do_V2" ;
+oper doctor_N : N  = notYet "doctor_N" ;
+oper dog_N : N  = notYet "dog_N" ;
+oper door_N : N  = notYet "door_N" ;
+oper drink_V2 : V2  = notYet "drink_V2" ;
+oper dry_A : A  = notYet "dry_A" ;
+oper dull_A : A  = notYet "dull_A" ;
+oper during_Prep : Prep  = notYet "during_Prep" ;
+oper dust_N : N  = notYet "dust_N" ;
+oper ear_N : N  = notYet "ear_N" ;
+oper earth_N : N  = notYet "earth_N" ;
+oper easy_A2V : A2  = notYet "easy_A2V" ;
+oper eat_V2 : V2  = notYet "eat_V2" ;
+oper egg_N : N  = notYet "egg_N" ;
+oper either7or_DConj : Conj  = notYet "either7or_DConj" ;
+oper empty_A : A  = notYet "empty_A" ;
+oper enemy_N : N  = notYet "enemy_N" ;
+oper every_Det : Det  = notYet "every_Det" ;
+oper everybody_NP : NP  = notYet "everybody_NP" ;
+oper everything_NP : NP  = notYet "everything_NP" ;
+oper everywhere_Adv : Adv  = notYet "everywhere_Adv" ;
+oper except_Prep : Prep  = notYet "except_Prep" ;
+oper eye_N : N  = notYet "eye_N" ;
+oper factory_N : N  = notYet "factory_N" ;
+oper fall_V : V  = notYet "fall_V" ;
+oper far_Adv : Adv  = notYet "far_Adv" ;
+oper fat_N : N  = notYet "fat_N" ;
+oper father_N2 : N2  = notYet "father_N2" ;
+oper fear_V2 : V2  = notYet "fear_V2" ;
+oper fear_VS : VS  = notYet "fear_VS" ;
+oper feather_N : N  = notYet "feather_N" ;
+oper few_Det : Det  = notYet "few_Det" ;
+oper few_X_short_of_Y : NP -> CN -> CN -> S  = notYet "few_X_short_of_Y" ;
+oper fight_V2 : V2  = notYet "fight_V2" ;
+oper find_V2 : V2  = notYet "find_V2" ;
+oper fingernail_N : N  = notYet "fingernail_N" ;
+oper fire_N : N  = notYet "fire_N" ;
+oper fish_N : N  = notYet "fish_N" ;
+oper float_V : V  = notYet "float_V" ;
+oper floor_N : N  = notYet "floor_N" ;
+oper flow_V : V  = notYet "flow_V" ;
+oper flower_N : N  = notYet "flower_N" ;
+oper fly_V : V  = notYet "fly_V" ;
+oper fog_N : N  = notYet "fog_N" ;
+oper foot_N : N  = notYet "foot_N" ;
+oper for_Prep : Prep  = notYet "for_Prep" ;
+oper forest_N : N  = notYet "forest_N" ;
+oper forget_V2 : V2  = notYet "forget_V2" ;
+oper freeze_V : V  = notYet "freeze_V" ;
+oper fridge_N : N  = notYet "fridge_N" ;
+oper friend_N : N  = notYet "friend_N" ;
+oper from_Prep : Prep  = notYet "from_Prep" ;
+oper fruit_N : N  = notYet "fruit_N" ;
+oper full_A : A  = notYet "full_A" ;
+oper fun_AV : A  = notYet "fun_AV" ;
+oper garden_N : N  = notYet "garden_N" ;
+oper give_V3 : V3  = notYet "give_V3" ;
+oper glass_of_CN : NP -> CN  = notYet "glass_of_CN" ;
+oper glove_N : N  = notYet "glove_N" ;
+oper go_V : V  = notYet "go_V" ;
+oper gold_N : N  = notYet "gold_N" ;
+oper good_A : A  = notYet "good_A" ;
+oper grammar_N : N  = notYet "grammar_N" ;
+oper grass_N : N  = notYet "grass_N" ;
+oper green_A : A  = notYet "green_A" ;
+oper guts_N : N  = notYet "guts_N" ;
+oper hair_N : N  = notYet "hair_N" ;
+oper hand_N : N  = notYet "hand_N" ;
+oper harbour_N : N  = notYet "harbour_N" ;
+oper has_age_VP : Card -> VP  = notYet "has_age_VP" ;
+oper hat_N : N  = notYet "hat_N" ;
+oper hate_V2 : V2  = notYet "hate_V2" ;
+oper have_name_Cl : NP -> NP -> Cl  = notYet "have_name_Cl" ;
+oper head_N : N  = notYet "head_N" ;
+oper hear_V2 : V2  = notYet "hear_V2" ;
+oper heart_N : N  = notYet "heart_N" ;
+oper heavy_A : A  = notYet "heavy_A" ;
+oper here7from_Adv : Adv  = notYet "here7from_Adv" ;
+oper here7to_Adv : Adv  = notYet "here7to_Adv" ;
+oper here_Adv : Adv  = notYet "here_Adv" ;
+oper hill_N : N  = notYet "hill_N" ;
+oper hit_V2 : V2  = notYet "hit_V2" ;
+oper hold_V2 : V2  = notYet "hold_V2" ;
+oper hope_VS : VS  = notYet "hope_VS" ;
+oper horn_N : N  = notYet "horn_N" ;
+oper horse_N : N  = notYet "horse_N" ;
+oper hot_A : A  = notYet "hot_A" ;
+oper how8many_IDet : IDet  = notYet "how8many_IDet" ;
+oper how8much_IAdv : IAdv  = notYet "how8much_IAdv" ;
+oper how_IAdv : IAdv  = notYet "how_IAdv" ;
+oper how_far_QCl : NP -> QCl  = notYet "how_far_QCl" ;
+oper how_old_QCl : NP -> QCl  = notYet "how_old_QCl" ;
+oper hungry_VP : VP  = notYet "hungry_VP" ;
+oper hunt_V2 : V2  = notYet "hunt_V2" ;
+oper husband_N : N  = notYet "husband_N" ;
+oper ice_N : N  = notYet "ice_N" ;
+oper if_Subj : Subj  = notYet "if_Subj" ;
+oper if_then_Conj : Conj  = notYet "if_then_Conj" ;
+oper ill_VP : VP  = notYet "ill_VP" ;
+oper important_A : A  = notYet "important_A" ;
+oper in8front_Prep : Prep  = notYet "in8front_Prep" ;
+oper industry_N : N  = notYet "industry_N" ;
+oper iron_N : N  = notYet "iron_N" ;
+oper is_right_VP : VP  = notYet "is_right_VP" ;
+oper is_wrong_VP : VP  = notYet "is_wrong_VP" ;
+oper it_Pron : Pron  = notYet "it_Pron" ;
+oper john_PN : PN  = notYet "john_PN" ;
+oper jump_V : V  = notYet "jump_V" ;
+oper kill_V2 : V2  = notYet "kill_V2" ;
+oper king_N : N  = notYet "king_N" ;
+oper knee_N : N  = notYet "knee_N" ;
+oper know_V2 : V2  = notYet "know_V2" ;
+oper know_VQ : VQ  = notYet "know_VQ" ;
+oper know_VS : VS  = notYet "know_VS" ;
+oper lake_N : N  = notYet "lake_N" ;
+oper lamp_N : N  = notYet "lamp_N" ;
+oper laugh_V : V  = notYet "laugh_V" ;
+oper leaf_N : N  = notYet "leaf_N" ;
+oper learn_V2 : V2  = notYet "learn_V2" ;
+oper leather_N : N  = notYet "leather_N" ;
+oper leave_V2 : V2  = notYet "leave_V2" ;
+oper left_Ord : Ord  = notYet "left_Ord" ;
+oper leg_N : N  = notYet "leg_N" ;
+oper less_CAdv : CAdv  = notYet "less_CAdv" ;
+oper lie_V : V  = notYet "lie_V" ;
+oper like_V2 : V2  = notYet "like_V2" ;
+oper listen_V2 : V2  = notYet "listen_V2" ;
+oper live_V : V  = notYet "live_V" ;
+oper liver_N : N  = notYet "liver_N" ;
+oper long_A : A  = notYet "long_A" ;
+oper lose_V2 : V2  = notYet "lose_V2" ;
+oper louse_N : N  = notYet "louse_N" ;
+oper love_N : N  = notYet "love_N" ;
+oper love_V2 : V2  = notYet "love_V2" ;
+oper many_Det : Det  = notYet "many_Det" ;
+oper married_A2 : A2  = notYet "married_A2" ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=e5537df3d2d2:351-579
+start=351
+end=579
+----
+oper married_Cl : NP -> NP -> Cl  = notYet "married_Cl" ;
+oper meat_N : N  = notYet "meat_N" ;
+oper milk_N : N  = notYet "milk_N" ;
+oper moon_N : N  = notYet "moon_N" ;
+oper more_CAdv : CAdv  = notYet "more_CAdv" ;
+oper most_Predet : Predet  = notYet "most_Predet" ;
+oper mother_N2 : N2  = notYet "mother_N2" ;
+oper mountain_N : N  = notYet "mountain_N" ;
+oper mouth_N : N  = notYet "mouth_N" ;
+oper much_Det : Det  = notYet "much_Det" ;
+oper music_N : N  = notYet "music_N" ;
+oper must_VV : VV  = notYet "must_VV" ;
+oper n_units_AP : Card -> CN -> A -> AP  = notYet "n_units_AP" ;
+oper n_units_of_NP : Card -> CN -> NP -> NP  = notYet "n_units_of_NP" ;
+oper name_N : N  = notYet "name_N" ;
+oper narrow_A : A  = notYet "narrow_A" ;
+oper nd : Digit -> Dig  = notYet "nd" ;
+oper nd10 : Sub10 -> Digits  = notYet "nd10" ;
+oper nd100 : Sub100 -> Digits  = notYet "nd100" ;
+oper nd1000 : Sub1000 -> Digits  = notYet "nd1000" ;
+oper nd1000000 : Sub1000000 -> Digits  = notYet "nd1000000" ;
+oper near_A : A  = notYet "near_A" ;
+oper neck_N : N  = notYet "neck_N" ;
+oper new_A : A  = notYet "new_A" ;
+oper newspaper_N : N  = notYet "newspaper_N" ;
+oper night_N : N  = notYet "night_N" ;
+oper no_Quant : Quant  = notYet "no_Quant" ;
+oper nobody_NP : NP  = notYet "nobody_NP" ;
+oper nose_N : N  = notYet "nose_N" ;
+oper not_Predet : Predet  = notYet "not_Predet" ;
+oper nothing_NP : NP  = notYet "nothing_NP" ;
+oper now_Adv : Adv  = notYet "now_Adv" ;
+oper num2digits : Numeral -> Digits  = notYet "num2digits" ;
+oper number_N : N  = notYet "number_N" ;
+oper oil_N : N  = notYet "oil_N" ;
+oper old_A : A  = notYet "old_A" ;
+oper only_Predet : Predet  = notYet "only_Predet" ;
+oper open_V2 : V2  = notYet "open_V2" ;
+oper otherwise_PConj : PConj  = notYet "otherwise_PConj" ;
+oper paint_V2A : V2A  = notYet "paint_V2A" ;
+oper paper_N : N  = notYet "paper_N" ;
+oper paris_PN : PN  = notYet "paris_PN" ;
+oper part_Prep : Prep  = notYet "part_Prep" ;
+oper peace_N : N  = notYet "peace_N" ;
+oper pen_N : N  = notYet "pen_N" ;
+oper person_N : N  = notYet "person_N" ;
+oper planet_N : N  = notYet "planet_N" ;
+oper plastic_N : N  = notYet "plastic_N" ;
+oper play_V : V  = notYet "play_V" ;
+oper play_V2 : V2  = notYet "play_V2" ;
+oper please_Voc : Voc  = notYet "please_Voc" ;
+oper policeman_N : N  = notYet "policeman_N" ;
+oper possess_Prep : Prep  = notYet "possess_Prep" ;
+oper priest_N : N  = notYet "priest_N" ;
+oper probable_AS : A  = notYet "probable_AS" ;
+oper pull_V2 : V2  = notYet "pull_V2" ;
+oper push_V2 : V2  = notYet "push_V2" ;
+oper put_V2 : V2  = notYet "put_V2" ;
+oper queen_N : N  = notYet "queen_N" ;
+oper question_N : N  = notYet "question_N" ;
+oper quite_Adv : AdA  = notYet "quite_Adv" ;
+oper radio_N : N  = notYet "radio_N" ;
+oper rain_N : N  = notYet "rain_N" ;
+oper rain_V0 : V  = notYet "rain_V0" ;
+oper ready_A : A  = notYet "ready_A" ;
+oper ready_VP : VP  = notYet "ready_VP" ;
+oper reason_N : N  = notYet "reason_N" ;
+oper red_A : A  = notYet "red_A" ;
+oper religion_N : N  = notYet "religion_N" ;
+oper restaurant_N : N  = notYet "restaurant_N" ;
+oper right_Ord : Ord  = notYet "right_Ord" ;
+oper river_N : N  = notYet "river_N" ;
+oper road_N : N  = notYet "road_N" ;
+oper rock_N : N  = notYet "rock_N" ;
+oper roof_N : N  = notYet "roof_N" ;
+oper root_N : N  = notYet "root_N" ;
+oper rope_N : N  = notYet "rope_N" ;
+oper rotten_A : A  = notYet "rotten_A" ;
+oper round_A : A  = notYet "round_A" ;
+oper rub_V2 : V2  = notYet "rub_V2" ;
+oper rubber_N : N  = notYet "rubber_N" ;
+oper rule_N : N  = notYet "rule_N" ;
+oper run_V : V  = notYet "run_V" ;
+oper salt_N : N  = notYet "salt_N" ;
+oper sand_N : N  = notYet "sand_N" ;
+oper say_VS : VS  = notYet "say_VS" ;
+oper scared_VP : VP  = notYet "scared_VP" ;
+oper school_N : N  = notYet "school_N" ;
+oper science_N : N  = notYet "science_N" ;
+oper scratch_V2 : V2  = notYet "scratch_V2" ;
+oper sea_N : N  = notYet "sea_N" ;
+oper seed_N : N  = notYet "seed_N" ;
+oper seek_V2 : V2  = notYet "seek_V2" ;
+oper sell_V3 : V3  = notYet "sell_V3" ;
+oper send_V3 : V3  = notYet "send_V3" ;
+oper sew_V : V  = notYet "sew_V" ;
+oper sharp_A : A  = notYet "sharp_A" ;
+oper sheep_N : N  = notYet "sheep_N" ;
+oper ship_N : N  = notYet "ship_N" ;
+oper shirt_N : N  = notYet "shirt_N" ;
+oper shoe_N : N  = notYet "shoe_N" ;
+oper shop_N : N  = notYet "shop_N" ;
+oper short_A : A  = notYet "short_A" ;
+oper silver_N : N  = notYet "silver_N" ;
+oper sing_V : V  = notYet "sing_V" ;
+oper sister_N : N  = notYet "sister_N" ;
+oper sit_V : V  = notYet "sit_V" ;
+oper skin_N : N  = notYet "skin_N" ;
+oper sky_N : N  = notYet "sky_N" ;
+oper sleep_V : V  = notYet "sleep_V" ;
+oper smell_V : V  = notYet "smell_V" ;
+oper smoke_N : N  = notYet "smoke_N" ;
+oper smooth_A : A  = notYet "smooth_A" ;
+oper snake_N : N  = notYet "snake_N" ;
+oper snow_N : N  = notYet "snow_N" ;
+oper so_AdA : AdA  = notYet "so_AdA" ;
+oper sock_N : N  = notYet "sock_N" ;
+oper somePl_Det : Det  = notYet "somePl_Det" ;
+oper someSg_Det : Det  = notYet "someSg_Det" ;
+oper somebody_NP : NP  = notYet "somebody_NP" ;
+oper something_NP : NP  = notYet "something_NP" ;
+oper somewhere_Adv : Adv  = notYet "somewhere_Adv" ;
+oper song_N : N  = notYet "song_N" ;
+oper speak_V2 : V2  = notYet "speak_V2" ;
+oper spit_V : V  = notYet "spit_V" ;
+oper split_V2 : V2  = notYet "split_V2" ;
+oper squeeze_V2 : V2  = notYet "squeeze_V2" ;
+oper stab_V2 : V2  = notYet "stab_V2" ;
+oper stand_V : V  = notYet "stand_V" ;
+oper star_N : N  = notYet "star_N" ;
+oper steel_N : N  = notYet "steel_N" ;
+oper stick_N : N  = notYet "stick_N" ;
+oper stone_N : N  = notYet "stone_N" ;
+oper stop_V : V  = notYet "stop_V" ;
+oper stove_N : N  = notYet "stove_N" ;
+oper straight_A : A  = notYet "straight_A" ;
+oper student_N : N  = notYet "student_N" ;
+oper stupid_A : A  = notYet "stupid_A" ;
+oper suck_V2 : V2  = notYet "suck_V2" ;
+oper sun_N : N  = notYet "sun_N" ;
+oper swell_V : V  = notYet "swell_V" ;
+oper swim_V : V  = notYet "swim_V" ;
+oper switch8off_V2 : V2  = notYet "switch8off_V2" ;
+oper switch8on_V2 : V2  = notYet "switch8on_V2" ;
+oper table_N : N  = notYet "table_N" ;
+oper tail_N : N  = notYet "tail_N" ;
+oper talk_V3 : V3  = notYet "talk_V3" ;
+oper teacher_N : N  = notYet "teacher_N" ;
+oper television_N : N  = notYet "television_N" ;
+oper that_Quant : Quant  = notYet "that_Quant" ;
+oper that_Subj : Subj  = notYet "that_Subj" ;
+oper there7from_Adv : Adv  = notYet "there7from_Adv" ;
+oper there7to_Adv : Adv  = notYet "there7to_Adv" ;
+oper there_Adv : Adv  = notYet "there_Adv" ;
+oper therefore_PConj : PConj  = notYet "therefore_PConj" ;
+oper thick_A : A  = notYet "thick_A" ;
+oper thin_A : A  = notYet "thin_A" ;
+oper think_V : V  = notYet "think_V" ;
+oper thirsty_VP : VP  = notYet "thirsty_VP" ;
+oper this_Quant : Quant  = notYet "this_Quant" ;
+oper through_Prep : Prep  = notYet "through_Prep" ;
+oper throw_V2 : V2  = notYet "throw_V2" ;
+oper tie_V2 : V2  = notYet "tie_V2" ;
+oper tired_VP : VP  = notYet "tired_VP" ;
+oper to_Prep : Prep  = notYet "to_Prep" ;
+oper today_Adv : Adv  = notYet "today_Adv" ;
+oper tongue_N : N  = notYet "tongue_N" ;
+oper too_AdA : AdA  = notYet "too_AdA" ;
+oper tooth_N : N  = notYet "tooth_N" ;
+oper train_N : N  = notYet "train_N" ;
+oper travel_V : V  = notYet "travel_V" ;
+oper tree_N : N  = notYet "tree_N" ;
+oper turn_V : V  = notYet "turn_V" ;
+oper ugly_A : A  = notYet "ugly_A" ;
+oper uncertain_A : A  = notYet "uncertain_A" ;
+oper under_Prep : Prep  = notYet "under_Prep" ;
+oper understand_V2 : V2  = notYet "understand_V2" ;
+oper university_N : N  = notYet "university_N" ;
+oper very_AdA : AdA  = notYet "very_AdA" ;
+oper village_N : N  = notYet "village_N" ;
+oper vomit_V : V  = notYet "vomit_V" ;
+oper wait_V2 : V2  = notYet "wait_V2" ;
+oper walk_V : V  = notYet "walk_V" ;
+oper want_VV : VV  = notYet "want_VV" ;
+oper war_N : N  = notYet "war_N" ;
+oper warm_A : A  = notYet "warm_A" ;
+oper wash_V2 : V2  = notYet "wash_V2" ;
+oper watch_V2 : V2  = notYet "watch_V2" ;
+oper water_N : N  = notYet "water_N" ;
+oper weather_adjCl : AP -> Cl  = notYet "weather_adjCl" ;
+oper wet_A : A  = notYet "wet_A" ;
+oper whatPl_IP : IP  = notYet "whatPl_IP" ;
+oper whatSg_IP : IP  = notYet "whatSg_IP" ;
+oper what_name_QCl : NP -> QCl  = notYet "what_name_QCl" ;
+oper when_IAdv : IAdv  = notYet "when_IAdv" ;
+oper when_Subj : Subj  = notYet "when_Subj" ;
+oper where_IAdv : IAdv  = notYet "where_IAdv" ;
+oper which_IQuant : IQuant  = notYet "which_IQuant" ;
+oper white_A : A  = notYet "white_A" ;
+oper whoPl_IP : IP  = notYet "whoPl_IP" ;
+oper whoSg_IP : IP  = notYet "whoSg_IP" ;
+oper why_IAdv : IAdv  = notYet "why_IAdv" ;
+oper wide_A : A  = notYet "wide_A" ;
+oper wife_N : N  = notYet "wife_N" ;
+oper win_V2 : V2  = notYet "win_V2" ;
+oper wind_N : N  = notYet "wind_N" ;
+oper window_N : N  = notYet "window_N" ;
+oper wine_N : N  = notYet "wine_N" ;
+oper wing_N : N  = notYet "wing_N" ;
+oper wipe_V2 : V2  = notYet "wipe_V2" ;
+oper without_Prep : Prep  = notYet "without_Prep" ;
+oper wonder_VQ : VQ  = notYet "wonder_VQ" ;
+oper wood_N : N  = notYet "wood_N" ;
+oper worm_N : N  = notYet "worm_N" ;
+oper write_V2 : V2  = notYet "write_V2" ;
+oper year_N : N  = notYet "year_N" ;
+oper yellow_A : A  = notYet "yellow_A" ;
+oper youPol_Pron : Pron  = notYet "youPol_Pron" ;
+oper young_A : A  = notYet "young_A" ;
+oper CNNumNP : CN -> Card -> NP  = notYet "CNNumNP" ;
+oper CNSymbNP : Det -> CN -> [Symb] -> NP  = notYet "CNSymbNP" ;
+oper FloatPN : Float -> PN  = notYet "FloatPN" ;
+oper IntPN : Int -> PN  = notYet "IntPN" ;
+oper NumPN : Card -> PN  = notYet "NumPN" ;
+oper SymbNum : Symb -> Card  = notYet "SymbNum" ;
+oper SymbOrd : Symb -> Ord  = notYet "SymbOrd" ;
+oper SymbPN : Symb -> PN  = notYet "SymbPN" ;
+oper SymbS : Symb -> S  = notYet "SymbS" ;
+}
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/NamesSom.gf"
+id=08bb26c43568
+kind=source
+size=472
+lines=25
+chunks=0
+----
+concrete NamesSom of Names = CatSom ** open ResSom, Prelude in {
+
+lin GivenName, MaleSurname, FemaleSurname = \n -> n ** {
+    s = \\c => n.s ;
+    isPron = False ;
+    st = Definite ;
+    empty = [] ;
+    };
+
+lin FullName gn sn = {
+       s = \\c => gn.s ++ sn.s ;
+       a = gn.a ;
+       isPron = False ;
+       st = Definite ;
+       empty = [] ;
+    } ;
+
+  UseLN pn = pn ** {
+    s = \\c => pn.s ;
+    isPron = False ;
+    st = Definite ;
+    empty = [] ;
+    } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/NounSom.gf"
+id=1b8c4baa9bb3
+kind=source
+size=11584
+lines=353
+chunks=2
+
+--- CHUNK BEGIN ---
+id=1b8c4baa9bb3:1-350
+start=1
+end=350
+----
+concrete NounSom of Noun = CatSom ** open ResSom, Prelude in {
+
+  flags optimize=all_subs ;
+
+  lin
+
+--2 Noun phrases
+
+-- : Det -> CN -> NP
+  DetCN det cn = useN cn ** {
+    s = sTable ;
+    st = det.st ;
+    a = getAgr det.n (gender cn) } where {
+      sTable : Case => Str = \\c =>
+         let nfc : {nf : NForm ; c : Case} =
+             case <det.numtype,c,cn.modtype,det.st,det.n> of {
+                -- Numbers
+                <Basic|Compound,_,_,_,_> => {nf=Numerative ; c=c} ;
+
+                -- special form for fem. nouns
+                <_,Nom,NoMod|OtherMod,Indefinite,Sg> => {nf=NomSg ; c=c} ;
+
+                -- If cn has modifier, Nom ending attaches to the modifier
+                <_,Nom,AMod,_,_> => {nf=Def det.n ; c=Abs} ;
+
+                -- a Det with st=Indefinite uses Indef forms
+                <_,_,_,Indefinite,n>  => {nf=Indef n ; c=c} ;
+
+                -- All other determiners use the definite stem
+                _ => {nf=Def det.n ; c=c}
+             } ;
+          art = gda2da cn.gda ! det.n ;
+          num = case isNum det.numtype of {True => Sg ; _ => det.n} ;
+          dt : {pref,s : Str} =
+            case <nfc.nf,cn.isPoss,andB det.isPoss cn.shortPoss> of {
+              -- Det is a cardinal number. The number is the head of the NP,
+              -- and CN becomes its modifier. If CN has modifiers of its own,
+              -- we insert the conjunction "oo" between the number and the CN.
+              <Numerative,_,_> =>
+                 let oo = case det.numtype of {Compound => "oo" ; _ => []}
+                  in {s = [] ; pref = det.s ! art ! nfc.c ++ oo} ;
+
+              -- CN has undergone ComplN2 and is already quantified
+              <_,True,_> => {pref = [] ; s = det.sp ! gender cn ! nfc.c} ;
+
+              -- CN is e.g. a kinship term and takes short possessive
+              <_,_,True> => {pref = [] ; s = BIND ++ det.shortPoss ! art} ;
+
+              -- Default case
+              _ => {pref = [] ; s = det.s ! art ! nfc.c}
+            } ;
+        in dt.pref -- if det is numeral
+        ++ cn.s ! nfc.nf
+        ++ dt.s -- non-numeral det
+        ++ cn.mod ! det.st ! num ! c
+    } ;
+
+  -- : PN -> NP ;
+  UsePN pn = pn ** {
+    s = \\c => pn.s ;
+    isPron = False ;
+    st = Definite ;
+    empty = [] ;
+    } ;
+
+  -- : Pron -> NP ;
+  UsePron pron = pron ** {st = Definite} ;
+
+  -- : Predet -> NP -> NP ; -- only the man
+  PredetNP predet np =
+    let qnt = PossPron (pronTable ! np.a) ;
+        det = qnt.shortPoss ! predet.da ;
+         predetS : Str = case predet.isPoss of {
+          True => glue predet.s det ;
+          False => predet.s
+        } ;
+     in np ** {
+          s = \\c =>
+            case <np.isPron,predet.isPoss> of {
+              <True,True> => np.empty ++ predetS ;
+              _ => np.s ! c ++ predetS} ;
+          isPron = False ; -- NP it loses its pronoun status when Predet is added
+        } ;
+
+-- A noun phrase can also be postmodified by the past participle of a
+-- verb, by an adverb, or by a relative clause
+
+
+  -- : NP -> V2  -> NP ;    -- the man seen
+  -- PPartNP np v2 = np ** {
+  --   s = \\c => v2.s ! ??? ++ np.s ! c } ; ----
+
+  -- : NP -> Adv -> NP ;    -- Paris today ; boys, such as ..
+  --AdvNP,ExtAdvNP = \np,adv -> np ** {} ; --adverbs are complicated
+
+  -- : NP -> RS -> NP ;    -- Paris, which is here
+  {- NB. technically, if the RS has undergone ConjRS, it could contain both
+     restrictive and appositive relative clauses. Quote Saeed p.215-216:
+       "When multiple relative clauses occur, this formal distinction is
+        maintained, since in the only context both can occur, on nouns with
+        determiners, restrictives are joined by ee while appositives employ oo."
+     In practice, we don't care--it's impossible to know on the RGL level
+     which RS are restrictive and which appositive, as it is semantic.
+   -}
+  RelNP np rs = np ** {
+    s = \\c => objpron np ! c ++ "oo" ++ rs.s ! Indefinite ! npgennum np ! c ;
+    isPron = False ;
+    } ;
+
+-- Determiners can form noun phrases directly.
+
+  -- : Det -> NP ;
+  DetNP det = emptyNP ** {
+    s = det.sp ! Masc ; ---- Any way to decide for gender here?
+    a = getAgr det.n Masc ;
+    isPron = False ;
+    } ;
+
+  -- MassNP : CN -> NP ;
+  MassNP cn = useN cn ** {
+    s = table { Nom => cn.s ! NomSg ++ cn.mod ! Indefinite ! Sg ! Nom ;
+                c   => cn.s ! Indef Sg ++ cn.mod ! Indefinite ! Sg ! c }
+    } ;
+
+
+--2 Determiners
+
+-- The determiner has a fine-grained structure, in which a 'nucleus'
+-- quantifier and an optional numeral can be discerned.
+
+  -- : Quant -> Num -> Det ;
+  DetQuant quant num = let indep = Hal in quant ** {
+    s = \\da,c =>
+            case isNum num.numtype of {
+               True => num.s ! indep ++ quant.s ! num.da ! c ++ num.thousand ;
+               False => num.s ! indep ++ quant.s ! da ! c ++ num.thousand } ;
+
+    sp = \\g,c => case <num.n,g> of {
+          <Sg,Masc> => num.s ! indep ++ quant.sp ! SgMasc ! c ++ num.thousand ;
+          <Sg,Fem> => num.s ! indep ++ quant.sp ! SgFem ! c ++ num.thousand ;
+          -- Independent form uses plural morpheme, not gender-flipped allomorph
+          <Pl,_> => num.s ! indep ++ quant.sp ! PlInv ! c ++ num.thousand } ;
+    numtype = num.numtype ;
+    n = num.n ;
+    shortPoss = \\da => quant.shortPoss ! da ++ num.s ! indep
+    } ;
+
+  -- : Quant -> Num -> Ord -> Det ;  -- these five best
+  DetQuantOrd quant num ord =
+    let theseFive = DetQuant quant num in theseFive ** {
+      s = \\g,c  => theseFive.s ! g ! c  ++ ord.s ! AF num.n c ;
+      sp = \\g,c => theseFive.sp ! g ! c ++ ord.s ! AF num.n c ;
+      shortPoss = \\da => theseFive.shortPoss ! da ++ ord.s ! AF num.n Abs
+      } ;
+
+-- Whether the resulting determiner is singular or plural depends on the
+-- cardinal.
+
+-- All parts of the determiner can be empty, except $Quant$, which is
+-- the "kernel" of a determiner. It is, however, the $Num$ that determines
+-- the inherent number.
+
+  NumSg = baseNum ;
+  NumPl = baseNum ** {n = Pl} ;
+
+  -- : Card -> Num ;
+  NumCard card = card ** {
+    numtype = case card.hasThousand of {
+                True => Compound ;
+                False => Basic }
+    } ;
+
+  -- : Digits  -> Card ;
+--  NumDigits dig = { s = dig.s ! NCard ; n = dig.n } ;
+
+  -- : Numeral -> Card ;
+  NumNumeral num = num ; -- ** {s = num.s ! NCard};
+
+{-
+  -- : AdN -> Card -> Card ;
+  AdNum adn card = card ** { s = adn.s ++ card.s } ;
+
+  -- : Digits  -> Ord ;
+  OrdDigits digs = digs ** { s = digs.s ! NOrd } ;
+-}
+  -- : Numeral -> Ord ;
+  OrdNumeral num = num ** {
+    s = \\_ => num.ord
+    } ;
+
+  -- : A       -> Ord ;
+  OrdSuperl a = {
+    s = \\af => "ugu" ++ a.s ! af ;
+    n = Sg -- ?? is this meaningful?
+    } ;
+
+-- One can combine a numeral and a superlative.
+
+  -- : Numeral -> A -> Ord ; -- third largest
+  -- OrdNumeralSuperl num a = num ** {  } ;
+
+  -- : Quant
+  DefArt = defQuant "a" "kan" "tan" "kuwan" False ;
+
+  -- : Quant
+  IndefArt = indefQuant ; -- TODO sp forms
+
+  -- : Pron -> Quant
+  PossPron pron =
+    let p = pron.poss ;
+     in DefArt ** {
+          shortPoss = p.short ;
+          isPoss = True ;
+          s = \\da,c => let casevow = case c of {Nom => "u" ; Abs => "a"}
+                         in BIND ++ p.s ! da ++ BIND ++ casevow ;
+
+          sp = \\gn,c => let prefix = case gn of {SgFem => "t" ; _ => "k"} ;
+                             casevow = case c of {Nom => "u" ; Abs => "a"}
+                          in prefix ++ BIND ++ p.sp ! gn ++ BIND ++ casevow ;
+        } ;
+
+--2 Common nouns
+
+  -- : N -> CN
+  -- : N2 -> CN ;
+  UseN,UseN2 = ResSom.useN ;
+
+  -- : N2 -> NP -> CN ;    -- Sahra hooyadeed
+  ComplN2 n2 np = genModCN (lin CN (useN n2)) np ;
+
+{-
+  -- : N3 -> NP -> N2 ;    -- distance from this city (to Paris)
+  ComplN3 n3 np =
+    let compl = applyPost n3.c3 np ;
+    in n3 ** {s = compl ++ n3.s } ;
+-}
+
+  -- : N3 -> N2 ;          -- distance (from this city)
+  Use2N3 n3 = lin N2 n3 ** { c2 = n3.c3 } ;
+
+  -- : N3 -> N2 ;          -- distance (to Paris)
+  Use3N3 n3 = lin N2 n3 ;
+  -- : AP -> CN -> CN
+  AdjCN ap cn = cn ** {
+    s = table { -- Add oo after Numerative only if this is CN's first modifier.
+          Numerative => cn.s ! Numerative
+                     ++ andConj Indefinite (notMod cn.modtype) ;
+          NomSg => cn.s ! Indef Sg ; -- Add adj -> noun loses case marker
+          nf => cn.s ! nf } ;
+    mod = \\st,n,c =>
+            cn.mod ! st ! n ! Abs -- If there was something before, it is now in Abs
+         ++ andConj st cn.modtype -- If the sentence is already modified, any new modifier needs to be introduced with conjunction
+         ++ ap.s ! AF n c ;
+    modtype = AMod
+    } ;
+
+  -- : CN -> RS  -> CN ;
+  RelCN cn rs = cn ** {
+    s = table {
+          Numerative => cn.s ! Numerative ++ andConj Indefinite (notMod cn.modtype) ;
+          nf => cn.s ! nf } ;
+    mod = \\st,n,c => --what to do with subject case if there's both adj and RS?
+            cn.mod ! st ! n ! Abs
+         ++ andConj st cn.modtype
+         ++ rs.s ! st ! gennum cn Sg ! c ; -- gennum cn Sg, because plural form is only for 1st person plural
+    modtype = AMod
+    } ;
+
+{-
+  -- : CN -> Adv -> CN ;
+  AdvCN cn adv = cn ** {  } ;
+
+-- Nouns can also be modified by embedded sentences and questions.
+-- For some nouns this makes little sense, but we leave this for applications
+-- to decide. Sentential complements are defined in VerbSom.
+
+  -- : CN -> SC  -> CN ;   -- question where she sleeps
+  SentCN cn sc = cn ** { } ;
+
+
+--2 Apposition
+
+-- This is certainly overgenerating.
+
+  -- : CN -> NP -> CN ;    -- city Paris (, numbers x and y)
+  ApposCN cn np = cn ** { s =  } ;
+-}
+
+--2 Possessive and partitive constructs
+
+  -- : PossNP  : CN -> NP -> CN ;
+  PossNP cn np = cn ** { -- guriga Axmed, not Axmed gurigiisa
+    mod = \\st,n,c => cn.mod ! st ! n ! c ++ objpron np ! Abs
+    } ;
+
+  -- : CN -> NP -> CN ;     -- glass of wine / two kilos of red apples
+  PartNP cn np = cn ** {
+    s = table {
+          Numerative => cn.s ! Numerative ++ andConj Indefinite (notMod cn.modtype) ;
+          nf => cn.s ! nf } ;
+    mod = \\st,n,c =>
+            cn.mod ! st ! n ! c
+          ++ andConj st cn.modtype  -- If the sentence is already modified, any new modifier needs to be introduced with conjunction
+          ++ objpron np ! Abs
+          ++ "ah" ;
+    modtype = case cn.modtype of {
+      AMod => AMod ;
+      _ => OtherMod }
+    } ;
+
+{-
+
+-- This is different from the partitive, as shown by many languages.
+
+  -- : Det -> NP -> NP ;
+  CountNP det np = np **
+    { } ; -- Nonsense for DefArt or IndefArt
+
+--3 Conjoinable determiners and ones with adjectives
+
+  -- : DAP -> AP -> DAP ;    -- the large (one)
+  AdjDAP dap ap = dap ** { } ;
+
+  -- : Det -> DAP ;          -- this (or that)
+  DetDAP det = det ;
+-}
+
+oper
+  andConj : State -> ModType -> Str = \st,mod ->
+    case <st,mod> of {
+      <Indefinite,AMod|OtherMod> => "oo" ;
+      <Definite,AMod|OtherMod>   => "ee" ;
+      _  => []
+    } ;
+
+  genModCN : CN -> NP -> CN = \cn,np -> cn ** {
+    s = \\nf =>
+      let num = case nf of {
+                      Def n  => n ;
+                      Indef n => n ;
+                      _ => Sg } ;
+          art = gda2da cn.gda ! num ;
+          qnt = PossPron (pronTable ! np.a) ;
+          det = case cn.shortPoss of {
+                  True => qnt.shortPoss ! art ;
+                  _ => qnt.s ! sg cn.gda ! Abs } ;
+          noun = case np.isPron of {
+                   True  => (pronTable ! np.a).sp ! Abs ; -- long subject pronoun
+                   False => np.s ! Abs }
+       in noun ++ cn.s ! Def num ++ BIND ++ det ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=1b8c4baa9bb3:351-353
+start=351
+end=353
+----
+     isPoss = True} ;
+
+}
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/NumeralSom.gf"
+id=f5f4e52ca0d9
+kind=source
+size=4919
+lines=178
+chunks=0
+----
+concrete NumeralSom of Numeral = CatSom [Numeral,Digits,Decimal] **
+  open Prelude, ResSom, ParamSom in {
+
+oper
+  LinDigit : Type = {
+    unit : {s : DForm => Str ; ord : Str ; da : DefArticle} ;
+    ten : {s, ord : Str ; da : DefArticle}
+    } ;
+
+  mkNum3 : (ucard,tcard,uord : Str) -> DefArticle -> LinDigit = \uc,tc,uo,ud -> {
+    unit = {s = \\df => uc ; ord = uo ; da = ud} ;
+    ten  = {s = tc ; ord = tc + "aad" ; da = M KA}
+    } ;
+
+  mkNum2 : (ucard,tcard : Str) -> LinDigit = \uc,tc ->
+    let uo : Str = case uc of {
+               x + "a" => x + "aad" ; -- ??
+               x + #v + c@#c => x + c + "aad" ;
+               _             => uc + "aad" } ;
+     in mkNum3 uc tc uo (F DA) ;
+
+  mkNum2Masc : (ucard,tcard : Str) -> LinDigit = \uc,tc ->
+    let uo : Str = case uc of {
+               x + "a" => x + "aad" ; -- ??
+               x + #v + c@#c => x + c + "aad" ;
+               _             => uc + "aad" } ;
+     in mkNum3 uc tc uo (M KA) ;
+
+
+lincat
+  Digit = LinDigit ;
+
+  {- Saeed p. 70-71: "When used with nouns, the cardinal numerals act as
+  the head of the construction and the counted noun occurs in the genitive
+  case. […] This construction also occurs with composite numerals like
+  laba boqol 'two hundred',
+  where laba 'two' is a feminine noun in absolutive case and
+  boqol 'hundred' is a masculine noun in genitive case.
+  Since laba is head, the whole nominal is feminine." -}
+  Sub10, Sub100, Sub1000, Sub1000000, Sub1000000000, Sub1000000000000 = {
+    s : DForm => Str ;
+    thousand : Str ; -- TODO figure out if this really works so
+    hasThousand : Bool ;
+    ord : Str ;
+    da : DefArticle ;
+    n : Number
+  } ;
+
+----------------------------------------------------------------------------
+
+
+--  num : Sub1000000 -> Numeral ;
+lin num x = x ;
+
+oper kow : DForm => Str = table {Kow => "kow" ; Hal => "hal" ; Mid => "mid"}  ;
+oper n1 : LinDigit = let one : LinDigit = mkNum2 "kow" "toban" in one ** {
+    unit = one.unit ** {s = kow}
+    } ;
+lin n2  = mkNum2 "laba" "labaatan" ;
+lin n3  = mkNum2 "saddex" "soddon" ;
+lin n4  = mkNum2 "afar" "afartan";
+lin n5  = mkNum2 "shan" "konton";
+lin n6  = mkNum2 "lix" "lixdan" ;
+lin n7  = mkNum2 "toddoba" "toddobaatan" ;
+lin n8  = mkNum2Masc "siddeed" "siddeetan" ;
+lin n9  = mkNum2Masc "sagaal" "sagaashan" ;
+
+lin pot01 = n1.unit ** {n = Sg ; thousand = [] ; hasThousand = False} ;
+
+lin pot0 d = d.unit ** {n = Pl ; thousand = [] ; hasThousand = False} ;
+
+lin pot110 = n1.ten ** {
+    s = \\df => n1.ten.s ;
+    thousand = [] ;
+    hasThousand = False ;
+    n = Pl
+    } ;
+lin pot111 = {
+    s = \\_ => "koob iyo" ++ n1.ten.s ;
+    ord = "koob iyo" ++ n1.ten.ord ;
+    thousand = [] ;
+    hasThousand = False ;
+    da = M KA ;
+    n = Pl
+    } ;
+lin pot1to19 d = {
+    s = \\_ => d.unit.s ! Hal ++ "iyo" ++ n1.ten.s ;
+    thousand = [] ;
+    hasThousand = False ;
+    ord = d.unit.s ! Hal ++ "iyo" ++ n1.ten.ord ;
+    da = M KA ;
+    n = Pl
+    } ;
+lin pot0as1 n = n ;
+lin pot1 d = d.ten ** {
+    s = \\df => d.ten.s ;
+    thousand = [] ;
+    hasThousand = False ;
+    n = Pl
+    } ;
+lin pot1plus d e = d.ten ** {
+    s = \\b => e.s ! b  ++ "iyo" ++ d.ten.s ;
+    ord = e.s ! Hal ++ "iyo" ++ d.ten.ord ;
+    thousand = [] ;
+    hasThousand = False ;
+    n = Pl ;
+  } ;
+lin pot1as2 n = n ;
+lin pot2 d = d ** {
+    thousand = "boqol" ;
+    hasThousand = True ;
+    ord = d.s ! Hal ++ "boqlaad"
+    } ;
+lin pot2plus d e = d ** {
+    thousand = "boqol iyo" ++ e.s ! Hal ;
+    hasThousand = True ;
+    ord = d.s ! Hal ++ "boqol iyo" ++ e.ord ;
+    n = Pl} ;
+lin pot2as3 n = n ;
+lin pot3 n = n ** {
+    thousand = n.thousand ++ "kun" ;
+    hasThousand = True ;
+    ord = n.s ! Hal ++ "kunaad" ;
+    n = Pl } ;
+
+lin pot3plus n m = n ** {
+  s = \\b => n.s ! b ++ "kun iyo" ++ m.s ! b ;
+  ord = n.ord ++ "kun iyo" ++ m.ord ;
+  n = Pl} ;
+
+lin pot3as4 n = n ;
+lin pot4as5 n = n ;
+
+
+----------------------------------------------------------------------------
+
+lincat Dig = TDigit ;
+
+oper
+  TDigit : Type = { s : CardOrd => Str ; n : Number } ;
+  mkDig : Str -> TDigit = \c -> mk2Dig c Pl ;
+
+  mk2Dig : Str -> Number -> TDigit = \c,num ->
+   { s = table { NCard => c ;
+                 NOrd  => c + "aan" } ;
+     n = num } ;
+
+
+lin D_0 = mkDig "0" ;
+lin D_1 = mk2Dig "1" Sg ;
+lin D_2 = mkDig "2" ;
+lin D_3 = mkDig "3" ;
+lin D_4 = mkDig "4" ;
+lin D_5 = mkDig "5" ;
+lin D_6 = mkDig "6" ;
+lin D_7 = mkDig "7" ;
+lin D_8 = mkDig "8" ;
+lin D_9 = mkDig "9" ;
+
+    -- : Dig -> Digits ;
+lin IDig dig = dig ;
+    -- : Dig -> Digits -> Digits ;
+lin IIDig dig digs = digs ** {s = \\co => glue (dig.s ! co) (digs.s ! co) } ;
+lin PosDecimal d = d ** {hasDot=False} ;
+lin NegDecimal d = {
+      s = \\co => glue "-" (d.s ! co) ;
+      n = Pl ;
+      hasDot=False
+    } ;
+    IFrac d i = {
+      s = \\co => d.s ! co ++
+                  if_then_Str d.hasDot BIND (BIND++"."++BIND) ++
+                  i.s ! co;
+      n = Pl ;
+      hasDot=True
+    } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/ParadigmsSom.gf"
+id=20a044fd0d68
+kind=source
+size=9011
+lines=291
+chunks=0
+----
+resource ParadigmsSom = open CatSom, ResSom, ParamSom, NounSom, Prelude in {
+
+oper
+
+--2 Parameters
+--
+-- To abstract over number, valency and (some) case names,
+-- we define the following identifiers. The application programmer
+-- should always use these constants instead of the constructors
+-- defined in $ResSom$.
+  Number : Type ;
+  sg : Number ;
+  pl : Number ;
+
+  Case : Type ;
+  absolutive : Case ;
+  nominative : Case ;
+
+  Agr : Type ;
+  sgFem : Agr ;
+  sgMasc : Agr ;
+  plAgr : Agr ;
+
+  Gender : Type ;
+  masc : Gender ;
+  fem : Gender ;
+
+-- Export the adposition type with the more usual/mainstream name Preposition
+  Preposition : Type ;
+  ka : Preposition ;
+  ku : Preposition ;
+  la : Preposition ;
+  u  : Preposition ;
+  noPrep : Preposition ;
+
+  VVForm : Type ; -- Argument to give to mkVV
+  infinitive : VVForm ; -- Takes its complement in infinitive
+  subjunctive : VVForm ; -- Takes its complement as a clause in subjunctive
+  waa_in : VVForm ; -- No explicit verb, just uses "waa in" construction
+
+
+--2 Nouns
+
+  mkN : overload {
+    mkN : (bisad : Str) -> N ; -- Predictable nouns
+    mkN : (shimbir : Str) -> (fem : Gender) -> N ; -- Unpredictable gender
+--    mkN : (nin, niman : Str) -> N ; -- Monosyllable word with unpredictable plural
+    mkN : (maalin,maalmo : Str) -> Gender -> N ; -- Consonant cluster in stem
+  } ;
+
+  mkN2 : overload {
+    mkN2 : Str -> N2 ; -- Predictable N2
+    mkN2 : N -> N2 -- N2 out of noun
+   } ;
+
+  mkPN : overload {
+    mkPN : Str -> PN ; -- Proper noun, default agr. P3 Sg Masc.
+    mkPN : Str -> Agr -> PN -- Proper noun, another agr.
+    } ;
+
+--2 Adjectives
+
+  mkA : overload {
+    mkA : (yar : Str) -> A ;
+    mkA : (sg,pl : Str) -> A
+  } ;
+
+  -- mkA2 : Str -> Prep -> A2 ;
+
+--2 Verbs
+
+  -- Verbs
+  mkV : overload {
+    mkV : (imp : Str) -> V ;    -- Predictable verb: imperative form as argument
+    mkV : (imp,sg1,pl2 : Str) -> V ; -- Less predictable verb: imperative, 1st person singular and 2nd person plural
+    mkV : Str -> V -> V  -- Add a prefix to an existing verb, e.g. u baahan+ahay
+  } ;
+
+  copula : V ; -- The copula verb 'ahay'
+
+  mkV2 : overload {
+    mkV2 : (sug : Str) -> V2 ; -- Predictable verb: imperative form, no preposition
+    mkV2 : (sug : Str) -> (_ku : Preposition) -> V2 ; -- Regular verb, imperative and preposition
+    mkV2 : V -> Preposition -> V2 ; -- Already constructed verb with preposition
+    } ;
+
+  mkV3 : overload {
+    mkV3 : (sug : Str) -> V3 ; -- Predictable verb: imperative form, no preposition
+    mkV3 : (sug : Str) -> (_,_ : Preposition) -> V2 ; -- Regular verb, imperative and preposition
+    mkV3 : V -> (_,_ : Preposition) -> V2 ; -- Already constructed verb with preposition
+    } ;
+
+  mkVV : overload {
+    mkVV : (kar : Str) -> VV ; -- VV that takes its complement in infinitive.
+    mkVV : (rab : Str) -> VVForm -> VV ; -- Specify complement type: infinitive or subjunctive.
+    mkVV : V -> VVForm -> VV ; -- VV out of an existing V
+   } ;
+
+   mkV2S : overload {
+     mkV2S : Str -> V2S ; -- Predictable verb, no preposition.
+     mkV2S : Str -> Preposition -> V2S ; -- Predictable verb, preposition given as second argument.
+     mkV2S : V -> Preposition -> V2S -- Unpredictable verb, preposition.
+  } ;
+
+  mkVA : Str -> VA
+    = \s -> lin VA (regV s) ;
+  mkVQ : Str -> VQ
+    = \s -> lin VQ (regV s) ;
+  mkVS : Str -> VS
+    = \s -> lin VS (regV s) ;
+
+  mkV2A : Str -> V2A
+    = \s -> lin V2A (regV s ** {c2 = noPrep}) ;
+  mkV2V : Str -> V2V
+    = \s -> lin V2V (regV s ** {c2 = noPrep}) ;
+  mkV2Q : Str -> V2Q
+    = \s -> lin V2Q (regV s ** {c2 = noPrep}) ;
+
+  -----
+
+--2 Structural categories
+
+  mkPrep = overload {
+    mkPrep : Str -> CatSom.Prep = \s ->
+      emptyPrep ** (ResSom.mkPrep s s s s s s) ;  -- ** {
+    mkPrep : (x1,_,_,_,_,x6 : Str) -> CatSom.Prep = \a,b,c,d,e,f ->
+      emptyPrep ** (ResSom.mkPrep a b c d e f) ; --
+    mkPrep : Preposition -> CatSom.Prep = \p ->
+      emptyPrep ** (prep p) ;
+    mkPrep : CatSom.Prep -> (x1,x2,x3 : Str) -> CatSom.Prep = \p,s,t,u ->
+      p ** {berri = s ; sii = t ; dhex = u} ;
+    } ;
+
+  possPrep : N -> CatSom.Prep ; -- Nouns like dhex that are used with possessive suffix to form adverbials
+
+  -- mkConj : (_,_ : Str) -> Number -> Conj = \s1,s2,num ->
+  --   lin Conj { s = s1 ; s2 = s2 } ;
+
+  -- mkSubj : Str -> Bool -> Subj = \s,b ->
+  --   lin Subj { } ;
+
+  mkAdv : Str -> Adv = \s -> lin Adv {
+    berri = s ;
+    c2 = noPrep ;
+    np = {s = [] ; a = ZeroObj} ;
+    sii,dhex,miscAdv = []
+    } ;
+
+  mkAdV : Str -> AdV = \s -> lin AdV {s = s} ;
+
+  mkAdA : Str -> AdA = \s -> lin AdA {s = s} ;
+
+
+--.
+-------------------------------------------------------------------------------
+-- The definitions should not bother the user of the API. So they are
+-- hidden from the document.
+
+  Number = ResSom.Number ;
+  sg = Sg ;
+  pl = Pl ;
+
+  Case = ResSom.Case ;
+  absolutive = Abs ;
+  nominative = Nom ;
+
+  Agr = ResSom.Agreement ;
+  sgFem = Sg3 Fem ;
+  sgMasc = Sg3 Masc ;
+  plAgr = Pl3 ;
+
+  Gender = ResSom.Gender ;
+  masc = Masc ;
+  fem = Fem ;
+
+  Preposition = ResSom.Adposition ;
+  ka = ResSom.Ka ;
+  ku = ResSom.Ku ;
+  la = ResSom.La ;
+  u  = ResSom.U ;
+  noPrep = ResSom.NoAdp ;
+
+  VVForm = ResSom.VVForm ;
+  infinitive = Infinitive ;
+  subjunctive = Subjunctive ;
+  waa_in = Waa_In ;
+  ------------------------
+
+  mkN = overload {
+    mkN : Str -> N                   = \s   -> lin N (mkN1 s) ;
+    mkN : Str -> Gender -> N         = \s,g -> lin N (mkNg s g) ;
+    mkN : (sg, pl : Str) -> N        = \sg,pl -> lin N (mk2N sg pl) ;
+    mkN : (indefsg,defsg : Str) -> Gender -> N = \s,t,g -> lin N (nMaalin s t g) ;
+    --mkN : N -> Gender -> N           = \n,g -> n ** {g = g }
+    } ;
+
+  shortPossN : N -> N -- force N to take short form of possessive suffix, e.g. family members
+   = \n -> n ** {shortPoss = True} ;
+
+  mkN2 = overload {
+    mkN2 : Str -> N2 = \s -> lin N2 (mkN1 s) ;
+    mkN2 : N   -> N2 = \n -> lin N2 n ;
+   } ;
+
+  mkPN = overload {
+    mkPN : Str -> PN        = \s -> lin PN (mkPNoun s sgMasc) ;
+    mkPN : Str -> Agr -> PN = \s,a -> lin PN (mkPNoun s a)
+    } ;
+
+  mkA = overload {
+    mkA : (yar : Str)   -> A = \s -> lin A (duplA s) ;
+    mkA : (sg,pl : Str) -> A = \s,p -> lin A (mkAdj s p)
+    } ;
+
+  mkV = overload {
+    mkV : (imp : Str) -> V = \v -> lin V (regV v) ;
+    mkV : (imp, sg1 : Str) -> V = \i,s1 -> lin V (reg2V i s1) ;
+    mkV : (imp,sg1,sg2,pl2 : Str) -> V = \i,s1,_,_ -> lin V (reg2V i s1) ; -- TODO: 4-place constructor
+    mkV : Str -> V -> V = \s,v -> lin V (prefixV s v)
+  } ;
+
+  copula = lin V (ResSom.copula) ;
+
+  regV : Str -> Verb = \s -> case s of {
+    _ + #c + #c + "o" => mkVerb (cJoogso s) ;
+    _           + "o" => mkVerb (cQaado s) ; ----
+    _           + "i" => mkVerb (cKari s) ;
+    _          + "ee" => mkVerb (cYaree s) ;
+    _                 => mkVerb (cSug s)
+    } ;
+
+  reg2V : Str -> Str -> Verb = \arag,arkaa -> case arag of {
+    _ + #c => mkVerb (cArag arag arkaa) ;
+    _ => regV arag
+  } ;
+
+  mkV2 = overload {
+    mkV2 : Str -> V2 = \s -> lin V2 (regV s ** {c2 = noPrep}) ;
+    mkV2 : Str -> Adposition -> V2 = \s,p -> lin V2 (regV s ** {c2 = p}) ;
+    mkV2 : V -> Adposition -> V2 = \v,p -> lin V2 (v ** {c2 = p}) ;
+    } ;
+
+  mkV3 = overload {
+    mkV3 : (sug : Str) -> V3 = \s -> lin V3 (regV s ** {c2,c3 = noPrep}) ;
+    mkV3 : (sug : Str) -> (_,_ : Adposition) -> V3 = \s,p,q -> lin V3 (regV s ** {c2 = p ; c3 = q}) ;
+    mkV3 : V -> (_,_ : Adposition) -> V3 = \v,p,q -> lin V3 (v ** {c2 = p ; c3 = q}) ;
+    } ;
+
+  mkVV = overload {
+    mkVV : (kar : Str) -> VV -- VV that takes its complement in infinitive.
+     = \kar -> lin VV ({vvtype=Infinitive} ** mkV kar) ;
+    mkVV : (rab : Str) -> VVForm -> VV -- Specify string and complement type:
+     = \rab,vvf -> lin VV ({vvtype=vvf} ** mkV rab) ;
+    mkVV : V -> VVForm -> VV
+      = \v,vvf -> lin VV (v ** {vvtype=vvf}) ;
+    mkVV : VVForm -> VV -- VV such as "waa in"
+     = \b -> let dummyV : V = mkV "in"
+              in lin VV (dummyV ** {vvtype=b ; s = \\_ => "in"})
+   } ;
+
+   mkV2S = overload {
+     mkV2S : Str -> V2S -- Predictable verb, no Adposition.
+     = \s -> lin V2S (regV s ** {c2 = noPrep}) ;
+     mkV2S : Str -> Adposition -> V2S -- Predictable verb, Adposition given as second argument.
+       = \s,pr -> lin V2S (regV s ** {c2 = pr}) ;
+     mkV2S : V -> Adposition -> V2S -- Unpredictable verb, Adposition.
+       = \v,pr -> lin V2S (v ** {c2 = pr})
+  } ;
+
+  possPrep : N -> CatSom.Prep = \dhex -> emptyPrep ** {
+    hoostiisa = \\agr =>
+        let qnt = PossPron (pronTable ! agr) ;
+            num = getNum agr ;
+            art = gda2da dhex.gda ! Sg ;
+            det = qnt.s ! art ! Abs ; -- this includes BIND
+         in dhex.s ! Def Sg ++ det ;
+    isPoss = True
+    } ;
+
+  emptyPrep : CatSom.Prep = lin Prep {
+    sii,berri,dhex = [] ;
+    hoostiisa = \\_ => [] ;
+    s = \\_ => [] ;
+    c2 = noPrep ;
+    isPoss = False
+  } ;
+--------------------------------------------------------------------------------
+
+  mkMU : Str -> MU = \s -> lin MU {s=s; isPre=False} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/ParamSom.gf"
+id=0b300a1b146f
+kind=source
+size=10911
+lines=360
+chunks=2
+
+--- CHUNK BEGIN ---
+id=0b300a1b146f:1-350
+start=1
+end=350
+----
+resource ParamSom = ParamX ** open Prelude in {
+
+--------------------------------------------------------------------------------
+-- Phonology
+
+oper
+   --TODO: make patterns actually adjusted to Somali
+  v : pattern Str = #("a" | "e" | "i" | "o" | "u") ;
+  vstar : pattern Str = #("a" | "e" | "i" | "o" | "u" | "y" | "w") ; -- semivowels included
+  vv : pattern Str = #("aa" | "ee" | "ii" | "oo" | "uu") ;
+  c : pattern Str = #("m"|"n"|"p"|"b"|"t"|"d"|"k"|"g"|"f"|"v"
+                      |"s"|"h"|"l"|"j"|"r"|"z"|"c"|"q");
+  cstar : pattern Str = #("m"|"n"|"p"|"b"|"t"|"d"|"k"|"g"|"f"|"v" -- semivowels included
+                      |"s"|"h"|"l"|"j"|"r"|"z"|"c"|"q"|"y"|"w");
+  lmnr : pattern Str = #("l" | "m" | "n" | "r") ;
+  kpt : pattern Str = #("k" | "p" | "t") ;
+  gbd : pattern Str = #("g" | "b" | "d") ;
+
+  voiced : Str -> Str = \s -> case s of {
+    "k" => "g" ;
+    "t" => "d" ;
+    "p" => "b" ;
+    _   => s } ;
+
+--------------------------------------------------------------------------------
+-- Morphophonology
+
+param
+  -- Allomorphs for the definite article
+  DefTA = TA | DA | SHA | DHA ;
+  DefKA = KA | GA | A_ | HA ;
+  DefArticle = F DefTA | M DefKA ;
+  GenderDefArt = FM DefTA DefKA
+             | MF DefKA DefTA
+             | MM DefKA DefKA  ;
+
+oper
+
+  sg : GenderDefArt -> DefArticle = \gda -> gda2da gda ! Sg ;
+  pl : GenderDefArt -> DefArticle = \gda -> gda2da gda ! Pl ;
+
+  gda2da : GenderDefArt -> Number => DefArticle = \gda ->
+    let da : {sg,pl:DefArticle} = case gda of {
+        FM s p => {sg = F s ; pl = M p} ;
+        MM s p => {sg = M s ; pl = M p} ;
+        MF s p => {sg = M s ; pl = F p} } ;
+    in table {Sg => da.sg ; Pl => da.pl} ;
+
+  defAllomorph : (_,_ : Str) -> GenderDefArt = \wiilka,wiilasha ->
+    case <getGender wiilka, getGender wiilasha> of {
+      <Masc,Fem>  => MF (allomM wiilka) (allomF wiilasha) ;
+      <Masc,Masc> => MM (allomM wiilka) (allomM wiilasha) ;
+      _           => FM (allomF wiilka) (allomM wiilasha)
+    } where {
+        allomF : Str -> DefTA = \wiilka ->
+          case wiilka of {
+                _ + "ta" => TA ; _ + "sha" => SHA ;
+                _ + "da" => DA ; _ + "dha" => DHA } ;
+        allomM : Str -> DefKA = \wiilka ->
+          case wiilka of {
+                _ + "ka" => KA ; _ + "aha" => HA ;
+                _ + "ga" => GA ; _ + "a"   => A_ } ;
+        getGender : Str -> Gender = \word ->
+          case word of {
+              _ + ("ta"|"sha"|"da"|"dha") => Fem ;
+              _ + "a" => Masc ;
+              _ => Predef.error ("defAllomorph: expecting definite form, given" ++ word)}
+        } ;
+
+  -- Use always via quantTable!
+  defStems : DefArticle => Str = table {
+    M KA => "k" ;
+    M GA => "g" ;
+    M A_ => [] ; -- If we want magac~magiciisa, we need to split this into CA and A_.
+    M HA => "ah" ; -- NB. stem vowel replaced
+    F TA => "t" ;
+    F DA => "d" ;
+    F SHA => "sh" ; -- NB. stem l replaced
+    F DHA => "dh"
+    } ;
+
+  quantTable = overload {
+    quantTable : Str -> DefArticle=>Str = \iis -> let i = head iis in table {
+      M HA => i + "h" + iis ;
+      x => defStems ! x + iis
+      } ;
+    quantTable : (ayg,ayd : Str) -> DefArticle=>Str = \ayg,ayd ->
+      let a = head ayg in table {
+      M HA => a + "h" + ayg ;
+      M x => defStems ! M x + ayg ;
+      F y => defStems ! F y + ayd
+      }
+    } ;
+
+  head : Str -> Str = \s -> case s of {
+    x@? + _ => x ;
+          _ => "" -- Predef.error "head: empty string."
+    } ;
+
+--------------------------------------------
+-- Old version, may be deprecated eventually
+param
+  Morpheme = mO | mKa | mTa ;
+oper
+  allomorph : Morpheme -> Str -> Str = \x,stem ->
+     case x of {
+       mO => case last stem of {
+                   d@("b"|"d"|"r"|"l"|"m"|"n") => d + "o" ;
+                   "c"|"g"|"i"|"j"|"x"|"s"     => "yo" ;
+                   _                           => "o" } ;
+       mTa => case stem of {  -- Saeed p. 29
+          _ + ("dh")                                    => "dha" ;
+          _ + (#v|"'"|"c"|"d"|"h"|"kh"|"q"|"w"|"x"|"y") => "da" ;
+          _ + "l"                                       => "sha" ;
+          _   {- b,f,g,n,r,s -}                         => "ta" } ;
+       mKa => case stem of { -- Saeed p. 28-29
+          _ + ("r"|"g"|"w"|"y"|"i"|"u"|"aa"|"oo"|"uu") => "ga" ;
+          _ + ("q"|"'"|"kh"|"x"|"c"|"h")               => "a" ;
+          _ + ("e"|"o")                                => "ha" ;
+          _   {- b,d,dh,f,j,l,n,r,sh-}                 => "ka" }
+     } ;
+
+--------------------------------------------------------------------------------
+-- Nouns
+
+param
+  Case = Nom | Abs ;
+  Gender = Masc | Fem ;
+  GenNum = SgMasc | SgFem | PlInv ; -- For Quant
+
+  Inclusion = Excl | Incl ;
+  Agreement =
+      Sg1
+    | Sg2
+    | Sg3 Gender
+    | Pl1 Inclusion
+    | Pl2
+    | Pl3
+    | Impers ; -- Verb agrees with Sg3, but needed for contractions
+
+  AdpObjAgr =
+      Sg1Obj
+    | Sg2Obj
+    | Pl1Obj Inclusion
+    | Pl2Obj
+    | ReflexiveObj
+    | ZeroObj ;
+
+  State = Definite | Indefinite ;
+
+  NForm = Def Number | Indef Number | NomSg | Numerative ;
+
+oper
+  getAgr : Number -> Gender -> Agreement = \n,g ->
+    case n of { Pl => Pl3 ;
+                _  => Sg3 g } ;
+
+  getNum : Agreement -> Number = \a ->
+    case a of { Sg1|Sg2|Sg3 _|Impers => Sg ; _ => Pl } ;
+
+  plAgr : Agreement -> Agreement = \agr ->
+    case agr of { Sg1   => Pl1 Excl ;
+                  Sg2   => Pl2 ;
+                  Sg3 _ => Pl3 ;
+                  agr   => agr } ;
+
+  agr2objAgr : Agreement -> AdpObjAgr = \a -> case a of {
+    Sg1 => Sg1Obj ;
+    Sg2 => Sg2Obj ;
+    Pl1 i => Pl1Obj i ;
+    Pl2 => Pl2Obj ;
+    _   => ZeroObj
+    } ;
+
+  objAgr2agr : AdpObjAgr -> Agreement = \a -> case a of {
+    Sg1Obj => Sg1 ;
+    Sg2Obj => Sg2 ;
+    Pl1Obj i => Pl1 i ;
+    Pl2Obj   => Pl2 ;
+    _          => Sg3 Masc
+  } ;
+
+  isP3 = overload {
+    isP3 : Agreement -> Bool = \agr ->
+      case agr of {Sg3 _ | Pl3 => True ; _ => False} ;
+    isP3 : AdpObjAgr -> Bool = \agr ->
+      case agr of {ZeroObj => True ; _ => False} ;
+  } ;
+
+
+  gender : {gda : GenderDefArt} -> Gender = \n ->
+    case n.gda of {FM _ _ => Fem ; _ => Masc} ;
+
+  gennum : {gda : GenderDefArt} -> Number -> GenNum = \gda,n ->
+    case n of {Pl => PlInv ; Sg =>
+      case gda.gda of {FM _ _ => SgFem ; _ => SgMasc}
+    } ;
+
+  npgennum : {a : Agreement} -> GenNum = \n ->
+    case n.a of {
+      Sg2|Sg3 Fem  => SgFem ;
+      Sg1|Sg3 Masc => SgMasc ;
+      _ => PlInv } ;
+
+--------------------------------------------------------------------------------
+-- Numerals
+
+param
+  DForm = Hal | Mid | Kow ; -- three variants of number 1
+
+  CardOrd = NOrd | NCard ;
+
+  -- to know whether to put oo in between numeral and CN
+  NumType = NoNum | Basic | Compound ;
+
+oper
+  isNum : NumType -> Bool = \nt -> case nt of {
+    NoNum => False ;
+    _     => True
+    } ;
+--------------------------------------------------------------------------------
+-- Adjectives
+
+param
+  AForm = AF Number Case ; ---- TODO: past tense
+
+  ModType = NoMod | AMod | OtherMod ;
+
+oper
+  -- to flip ModType
+  notMod : ModType -> ModType = \mt -> case mt of {
+    NoMod => OtherMod ;
+    _ => NoMod
+  } ;
+
+--------------------------------------------------------------------------------
+-- Adpositions
+
+param
+  Adposition = U | Ku | Ka | La | NoAdp ;
+
+  AdpCombination =
+    Single Adposition     -- 0-1 adpositions (0 = NoAdp)
+  | ImpersSubj Adposition -- impersonal subject + 0-1 adpositions
+  | Ugu | Uga | Ula
+  | Kaga | Kula | Kala ;
+
+oper
+  combine : Adposition -> Adposition -> AdpCombination = \p1,p2 ->
+    let oneWay : Adposition => Adposition => AdpCombination = \\x,y =>
+        case <x,y> of {
+          <U,U|Ku> => Ugu ;
+          <U,Ka>   => Uga ;
+          <U,La>   => Ula ;
+          <Ku|Ka,
+          Ku|Ka> => Kaga ;
+          <Ku,La>  => Kula ;
+          <Ka,La>  => Kala ;
+          <NoAdp,p> => Single p ;
+          <p,NoAdp> => Single x ;
+          <p,_> => Single x } -- for trying both ways
+     in case oneWay ! p2 ! p1 of {
+          Single _ => oneWay ! p1 ! p2 ;
+          z        => z } ;
+
+  isPassive : {c2 : AdpCombination} -> Bool = \vp ->
+    case vp.c2 of {
+      ImpersSubj _ => True ;
+      _ => False
+    } ;
+
+--------------------------------------------------------------------------------
+-- Verbs
+
+-- Saeed p. 84-85
+-- Tense: Past/Present/Future
+-- Aspect: Simple/Progressive/Habitual
+-- Mood: Declarative/Imperative/Conditional/Optative/Potential
+-- Negation: Positive/Negative
+-- Sentence subordination: Main/Subordinate
+-- Not every possible combination of these categories occurs, as we shall see: for example, tense and aspect are only marked in declarative sentences; there is no negation in potential sentences, etc. We can group the possible combinations into the twelve verbal paradigms below, details of which are given in the next three sections for suffix verbs, prefix verbs and yahay 'be':
+-- 1. Imperative
+-- 2. Infinitive
+-- 3. Past simple
+-- 4. Past progressive
+-- 5. Past habitual
+-- 6. Present habitual
+-- 7. Present progressive
+-- 8. Future
+-- 9. Conditional
+-- 10. Optative
+-- 11. Potential
+-- 12. Subordinate clause forms  -- same as negative present. But they carry subject markers when made into SC.
+
+param
+
+  Aspect = Simple | Progressive ;
+
+  VForm =
+      VInf
+    | VPres Aspect VAgr Polarity
+    | VNegPast Aspect
+    | VPast Aspect VAgr
+    | VImp Number Polarity
+    | VRel GenNum {- Saeed p. 95-96 + ch 8
+                     Reduced present general in relative clauses;  as absolutive
+                      1/2SG/3SG M/2PL/3PL suga (VRel MascSg)
+                      3 SG F sugta (VRel FemSg)
+                      1PL sugna (VRel PlInv) -}
+    | VRelNeg     -- Saeed p. 211 have: lahayn, be: ahayni
+    | VNegCond GenNum ;
+
+  VAgr =
+      Sg1_Sg3Masc
+    | Sg2_Sg3Fem
+    | Pl1_
+    | Pl2_
+    | Pl3_ ;
+
+  PredType = NoPred | Copula | NoCopula ;
+
+  STM = Waa PredType | Waxa ;
+
+  VVForm = Infinitive | Subjunctive | Waa_In ;
+
+oper
+  if_then_Pol : Polarity -> Str -> Str -> Str = \p,t,f ->
+    case p of {Pos => t ; Neg => f } ;
+
+  forceAgr : Agreement -> (VForm=>Str) -> (VForm=>Str) = \agr,tbl -> table {
+    VPres asp _a pol => tbl ! VPres asp (agr2vagr agr) pol ;
+    VPast asp _a     => tbl ! VPast asp (agr2vagr agr) ;
+    x                => tbl ! x
+    } ;
+
+  agr2vagr : Agreement -> VAgr = \agr -> case agr of {
+    Sg1|Sg3 Masc|Impers => Sg1_Sg3Masc ;
+    Sg2|Sg3 Fem => Sg2_Sg3Fem ;
+    Pl1 _ => Pl1_ ; Pl2 => Pl2_ ; Pl3 => Pl3_
+  } ;
+
+  isNeg : VForm -> Bool = \vf -> case vf of {
+    VNegPast _ => True ;
+    VNegCond _ => True ;
+    VRelNeg    => True ;
+    VImp _ Neg => True ;
+    VPres _ _ Neg => True ;
+    _ => False
+    } ;
+
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=0b300a1b146f:351-360
+start=351
+end=360
+----
+  showSTM : STM -> Str = \stm -> case stm of {
+    Waxa  => "waxa" ; Waa _ => "waa" } ;
+--------------------------------------------------------------------------------
+-- Clauses
+
+param
+
+  ClType = Statement | PolarQuestion | WhQuestion | Subord ;
+
+}
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/PhraseSom.gf"
+id=c07403ab6f68
+kind=source
+size=930
+lines=33
+chunks=0
+----
+concrete PhraseSom of Phrase = CatSom ** open Prelude, ResSom in {
+
+  lin
+    PhrUtt pconj utt voc = {s = pconj.s ++ utt.s ++ voc.s} ;
+
+    UttS s = {s = s.s ! False} ;
+    UttQS qs = qs ;
+    UttIAdv iadv = iadv ;
+
+    UttImpSg pol imp =
+      let ha = case pol.p of {Pos => [] ; Neg => "ha"}
+      in {s = ha ++ imp.s ! Sg ! pol.p} ;
+    UttImpPl pol imp =
+      let ha = case pol.p of {Pos => [] ; Neg => "ha"}
+       in {s = ha ++ imp.s ! Pl ! pol.p} ;
+    UttImpPol = UttImpSg ;
+
+    UttIP ip = {s = ip.s ! Abs} ;
+    UttNP np = {s = np.s ! Abs} ;
+    UttVP vp = {s = infVP vp} ;
+    UttAdv adv = {s = linAdv adv} ;
+    UttCN n = {s = linCN n} ;
+    UttCard n = {s = n.s ! Mid} ;
+    UttAP ap = { s = ap.s ! AF Sg Abs } ;
+    UttInterj i = i ;
+
+    NoPConj = {s = []} ;
+    PConjConj conj = {s = conj.s1 ++ conj.s2 ! Indefinite} ;
+
+    NoVoc = {s = []} ;
+    VocNP np = { s = "," ++ np.s ! Abs } ; --TODO: vocative exists
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/QuestionSom.gf"
+id=e42ff16b5ff5
+kind=source
+size=4771
+lines=131
+chunks=0
+----
+concrete QuestionSom of Question = CatSom ** open
+  Prelude, ResSom, ParadigmsSom, (VS=VerbSom), (NS=NounSom), (SS=StructuralSom) in {
+
+-- A question can be formed from a clause ('yes-no question') or
+-- with an interrogative.
+
+  lin
+  -- : Cl -> QCl ;
+  QuestCl = cl2qcl PolarQuestion True;
+
+  -- : IP -> VP -> QCl ;
+  QuestVP ip vp = -- TODO: if we want to contract baa + subj. pronoun, change ResSom.predVP
+    let cls : ResSom.ClSlash = predVP ip vp ;
+        baan : Str = case ip.contractSTM of {True => "aan" ; _ => "baa aan"} ;
+        cl : ResSom.ClSlash = cls ** {
+                stm = modSTM "baa" baan cls.stm
+        } ;
+     in cl2qcl PolarQuestion (notB ip.contractSTM) cl ;
+
+  -- : IP -> ClSlash -> QCl ; -- whom does John love
+  QuestSlash ip cls =
+    let baan : Str = case ip.contractSTM of {True => "aan" ; _ => "baa aan"} ;
+        clsIPFocus = cls ** {
+          subj = cls.subj ** {  -- keep old subject pronoun,
+                   noun = ip.s ! Nom -- and place IP first.
+                 } ;
+          obj = cls.obj ** { -- move old subject noun before object.
+                   s = cls.subj.noun ++ cls.obj.s
+                 } ;
+          stm = modSTM "baa" baan cls.stm
+        } ;
+     in cl2qclslash (notB ip.contractSTM) clsIPFocus ;
+
+  -- : IAdv -> Cl -> QCl ;    -- why does John walk
+  QuestIAdv iadv cls =
+    let clRaw : ResSom.ClSlash = insertIAdv iadv cls ;
+        sbj = clRaw.subj ;
+        cl : ResSom.ClSlash = clRaw ** {
+            stm = \\clt,p => case <clt,p> of {
+                                -- IAdv is focused with baa, and subject comes after
+                                <_,Pos> => case iadv.contractSTM of {
+                                             True => [] ; _ => "baa"}
+                                        ++ sbj.pron ++ sbj.noun ;
+                                _ => case iadv.contractSTM of {
+                                      True => [] ; _ => clRaw.stm ! WhQuestion ! p}
+                                  ++ sbj.pron ++ sbj.noun } ;
+            subj = sbj ** {noun, pron = []}  -- to force subject after baa
+        } ;
+     in cl2qcl WhQuestion True cl ; -- True because we handle STM placement in cl.stm
+
+  -- : IComp -> NP -> QCl ;   -- where is John?
+  QuestIComp icomp np =
+    let cls = predVP np (VS.UseComp (icomp2comp icomp)) ;
+        -- cl = cls ** { -- TODO: neg. questions
+        --       stm : ClType=>Polarity=>Str = \\_,_ => "waa"
+        -- }
+     in cl2sentence False cls ; -- copula is dropped and STM is waa
+
+-- Interrogative pronouns can be formed with interrogative
+-- determiners, with or without a noun.
+
+  -- : IDet -> CN -> IP ;       -- which five songs
+  IdetCN idet cn = {contractSTM = False} ** NS.DetCN idet cn ;
+
+  -- : IDet       -> IP ;       -- which five
+  IdetIP idet = {contractSTM = False} ** NS.DetNP idet ;
+
+-- They can be modified with adverbs.
+  -- : IP -> Adv -> IP ;        -- who in Paris
+  --AdvIP = NS.AdvNP ;
+
+-- Interrogative quantifiers have number forms and can take number modifiers.
+
+  -- : IQuant -> Num -> IDet ;  -- which (five)
+  IdetQuant = NS.DetQuant ;
+
+-- Interrogative adverbs can be formed prepositionally.
+  -- : Prep -> IP -> IAdv ;     -- with whom
+  PrepIP prep ip = SS.prepIP prep (ip.s ! Abs) False ;
+
+-- They can be modified with other adverbs.
+
+  -- : IAdv -> Adv -> IAdv ;    -- where in Paris
+  --  AdvIAdv iadv adv = iadv ** {s = iadv.s ++ adv.berri} ; -- TODO do we need AdpCombination in IAdv?
+
+-- Interrogative complements to copulas can be both adverbs and
+-- pronouns.
+
+  -- : IAdv -> IComp ;
+  CompIAdv iadv = iadv ;            -- where (is it)
+
+  -- : IP -> IComp ;
+  CompIP ip = {s = ip.s ! Abs} ;    -- who (is it)
+
+{-
+-- More $IP$, $IDet$, and $IAdv$ are defined in $Structural$.
+
+-- Wh questions with two or more question words require a new, special category.
+
+  cat
+    QVP ;          -- buy what where
+  fun
+    ComplSlashIP  : VPSlash -> IP -> QVP ;   -- buys what
+    AdvQVP        : VP  ->   IAdv -> QVP ;   -- lives where
+    AddAdvQVP     : QVP ->   IAdv -> QVP ;   -- buys what where
+
+    QuestQVP      : IP -> QVP -> QCl ;       -- who buys what where
+-}
+
+oper
+
+  icomp2comp : SS -> Complement = \icomp -> icomp ** {
+    aComp = \\_ => [] ;
+    nComp = icomp.s ;
+    compar = [] ;
+    stm = Waa NoCopula
+  } ;
+
+  -- Question clauses: subject pronoun not included, STM is
+  cl2qcl : ClType -> Bool -> ResSom.ClSlash -> Clause = \cltyp ->
+    let hasSubjPron : Bool = False ;
+        isRel : Bool = False ;
+     in mkClause cltyp isRel hasSubjPron ;
+
+  -- Question clause with wh-word as object: subject pronoun is included
+  cl2qclslash : Bool -> ResSom.ClSlash -> Clause =
+    let hasSubjPron : Bool = True ;
+        isRel : Bool = False ;
+     in mkClause PolarQuestion isRel hasSubjPron ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/README.md"
+id=519ef6c98be3
+kind=markdown
+size=565
+lines=26
+chunks=0
+----
+# Somali
+
+## Language info
+
+* English name: Somali
+* Autonym: Af-Soomaali
+* ISO code: Som
+
+## Authors
+
+Inari Listenmaa, 2018-
+
+## Publications
+
+-
+
+## Implementation information
+
+Grammars by [John Saeed](https://benjamins.com/catalog/loall.10) and [Morgan Nilsson](http://morgannilsson.se/Kort%20somalisk%20grammatik.pdf) have been used
+in development. Saeed and Nilsson differ in orthography in some cases;
+this grammar follows Nilsson's convention, in which sentence type markers
+do not contract with subject pronouns.
+
+## Maintainer
+
+Inari Listenmaa (@inariksit)
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/RelativeSom.gf"
+id=709d5c95649f
+kind=source
+size=2427
+lines=63
+chunks=0
+----
+concrete RelativeSom of Relative = CatSom ** open
+  ResSom, Prelude, (NS=NounSom), (SS=StructuralSom) in {
+
+
+lin
+  --  : Cl -> RCl ;            -- such that John loves her
+  -- RelCl cl = {s = cl.s ! Subord} ;
+
+  -- : RP -> VP -> RCl ;
+  {- NB. this works because vfSubord only puts different forms from vfStatement
+    in Pres,Simul,Pos. RelVP needs a third set of forms in Abs,Pres,Simul,Pos,
+    called "reduced present general" (Saeed p. 95-96 + ch 8).
+    These forms are found in VRel in VP, and aren't chosen by predVP, so we put
+    them in manually in RelVP.
+  -}
+  RelVP rp vp = {s = \\gn,c,t,a,p =>
+    let cls = predVP impersNP vp ;
+        rclSubord = cl2rcl cls ;
+        rclStatement = cl2rclNom cls ;
+    in rp.s ++ case <gn,c,t,a,p> of {
+        <g,Abs,Pres,Simul,Pos> => linVP (VRel g) Subord vp ; -- reduced present only in absolutive
+        <_,Abs,Pres,Simul,Neg> => linVP VRelNeg Subord vp ; -- special form for have and be
+        <_,Nom,Pres,Simul,Pos> => rclStatement.s ! t ! a ! p ; -- as nominative, use the usual forms, not subordinate
+        _ => rclSubord.s ! t ! a ! p } -- the rest is Subord because of negation.
+    } ;
+
+  -- : RP -> ClSlash -> RCl ; -- whom John loves
+  RelSlash rp cls =
+    let rcl = cl2relslash cls -- in subordinate clause, STM is not included but subject pronoun is
+     in rcl ** {s = \\g,c,t,a,p => rp.s ++ rcl.s ! t ! a ! p} ;
+
+
+  -- : RP ;
+  IdRP = {s = ""} ; -- no overt relative pronoun "that, which". For "what" e.g. "tell me what you saw", use waxa. (Nilsson p. 107)
+
+  -- : Prep -> NP -> RP -> RP ;  -- the mother of whom
+  --FunRP prep np rp = {} ;
+
+oper
+
+  -- RelVP: subject pronoun is never included
+  cl2rcl : ClSlash -> Clause =
+    let hasSubjPron : Bool = False ;
+        hasSTM : Bool = False ;
+        isRel : Bool = True ;
+     in mkClause Subord isRel hasSubjPron hasSTM ;
+
+  -- No subject pronoun, no STM, but use verb forms from Statement
+  cl2rclNom : ClSlash -> Clause = \cls ->
+    let hasSubjPron : Bool = False ;
+        hasSTM : Bool = False ;
+        isRel : Bool = True ;
+      in mkClause Statement isRel hasSubjPron hasSTM cls ;
+
+  -- RelSlash: subject pronoun is included if it's not 3rd person
+  -- TODO check this rule with more example sentences
+  cl2relslash : ClSlash -> Clause =
+    let hasSubjPron : Bool = True ;
+        hasSTM : Bool = False ;
+        isRel : Bool = True ;
+     in mkClause Subord isRel hasSubjPron hasSTM ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/ResSom.gf"
+id=5a274f7b4505
+kind=source
+size=45999
+lines=1192
+chunks=4
+
+--- CHUNK BEGIN ---
+id=5a274f7b4505:1-350
+start=1
+end=350
+----
+resource ResSom = ParamSom ** open Prelude, Predef, ParamSom in {
+
+--------------------------------------------------------------------------------
+-- Nouns
+oper
+
+  Noun : Type = {
+    s : NForm => Str ;
+    gda : GenderDefArt ;
+    shortPoss : Bool ;
+    } ;
+  Noun2 : Type = Noun ; -- TODO eventually more parameters?
+  Noun3 : Type = Noun ;
+
+  CNoun : Type = Noun ** {
+    mod : State -- for conjunctions: oo for indef, ee for def
+       => Number => Case => Str ;
+    modtype : ModType ;
+    isPoss : Bool -- to prevent impossible forms in ComplN2 with Ns that have short possessive, e.g. "father"
+    } ;
+
+  cn2str : Number -> Case -> CNoun -> Str = \n,c,cn ->
+    cn.s ! Indef n ++ cn.mod ! Indefinite ! n ! c ;
+
+  PNoun : Type = {s : Str ; a : Agreement} ;
+
+  mkPNoun : Str -> Agreement -> PNoun = \str,agr -> {s = str ; a = agr} ;
+
+  mkNoun : (x1,_,_,x4 : Str) -> Gender -> Noun = \wiil,wiilka,wiilal,wiilasha,gender -> {
+    s = table {
+          Def Sg => hooya ; Def Pl => gury ;
+          Indef Sg => wiil ; Indef Pl => wiilal ;
+          -- Special forms for feminine nouns
+          NomSg => bisadi ; Numerative => bisadood
+          } ;
+    gda = defAllomorph wiilka wiilasha ;
+    shortPoss = False
+    } where {
+        hooya : Str = case wiilka of {
+                        aabb + "aha" => aabb ;
+                        hooya + "da" => hooya ;
+                        wiila + "sha" => wiila ;
+                        _ => wiil} ;
+        gury : Str = case wiilasha of {
+                        gury + "aha" => gury ;
+                        magacya + "da" => magacya ;
+                        wiila + "sha" => wiila ;
+                        _ => wiilal} ;
+        bisadi : Str = case gender of {
+                        Fem  => case wiil of {
+                                  _ + #c => wiil+"i" ;
+                                  _      => wiil } ;
+                        Masc => wiil } ;
+        bisadood : Str = case gender of {
+                        Fem  => case wiilal of {
+                                  _ + "o" => wiilal+"od" ;
+                                  _ => wiil } ;
+                        Masc => wiil }
+
+    } ;
+-------------------------
+-- Regular noun paradigms
+  nHooyo, nAabbe, nMas, nUl, nGuri, nXayawaan : Str -> Noun ;
+
+  --1) Feminine nouns that end in -o
+  nHooyo hooyo =
+    mkNoun hooyo (init hooyo + "ada") (hooyo + "oyin") (hooyo + "oyinka") Fem ;
+
+  --2) Masculine nouns that end in -e
+  nAabbe aabbe = let aabb = init aabbe in
+    mkNoun aabbe (aabb + "aha") (aabb + "ayaal") (aabb + "ayaasha") Masc ;
+
+  -- 3) Masculine, plural with duplication
+  nMas mas = let s = last mas ;
+                 a = last (init mas) ;
+                 ka = allomorph mKa mas in
+    mkNoun mas (mas + ka) (mas + a + s) (mas + a + s + ka) Masc ;
+
+  -- Irregular one-syllable masculine word
+  nWiil : (_,_ : Str) -> Noun = \wiil,wiilal ->
+    let ka = allomorph mKa wiil ;
+        sha = allomorph mTa wiilal ;
+        wiila : Str = case wiilal of {wiila + "l" => wiila ; _ => wiilal} in
+    mkNoun wiil (wiil + ka) wiilal (wiila + sha) Masc ;
+
+  -- 4a) Feminine, plural with ó
+  nUl ul = let o  = case last ul of { "i" => "yo" ; _ => "o" } ;
+               u  = case last ul of { "l" => init ul ; _ => ul } ;
+               sha = allomorph mTa ul in
+    mkNoun ul (u + sha) (ul + o) (ul + "aha") Fem ;
+
+  -- 4b) Masculine, plural with ó, 2 syllables
+  nGuri guri = let ga = allomorph mKa guri ;
+                   gury = case last guri of { -- TODO does this generalise? Or just exception?
+                                 "i" => init guri + "y" ;
+                                 _   => guri } ;
+                    o = allomorph mO gury in
+    mkNoun guri (guri + ga) (gury + o) (gury + "aha") Masc ;
+
+  -- 4c) Masculine, plural with -ó, 3 syllables or longer
+  nXayawaan x = let ka = allomorph mKa x ;
+                    o = allomorph mO x ;
+                    xo = x + o in
+    mkNoun x (x + ka) xo (init xo + "ada") Masc ;
+
+  nMaalin : (_,_ : Str) -> Gender -> Noun = \maalin,maalmo,g ->
+   let ta = case g of { Masc => allomorph mKa maalin ;
+                        Fem  => allomorph mTa maalin } ;
+       aha = case g of { Masc|Fem  => "aha" } ; ---- ?
+   in mkNoun maalin (maalin + ta) maalmo (init maalmo + aha) g ;
+
+-------------------------
+-- Smart paradigms
+
+  mkN1 : Str -> Noun = \n -> case n of {
+      _ + ("ad"|"adh") => nUl n ;
+      _ + "o"          => nHooyo n ;
+      _ + "e"          => nAabbe n ;
+      _ + "ri"         => nGuri n ;
+      (#c + #v + #v + #c) -- One syllable words
+       | (#v + #v + #c)
+       | (#c + #v + #c)
+       | (#v + #c)     => nMas n ;
+      _                => nXayawaan n } ;
+
+  mk2N : Str -> Str -> Noun = nWiil ;
+
+  mkNg : Str -> Gender -> Noun = \n,g -> case n of {
+      _ -- + ("r"|"n"|"l"|"g")
+          => case g of {
+                  Fem  => nUl n ;
+                  Masc => mkN1 n } ;
+      _   => mkN1 n
+   } ; -- TODO: add more exceptional cases
+
+---------------------------------------------
+-- NP
+
+  BaseNP : Type = {
+    a : Agreement ;
+    isPron : Bool ;
+    st : State ;
+    empty : Str ;
+    } ;
+
+  NounPhrase : Type = BaseNP ** {s : Case => Str} ;
+
+  NPLite : Type = {s : Str ; a : AdpObjAgr} ; -- Used in Adv and as an object in VP
+
+  nplite : NounPhrase -> NPLite = \np ->
+    let objAgr : AdpObjAgr = agr2objAgr np.a in
+    case <np.isPron,isP3 np.a> of {
+      <False,_>   => {s = np.s ! Abs ; a = objAgr} ;
+      -- <True,True> => {s = objpron np ! Abs ; a = objAgr} ; -- uncomment if you want to add long object pronoun for 3rd person object
+      _ => {s = np.empty ; a = objAgr} } ; -- no long object for other pronouns
+
+  objpron : NounPhrase -> Case => Str = \np -> case np.isPron of {
+    True => \\c => np.empty ++ (pronTable ! np.a).sp ! c ;
+    False => np.s} ;
+
+  useN : Noun -> CNoun ** BaseNP = \n -> n **
+    { mod = \\_,_,_ => [] ; modtype = NoMod ;
+      a = Sg3 (gender n) ; isPron,isPoss = False ;
+      empty = [] ; st = Indefinite
+    } ;
+
+  emptyNP : NounPhrase = {
+    s = \\_ => [] ;
+    a = Sg3 Masc ;
+    isPron = False ;
+    empty = [] ;
+    st = Indefinite
+    } ;
+
+  impersNP : NounPhrase = pronTable ! Impers ;
+
+  indeclNP : Str -> NounPhrase = \s -> emptyNP ** {s = \\c => s} ;
+
+--------------------------------------------------------------------------------
+-- Pronouns
+
+  Pronoun : Type = NounPhrase ** {
+    poss : { -- for PossPron : Pron -> Quant
+      s : DefArticle => Str ;
+      sp : GenNum => Str ; -- independent forms, e.g. M:kayga F:tayda Pl:kuwayga
+      short : DefArticle => Str -- short possessive suffix: e.g. family members, my/your name
+      } ;
+    sp : Case => Str ;
+    } ;
+
+  {- Saeed p.115: "This combination of possessive and article [kay-ga, tay-da]
+      is the basic form but possessives occur with the full range of determiners,
+      with associated meanings, for example:
+      remote article kii/tii:    gurigaagii 'your house (remote)'
+      demonstrative kaas/taas:   gurigaagaas 'that house of yours'
+      interrogative kee/tee:     gurigaagee? 'which house of yours?'"
+
+     Since RGL abstract syntax doesn't allow combining two Quants, the way to go is
+     to have another Pron -> Quant function in Extra, which forms Quants such as
+     -gaagii, -gaagaas, -gaagee.
+  -}
+
+  pronTable : Agreement => Pronoun = table {
+    Sg1 => {
+      s = table {Nom => "aan" ; Abs => "i"} ;
+      a = Sg1 ; isPron = True ; sp = table {Nom => "anigu" ; _ =>"aniga"} ;
+      empty = [] ; st = Definite ;
+      poss = {s = quantTable "ayg" "ayd" ; short = quantTable "ay" ; sp = gnTable "ayg" "ayd" "uwayg"}
+      } ;
+    Sg2 => {
+      s = table {Nom => "aad" ; Abs => "ku"} ;
+      a = Sg2 ; isPron = True ; sp = table {Nom => "adigu" ; _ => "adiga"} ;
+      empty = [] ; st = Definite ;
+      poss = {s = quantTable "aag" "aad" ; short = quantTable "aa" ; sp = gnTable "aag" "aad" "uwaag"}
+      } ;
+    Sg3 Masc => {
+      s = table {Nom => "uu" ; Abs => []} ;
+      a = Sg3 Masc ; isPron = True ; sp = table {Nom => "isagu" ; _ => "isaga"} ;
+      empty = [] ; st = Definite ;
+      poss = {s, short = quantTable "iis" ; sp = gnTable "iis" "iis" "uwiis"}
+      } ;
+    Sg3 Fem => {
+      s = table {Nom => "ay" ; Abs => []} ;
+      a = Sg3 Fem ; isPron = True ; sp = table {Nom => "iyadu" ; _ => "iyada"} ;
+      empty = [] ; st = Definite ;
+      poss = {s, short = quantTable "eed" ; sp = gnTable "eed" "eed" "uweed"}
+      } ;
+    Pl1 Excl => {
+      s = table {Nom => "aan" ; Abs => "na"} ;
+      a = Pl1 Excl ; isPron = True ; sp = table {Nom => "annagu" ; _ => "annaga"} ;
+      empty = [] ; st = Definite ;
+      poss = {s = quantTable "eenn" ; short = quantTable "een" ; sp = gnTable "eenn" "eenn" "uweenn"}
+      } ;
+    Pl1 Incl => {
+      s = table {Nom => "aynu" ; Abs => "ina"} ;
+      a = Pl1 Incl ; isPron = True ; sp = table {Nom => "innagu" ; _ => "innaga"} ;
+      empty = [] ; st = Definite ;
+      poss = {s = quantTable "eenn" ; short = quantTable "een" ; sp = gnTable "eenn" "eenn" "uweenn"}
+      } ;
+    Pl2 => {
+      s = table {Nom => "aad" ; Abs => "idin"} ;
+      a =  Pl2 ; isPron = True ; sp = table {Nom => "idinku" ; _ => "idinka"} ;
+      empty = [] ; st = Definite ;
+      poss = {s = quantTable "iinn" ; short = quantTable "iin" ; sp = gnTable "iinn" "iinn" "uwiinn"}
+      } ;
+    Pl3 => {
+      s = table {Nom => "ay" ; Abs => []} ;
+      a = Pl3 ; isPron = True ; sp = table {Nom => "iyagu" ; _ => "iyaga"} ;
+      empty = [] ; st = Definite ;
+      poss = {s, short = quantTable "ood" ; sp = gnTable "ood" "ood" "uwood"}
+      } ;
+    Impers => {
+      s = \\_ => [] ; -- the string `la' comes from the AdpCombination value `ImpersSubj Adposition`
+      a = Impers ; isPron = True ; sp = \\_ => "" ;
+      empty = [] ; st = Definite ;
+      poss = {s, short = quantTable "iis" ; sp = gnTable "iis" "iis" "uwiis"}
+      }
+    } ;
+
+  secondObject : AdpObjAgr => Str = table {
+    Sg1Obj      => "kay" ;
+    Sg2Obj      => "kaa" ;
+    Pl1Obj Excl => "kayo" ;
+    Pl1Obj Incl => "keen" ;
+    Pl2Obj      => "kiin" ;
+    _             => []
+    } ;
+
+--------------------------------------------------------------------------------
+-- Det, Quant, Card, Ord
+
+  BaseQuant : Type = {
+    s : DefArticle => Case => Str ;
+    isPoss : Bool ;
+    shortPoss : DefArticle => Str ; -- short form of possessive, e.g. family members
+    st : State ;
+    } ;
+
+  Determiner : Type = BaseQuant ** {
+    sp : Gender => Case => Str ;
+    n : Number ;
+    numtype : NumType ;  -- placement in NP + whether to choose Numerative from CN
+    } ;
+
+  Quant : Type = BaseQuant ** {
+    sp : GenNum => Case => Str ;
+    } ;
+
+  BaseNum : Type = {
+    s : DForm => Str ; -- independent or attribute
+    thousand : Str ; -- TODO check where possessive suffix goes
+    hasThousand : Bool ;
+    da : DefArticle ;
+    n : Number
+    } ;
+
+  baseNum : Num = {
+    s = \\_ => [] ;
+    thousand = [] ;
+    hasThousand = False ;
+    da = M KA ;
+    n = Sg ;
+    numtype = NoNum
+    } ;
+
+  Num : Type = BaseNum ** {
+    numtype : NumType -- whether to choose Numerative as the value of NForm
+    } ;
+
+  Numeral : Type = BaseNum ** {
+    ord : Str
+    } ;
+
+  baseQuant : BaseQuant = {
+    s = \\alm,c => [] ;
+    isPoss = False ;
+    shortPoss = \\_ => [] ;
+    st = Indefinite
+  } ;
+
+  defQuant = defQuantBind True ;
+
+  defQuantBind : (bind : Bool) -> (s, kan, tan, kuwan : Str) -> (vowIsI : Bool) -> Quant = \b,s,spm,spf,spp,v ->
+    let bind : Str -> Str = \x -> case b of {False => x ; True => BIND ++ x} ;
+    in baseQuant ** {
+        s = \\allomorph,c =>
+           let nom = case v of {False => "u" ; _ => s + "i"}
+            in case c of {
+                Nom => bind (quantTable nom ! allomorph) ;
+                _   => bind (quantTable s ! allomorph) } ;
+        sp = \\gn,c =>
+           let i = case c of {Nom => "i"; _ => []}
+           in gnTable (spm + i) (spf + i) (spp + i) ! gn ;
+        st = Definite ;
+        } ;
+
+  defIQuant : Str -> Quant = \ee ->
+    let quantRaw = defQuant ee ("k"+ee) ("t"+ee) ("kuw"+ee) False
+     in quantRaw ** {
+          s = \\da,c => quantRaw.s ! da ! Abs ;
+          sp = \\gn,c => quantRaw.sp ! gn ! Abs } ;
+
+  gnTable : (m,f,p : Str) -> (GenNum => Str) = \m,f,p ->
+    table {SgMasc => m ; SgFem => f ; _ => p} ;
+
+  indefQuant : Quant = baseQuant ** {
+    s = \\da,c => [] ;
+    sp = \\gn,c => [] ;
+    st = Indefinite ;
+    } ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=5a274f7b4505:351-700
+start=351
+end=700
+----
+
+--------------------------------------------------------------------------------
+-- Adpositions
+
+  Prep : Type = {
+    s : AdpObjAgr => Str ;
+    c2 : Adposition ;
+    isPoss : Bool ;
+    berri, sii, dhex : Str ;
+    hoostiisa : Agreement => Str } ;
+
+  mkPrep : (x1,_,_,_,_,x6 : Str) -> {s : AdpObjAgr => Str} = \ku,ii,kuu,noo,idiin,isku -> {
+    s = table {
+          ZeroObj     => ku ;
+          Sg1Obj      => ii ;
+          Sg2Obj      => kuu ;
+          Pl2Obj      => idiin ;
+          Pl1Obj Excl => noo ;
+          Pl1Obj Incl => "i" + noo ;
+          ReflexiveObj => isku
+        }
+    } ;
+  prep : Adposition -> {s : AdpObjAgr => Str ; c2 : Adposition} = \p ->
+    prepTable ! p ** {c2 = p} ;
+
+  prepTable : Adposition => {s : AdpObjAgr => Str} = table {
+    Ku => mkPrep "ku" "igu" "kugu" "nagu" "idinku" "isku" ;
+    Ka => mkPrep "ka" "iga" "kaa"  "naga" "idinka" "iska" ;
+    La => mkPrep "la" "ila" "kula" "nala" "idinla" "isla" ;
+    U  => mkPrep "u" "ii" "kuu" "noo" "idiin" "isu" ;
+    _  => mkPrep []  "i"  "ku"  "na"  "idin"  "is"
+  } ;
+
+  allContractions : AdpObjAgr => AdpCombination => Str = table {
+    Sg1Obj => table {
+                   Ugu => "iigu" ; Uga => "iiga" ; Ula => "iila" ;
+                   Kaga => "igaga" ; Kula => "igula" ; Kala => "igala" ;
+                   ImpersSubj NoAdp => "lay" ; -- alt. "la i"
+                   ImpersSubj U => "la ii" ;
+                   ImpersSubj La => "layla" ; -- alt. "la ila"
+                   ImpersSubj Ku => "laygu" ; -- alt. "la igu"
+                   ImpersSubj Ka => "layga" ; -- alt. "la iga"
+                   Single p => (prepTable ! p).s ! Sg1Obj } ;
+    Sg2Obj => table {
+                   Ugu => "kuugu" ; Uga => "kaaga" ; Ula => "kuula" ;
+                   Kaga => "kaaga" ; Kula => "kugula" ; Kala => "kaala" ;
+                   ImpersSubj NoAdp => "lagu" ; -- Lagu 1: ku = Sg2Obj
+                   ImpersSubj U => "laguu" ;
+                   ImpersSubj La => "lagula" ;
+                   ImpersSubj Ku => "lagugu" ;
+                   ImpersSubj Ka => "lagaa" ;
+                   Single p => (prepTable ! p).s ! Sg2Obj } ;
+    Pl1Obj Excl =>
+           table { Ugu => "noogu" ; Uga => "nooga" ; Ula => "noola" ;
+                   Kaga => "nagaga" ; Kula => "nagula" ; Kala => "nagala" ;
+                   ImpersSubj NoAdp => "nala" ;
+                   ImpersSubj U => "naloo" ;   -- alt. "lanoo"
+                   ImpersSubj La => "nalala" ; -- alt. "lanala"
+                   ImpersSubj Ku => "nalagu" ; -- alt. "lanagu"
+                   ImpersSubj Ka => "nalaga" ; -- alt. "lanaga"
+                   Single p => (prepTable ! p).s ! Pl1Obj Excl } ;
+    Pl1Obj Incl =>
+           table { Ugu => "inoogu" ; Uga => "inooga" ; Ula => "inoola" ;
+                   Kaga => "inagaga" ; Kula => "inagula" ; Kala => "inagala" ;
+                   ImpersSubj NoAdp => "inala" ;
+                   ImpersSubj U => "laynoo" ; -- alt. "la inoo" ;
+                   ImpersSubj La => "laynala" ; -- alt. "la inala" ;
+                   ImpersSubj Ku => "laynagu" ; -- alt. "la inagu" ;
+                   ImpersSubj Ka => "laynaga" ; -- alt. "la inaga" ;
+                   Single p => (prepTable ! p).s ! Pl1Obj Incl } ;
+    Pl2Obj =>
+           table { Ugu => "idiinku" ; Uga => "idiinka" ; Ula => "idiinla" ;
+                   Kaga => "idinkaga" ; Kula => "idinkula" ; Kala => "idinkala" ;
+                   ImpersSubj NoAdp => "laydin" ;
+                   ImpersSubj U => "laydiin" ; -- alt. "la idiin"
+                   ImpersSubj La => "laydinla" ; -- alt. "la idinla"
+                   ImpersSubj Ku => "laydinku" ; -- alt. "la idinku"
+                   ImpersSubj Ka => "laydinka" ; -- alt. "la idinka"
+                   Single p => (prepTable ! p).s ! Pl2Obj } ;
+    ReflexiveObj =>
+           table { Ugu => "isugu" ; Uga => "isaga" ;
+                   Ula => "isula" ; Kaga => "iskaga" ; Kula => "iskula" ; Kala => "iskala" ;
+                   ImpersSubj NoAdp => "lays" ;
+                   ImpersSubj U => "laysu" ;   -- alt. "la isu"
+                   ImpersSubj La => "laysla" ; -- alt. "la isla"
+                   ImpersSubj Ku => "laysku" ; -- alt. "la isku"
+                   ImpersSubj Ka => "layska" ; -- alt. "la iska"
+                   Single p => (prepTable ! p).s ! ReflexiveObj } ;
+    a   => table { Ugu => "ugu" ; Uga => "uga" ; Ula => "ula" ;
+                   Kaga => "kaga" ; Kula => "kula" ; Kala => "kala" ;
+                   ImpersSubj NoAdp => "la" ;
+                   ImpersSubj U => "loo" ;
+                   ImpersSubj La => "lala" ;
+                   ImpersSubj Ku => "lagu" ; -- Lagu 2: ku = Adp
+                   ImpersSubj Ka => "laga" ;
+                   Single p => (prepTable ! p).s ! a }
+  } ;
+
+--------------------------------------------------------------------------------
+-- Adjectives
+
+-- Sequences of adjectives follow the rules for restrictive relatives clauses, i.e. are linked by oo 'and' on an indefinite head NounPhrase and by ee 'and' on a definite NounPhrase (8.1).
+
+  Adjective : Type = {s : AForm => Str} ;
+  Adjective2 : Type = Adjective ** {c2 : Adposition} ;
+
+  duplA : Str -> Adjective = \yar ->
+    let yaryar = duplicate yar
+    in mkAdj yar yaryar ;
+
+  mkAdj : (str,pl : Str) -> Adjective = \sg,pl -> {
+    s = table {
+          AF Sg Nom => sg + "i" ;
+          AF Pl Nom => pl + "i" ;
+          AF Sg _ => sg ;
+          AF Pl _ => pl }
+    } ;
+
+  duplicate : Str -> Str = \sg -> case sg of {
+    -- some hard-coded cases; in general, better to
+    -- use 2-paradigm mkAdj for irregular adjectives.
+    "dheer" => "dhaadheer" ;
+    "weyn"  => "waaweyn" ;
+
+    -- general patterns
+    a@#v + d@#c + ? + ?  -- 4 letters of form CVXX
+        => a + d + sg ; -- ad+adag
+    g@#c + aa@#vv + _
+        => g + aa + sg ; -- gaa+gaaban
+    y@#c + a@#v + r@#c + _
+        => y + a + r + sg ; -- yar+yar ; fud+fudud
+    d@#c + h@#c + uu@#vv + _
+        => d + h + uu + sg ; -- dhuu+dhuuban
+    q@#c + a@#v + y@#vstar + b@#c + _
+        => q + a + y + b + sg ; --qayb+qaybsan, fiic+fiican
+    _   => sg + sg } ;
+
+  AdjPhrase : Type = Adjective ** {compar : Str} ;
+--------------------------------------------------------------------------------
+-- Verbs
+
+  BaseVerb : Type = {
+    s : VForm => Str ;
+    } ;
+  Verb : Type = BaseVerb ** {
+    sii : Str ; -- closed class of particles: sii, soo, kala, wada (Saeed 171)
+    dhex : Str ; -- closed class of adverbials: hoos, kor, dul, dhex, …
+    isCopula : Bool ;
+    } ;
+  Verb2 : Type = Verb ** {c2 : Adposition} ;
+  Verb3 : Type = Verb2 ** {c3 : Adposition} ;
+
+  VV : Type = Verb ** {vvtype : VVForm} ;
+
+  -- Saeed page 79:
+  -- "… the reference form is the imperative singular form
+  -- since it corresponds to the form of the basic root."
+
+  VerbRoots8 : Type = {imper,sg1stem,sg2stem,pl1stem,progr,inf,negpast,impernegpl : Str} ;
+
+  mkVerb : VerbRoots8 -> Verb = \vr ->
+    let arag : Str = vr.imper ;
+        qaat : Str = vr.sg1stem ;    -- +aa  -- hayst,  boogd,  joogsad, bilaab, ark,   akhriy,
+        hadash : Str = vr.sg2stem ;  -- +aa  -- haysat, booqat, joogsat, bilowd, aragt, akhris,
+        qaadann : Str = vr.pl1stem ; -- +aa  --
+        arki : Str = vr.inf ;
+        arkin : Str = vr.negpast ;
+        qaada : Str = init vr.negpast ; -- TODO: is this correct? is 2sg neg imperative same as negative past root?
+        ay : Str = case arag of {
+            _ + ("i"|"e") => "ey" ;
+            _             => "ay" } ;
+    in {
+      s = table {
+          VPres Simple Sg1_Sg3Masc pol
+                                    => qaat     + if_then_Pol pol "aa" "o" ;
+          VPres Simple Sg2_Sg3Fem pol
+                                    => hadash  + if_then_Pol pol "aa" "o" ;
+          VPres Simple Pl1_ pol     => qaadann + if_then_Pol pol "aa" "o"  ;
+          VPres Simple Pl2_ pol     => hadash  + "aan" ;
+          VPres Simple Pl3_ pol     => qaat    + "aan" ;
+
+          VPres Progressive Sg1_Sg3Masc pol
+                                     => vr.progr + if_then_Pol pol "aa" "o" ;
+          VPres Progressive Sg2_Sg3Fem pol
+                                     => vr.progr + if_then_Pol pol "saa" "so" ;
+          VPres Progressive Pl1_ pol
+                                     => vr.progr + if_then_Pol pol "naa" "no"  ;
+          VPres Progressive Pl2_ pol => vr.progr + "saan" ;
+          VPres Progressive Pl3_ pol => vr.progr + "aan" ;
+
+          VPast Simple Sg1_Sg3Masc
+                                  => qaat    + ay ;
+          VPast Simple Sg2_Sg3Fem => hadash  + ay ;
+          VPast Simple Pl1_       => qaadann + ay ;
+          VPast Simple Pl2_       => hadash  + "een" ;
+          VPast Simple Pl3_       => qaat    + "een" ;
+
+          VPast Progressive Sg1_Sg3Masc => vr.progr + "ey" ;
+          VPast Progressive Sg2_Sg3Fem  => vr.progr + "sey" ;
+          VPast Progressive Pl1_        => vr.progr + "ney" ;
+          VPast Progressive Pl2_        => vr.progr + "seen" ;
+          VPast Progressive Pl3_        => vr.progr + "een" ;
+
+          VNegPast Simple      => arkin ;
+          VNegPast Progressive => vr.progr + "n" ;
+
+          -- TODO check conjugations 2 and 3
+          VNegCond SgMasc => qaat    + "een" ; -- for most verbs same as VPast Simple Pl3_
+          VNegCond SgFem  => hadash  + "een" ; -- for most verbs same as VPast Simple Pl2_
+          VNegCond PlInv  => qaadann + "een" ; --
+
+          VImp Sg Pos   => arag ;
+          VImp Pl Pos   => qaat + "a" ;
+          VImp Sg Neg   => qaada + "n" ;
+          VImp Pl Neg   => vr.impernegpl ;
+
+          VInf          => arki ;
+          VRel SgMasc   => qaat + "a" ;
+          VRel SgFem    => hadash + "a" ;
+          VRel PlInv    => qaadann + "a" ;
+          VRelNeg       => qaat + "o"  -- TODO check
+
+          } ;
+        sii, dhex = [] ;
+        isCopula = False ;
+      } ;
+
+-------------------------
+-- Regular verb paradigms
+
+  cSug, cBilaab, cKari, cYaree, cHayso, cJoogso, cQaado : Str -> VerbRoots8 ;
+  cArag : (arag,arkaa : Str) -> VerbRoots8 ;
+
+  -- 1: Root verbs with no lexical affixes, e.g. sug TR 'wait for', kar INTR 'boil, cook';
+  -- NB. imperative unable to distinguish whether stem consonant is K or G: sug~sugaa vs. bug~bukaa
+  cSug sug =
+    let cabb : Str = case sug of {
+          ca + "b" => ca + "bb" ; -- TODO: more duplication patterns
+          _       => sug } ;
+     in cArag sug (cabb+"aa") ;
+
+  -- Imperative only cannot distinguish whether the vowel is epenthetic, and whether stem consonant is G/K or N/M
+  cArag arag arkaa = -- analogously: bug~bukaa, tartan~tartamaa
+    let ark : Str = init (init arkaa) ;
+        n : Str = case arag of {
+               _ + #v  => "nn" ; -- n duplicates after vowel
+               _ + "r" => "r" ; -- Saeed p. 35: agreement marker n (1PL)
+               _ + "l" => "l" ; -- assimilates to stem final r or.
+               _       => "n" } ;
+        t : Str = case arag of { -- kari+saa, noq+daa, (sug|joogsa|qaada)+taa, hadh+aa
+          _ + ("x"|"q"|"c") => "d" ; -- t changes into d after x/q/c
+          _ + "dh"          => [] ; -- duplicates after dh, but not written
+          _                 => "t" } ;
+        hadash : Str = case arag of {
+          hada + "l" => hada + "sh" ;
+          _ => arag + t
+        } ;
+
+     in { imper = arag ;
+          sg1stem = ark ;
+          sg2stem = hadash ;
+          pl1stem = arag + n ;
+          inf = ark + "i" ;
+          progr = ark + "ay" ;
+          negpast = ark + "in" ;
+          impernegpl = ark + "ina" } ;
+
+
+
+  -- Predictable stem alterations: aab->ow
+  cBilaab bilaab =
+    let bilow : Str = init (init (init bilaab)) + "ow" ;
+     in cArag bilaab (bilaab + "aa") ** {
+          sg2stem = bilow + "d" ;
+          pl1stem = bilow + "n" } ;
+
+
+  -- 2A: Verbs derived from root verbs by the causative affix -i/-is, e.g. kari TR 'cook' (from conjugation 1 kar INTR 'boil, cook');
+  -- 2B: Verbs derived from nouns and adjectives by the causative/factitive affix -eel-ayn, e.g. yaree 'make small' (from yar ADJ 'small');
+  cKari kari = { imper = kari ;
+                 sg1stem = kari + "y" ;
+                 sg2stem = kari + "s" ;
+                 pl1stem = kari + "nn" ;
+                 inf, negpast = kari + "n" ;
+                 progr = kari + "nay" ;
+                 impernegpl = kari + "nina" } ;
+
+  cYaree yaree =
+    let yar : Str = init (init yaree) ;
+        yarey : Str = case yaree of {
+          yar + "ee" => yar + "ey" ;
+          _ => yaree + "n" -- ideally shouldn't happen; this constructor should only be applied to imperatives that end in ee
+        } ;
+    in { imper = yaree ;
+         sg1stem = yaree + "y" ;
+         sg2stem = yarey + "s" ;
+         pl1stem = yarey + "n" ;
+         inf, negpast = yarey + "n" ;
+         progr = yarey + "nay" ;
+         impernegpl = yar + "aynina" } ;
+
+
+  -- 3A: Verbs derived from verbal stems by the middle voice affix -ol­/at
+  -- e.g. karsó 'cook for oneself (from conjugation 2 kâri TR 'cook');
+  cJoogso joogso =
+    let joogsa = init joogso + "a" ;
+     in { imper = joogso ;
+          sg1stem = joogsa + "d" ;
+          sg2stem = joogsa + "t" ;
+          pl1stem = joogsa + "nn" ;
+          inf, negpast = joogsa + "n" ;
+          progr = joogsa + "nay" ;
+          impernegpl = joogsa + "nina" } ;
+
+  cHayso hayso = -- otherwise like joogso, but sg1 is different
+    let hays  : Str = init hayso ;
+     in cJoogso hayso ** {sg1stem = hays + "t"} ;
+
+
+  -- 3B: As conjugation 3A but verbs whose syllable structure triggers
+  -- stem contraction and subsequent sandhi rules, e.g. qaadó 'take for oneself
+  -- (from conjugation 1 qàad TR 'take').
+  cQaado qaado =
+    let qaa = init (init qaado)
+     in cJoogso qaado ** { sg1stem = qaa + "t" } ;
+
+  -- Constructs verbs like u baahan+ahay
+  prefixV : Str -> Verb -> Verb = \s,v -> v ** {
+    s = \\vf => s + v.s ! vf
+  } ;
+
+------------------
+-- Irregular verbs
+  presCopula : {agr:Agreement ; pol:Polarity} => Str =
+    \\a => case <a.agr,a.pol> of {
+        <Sg1,pol>    => if_then_Pol pol "ahay" "ihi" ;
+        <Sg2,pol>    => if_then_Pol pol "tahay" "ihid" ;
+        <(Sg3 Masc|Impers),pol> => if_then_Pol pol "yahay" "aha" ;
+        <(Sg3 Fem),pol> => if_then_Pol pol "tahay" "aha" ;
+        <(Pl1 _),pol> => if_then_Pol pol "nahay" "ihin" ;
+        <Pl2,pol>     => if_then_Pol pol "tihiin" "ihidin" ;
+        <Pl3,pol>     => if_then_Pol pol "yihiin" "aha"
+  } ;
+
+  copula : Verb = {
+    s = table {
+          VPast _ Sg1_Sg3Masc
+                          => "ahaa" ;
+          VPast _ Sg2_Sg3Fem
+                          => "ahayd" ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=5a274f7b4505:701-1050
+start=701
+end=1050
+----
+          VPast _ Pl1_    => "ahayn" ;
+          VPast _ Pl2_    => "ahaydeen" ;
+          VPast _ Pl3_    => "ahaayeen" ;
+          VNegPast _      => "ahi" ;
+          VNegCond SgMasc => "ahaadeen" ; -- 1SG/3 SG M/3PL
+          VNegCond SgFem  => "ahaateen" ; -- 2SG/3 SG F/2PL
+          VNegCond PlInv  => "ahaanneen" ; -- 1PL
+          VRel _          => "ah" ; -- All persons: see Nilsson p. 78. TODO check Saeed p. 103
+          VRelNeg         => "ahayni" ; -- Saeed
+          VInf            => "ahaan" ;
+          VImp Sg pol     => if_then_Pol pol "ahaw" "ahaanin" ;
+          VImp Pl pol     => if_then_Pol pol "ahaada" "ahaanina" ;
+          VPres _ _ _     => nonExist -- use presCopula instead
+          } ;
+      sii, dhex = [] ;
+      isCopula = True
+     } ;
+
+  have_V : Verb =
+   let hold_V = mkVerb (cHayso "hayso") in hold_V ** {
+    s = table {
+          VPres _ Sg1_Sg3Masc Pos => "leeyahay" ;
+          VPres _ Sg2_Sg3Fem  Pos => "leedahay" ;
+          VPres _ Pl1_        Pos => "leenahay" ;
+          VPres _ Pl2_        Pos => "leedihiin" ;
+          VPres _ Pl3_        Pos => "leeyihiin" ;
+
+          VPres _ Sg1_Sg3Masc Neg => "lihi" ;
+          VPres _ Sg2_Sg3Fem  Neg => "lihid" ;
+          VPres _ Pl1_        Neg => "lihin" ;
+          VPres _ Pl2_        Neg => "lihidin" ;
+          VPres _ Pl3_        Neg => "laha" ;
+
+          VNegPast _              => "lahayn" ;
+
+          VPast asp agr           => "l" + copula.s ! VPast asp agr ;
+          VNegCond agr            => "l" + copula.s ! VNegCond agr ;
+          VRel _                => "leh" ; -- All persons: see Nilsson p. 78
+          VRelNeg               => "lahayn" ;
+          x                     => hold_V.s ! x }
+    } ;
+
+  fail_V : Verb =
+   let waa_V : Verb = mkVerb (cSug "waay") in waa_V ** {
+    s = table {
+      VPres _ Sg2_Sg3Fem _
+                      => "waayday" ;
+      VPast _ Sg1_Sg3Masc
+                      => "waayey" ;
+      VPast _ Sg2_Sg3Fem
+                      => "weydey" ;
+      VPast _ Pl1_    => "weyney" ;
+      VPast _ Pl2_    => "weydeen" ;
+      VPast _ Pl3_    => "waayeen" ;
+      VInf => "waayi" ;
+      x => waa_V.s ! x -- TODO actual forms
+    }
+  } ;
+
+------------------
+-- Adv
+
+  BaseAdv : Type = {
+    sii, -- sii, soo, wala, kada go inside VP.
+    dhex, -- dhex, hoos, koor, dul, … go inside VP.
+    berri, -- AdV, e.g. "tomorrow"; goes before VP.
+    miscAdv : Str -- dump for any other kind of adverbial.
+    } ;
+
+  Adverb : Type = BaseAdv ** {
+    c2 : Adposition ; -- adverbs can contribute to Adposition contraction.
+    np : NPLite ; -- NP from PrepNP can be promoted into a core argument.
+    } ;
+
+  IAdv : Type = Adverb ** {
+    contractSTM : Bool ;
+    s : Str -- alone, in one-word question, e.g. Waayo? 'Why?'
+    } ;
+
+  prepNP : Prep -> NounPhrase -> Adverb = \prep,np -> prep ** {
+    np = case prep.isPoss of {
+           True  => nplite emptyNP ;
+           False => nplite np } ;
+    miscAdv = case prep.isPoss of {
+           True  => np.s ! Abs ++ prep.hoostiisa ! np.a ;
+           False => prep.hoostiisa ! Sg3 Masc }
+    } ;
+
+------------------
+-- VP
+
+  Complement : Type = {
+    aComp : Agreement => Str ;
+    nComp : Str ;
+    compar : Str ; -- comparative is discontinuous
+    stm : STM ; -- to choose right sentence type marker
+    } ;
+
+  VerbPhrase : Type = BaseVerb ** Complement ** BaseAdv ** {
+    c2 : AdpCombination ; -- Adpositions can combine together and with object pronoun.
+    obj : NPLite ; -- {s : Str ; a : AdpObjAgr}
+    obj2 : Str ; -- if two overt pronoun objects
+    vComp : {subjunc : Str ; -- "waa in" or subjunctive construction: "in" is placed here
+              inf : Str ; -- auxiliary VV with infinitive argument
+              subcl : Agreement => Str} -- VV complement if it's a subordinate clause
+    } ;
+
+  VPSlash : Type = VerbPhrase ;
+
+  useV : Verb -> VerbPhrase = \v -> v ** {
+    stm = case v.isCopula of { -- can change into Waxa in ComplVV
+            True  => Waa Copula ;
+            False => Waa NoPred
+          } ;
+    compar = [] ;
+    nComp = [] ;
+    aComp = \\_ => [] ;
+    vComp = {subjunc, inf = [] ;
+             subcl = \\_ => []} ;
+    berri,miscAdv = [] ;
+    c2 = Single NoAdp ;
+    obj = {s = [] ; a = ZeroObj} ;
+    obj2 = []
+    } ;
+
+  useVc : Verb2 -> VPSlash = \v2 -> useV v2 ** {
+    c2 = Single v2.c2
+    } ;
+
+  useVc3 : Verb3 -> VPSlash = \v3 -> useV v3 ** {
+    c2 = combine v3.c2 v3.c3 ;
+    } ;
+
+  passV2 : Verb2 -> VerbPhrase = \v2 -> passVP (useVc v2) ;
+
+  passVP : VerbPhrase -> VerbPhrase = \vp -> vp ** {
+    c2 = case vp.c2 of {
+      Single p => ImpersSubj p ;
+      _        => vp.c2 } -- TODO: do combinations of La + 2 adpositions exist?
+    } ;
+
+  insertRefl : VPSlash -> VPSlash = \vps -> vps ** {
+    obj = vps.obj ** {a = ReflexiveObj} ;
+
+    -- If old obj was something else than P3, it is now shown in obj2
+    obj2 = vps.obj2 ++ secondObject ! vps.obj.a ;
+    } ;
+
+  insertComp : VPSlash -> NounPhrase -> VerbPhrase = \vp,np ->
+    vp ** insertCompLite vp (nplite np) ;
+
+  insertCompCl : ClSlash -> NounPhrase -> ClSlash = \cls,np ->
+    cls ** insertCompLite cls (nplite np) ;
+
+  insertAdv : VerbPhrase -> Adverb -> VerbPhrase = \vp,adv ->
+    vp ** insertAdvLite vp adv ;
+
+  insertIAdv : Adverb -> ClSlash -> ClSlash = \adv,cls ->
+    cls ** insertAdvLite cls adv ;
+
+  -- To generalise insertAdv and insertComp
+  VPLite : Type = {
+    c2 : AdpCombination ;
+    obj : NPLite ;
+    sii,dhex,berri,miscAdv,obj2 : Str} ;
+
+  insertCompLite : VPLite -> NPLite -> VPLite = \vp,nplite ->
+    case vp.obj.a of {
+      -- If the old object is 3rd person (or nonexistent), we replace its agreement.
+      -- We keep both old and new string (=noun, if there was one) in obj.s.
+      ZeroObj =>
+        vp ** {obj = nplite ** {
+                  s = nplite.s ++ vp.obj.s}
+                  } ; -- no obj2, because there's ≤1 non-3rd-person pronoun.
+
+      -- If old object was non-3rd person, we keep its agreement.
+      -- The new object is put in the secondObject field.
+      _ =>
+          vp ** {obj = vp.obj ** {
+                    s = nplite.s ++ vp.obj.s
+                    } ;
+                 obj2 = vp.obj2 ++ secondObject ! nplite.a}
+    } ;
+
+  insertAdvLite : VPLite -> Adverb -> VPLite = \vp,adv ->
+    case adv.c2 of {
+      NoAdp => vp ** adv'' ; -- the adverb is not formed with PrepNP, e.g. "tomorrow"
+      _ => case vp.c2 of {
+             -- if free complement slots, introduce adv.np with insertComp
+             Single NoAdp => insertCompLite (vp ** {c2 = Single adv.c2}) adv.np ** adv' ;
+             Single p => insertCompLite (vp ** {c2 = combine p adv.c2}) adv.np ** adv' ;
+             ImpersSubj NoAdp => insertCompLite (vp ** {c2 = ImpersSubj adv.c2}) adv.np ** adv' ;
+             -- ImpersSubj p => insertCompLite (vp ** {c2 = ??? }) adv.np ** adv' ; -- TODO: is this allowed?
+
+             -- if complement slots are full, just insert strings.
+             _ => vp ** adv''
+            }
+    } where {
+        adv' : {sii,dhex,berri,miscAdv : Str} = { -- adv.np done with insertComp
+          sii = vp.sii ++ adv.sii ;
+          dhex = vp.dhex ++ adv.dhex ;
+          berri = vp.berri ++ adv.berri ;
+          miscAdv = vp.miscAdv ++ adv.miscAdv} ;
+        adv'' : {sii,dhex,berri,miscAdv : Str} -- adv.np inserted into miscAdv
+          = adv' ** {dhex = (prepTable ! adv.c2).s ! adv.np.a ++ adv.dhex ;
+                    miscAdv = adv.miscAdv ++ adv.np.s}
+        } ;
+--------------------------------------------------------------------------------
+-- Sentences etc.
+
+
+  {- After PredVP, we might still want to add more adverbs (QuestIAdv),
+     but we're done with verb inflection.
+   -}
+  ClSlash : Type = BaseAdv ** {
+    -- Fixed in Cl
+    subj : {noun, pron : Str ; isP3 : Bool} ; -- noun and subject pronoun if applicable
+    obj : NPLite ;
+    obj2 : Str ;
+    c2 : AdpCombination ; -- NB. QuestIAdv can add more Adpositions
+    aComp : Str ;
+    nComp : Str ;
+    vComp : {inf,subcl,subjunc : Str} ;
+
+    -- Still open
+    pred : ClType => Tense => Anteriority => Polarity => Str ;
+    stm : ClType => Polarity => Str
+    } ;
+
+  Clause : Type = {s : Tense => Anteriority => Polarity => Str} ;
+  QClause = Clause ;
+  RClause : Type = {s : GenNum => Case => Tense => Anteriority => Polarity => Str} ;
+  Sentence : Type = {s : Bool {-is subordinate-} => Str} ;
+
+  predVPslash = predVP ; -- Cl and ClSlash are the same category
+
+  predVP : NounPhrase -> VerbPhrase -> ClSlash = \np,vps -> vp ** {
+    subj = {noun = subjnoun ; pron = subjpron ; isP3 = isP3 subj.a} ;
+    obj = vp.obj ** {s = vp.obj.s ++ vp.compar} ;
+    pred = \\cltyp,t,a,p =>
+            let predRaw = vf cltyp t a p subj.a vp ;
+             in case <cltyp, p, t, vp.stm, subj.a> of {
+                <Statement, Pos, Pres, Waa NoCopula, Sg3 _|Pl3> -- VP comes from CompNP/CompCN + P3 subject
+                  => [] ;
+                <_, _, Pres, Waa (Copula|NoCopula), _> -- Comp* present tense + any subject
+                  => presCopula ! {agr=subj.a ; pol=p} ;
+
+                _ => predRaw -- Any other verb
+           } ;
+
+    stm = mkStm subj.a vp.stm ;
+    aComp = vp.aComp ! subj.a ;
+    vComp = vp.vComp ** {
+              subcl = vp.vComp.subcl ! subj.a
+            }
+  } where {
+      vp : VerbPhrase = case isPassive vps of {
+               True => insertComp vps np ;
+               _    => vps } ;
+      subj : NounPhrase = case isPassive vps of {
+               True => impersNP ;
+               _    => np } ;
+      subjnoun : Str = case np.isPron of {
+                          True  => np.empty ;
+                          False => subj.s ! Nom
+                       } ;
+      subjpron : Str = case <vp.stm,subj.a> of {
+                          <Waa (Copula|NoCopula),Pl3|Sg3 _|Impers>
+                            => np.empty ;
+                          _ => (pronTable ! subj.a).s ! Nom
+                       }
+      } ;
+
+  -- Sentence: include subject pronoun and STM.
+  -- When subordinate, include "in".
+  cl2sentence : Bool -> ClSlash -> Clause = \isSubord,cls -> {
+    s = \\t,a,p =>
+    let cltyp : ClType = case isSubord of {
+                           True  => Subord ;
+                           False => Statement } ;
+        cl : ClSlash = case isSubord of { -- add "in" to the clause if used as subordinate
+                           True  => cls ** {
+                                      vComp = cls.vComp ** {subjunc = "in"}
+                                    } ;
+                           False => cls } ;
+        isRel = False ;
+        hasSubjPron = True ;
+        hasSTM = True ;
+        sent = mkClause cltyp isRel hasSubjPron hasSTM cl
+     in sent.s ! t ! a ! p
+    } ;
+
+  mkClause : ClType -> (rel,sp,stm : Bool) -> ClSlash -> Clause =
+    \cltyp,isRel,hasSubjPron,hasSTM,cl -> {
+    s = \\t,a,p =>
+      let -- Put all arguments in their right place
+          --cl : ClSlash = complCl incomplCl ;
+          prepComb = allContractions ! cl.obj.a ! cl.c2 ;
+
+          -- Contractions
+          bind : Str = case <isPassive cl, cl.obj.a, cl.c2> of {
+            <False,ZeroObj,Single NoAdp> => [] ; -- nothing to attach to the STM
+            _                            => BIND } ; -- something to attach, use BIND
+          prepCombNeg : Str = case <cltyp,p> of {
+             <Statement,Neg> => prepComb ++ bind ;
+             _ => []
+          } ;
+          prepCombPos : Str = case <cltyp,p> of {
+             <Statement,Neg> => [] ;
+             _ => prepComb
+          } ;
+
+          -- Placement of object noun varies depending on type of clause
+          statementNounObj = case cltyp of {
+                                Statement => cl.obj.s ;
+                                _         => [] } ;
+          statementNounComp = case cltyp of {
+                                Statement => cl.nComp ;
+                                _         => [] } ;
+
+          -- for subord and question, NP predicatives and objects behave the same
+          subordNounObj = case cltyp of {
+                                Subord => cl.obj.s ++ cl.nComp ;
+                                _      => [] } ;
+          questionNounObj = case cltyp of {
+                                PolarQuestion|WhQuestion
+                                       => cl.obj.s ++ cl.nComp ;
+                                _      => [] } ;
+
+          -- Control whether to include subject pronoun and STM
+          subjpron : Str = case <hasSubjPron,p,cl.subj.isP3,isRel> of {
+                              <True,Pos,True,True> => [] ;
+                              <True,Pos,_,_>       => cl.subj.pron ;
+                               _                   => [] } ;
+          stm : Str = case <hasSTM,p> of {
+                               <True,_> => cl.stm ! cltyp ! p ;
+                               <_,Neg>  => cl.stm ! cltyp ! p ; -- negation overrides hasSTM=False. To override the override, set STM to [] in the function that calls this. /IL
+                               _          => [] }
+    in cl.berri      -- AdV
+    ++ cl.subj.noun -- subject if it's a noun
+    ++ statementNounObj -- noun object if it's a statement
+
+    ++ prepCombNeg  -- Adpositions and pron. objects in negative statement
+    ++ stm
+
+    ++ cl.vComp.subjunc  -- "waa in" construction /
+    ++ subjpron          -- subject pronoun
+
+    ++ subordNounObj -- noun object if it's subordinate clause: "timir aan /laf/ lahayn" (Saeed p. 210-211)
+    ++ cl.aComp          -- AP complement, regardless of cltype
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=5a274f7b4505:1051-1192
+start=1051
+end=1192
+----
+    ++ statementNounComp -- NP complement if it's direct statement
+
+    ++ prepCombPos -- Adpositions + pron. objects in positive sentence
+
+    ++ cl.sii   -- restricted set of particles
+    ++ cl.dhex  -- restricted set of nouns/adverbials
+    ++ cl.obj2   -- "second object"
+    ++ cl.vComp.inf  -- VV complement, if it's infinitive
+    ++ cl.pred ! cltyp ! t ! a ! p  -- the inflecting verb
+    ++ questionNounObj -- noun object if it's a question
+    ++ cl.vComp.subcl -- VV complement, if it's subordinate clause
+    ++ cl.miscAdv    ---- NB. Only used if there are several adverbs, or for "waa in" construction.
+    } ;              ---- Primary places for adverbs are obj, sii or dhex.
+
+
+  VFun : Type = Tense -> Anteriority -> Polarity -> Agreement -> BaseVerb
+    -> Str ;
+
+  vf : ClType -> VFun = \clt -> case clt of {
+    Subord     => vfSubord ;
+    WhQuestion => vfQuestion ; -- INF + waayaa 'why did you fail to go'
+    _          => vfStatement } ;
+
+  vfStatement : VFun = \t,ant,p,agr,vp ->
+    case <t,ant,p> of {
+      <Cond,_,Pos> => vp.s ! VInf ++ pastV have_V ;
+      <Cond,_,Neg> => condNegV vp ;
+      <Pres,Simul> => presV vp ;
+      <Past,Simul> => pastV vp ;
+      <Pres,Anter> => vp.s ! VInf ++ presCopula ! agrPol ; ---- just guessing
+      <Past,Anter> => vp.s ! VInf ++ pastV (mkVerb (cSug "jir"))  ;
+      <Fut,Simul>  => vp.s ! VInf ++ presV (mkVerb (cSug "doon")) ;
+      <Fut,Anter>  => vp.s ! VInf ++ pastV (mkVerb (cSug "doon"))
+      }
+    where {
+      agrPol : {agr:Agreement ; pol:Polarity} = {agr=agr; pol=p} ;
+      pastV : BaseVerb -> Str = \v ->
+        case p of { Neg => v.s ! VNegPast Simple ;
+                    Pos => v.s ! VPast Simple (agr2vagr agr) } ;
+
+      presV : BaseVerb -> Str = \v -> v.s ! VPres Simple (agr2vagr agr) p ;
+
+      condNegV : BaseVerb -> Str = \v -> case agr of {
+          Sg2|Sg3 Fem
+           |Pl2 => v.s ! VNegCond SgFem ;
+          Pl1 _ => v.s ! VNegCond PlInv ;
+          _     => v.s ! VNegCond SgMasc --Sg1|Sg3 Masc|Pl3|Impers
+          }
+      } ;
+
+  vfQuestion : VFun = \t,ant,p,agr,vp ->
+    case <t,ant,p> of {
+      <_,_,Neg> => vp.s ! VInf ++ vfStatement t ant Pos agr (useV fail_V) ;
+      _ => vfStatement t ant p agr vp
+    } ;
+
+  vfSubord : VFun = \t,ant,p,agr,vp ->
+    case <t,ant,p> of {
+      <Pres,Simul,Pos> => vfStatement Pres ant Neg agr vp ;
+      _ => vfStatement t ant p agr vp
+      } ; -- TODO other relative forms
+
+  infVP : VerbPhrase -> Str = linVP VInf Statement ;
+
+  STMarker : Type = ClType => Polarity => Str ;
+
+  -- NB. Agreement is used only for negative questions. If we want to change it
+  -- in other sentence types, we need to change predVP and mkClause accordingly;
+  -- certain VVs put stuff between STM and subject pronoun. Some VVs render now
+  -- incorrectly in negative questions.
+  mkStm : Agreement -> STM -> STMarker = \agr,stm ->
+    \\cltyp,pol =>
+      case <cltyp,pol> of {
+        <Statement,Pos> => showSTM stm ;
+        <Statement,Neg> => "ma" ;
+        <Subord,Pos>    => [] ;
+        <Subord,Neg>    => "aan" ;
+        <WhQuestion,_>  => "ma" ; -- neg. wh-questions are formed with waayaa 'fail to do sth', so they are syntactically positive
+        <PolarQuestion,Pos> => "ma" ;
+        <PolarQuestion,Neg> => case agr of { -- Negative question in past tense has only one form, need subject pronoun to know what the subject is.
+          Sg1 => "miyaanan" ; -- Saeed p. 200
+          Sg2 => "miyaanad" ; -- Saeed p. 200
+          Sg3 Masc => "miyaanu" ; -- Saeed p. 200
+          Sg3 Fem  => "miyaanay" ; -- ???
+          Pl1 Excl => "miyaanaannu" ; -- ???
+          Pl1 Incl => "miyaanaynu" ; -- ???
+          Pl2 => "miyaanaydin" ; -- ???
+          Pl3 => "miyaanay" ; -- ???
+          Impers => "ma aan" } -- not merged
+      } ;
+
+  modSTM : (pos, neg : Str) -> STMarker -> STMarker = \pos,neg,stm ->
+    \\cltyp,pol =>
+      case pol of {
+         Pos => pos ;
+         _   => neg
+      } ;
+--------------------------------------------------------------------------------
+-- linrefs
+
+oper
+  linCN : CNoun -> Str = \cn -> cn.s ! Indef Sg ++ cn.mod ! Indefinite ! Sg ! Abs ;
+  linAdv : Adverb -> Str = \adv ->
+     adv.berri
+  ++ adv.sii
+  ++ (prepTable ! adv.c2).s ! adv.np.a
+  ++ adv.dhex
+  ++ adv.np.s
+  ++ adv.miscAdv ;
+
+  linVP : VForm -> ClType -> VerbPhrase -> Str = \vf,cltyp,vp ->
+    let pred = vp.s ! vf ;
+        pr = allContractions ! vp.obj.a ! vp.c2 ;
+        neg = case <cltyp,isNeg vf> of {
+                <Subord,True> => "aan" ;
+                _             => []
+               } ;
+     in wordOrder cltyp neg pred pr vp ;
+
+  -- Light version of the word order complexity in mkClause.
+  wordOrder : ClType -> (neg,pred,prepcomb : Str) -> VerbPhrase -> Str =
+    \cltyp,neg,pred,pr,vp ->
+        vp.berri -- AdV
+     ++ case cltyp of {
+          Subord => [] ;
+          _ => vp.obj.s } -- noun object if it's a statement
+     ++ neg
+     ++ vp.vComp.subjunc -- "waa in" construction
+     ++ case cltyp of {
+          Subord => vp.obj.s ; -- noun object if it's subordinate clause
+          _      => [] }
+     ++ vp.aComp ! objAgr2agr vp.obj.a  -- AP complement agreeing with object
+     ++ pr       -- object if it's a pronoun
+     ++ vp.sii   -- restricted set of particles
+     ++ vp.dhex  -- restricted set of nouns/adverbials
+     ++ vp.obj2   -- "second object"
+     ++ vp.vComp.inf -- VV complement, if it's infinitive
+     ++ pred         -- the verb inflected
+     ++ vp.vComp.subcl ! Sg3 Masc  -- VV complement, if it's subordinate clause
+     ++ vp.miscAdv ; ---- NB. Only used if there are several adverbs, or for "waa in" construction.
+
+}
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/SentenceSom.gf"
+id=82d6bac0f0f5
+kind=source
+size=2274
+lines=85
+chunks=0
+----
+concrete SentenceSom of Sentence = CatSom ** open
+  TenseX, ResSom, (AS=AdverbSom), Prelude in {
+
+flags optimize=all_subs ;
+
+lin
+
+--2 Clauses
+
+  -- : NP -> VP -> Cl
+  PredVP = predVP ;
+
+  -- : SC -> VP -> Cl ;         -- that she goes is good (Saeed p. 94)
+  --PredSCVP sc vp = ;
+
+--2 Clauses missing object noun phrases
+  -- : NP -> VPSlash -> ClSlash ;
+  SlashVP = predVP ;
+{-
+  -- : ClSlash -> Adv -> ClSlash ;     -- (whom) he sees today
+  AdvSlash cls adv = cls ** insertAdv adv cls ;
+
+--    SlashPrep : Cl -> Prep -> ClSlash ;         -- (with whom) he walks
+
+  -- : NP -> VS -> SSlash -> ClSlash ; -- (whom) she says that he loves
+--  SlashVS np vs ss = {} ;
+
+-}
+  --  : Temp -> Pol -> ClSlash -> SSlash ; -- (that) she had not seen
+  UseSlash t p cls = {
+    s = \\isSubord =>
+        let cls' : ClSlash = cls ** {
+                    stm = modSTM "waxa" "waxa aan" cls.stm -- Saeed p. 195
+                  } ;
+            cl : Clause = cl2sentence isSubord cls' in
+        t.s ++ p.s ++ cl.s ! t.t ! t.a ! p.p
+    } ;
+
+--2 Imperatives
+  -- : VP -> Imp ;
+  ImpVP vp = {s = \\num,pol => linVP (VImp num pol) Statement vp} ;
+
+--2 Embedded sentences
+
+  -- : S  -> SC ;
+  EmbedS s = {s = s.s ! True} ; -- choose subordinate
+
+  -- : QS -> SC ;
+  -- EmbedQS qs = { } ;
+
+  -- : VP -> SC ;
+  EmbedVP vp = {s = infVP vp} ;
+
+--2 Sentences
+
+  -- : Temp -> Pol -> Cl -> S ;
+  UseCl t p cls = {
+    s = \\isSubord => let cl = cl2sentence isSubord cls in
+        t.s ++ p.s ++ cl.s ! t.t ! t.a ! p.p
+    } ;
+
+  -- : Temp -> Pol -> QCl -> QS ;
+  UseQCl t p cl = {s = t.s ++ p.s ++ cl.s ! t.t ! t.a ! p.p} ;
+
+  -- : Temp -> Pol -> RCl -> RS ;
+  UseRCl t p cl = {s = \\st,g,c => t.s ++ p.s ++ cl.s ! g ! c ! t.t ! t.a ! p.p} ;
+
+  -- AdvS : Adv -> S  -> S ;            -- then I will go home
+  -- ExtAdvS : Adv -> S  -> S ;         -- next week, I will go home
+  AdvS, ExtAdvS = advS ;
+
+-- There's an SubjS already in AdverbSom -- should this be deprecated?
+  -- : S -> Subj -> S -> S ;
+  SSubjS s1 subj s2 = AdvS (AS.SubjS subj s2) s1 ;
+
+  --  : S -> RS -> S ;              -- she sleeps, which is good
+  -- RelS sent rs = advS {s = rs.s ! Sg3 Masc ++ SOFT_BIND ++ ","} sent ;
+
+oper
+
+  advS : Adverb -> S -> S = \a,sent -> sent ** {
+    s = \\b => sent.s ! b ++ linAdv a
+    } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/StructuralSom.gf"
+id=4ba9d9e197be
+kind=source
+size=5679
+lines=206
+chunks=0
+----
+concrete StructuralSom of Structural = CatSom **
+  open Prelude, ResSom, (N=NounSom), ParadigmsSom in {
+
+-------
+-- Ad*
+{-
+lin almost_AdA = mkAdA "" ;
+lin almost_AdN = ss "" ;
+lin at_least_AdN = ss "" ;
+lin at_most_AdN = ss "" ;
+lin so_AdA = ss "" ;
+lin too_AdA = ss "" ;
+lin very_AdA = mkAdA "" ;
+
+lin as_CAdv = { s = "" ; p = [] } ;
+lin less_CAdv = { s = "" ; p = [] } ;
+lin more_CAdv = { s = "" ; p = [] } ;
+-}
+lin how_IAdv = mkIAdv u "sidee" False ;
+
+-- lin how8much_IAdv = ss "" ;
+-- lin when_IAdv = ss "" ;
+lin where_IAdv = mkIAdv noPrep "xaggee" False ;
+lin why_IAdv = let mx = mkIAdv u "maxaa" True in mx ** {s = "waayo"} ;
+
+{-lin always_AdV = ss "" ;
+
+lin everywhere_Adv = ss "" ;
+lin here7from_Adv = ss "" ;
+lin here7to_Adv = ss "" ;
+lin here_Adv = ss "" ;
+lin quite_Adv = ss "" ;
+lin somewhere_Adv = ss "" ;
+lin there7from_Adv = ss "" ;
+lin there7to_Adv = ss "" ;
+lin there_Adv = ss "" ;
+
+-}
+-------
+-- Conj
+
+lin and_Conj = {s2 = table {Definite => "ee" ; Indefinite => "oo"} ; s1 = [] ; n = Pl} ;
+lin or_Conj = {s2 = \\_ => "ama" ; s1 = [] ; n = Sg} ; -- mise with interrogatives; Saeed p. 122-123: "Note that the clause introduced by misé has the form of a declarative not an interrogative though the whole sentence is interpreted as a question."
+-- lin if_then_Conj = mkConj
+-- lin both7and_DConj = mkConj "" "" pl ;
+lin either7or_DConj = {s2 = \\_ => "ama" ; s1 = "ama" ; n = Sg} ;
+--
+-- lin but_PConj = ss "" ;
+-- lin otherwise_PConj = ss "" ;
+-- lin therefore_PConj = ss "" ;
+
+
+-----------------
+-- *Det and Quant
+
+--lin how8many_IDet = R.indefDet "" pl ;
+
+lin all_Predet = {s = "giddi" ; isPoss = True ; da = M GA} ;
+--lin not_Predet = { s = "" } ;
+--lin only_Predet = { s = "" } ;
+lin most_Predet = {s = "badi" ; isPoss = True ; da = F DA} ;
+{-
+lin every_Det = R.defDet [] pl **
+                 { s = mkVow } ;
+lin few_Det = R.indefDet "" pl ;
+lin many_Det = R.indefDet "" pl ;
+lin much_Det = R.indefDet "" sg ;
+-}
+lin somePl_Det = {
+    sp = \\_,_ => "qaar" ;
+    isPoss = False ;
+    numtype = NoNum ;
+    st = Definite ; -- NB. Indefinite means actually only IndefArt.
+    n = Pl ;
+    s = \\x,_ => BIND ++ defStems ! x ++ BIND ++ "a qaarkood" ;
+    shortPoss = \\x => BIND ++ defStems ! x ++ BIND ++ "a qaarkood" ;
+    } ;
+
+lin someSg_Det = somePl_Det ** {
+    n = Sg ;
+    s = table {
+            M x => \\_ => BIND ++ defStems ! M x ++ BIND ++ "a qaarkiis" ;
+            F x => \\_ => BIND ++ defStems ! F x ++ BIND ++ "a qaarkeed" } ;
+    shortPoss = table {
+            M x => BIND ++ defStems ! M x ++ BIND ++ "a qaarkiis" ;
+            F x => BIND ++ defStems ! F x ++ BIND ++ "a qaarkeed" }
+    } ;
+
+
+--lin no_Quant = mkPrep no_Quant
+
+lin that_Quant = defQuant "aas" "kaas" "taas" "kuwaas" True ; -- true = nominative marker is i
+lin this_Quant = defQuant "an" "kan" "tan" "kuwan" True ;
+lin which_IQuant = defIQuant "ee" ;
+{-
+
+-----
+-- NP
+
+lin everybody_NP = defNP "" N.NumPl ;
+lin everything_NP = defNP "" N.NumSg ;
+lin nobody_NP = mkVerb; ""
+lin nothing_NP = defNP "" N.NumSg ;
+lin somebody_NP = defNP "" N.NumSg ;
+lin something_NP = defNP "" N.NumSg ;
+
+oper
+ defNP : Str -> Num -> NP = {} ;
+-}
+
+-------
+-- Prep
+
+lin above_Prep = mkPrep (mkPrep ka) [] [] "dul" ;
+-- lin after_Prep = mkPrep ""
+-- lin before_Prep = mkPrep "" ;
+-- lin behind_Prep = mkPrep ""  ;
+lin between_Prep = possPrep (lin N (nUl "dhex")) ;
+-- lin by8agent_Prep = mkPrep ;
+-- lin by8means_Prep = mkPrep ;
+-- lin during_Prep = mkPrep ;
+-- lin except_Prep = mkPrep ;
+-- lin for_Prep = mkPrep ;
+-- lin from_Prep = mkPrep "" ;
+lin in8front_Prep = possPrep (lin N (nUl "hor")) ;
+lin in_Prep = mkPrep ku ;
+lin on_Prep = mkPrep ku ;
+-- lin part_Prep = mkPrep ;
+-- lin possess_Prep = mkPrep ;
+-- lin through_Prep = mkPrep ;
+-- lin to_Prep = mkPrep ;
+lin under_Prep =
+    let hoos : CatSom.Prep = possPrep (lin N (nUl "hoos"))
+     in hoos ** {c2 = Ku} ;
+lin with_Prep = mkPrep la ;
+-- lin without_Prep = mkPrep ;
+
+
+-------
+-- Pron
+
+-- Pronouns are closed class, no constructor in ParadigmsSom.
+    it_Pron = he_Pron ** {s = \\_ => [] ; sp = \\_ => [] ; a = Impers} ;
+    i_Pron = pronTable ! Sg1 ;
+    youPol_Pron,
+    youSg_Pron = pronTable ! Sg2 ;
+    he_Pron = pronTable ! Sg3 Masc ;
+    she_Pron = pronTable ! Sg3 Fem ;
+    we_Pron = pronTable ! Pl1 Incl ;
+    youPl_Pron = pronTable ! Pl2 ;
+    they_Pron = pronTable ! Pl3 ;
+
+--lin whatPl_IP = ;
+lin whatSg_IP = mkIP "maxay" "maxaa" True ;
+--lin whoPl_IP = ;
+lin whoSg_IP = mkIP "ayo" "yaa" True ;
+
+-------
+-- Subj
+
+-- lin although_Subj = mkSubj "" False ;
+-- lin because_Subj  = mkSubj "" False ;
+-- lin if_Subj = mkSubj "" True ;
+lin that_Subj = {s = "in"} ;
+-- lin when_Subj = mkSubj "" False ;
+
+
+------
+-- Utt
+
+lin language_title_Utt = ss "af soomaali" ;
+lin no_Utt = ss "maya" ;
+lin yes_Utt = ss "haa" ;
+
+
+-------
+-- Verb
+
+lin have_V2 = mkV2 (lin V have_V) noPrep ; -- TODO: check if {sii = "l" ++ BIND ; isCopula=True} makes sense for present tense negative
+lin can8know_VV = can_VV ; -- can (capacity)
+lin can_VV = mkVV "kar" ;   -- can (possibility)
+lin must_VV = mkVV waa_in ;
+lin want_VV = mkVV (mkV "rab" "rabaa") subjunctive ;
+
+
+------
+-- Voc
+{-
+lin please_Voc = ss "" ;
+-}
+oper
+  mkIAdv : Adposition -> Str -> Bool -> ResSom.IAdv = \pr ->
+    prepIP (ParadigmsSom.mkPrep pr) ;
+
+  mkIP : (maxay, maxaa : Str) -> Bool -> IP = \maxay,maxaa,b -> lin IP (emptyNP ** {
+    s = table {
+      Nom => maxaa ; -- together with STM
+      Abs => maxay } ; -- alone, no STM (used in UttIP and IComp)
+    contractSTM = b ;
+    }) ;
+
+  prepIP : CatSom.Prep -> Str -> Bool -> ResSom.IAdv = \pr,str,b ->
+    let adv : Adverb = prepNP (mkPrep pr str [] []) emptyNP ;
+     in lin IP (adv ** {contractSTM = b ; s = linAdv adv}) ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/SymbolSom.gf"
+id=8a665d903f83
+kind=source
+size=1024
+lines=50
+chunks=0
+----
+--# -path=.:../abstract:../common:../prelude
+
+concrete SymbolSom of Symbol = CatSom **
+  open Prelude, ParadigmsSom, ResSom, (NS=NounSom) in {
+
+lin
+
+  --  : Symb -> PN ;                -- x
+  SymbPN i = mkPN i.s ;
+
+  -- : Int -> PN ;                 -- 27
+  IntPN i  = mkPN i.s ;
+
+  -- : Float -> PN ;               -- 3.14159
+  FloatPN i = mkPN i.s ;
+
+  -- : Card -> PN ;                -- twelve [as proper name]
+  NumPN i = mkPN i.s ;
+
+{-
+lin
+--  CNIntNP cn i = {} ;
+
+  -- : Det -> CN -> [Symb] -> NP ; -- (the) (2) numbers x and y
+  CNSymbNP det cn xs =
+    let cnSymb = cn ** { comp = cn.comp ++ xs.s }
+     in NS.DetCN det cnSymb ;
+
+  -- : CN -> Card -> NP ;          -- level five ; level 5
+  CNNumNP cn i = NS.MassNP (cn ** { comp = cn.comp ++ i.s }) ;
+
+  -- : Symb -> S ;
+  SymbS sy = {s = } ;
+  -- : Symb -> Card ;
+  SymbNum sy = { s = sy.s ; n = Pl } ;
+
+  -- : Symb -> Ord ;
+  SymbOrd sy = { s =} ;
+-}
+lincat
+  Symb, [Symb] = SS ;
+
+lin
+  MkSymb s = s ;
+
+  BaseSymb = infixSS "oo" ;
+  ConsSymb = infixSS "," ;
+
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="somali/VerbSom.gf"
+id=7f034c1efe29
+kind=source
+size=4340
+lines=175
+chunks=0
+----
+concrete VerbSom of Verb = CatSom ** open ResSom, AdverbSom, Prelude in {
+
+
+lin
+
+-----
+-- VP
+  -- : V -> VP
+  UseV = ResSom.useV ;
+
+  --  : V2 -> VP ; -- be loved
+  PassV2 = ResSom.passV2 ;
+
+  -- : VPSlash -> VP ;
+  ReflVP = ResSom.insertRefl ;
+
+  -- : VV  -> VP -> VP ;
+  ComplVV vv vp = let vc = vp.vComp in case vv.vvtype of {
+    Waa_In => vp ** {
+      vComp = vc ** {subjunc = vv.s ! VInf} ; -- it's always the word "in", and it will be placed before subject pronoun. it's placed in vv.s!VInf so that the VV would contribute with some string. /IL
+      obj = vp.obj ** {s = []} ;      -- word order hack to avoid more parameters:
+      miscAdv = vp.miscAdv ++ vp.obj.s -- dump the object to miscAdv
+      } ;
+
+    Subjunctive => useV vv ** {
+      stm = Waxa ;
+      vComp = vc ** { -- The whole previous VP becomes the subordinate clause
+                subcl = \\agr =>
+                          let subj = pronTable ! agr ;
+                              cls = predVPslash subj vp ;
+                              scl = cl2sentence True cls ;
+                           in scl.s ! Pres ! Simul ! Pos
+              }
+      } ;
+
+    Infinitive => vp ** {
+      s = vv.s ; -- check Saeed p. 169
+      vComp = vc ** {
+        inf = vc.inf ++ vp.s ! VInf
+        } ;
+      stm = Waa NoPred ;
+      }
+    } ;
+
+  -- : VS  -> S  -> VP ;
+  ComplVS vs s =
+    let vps = useV vs ;
+        subord = SubjS {s="in"} s ;
+     in vps ** {obj = {s = subord.berri ; a = ZeroObj}} ;
+
+{-
+  -- : VQ -> QS -> VP ;
+  ComplVQ vq qs = ;
+
+  -- : VA -> AP -> VP ;  -- they become red
+  ComplVA va ap = ResSom.insertComp (CompAP ap).s (useV va) ;
+
+-}
+--------
+-- Slash
+
+  -- : V2 -> VPSlash
+  SlashV2a = useVc ;
+
+  -- : V3 -> NP -> VPSlash ; -- give it (to her)
+  -- : V3 -> NP -> VPSlash ; -- give (it) to her
+  Slash2V3,
+  Slash3V3 = \v3 -> insertComp (useVc3 v3) ;
+
+  -- : V2S -> S  -> VPSlash ;  -- answer (to him) that it is good
+  SlashV2S v2s s =
+    let vps = useVc v2s ;
+        subord = SubjS {s="in"} s ;
+     in vps ** {obj = {s = subord.berri ; a = ZeroObj}} ;
+
+{-
+  -- : V2V -> VP -> VPSlash ;  -- beg (her) to go
+  SlashV2V v2v vp = ;
+
+  -- : V2Q -> QS -> VPSlash ;  -- ask (him) who came
+  SlashV2Q v2q qs = ;
+-}
+  -- : V2A -> AP -> VPSlash ;  -- paint (it) red
+   -- TODO: is "red" plural in "paint them red"?
+  SlashV2A v2a ap = useVc v2a ** {
+    aComp = \\_ => (CompAP ap).aComp ! Sg3 Masc
+  } ;
+
+  -- : VPSlash -> NP -> VP
+  ComplSlash = insertComp ;
+
+{-
+  -- : VV  -> VPSlash -> VPSlash ;
+                  -- Just like ComplVV except missing subject!
+  SlashVV vv vps = ComplVV vv vps ** { missing = vps.missing ;
+                                       post = vps.post } ;
+
+  -- : V2V -> NP -> VPSlash -> VPSlash ; -- beg me to buy
+  SlashV2VNP v2v np vps =
+    ComplVV v2v vps **
+      { missing = vps.missing ;
+        post = vps.post ;
+        iobj = np ** { s = np.s ! Dat } } ;
+
+-}
+
+  -- : Comp -> VP ;
+  UseComp comp = UseCopula ** comp ;
+
+  -- : VP -> Adv -> VP ;  -- sleep here
+  AdvVP = insertAdv ;
+
+  -- : VPSlash -> Adv -> VPSlash ;  -- use (it) here
+  AdvVPSlash = insertAdv ;
+
+{-
+  -- : VP -> Adv -> VP ;  -- sleep , even though ...
+  ExtAdvVP vp adv =  ;
+
+  -- : AdV -> VP -> VP ;  -- always sleep
+  AdVVP adv vp = vp ** {adv = adv} ;
+
+
+  -- : AdV -> VPSlash -> VPSlash ;  -- always use (it)
+  AdVVPSlash adv vps = vps ** { adv = adv.s ++ vps.adv } ;
+-}
+  -- : VP -> Prep -> VPSlash ;  -- live in (it)
+  VPSlashPrep vp prep =
+    let adv = prepNP prep emptyNP
+     in insertAdv vp adv ;
+
+
+
+
+--2 Complements to copula
+
+-- Adjectival phrases, noun phrases, and adverbs can be used.
+
+  -- : AP  -> Comp ;
+  CompAP ap = {
+    aComp = \\a => ap.s ! AF (getNum a) Abs ;
+    nComp = [] ;
+    compar = ap.compar ;
+    stm = Waa Copula ;
+    } ;
+
+  -- : CN  -> Comp ;
+  CompCN cn = {
+    -- I am [a house that sleeps here] vs.  we are [houses that sleep here]
+    aComp = \\a => cn2str (getNum a) Abs cn ;
+    nComp = [] ;
+    compar = [] ;
+    stm = Waa NoCopula ;
+    } ;
+
+  --  NP  -> Comp ;
+  CompNP np = {
+    aComp = \\a => [] ;
+    nComp = np.s ! Abs ;
+    compar = [] ;
+    stm = Waa NoCopula ;
+    } ;
+
+  -- : Adv  -> Comp ;
+  CompAdv adv = {
+    aComp = \\a => linAdv adv ; -- TODO check placement
+    nComp = [] ;
+    compar = [] ;
+    stm = Waa Copula ;
+    } ;
+
+  -- : VP -- Copula alone;
+  UseCopula = useV copula ;
+
+}
+----- FILE END -----

@@ -1,0 +1,4812 @@
+==== VOLUME META ====
+generated_at: 2026-02-25T14:09:52.552279
+title: FOLDER: french
+root_dir: C:\MyCode\GFCodex\RGL_Source_Code
+file_count: 40
+total_size_mb: 0.1325
+home: 00_START_HERE.instructions.md
+prev_volume: RGL_Source_Code_20260225_140951_36_somali.txt
+next_volume: RGL_Source_Code_20260225_140951_38_hungarian.txt
+prev_title: somali
+next_title: hungarian
+short_title: french
+
+==== FILE_INDEX ====
+ENTRY id=aaacc593600e path="french/AdjectiveFre.gf" kind=source size=95 lines=2 chunks=0
+ENTRY id=7cd986102d4e path="french/AdverbFre.gf" kind=source size=86 lines=2 chunks=0
+ENTRY id=8209863d8bf4 path="french/AllFre.gf" kind=source size=155 lines=7 chunks=0
+ENTRY id=f6ab62984fef path="french/AllFreAbs.gf" kind=source size=64 lines=5 chunks=0
+ENTRY id=0fc8d91700c4 path="french/BeschFre.gf" kind=source size=34269 lines=981 chunks=3
+ENTRY id=d9dd3ead0242 path="french/CatFre.gf" kind=source size=199 lines=5 chunks=0
+ENTRY id=e8764f1b8ad6 path="french/CompatibilityFre.gf" kind=source size=310 lines=11 chunks=0
+ENTRY id=2a9f564522ba path="french/ConjunctionFre.gf" kind=source size=101 lines=2 chunks=0
+ENTRY id=4479b959d211 path="french/ConstructionFre.gf" kind=source size=5742 lines=153 chunks=0
+ENTRY id=0604fdd0f71d path="french/DiffFre.gf" kind=source size=11759 lines=347 chunks=0
+ENTRY id=19ab7214cd32 path="french/DocumentationFre.gf" kind=source size=228 lines=6 chunks=0
+ENTRY id=06a2c7b1ab63 path="french/DocumentationFreEng.gf" kind=source size=197 lines=6 chunks=0
+ENTRY id=99a7f2c2816f path="french/DocumentationFreFunctor.gf" kind=source size=8242 lines=271 chunks=0
+ENTRY id=625fdfb34244 path="french/ExtendFre.gf" kind=source size=4918 lines=167 chunks=0
+ENTRY id=9639f2d6d6a1 path="french/ExtraFre.gf" kind=source size=4184 lines=130 chunks=0
+ENTRY id=668296cf1cb2 path="french/ExtraFreAbs.gf" kind=source size=1657 lines=65 chunks=0
+ENTRY id=b12307a16142 path="french/ExtraRomanceFre.gf" kind=source size=136 lines=2 chunks=0
+ENTRY id=81aff43f07cb path="french/GrammarFre.gf" kind=source size=364 lines=23 chunks=0
+ENTRY id=0fb024576517 path="french/IdiomFre.gf" kind=source size=2323 lines=75 chunks=0
+ENTRY id=72dc86da54d9 path="french/LangFre.gf" kind=source size=258 lines=13 chunks=0
+ENTRY id=4ab504c47cce path="french/MakeStructuralFre.gf" kind=source size=1920 lines=59 chunks=0
+ENTRY id=b80db6c25506 path="french/MarkupFre.gf" kind=source size=140 lines=3 chunks=0
+ENTRY id=ff548495a0b0 path="french/MorphoFre.gf" kind=source size=13385 lines=443 chunks=2
+ENTRY id=5ee92b385121 path="french/NamesFre.gf" kind=source size=1259 lines=46 chunks=0
+ENTRY id=2950308be9f5 path="french/NounFre.gf" kind=source size=128 lines=4 chunks=0
+ENTRY id=f6ad6133efba path="french/NumeralFre.gf" kind=source size=7593 lines=215 chunks=0
+ENTRY id=10711561e94d path="french/ParadigmsFre.gf" kind=source size=19232 lines=606 chunks=2
+ENTRY id=081c75b93d42 path="french/ParseEngFre.gf" kind=source size=3076 lines=110 chunks=0
+ENTRY id=b78f86b4e5b1 path="french/ParseFre.gf" kind=source size=5283 lines=189 chunks=0
+ENTRY id=42fba9143023 path="french/PhonoFre.gf" kind=source size=1060 lines=33 chunks=0
+ENTRY id=bb5e88a6e891 path="french/PhraseFre.gf" kind=source size=86 lines=2 chunks=0
+ENTRY id=544530bbfb6e path="french/QuestionFre.gf" kind=source size=92 lines=2 chunks=0
+ENTRY id=c5dbc5e26bef path="french/RelativeFre.gf" kind=source size=92 lines=2 chunks=0
+ENTRY id=f3fecc536ceb path="french/ResFre.gf" kind=source size=371 lines=13 chunks=0
+ENTRY id=da8527857a6d path="french/SentenceFre.gf" kind=source size=92 lines=2 chunks=0
+ENTRY id=c54378d6b453 path="french/StructuralFre.gf" kind=source size=7802 lines=229 chunks=0
+ENTRY id=5977faab655b path="french/SymbolFre.gf" kind=source size=143 lines=4 chunks=0
+ENTRY id=1de55e8e33c2 path="french/TenseFre.gf" kind=source size=116 lines=3 chunks=0
+ENTRY id=4e74cb415362 path="french/TerminologyFre.gf" kind=source size=1680 lines=68 chunks=0
+ENTRY id=561f06660c0e path="french/VerbFre.gf" kind=source size=128 lines=4 chunks=0
+
+==== FILES ====
+
+----- FILE BEGIN -----
+path="french/AdjectiveFre.gf"
+id=aaacc593600e
+kind=source
+size=95
+lines=2
+chunks=0
+----
+concrete AdjectiveFre of Adjective = CatFre ** AdjectiveRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/AdverbFre.gf"
+id=7cd986102d4e
+kind=source
+size=86
+lines=2
+chunks=0
+----
+concrete AdverbFre of Adverb = CatFre ** AdverbRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/AllFre.gf"
+id=8209863d8bf4
+kind=source
+size=155
+lines=7
+chunks=0
+----
+--# -path=.:../romance:../abstract:../common:../api:../prelude
+
+concrete AllFre of AllFreAbs = 
+  LangFre,
+  IrregFre,
+  ExtendFre ---- ExtraFre
+  ** {} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/AllFreAbs.gf"
+id=f6ab62984fef
+kind=source
+size=64
+lines=5
+chunks=0
+----
+abstract AllFreAbs = 
+  Lang,
+  IrregFreAbs,
+  Extend
+  ** {} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/BeschFre.gf"
+id=0fc8d91700c4
+kind=source
+size=34269
+lines=981
+chunks=3
+
+--- CHUNK BEGIN ---
+id=0fc8d91700c4:1-350
+start=1
+end=350
+----
+resource BeschFre = open Prelude, MorphoFre in {
+
+flags optimize=noexpand ; -- faster and smaller than =all
+    coding=utf8 ;
+
+oper VerbeN = {s : VF => Str} ;
+oper mkNV : Verbe -> VerbeN = \ve -> {s = vvf ve} ;
+
+oper conj : Str -> Verbe = conj1aimer ;  --- temp. default
+
+oper v_nancy100inf : Str -> VerbeN = \ve -> {s = table {
+  VInfin _ => ve ;
+  _ => nonExist
+  }
+} ;
+
+
+oper v_besch1 : Str -> VerbeN = \s -> mkNV (conjAvoir s) ;
+oper v_besch2 : Str -> VerbeN = \s -> mkNV (conjÊtre s) ;
+-- 3-5 not used
+oper v_besch6 : Str -> VerbeN = \s -> mkNV (conj1aimer s) ;
+oper v_besch7 : Str -> VerbeN = \s -> mkNV (conj1placer s) ;
+oper v_besch8 : Str -> VerbeN = \s -> mkNV (conj1manger s) ;
+oper v_besch9 : Str -> VerbeN = \s -> mkNV (conj1peser s) ;
+oper v_besch10 : Str -> VerbeN = \s -> mkNV (conj1céder s) ;
+oper v_besch11 : Str -> VerbeN = \s -> mkNV (conj1jeter s) ;
+oper v_besch12 : Str -> VerbeN = \s -> mkNV (conj1jeter s) ;
+oper v_besch13 : Str -> VerbeN = \s -> mkNV (conj1aimer s) ;
+oper v_besch14 : Str -> VerbeN = \s -> mkNV (conj1assiéger s) ;
+oper v_besch15 : Str -> VerbeN = \s -> mkNV (conj1aimer s) ; --- ?
+oper v_besch16 : Str -> VerbeN = \s -> mkNV (conj1payer s) ;
+oper v_besch17 : Str -> VerbeN = \s -> mkNV (conj1payer s) ;
+oper v_besch18 : Str -> VerbeN = \s -> mkNV (conj1envoyer s) ;
+oper v_besch19 : Str -> VerbeN = \s -> mkNV (conj2finir s) ;
+oper v_besch20 : Str -> VerbeN = \s -> mkNV (conj2haïr s) ;
+-- oper v_besch21 : Str -> VerbeN = \s -> mkNV (conj s) ; -- not used
+oper v_besch22 : Str -> VerbeN = \s -> mkNV (conj3aller s) ;
+oper v_besch23 : Str -> VerbeN = \s -> mkNV (conj3tenir s) ;
+oper v_besch24 : Str -> VerbeN = \s -> mkNV (conj3quérir s) ;
+oper v_besch25 : Str -> VerbeN = \s -> mkNV (conj3sentir s) ;
+oper v_besch26 : Str -> VerbeN = \s -> mkNV (conj3vêtir s) ;
+oper v_besch27 : Str -> VerbeN = \s -> mkNV (conj3couvrir s) ;
+oper v_besch28 : Str -> VerbeN = \s -> mkNV (conj3cueillir s) ;
+oper v_besch29 : Str -> VerbeN = \s -> mkNV (conj3assaillir s) ;
+oper v_besch30 : Str -> VerbeN = \s -> mkNV (conj3faillir s) ;
+oper v_besch31 : Str -> VerbeN = \s -> mkNV (conj3bouillir s) ;
+oper v_besch32 : Str -> VerbeN = \s -> mkNV (conj3dormir s) ;
+oper v_besch33 : Str -> VerbeN = \s -> mkNV (conj3courir s) ;
+oper v_besch34 : Str -> VerbeN = \s -> mkNV (conj3mourir s) ;
+oper v_besch35 : Str -> VerbeN = \s -> mkNV (conj3sentir s) ;
+oper v_besch36 : Str -> VerbeN = \s -> mkNV (conj3fuir s) ;
+oper v_besch37 : Str -> VerbeN = \s -> mkNV (conj3ouïr s) ;
+oper v_besch38 : Str -> VerbeN = \s -> mkNV (conj3cevoir s) ;
+oper v_besch39 : Str -> VerbeN = \s -> mkNV (conj3voir s) ;
+oper v_besch40 : Str -> VerbeN = \s -> mkNV (conj3pourvoir s) ;
+oper v_besch41 : Str -> VerbeN = \s -> mkNV (conj3savoir s) ;
+oper v_besch42 : Str -> VerbeN = \s -> mkNV (conj3devoir s) ;
+oper v_besch43 : Str -> VerbeN = \s -> mkNV (conj3pouvoir s) ;
+oper v_besch44 : Str -> VerbeN = \s -> mkNV (conj3mouvoir s) ;
+oper v_besch45 : Str -> VerbeN = \s -> mkNV (conj3pleuvoir s) ;
+oper v_besch46 : Str -> VerbeN = \s -> mkNV (conj3falloir s) ;
+oper v_besch47 : Str -> VerbeN = \s -> mkNV (conj3valoir s) ;
+oper v_besch48 : Str -> VerbeN = \s -> mkNV (conj3vouloir s) ;
+oper v_besch49 : Str -> VerbeN = \s -> mkNV (conj3asseoir s) ;
+oper v_besch50 : Str -> VerbeN = \s -> mkNV (conj3messeoir s) ; --- ?
+oper v_besch51 : Str -> VerbeN = \s -> mkNV (conj3surseoir s) ;
+oper v_besch52 : Str -> VerbeN = \s -> mkNV (conj3choir s) ;
+oper v_besch53 : Str -> VerbeN = \s -> mkNV (conj3rendre s) ;
+oper v_besch54 : Str -> VerbeN = \s -> mkNV (conj3prendre s) ;
+oper v_besch55 : Str -> VerbeN = \s -> mkNV (conj3battre s) ;
+oper v_besch56 : Str -> VerbeN = \s -> mkNV (conj3mettre s) ;
+oper v_besch57 : Str -> VerbeN = \s -> mkNV (conj3peindre s) ;
+oper v_besch58 : Str -> VerbeN = \s -> mkNV (conj3joindre s) ;
+oper v_besch59 : Str -> VerbeN = \s -> mkNV (conj3craindre s) ;
+oper v_besch60 : Str -> VerbeN = \s -> mkNV (conj3vaincre s) ;
+oper v_besch61 : Str -> VerbeN = \s -> mkNV (conj3traire s) ;
+oper v_besch62 : Str -> VerbeN = \s -> mkNV (conj3faire s) ;
+oper v_besch63 : Str -> VerbeN = \s -> mkNV (conj3plaire s) ;
+oper v_besch64 : Str -> VerbeN = \s -> mkNV (conj3connaître s) ;
+oper v_besch65 : Str -> VerbeN = \s -> mkNV (conj3naître s) ;
+oper v_besch66 : Str -> VerbeN = \s -> mkNV (conj3paître s) ;
+oper v_besch67 : Str -> VerbeN = \s -> mkNV (conj3croître s) ;
+oper v_besch68 : Str -> VerbeN = \s -> mkNV (conj3croire s) ;
+oper v_besch69 : Str -> VerbeN = \s -> mkNV (conj3boire s) ;
+oper v_besch70 : Str -> VerbeN = \s -> mkNV (conj3clore s) ;
+oper v_besch71 : Str -> VerbeN = \s -> mkNV (conj3conclure s) ;
+oper v_besch72 : Str -> VerbeN = \s -> mkNV (conj3absoudre s) ;
+oper v_besch73 : Str -> VerbeN = \s -> mkNV (conj3coudre s) ;
+oper v_besch74 : Str -> VerbeN = \s -> mkNV (conj3moudre s) ;
+oper v_besch75 : Str -> VerbeN = \s -> mkNV (conj3suivre s) ;
+oper v_besch76 : Str -> VerbeN = \s -> mkNV (conj3vivre s) ;
+oper v_besch77 : Str -> VerbeN = \s -> mkNV (conj3lire s) ;
+oper v_besch78 : Str -> VerbeN = \s -> mkNV (conj3dire s) ;
+oper v_besch79 : Str -> VerbeN = \s -> mkNV (conj3rire s) ;
+oper v_besch80 : Str -> VerbeN = \s -> mkNV (conj3écrire s) ;
+oper v_besch81 : Str -> VerbeN = \s -> mkNV (conj3confire s) ;
+oper v_besch82 : Str -> VerbeN = \s -> mkNV (conj3cuire s) ;
+
+-- 83-99 not used
+
+oper v_besch100 : Str -> VerbeN = \s -> mkNV (conj s) ; --- to do
+oper v_besch101 : Str -> VerbeN = \s -> mkNV (conj s) ; --- to do
+
+----------------------------------------------------
+-- infrastructure from old MorphoFre
+
+-- We very often form the verb stem by dropping out the infinitive ending.
+
+  troncVerb : Tok -> Tok = Predef.tk 2 ;
+
+--3 Macros for the complete conjugation type
+--
+-- The type $VForm$ has 55 forms, as defined in $types.Fra.gf$.
+-- The worst-case macro takes 11 stems and two affix sets.
+-- (We will actually never need all of these at the same time.)
+
+  verbAffixes :
+    (a,b,c,d,e,f,g,h,i,j,k : Str) -> Affixe -> AffixPasse -> Verbe =
+    \tien, ten, tienn, t, tiendr, soi, soy, soie, tenu, tenus, tenir ->
+    \affpres, affpasse ->
+    table {
+      Inf                   => tenir  ;
+      Indi  Presn   Sg p    => tien   + affpres ! p ;
+      Indi  Presn   Pl P3   => tienn  + "ent" ;
+      Indi  Presn   Pl p    => ten    + affixPlOns ! p ;
+      Indi  Imparf  n  p    => ten    + affixImparf ! n ! p ;
+      Indi  Passe   n  p    => t      + affpasse.ps ! n ! p ;
+      Indi  Futur   n  p    => tiendr + affixFutur ! n ! p ;
+      Condi         n  p    => tiendr + affixImparf ! n ! p ;
+      Subjo SPres   Sg p    => soi    + affixSPres ! Sg ! p ;
+      Subjo SPres   Pl P3   => soi    + "ent" ;
+      Subjo SPres   Pl p    => soy    + affixSPres ! Pl ! p ;
+      Subjo SImparf n  p    => t      + affpasse.si ! n ! p ;
+      Imper        SgP2     => soie ;
+      Imper        p        => soy    + affixImper ! p ;
+      Part PPres            => ten    + "ant" ;
+      Part (PPasse Masc Sg) => tenu ;
+      Part (PPasse Fem  Sg) => tenu + "e" ;
+      Part (PPasse Masc Pl) => tenus ;
+      Part (PPasse Fem  Pl) => tenu + "es"
+      } ;
+
+
+-- Almost always seven stems are more than enough.
+
+  verbHabituel :
+    (a,b,c,d,e,f,g : Str) -> Affixe -> AffixPasse -> Verbe =
+    \tien, ten, tienn, t, tiendr, tenu, tenir ->
+    \affpres, affpasse ->
+    verbAffixes tien ten tienn t tiendr tienn ten 
+                (tien + affpres ! P1) tenu 
+                (case tenu of {_ +"s" => tenu ; _ => tenu + "s"}) tenir affpres affpasse ;
+
+
+--3 The first conjugation
+--
+-- There is quite some phonologically explained variation in the first conjugation.
+-- The worst case has three different stems.
+
+  auxConj1 : Str -> Str -> Str -> Verbe = \jet, jett, jeter ->
+    verbHabituel jett jet jett jet jeter (jet+"é") (jet+"er") affixSgE affixPasseA ;
+
+  conj1aimer : Str -> Verbe = \aimer -> 
+    let {aim = troncVerb aimer} in
+    auxConj1 aim aim aimer ;
+
+  conj1céder : Str -> Verbe = \céder -> 
+    let {
+      ced = troncVerb céder ; 
+      d   = Predef.dp 1 ced ;
+      c   = Predef.tk 2 ced ; 
+      cèd = c + "è" + d ; 
+      céd = c + "é" + d
+      } 
+      in auxConj1 céd cèd céder ;
+
+  conj1peser : Str -> Verbe = \céder -> ---- ? a verifier
+    let {
+      ced = troncVerb céder ; 
+      d   = Predef.dp 1 ced ;
+      c   = Predef.tk 2 ced ; 
+      cèd = c + "è" + d ; 
+      céd = c + "e" + d
+      } 
+      in auxConj1 céd cèd céder ;
+
+  conj1jeter : Str -> Verbe = \jeter ->
+    let {
+      jet  = troncVerb jeter ;
+      jett = jet + Predef.dp 1 jet
+    } 
+    in auxConj1 jet jett (jett + "er") ;
+
+  conj1placer : Str -> Verbe = \placer -> 
+    let {
+      pla = Predef.tk 3 placer ;
+      plac = preVoyelleFront (pla+"ç") (pla+"c")
+    } in
+    auxConj1 plac plac placer ;
+
+  conj1manger : Str -> Verbe = \manger -> 
+    let {
+      mang  = Predef.tk 2 manger ;
+      mange = preVoyelleFront (mang+"e") mang
+    } in
+    auxConj1 mange mange manger ;
+
+  conj1assiéger : Str -> Verbe = \assiéger ->
+    let {assi = Predef.tk 4 assiéger} in
+    auxConj1 (preVoyelleFront (assi+"ége") (assi+"ég")) (assi+"èg") assiéger ;
+
+  conj1payer : Str -> Verbe = \payer -> 
+    let {pa = Predef.tk 3 payer} in
+    auxConj1 (pa + "y") (pa + "i") (pa + "ier") ;
+
+  conj1envoyer : Str -> Verbe = \envoyer ->
+    let {renv = Predef.tk 4 envoyer} in
+    auxConj1 (renv + "oy") (renv + "oi") (renv + "err") ;
+
+-- This is a collective dispatcher.
+
+  mkVerbReg : Str -> Verbe = \parler ->
+    case parler of {
+      _ + "ir"              => conj2finir parler ;
+      _ + "re"              => conj3rendre parler ;
+      _ + "éger"            => conj1assiéger parler ;
+      _ + ("emer" | "ener" | "eper" | "eser" | "ever") => conj1peser parler ;  
+      _ + ("eler" | "eter") => conj1jeter parler ;
+      _ + ("écer" | "éder" | "éler" | "éner" | "éper" | "érer" | "éser" | "éter")            => conj1céder parler ;
+      _ + "cer"             => conj1placer parler ;
+      _ + "ger"             => conj1manger parler ;
+      _ + "yer"             => conj1payer parler ;
+      _ + "er"              => conj1aimer parler ;
+      _                     => Predef.error ("verb infinitive must end er/ir/re, not satisfied by" ++ parler)
+    } ;
+
+-- The following can be more reliable.
+
+  mkVerb2Reg : Str -> Str -> Verbe = \jeter,jette -> case <jeter,jette> of {
+    <_ + "er", _ + "e">  => auxConj1 (Predef.tk 2 jeter) (Predef.tk 1 jette) 
+                                     (jette + "r") ;
+    <_ + "oir", _ >      => conj3cevoir jeter ;
+    <_ + "ir", _ + "it"> => conj2finir jeter ;
+    <_ + "ir", _ >       => conj3sentir jeter ;
+    _ => mkVerbReg jeter
+    } ;
+
+  mkVerb3Reg : Str -> Str -> Str -> Verbe = \jeter,jette,jettera ->
+    case jeter of {
+      _ + "er" => auxConj1 (Predef.tk 2 jeter) (Predef.tk 1 jette) (Predef.tk 1 jettera) ;
+      _ => mkVerb2Reg jeter jette
+      } ;
+
+--3 The second conjugation
+--
+-- There are just two different cases.
+
+  conj2finir : Str -> Verbe = \finir ->
+    let {
+      fin  = troncVerb finir ; 
+      fini = fin + "i" ; 
+      finiss = fin + "iss"
+      } in
+    verbHabituel fini finiss finiss fin finir fini finir affixSgS affixPasseI ;
+
+  conj2haïr : Str -> Verbe = \haïr ->
+    let {ha    = troncVerb haïr ;
+         hai   = ha + "i" ; 
+         haï   = ha + "ï" ; 
+         haiss = ha + "ïss"
+        } in
+    verbHabituel hai haiss haiss ha haïr haï haïr affixSgS (affixPasse "ï" "ï") ;
+
+
+--3 The third conjugation
+--
+-- This group is very heterogeneous. Most verbs have "re" in the infinitive,
+-- but the first example does not!
+
+  conj3tenir : Str -> Verbe = \tenir ->
+    let {t = Predef.tk 4 tenir} in
+    verbHabituel 
+      (t+"ien") (t+"en") (t+"ienn") t (t+"iendr") (t+"enu") tenir
+      affixSgS (affixPasse "in" "în") ;
+
+-- Many verbs have "is" in the past participle. But there is so much variation
+-- that the worst-case macro needs seven forms.
+
+  auxConj3is : (_,_,_,_,_,_,_ : Str) -> Verbe =
+    \quier, quér, quièr, qu, querr, quis, quiss ->
+    verbAffixes 
+      quier quér quièr qu querr quièr quér
+      (quier + "s") quis quiss (quér + "ir") affixSgS affixPasseI ;
+
+  auxConj3ir : (_,_,_ : Str) -> Verbe = \sen, sent, i -> 
+    auxConj3is sen sent sent sent (sent+"ir") (sent+i) (sent+i+"s") ;
+
+  conj3quérir : Str -> Verbe = \quérir ->
+    let {qu = Predef.tk 4 quérir} in
+    auxConj3is (qu+"ier") (qu+"ér") (qu+"ièr") qu (qu+"err") (qu+"is") (qu+"is") ;
+
+  conj3sentir : Str -> Verbe = \sentir ->
+    let {
+      sent = troncVerb sentir ;
+      sen  = Predef.tk 1 sent
+    } in
+    auxConj3ir sen sent "i" ;
+
+  conj3vêtir : Str -> Verbe = \vêtir -> 
+    let {
+      s = Predef.tk 5 vêtir ;
+      vet = auxConj3ir "vêt" "vêt" "u"
+    } in
+    table {
+      Indi Presn Sg P3 => s + "vêt" ;
+      p              => s + vet ! p
+      };
+  
+  auxConj3vrir : (_,_,_ : Str) -> Verbe = \ouvr, i, ouvert ->
+    verbAffixes 
+      ouvr ouvr ouvr ouvr (ouvr + i + "r") ouvr ouvr
+      (ouvr + "e") ouvert (ouvert + "s") (ouvr + "ir") affixSgE affixPasseI  ;
+
+  conj3couvrir  : Str -> Verbe = \couvrir -> 
+    let {couv = Predef.tk 3 couvrir} in
+    auxConj3vrir (couv+"r") "i" (couv+"ert") ;
+
+  conj3cueillir : Str -> Verbe = \cueillir -> 
+    let {cueill = troncVerb cueillir} in
+    auxConj3vrir cueill "e" (cueill + "i") ;
+
+  conj3assaillir : Str -> Verbe = \assaillir -> 
+    let {assaill = troncVerb assaillir} in
+    auxConj3vrir assaill "i" (assaill + "i") ;
+
+-- The verb "faillir" has lots of alternatives forms.
+
+  conj3faillir : Str -> Verbe = \faillir ->
+    let {
+      fa    = Predef.tk 5 faillir ;
+      faudr = fa + "udr" ;
+      tfa   = conj3assaillir faillir
+      } in
+    table {
+      Indi Presn Sg p   => fa + "u" + affixSgX ! p ;
+
+      Subjo SPres n p => fa + "ill" + affixSPres ! n ! p ;
+      Indi Futur n p  => faudr + affixFutur ! n ! p ;
+      Condi      n p  => faudr + affixImparf ! n ! p ;
+---v      Subjo SPres n p => fa + variants {"illiss" ; "ill"} + affixSPres ! n ! p ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=0fc8d91700c4:351-700
+start=351
+end=700
+----
+---v      Indi Futur n p => variants {tfa ! Indi Futur n p ; faudr + affixFutur ! n ! p} ;
+---v      Condi      n p => variants {tfa ! Condi n p     ; faudr + affixImparf ! n ! p} ;
+
+      Imper _         => nonExist ;
+      p               => tfa ! p
+      };
+
+  conj3bouillir : Str -> Verbe = \bouillir -> 
+    let {
+      bou = Predef.tk 5 bouillir ;
+      tbou = conj3assaillir bouillir
+    } in
+    table {
+      Indi Presn Sg p  => bou + affixSgS ! p ;
+      Imper SgP2     => bou + "s" ;
+      p              => tbou ! p
+    };
+
+-- Notice that here we don't need another conjugation, as Bescherelle does.
+
+  conj3dormir : Str -> Verbe = conj3sentir ;
+
+-- The verbs "mourir" and "courir" have much in common, except the first two
+-- persons in the present indicative singular, and the past participles.
+
+  auxConj3ourir : (_,_,_ : Str) -> Verbe = \meur, mour, mort ->
+    verbAffixes 
+      meur mour meur mour (mour + "r") meur mour
+      (meur + "s") mort (mort + "s") (mour + "ir") affixSgS affixPasseU ;
+
+  conj3courir : Str -> Verbe = \courir -> 
+    let {cour = troncVerb courir} in
+    auxConj3ourir cour cour (cour + "u") ;
+
+  conj3mourir : Str -> Verbe = \mourir ->
+    let {m = Predef.tk 5 mourir} in
+    auxConj3ourir (m + "eur") (m + "our") (m + "ort") ;
+
+-- A little auxiliary to cover "fuir" and "ouïr". 
+-- *N.B.* some alternative forms for "ouïr" are still missing.
+
+  auxConj3ui : AffixPasse -> (_,_,_ : Str) -> Verbe = \affpasse, o, ou, ouï ->
+    let {oi : Str = o + "i" ; oy : Str = o + "y" ; ouïr : Str = ouï + "r"} in
+    verbHabituel oi oy oi ou ouïr ouï ouïr affixSgS affpasse ;
+
+  conj3fuir : Str -> Verbe = \fuir ->
+    let {fu = troncVerb fuir} in 
+    auxConj3ui affixPasseI fu fu (fu + "i") ;
+
+  conj3ouïr : Str -> Verbe = \ouir ->
+    let {o = Predef.tk 3 ouir} in
+    auxConj3ui (affixPasse "ï" "ï") o (o + "u") (o + "uï") ;
+
+-- The verb "gésir" lacks many forms.
+
+  conj3gésir : Str -> Verbe = \gésir -> 
+    let {g = Predef.tk 4 gésir} in
+    table {
+      Inf              => g + "ésir" ;
+      Indi  Presn   Sg p => g + lesAffixes "is" "is" "ît" ! p ; 
+      Indi  Presn   Pl p => g + "is" + affixPlOns ! p ;
+      Indi  Imparf n  p => g + "is" + affixImparf ! n ! p ;
+      Part PPres       => g + "isant" ;
+      _                => nonExist
+      } ;
+
+-- Here is an auxiliary for a large, and heterogeneous, group of verbs whose
+-- infinitive ends in "oir". It has two special cases, depending on the ending
+-- of the first two persions in the present indicative singular.
+
+  auxConj3oir : Affixe -> AffixPasse -> (_,_,_,_,_,_,_,_ : Str) -> Verbe =
+     \affpres, affpasse -> 
+     \peu, pouv, peuv, p, pourr, veuill, voul, v ->
+     let {pu : Str = p + "u"} in
+     verbAffixes 
+       peu pouv peuv p pourr veuill voul (peu+affpres!P1) pu (pu+"s") (v+"oir")
+       affpres affpasse ;
+
+  auxConj3usX : (_,_,_,_,_,_,_,_ : Str) -> Verbe = 
+    auxConj3oir affixSgX affixPasseU ;
+  auxConj3usS : (_,_,_,_,_,_,_,_ : Str) -> Verbe = 
+    auxConj3oir affixSgS affixPasseU ;
+
+  conj3cevoir : Str -> Verbe = \cevoir ->
+    let {re = Predef.tk 6 cevoir} in
+    auxConj3usS (re+"çoi") (re+"cev") (re+"çoiv") (re+"ç") 
+                (re+"cevr") (re+"çoiv") (re+"cev") (re+"cev") ;
+
+  conj3voir : Str -> Verbe = \voir -> 
+    let {
+      v = Predef.tk 3 voir ;
+      voi = v + "oi"
+      } in
+    auxConj3oir 
+      affixSgS affixPasseI voi (v + "oy") voi v (v + "err") voi (v + "oy") v ;
+
+  conj3pourvoir : Str -> Verbe = \pourvoir ->
+    let {
+      pourv = Predef.tk 3 pourvoir ;
+      pourvoi = pourv + "oi" ;
+      pourvoy = pourv + "oy"
+      } in
+    auxConj3usS pourvoi pourvoy pourvoi pourv pourvoir pourvoi pourvoy pourv ;  
+
+  conj3savoir : Str -> Verbe = \savoir ->
+    let {
+      s = Predef.tk 5 savoir ;
+      tsavoir = auxConj3usS "ai" "av" "av" "" "aur" "ach" "ach" "av"
+      } in
+    table {
+     Imper p        => s + "ach" + affixImper ! p ;
+     Part PPres     => s + "achant" ;
+     p => s + tsavoir ! p 
+     } ;
+
+  conj3devoir : Str -> Verbe = \devoir ->
+    let {
+      s = Predef.tk 6 devoir ;
+      tdevoir = auxConj3usS "doi" "dev" "doiv" "d" "devr" "doiv" "dev" "dev"
+      } in
+    table {
+      Part (PPasse Masc Sg) => s + "dû" ;
+      p => s + tdevoir ! p
+     } ;
+
+  conj3pouvoir : Str -> Verbe = \pouvoir ->
+    let {
+      p = Predef.tk 6 pouvoir ;
+      tpouvoir = auxConj3usX "eu" "ouv" "euv" "" "ourr" "uiss" "uiss" "ouv"
+      } in
+    table {
+      Indi Presn Sg P1 => p + "eux" ;
+---v      Indi Presn Sg P1 => p + variants {"eux" ; "uis"} ;
+      t => p + tpouvoir ! t
+      } ;
+
+  conj3mouvoir : Str -> Verbe = \mouvoir -> 
+    let {
+      s = Predef.tk 7 mouvoir ;
+      mu = adjReg "mû" ;
+      tmouvoir = auxConj3usS "meu" "mouv" "meuv" "m" "mouvr" "meuv" "mouv" "mouv"
+      } in
+    table {
+      Part (PPasse g n) => s + mu ! g ! n ;
+      p => s + tmouvoir ! p
+      } ;
+
+  auxConj3seul3sg : (_,_,_,_,_ : Str) -> Verbe = 
+    \faut, fall, pl, faudr, faill -> table {
+      Inf                 => fall + "oir" ;
+      Indi  Presn     Sg P3 => faut ;
+      Indi  Imparf   Sg P3 => fall + "ait" ;
+      Indi  Passe    Sg P3 => pl + "ut" ;
+      Indi  Futur    Sg P3 => faudr + "a" ;
+      Condi          Sg P3 => faudr + "ait" ;
+      Subjo SPres   Sg P3 => faill + "e" ;
+      Subjo SImparf Sg P3 => pl + "ût" ;
+      Part PPres          => fall + "ant" ;
+      Part (PPasse g n)   => adjReg (pl + "u") ! g ! n ;
+      _                   => nonExist
+      } ;
+
+  conj3pleuvoir : Str -> Verbe = \pleuvoir ->
+    let {
+      pleuv = Predef.tk 3 pleuvoir ;
+      pl    = Predef.tk 3 pleuv
+      } in
+    auxConj3seul3sg (pl + "eut") pleuv pl (pleuv + "r") pleuv ;
+
+  conj3falloir : Str -> Verbe = \falloir ->
+    let {
+      fa   = Predef.tk 5 falloir ;
+      fau  = fa + "u" ;
+      fall = Predef.tk 3 falloir
+      } in
+    auxConj3seul3sg (fau + "t") fall fall (fau + "dr") (fa + "ill") ;
+
+  conj3valoir : Str -> Verbe = \valoir ->
+    let {
+      va = Predef.tk 4 valoir ;
+      val = va + "l"
+    } in
+    auxConj3usX (va + "u") val val val (va + "udr") (va + "ill") val val ;
+
+  conj3vouloir : Str -> Verbe = \vouloir ->
+    let {
+      v  = Predef.tk 6 vouloir ;
+      vo = v + "o" ;
+      voul = vo + "ul" ;
+      veul = v + "eul"
+    } in
+    auxConj3usX (v + "eu") voul veul voul (vo + "udr") (v + "euill") voul voul ;
+
+-- The following two are both "asseoir" in the Bescherelle, which however 
+-- points out that the latter conjugation has an infinitive form without "e"
+-- since the orthographic rectifications of 1990.
+
+  conj3asseoir : Str -> Verbe = \asseoir -> 
+    let {
+      ass = Predef.tk 4 asseoir ;
+      tasseoir = auxConj3is "ied" "ey" "ey" "" "iér" "is" "is"
+    } in 
+    table {
+      Inf => ass + "eoir" ;
+      Indi Presn Sg P3 => ass + "ied" ;
+      t => ass + tasseoir ! t
+      } ;
+
+  conj3assoir : Str -> Verbe = \assoir -> 
+    let {
+      ass = Predef.tk 3 assoir ;
+      tassoir = auxConj3is "oi" "oy" "oi" "" "oir" "is" "is"
+    } in 
+    table {
+      Inf => ass + "eoir" ;
+---v  Inf => ass + variants {"oir" ; "eoir"} ;
+      t => ass + tassoir ! t
+      } ;
+
+  conj3seoir : Str -> Verbe = \seoir -> 
+    let {
+      s = Predef.tk 4 seoir ;
+      tseoir = conj3asseoir seoir
+    } in
+    table {
+      Indi Presn   Pl P3 => s + "iéent" ;
+      Indi _      _  P1 => nonExist ;
+      Indi _      _  P2 => nonExist ;
+      Indi Passe  _  _  => nonExist ;
+      Condi       _  P1 => nonExist ;
+      Condi       _  P2 => nonExist ;
+      Subjo SPres Sg P3 => s + "iée" ;
+      Subjo SPres Pl P3 => s + "iéent" ;
+      Subjo _     _  _  => nonExist ;
+      Imper _           => nonExist ;
+      Part PPres        => s + "éant" ;      
+      t => tseoir ! t
+      } ;
+
+-- Here we don't need a new conjugation.
+
+  conj3messeoir : Str -> Verbe = \messeoir ->
+    let {tmesseoir = conj3seoir messeoir} in
+    table {
+      Part (PPasse _ _) => nonExist ;
+      p => tmesseoir ! p
+      } ;
+
+  conj3surseoir : Str -> Verbe = \surseoir ->
+    let {
+      surs = Predef.tk 4 surseoir ;
+      tsurseoir = auxConj3is "oi" "oy" "oi" "" "eoir" "is" "is"
+    } in
+    table {
+      Inf => surseoir ;
+      t   => surs + tsurseoir ! t
+      } ;
+
+-- Here we interpolate and include the imperfect and subjunctive forms,
+-- which Bescherelle leaves out.
+
+  conj3choir : Str -> Verbe = \choir ->
+    let {
+      e = Predef.tk 5 choir ;
+      tchoir = 
+        auxConj3usS "choi" "choy" "choi" "ch" 
+          "cherr" "choi" "choy" "ch"
+---v      (variants {"choir" ; "cherr"}) "choi" "choy" "ch"
+    } in
+    \\p => e + tchoir ! p ;
+
+  conj3échoir : Str -> Verbe = \échoir -> 
+    let {techoir = conj3choir échoir} in
+    table {
+      Indi _      _  P1 => nonExist ;
+      Indi _      _  P2 => nonExist ;
+      Indi Presn Pl P3   => Predef.tk 3 échoir + "éent" ;
+---v  Indi Presn Pl P3   => Predef.tk 3 échoir + variants {"oient" ; "éent"} ;
+      Subjo _    _  P1 => nonExist ;
+      Subjo _    _  P2 => nonExist ;
+      Condi       _  P1 => nonExist ;
+      Condi       _  P2 => nonExist ;
+      Imper _          => nonExist ;
+      Part PPres       => Predef.tk 3 échoir + "éant" ;      
+      t => techoir ! t 
+      } ;
+ 
+-- Verbs with the infinitive ending "re" are a major group within the third
+-- conjugation. The worst-case macro takes 2 sets of affixes and 7 stems.
+
+  auxConj3re : Affixe -> AffixPasse -> (_,_,_,_,_,_,_ : Str) -> Verbe =
+     \affpr, affp -> \prend, pren, prenn, pr, prendr, pris, priss ->
+    verbAffixes prend pren prenn pr prendr prenn pren 
+                (prend + affpr ! P1) pris priss (prendr + "e") affpr affp ;
+
+  auxConj3tre : (_,_ : Str) -> Verbe = \bat, batt -> 
+    auxConj3re affixSgSsansT affixPasseI 
+             bat batt batt batt (batt + "r") (batt + "u") (batt + "us") ;
+
+  conj3rendre : Str -> Verbe = \rendre -> 
+    let {rend = troncVerb rendre} in
+    auxConj3tre rend rend ;
+
+  conj3battre : Str -> Verbe = \battre -> 
+    let {bat = Predef.tk 3 battre} in
+    auxConj3tre bat (bat + "t") ;
+
+  conj3prendre : Str -> Verbe = \prendre ->
+    let {pr = Predef.tk 5 prendre} in
+    auxConj3re 
+       affixSgSsansT affixPasseI (pr + "end") (pr + "en") 
+       (pr + "enn") pr (pr + "endr") (pr + "is") (pr + "is") ;
+
+  conj3mettre : Str -> Verbe = \mettre ->
+    let {m = Predef.tk 5 mettre ; met = m + "et"} in
+    auxConj3re 
+      affixSgSsansT affixPasseI met (met + "t") 
+      (met + "t") m (met + "tr") (m + "is") (m + "is") ;
+
+  conj3peindre : Str -> Verbe = \peindre -> 
+    let {pe = Predef.tk 5 peindre ; peign = pe + "ign"} in
+    auxConj3re 
+      affixSgS affixPasseI
+      (pe + "in") peign peign peign (pe + "indr") (pe + "int") (pe + "ints") ;
+
+-- We don't need a separate conjugation for "joindre" and "craindre".
+
+  conj3joindre = conj3peindre ;
+
+  conj3craindre = conj3peindre ;
+
+  conj3vaincre : Str -> Verbe = \vaincre -> 
+    let {
+      vainc = troncVerb vaincre ; 
+      vainqu = Predef.tk 1 vainc + "qu"
+     } in
+     auxConj3re 
+        affixSgSsansT affixPasseI
+        vainc vainqu vainqu vainqu (vainc + "r") (vainc + "u") (vainc + "us") ;
+
+  conj3traire : Str -> Verbe = \traire -> 
+    let {
+      tra  = Predef.tk 3 traire ; 
+      trai = tra + "i" ; 
+      tray = tra + "y" 
+    } in
+    auxConj3re 
+      affixSgS affixPasseNonExist
+      trai tray trai [] (trai + "r") (trai + "t") (trai + "ts") ;
+
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=0fc8d91700c4:701-981
+start=701
+end=981
+----
+-- The verb "faire" has a great many irregularities. Following Bescherelle, 
+-- we have left out the plural 2nd person variant "faisez", which is a
+-- 'grossier barbarisme'.
+
+  conj3faire : Str -> Verbe = \faire -> 
+    let {
+      fai  = troncVerb faire ; 
+      fais = fai + "s" ;
+      f    = Predef.tk 2 fai ;
+      tfaire = auxConj3re 
+                 affixSgS affixPasseI 
+                 fai fais (f + "ass") f (f + "er") (fai + "t") (fai + "ts")
+      } in 
+    table {
+      Inf              => faire ;
+      Indi  Presn  Pl P2 => fai + "tes" ;
+      Indi  Presn  Pl P3 => f + "ont" ;
+      Subjo SPres Pl p => f + "ass" + affixSPres ! Pl ! p ;
+      Imper      PlP2  => fai + "tes" ;
+      t => tfaire ! t
+      } ;
+
+  auxConj3oire : (_,_,_,_ : Str) -> Verbe = \boi, buv, boiv, b -> 
+     auxConj3re 
+       affixSgS affixPasseU boi buv boiv b (boi + "r") (b + "u") (b + "us") ;
+
+  auxConj3ît : Verbe -> Str -> Verbe = \conj,plaît ->
+    table {
+      Indi Presn Sg P3 => plaît ;
+      t => conj ! t
+      } ;
+
+  conj3plaire : Str -> Verbe = \plaire -> 
+    let {
+      pl = Predef.tk 4 plaire ;
+      tplaire = auxConj3oire (pl + "ai") (pl + "ais") (pl + "ais") pl  
+    } in
+    auxConj3ît tplaire (pl + "aît") ;
+
+  conj3connaître : Str -> Verbe = \connaître -> 
+    let {
+      conn = Predef.tk 5 connaître ;
+      connaiss = conn + "aiss" ;
+      tconnaitre = 
+        auxConj3re 
+          affixSgS affixPasseU (conn + "ai") connaiss connaiss 
+          conn (conn + "aîtr") (conn + "u") (conn + "us")
+    } in 
+    auxConj3ît tconnaitre (conn + "aît") ;
+
+  conj3naître : Str -> Verbe = \naître -> 
+    let {
+      n = Predef.tk 5 naître ;
+      tnaitre = auxConj3re 
+                   affixSgS affixPasseI
+                   (n + "ai") (n + "aiss") (n + "aiss") (n + "aqu") 
+                   (n + "aîtr") (n + "é") (n + "és")
+    } in
+    auxConj3ît tnaitre (n + "aît") ;
+
+-- The conjugation of "paître" is defective in a curious way, especially
+-- if compared with "repaître". According to Bescherelle, the invariable 
+-- past participle is only used as a term of "fauconnerie" (one would expect it
+-- to be defective rather than invariable).
+
+  conj3paître : Str -> Verbe = \paître ->
+    let {tpaitre = conj3connaître paître} in
+    table {
+      Indi Passe _ _     => nonExist ;
+      Subjo SImparf _ _ => nonExist ;
+      Part (PPasse _ _) => Predef.tk 5 paître + "u" ;
+      p => tpaitre ! p
+    } ;
+
+  conj3repaître = conj3connaître ;
+
+  conj3croître : Str -> Verbe = \croître ->
+    let {cr = Predef.tk 5 croître} in
+    auxConj3re 
+      affixSgS (affixPasse "û" "û") (cr + "oî") (cr + "oiss") 
+      (cr + "oiss") cr (cr + "oîtr") (cr + "û") (cr + "ûs") ;
+
+  conj3croire : Str -> Verbe = \croire -> 
+    let {cr = Predef.tk 4 croire} in
+    auxConj3oire (cr + "oi") (cr + "oy") (cr + "oi") cr ;
+
+  conj3boire : Str -> Verbe = \boire -> 
+    let {b = Predef.tk 4 boire} in
+    auxConj3oire (b + "oi") (b + "uv") (b + "oiv") b ;
+
+-- The verb "clore" shows a systematic absence of past forms, 
+-- including the imperfect indicative. What is more capricious, is the absence 
+-- of the plural first and second persons in the present indicative and
+-- the imperative.
+
+  conj3clore : Str -> Verbe = \clore -> 
+    let {
+      clo = troncVerb clore ;
+      clos = clo + "s" ;
+      tclore = auxConj3re 
+                 affixSgS affixPasseNonExist clo clos clos 
+                 nonExist (clo + "r") clos clos
+    } in
+    table {
+      Indi Presn Sg P3 => Predef.tk 1 clo + "ôt" ;
+      Indi Presn Pl P1 => nonExist ;
+      Indi Presn Pl P2 => nonExist ;
+      Indi Imparf _ _ => nonExist ;
+      Imper PlP1 => nonExist ;
+      Imper PlP2 => nonExist ;
+      t => tclore ! t
+    } ;
+
+  conj3conclure : Str -> Verbe = \conclure ->
+    let {
+      conclu = troncVerb conclure ;
+      concl = Predef.tk 1 conclu
+    } in
+    auxConj3re 
+      affixSgS affixPasseU
+      conclu conclu conclu concl (conclu + "r") conclu (conclu + "s") ;
+
+  conj3absoudre : Str -> Verbe = \absoudre ->
+    let {
+      abso = Predef.tk 4 absoudre ;
+      tabsoudre = conj3résoudre absoudre
+    } in
+    table {
+      Indi Passe _ _ => nonExist ;
+      Subjo SImparf _ _ => nonExist ;
+      Part (PPasse Masc _) => abso + "us" ;
+      Part (PPasse Fem n) => nomReg (abso + "ute") ! n ;
+      p => tabsoudre ! p
+      } ;
+
+  conj3résoudre : Str -> Verbe = \résoudre ->
+    let {reso = Predef.tk 4 résoudre} in
+    auxConj3re 
+      affixSgS affixPasseU (reso + "u") (reso + "lv") (reso + "lv") 
+      (reso + "l") (reso + "udr") (reso + "lu") (reso + "lus") ;
+
+  conj3coudre : Str -> Verbe = \coudre ->
+     let {
+       cou  = Predef.tk 3 coudre ;
+       cous = cou + "s"
+     } in
+     auxConj3re 
+        affixSgSsansT affixPasseI
+        (cou +"d") cous cous cous (cou + "dr") (cous + "u") (cous + "us") ;
+
+  conj3moudre : Str -> Verbe = \moudre ->
+     let {
+       mou = Predef.tk 3 moudre ;
+       moul = mou + "l"
+     } in
+     auxConj3re 
+       affixSgSsansT affixPasseU
+       (mou + "d") moul moul moul (mou + "dr") (moul + "u") (moul + "us") ;
+
+  conj3suivre : Str -> Verbe = \suivre ->
+    let {
+      suiv  = troncVerb suivre ;
+      sui   = Predef.tk 1 suiv ;
+      suivi = suiv + "i"
+    } in  
+    auxConj3re 
+      affixSgS affixPasseI sui suiv suiv suiv (suiv + "r") suivi (suivi+"s") ;
+
+  conj3vivre : Str -> Verbe = \vivre ->
+    let {
+      viv = troncVerb vivre ;
+      vi  = Predef.tk 1 viv ;
+      véc = Predef.tk 1 vi + "éc"
+    } in 
+    auxConj3re 
+      affixSgS affixPasseU vi viv viv véc (viv + "r") (véc + "u") (véc + "us") ;
+
+  conj3lire : Str -> Verbe = \lire -> 
+    let {
+      li  = troncVerb lire ;
+      lis = li + "s" ;
+      l   = Predef.tk 1 li
+    } in 
+    auxConj3re affixSgS affixPasseU li lis lis l (li + "r") (l + "u") (l + "us") ;
+
+  conj3dire : Str -> Verbe = \dire ->
+    let {
+      di  = troncVerb dire ;
+      dis = di + "s" ;
+      dit = di + "t" ;
+      d   = Predef.tk 1 di ;
+      tdire = auxConj3re 
+                affixSgS affixPasseI di dis dis d (di + "r") dit (dit+"s")
+    } in 
+    table {
+      Indi  Presn  Pl P2  => di + "tes" ;
+      Imper      PlP2   => di + "tes" ;
+      t => tdire ! t
+      } ;
+
+  conj3rire : Str -> Verbe = \rire ->
+    let {
+      ri  = troncVerb rire ;
+      r   = Predef.tk 1 ri
+    } in  
+    auxConj3re affixSgS affixPasseI ri ri ri r (ri + "r") ri (ri+"s") ;
+
+  auxConj3scrire : (_,_,_,_: Str) -> Verbe = \ecri, ecriv, ecrivi, ecrit -> 
+    auxConj3re 
+      affixSgS affixPasseI ecri ecriv ecriv ecrivi (ecri + "r") ecrit (ecrit+"s") ;
+
+  conj3écrire : Str -> Verbe = \écrire ->
+    let {écri = troncVerb écrire} in
+    auxConj3scrire écri (écri + "v") (écri + "v") (écri + "t") ;
+
+  conj3confire : Str -> Verbe = \confire -> 
+    let {confi = troncVerb confire} in
+    auxConj3scrire confi (confi + "s") (Predef.tk 1 confi) (confi + "t") ;
+
+  conj3cuire : Str -> Verbe = \cuire -> 
+    let {cui = troncVerb cuire} in
+    auxConj3scrire cui (cui + "s") (cui + "s") (cui + "t") ;
+
+
+--3 Very irregular verbs
+--
+-- Here we cannot do even with the 'worst case macro'.
+
+  conj3aller : Str -> Verbe = \aller ->
+    let {
+      s = Predef.tk 5 aller ;
+      pres = formesPresAi "v" "all" ;
+      taller = verbHabituel 
+                            "all" "all" "aill" "all" "ir" "allé" "aller"
+                            affixSgS affixPasseA
+    } in
+    table {
+      Indi  Presn    Sg P1 => s + "vais" ;
+      Indi  Presn    n  p  => s + pres ! n ! p ;
+      Indi  Imparf  n  p  => s + "all" + affixImparf ! n ! p ;
+      Imper        SgP2  => s + "va" ;
+      t                  => s + taller ! t
+      } ;
+
+  conjÊtre : Str -> Verbe = \etre -> 
+    let {
+      s = Predef.tk 4 etre ;
+      sg = lesAffixes "suis" "es" "est" ;
+      pl = lesAffixes "sommes" "êtes" "sont" ;
+      tetre = verbHabituel 
+                "soi" "soy" "soi" "f" "ser" "été" "être" affixSgS affixPasseU
+    } in
+    table {
+      Indi  Presn    Sg p  => s + sg ! p ;
+      Indi  Presn    Pl p  => s + pl ! p ;
+      Indi  Imparf  n  p  => s + "ét"   + affixImparf ! n ! p ;
+      Subjo SPres  Sg p  => s + "soi"  + affixSgS ! p ;
+      Subjo SPres  Pl P3 => s + "soient" ;
+      Subjo SPres  Pl p  => s + "soy"  + affixPlOns ! p ;
+      Part PPres         => s + "étant" ;
+      t                  => s + tetre ! t
+      } ;
+
+  conjAvoir : Str -> Verbe = \avoir ->
+    let {
+      s = Predef.tk 5 avoir ;
+      pres = formesPresAi [] "av" ;
+      tavoir = verbHabituel 
+                 "ai" "ay" "ai" "e" "aur" "eu" "avoir" affixSgS affixPasseU
+    } in
+    table {
+      Indi  Presn    n  p  => s + pres ! n ! p ;
+      Indi  Imparf  n  p  => s + "av" + affixImparf ! n ! p ;
+      Subjo SPres  Sg P3 => s + "ait" ;
+      Subjo SPres  Pl P3 => s + "aient" ;
+      Subjo SPres  Pl p  => s + "ay"  + affixPlOns ! p ;
+      Imper        SgP2  => s + "aie" ;
+      t                  => s + tavoir ! t
+      } ;
+
+}
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/CatFre.gf"
+id=d9dd3ead0242
+kind=source
+size=199
+lines=5
+chunks=0
+----
+--# -path=.:../romance:../common:../abstract:../common:prelude
+
+concrete CatFre of Cat = CommonX - [SC,Temp,TTAnt,Tense,TPres,TPast,TFut,TCond,Pol,MU] 
+  ** CatRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/CompatibilityFre.gf"
+id=e8764f1b8ad6
+kind=source
+size=310
+lines=11
+chunks=0
+----
+--# -path=.:../romance:../abstract:../common:../prelude
+
+concrete CompatibilityFre of Compatibility = CatFre ** open Prelude, CommonRomance in {
+
+-- from Noun 19/4/2008
+
+lin
+    NumInt n = {s = \\_ => n.s ; isNum = True ; n = Pl} ;
+    OrdInt n = {s = \\_ => n.s ++ SOFT_BIND ++ "." ; s2 = \\_ => []} ; ---
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ConjunctionFre.gf"
+id=2a9f564522ba
+kind=source
+size=101
+lines=2
+chunks=0
+----
+concrete ConjunctionFre of Conjunction = CatFre ** ConjunctionRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ConstructionFre.gf"
+id=4479b959d211
+kind=source
+size=5742
+lines=153
+chunks=0
+----
+--# -path=alltenses:.:../abstract
+
+concrete ConstructionFre of Construction = CatFre ** 
+  open SyntaxFre, SymbolicFre, ParadigmsFre, 
+       (L = LexiconFre), (E = ExtraFre), (I = IrregFre), (R = ResFre), (C = CommonRomance),
+       Prelude in {
+flags coding=utf8 ;
+
+
+lin
+  hungry_VP = E.ComplCN have_V2 (mkCN (mkN "faim")) ;
+  thirsty_VP = E.ComplCN have_V2 (mkCN (mkN "soif")) ;
+  tired_VP = mkVP (mkA "fatigué") ;
+  scared_VP = E.ComplCN have_V2 (mkCN (mkN "peur" feminine)) ;
+  ill_VP = mkVP (mkA "malade") ;
+  ready_VP = mkVP (mkA "prêt") ;
+
+  has_age_VP card = mkVP have_V2 (mkNP <lin Card card : Card> L.year_N) ;
+
+  have_name_Cl x y = mkCl x (mkV2 (reflV (mkV "appeler"))) y ;
+  married_Cl x y = mkCl (lin NP x) L.married_A2 (lin NP y) | mkCl (mkNP and_Conj (lin NP x) (lin NP y)) (mkA "marié") ;
+
+  what_name_QCl x = mkQCl how_IAdv (mkCl (lin NP x) (reflV (mkV "appeler"))) ;
+  how_old_QCl x = mkQCl (mkIP whichSg_IDet (mkN "âge" masculine)) (lin NP x) have_V2 ;
+  how_far_QCl x = mkQCl (mkIAdv dative (mkIP which_IDet (mkN "distance"))) x ;
+
+-- some more things
+  weather_adjCl ap = mkCl (mkVP (mkVA (mkV I.faire_V2)) (lin AP ap)) ;
+   
+  is_right_VP = E.ComplCN have_V2 (mkCN (mkN "raison")) ;
+  is_wrong_VP = E.ComplCN have_V2 (mkCN (mkN "tort")) ;
+
+  n_units_AP card cn a = mkAP (lin AdA (mkUtt (mkNP <lin Card card : Card> (lin CN cn)))) (lin A a) ;
+
+  bottle_of_CN np = mkCN (lin N2 (mkN2 (mkN "bouteille" feminine) part_Prep)) np ;
+  cup_of_CN    np = mkCN (lin N2 (mkN2 (mkN "tasse") part_Prep)) np ;
+  glass_of_CN  np = mkCN (lin N2 (mkN2 (mkN "verre") part_Prep)) np ;
+
+{-
+-- spatial deixis and motion verbs
+
+  where_go_QCl np = mkQCl where_IAdv (mkCl np (mkVP L.go_V)) ;
+  where_come_from_QCl np =  mkQCl (lin IAdv (ss "d'où")) (mkCl np (mkVP L.go_V)) ;
+  
+  go_here_VP = mkVP (mkVP L.go_V) here_Adv ;
+  come_here_VP = mkVP (mkVP L.come_V) here_Adv ;
+  come_from_here_VP = mkVP (mkVP L.come_V) (mkAdv "d'ici") ;
+
+  go_there_VP = mkVP (mkVP L.go_V)  there_Adv ;
+  come_there_VP = mkVP (mkVP L.come_V) there_Adv ;
+  come_from_there_VP = mkVP (mkVP L.come_V) (mkAdv "de là") ;
+-}  
+
+lincat
+  Weekday = N ;
+  Monthday = NP ;
+  Month = N ;
+  Year = NP ;
+oper
+  noPrep : Prep = mkPrep [] ;
+
+lin
+  weekdayPunctualAdv w = lin Adv {s = w.s ! C.Sg} ;         -- lundi
+  weekdayHabitualAdv w = SyntaxFre.mkAdv noPrep (mkNP the_Det w) ; -- le lundi
+  weekdayLastAdv w = SyntaxFre.mkAdv noPrep (mkNP the_Det (mkCN (mkA "dernier") w)) ; -- le lundi dernier
+  weekdayNextAdv w = SyntaxFre.mkAdv noPrep (mkNP the_Det (mkCN (mkA "prochain") w)) ; -- le lundi prochain
+
+  monthAdv m = lin Adv {s = "en" ++ m.s ! C.Sg} ;         -- en mai
+  yearAdv y = SyntaxFre.mkAdv (mkPrep "en") y ;
+  dayMonthAdv d m = ParadigmsFre.mkAdv ("le" ++ (d.s ! R.Nom).comp ++ m.s ! C.Sg) ; -- le 17 mai ---- le 1 mai should be le 1er mai
+  monthYearAdv m y = lin Adv {s = "en" ++ m.s ! C.Sg ++ (y.s ! R.Nom).comp} ;         -- en mai 2012
+  dayMonthYearAdv d m y = ParadigmsFre.mkAdv ("le" ++ (d.s ! R.Nom).comp ++ m.s ! C.Sg ++ (y.s ! R.Nom).comp) ; -- le 17 mai 2013
+
+  intYear = symb ;
+  intMonthday = symb ;
+  
+
+lincat Language = N ;
+
+lin InLanguage l = SyntaxFre.mkAdv (mkPrep "en") (mkNP l) ;
+
+lin
+  weekdayN w = w ;
+
+  weekdayPN w = mkPN w ;
+  monthPN m = mkPN m ;
+
+  languageCN l = mkCN l ;
+  languageNP l = mkNP the_Det l ;
+
+oper mkLanguage : Str -> N = \s -> mkN s ;
+
+----------------------------------------------
+---- lexicon of special names
+
+lin monday_Weekday = mkN "lundi" ;
+lin tuesday_Weekday = mkN "mardi" ;
+lin wednesday_Weekday = mkN "mercredi" ;
+lin thursday_Weekday = mkN "jeudi" ;
+lin friday_Weekday = mkN "vendredi" ;
+lin saturday_Weekday = mkN "samedi" ;
+lin sunday_Weekday = mkN "dimanche" masculine ;
+
+lin january_Month = mkN "janvier" ; 
+lin february_Month = mkN "février" ; 
+lin march_Month = mkN "mars" ; 
+lin april_Month = mkN "avril" ;
+lin may_Month = mkN "mai" ;
+lin june_Month = mkN "juin" ;
+lin july_Month = mkN "juillet" ;
+lin august_Month = mkN "août" ;
+lin september_Month = mkN "septembre" ;
+lin october_Month = mkN "octobre" ;
+lin november_Month = mkN "novembre" ;
+lin december_Month = mkN "décembre" ;
+
+lin afrikaans_Language = mkLanguage "afrikaans" ;
+lin amharic_Language = mkLanguage "amharique" ; ----
+lin arabic_Language = mkLanguage "arabe" ;
+lin bulgarian_Language = mkLanguage "bulgare" ;
+lin catalan_Language = mkLanguage "catalan" ;
+lin chinese_Language = mkLanguage "chinois" ;
+lin danish_Language = mkLanguage "danois" ;
+lin dutch_Language = mkLanguage "hollandais" ;
+lin english_Language = mkLanguage "anglais" ;
+lin estonian_Language = mkLanguage "estonien" ;
+lin finnish_Language = mkLanguage "finnois" ;
+lin french_Language = mkLanguage "français" ;
+lin german_Language = mkLanguage "allemand" ;
+lin greek_Language = mkLanguage "grècque" ;
+lin hebrew_Language = mkLanguage "hebreu" ;
+lin hindi_Language = mkLanguage "hindi" ;
+lin japanese_Language = mkLanguage "japonais" ;
+lin italian_Language = mkLanguage "italien" ;
+lin latin_Language = mkLanguage "latin" ;
+lin latvian_Language = mkLanguage "letton" ;
+lin maltese_Language = mkLanguage "maltais" ;
+lin nepali_Language = mkLanguage "nepali" ;
+lin norwegian_Language = mkLanguage "norvégien" ;
+lin persian_Language = mkLanguage "persien" ;
+lin polish_Language = mkLanguage "polonais" ;
+lin punjabi_Language = mkLanguage "punjabi" ;
+lin romanian_Language = mkLanguage "roumain" ;
+lin russian_Language = mkLanguage "russe" ;
+lin sindhi_Language = mkLanguage "sindhi" ;
+lin spanish_Language = mkLanguage "espagnol" ;
+lin swahili_Language = mkLanguage "swahili" ;
+lin swedish_Language = mkLanguage "suédois" ;
+lin thai_Language = mkLanguage "thaï" ;
+lin turkish_Language = mkLanguage "turque" ;
+lin urdu_Language = mkLanguage "urdu" ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/DiffFre.gf"
+id=0604fdd0f71d
+kind=source
+size=11759
+lines=347
+chunks=0
+----
+--# -path=.:../romance:../abstract:../common:prelude
+
+instance DiffFre of DiffRomance - [
+  imperClit,
+  invertedClause,
+  verbHyphen,
+  iAdvQuestionInv,
+  -- for comparative forms
+  ComparAgr, af2compar, aagr2compar
+  ]
+  = open CommonRomance, PhonoFre, Prelude in {
+
+  flags optimize=noexpand ; coding=utf8 ;
+--  flags optimize=all ;
+
+  param
+    Prepos = P_de | P_a | PNul ;
+    VType = VTyp VAux VBool ;  -- True means that -t- is required as in va-t-il, alla-t-il
+    VAux  = VHabere | VEsse | VRefl ;
+    VBool = VFalse ;
+    oper VTrue = VFalse ;
+  oper
+    dative   : Case = CPrep P_a ;
+    genitive : Case = CPrep P_de ;
+
+    prepCase : Case -> Str = \c -> case c of {
+      Nom => [] ;
+      Acc => [] ;
+      CPrep P_a => "à" ;
+      CPrep P_de => elisDe ;
+      CPrep PNul => []
+      } ;
+
+    artDef : Bool -> Gender -> Number -> Case -> Str = \isNP,g,n,c ->
+      case <g,n,c> of {
+        <Masc,Sg, CPrep P_de> => pre {"du" ; ("de l'" ++ Predef.BIND) / voyelle} ;
+        <Masc,Sg, CPrep P_a>  => pre {"au" ; ("à l'"  ++ Predef.BIND)  / voyelle} ;
+        <Masc,Sg, _>    => elisLe ;
+        <Fem, Sg, _>    => prepCase c ++ elisLa ;
+        <_,   Pl, CPrep P_de> => "des" ;
+        <_,   Pl, CPrep P_a>  => "aux" ;
+        <_,   Pl, _ >   => "les"
+        } ;
+
+-- In these two, "de de/du/des" becomes "de".
+
+    artIndef = \isNP,g,n,c -> case <n,c> of {
+      <Sg,_>   => prepCase c ++ genForms "un" "une" ! g ;
+      <Pl,CPrep P_de> => if_then_else Str isNP (prepCase c ++ genForms "quelques-uns" "quelques-unes" ! g) elisDe ;
+      _        => if_then_else Str isNP (prepCase c ++ genForms "quelques-uns" "quelques-unes" ! g) (prepCase c ++ "des")
+      } ;
+
+    possCase = \_,_,c -> prepCase c ;
+
+    partitive = \g,c -> case c of {
+      CPrep P_de => elisDe ;
+      _ => prepCase c ++ artDef False g Sg (CPrep P_de)
+      } ;
+
+    conjunctCase : Case -> Case = \c -> c ;
+
+    auxVerb : VType -> (VF => Str) = \vtyp -> case vtyp of {
+      VTyp VHabere _ => avoir_V.s ;
+      _ => copula.s
+      } ;
+
+    vpAgrClit : Agr -> VPAgr = \a0 ->
+      let a = complAgr a0 in
+      VPAgrClit a.g a.n ;
+
+    partAgr   : VType -> Bool = \vtyp -> case vtyp of { -- works for all except Spa
+      VTyp VHabere _ => False ;
+      _ => True
+      } ;
+
+----    pronArg = pronArgGen Neg ; --- takes more space and time
+
+    pronArg : Number -> Person -> CAgr -> CAgr -> Str * Str * Bool =
+      \n,p,acc,dat ->
+      let
+        pacc = case acc of {
+          CRefl => <case p of {
+            P3 => elision "s" ;  --- use of reflPron incred. expensive
+            _  => argPron Fem n p Acc
+            },True> ;
+          CPron ag an ap => <argPron ag an ap Acc,True> ;
+          _ => <[],False>
+          } ;
+       in
+       case dat of {
+          CPron ag an ap => let pdat = argPron ag an ap dative in case ap of {
+            P3 => <pacc.p1 ++ pdat,[],True> ;
+            _  => <pdat ++ pacc.p1,[],True>
+            } ;
+          _ => <pacc.p1, [],pacc.p2>
+          } ;
+
+    infForm _ _ _ _  = True ;
+
+-- Positive polarity is used in the imperative: stressed for 1st and
+-- 2nd persons.
+
+    pronArgGen : RPolarity -> Number -> Person -> CAgr -> CAgr -> Str * Str =
+      \b,n,p,acc,dat ->
+      let
+        cas : Person -> Case -> Case = \pr,c -> case <pr,b> of {
+          <P1 | P2, RPos> => CPrep P_de ; --- encoding in argPron
+          _ => c
+          } ;
+        pacc = case acc of {
+          CRefl => case p of {
+            P3 => elision "s" ;  --- use of reflPron incred. expensive
+            _  => argPron Fem n p (cas p Acc)
+            } ;
+          CPron ag an ap => argPron ag an ap (cas ap Acc) ;
+          _ => []
+          } ;
+        pdat = case dat of {
+          CPron ag an ap => argPron ag an ap (cas ap dative) ;
+          _ => []
+          } ;
+       in
+       case dat of {
+          CPron _ _ P3 => <pacc ++ pdat,[]> ;
+          _ => <pdat ++ pacc, []>
+          } ;
+
+    mkImperative b p vp =
+      \\pol,g,n =>
+        let
+          agr   = Ag g n p ;
+          num   = if_then_else Number b Pl n ;
+          verb  = vp.s.s ! vImper num p ;
+          neg   = vp.neg ! pol ;
+          refl  = case vp.s.vtyp of {
+            VTyp VRefl _ => case <n,b> of {
+              <Sg,False> => <"toi",elision "t",True> ;
+              _ => <"vous","vous",True>
+              } ;
+            _ => <[],[],False>
+            } ;
+          clpr  = <vp.clit1 ++ vp.clit2, vp.clit3.hasClit> ;
+          compl = vp.comp ! agr ++ vp.ext ! pol
+        in
+        case pol of {
+          RPos => verb ++ if_then_Str refl.p3 bindHyphen [] ++ refl.p1 ++
+                          if_then_Str clpr.p2 bindHyphen [] ++ vp.clit3.imp ++
+                          compl ;
+          RNeg _ => neg.p1 ++ refl.p2 ++ clpr.p1 ++ verb ++ neg.p2 ++ compl
+          } ;
+
+    imperClit : Agr -> Str -> Str -> Str = \a,c1,c2 -> case a of {
+      {n = Sg ; p = P1 ; g = _} => "moi" ;
+      {n = Sg ; p = P2 ; g = _} => "toi" ;
+      _ => c1 ++ c2
+      } ;
+
+    iAdvQuestionInv : Direct = DDir ;
+
+    bindHyphen : Str = BIND ++ "-" ++ BIND ;
+
+-- AForm
+  param
+    AFormComplex = AF Gender Number | AAttrMasc | AA ;
+  oper
+    AForm = AFormComplex ;
+    aform2aagr : AForm -> AAgr = \a -> case a of {
+      DiffFre.AF g n => aagr g n ;
+      _              => aagr Masc Sg -- "le plus lentement"
+      } ;
+    genNum2Aform : Gender -> Number -> AForm = DiffFre.AF ;
+    genNumPos2Aform : Gender -> Number -> Bool -> AForm = \g,n,isPre ->
+      case <g,n,isPre> of {
+        <Masc,Sg,True> => AAttrMasc ;
+        _              => genNum2Aform g n
+      } ;
+
+-- Comparatives
+    ComparAgr = AAgr ;
+    af2compar = aform2aagr ;
+    aagr2compar = id AAgr ;
+    piuComp = "plus" ;
+
+
+
+    CopulaType = {} ;
+    selectCopula = \isEstar -> copula ;
+    serCopula = <> ;
+    estarCopula = <> ;
+
+    negation : RPolarity => (Str * Str) = table {
+      RPos => <[],[]> ;
+      RNeg True  => <elisNe,[]> ;
+      RNeg False => <elisNe,"pas">
+      } ;
+
+    conjThan = elisQue ;
+    conjThat = elisQue ;
+
+    subjIf = "si" ; --- s'
+
+    clitInf _ cli inf = cli ++ inf ;
+
+    relPron : Bool => AAgr => Case => Str = \\b,a,c =>
+      let
+        lequel = case <a.g,a.n,c> of {
+        <Masc,Sg, CPrep P_de> => "duquel" ;
+        <Masc,Sg, CPrep P_a>  => "auquel" ;
+        <Masc,Sg, _>    => prepCase c ++ "lequel" ;
+        <Fem, Sg, _>    => prepCase c ++ "laquelle" ;
+        <Fem, Pl, CPrep P_de> => "desquelles" ;
+        <_,   Pl, CPrep P_de> => "desquels" ;
+        <Fem, Pl, CPrep P_a>  => "auxquelles" ;
+        <_,   Pl, CPrep P_a>  => "auxquels" ;
+        <Fem, Pl, _ >   => "lesquelles" ;
+        <_,   Pl, _ >   => "lesquels"
+        } ;
+      ---- artDef a.g a.n c ++ quelPron ! a  ---- doesn't compile properly AR 17/3/2014
+      in
+      case b of {
+      False => case c of {
+        Nom => "qui" ;
+        Acc => elisQue ;
+        CPrep P_de => "dont" ;
+        _ => lequel
+        } ;
+      _   => lequel
+      } ;
+
+    pronSuch : AAgr => Str = aagrForms "tel" "telle" "tels" "telles" ;
+
+    quelPron : AAgr => Str = aagrForms "quel" "quelle" "quels" "quelles" ;
+
+    partQIndir = "ce" ; --- only for qui,que: elision "c" ;
+
+    reflPron : Number -> Person -> Case -> Str = \n,p,c ->
+      let pron = argPron Fem n p c in
+      case <p,c> of {
+        <P3,  Acc | CPrep P_a> => elision "s" ;
+        <P3, _> => prepCase c ++ "soi" ;
+        _ => pron
+        } ;
+
+    argPron : Gender -> Number -> Person -> Case -> Str =
+      let
+        cases : (x,y : Str) -> Case -> Str = \me,moi,c -> case c of {
+          Acc | CPrep P_a => me ;
+          _ => moi
+          } ;
+        cases3 : (x,y,z : Str) -> Case -> Str = \les,leur,eux,c -> case c of {
+          Acc => les ;
+          CPrep P_a => leur ;
+          _ => eux
+          } ;
+      in
+      \g,n,p -> case <g,n,p> of {
+        <_,Sg,P1> => cases (elision "m") "moi" ;
+        <_,Sg,P2> => cases (elision "t") "toi" ;
+        <_,Pl,P1> => \_ -> "nous" ;
+        <_,Pl,P2> => \_ -> "vous" ;
+        <Fem,Sg,P3> => cases3 elisLa "lui" "elle" ;
+        <_,Sg,P3> => cases3 (elision "l") "lui" "lui" ;
+        <Fem,Pl,P3> => cases3 "les" "leur" "elles" ;
+        <_,Pl,P3> => cases3 "les" "leur" "eux"
+        } ;
+
+    vRefl   : VType -> VType = \t -> VTyp VRefl VFalse ; ---- (getVTypT t) ;
+    isVRefl : VType -> Bool = \ty -> case ty of {
+      VTyp VRefl _ => True ;
+      _ => False
+      } ;
+
+    getVTypT : VType -> VBool = \t -> case t of {VTyp _ b => b} ; -- only in Fre
+
+    copula, auxPassive, essere_V : Verb = {s = table VF ["être";bindHyphen;"suis";"es";"est";"sommes";"êtes";"sont";"sois";"sois"
+;"soit";"soyons";"soyez";"soient";
+"étais";"étais";"était";"étions";"étiez";"étaient";--# notpresent
+"fusse";"fusses";"fût";"fussions";"fussiez";"fussent";--# notpresent
+"fus";"fus";"fut";"fûmes";"fûtes";"furent";--# notpresent
+"serai";"seras";"sera";"serons";"serez";"seront";--# notpresent
+"serais";"serais";"serait";"serions";"seriez";"seraient";--# notpresent
+"sois";"soyons";"soyez";"été";"étés";"étée";"étées";"étant";"étant"]; vtyp=VTyp VHabere VFalse ; p = []} ;
+
+    avoir_V : Verb = {s=table VF ["avoir";bindHyphensT;"ai";"as";"a";"avons";"avez";"ont";"aie";"aies";"ait"
+;"ayons";"ayez";"aient";
+"avais";"avais";"avait";"avions";"aviez";"avaient"; --# notpresent
+"eusse";"eusses";"eût";"eussions";"eussiez";"eussent";--# notpresent
+"eus";"eus";"eut";"eûmes";"eûtes";"eurent";--# notpresent
+"aurai";"auras";"aura";"aurons";"aurez";"auront";--# notpresent
+"aurais";"aurais";"aurait";"aurions";"auriez";"auraient";--# notpresent
+"aie";"ayons";"ayez";"eu";"eus";"eue";"eues";"ayant";"ayant"];vtyp=VTyp VHabere VTrue ; p = []} ; ---- a-t-il eut-il
+
+  datClit = "y" ;
+  genClit = "en" ;
+
+  subjPron = \a -> case a of {
+    {n = Sg ; p = P1} => "je" ;
+    {n = Sg ; p = P2} => "tu" ;
+    {n = Pl ; p = P1} => "nous" ;
+    {n = Pl ; p = P2} => "vous" ;
+    {n = Sg ; p = P3 ; g = Masc} => "il" ;
+    {n = Sg ; p = P3 ; g = Fem}  => "elle" ;
+    {n = Pl ; p = P3 ; g = Masc} => "ils" ;
+    {n = Pl ; p = P3 ; g = Fem}  => "elles"
+    } ;
+
+  polNegDirSubj = RNeg True ;
+
+  invertedClause :
+    VType -> (RTense * Anteriority * Number * Person) -> Bool -> (Str * Str) -> Str -> (clit,fin,inf,compl,subj,ext : Str) -> Str =
+    \vtyp,vform,hasClit,neg,bindHyph,clit,fin,inf,compl,subj,ext -> case <vtyp,vform,hasClit> of {
+
+      -- parle-t-il - some verbs
+      <VTyp _ VTrue, <RPres,Simul,Sg,P3>, True> =>
+           neg.p1 ++ clit ++ fin ++ bindHyph ++ subj ++ neg.p2 ++ inf ++ compl ++ ext ;
+
+      -- parla-t-il - some verbs
+      <VTyp _ VTrue, <RPasse,Simul,Sg,P3>, True> =>                                             --# notpresent
+           neg.p1 ++ clit ++ fin ++ bindHyph ++ subj ++ neg.p2 ++ inf ++ compl ++ ext ;    --# notpresent
+
+      -- fera-t-il, sera-t-il venu - all verbss
+      <_,           <RFut,_,Sg,P3>, True> =>                                                   --# notpresent
+           neg.p1 ++ clit ++ fin ++ bindHyphensT ++ subj ++ neg.p2 ++ inf ++ compl ++ ext ;    --# notpresent
+
+      -- a-t-il fait - all "avoir" verbs
+      <VTyp VHabere _,<RPres,Anter,Sg,P3>, True> =>                                            --# notpresent
+           neg.p1 ++ clit ++ fin ++ bindHyphensT ++ subj ++ neg.p2 ++ inf ++ compl ++ ext ;    --# notpresent
+
+      -- suis-je
+      <_, _, True> =>
+           neg.p1 ++ clit ++ fin ++ bindHyphen ++ subj ++ neg.p2 ++ inf ++ compl ++ ext ;
+
+      -- est Paris loin
+      _ => neg.p1 ++ clit ++ fin ++ neg.p2 ++ subj ++ inf ++ compl ++ ext
+      } ;
+
+  bindHyphensT : Str = bindHyphen ++ "t" ++ bindHyphen ;
+
+  verbHyphen : Verb -> Str = \v -> v.s ! (VInfin True) ; --- kluge: use this field to store - or -t-
+
+param
+  HasArt = NoArt | UseArt | AlwaysArt ;
+
+oper
+  superlCanBePost = False ;
+
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/DocumentationFre.gf"
+id=19ab7214cd32
+kind=source
+size=228
+lines=6
+chunks=0
+----
+--# -path=.:../abstract:../common
+
+-- documentation of French in French: the default introduced in LangFre
+
+concrete DocumentationFre of Documentation = CatFre ** 
+  DocumentationFreFunctor with (Terminology = TerminologyFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/DocumentationFreEng.gf"
+id=06a2c7b1ab63
+kind=source
+size=197
+lines=6
+chunks=0
+----
+--# -path=.:../abstract:../common
+
+-- documentation of French in English
+
+concrete DocumentationFreEng of Documentation = CatFre ** 
+  DocumentationFreFunctor with (Terminology = TerminologyEng) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/DocumentationFreFunctor.gf"
+id=99a7f2c2816f
+kind=source
+size=8242
+lines=271
+chunks=0
+----
+--# -path=.:../abstract:../common
+
+incomplete concrete DocumentationFreFunctor of Documentation = CatFre ** open
+  Terminology, -- the interface to be instantiated
+  ResFre,
+  CommonRomance,
+  ParadigmsFre,
+  (G = GrammarFre),
+  (S = SyntaxFre),
+  (L = LexiconFre),
+  Prelude,
+  HTML
+in {
+flags coding=utf8 ;
+
+
+lincat
+  Inflection = {t : Str; s1,s2 : Str} ;
+  Definition = {s : Str} ;
+  Document = {s : Str} ;
+  Tag = {s : Str} ;
+
+{-
+-} --# notpresent
+
+oper
+   heading : N -> Str = \n -> (nounHeading n).s ;
+
+lin
+  InflectionN, InflectionN3, InflectionN3 = \noun -> {
+    t = "n" ;
+    s1 = heading1 (heading noun_Category ++
+                   case noun.g of {
+                     Masc => "("+heading masculine_Parameter+")" ;
+                     Fem  => "("+heading feminine_Parameter+")"
+                   }) ;
+    s2 = frameTable (
+           tr (th (heading singular_Parameter) ++ th  (heading plural_Parameter)) ++
+           tr (td (noun.s ! Sg)                ++ td (noun.s ! Pl))
+           )
+    } ;
+
+  InflectionPN = \pn -> {
+    t = "pn" ;
+    s1 = heading1 ("Nom Propre" ++
+                   case pn.g of {
+                     Masc => "("+heading masculine_Parameter+")" ;
+                     Fem  => "("+heading feminine_Parameter+")"
+                   }) ;
+    s2 = pn.s
+    } ;
+
+  InflectionGN = \gn -> {
+    t = "pn" ;
+    s1 = heading1 ("Prénom" ++
+                   case gn.g of {
+                     Masc => "("+heading masculine_Parameter+")" ;
+                     Fem  => "("+heading feminine_Parameter+")"
+                   }) ;
+    s2 = gn.s
+    } ;
+
+  InflectionSN = \gn -> {
+    t = "pn" ;
+    s1 = heading1 "Nom de Famille" ;
+    s2 = gn.s ! Masc
+    } ;
+
+  InflectionLN = \ln -> {
+    t = "nl" ;
+    s1 = heading1 ("Nom de la Localisation" ++
+                   case ln.g of {
+                     Masc => "("+heading masculine_Parameter+")" ;
+                     Fem  => "("+heading feminine_Parameter+")"
+                   }) ;
+    s2 = paragraph ln.s ++
+         heading2 "Adverbe" ++
+         paragraph (let p : {s : Str; c:Prepos} =
+                          case ln.onPrep of {
+                            True  => {s="en"; c=PNul} ;
+                            False => {s="";   c=P_a}
+                          }
+                    in p.s ++ case ln.art of {
+                                AlwaysArt => artDef True ln.g ln.num (CPrep p.c) ++ ln.s;
+                                _         => prepCase (CPrep p.c) ++ ln.s
+                              })
+    } ;
+
+  InflectionA, InflectionA2 = \adj -> {
+    t  = "a" ;
+    s1 = heading1 (nounHeading adjective_Category).s ;
+    s2 = frameTable (
+           tr (th ""                            ++ th (heading singular_Parameter)  ++ th  (heading plural_Parameter)) ++
+           tr (th (heading masculine_Parameter) ++ td (adj.s ! genNum2Aform Masc Sg) ++ td (adj.s ! genNum2Aform Masc Pl)) ++
+           tr (th (heading feminine_Parameter)  ++ td (adj.s ! genNum2Aform Fem Sg)  ++ td (adj.s ! genNum2Aform Fem Pl))
+         )
+    } ;
+
+  InflectionAdv, InflectionAdV, InflectionAdA, InflectionAdN = \adv -> {
+    t  = "adv" ;
+    s1 = heading1 "Adverbe" ;
+    s2 = paragraph adv.s
+    } ;
+
+  InflectionPrep p = {
+    t  = "prep" ;
+    s1 = heading1 "Préposition" ;
+    s2 = paragraph p.s
+    } ;
+
+  InflectionV v = {
+    t  = "v" ;
+    s1 = heading1 (heading verb_Category) ++
+         paragraph (verbExample (S.mkCl S.she_NP v)) ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionV2 v = {
+    t  = "v" ;
+    s1 = heading1 (heading verb_Category) ++
+         paragraph (verbExample (S.mkCl S.she_NP v S.something_NP)) ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionV3 v = {
+    t  = "v" ;
+    s1 = heading1 (heading verb_Category) ++
+         paragraph (verbExample (S.mkCl S.she_NP v S.something_NP S.something_NP)) ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionV2V v = {
+    t  = "v" ;
+    s1 = heading1 (heading verb_Category) ++
+         paragraph (verbExample (S.mkCl S.she_NP (lin V2V v) S.we_NP (S.mkVP (L.sleep_V)))) ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionV2S v = {
+    t  = "v" ;
+    s1 = heading1 (heading verb_Category) ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionV2Q v = {
+    t  = "v" ;
+    s1 = heading1 (heading verb_Category) ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionV2A v = {
+    t  = "v" ;
+    s1 = heading1 "Verb" ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionVV v = {
+    t  = "v" ;
+    s1 = heading1 (heading verb_Category) ++
+         paragraph (verbExample (S.mkCl S.she_NP v (S.mkVP (L.sleep_V)))) ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionVS v = {
+    t  = "v" ;
+    s1 = heading1 "Verb" ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionVQ v = {
+    t  = "v" ;
+    s1 = heading1 "Verb" ;
+    s2 = inflVerb v
+    } ;
+
+  InflectionVA v = {
+    t  = "v" ;
+    s1 = heading1 "Verb" ;
+    s2 = inflVerb v
+    } ;
+
+lin
+  NoDefinition   t     = {s=t.s};
+  MkDefinition   t d   = {s="<p><b>Définition:</b>"++t.s++d.s++"</p>"};
+  MkDefinitionEx t d e = {s="<p><b>Définition:</b>"++t.s++d.s++"</p><p><b>Exemple:</b>"++e.s++"</p>"};
+
+  MkDocument d i e = ss (i.s1 ++ d.s ++ i.s2 ++ paragraph e.s) ;  -- explanation appended in a new paragraph
+  MkTag i = ss i.t ;
+
+oper
+  verbExample : CatFre.Cl -> Str = \cl ->
+     (S.mkUtt cl).s
+     ++ ";" ++ (S.mkUtt (S.mkS S.anteriorAnt cl)).s  --# notpresent
+     ;
+
+  inflVerb : Verb -> Str = \verb ->
+     let
+       vfin : CommonRomance.VF -> Str = \f ->
+         verb.s ! f ;
+
+       ttable : TMood -> Str = \tense ->
+         frameTable (
+           tr (th "" ++
+               th (heading singular_Parameter) ++
+               th (heading plural_Parameter)) ++
+           tr (th "1.p" ++
+               td (vfin (VFin tense Sg P1)) ++
+               td (vfin (VFin tense Pl P1))) ++
+           tr (th "2.p" ++
+               td (vfin (VFin tense Sg P2)) ++
+               td (vfin (VFin tense Pl P2))) ++
+           tr (th "3.p" ++
+               td (vfin (VFin tense Sg P3)) ++
+               td (vfin (VFin tense Pl P3)))
+           ) ;
+
+       ttable2 : (Mood -> TMood) -> Str = \f ->
+         frameTable (
+           tr (intagAttr "th" "colspan=2" "" ++
+               th (heading indicative_Parameter) ++
+               th (heading conjunctive_Parameter)) ++
+           tr (intagAttr "th" "rowspan=3" (heading singular_Parameter) ++
+               th "1.p" ++
+               td (vfin (VFin (f Indic) Sg P1)) ++
+               td (vfin (VFin (f Conjunct) Sg P1))) ++
+           tr (th "2.p" ++
+               td (vfin (VFin (f Indic) Sg P2)) ++
+               td (vfin (VFin (f Conjunct) Sg P2))) ++
+           tr (th "3.p" ++
+               td (vfin (VFin (f Indic) Sg P3)) ++
+               td (vfin (VFin (f Conjunct) Sg P3))) ++
+           tr (intagAttr "th" "rowspan=3" (heading plural_Parameter) ++
+               th "1.p" ++
+               td (vfin (VFin (f Indic) Pl P1)) ++
+               td (vfin (VFin (f Conjunct) Pl P1))) ++
+           tr (th "2.p" ++
+               td (vfin (VFin (f Indic) Pl P2)) ++
+               td (vfin (VFin (f Conjunct) Pl P2))) ++
+           tr (th "3.p" ++
+               td (vfin (VFin (f Indic) Pl P3)) ++
+               td (vfin (VFin (f Conjunct) Pl P3)))
+           ) ;
+
+     in heading2 (heading present_Parameter) ++
+        ttable2 VPres ++
+        heading2 (heading imperfect_Parameter) ++
+        ttable2 VImperf
+        ++ heading2 (heading simple_past_Parameter) ++  --# notpresent
+        ttable VPasse  --# notpresent
+        ++ heading2 (heading future_Parameter) ++  --# notpresent
+        ttable VFut  --# notpresent
+        ++ heading2 (heading conditional_Parameter) ++  --# notpresent
+        ttable VCondit  --# notpresent
+        ++ heading2 (heading infinitive_Parameter) ++
+        paragraph (vfin (VInfin False)) ++
+        heading2 (heading imperative_Parameter) ++
+        frameTable (
+          tr (th "sg.2.p" ++ td (vfin (VImper SgP2))) ++
+          tr (th "pl.1.p" ++ td (vfin (VImper PlP1))) ++
+          tr (th "pl.2.p" ++ td (vfin (VImper PlP2)))
+          ) ++
+        heading2 (heading participle_Parameter) ++
+        frameTable (
+          tr (th (heading past_Parameter)    ++ td (vfin (VPart Masc Sg))) ++
+          tr (th (heading present_Parameter) ++ td (vfin VGer))
+          ) ;
+
+{- --# notpresent
+-}
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ExtendFre.gf"
+id=625fdfb34244
+kind=source
+size=4918
+lines=167
+chunks=0
+----
+--# -path=alltenses:../common:../abstract
+
+concrete ExtendFre of Extend =
+  CatFre ** ExtendFunctor -
+   [
+----   iFem_Pron, youFem_Pron, weFem_Pron, youPlFem_Pron, theyFem_Pron, youPolFem_Pron, youPolPl_Pron, youPolPlFem_Pron,
+   GenRP,
+   ExistCN, ExistMassCN, ExistPluralCN, RNP, ReflRNP,
+   PassVPSlash, PassAgentVPSlash, PastPartAP, PastPartAgentAP, ApposNP, CompoundN,
+   BaseVPS, ConsVPS, PredVPS, MkVPS, ConjVPS, RelVPS, ExistsNP
+   ]                   -- put the names of your own definitions here
+  with
+    (Grammar = GrammarFre) **
+  open
+    GrammarFre,
+    ResFre,
+    MorphoFre,
+    PhonoFre,
+    Coordination,
+    Prelude,
+    ParadigmsFre in {
+    -- put your own definitions here
+
+lincat
+  RNP = {s : Agr => Case => Str} ;
+
+lin
+    GenRP nu cn = {
+      s = \\_b,_aagr,_c => "dont" ++ num ++ artDef False g n Nom ++ cn.s ! n ;
+      a = aagr g n ;
+      hasAgr = True
+      } where {
+        g = cn.g ;
+        n = nu.n ;
+        num = if_then_Str nu.isNum (nu.s ! g) []
+      } ;
+
+   ExistCN cn =
+      let
+         pos = ExistNP (DetCN (DetQuant IndefArt NumSg) cn) ;
+         neg = ExistNP (DetCN (DetQuant de_Quant NumSg) cn) ;
+      in posNegClause pos neg PNeg.p ;
+   ExistMassCN cn =
+      let
+         pos = ExistNP (MassNP cn) ;
+         neg = ExistNP (DetCN (DetQuant de_Quant NumSg) cn) ;
+      in posNegClause pos neg PNeg.p ;
+   ExistPluralCN cn =
+      let
+         pos = ExistNP (DetCN (DetQuant IndefArt NumPl) cn) ;
+         neg = ExistNP (DetCN (DetQuant de_Quant NumPl) cn) ;
+      in posNegClause pos neg PNeg.p ;
+
+oper
+  de_Quant : Quant = IndefArt ** {s = \\_,_,_,_ => elisDe} ;
+
+lin PassVPSlash vps = passVPSlash vps [] ;
+    PassAgentVPSlash vps np = passVPSlash 
+      vps (let by = <Grammar.by8agent_Prep : Prep> in by.s ++ (np.s ! by.c).ton) ;
+
+    PastPartAP vps = pastPartAP vps [] ;
+    PastPartAgentAP vps np = pastPartAP vps (let by = <Grammar.by8agent_Prep : Prep> in by.s ++ (np.s ! by.c).ton) ;
+
+    ReflRNP v rnp =      -- VPSlash -> RNP -> VP ; -- love my family and myself
+      case v.c2.isDir of {
+        True  => insertRefl v ;
+        False => insertComplement
+                   (\\a => let agr = verbAgr a in v.c2.s ++ rnp.s ! agr ! v.c2.c) v
+      } ;
+
+    ReflPron = {         -- RNP ; -- myself
+      s = \\agr,c => reflPron agr.n agr.p c
+    } ;
+
+oper
+    passVPSlash : VPSlash -> Str -> VP = \vps, agent -> 
+      let auxvp = predV auxPassive 
+      in
+      vps ** {
+         s = auxvp.s ;
+         agr = auxvp.agr ;
+         comp  = \\a => (let agr = complAgr a in vps.s.s ! VPart agr.g agr.n) ++ vps.comp ! a ++ agent ;
+        } ;
+
+    pastPartAP : VPSlash -> Str -> AP ;
+    pastPartAP vps agent = lin AP {
+      s = \\af => vps.s.s ! VPart (aform2gender af) (aform2number af) ++ vps.comp ! (aform2aagr af ** {p = P3}) ++ agent ;
+      isPre = False ;
+      copTyp = serCopula
+      } ;
+
+lin ApposNP np1 np2 = np1 ** {    -- guessed by KA
+      s = \\c => np1.s ! c ** {ton  =(np1.s ! c).ton  ++ "," ++ (np2.s ! Nom).ton;
+                               comp =(np1.s ! c).comp ++ "," ++ (np2.s ! Nom).comp
+                              } ;
+    } ;
+
+lin CompoundN a b = lin N {
+      s = \\n => b.s ! n ++
+                 case b.relType of {
+                   NRelPrep p => prepCase (CPrep p) ++ a.s ! Sg ;  -- tasa de suicidio
+                   NRelNoPrep => a.s ! n               -- connessione internet = internet connection
+                 } ;
+      g = b.g ;
+      relType = b.relType
+      } ;
+
+lin UseDAP = \dap ->
+      let
+        g = Masc ;
+        n = dap.n
+      in heavyNPpol dap.isNeg {
+        s = dap.spn ;
+        a = agrP3 g n ;
+        hasClit = False
+        } ;
+    UseDAPMasc = \dap ->
+      let
+        g = Masc ;
+        n = dap.n
+      in heavyNPpol dap.isNeg {
+        s = dap.sp ! g ;
+        a = agrP3 g n ;
+        hasClit = False
+        } ;
+    UseDAPFem dap =
+      let
+        g = Fem ;
+        n = dap.n
+      in heavyNPpol dap.isNeg {
+           s = dap.sp ! g ;
+           a = agrP3 g n ;
+           hasClit = False
+           } ;
+
+  lincat
+    VPS = {s : Mood => Agr => Bool => Str} ;
+    [VPS] = {s1,s2 : Mood => Agr => Bool => Str} ;
+
+  lin
+    BaseVPS x y = twoTable3 Mood Agr Bool x y ;
+    ConsVPS = consrTable3 Mood Agr Bool comma ;
+
+  lin
+    PredVPS np vpi = {
+      s = \\m => (np.s ! Nom).comp ++ vpi.s ! m ! np.a ! np.isNeg
+      } ;
+    MkVPS tm p vp = {
+      s = \\m,agr,isNeg =>
+        tm.s ++ p.s ++
+        (mkClausePol (orB isNeg vp.isNeg) [] False False agr vp).s
+          ! DDir ! tm.t ! tm.a ! p.p ! m
+      } ;
+    ConjVPS = conjunctDistrTable3 Mood Agr Bool ;
+    
+    RelVPS rp vpi = {
+      s = \\m, agr => rp.s ! False ! complAgr agr ! Nom ++ vpi
+                      .s ! m ! (Ag rp.a.g rp.a.n P3) ! False ;
+      c = Nom
+      } ;
+
+    ExistsNP np =
+      mkClause "il" True False np.a
+      (insertComplement (\\_ => (np.s ! Nom).ton)
+         (predV (mkV "exister"))) ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ExtraFre.gf"
+id=9639f2d6d6a1
+kind=source
+size=4184
+lines=130
+chunks=0
+----
+concrete ExtraFre of ExtraFreAbs = ExtraRomanceFre ** 
+  open CommonRomance, PhonoFre, MorphoFre, ParadigmsFre, ParamX, ResFre, Prelude in {
+
+  flags coding=utf8 ;
+  lin
+    EstcequeS qs          = {s = "est-ce" ++ elisQue ++ qs.s ! Indic} ;
+    EstcequeIAdvS idet qs = {s = idet.s ++ "est-ce" ++ elisQue ++ qs.s ! Indic} ;
+
+    QueestcequeIP = {
+      s = table {
+        c => prepQue c ++ "est-ce" ++ caseQue c
+        } ; 
+      a = aagr Fem Pl
+      } ;
+
+    QuiestcequeIP = {
+      s = table {
+        c => prepQue c ++ "qui" ++ "est-ce" ++ caseQue c
+        } ; 
+      a = aagr Fem Pl
+      } ;
+
+    EstcequeCl cl = {
+      s = \\t,a,p,q => "est-ce" ++ elisQue ++ cl.s ! DDir ! t ! a ! p ! Indic
+      } ;
+
+    i8fem_Pron = mkPronoun
+      (elision "j") (elision "m") (elision "m") "moi" "mon" (elisPoss "m") "mes"
+      Fem Sg P1 ;
+    these8fem_NP = makeNP ["celles-ci"] Fem Pl ;
+    they8fem_Pron = mkPronoun
+      "elles" "les" "leur" "eux" "leur" "leur" "leurs"
+      Fem Pl P3 ;
+    this8fem_NP = pn2np (mkPN ["celle-ci"] Fem) ;
+    those8fem_NP = makeNP ["celles-là"] Fem Pl ;
+    we8fem_Pron = mkPronoun "nous" "nous" "nous" "nous" "notre" "notre" "nos"
+      Fem Pl P1 ;
+    whoPl8fem_IP = 
+      {s = \\c => "les" + quelPron ! a ; a = a}
+      where {a = aagr Fem Pl} ;
+    whoSg8fem_IP = 
+      {s = \\c => "la" + quelPron ! a ; a = a}
+      where {a = aagr Fem Pl} ;
+
+    youSg8fem_Pron = mkPronoun 
+      "tu" (elision "t") (elision "t") "toi" "ton" (elisPoss "t") "tes"
+      Fem Sg P2 ;
+    youPl8fem_Pron =
+      let vous = mkPronoun "vous" "vous" "vous" "vous" "votre" "votre" "vos" Fem Pl P2
+      in 
+      {s = vous.s ; hasClit = vous.hasClit ; poss = vous.poss ; a = vous.a ; isPol = False ; isNeg = False} ;
+    youPol8fem_Pron =
+      let vous = mkPronoun "vous" "vous" "vous" "vous" "votre" "votre" "vos" Fem Pl P2
+      in 
+      {s = vous.s ; hasClit = vous.hasClit ; poss = vous.poss ; a = vous.a ; isPol = True ; isNeg = False} ;
+
+    ce_Pron = 
+      let ce = elision "c" 
+      in 
+      mkPronoun ce ce ce ("cela" | "ça") "son" (elisPoss "s") "ses" Masc Sg P3 ; ---- variants?
+
+    AdvDatVP = insertClit3 datClit ;
+    AdvGenVP = insertClit3 genClit ;
+
+  oper
+    prepQue : Case -> Str = \c -> case c of {
+      Nom | Acc => elisQue ;
+      _   => prepCase c ++ "qui" ---
+      } ;
+    caseQue : Case -> Str = \c -> case c of {
+      Nom => "qui" ;
+      _   => elisQue
+      } ;
+
+  lin
+    tout_Det = {
+    s,sp = \\g,c => prepCase c ++ genForms "tout" "toute" ! g ;
+    spn= \\c => prepCase c ++ "tout" ;
+    n = Sg ; 
+    s2 = \\c => [] ;
+    isNeg = False
+    } ;
+
+    PNegNe = {s = [] ; p = RNeg True} ;
+
+    ExistsNP np = 
+      mkClause "il" True False np.a (insertComplement (\\_ => (np.s ! Nom).ton) (predV (regV "exister"))) ;
+
+
+    EstcequeQuestCl cl = 
+    {s = \\t,a,p =>                             -- est-ce qu'il dort ?
+            let cls = cl.s ! DDir ! t ! a ! p 
+            in table {
+              QDir   => "est-ce" ++ elisQue ++ cls ! Indic ;
+              QIndir => subjIf ++ cls ! Indic
+              }
+      } ;
+    EstcequeQuestIAdvCl iadv cl = 
+    {s = \\t,a,p =>                             -- est-ce qu'il dort ?
+            let cls = cl.s ! DDir ! t ! a ! p 
+            in table {
+              QDir   => iadv.s ++ "est-ce" ++ elisQue ++ cls ! Indic ;
+              QIndir => iadv.s ++ cls ! Indic
+              }
+      } ;
+    InvQuestCl cl = {s = \\t,a,p =>                             -- dort-il ?
+            let cls = cl.s ! DInv ! t ! a ! p 
+            in table {
+              QDir   => cls ! Indic ;
+              QIndir => subjIf ++ cl.s ! DDir ! t ! a ! p ! Indic
+              }
+      } ;
+    InvQuestIAdvCl iadv cl = {s = \\t,a,p =>                             -- dort-il ?
+            let cls = cl.s ! DInv ! t ! a ! p 
+            in table {
+              QDir   => iadv.s ++ cls ! Indic ;
+              QIndir => iadv.s ++ cl.s ! DDir ! t ! a ! p ! Indic
+              }
+      } ;
+
+    quel_IComp = {
+      s = aagrForms "quel" "quelle" "quels" "quelles" ;
+      cop = <> ;
+      } ;
+
+--- in ExtraRomance
+--    PassAgentVPSlash vps np = passVPSlash 
+--      vps ("par" ++ (np.s ! Acc).ton) ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ExtraFreAbs.gf"
+id=668296cf1cb2
+kind=source
+size=1657
+lines=65
+chunks=0
+----
+-- Structures special for French. These are not implemented in other
+-- Romance languages.
+
+abstract ExtraFreAbs = ExtraRomanceAbs - [ProDrop] ** {
+  flags coding=utf8 ;
+
+-- Notice: only direct (main-clause) questions are generated, and needed.
+
+  fun
+    EstcequeS     : S -> Utt ;          -- est-ce qu'il pleut
+    EstcequeIAdvS : IAdv -> S -> Utt ;  -- où est-ce qu'il pleut
+
+-- These also generate indirect (subordinate) questions.
+
+    QueestcequeIP : IP ;    -- qu'est-ce (que/qui) 
+    QuiestcequeIP : IP ;    -- qu'est-ce (que/qui)
+
+-- This is needed for compositionality in library applications.
+
+    EstcequeCl    : Cl -> QCl ;          -- est-ce qu'il pleut
+
+-- Feminine variants of pronouns (those in $Structural$ are
+-- masculine, which is the default when gender is unknown).
+
+    i8fem_Pron : Pron ;
+    these8fem_NP : NP ;
+    they8fem_Pron : Pron ;
+    this8fem_NP : NP ;
+    those8fem_NP : NP ;
+
+    we8fem_Pron : Pron ;
+    whoPl8fem_IP : IP ;
+    whoSg8fem_IP : IP ;
+
+    youSg8fem_Pron : Pron ;
+    youPl8fem_Pron : Pron ;
+    youPol8fem_Pron : Pron ;
+
+    ce_Pron : Pron ;
+
+-- clitic adverbs
+
+    AdvDatVP : VP -> VP ;  -- j'y vais
+    AdvGenVP : VP -> VP ;  -- j'en vais
+
+
+-- The determiner "tout" in the special use "tout nombre"
+
+    tout_Det : Det ;
+
+-- Polarity "ne" without "pas"
+
+    PNegNe : Pol ;
+
+-- alternative forms of questions
+
+    EstcequeQuestCl : Cl -> QCl ; -- est-ce qu'il dort
+    EstcequeQuestIAdvCl : IAdv -> Cl -> QCl ; -- où est-ce qu'il dort
+    InvQuestCl : Cl -> QCl ;      -- dort-il
+    InvQuestIAdvCl : IAdv -> Cl -> QCl ;      -- dort-il
+
+    quel_IComp : IComp ; -- quelle est votre nationalité
+
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ExtraRomanceFre.gf"
+id=b12307a16142
+kind=source
+size=136
+lines=2
+chunks=0
+----
+concrete ExtraRomanceFre of ExtraRomanceAbs = CatFre ** ExtraRomance - [ProDrop] with
+  (ResRomance = ResFre), (Grammar = GrammarFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/GrammarFre.gf"
+id=81aff43f07cb
+kind=source
+size=364
+lines=23
+chunks=0
+----
+--# -path=.:../romance:../abstract:../common:prelude
+
+concrete GrammarFre of Grammar = 
+  NounFre, 
+  VerbFre, 
+  AdjectiveFre,
+  AdverbFre,
+  NumeralFre,
+  SentenceFre,
+  QuestionFre,
+  RelativeFre,
+  ConjunctionFre,
+  PhraseFre,
+  TextX - [SC,Temp,Tense,Pol,PPos,PNeg,MU],
+  IdiomFre,
+  StructuralFre,
+  TenseFre,
+  NamesFre
+  ** {
+
+flags startcat = Phr ; 
+
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/IdiomFre.gf"
+id=0fb024576517
+kind=source
+size=2323
+lines=75
+chunks=0
+----
+concrete IdiomFre of Idiom = CatFre ** 
+  open (P = ParamX), PhonoFre, MorphoFre, ParadigmsFre, Prelude in {
+
+  flags optimize=all_subs ;
+  flags coding=utf8 ;
+
+  lin
+    ImpersCl vp = mkClause "il" True False (agrP3 Masc Sg) vp ;
+    GenericCl vp = mkClause "on" True False (agrP3 Masc Sg) vp ;
+
+    ExistNP np = 
+      mkClause "il" True False (agrP3 Masc Sg)
+        (insertClit3 "y" (insertComplement (\\_ => (np.s ! Acc).ton) (predV avoir_V))) ;
+	
+    ExistNPAdv np adv = 
+      mkClause "il" True False (agrP3 Masc Sg)
+        (insertAdv adv.s (insertClit3 "y" (insertComplement (\\_ => (np.s ! Acc).ton) (predV avoir_V)))) ;
+
+    ExistIP ip = {
+      s = \\t,a,p,_ => 
+        ip.s ! Nom ++ 
+        (mkClause "il" True False (agrP3 Masc Sg)
+              (insertClit3 "y" (predV avoir_V))).s 
+           ! DDir ! t ! a ! p ! Indic ---- DInv
+      } ;
+
+    CleftNP np rs = mkClause elisCe True np.isPol (agrP3 Masc Sg) 
+      (insertComplement (\\_ => rs.s ! Indic ! np.a)
+        (insertComplement (\\_ => (np.s ! rs.c).ton) (predV copula))) ;
+
+    CleftAdv ad s = mkClause elisCe True False (agrP3 Masc Sg) 
+      (insertComplement (\\_ => conjThat ++ s.s ! Indic)
+        (insertComplement (\\_ => ad.s) (predV copula))) ;
+
+
+    ProgrVP vp = 
+      insertComplement 
+        (\\a => "en" ++ "train" ++ elisDe ++ infVP vp RPos a) 
+        (predV copula) ;
+
+    ImpPl1 vp = {
+      s = mkImperative False P1 vp ! RPos ! Masc ! Pl  --- fem
+      } ;
+
+    ImpP3 np vp = {
+      s = (mkClause (np.s ! Nom).comp np.hasClit False np.a vp).s 
+             ! DInv ! RPres ! Simul ! RPos ! Conjunct
+      } ;
+
+
+    SelfAdvVP vp = insertComplement memePron vp ;
+    SelfAdVVP vp = insertComplement memePron vp ; ---- should be AdV
+    SelfNP np = heavyNP {
+      s = \\c => (np.s ! c).ton ++ memePron ! np.a ; ---- moi moi-même ? 
+      a = np.a
+      } ;
+
+  oper
+    elisCe = elision "c" ;
+
+    memePron : Agr => Str = table {
+      {n = Sg ; p = P1} => "moi-même" ;
+      {n = Sg ; p = P2} => "toi-même" ;
+      {g = Masc ; n = Sg ; p = P3} => "lui-même" ;
+      {g = Fem  ; n = Sg ; p = P3} => "elle-même" ;
+      {n = Pl ; p = P1} => "nous-mêmes" ;
+      {n = Pl ; p = P2} => "vous-mêmes" ;
+      {g = Masc ; n = Pl ; p = P3} => "eux-mêmes" ;
+      {g = Fem  ; n = Pl ; p = P3} => "elles-mêmes"
+      } ;
+
+
+}
+
+
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/LangFre.gf"
+id=72dc86da54d9
+kind=source
+size=258
+lines=13
+chunks=0
+----
+--# -path=.:../romance:../abstract:../common:../api
+
+concrete LangFre of Lang = 
+  GrammarFre,
+  LexiconFre
+  ,MarkupFre - [stringMark]
+  ,DocumentationFre --# notpresent
+  ,ConstructionFre
+  ** {
+
+flags startcat = Phr ; unlexer = text ; lexer = text ;
+
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/MakeStructuralFre.gf"
+id=4ab504c47cce
+kind=source
+size=1920
+lines=59
+chunks=0
+----
+--# -path=.:../romance:../common:../abstract
+
+resource MakeStructuralFre = open CatFre, (P = ParadigmsFre), MorphoFre, Prelude in {
+
+oper 
+
+  mkConj = overload {
+    mkConj : Str -> Conj = \s -> lin Conj {s1 = [] ; s2 = s ; n = Pl} ;
+
+    mkConj : Str -> Str -> Number -> Conj = \x,y,n -> 
+      {s1 = x ; s2 = y ; n = n ; lock_Conj = <>} ;
+    } ;
+  mkSubj : Str -> Subj = \x -> 
+    {s = x ; m = Indic ; lock_Subj = <>} ;
+  mkSubjSubj : Str -> Subj = \x -> 
+    {s = x ; m = Conjunct ; lock_Subj = <>} ;
+
+  mkQuant : (_,_,_,_ : Str) -> Quant = \sm,sf,pm,pf -> 
+    let aucun : ParadigmsFre.Number => ParadigmsFre.Gender => Case => Str = table {
+      Sg => \\g,c => prepCase c ++ genForms sm sf ! g ;
+      Pl => \\g,c => prepCase c ++ genForms pm pf ! g 
+      }
+    in lin Quant {
+    s = \\_ => aucun ;
+    sp = aucun ;
+    spn= \\c => prepCase c ++ sm ;
+    s2 = [] ;
+    isNeg = False
+    } ;
+
+  mkIQuant : Str -> IQuant = \s ->
+    {s = \\_,_,c => prepCase c ++ s ; lock_IQuant = <>} ;
+
+  mkPredet : Str -> Str -> Prep -> Bool -> Predet = \m,f,c,p -> lin Predet {
+    s = \\g,k => prepCase k ++ case g.g of {Masc => m ; Fem => f} ; 
+    c = c.c ; 
+    a = if_then_else PAgr p (PAg Sg) PNoAg ---- e,g, "chacun de"; other possibilities?
+    } ;
+
+  mkInterj : Str -> Interj = \s -> lin Interj (ss s) ;
+  mkDet = overload {
+    mkDet : Str -> Det = \s -> lin Det {
+      s,sp = \\_,c => prepCase c ++ s ;
+      spn = \\c => prepCase c ++ s ;
+      n = Sg ; s2 = \\g => [] ; isNeg = False
+    } ;
+    mkDet : Str -> Number -> Det = \s, n -> lin Det {
+      s,sp = \\_,c => prepCase c ++ s ;
+      spn = \\c => prepCase c ++ s ;
+      n = n ; s2 = \\g => [] ; isNeg = False
+    } ;
+    mkDet : Str -> Str -> Number -> Det = \m,f,n -> lin Det {
+      s,sp = \\g,c => prepCase c ++ case g of {Masc => m ; Fem => f} ;
+      spn = \\c => prepCase c ++ m ;
+      n = n ; s2 = \\g => [] ; isNeg = False
+      } ;
+    } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/MarkupFre.gf"
+id=b80db6c25506
+kind=source
+size=140
+lines=3
+chunks=0
+----
+--# -path=.:../abstract:../common:../romance
+
+concrete MarkupFre of Markup = CatFre, MarkHTMLX ** MarkupRomance with (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/MorphoFre.gf"
+id=ff548495a0b0
+kind=source
+size=13385
+lines=443
+chunks=2
+
+--- CHUNK BEGIN ---
+id=ff548495a0b0:1-350
+start=1
+end=350
+----
+--# -path=.:../romance:../common:../../prelude
+
+--1 A Simple French Resource Morphology
+--
+-- Aarne Ranta 2002 -- 2005
+--
+-- This resource morphology contains definitions needed in the resource
+-- syntax. To build a lexicon, it is better to use $ParadigmsFre$, which
+-- gives a higher-level access to this module.
+
+resource MorphoFre = CommonRomance, ResFre **
+  open PhonoFre, Prelude, Predef in {
+
+flags optimize=noexpand ;
+    coding=utf8 ;
+
+--2 Front vowels
+--
+-- In verb conjugation, we will need the concept of frontal vowel.
+
+oper
+  voyelleFront : Strs = strs {"e" ; "i" ; "y" ; "é" ; "è"} ;
+  preVoyelleFront : (_,_ : Str) -> Str = \t,u -> pre {t ; u / voyelleFront} ;
+
+
+--2 Nouns
+
+-- regular noun forms are defined as follows:
+  nomReg : Str -> Number => Str = \bu -> numForms bu (bu + "s") ;
+
+-- Common nouns are inflected in number and have an inherent gender.
+
+  CNom = {s : Number => Str ; g : Gender} ;
+
+  mkCNom : (Number => Str) -> Gender -> CNom = \mecmecs,gen ->
+    {s = mecmecs ; g = gen} ;
+
+  mkCNomIrreg : Str -> Str -> Gender -> CNom = \mec,mecs ->
+    mkCNom (numForms mec mecs) ;
+
+  mkCNomReg : Str -> Gender -> CNom = \mec ->
+    mkCNom (nomReg mec) ;
+
+  mkCNomNiveau : Str -> Gender -> CNom = \niveau ->
+    mkCNomIrreg niveau (niveau + "x") ;
+
+  mkCNomCheval : Str -> Gender -> CNom = \cheval ->
+    let {cheva = Predef.tk 1 cheval} in
+    mkCNomIrreg cheval (cheva + "ux") ;
+
+  mkCNomInvar : Str -> Gender -> CNom = \cas ->
+    mkCNomIrreg cas cas ;
+
+  mkNomReg : Str -> Gender -> CNom = \cas ->
+    let cass = case Predef.dp 2 cas of {
+      "al" => init cas + "ux" ;
+      "au" => cas + "x" ;
+      "eu" => cas + "x" ;
+      "ou" => cas + "x" ;
+      _ => case last cas of {
+      "s" => cas ;
+      "x" => cas ;
+      "z" => cas ;
+      _   => cas + "s"
+      }
+    }
+    in mkCNomIrreg cas cass ;
+
+
+--2 Adjectives
+--
+-- Adjectives are conveniently seen as gender-dependent nouns.
+-- Here are some patterns. First one that describes the worst case.
+
+  mkAdj' : (_,_,_,_,_ : Str) -> Adj ;
+  mkAdj' vieux vieil vieille vieuxs vieillement = {
+    s = table {
+      -- vieil, nouvel only comes as attributive, not predicative:
+      -- 'un vieil ami', but 'ce vin est nouveau et bon', not *nouvel et bon.
+      AAttrMasc => pre {#voyelle => vieil ; "h" => vieil ; _ => vieux} ;
+      AF g Sg   => genForms vieux vieille ! g ;
+      AF g Pl   => genForms vieuxs (vieille + "s") ! g ;
+      AA        => vieillement
+      }
+    } ;
+
+  mkAdj : (_,_,_,_ : Str) -> Adj ;
+  mkAdj bleu bleue bleus bleuement = mkAdj' bleu bleu bleue bleus bleuement ;
+
+-- Then the regular and invariant patterns.
+
+  adjReg : Str -> Gender => Number => Str = \bu -> table {
+    Masc => (mkNomReg bu Masc).s ;
+    Fem  => nomReg (case last bu of {
+      "e" => bu ;
+      _ => bu + "e"
+      })
+    } ;
+
+  adjInvar : Str -> Gender => Number => Str = \bien ->
+    \\_,_ => bien ;
+
+-- Adjectives themselves are records. Here the most common cases:
+
+  adjGrand : Str -> Adj = \grand ->
+    let grande = case last grand of {
+      "e" => grand ;
+      _ => grand + "e"
+      }
+    in
+    mkAdj grand grande (grand + "s") (grande + "ment") ;
+
+-- Masculine form used for adverbial; also covers "carré".
+
+  adjJoli : Str -> Adj = \joli ->
+    mkAdj joli (joli + "e") (joli + "s") (joli + "ment") ;
+
+  adjHeureux : Str -> Adj = \heureux ->
+    let {heureu = Predef.tk 1 heureux} in
+    mkAdj heureux (heureu+"se") heureux (heureu+"sement") ;
+
+  adjBanal : Str -> Adj = \banal ->
+    let {bana = Predef.tk 1 banal} in
+    mkAdj banal (banal + "e") (bana+"ux") (banal+"ement") ;
+
+  adjJeune : Str -> Adj = \jeune ->
+    mkAdj jeune jeune (jeune+"s") (jeune+"ment") ;
+
+  adjIndien : Str -> Adj = \indien ->
+    mkAdj indien (indien+"ne") (indien+"s") (indien+"nement") ;
+
+  adjTel : Str -> Adj = \tel ->
+    mkAdj tel (tel+"le") (tel+"s") (tel+"lement") ;
+
+  adjFrancais : Str -> Adj = \francais ->
+    mkAdj francais (francais+"e") francais (francais+"ement") ;
+
+  adjCher : Str -> Adj = \cher ->
+    let {ch = Predef.tk 2 cher} in
+    mkAdj cher (ch + "ère") (cher + "s") (ch + "èrement") ;
+
+  adjPublic : Str -> Adj = \public ->
+    let publique = init public + "que" in
+    mkAdj public publique (public+"s") (publique+"ment") ;
+
+  adjVif : Str -> Adj = \vif ->
+    let vive = init vif + "ve" in
+    mkAdj vif vive (vif+"s") (vive+"ment") ;
+
+  mkAdjReg : Str -> Adj = \creux ->
+    case Predef.dp 3 creux of {
+      "eux" => adjHeureux creux ;
+      _ => case Predef.dp 2 creux of {
+        "al" => adjBanal creux ;
+        "en" => adjIndien creux ;
+        "el" => adjTel creux ;
+        "on" => adjIndien creux ;
+        "er" => adjCher creux ;
+	"ic" => adjPublic creux ;
+	"if" => adjVif creux ;
+        _ => case Predef.dp 1 creux of {
+          "s" => adjFrancais creux ;
+          "x" => adjFrancais creux ;
+          "e" => adjJeune creux ;
+          "é" => adjJoli creux ;
+          "i" => adjJoli creux ;
+          _ => adjGrand creux
+          }
+        }
+      } ;
+
+
+--2 Personal pronouns
+--
+-- All the eight personal pronouns can be built by the following macro.
+-- The use of "en" as atonic genitive is debatable.
+
+  mkPronoun : (_,_,_,_,_,_,_ : Str) ->
+              Gender -> Number -> Person -> Pronoun =
+    \il,le,lui,Lui,son,sa,ses,g,n,p ->
+    let
+      alui : Case -> Str = \x -> prepCase x ++ Lui ;
+    in {
+    s = table {
+      Nom        => {c1 = [] ; c2 = []  ; comp = il ; ton = Lui} ;
+      Acc        => {c1 = le ; c2 = []  ; comp = [] ; ton = Lui} ;
+      CPrep P_a  => {c1 = [] ; c2 = lui ; comp = [] ; ton = alui (CPrep P_a)} ;
+      c          => {c1 = [] ; c2 = []  ; comp, ton = alui c}
+      } ;
+    poss = \\n,g => case <n,g> of {
+      <Sg,Masc> => son ;
+      <Sg,Fem>  => sa ;
+      _         => ses
+      } ;
+    a = Ag g n p ;
+    hasClit = True ;
+    isPol = False ;
+    isNeg = False
+    } ;
+
+  elisPoss : Str -> Str = \s ->
+   pre {
+     voyelle => s + "on" ;
+     _ => s + "a"
+     } ;
+
+
+--2 Determiners
+--
+-- Determiners, traditionally called indefinite pronouns, are inflected
+-- in gender and number. It is usually enough to give the two singular
+-- forms to form the plurals.
+
+  pronForms : Str -> Str -> Gender -> Number -> Str = \tel,telle,g,n -> case g of {
+    Masc => nomReg tel ! n ;
+    Fem  => nomReg telle ! n
+    } ;
+
+-- The following macro generates the phrases "est-ce que", "est-ce qu'",
+-- and "est-ce qui" (the last one used e.g. in "qu'est-ce qui").
+
+  estCeQue : Case -> Str = \c ->
+    "est-ce" ++ case c of {
+       Nom => "qui" ;
+       Acc => elisQue ;
+       _   => nonExist  --- dont?
+      } ;
+
+
+--2 Verbs
+
+--3 Parameters
+
+-- The full conjunction is a table on $VForm$, as in "Bescherelle".
+
+param
+  Temps    = Presn | Imparf | Passe | Futur ;
+  TSubj    = SPres | SImparf ;
+  TPart    = PPres | PPasse Gender Number ;
+  VForm    = Inf
+           | Indi Temps Number Person
+           | Condi Number Person
+           | Subjo TSubj Number Person
+           | Imper NumPersI
+           | Part TPart ;
+
+-- This is a conversion to the type in $CommonRomance$.
+
+oper
+  vvf : (VForm => Str) -> (VF => Str) = \aller -> table {
+    VInfin True => case last (aller ! Indi Presn Sg P3) of {  --- terrible hack to store the binding here... 30/11/2014
+      "a" | "e" => bindHyphensT ; -- parle-t-il, va-t-il
+      _ => bindHyphen  -- prend-il
+      } ;
+    VInfin False => aller ! Inf ;
+    VFin (VPres   Indic) n p => aller ! Indi Presn n p ;
+    VFin (VPres   Subjunct) n p => aller ! Subjo SPres n p ;
+    VFin (VImperf Indic) n p => aller ! Indi Imparf n p ;     --# notpresent
+    VFin (VImperf Subjunct) n p => aller ! Subjo SImparf n p ;  --# notpresent
+    VFin VPasse n p  => aller ! Indi Passe n p ;  --# notpresent
+    VFin VFut n p    => aller ! Indi Futur n p ;  --# notpresent
+    VFin VCondit n p => aller ! Condi n p ;  --# notpresent
+    VImper np    => aller ! Imper np ;
+    VPart g n    => aller ! Part (PPasse g n) ;
+    VGer | VPresPart => aller ! Part PPres -- *en* allant
+    } ;
+
+  Verbe : Type = VForm => Str ;
+
+-- the worst case
+
+  mkVerb12 :
+    (tenir,tiens,tient,tenons,tenez,tiennent,tienne,tenions,tiensI,tint,tiendra,tenu : Str) -> Verbe =
+    \tenir,tiens,tient,tenons,tenez,tiennent,tienne,tenions,tiensI,tint,tiendra,tenu ->
+    let
+      tiens2 : Str = case tiens of {
+        _ + "e" => tiens + "s" ;
+        _       => tiens
+        } ;
+      tiendr = init tiendra ;
+      ten = Predef.tk 3 tenons ;
+      affpasse : AffixPasse * Int = case tint of {
+        _ + "a"  => <affixPasseA,1> ;
+        _ + "it" => <affixPasseI,2> ;
+        _ + "ut" => <affixPasseU,2> ;
+        _ + "nt" => <affixPasse "in" "în",3> ;
+        _        => Predef.error ("cannot form past tense from" ++ tint)
+        } ;
+      tin = Predef.tk affpasse.p2 tint ;
+      tienn = init tienne ;
+      tenS = Predef.tk 4 tenions ;
+      tenus : Str = case tenu of {_ +"s" => tenu ; _ => tenu + "s"} ;
+    in table {
+      Inf                   => tenir ;
+      Indi  Presn   Sg P1   => tiens ;
+      Indi  Presn   Sg P2   => tiens2 ;
+      Indi  Presn   Sg P3   => tient ;
+      Indi  Presn   Pl P1   => tenons ;
+      Indi  Presn   Pl P2   => tenez ;
+      Indi  Presn   Pl P3   => tiennent ;
+
+      Indi  Imparf  n  p    => ten    + affixImparf ! n ! p ;
+      Indi  Passe   n  p    => tin    + affpasse.p1.ps ! n ! p ;
+      Indi  Futur   n  p    => tiendr + affixFutur ! n ! p ;
+      Condi         n  p    => tiendr + affixImparf ! n ! p ;
+      Subjo SPres   Sg p    => tienn  + affixSPres ! Sg ! p ;
+      Subjo SPres   Pl P3   => tienn  + "ent" ;
+      Subjo SPres   Pl p    => tenS   + affixImparf ! Pl ! p ;
+      Subjo SImparf n  p    => tin    + affpasse.p1.si ! n ! p ;
+      Imper        SgP2     => tiensI ;
+      Imper        p        => tenS   + affixImper ! p ;
+      Part PPres            => ten    + "ant" ;
+      Part (PPasse Masc Sg) => tenu ;
+      Part (PPasse Fem  Sg) => tenu + "e" ;
+      Part (PPasse Masc Pl) => tenus ;
+      Part (PPasse Fem  Pl) => tenu + "es"
+      } ;
+
+  mkVerb7 : (tenir,tiens,tenons,tiennent,tint,tiendra,tenu : Str) -> Verbe =
+    \tenir,tiens,tenons,tiennent,tint,tiendra,tenu ->
+    let
+      tient : Str = case tiens of {
+        _ + "e"                  => tiens ;
+        _ + ("cs" | "ts" | "ds") => init tiens ;
+        tien + ("x"| "s")        => tien + "t" ;
+        _ => Predef.error ("mkVerb7: not valid present singular first:" ++ tiens)
+        } ;
+      tenez = Predef.tk 3 tenons + "ez" ;
+      tenions = Predef.tk 3 tenons + "ions" ;
+      tienne = Predef.tk 2 tiennent ;
+      tiensI = tiens
+    in
+    mkVerb12 tenir tiens tient tenons tenez tiennent tienne tenions tiensI tint tiendra tenu ;
+
+
+--3 Affixes
+--
+-- It is convenient to have sets of affixes as data objects.
+
+  Affixe : Type = Person => Str ;
+
+  lesAffixes : (_,_,_ : Str) -> Affixe = \x,y,z -> table {
+      P1 => x ;
+      P2 => y ;
+      P3 => z
+      } ;
+
+-- Much of variation can be described in terms of affix sets:
+
+  affixSgE      : Affixe = lesAffixes "e" "es" "e" ;
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=ff548495a0b0:351-443
+start=351
+end=443
+----
+
+  affixSgS      : Affixe = lesAffixes "s" "s" "t" ;
+
+  affixSgSsansT : Affixe = lesAffixes "s" "s" [] ;
+
+  affixSgX      : Affixe = lesAffixes "x" "x" "t" ;
+
+  affixPlOns    : Affixe = lesAffixes "ons" "ez" "ent" ;
+
+  affixSgAi     : Affixe = lesAffixes "ai" "as" "a" ;
+
+  affixSgAis    : Affixe = \\p => "ai" + affixSgS ! p ;
+
+  affixPlIons   : Affixe = table {
+      P3 => "aient" ;
+      p  => "i" + affixPlOns ! p
+      } ;
+
+-- Often affix sets come in pairs, for the singular and the plural.
+
+  affixImparf : Number => Affixe = table {
+      Sg => affixSgAis ;
+      Pl => affixPlIons
+      } ;
+
+  affixFutur : Number => Affixe = table {
+      Sg => affixSgAi ;
+      Pl => table {
+        P3 => "ont" ;
+        p  => affixPlOns ! p
+        }
+      } ;
+
+  affixSPres : Number => Affixe = table {
+      Sg => affixSgE ;
+      Pl => table {
+        P3 => "ent" ;
+        p  => affixPlIons ! p
+        }
+      } ;
+
+  affixPlMes : (_,_ : Str) -> Affixe =
+     \è, â -> lesAffixes (â + "mes") (â + "tes") (è + "rent") ;
+
+  affixPasseAi : Number => Affixe = table {
+      Sg => affixSgAi ;
+      Pl => affixPlMes "è" "â"
+      } ;
+
+  affixPasseS : (i,î : Str) -> Number => Affixe = \i,î -> table {
+      Sg => table {p => i + affixSgS ! p} ;
+      Pl => affixPlMes i î
+      } ;
+
+  affixSImparfSse : (i,î : Str) -> Number => Affixe =  \i,î -> table {
+      Sg => table {
+        P3 => î + "t" ;
+        p  => i + "ss" + affixSgE ! p
+        } ;
+      Pl => table {p  => i + "ss" + affixSPres ! Pl ! p}
+      } ;
+
+  AffixPasse : Type = {ps : Number => Affixe ; si : Number => Affixe} ;
+
+  affixPasse : (_,_ : Str) -> AffixPasse = \i, î ->
+    {ps = affixPasseS i î ; si = affixSImparfSse i î} ;
+
+  affixPasseA : AffixPasse = {ps = affixPasseAi ; si = affixSImparfSse "a" "â"} ;
+
+  affixPasseI : AffixPasse = affixPasse "i" "î" ;
+
+  affixPasseU : AffixPasse = affixPasse "u" "û" ;
+
+  affixPasseNonExist : AffixPasse =
+    let {aff : Number => Affixe =
+                 table {_ => lesAffixes nonExist nonExist nonExist}} in
+      {ps = aff ; si = aff} ;
+
+  affixImper : NumPersI => Str = table {
+     SgP2 => "e" ;
+     PlP1 => "ons" ;
+     PlP2 => "ez"
+     } ;
+
+  formesPresAi : (v,all : Str) -> Number => Affixe = \v,all -> table {
+       Sg => \\p  => v + affixSgAi ! p ;
+       Pl => table {
+         P3 => v + "ont" ;
+         p  => all + affixPlOns ! p
+         }
+       } ;
+
+}
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/NamesFre.gf"
+id=5ee92b385121
+kind=source
+size=1259
+lines=46
+chunks=0
+----
+concrete NamesFre of Names = CatFre ** open Prelude, ResFre, CommonRomance, PhonoFre in {
+
+lin GivenName = \n -> pn2np n ;
+lin MaleSurname = \n -> pn2np {s = n.s ! Masc; g = Masc} ;
+lin FemaleSurname = \n -> pn2np {s = n.s ! Fem; g = Fem} ;
+lin PlSurname = \n -> heavyNPpol False {
+       s = \\c => prepCase c ++ n.pl ;
+       a = agrP3 Masc Pl
+    } ;
+lin FullName gn sn = pn2np {
+       s = gn.s ++ sn.s ! gn.g ;
+       g = gn.g
+    } ;
+
+lin PlainLN n = heavyNP {
+      s = \\c => prepCase c ++ n.s;
+      a = {g = n.g ; n = n.num ; p = P3}
+      } ;
+
+lin UseLN n = heavyNP {
+      s = \\c => case n.art of {
+        AlwaysArt | UseArt => artDef True n.g n.num c ++ n.s ;
+        _      => n.s
+        } ;
+      a = {g = n.g ; n = n.num ; p = P3}
+  } ;
+
+
+lin InLN n = {
+      s = let p : {s : Str; c:Prepos} =
+                case n.onPrep of {
+                  True  => {s="en"; c=PNul} ;
+                  False => {s="";   c=P_a}
+                }
+          in p.s ++ case n.art of {
+                      AlwaysArt => artDef True n.g n.num (CPrep p.c) ++ n.s;
+                      _         => prepCase (CPrep p.c) ++ n.s
+                    } ;
+  } ;
+
+
+lin AdjLN ap n = n ** {
+      s = preOrPost ap.isPre (ap.s ! AF n.g n.num) n.s ;
+    } ;    
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/NounFre.gf"
+id=2950308be9f5
+kind=source
+size=128
+lines=4
+chunks=0
+----
+--# -path=.:romance:abstract:../common:prelude
+
+concrete NounFre of Noun = CatFre ** NounRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/NumeralFre.gf"
+id=f6ad6133efba
+kind=source
+size=7593
+lines=215
+chunks=0
+----
+concrete NumeralFre of Numeral = CatFre [Numeral,Digits,Decimal] ** 
+  open CommonRomance, ResRomance, MorphoFre, Prelude in {
+  flags coding=utf8 ;
+
+-- originally written in 1998, automatically translated to current notation...
+-- last modified 24/1/2006, adding ordinals
+
+-- Auxiliaries
+
+oper
+  digitPl : {s : DForm => Str; inh : DForm ; n : Number} ->
+            {s : CardOrd => DForm => Str ; inh : DForm ; n : Number} = \d -> {
+   s = \\co,df => let ds = d.s ! df in 
+     case co of {
+       NCard _ => ds ;
+       NOrd _ _  => case last ds of {
+         "q" => ds + "uième" ;
+         "e" => init ds + "ième" ;
+         _ => ds + "ième"
+         }
+       } ;
+       inh = d.inh ; n = d.n
+  } ;
+
+  cardOrdG : CardOrd -> (_,_,_,_,_,_ : Str) -> Str = 
+    \co,x,xf,sm,sf,pm,pf -> case co of {
+    NCard Masc => x ; 
+    NCard Fem => xf ; 
+    NOrd Masc Sg => sm ;
+    NOrd Fem  Sg => sf ;
+    NOrd Masc Pl => pm ;
+    NOrd Fem  Pl => pf
+    } ;
+
+  cardOrd : CardOrd -> Str -> Str -> Str = \co, x,y -> case co of {
+    NCard _ => x ; 
+    NOrd _ _ => y
+    } ;
+
+param DForm = unit  | teen  | jten  | ten  | tenplus  ;
+param Placement = indep  | postpo | attr  ;
+
+lincat 
+  Digit = {s : CardOrd => DForm => Str ; inh : DForm ; n : Number} ; 
+  Sub10 = {s : CardOrd => (DForm * Placement) => Str ; inh : Number} ;
+  Sub100 = {s : CardOrd => Placement => Str ; n : Number} ;
+  Sub1000 = {s : CardOrd => Placement => Str ; n : Number} ;
+  Sub1000000 = {s : CardOrd => Str ; n : Number} ;
+  Sub1000000000 = {s : CardOrd => Str ; n : Number} ;
+  Sub1000000000000 = {s : CardOrd => Str ; n : Number} ;
+
+lin num x0 = x0 ;
+
+lin n2  =
+  digitPl {inh = unit ; n = Sg ; s = table {unit => "deux" ; teen => "douze" ; jten => "vingt" ; ten => "vingt" ; tenplus => "vingt"}} ;
+lin n3  =
+  digitPl {inh = unit ; n = Sg ; s = table {unit => "trois" ; teen => "treize" ; jten => "trente" ; ten => "trente" ; tenplus => "trente"}} ;
+lin n4  =
+  digitPl {inh = unit ; n = Sg ; s = table {unit => "quatre" ; teen => "quatorze" ; jten => "quarante" ; ten => "quarante" ; tenplus => "quarante"}} ;
+lin n5  =
+   digitPl {inh = unit ; n = Sg ; s = table {unit => "cinq" ; teen => "quinze" ; jten => "cinquante" ; ten => "cinquante" ; tenplus => "cinquante"}} ;
+lin n6  =
+   digitPl {inh = unit ; n = Sg ; s = table {unit => "six" ; teen => "seize" ; jten => "soixante" ; ten => "soixante" ; tenplus => "soixante"}} ;
+lin n7  =
+   digitPl {inh = teen ; n = Sg ; s = table {unit => "sept" ; teen => "dix-sept" ; jten => "soixante-dix" ; ten => "soixante-dix" ; tenplus => "soixante"}} ;
+lin n8  =
+   digitPl {inh = unit ; n = Pl ; s = table {unit => "huit" ; teen => "dix-huit" ; jten => "quatre-vingts" ; ten => "quatre-vingt" ; tenplus => "quatre-vingt"}} ;
+lin n9  =
+   digitPl {inh = teen ; n = Pl ; s = table {unit => "neuf" ; teen => "dix-neuf" ; jten => "quatre-vingt-dix" ; ten => "quatre-vingt-dix" ; tenplus => "quatre-vingt"}} ;
+
+lin pot01  =
+  {inh = Sg ; s = \\g => let dix = cardOrd g "dix" "dixième" in table {
+  {p1 = unit ; p2 = indep} => 
+     cardOrdG g "un" "une" "premier" "première" "premiers" "premières" ; 
+  {p1 = unit ; p2 = postpo} => 
+     cardOrdG g "un" "une" "unième"  "unième"  "unième"  "unième" ;
+  {p1 = unit ; p2 = attr} => [] ; 
+  {p1 = teen ; p2 = indep | postpo} => cardOrd g "onze" "onzième" ; 
+  {p1 = teen ; p2 = attr} => [] ; 
+  {p1 = jten ; p2 = indep | postpo} => dix ; 
+  {p1 = jten ; p2 = attr} => [] ; 
+  {p1 = ten  ; p2 = indep | postpo} => dix ; 
+  {p1 = ten ; p2 = attr} => [] ; 
+  {p1 = tenplus ; p2 = indep | postpo} => dix ; 
+  {p1 = tenplus ; p2 = attr} => []} ; 
+  n = Sg} ;
+lin pot0 d =
+  {inh = Pl ; s = \\g => table {
+    {p1 = unit ; p2 = indep | postpo} => d.s ! g !  unit ; 
+    {p1 = unit ; p2 = attr} => d.s ! g ! unit ; 
+    {p1 = teen ; p2 = indep | postpo} => d.s ! g ! teen ; 
+    {p1 = teen ; p2 = attr} => d.s ! g ! teen ; 
+    {p1 = jten ; p2 = indep | postpo} => d.s ! g ! jten ; 
+    {p1 = jten ; p2 = attr} => d.s ! g ! jten ;
+    {p1 = ten ; p2 = indep | postpo} => d.s ! g ! ten ; 
+    {p1 = ten ; p2 = attr} => d.s ! g ! ten ; 
+    {p1 = tenplus ; p2 = indep | postpo} => d.s ! g ! tenplus ; 
+    {p1 = tenplus ; p2 = attr} => d.s ! g ! tenplus} ; n = Pl} ;
+
+lin pot110  =
+  {s = \\g => table {_ => cardOrd g "dix" "dixième"} ; n = Pl} ;
+lin pot111  =
+  {s = \\g => table {_ => cardOrd g "onze" "onzième"} ; n = Pl} ;
+lin pot1to19 d =
+  {s = \\g => table {indep | postpo => d.s ! g ! teen ; attr => d.s ! g ! teen} ; n = Pl} ;
+lin pot0as1 n =
+  {s = \\g => table {
+  p@(indep | postpo) => n.s ! g ! {p1 = unit ; p2 = p} ;
+  attr => n.s ! g ! {p1 = unit ; p2 = attr}} ; n = n.inh} ;
+lin pot1 d =
+  {s = \\g => table {indep | postpo => d.s ! g ! jten ; attr => d.s ! g ! ten}
+  ; n = Pl} ;
+lin pot1plus d e =
+  {s = \\g => table {
+  p@(indep | postpo) => (d.s ! (NCard Masc) ! tenplus) ++ (table {{p1 = Sg
+  ; p2 = Sg} => "et" ; {p1 = Sg ; p2 = pl} => hyphen ; {p1 = Pl ; p2 =
+  Sg} => hyphen ; {p1 = Pl ; p2 = pl} => hyphen} ! {p1 = d.n ; p2 =
+  e.inh}) ++ e.s ! g ! {p1 = d.inh ; p2 = p} ; 
+  attr => (d.s ! (NCard Masc) !
+  tenplus) ++ (table {{p1 = Sg ; p2 = Sg} => "et" ; {p1 = Sg ; p2 =
+  pl} => hyphen ; {p1 = Pl ; p2 = Sg} => hyphen ; {p1 = Pl ; p2 = pl} =>
+  hyphen} ! {p1 = d.n ; p2 = e.inh}) ++ e.s ! g ! {p1 = d.inh ; p2 =
+  indep}} ; n = Pl} ;
+lin pot1as2 n = n ;
+lin pot2 d =
+  {s = \\g => table {indep | postpo => (d.s ! NCard Masc ! {p1 = unit ; p2 = attr})
+  ++ table {Sg => cardOrd g "cent" "centième" ; Pl => cardOrd g "cents" "centième"} ! (d.inh) ; attr => (d.s !
+  NCard Masc ! {p1 = unit ; p2 = attr}) ++ cardOrd g "cent" "centième"} ; n = Pl} ;
+lin pot2plus d e =
+  {s = \\g => table {
+    attr => (d.s ! NCard Masc ! {p1 = unit ; p2 = attr}) ++ "cent" ++ e.s ! g ! indep ;
+    p => (d.s ! NCard Masc ! {p1 = unit ; p2 = attr}) ++ "cent" ++ e.s ! g ! p 
+   } ; 
+   n = Pl 
+  } ;
+lin pot2as3 n =
+  {s = \\g => n.s ! g ! indep ; n = n.n} ;
+lin pot3 n =
+  {s = \\g => (n.s ! NCard Masc ! attr) ++ cardOrd g "mille" "millième" ; n = Pl} ;
+lin pot3plus n m =
+  {s = \\g => (n.s ! NCard Masc !  attr) ++  "mille" ++ m.s ! g ! postpo ; n =
+  Pl} ;
+
+lin pot3as4 n = n ;
+lin pot4as5 n = n ;
+
+oper hyphen = BIND ++ "-" ++ BIND ;
+
+
+-- numerals as sequences of digits
+
+  lincat 
+    Dig = TDigit ;
+
+  lin
+    IDig d = d ** {tail = T1} ;
+
+    IIDig d i = {
+      s = \\o => d.s ! NCard Masc ++ spaceIf i.tail ++ i.s ! o ;
+      n = Pl ;
+      tail = inc i.tail
+    } ;
+
+    D_0 = mkDig "0" ;
+    D_1 = mk3Dig "1" "1er" Sg ; ---- gender
+    D_2 = mk2Dig "2" "2ème" ;
+    D_3 = mk2Dig "3" "3ème" ;
+    D_4 = mkDig "4" ;
+    D_5 = mkDig "5" ;
+    D_6 = mkDig "6" ;
+    D_7 = mkDig "7" ;
+    D_8 = mkDig "8" ;
+    D_9 = mkDig "9" ;
+
+    PosDecimal d = d ** {hasDot=False} ;
+    NegDecimal d = {
+      s = \\o => "-" ++ BIND ++ d.s ! o ;
+      n = Pl ;
+      hasDot=False
+      } ;
+    IFrac d i = {
+     s = \\o => d.s ! NCard Masc ++
+                if_then_Str d.hasDot BIND (BIND++","++BIND) ++
+                i.s ! o ;
+     n = Pl ;
+     hasDot=True
+     } ;
+
+  oper
+    spaceIf : DTail -> Str = \t -> case t of {
+      T3 => SOFT_SPACE ;
+      _  => BIND
+      } ;
+
+    inc : DTail -> DTail = \t -> case t of {
+      T1 => T2 ;
+      T2 => T3 ;
+      T3 => T1
+      } ;
+
+  oper
+    mk2Dig : Str -> Str -> TDigit = \c,o -> mk3Dig c o Pl ;
+    mkDig : Str -> TDigit = \c -> mk2Dig c (c + "ème") ;
+
+    mk3Dig : Str -> Str -> Number -> TDigit = \c,o,n -> {
+      s = table {NCard _ => c ; NOrd _ _ => o} ; ---- gender
+      n = n
+      } ;
+
+    TDigit = {
+      n : Number ;
+      s : CardOrd => Str
+    } ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ParadigmsFre.gf"
+id=10711561e94d
+kind=source
+size=19232
+lines=606
+chunks=2
+
+--- CHUNK BEGIN ---
+id=10711561e94d:1-350
+start=1
+end=350
+----
+--# -path=.:../romance:../common:../abstract:../../prelude
+
+--1 French Lexical Paradigms
+--
+-- Aarne Ranta 2001 - 2006
+--
+-- This is an API for the user of the resource grammar
+-- for adding lexical items. It gives functions for forming
+-- expressions of open categories: nouns, adjectives, verbs.
+--
+-- Closed categories (determiners, pronouns, conjunctions) are
+-- accessed through the resource syntax API, $Structural.gf$.
+--
+-- The main difference with $MorphoFre.gf$ is that the types
+-- referred to are compiled resource grammar types. We have moreover
+-- had the design principle of always having existing forms, rather
+-- than stems, as string arguments of the paradigms.
+--
+-- The structure of functions for each word class $C$ is the following:
+-- first we give a handful of patterns that aim to cover all
+-- regular cases. Then we give a worst-case function $mkC$, which serves as an
+-- escape to construct the most irregular words of type $C$.
+-- However, this function should only seldom be needed: we have a
+-- separate module [``IrregFre`` ../../french/IrregFre.gf],
+-- which covers all irregularly inflected verbs.
+
+resource ParadigmsFre =
+  open
+    (Predef=Predef),
+    Prelude,
+    MorphoFre,
+    BeschFre,
+    CatFre in {
+
+  flags optimize=all ;
+    coding=utf8 ;
+
+--2 Parameters
+--
+-- To abstract over gender names, we define the following identifiers.
+
+oper
+  Gender : PType ;
+
+  masculine : Gender ;
+  feminine  : Gender ;
+
+-- To abstract over number names, we define the following.
+
+  Number : PType ;  --%
+
+  singular : Number ; --%
+  plural   : Number ; --%
+
+-- Prepositions used in many-argument functions are either strings
+-- (including the 'accusative' empty string) or strings that
+-- amalgamate with the following word (the 'genitive' "de" and the
+-- 'dative' "à").
+
+  accusative : Prep ; -- direct object case
+  genitive   : Prep ; -- genitive, constructed with "de"
+  dative     : Prep ; -- dative, usually constructed with "à"
+
+  mkPrep : overload {
+    mkPrep : Str -> Prep  ;         -- simple preposition (other than "de" and "à")
+    mkPrep : Str -> Prep -> Prep ;  -- complex preposition e.g. "à côté de"
+    } ;
+
+
+--2 Nouns
+
+  mkN : overload {
+
+-- The regular function uses heuristics to compute the
+-- plural and the gender from the singular. The plural
+-- heuristic currently
+-- covers the cases "pas-pas", "prix-prix", "nez-nez",
+-- "bijou-bijoux", "cheveu-cheveux", "plateau-plateaux", "cheval-chevaux".
+-- The gender heuristic is less reliable: it treats as feminine all
+-- nouns ending with "e" and "ion", all others as masculine.
+
+    mkN : (cheval : Str) -> N ;  -- predictable, with variations like cheval-chevaux
+
+-- Adding gender information widens the scope of the regular pattern.
+
+    mkN : (foie : Str) -> Gender -> N ; --%
+
+-- In the worst case, both singular and plural forms and the gender are needed.
+
+    mkN : (oeil,yeux : Str) -> Gender -> N ; -- worst-case noun
+
+--3 Compound nouns
+--
+-- Some nouns are ones where the first part is inflected as a noun but
+-- the second part is not inflected. e.g. "numéro de téléphone".
+-- They could be formed in syntax, but we give a shortcut here since
+-- they are frequent in lexica.
+
+    mkN : N -> Str -> N -- compound noun, e.g. numéro + de téléphone
+  } ;
+
+
+
+
+--3 Relational nouns
+--
+-- Relational nouns ("fille de x") need a case and a preposition.
+
+  mkN2 : N -> Prep -> N2 ; -- e.g. fille + genitive
+
+-- The most common cases are the genitive "de" and the dative "à",
+-- with the empty preposition.
+
+  deN2 : N -> N2 ; --%
+  aN2  : N -> N2 ; --%
+
+-- Three-place relational nouns ("la connection de x à y") need two prepositions.
+
+  mkN3 : N -> Prep -> Prep -> N3 ; -- e.g. connection + genitive + dative
+
+
+--3 Relational common noun phrases
+--
+-- In some cases, you may want to make a complex $CN$ into a
+-- relational noun (e.g. "la vieille église de"). However, $N2$ and
+-- $N3$ are purely lexical categories. But you can use the $AdvCN$
+-- and $PrepNP$ constructions to build phrases like this.
+
+--
+--3 Proper names and noun phrases
+--
+-- Proper names need a string and a gender. If no gender is given, the
+-- feminine is used for strings ending with "e", the masculine for other strings.
+
+  mkPN  : overload {
+    mkPN : Str -> PN ; -- feminine if ends with "e", otherwise masculine
+    mkPN : Str -> Gender -> PN ; -- gender deviant from the simple rule
+    mkPN : N -> PN ; -- gender inherited from noun
+    } ;
+
+  mkGN = overload {
+    mkGN : (Anna : Str) -> GN = \s -> lin GN (regPN s) ; -- feminine for "-a", otherwise masculine
+    mkGN : (Pilar : Str) -> Gender -> GN = \s,g -> lin GN (mk2PN s g) ; -- force gender
+    } ;
+
+  mkSN = overload {
+    mkSN : Str -> SN = \s -> lin SN {s = \\_ => s; pl = s} ;
+    mkSN : Str -> Str -> Str -> SN = \male,female,pl -> lin SN {s = table {Masc=>male; Fem=>female}; pl = pl} ;
+    } ;
+
+  mkLN = overload {
+    mkLN : Str -> LN = \s ->
+      lin LN {s = s ;
+              onPrep=False ;
+              art = NoArt ;
+              g = Masc ;
+              num = Sg} ;
+    mkLN : Str -> Gender -> LN = \s,g ->
+      lin LN {s = s ;
+              onPrep=False ;
+              art = NoArt ;
+              g = g ;
+              num = Sg} ;
+    mkLN : Str -> Gender -> Number -> LN = \s,g,num ->
+      lin LN {s = s ;
+              onPrep=False ;
+              art = NoArt ;
+              g = g ;
+              num = num} ;
+  } ;
+
+
+  defLN : LN -> LN = \n -> n ** {art = AlwaysArt} ;
+  useDefLN : LN -> LN = \n -> n ** {art = UseArt} ;
+  enLN : LN -> LN = \n -> n ** {onPrep = True} ;
+
+
+--2 Adjectives
+
+  mkA : overload {
+
+-- For regular adjectives, all forms are derived from the
+-- masculine singular. The heuristic takes into account certain
+-- deviant endings: "banal-banale-banaux", "chinois-chinoise-chinois",
+-- "heureux-heureuse-heureux", "italien-italienne", "jeune-jeune",
+-- "amer-amère", "carré- - -carrément", "joli- - -joliment".
+
+    mkA : (cher : Str) -> A ; -- predictable, e.g. cher-chère
+
+-- Often just the feminine singular is deviant.
+
+    mkA : (sec,seche : Str) -> A ; -- unpredictable feminine
+
+-- The masculine plural can also be deviant.
+
+    mkA : (banal,banale,banaux : Str) -> A ;
+
+-- This is the worst-case paradigm for the positive forms, except for "vieux/vieil".
+
+    mkA : (banal,banale,banaux,banalement : Str) -> A ; -- almost worst-case adjective
+
+-- This is the worst-case paradigm for the positive forms, used for "vieux/vieil".
+    mkA : (vieux,vieil,vieille,vieux,vieillement : Str) -> A ; -- worst-case adjetive
+
+-- If comparison forms are irregular (i.e. not formed by "plus", e.g.
+-- "bon-meilleur"), the positive and comparative can be given as separate
+-- adjectives.
+
+    mkA : A -> A -> A ; -- irregular comparison, e.g. bon-meilleur
+
+    mkA : A -> CopulaType -> A -- force copula type
+
+  } ;
+
+-- The functions create by default postfix adjectives. To switch
+-- them to prefix ones (i.e. ones placed before the noun in
+-- modification, as in "petite maison"), the following function is
+-- provided.
+
+  prefixA : A -> A ; -- adjective that comes before noun, e.g. petit
+
+
+--3 Two-place adjectives
+--
+-- Two-place adjectives need a preposition for their second argument.
+
+  mkA2 : A -> Prep -> A2 ; -- e.g. supérieur + dative
+
+
+--2 Adverbs
+
+-- Adverbs are not inflected. Most lexical ones have position
+-- after the verb.
+
+  mkAdv : Str -> Adv ; -- ordinary adverb
+
+-- Some appear next to the verb (e.g. "toujours").
+
+  mkAdV : Str -> AdV ; -- sentential adverb, e.g. toujours
+
+-- Adverbs modifying adjectives and sentences can also be formed.
+
+  mkAdA : Str -> AdA ; -- modify adjective, e.g. très
+
+
+--2 Verbs
+--
+-- Irregular verbs are given in the module $IrregFre$.
+-- If a verb should be missing in that list, the module
+-- $BeschFre$ gives all the patterns of the "Bescherelle" book.
+--
+-- Regular verbs are ones with the infinitive "er" or "ir", the
+-- latter with plural present indicative forms as "finissons".
+-- The regular verb function in the first conjugation recognizes
+-- these endings, as well as the variations among
+-- "aimer, céder, placer, peser, jeter, placer, manger, assiéger, payer".
+--
+-- Sometimes, however, it is not predictable which variant of the "er"
+-- conjugation is to be selected. Then it is better to use the function
+-- that gives the third person singular present indicative and future
+-- (("il") "jette", "jettera") as second argument.
+
+  mkV : overload {
+    mkV : (finir : Str) -> V ; -- regular 1/2/3 conjugation
+    mkV : (jeter,jette : Str) -> V ; -- 1st and 2nd conjugation variations
+    mkV : (jeter,jette,jettera : Str) -> V ; -- 1st conjugation variations
+
+-- Here is a paradigm that works for most irregular verbs.
+
+    mkV : (tenir,tiens,tenons,tiennent,tint,tiendra,tenu : Str) -> V ;
+
+-- Here is a worst-case paradigm.
+
+    mkV : (tenir,tiens,tient,tenons,tenez,tiennent,tienne,tenions,tiensI,tint,tiendra,tenu : Str) -> V ;
+
+-- The $IrregFre$ list gives some verbs as two-place. These verbs can be
+-- reused as one-place verbs.
+
+    mkV : V2 -> V ; -- make 2-place to 1-place (e.g. from IrregFre)
+
+-- Particle verbs ("avoir" + "besoin")
+
+    mkV : V -> Str -> V  ;
+  } ;
+
+-- The function $mkV$ gives the default compound auxiliary "avoir".
+-- To change it to "être", use the following function.
+
+  etreV : V -> V ; -- force auxiliary to be être (default avoir)
+
+-- This function turns a verb into reflexive, which implies the auxiliary "être".
+
+  reflV : V -> V ; -- reflexive, implies auxiliary être, e.g. se demander
+
+
+--3 Two-place verbs
+--
+-- Two-place verbs need a preposition, except the special case with direct object.
+-- (transitive verbs).
+
+  mkV2 = overload {
+    mkV2 : Str -> V2  --%
+    = \s -> dirV2 (regV s) ;
+    mkV2 : V -> V2  -- direct transitive
+    = dirV2 ;
+    mkV2 : V -> Prep -> V2 -- e.g. se fier + genitive
+    = mmkV2
+  } ;
+
+
+--3 Three-place verbs
+--
+-- Three-place (ditransitive) verbs need two prepositions, of which
+-- the first one or both can be absent.
+
+  mkV3 : overload {
+    mkV3 : V -> V3 ;                -- donner (+ accusative + dative)
+    mkV3 : V -> Prep -> V3 ;        -- placer (+ accusative) + dans
+    mkV3 : V -> Prep -> Prep -> V3  -- parler + dative + genitive
+    } ;
+
+--3 Other complement patterns
+--
+-- Verbs and adjectives can take complements such as sentences,
+-- questions, verb phrases, and adjectives.
+
+  mkV0  : V -> V0 ;  --%
+  mkVS  : V -> VS ;
+  subjVS  : V -> VS ;
+  mkVV  : V -> VV ;  -- plain infinitive: "je veux parler"
+  deVV  : V -> VV ;  -- "j'essaie de parler"
+  aVV   : V -> VV ;  -- "j'arrive à parler"
+  mkV2S  : overload {
+    mkV2S : V -> V2S ;
+    mkV2S : V -> Prep -> V2S ;
+    } ;
+  mkV2V  : overload {
+    mkV2V : V -> V2V ;
+    mkV2V : V -> Prep -> Prep -> V2V ;
+    } ;
+  mkVA  : V -> VA ;
+
+  mkV2A : overload {
+    mkV2A : V -> V2A ;
+    mkV2A : V -> Prep -> Prep -> V2A ;
+    } ;
+
+  mkVQ  : V -> VQ ;
+  mkV2Q : V -> Prep -> V2Q ;
+
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=10711561e94d:351-606
+start=351
+end=606
+----
+  mkAS  : A -> AS ; --%
+  mkA2S : A -> Prep -> A2S ; --%
+  mkAV  : A -> Prep -> AV ; --%
+  mkA2V : A -> Prep -> Prep -> A2V ; --%
+
+-- Notice: categories $AS, A2S, AV, A2V$ are just $A$,
+-- and the second argument is given as an adverb. Likewise
+-- $V0$ is just $V$.
+
+  V0 : Type ; --%
+  AS, A2S, AV, A2V : Type ; --%
+
+--.
+--2 Definitions of the paradigms
+--
+-- The definitions should not bother the user of the API. So they are
+-- hidden from the document.
+
+
+  Gender = MorphoFre.Gender ;
+  Number = MorphoFre.Number ;
+  masculine, male = Masc ;
+  feminine, female = Fem ;
+  male = Masc ;
+  female = Fem ;
+  singular = Sg ;
+  plural = Pl ;
+
+  Preposition = Compl ;
+  accusative = complAcc ** {lock_Prep = <>} ;
+  genitive = complGen ** {lock_Prep = <>} ;
+  dative = complDat ** {lock_Prep = <>} ;
+  mkPrep = overload {
+    mkPrep : Str -> Prep  = \p -> {s = p ; c = CPrep PNul ; isDir = False ; lock_Prep = <>} ;
+    mkPrep : Str -> Prep -> Prep = \s,c-> {s = s ; c = c.c ; isDir = False ; lock_Prep = <>}
+    } ;
+
+  --- obsolete
+  Preposition : Type ;
+  mkPreposition : Str -> Preposition ;
+  mkPreposition s = mkPrep s ;
+
+  regGenN : Str -> Gender -> N ;
+  regN : Str -> N ;
+  mk2N  : (oeil,yeux : Str) -> Gender -> N ;
+  mk2N x y g = mkCNomIrreg x y g ** {relType = NRelPrep P_de; lock_N = <>} ;
+  regN x = regGenN x g where {
+    g = case <x : Str> of {
+     _ + ("e" | "ion") => Fem ;
+     _ => Masc
+     }
+    } ;
+  regGenN x g = mkNomReg x g ** {relType = NRelPrep P_de; lock_N = <>} ;
+  compN : N -> Str -> N ;
+  compN x y = {s = \\n => x.s ! n ++ y ; g = x.g ; relType = NRelPrep P_de ; lock_N = <>} ;
+
+  mkN = overload {
+    mkN : Str -> N = regN ;
+    mkN : Str -> Gender -> N = regGenN ;
+    mkN : (oeil,yeux : Str) -> Gender -> N = mk2N ;
+    mkN : N -> Str -> N = compN
+  } ;
+
+
+  mkN2 = \n,p -> n ** {lock_N2 = <> ; c2 = p} ;
+  deN2 n = mkN2 n genitive ;
+  aN2 n = mkN2 n dative ;
+  mkN3 = \n,p,q -> n ** {lock_N3 = <> ; c2 = p ; c3 = q} ;
+
+  regPN x = mk2PN x g where {
+    g = case last x of {
+      "e" => feminine ;
+      _ => masculine
+      }
+    } ;
+
+  mkPN = overload {
+    mkPN : Str -> PN = regPN ;
+    mkPN : Str -> Gender -> PN = \x,g -> lin PN {s = x ; g = g} ;
+    mkPN : N -> PN = \x -> lin PN {s = x.s ! Sg ; g = x.g} ;
+    } ;
+
+  mk4A masc fem mascpl aa = mk5A masc masc fem mascpl aa ;
+  mk5A masc mascv fem mascpl aa = compADeg (mkAdj' masc mascv fem mascpl aa) ;
+  regA a = compADeg (mkAdjReg a);
+  prefA a = a ** {isPre = True} ;
+  adjCopula a cop = a ** {copTyp = cop} ;
+
+  mkA2 a p = a ** {c2 = p ; lock_A2 = <>} ;
+
+  mkA = overload {
+    mkA : Str -> A = regA ;
+    mkA : (sec,seche : Str) -> A = \sec,seche ->
+      let a = regA sec
+      in a ** {
+        s = table {
+	  AF Fem Sg => seche ;
+	  AF Fem Pl => seche  + "s" ;
+	  AA => case seche of {
+	    _ + "ée" => init seche + "ment" ;
+	    _ => seche + "ment"
+	    } ;
+	  c => a.s ! c
+	  }
+	} ;
+
+    mkA : (banal,banale,banaux : Str) -> A = \sec,seche,secs ->
+      let sechement : Str = case seche of {
+	    _ + "ée" => init seche + "ment" ;
+	    _ => seche + "ment"
+	    }
+      in mk4A sec seche secs sechement ;
+    mkA : (banal,banale,banaux,banalement : Str) -> A = mk4A ;
+    mkA : (vieux,vieil,vieille,vieuxs,vieuxment : Str) -> A = mk5A ;
+    mkA : A -> A -> A = mkADeg ;
+    mkA : A -> CopulaType -> A = adjCopula ;
+  };
+
+  prefixA = prefA ;
+
+  invarA : (sud : Str) -> A = \sud -> compADeg {
+    s = table {
+          AF _ _ => sud;
+          AAttrMasc => sud;
+          AA     => case sud of {
+	                  _ + "ée" => init sud + "ment" ;
+	                  _ => sud + "ment"
+	                }
+        } ;
+  } ;
+
+  mkAdv x = ss x ** {lock_Adv = <>} ;
+  mkAdV x = ss x ** {lock_AdV = <>} ;
+  mkAdA x = ss x ** {lock_AdA = <>} ;
+
+  regV x = let v = vvf (mkVerbReg x) in {s = v ; vtyp = VTyp VHabere (getVerbT v) ; lock_V = <> ; p = []} ;
+  reg3V x y z = let v = vvf (mkVerb3Reg x y z) in {s = v ; vtyp = VTyp VHabere (getVerbT v) ; lock_V = <> ; p = []} ;
+  etreV v = v ** {vtyp = VTyp VEsse (getVTypT v.vtyp)} ;
+  reflV v = v ** {vtyp = vRefl v.vtyp} ;
+
+  mmkV3 v p q = v ** {c2 = p ; c3 = q ; lock_V3 = <>} ;
+  dirV3 v p = mmkV3 v accusative p ;
+  dirdirV3 v = mmkV3 v dative accusative ;
+
+  mkV3 = overload {
+    mkV3 : V -> V3 = dirdirV3 ;               -- donner,_,_
+    mkV3 : V -> Prep -> V3 = dirV3 ;          -- placer,_,sur
+    mkV3 : V -> Prep -> Prep -> V3 = mmkV3    -- parler, à, de
+    } ;
+
+  V0 : Type = V ;
+  AS, AV : Type = A ;
+  A2S, A2V : Type = A2 ;
+
+  mkV0  v = v ** {lock_V0 = <>} ;
+  mkVS  v = v ** {m = \\_ => Indic ; lock_VS = <>} ;
+  subjVS  v = v ** {m = \\_ => Conjunct ; lock_VS = <>} ;
+
+  mkV2S = overload {
+    mkV2S : V -> V2S = \v -> mmkV2 v dative ** {mn,mp = Indic ; lock_V2S = <>} ;
+    mkV2S : V -> Prep -> V2S = \v,p -> mmkV2 v p ** {mn,mp = Indic ; lock_V2S = <>} ;
+    } ;
+
+  mkVV  v = v ** {c2 = complAcc ; lock_VV = <>} ;
+  deVV  v = v ** {c2 = complGen ; lock_VV = <>} ;
+  aVV  v = v ** {c2 = complDat ; lock_VV = <>} ;
+
+  mkV2V = overload {
+    mkV2V : V -> V2V                 = \v -> mmkV3 v accusative dative ** {lock_V2V = <>} ;
+    mkV2V : V -> Prep -> Prep -> V2V = \v,p,q -> mmkV3 v p q ** {lock_V2V = <>} ;
+    } ;
+
+  mkV2A = overload {
+    mkV2A : V -> V2A                 = \v -> mmkV3 v accusative dative ** {lock_V2A = <>} ;
+    mkV2A : V -> Prep -> Prep -> V2A = \v,p,q -> mmkV3 v p q ** {lock_V2A = <>} ;
+    } ;
+
+  mkVA  v = v ** {lock_VA = <>} ;
+
+  mkVQ  v = v ** {lock_VQ = <>} ;
+  mkV2Q v p = mmkV2 v p ** {lock_V2Q = <>} ;
+
+  mkAS  v = v ** {lock_AS = <>} ; ---- more moods
+  mkA2S v p = mkA2 v p ** {lock_A2S = <>} ;
+  mkAV  v p = v ** {c = p.p1 ; s2 = p.p2 ; lock_AV = <>} ;
+  mkA2V v p q = mkA2 v p ** {s3 = q.p2 ; c3 = q.p1 ; lock_A2V = <>} ;
+
+--------------------------- obsolete
+
+  makeNP : Str -> Gender -> Number -> NP ;
+  makeNP x g n = {s = (pn2np {s=x;g= g}).s; a = agrP3 g n ; hasClit = False ; isPol = False ; isNeg = False ; lock_NP = <>} ;
+  regPN : Str -> PN ;
+  mk2PN : Str -> Gender -> PN = \x,g -> {s = x ; g = g} ** {lock_PN = <>} ;
+
+  mkADeg : A -> A -> A ;
+  compADeg : Adj -> A ;
+
+  regA : Str -> A ;
+  mk4A : (banal,banale,banaux,banalement : Str) -> A ;
+  mk5A : (vieux,vieil,vieille,vieuxs,vieuxment : Str) -> A ; -- worst-case adjetive
+
+  prefA : A -> A ;
+  adjCopula : A -> CopulaType -> A ;
+
+  mkADeg a b = a ** {
+    compar = \\aagr => b.s ! aagr2aform aagr ; -- meilleur, meilleure, meilleurs, meilleures
+    isDeg = True } ;
+  compADeg a = lin A
+    {s = a.s ;
+     compar = \\_ => nonExist ; --
+     isPre = False ;       -- default values
+     copTyp = <> ;
+     isDeg = False
+     } ;
+
+  mkV = overload {
+    mkV : Str -> V = regV ;
+    mkV : (jeter,jette : Str) -> V =
+      \x,y -> let v = vvf (mkVerb2Reg x y) in {s = v ; vtyp = VTyp VHabere (getVerbT v) ; lock_V = <> ; p = []} ;
+    mkV : (jeter,jette,jettera : Str) -> V = reg3V ;
+    mkV : V2 -> V = v2V ;
+    mkV : (tenir,tiens,tenons,tiennent,tint,tiendra,tenu : Str) -> V
+    = \tenir,tiens,tenons,tiennent,tint,tiendra,tenu ->
+      let v = vvf (mkVerb7 tenir tiens tenons tiennent tint tiendra tenu) in
+      {s = v ; vtyp = VTyp VHabere (getVerbT v) ; lock_V = <> ; p = []} ;
+    mkV : (tenir,tiens,tient,tenons,tenez,tiennent,tienne,tenions,tiensI,tint,tiendra,tenu : Str) -> V
+    = \tenir,tiens,tient,tenons,tenez,tiennent,tienne,tenions,tiensI,tint,tiendra,tenu ->
+      let v = vvf (mkVerb12 tenir tiens tient tenons tenez tiennent tienne tenions tiensI tint tiendra tenu) in
+      {s = v ; vtyp = VTyp VHabere (getVerbT v) ; lock_V = <> ; p = []} ;
+   mkV : V -> V
+    = \v -> v ;
+    mkV : V -> Str -> V
+    = \v,p -> v ** {p = p} ;  ---- to recognize particles in dict, not yet in lincat V
+  } ;
+
+  regV : Str -> V ;
+  reg3V : (jeter,jette,jettera : Str) -> V ;
+
+  mmkV2 : V -> Prep -> V2 ;
+  mmkV2 v p = v ** {c2 = p ; lock_V2 = <>} ;
+  dirV2 : V -> V2 = \v -> mmkV2 v accusative ;
+  v2V : V2 -> V ;
+  v2V v = v ** {lock_V = <>} ;
+
+  mmkV3    : V -> Prep -> Prep -> V3 ;  -- parler, à, de
+  dirV3    : V -> Prep -> V3 ;          -- donner,_,à
+  dirdirV3 : V -> V3 ;                  -- donner,_,_
+
+  getVerbT : (VF => Str) -> VBool = \v -> case last (v ! (VFin (VPres Indic) Sg P3)) of {
+    "a" | "e" => VTrue ; -- parle-t-il, va-t-il
+    _ => VFalse  -- prend-il
+    } ;
+
+  mkMU : Str -> MU = \s -> lin MU {s=s; isPre=False; hasArt=False} ;
+
+} ;
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ParseEngFre.gf"
+id=081c75b93d42
+kind=source
+size=3076
+lines=110
+chunks=0
+----
+--# -path=alltenses:.:../english
+concrete ParseEngFre of ParseEngAbs = 
+  TenseFre,
+  NounFre - [PPartNP],
+  AdjectiveFre,
+  NumeralFre,
+  SymbolFre [PN, Symb, String, CN, Card, NP, MkSymb, SymbPN, CNNumNP],
+  ConjunctionFre,
+  VerbFre - [SlashV2V, PassV2, UseCopula, ComplVV],
+  AdverbFre,
+  PhraseFre,
+  SentenceFre,
+  QuestionFre,
+  RelativeFre,
+  IdiomFre [NP, VP, Tense, Cl, ProgrVP, ExistNP],
+  ExtraFre [NP, Quant, VPSlash, VP, Tense, GenNP, PassVPSlash,
+            Temp, Pol, Conj, VPS, ListVPS, S, MkVPS, BaseVPS, ConsVPS, ConjVPS, PredVPS,
+             VPI, VPIForm, VPIInf, VPIPresPart, ListVPI, VV, MkVPI, BaseVPI, ConsVPI, ConjVPI, ComplVPIVV,
+            ClSlash, RCl, EmptyRelSlash],
+            
+  DictEngFre ** 
+open MorphoFre, ResFre, ParadigmsFre, SyntaxFre, Prelude, (CR = CommonRomance) in {
+
+flags literal=Symb ; coding = utf8 ;
+
+lin
+    ComplVV v ant p vp = insertComplement 
+                    (\\a => prepCase v.c2.c ++ specVP vp ant p a) (predV v) ;
+
+    PPartNP np vp = heavyNP {  
+      s = \\c => (np.s ! c).comp ++ 
+                 (vp.s).s ! CR.VPart np.a.g np.a.n ++ 
+                  vp.comp ! np.a ++ vp.ext ! RPos ;
+      a = np.a
+      } ;
+
+  CompoundCN num noun cn = {
+    s = \\n => num.s ! noun.g ++ glue (noun.s ! num.n) (cn.s ! n) ;
+    g = cn.g
+  } ;
+
+
+  DashCN noun1 noun2 = { 
+    s = \\n => noun1.s ! Sg ++ "-" ++ noun2.s ! n ;
+    g = noun2.g
+  } ;
+
+  GerundN v = {
+    s = \\n => v.s ! VGer ;
+    g = CR.Masc
+  } ;
+  
+  GerundAP v = {
+    s = \\c => case c of 
+                 {CR.AF gg nn => v.s ! CR.VGer;
+                  _           => "NONEXISTENT" };
+    isPre = False} ;
+
+  PastPartAP v = {
+    s = \\c => case c of 
+                 {CR.AF gg nn => v.s ! CR.VPart gg nn ;
+                  _           => v.s ! CR.VPart CR.Masc Sg};
+    isPre = False} ;
+
+  OrdCompar a = {s = \\c => a.s ! Compar ! AF c.g c.n} ; 
+
+  PositAdVAdj a = {s = a.s ! Posit ! AA } ; 
+
+  UseQuantPN q pn = heavyNP{ 
+      s = \\c => q.s ! False ! Sg ! pn.g ! c ++ 
+                pn.s ; 
+      a = CR.agrP3 pn.g Sg} ; 
+
+
+  SlashV2V v ant p vp = 
+       (insertComplement 
+         (\\a => prepCase v.c3.c ++ specVP vp ant p a) 
+         (predV v)) ** {c2 = v.c2} ;
+
+  -- PredVPosV np vp
+  -- PredVPosv np vp TO DO : ask what they are ?
+         
+
+
+  CompS s = {s = \\_ => "que" ++ s.s ! CR.Indic} ; 
+  CompVP ant pol vp = {s = \\a => specVP vp ant pol a} ; 
+
+
+lin
+  that_RP = which_RP ;
+
+  UttAdV adv = adv;
+
+oper   
+ specVP : VP -> Ant -> Pol -> Agr -> Str = \vp,ant,pp,agr ->
+      let
+        iform = False ;                    ---- meaning: no clitics
+        pol : CR.RPolarity  = CR.RPos;
+        inf   = vp.s.s ! VInfin iform ;         -- TO DO: fix anteriority    
+        neg   = vp.neg ! pol ;             --- Neg not in API
+        obj   = neg.p2 ++ vp.comp ! agr ++ vp.ext ! pol ; ---- pol
+        refl  = case vp.s.vtyp of {
+            VRefl => reflPron agr.n agr.p Acc ; ---- case ?
+            _ => [] 
+            } ;
+      in
+      neg.p1 ++ clitInf iform (refl ++ vp.clit1 ++ vp.clit2 ++ vp.clit3) inf ++ obj ;
+      
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ParseFre.gf"
+id=b78f86b4e5b1
+kind=source
+size=5283
+lines=189
+chunks=0
+----
+--# -path=.:../english/:../abstract:../romance:alltenses:../translator
+concrete ParseFre of ParseEngAbs = 
+  TenseFre,
+--  CatFre,
+  NounFre - [PPartNP],
+  AdjectiveFre,
+  NumeralFre,
+  SymbolFre [PN, Symb, String, CN, Card, NP, MkSymb, SymbPN, CNNumNP],
+  ConjunctionFre,
+  VerbFre - [SlashV2V, PassV2, UseCopula, ComplVV],
+  AdverbFre,
+  PhraseFre,
+  SentenceFre,
+  QuestionFre - [QuestCl, QuestIAdv], -- more variants here
+  RelativeFre,
+  IdiomFre [NP, VP, Tense, Cl, ProgrVP, ExistNP, SelfAdvVP, SelfAdVVP, SelfNP],
+  ConstructionFre,
+  DocumentationFre,
+  ExtraFre [NP, Quant, VPSlash, VP, Tense, GenNP, PassVPSlash, PassAgentVPSlash,
+            Temp, Pol, Conj, VPS, ListVPS, S, Num, CN, RP, MkVPS, BaseVPS, ConsVPS, ConjVPS, PredVPS, GenRP,
+            VPI, VPIForm, VPIInf, VPIPresPart, ListVPI, VV, MkVPI, BaseVPI, ConsVPI, ConjVPI, ComplVPIVV,
+            ClSlash, RCl, EmptyRelSlash],
+
+  DictionaryFre ** 
+open PhonoFre, MorphoFre, ResFre, CommonRomance, ParadigmsFre, SyntaxFre, Prelude, (G = GrammarFre) in {
+
+flags
+  literal=Symb ;
+  coding = utf8 ;
+
+-- overrides from Lang
+
+lin
+  QuestCl cl = 
+    {s = \\t,a,p =>                             -- est-ce qu'il dort ?
+            let cls = cl.s ! DDir ! t ! a ! p 
+            in table {
+              QDir   => "est-ce" ++ elisQue ++ cls ! Indic ;
+              QIndir => subjIf ++ cls ! Indic
+              }
+      }
+  | {s = \\t,a,p =>                             -- dort-il ?
+            let cls = cl.s ! DInv ! t ! a ! p 
+            in table {
+              QDir   => cls ! Indic ;
+              QIndir => subjIf ++ cls ! Indic
+              }
+      }
+  | G.QuestCl cl                                -- il dort ?
+  ;
+
+
+  QuestIAdv iadv cl = 
+     G.QuestIAdv iadv cl                       -- où dort-il
+   | {s = \\t,a,p,q =>                         -- où est-ce qu'il dort        
+            let 
+              ord = DDir ;
+              cls = cl.s ! ord ! t ! a ! p ! Indic ;
+              why = iadv.s
+            in why ++ "est-ce" ++ elisQue ++ cls
+      } ;
+
+lin
+-- missing from ExtraFre; should not really be there either
+
+  GenNP np = 
+    let denp = (np.s ! ResFre.genitive).ton in {
+      s = \\_,_,_,_ => [] ; 
+      sp = \\_,_,_ => denp ;
+      s2 = denp ; 
+      isNeg = False ;
+    } ;
+
+  EmptyRelSlash slash = mkRCl which_RP (lin ClSlash slash) ;
+
+  that_RP = which_RP ;
+
+  UncNeg = negativePol ;
+
+-- lexical entries
+
+----  another_Quant = mkQuantifier "autre" "autre" "autres" "autres" ;
+----  some_Quant = mkQuantifier "quelqu'un" "quelqu'une" "quelques-uns" "quelques-unes" ;
+----  anySg_Det = mkDeterminer "n'importe quel" "n'importe quelle" Sg False ; ---- also meaning "whichever" ? 
+--  each_Det = SyntaxFre.every_Det ;
+
+  but_Subj = {s = "mais" ; m = Indic} ; ---- strange to have this as Subj
+
+{-
+  myself_NP = regNP "myself" singular ;
+  yourselfSg_NP = regNP "yourself" singular ;
+  himself_NP = regNP "himself" singular ;
+  herself_NP = regNP "herself" singular ;
+  itself_NP = regNP "itself" singular ;
+  ourself_NP = regNP "ourself" plural ;
+  yourselfPl_NP = regNP "yourself" plural ;
+  themself_NP = regNP "themself" plural ;
+  themselves_NP = regNP "themselves" plural ;
+-}
+
+  CompoundCN num noun cn = {
+    s = \\n => cn.s ! n ++ elisDe ++ noun.s ! num.n ;
+    g = cn.g
+  } ;
+
+{-  
+  DashCN noun1 noun2 = {
+    s = \\n,c => noun1.s ! Sg ! Nom ++ "-" ++ noun2.s ! n ! c ;
+    g = noun2.g
+  } ;
+
+  GerundN v = {
+    s = \\n,c => v.s ! VPresPart ;
+    g = Neutr
+  } ;
+  
+  GerundAP v = {
+    s = \\agr => v.s ! VPresPart ;
+    isPre = True
+  } ;
+-}
+
+  PastPartAP v = {
+    s = table {
+      AF g n => v.s ! VPart g n ;
+      _ => v.s ! VPart Masc Sg  ---- the adverb form
+      } ;
+    isPre = True
+  } ;
+
+{-
+  OrdCompar a = {s = \\c => a.s ! AAdj Compar c } ;
+-}
+
+  PositAdVAdj a = {s = a.s ! Posit ! AA} ;
+
+{-
+  UseQuantPN q pn = {s = \\c => q.s ! False ! Sg ++ pn.s ! npcase2case c ; a = agrgP3 Sg pn.g} ;
+
+  SlashV2V v ant p vp = insertObjc (\\a => v.c3 ++ ant.s ++ p.s ++
+                                           infVP v.typ vp ant.a p.p a)
+                                   (predVc v) ;
+
+  SlashVPIV2V v p vpi = insertObjc (\\a => p.s ++ 
+                                           v.c3 ++ 
+                                           vpi.s ! VVAux ! a)
+                                   (predVc v) ;
+-}
+  ComplVV v a p vp = 
+      insertComplement (\\a => prepCase v.c2.c ++ infVP vp a) (predV v) ; ---- a,p
+
+---- TODO: find proper expressions for OSV and OVS in Fre
+  PredVPosv np vp = mkCl (lin NP np) (lin VP vp) ;
+  PredVPovs np vp = mkCl (lin NP np) (lin VP vp) ;
+
+
+  CompS s = {s = \\_ => "de" ++ "que" ++ s.s ! Indic} ; ---- de ?
+
+{-
+  CompQS qs = {s = \\_ => qs.s ! QIndir} ;
+  CompVP ant p vp = {s = \\a => ant.s ++ p.s ++ 
+                                infVP VVInf vp ant.a p.p a} ;
+
+  VPSlashVS vs vp = 
+    insertObj (\\a => infVP VVInf vp Simul CPos a) (predV vs) **
+    {c2 = ""; gapInMiddle = False} ;
+
+  PastPartRS ant pol vps = {
+    s = \\agr => vps.ad ++ vps.ptp ++ vps.s2 ! agr ;
+    c = npNom
+    } ;
+
+  PresPartRS ant pol vp = {
+    s = \\agr => vp.ad ++ vp.prp ++ vp.s2 ! agr ;
+    c = npNom
+  } ;
+
+  ApposNP np1 np2 = {
+    s = \\c => np1.s ! c ++ "," ++ np2.s ! npNom ;
+    a = np1.a
+  } ;
+  
+  AdAdV = cc2 ;
+  
+  UttAdV adv = adv;
+
+-}    
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/PhonoFre.gf"
+id=42fba9143023
+kind=source
+size=1060
+lines=33
+chunks=0
+----
+resource PhonoFre = open Prelude in {
+
+flags coding=utf8 ;
+
+oper 
+  voyelle : Strs = strs {
+    "a" ; "à" ; "â" ; "e" ; "é" ; "è" ; "ê" ; 
+    "h" ; 
+    "i" ; "î" ; "o" ; "ô" ; "u" ; "û" ; "y" ;
+    "A" ; "À" ; "Â" ; "E" ; "É" ; "È" ; "Ê" ; 
+    "H" ; 
+    "I" ; "Î" ; "O" ; "Ô" ; "U" ; "Û" ; "Y"
+    } ;
+
+----  elision : Str -> Str = \d -> d + pre {"e" ; "'" / voyelle} ;
+  elision : Str -> Str = \d -> d + pre {"e" ; ("'" ++ Predef.BIND) / voyelle} ;
+
+-- The following morphemes are the most common uses of elision.
+
+  elisDe  = elision "d" ;
+----  elisLa  = pre {"la" ; ("l'") / voyelle} ;
+  elisLa  = pre {"la" ; ("l'" ++ Predef.BIND) / voyelle} ; --- doesn't work properly 15/4/2014
+  elisLe  = elision "l" ;
+  elisNe  = elision "n" ;
+  elisQue = elision "qu" ; 
+
+-- The subjunction "si" has a special kind of elision. The rule is
+-- only approximatively correct, for "si" is not really elided before
+-- the string "il" in general, but before the pronouns "il" and "ils".
+
+  elisSi = pre {"si" ; ("s'" ++ Predef.BIND) / strs {"il"}} ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/PhraseFre.gf"
+id=bb5e88a6e891
+kind=source
+size=86
+lines=2
+chunks=0
+----
+concrete PhraseFre of Phrase = CatFre ** PhraseRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/QuestionFre.gf"
+id=544530bbfb6e
+kind=source
+size=92
+lines=2
+chunks=0
+----
+concrete QuestionFre of Question = CatFre ** QuestionRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/RelativeFre.gf"
+id=c5dbc5e26bef
+kind=source
+size=92
+lines=2
+chunks=0
+----
+concrete RelativeFre of Relative = CatFre ** RelativeRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/ResFre.gf"
+id=f3fecc536ceb
+kind=source
+size=371
+lines=13
+chunks=0
+----
+--1 French auxiliary operations.
+--
+---- This module contains operations that are needed to make the
+---- resource syntax work. To define everything that is needed to
+---- implement $Test$, it moreover contains regular lexical
+---- patterns needed for $Lex$.
+--
+
+instance ResFre of ResRomance = DiffFre ** open CommonRomance, Prelude in {
+
+flags optimize=noexpand ;
+
+} ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/SentenceFre.gf"
+id=da8527857a6d
+kind=source
+size=92
+lines=2
+chunks=0
+----
+concrete SentenceFre of Sentence = CatFre ** SentenceRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/StructuralFre.gf"
+id=c54378d6b453
+kind=source
+size=7802
+lines=229
+chunks=0
+----
+--# -path=.:../abstract:../romance:../common:prelude
+
+concrete StructuralFre of Structural = CatFre ** 
+  open PhonoFre, MorphoFre, ParadigmsFre, IrregFre, (X = ConstructX), 
+  MakeStructuralFre,
+  Prelude in {
+
+  flags optimize=all ; coding=utf8 ;
+
+lin
+
+  above_Prep = {s = ["au dessus"] ; c = MorphoFre.genitive ; isDir = False} ;
+  after_Prep = mkPreposition "après" ;
+  all_Predet = {
+    s = \\a,c => prepCase c ++ aagrForms "tout" "toute" "tous" "toutes" ! a ;
+    c = Nom ;
+    a = PNoAg
+    } ;
+  almost_AdA, almost_AdN = ss "presque" ;
+  always_AdV = ss "toujours" ;
+  although_Subj = ss ("bien" ++ elisQue) ** {m = Conjunct} ;
+  and_Conj = {s1 = [] ; s2 = "et" ; n = Pl} ;
+  because_Subj = ss ("parce" ++ elisQue) ** {m = Indic} ;
+  before_Prep = mkPreposition "avant" ;
+  behind_Prep = mkPreposition "derrière" ;
+  between_Prep = mkPreposition "entre" ;
+  both7and_DConj = {s1,s2 = "et" ; n = Pl} ;
+  but_PConj = ss "mais" ;
+  by8agent_Prep = mkPreposition "par" ;
+  by8means_Prep = mkPreposition "par" ;
+  can8know_VV = mkVV (savoir_V2 ** {lock_V = <>}) ;
+  can_VV = mkVV pouvoir_V ;
+  during_Prep = mkPreposition "pendant" ;
+  either7or_DConj = {s1,s2 = "ou" ; n = Pl} ;
+  everybody_NP = pn2np (mkPN ["tout le monde"] Masc) ;
+  every_Det = {
+    s  = \\_,c => prepCase c ++ "chaque" ;
+    sp = \\g,c => prepCase c ++ genForms "chacun" "chacune" ! g ;
+    spn= \\c => prepCase c ++ "tout" ;
+    n = Sg ;
+    s2 = \\g => [] ;
+    isNeg = False
+    } ;
+  everything_NP = pn2np (mkPN ["tout"] Masc) ;
+  everywhere_Adv = ss "partout" ;
+  few_Det  = {
+    s,sp = \\g,c => prepCase c ++ "peu" ++ elisDe ;
+    spn  = \\c => prepCase c ++ "peu" ++ elisDe ;
+    n = Pl ; s2 = \\g => [] ; isNeg = False} ;
+--- DEPREC first_Ord = {s = \\ag => (regA "premier").s ! Posit ! AF ag.g ag.n} ;
+  for_Prep = mkPreposition "pour" ;
+  from_Prep = complGen ; ---
+  he_Pron = 
+    mkPronoun
+      "il" (elision "l") "lui" "lui" "son" (elisPoss "s") "ses"
+      Masc Sg P3 ;
+  here7from_Adv = ss "d'ici" ;
+  here7to_Adv = ss "ici" ;
+  here_Adv = ss "ici" ;
+  how_IAdv = ss "comment" ;
+  how8much_IAdv = ss "combien" ;
+  how8many_IDet = {s = \\_,c => prepCase c ++ "combien" ++ elisDe ; n = Pl} ;
+  if_Subj = ss elisSi ** {m = Indic} ;
+  in8front_Prep = mkPreposition "devant" ;
+  i_Pron = 
+    mkPronoun
+      (elision "j") (elision "m") (elision "m") "moi" "mon" (elisPoss "m") "mes"
+      Masc Sg P1 ;
+  in_Prep = mkPreposition "dans" ;
+  it_Pron = 
+    mkPronoun
+      "il" (elision "l") "lui" "lui" "son" (elisPoss "s") "ses"
+      Masc Sg P3 ;
+  less_CAdv = X.mkCAdv "moins" conjThan ;
+  many_Det = {
+    s,sp = \\_,c => prepCase c ++ "plusieurs" ;
+    spn = \\c => prepCase c ++ "plusieurs" ;
+    n = Pl ; s2 = \\g => [] ; isNeg = False} ;
+  more_CAdv = X.mkCAdv "plus" conjThan ;
+  most_Predet = {s = \\_,c => prepCase c ++ ["la plupart"] ; c = CPrep P_de ; a = PNoAg} ;
+  much_Det = {s,sp = \\_,c => prepCase c ++ "beaucoup" ++ elisDe ;
+              spn = \\c => prepCase c ++ "beaucoup" ++ elisDe ;
+              n = Pl ; s2 = \\g => [] ; isNeg = False} ;
+  must_VV = mkVV (devoir_V2 ** {lock_V = <>}) ;
+---b  no_Phr = ss "non" ;
+  no_Utt = ss "non" ;
+  on_Prep = mkPreposition "sur" ;
+--- DEPREC   one_Quant = {s = \\g,c => prepCase c ++ genForms "un" "une" ! g} ;
+  only_Predet = {s = \\_,c => prepCase c ++ "seulement" ; c = Nom ; a = PNoAg} ; --- seul(e)(s)
+  or_Conj = {s1 = [] ; s2 = "ou" ; n = Sg} ;
+  otherwise_PConj = ss "autrement" ;
+  part_Prep = complGen ;
+  please_Voc = ss ["s'il vous plaît"] ;
+  possess_Prep = complGen ;
+  quite_Adv = ss "assez" ;
+  she_Pron = 
+    mkPronoun
+      "elle" elisLa "lui" "elle" "son" (elisPoss "s") "ses"
+      Fem Sg P3 ;
+
+  so_AdA = ss "si" ;
+  somebody_NP = pn2np (mkPN ["quelqu'un"] Masc) ;
+  somePl_Det = {
+    s,sp = \\_,c => prepCase c ++ "quelques" ;
+    spn = \\c => prepCase c ++ "quelque chose" ;
+    n = Pl ; s2 = \\g => [] ; isNeg = False} ; ---- sp
+  someSg_Det = {
+    s,sp = \\_,c => prepCase c ++ "quelque" ;
+    spn = \\c => prepCase c ++ "quelque chose" ;
+    n = Sg ; s2 = \\g => [] ; isNeg = False} ; ----sp
+  something_NP = pn2np (mkPN ["quelque chose"] Masc) ;
+  somewhere_Adv = ss ["quelque part"] ; --- ne - pas
+
+  that_Quant = {
+    s = \\_ => table {
+      Sg => \\g,c => prepCase c ++ 
+                     genForms (pre {"ce" ; "cet" / voyelle}) "cette" ! g ;
+      Pl => \\_,c => prepCase c ++ "ces"
+      } ;
+    sp = table {
+      Sg => \\g,c => prepCase c ++ genForms "celui-là" "celle-là" ! g ;
+      Pl => \\g,c => prepCase c ++ genForms "ceux-là" "celles-là" ! g
+      } ;
+    spn= \\c => prepCase c ++ "celui-là" ;
+    s2 = [] ; ---- "-là" ;
+    isNeg = False
+    } ;
+
+---b  that_NP = makeNP ["cela"] Masc Sg ;
+  there7from_Adv = ss ["de là"] ;
+  there7to_Adv = ss "là" ; --- y
+  there_Adv = ss "là" ;
+  therefore_PConj = ss "donc" ;
+---b  these_NP = makeNP ["ceux-ci"] Masc Pl ;
+  they_Pron = mkPronoun
+    "ils" "les" "leur" "eux" "leur" "leur" "leurs"
+    Masc Pl P3 ;
+
+  this_Quant = {
+    s = \\_ => table {
+      Sg => \\g,c => prepCase c ++ 
+                     genForms (pre {"ce" ; "cet" / voyelle}) "cette" ! g ;
+      Pl => \\_,c => prepCase c ++ "ces"
+      } ;
+    sp = table {
+      Sg => \\g,c => prepCase c ++ genForms "celui-ci" "celle-ci" ! g ;
+      Pl => \\g,c => prepCase c ++ genForms "ceux-ci" "celles-ci" ! g
+      } ;
+    spn= \\c => prepCase c ++ "cela" ;
+    s2 = [] ; ---- "-ci"
+    isNeg = False
+    } ;
+
+---b  this_NP = pn2np (mkPN ["ceci"] Masc) ;
+---b  those_NP = makeNP ["ceux-là"] Masc Pl ;
+  through_Prep = mkPreposition "par" ;
+  too_AdA = ss "trop" ;
+  to_Prep = complDat ;
+  under_Prep = mkPreposition "sous" ;
+  very_AdA = ss "très" ;
+  want_VV = mkVV (vouloir_V2 ** {lock_V = <>}) ;
+  we_Pron = 
+    mkPronoun "nous" "nous" "nous" "nous" "notre" "notre" "nos"
+    Masc Pl P1 ;
+  whatSg_IP = 
+    {s = \\c => prepCase c ++ elisQue ; a = a}
+    where {a = aagr Masc Sg} ;
+  whatPl_IP = 
+    {s = \\c => prepCase c ++ elisQue ; a = a}
+    where {a = aagr Masc Pl} ;
+  when_IAdv = ss "quand" ;
+  when_Subj = ss "quand" ** {m = Indic} ;
+  where_IAdv = ss "où" ;
+  which_IQuant = {
+    s = \\n,g,c => 
+        prepCase c ++ aagrForms "quel" "quelle" "quels" "quelles" ! aagr g n
+    } ;
+
+  whoPl_IP = {s = \\c => prepCase c ++ "qui" ; a = aagr Masc Pl} ;
+  whoSg_IP = {s = \\c => prepCase c ++ "qui" ; a = aagr Masc Sg} ;
+  why_IAdv = ss "pourquoi" ;
+  without_Prep = mkPreposition "sans" ;
+  with_Prep = mkPreposition "avec" ;
+  yes_Utt = ss "oui" ; --- si
+
+  youSg_Pron = mkPronoun 
+    "tu" (elision "t") (elision "t") "toi" "ton" (elisPoss "t") "tes"
+    Masc Sg P2 ;
+  youPl_Pron =
+    mkPronoun
+      "vous" "vous" "vous" "vous" "votre" "votre" "vos"
+       Masc Pl P2 ;
+  youPol_Pron = 
+    let vous = mkPronoun "vous" "vous" "vous" "vous" "votre" "votre" "vos" Masc Pl P2
+    in 
+    {s = vous.s ; hasClit = vous.hasClit ; poss = vous.poss ; a = vous.a ; isPol = True ; isNeg = False} ;
+
+  not_Predet = {s = \\a,c => prepCase c ++ "pas" ; c = Nom ; a = PNoAg} ;
+
+  no_Quant = 
+    let aucun : ParadigmsFre.Number => ParadigmsFre.Gender => Case => Str = table {
+      Sg => \\g,c => prepCase c ++ genForms "aucun" "aucune" ! g ;
+      Pl => \\g,c => prepCase c ++ genForms "aucuns" "aucunes" ! g ---- 
+      }
+    in {
+    s = \\_ => aucun ;
+    sp = aucun ;
+    spn= aucun ! Sg ! Masc ;
+    s2 = [] ;
+    isNeg = True
+    } ;
+  if_then_Conj = {s1 = "si" ; s2 = "alors" ; n = Sg ; lock_Conj = <>} ;
+  nobody_NP = pn2npNeg (mkPN ["personne"] Fem) ;
+ 
+  nothing_NP = pn2npNeg (mkPN "rien" Masc) ;
+  at_least_AdN = ss "au moins" ;
+  at_most_AdN = ss "au plus" ;
+
+  except_Prep = mkPreposition "excepté" ;
+
+  as_CAdv = X.mkCAdv "aussi" conjThan ;
+
+  have_V2 = avoir_V2 ;
+  that_Subj = ss elisQue ** {m = Conjunct} ;
+
+  lin language_title_Utt = ss "français" ;
+
+}
+
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/SymbolFre.gf"
+id=5977faab655b
+kind=source
+size=143
+lines=4
+chunks=0
+----
+--# -path=.:../romance:../abstract:../common:../prelude
+
+concrete SymbolFre of Symbol = CatFre ** SymbolRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/TenseFre.gf"
+id=1de55e8e33c2
+kind=source
+size=116
+lines=3
+chunks=0
+----
+concrete TenseFre of Tense = CatFre, TenseX [Ant,AAnter,ASimul] ** 
+  TenseRomance with
+    (ResRomance = ResFre) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/TerminologyFre.gf"
+id=4e74cb415362
+kind=source
+size=1680
+lines=68
+chunks=0
+----
+--# -path=.:../abstract:../common
+
+concrete TerminologyFre of Terminology = CatFre ** open 
+  ResFre,
+  CommonRomance,
+  ParadigmsFre,
+  (G = GrammarFre),
+  (S = SyntaxFre),
+  (L = LexiconFre),
+  Prelude
+
+in {
+flags coding=utf8 ;
+
+
+lincat
+  Category = G.N ;
+  ParameterType = G.N ;
+  Parameter = G.N ;
+  
+  Heading = {s : Str} ;
+  
+
+lin
+  noun_Category = mkN "nom" ;
+  adjective_Category = mkN "adjectif" ;
+  verb_Category = mkN "verbe" masculine ;
+
+  gender_ParameterType = mkN "genre" masculine ;
+
+  singular_Parameter = mkN "singulier" ;
+  plural_Parameter = mkN "pluriel" ;
+
+  masculine_Parameter = mkN "masculin" ;
+  feminine_Parameter = mkN "féminin" ;
+  neuter_Parameter = mkN "neutre" ;
+
+  nominative_Parameter = mkN "nominatif" ;
+  genitive_Parameter = mkN "génitif" ;
+  dative_Parameter = mkN "datif" ;
+  accusative_Parameter = mkN "accusativ" ;
+  
+  imperative_Parameter = mkN "impératif" ;
+  indicative_Parameter = mkN "indicatif" ;
+  conjunctive_Parameter = mkN "subjonctif" ;
+  infinitive_Parameter = mkN "infinitif" ;
+
+  present_Parameter = mkN "présent" ;
+  past_Parameter = mkN "passé" ;
+  future_Parameter = mkN "futur" ;
+  conditional_Parameter = mkN "conditionnel" ;
+  perfect_Parameter = mkN "passé composé" ; ----
+  imperfect_Parameter = mkN "imparfait" ;
+  simple_past_Parameter = mkN "passé simple" ; ----
+
+  participle_Parameter = mkN "participe" ;
+  aux_verb_Parameter = mkN "auxiliaire" ;
+
+  positive_Parameter = mkN "positif" ;
+  comparative_Parameter = mkN "comparatif" ;
+  superlative_Parameter = mkN "superlatif" ;
+  predicative_Parameter = mkN "prédicatif" ;
+
+  nounHeading n = ss (n.s ! Sg) ;
+
+  exampleGr_N = mkN "exemple" masculine ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="french/VerbFre.gf"
+id=561f06660c0e
+kind=source
+size=128
+lines=4
+chunks=0
+----
+--# -path=.:romance:abstract:../common:prelude
+
+concrete VerbFre of Verb = CatFre ** VerbRomance with
+  (ResRomance = ResFre) ;
+----- FILE END -----

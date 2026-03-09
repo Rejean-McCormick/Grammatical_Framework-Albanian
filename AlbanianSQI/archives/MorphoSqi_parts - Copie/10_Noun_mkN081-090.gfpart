@@ -1,0 +1,232 @@
+mkN081 : Str -> N ;
+mkN081 base_1 =
+  case base_1 of {
+    stem+"k" => mkN081_core base_1 "u" ;
+    stem+"g" => mkN081_core base_1 "u" ;
+    stem+"h" => mkN081_core base_1 "u" ;
+    _        => mkN081_core base_1 "i"
+  } where {
+    mkN081_core : Str -> Str -> N = \b,obl ->
+      lin N
+      (let pl = b+"ra" in {
+        s = table {
+          Indef => table {
+            Nom   => table { Sg => b ; Pl => pl } ;
+            Acc   => table { Sg => b ; Pl => pl } ;
+            Dat   => table { Sg => b+obl ; Pl => b+"rave" } ;
+            Ablat => table { Sg => b+obl ; Pl => b+"rash" }
+          } ;
+          Def => table {
+            Nom   => table { Sg => b+obl ; Pl => b+"rat" } ;
+            Acc   => table { Sg => b+obl+"n" ; Pl => b+"rat" } ;
+            Dat   => table { Sg => b+obl+"t" ; Pl => b+"rave" } ;
+            Ablat => table { Sg => b+obl+"t" ; Pl => b+"rave" }
+          }
+        } ;
+        g = Masc
+      }) ;
+  } ;
+
+mkN082 : Str -> N ;
+mkN082 base_1 =
+  lin N
+  (let b = base_1 in {
+    s = table {
+      Indef => table {
+        Nom   => table { Sg => b ; Pl => b } ;
+        Acc   => table { Sg => b ; Pl => b } ;
+        Dat   => table { Sg => b+"e" ; Pl => b+"ve" } ;
+        Ablat => table { Sg => b+"e" ; Pl => b+"sh" }
+      } ;
+      Def => table {
+        Nom   => table { Sg => b+"a" ; Pl => b+"të" } ;
+        Acc   => table { Sg => b+"në" ; Pl => b+"të" } ;
+        Dat   => table { Sg => b+"së" ; Pl => b+"ve" } ;
+        Ablat => table { Sg => b+"së" ; Pl => b+"ve" }
+      }
+    } ;
+    g = Fem
+  }) ;
+
+mkN083 : Str -> N ;
+mkN083 base_1 =
+  case base_1 of {
+    stem+"k" => mkN083_core base_1 "u" ;
+    stem+"g" => mkN083_core base_1 "u" ;
+    stem+"h" => mkN083_core base_1 "u" ;
+    _        => mkN083_core base_1 "i"
+  } where {
+    mkN083_core : Str -> Str -> N = \b,obl ->
+      lin N
+      (let pl = b+"ë" in {
+        s = table {
+          Indef => table {
+            Nom   => table { Sg => b ; Pl => pl } ;
+            Acc   => table { Sg => b ; Pl => pl } ;
+            Dat   => table { Sg => b+obl ; Pl => b+"ëve" } ;
+            Ablat => table { Sg => b+obl ; Pl => b+"ësh" }
+          } ;
+          Def => table {
+            Nom   => table { Sg => b+obl ; Pl => b+"ët" } ;
+            Acc   => table { Sg => b+obl+"n" ; Pl => b+"ët" } ;
+            Dat   => table { Sg => b+obl+"t" ; Pl => b+"ëve" } ;
+            Ablat => table { Sg => b+obl+"t" ; Pl => b+"ëve" }
+          }
+        } ;
+        g = Masc
+      }) ;
+  } ;
+
+mkN084 : Str -> N ;
+mkN084 base_1 =
+  case base_1 of {
+    stem+"k" => mkN084_core base_1 "u" ;
+    stem+"g" => mkN084_core base_1 "u" ;
+    stem+"h" => mkN084_core base_1 "u" ;
+    _        => mkN084_core base_1 "i"
+  } where {
+    mkN084_core : Str -> Str -> N = \b,obl ->
+      lin N
+      (let pl = b+"i" ; plDef = b+"it" in {
+        s = table {
+          Indef => table {
+            Nom   => table { Sg => b ; Pl => pl } ;
+            Acc   => table { Sg => b ; Pl => pl } ;
+            Dat   => table { Sg => b+obl ; Pl => b+"ive" } ;
+            Ablat => table { Sg => b+obl ; Pl => b+"ish" }
+          } ;
+          Def => table {
+            Nom   => table { Sg => b+obl ; Pl => plDef } ;
+            Acc   => table { Sg => b+obl+"n" ; Pl => plDef } ;
+            Dat   => table { Sg => b+obl+"t" ; Pl => b+"ive" } ;
+            Ablat => table { Sg => b+obl+"t" ; Pl => b+"ive" }
+          }
+        } ;
+        g = Masc
+      }) ;
+  } ;
+
+mkN085 : Str -> N ;
+mkN085 base =
+  case base of {
+    stem+"je" => lin N
+      (let sg = stem+"je" ;
+           pl = stem+"je" ;
+           sgDefNom = stem+"ja" ;
+           plDef = stem+"jet"
+       in {
+        s = table {
+          Indef => table {
+            Nom   => table { Sg => sg ; Pl => pl } ;
+            Acc   => table { Sg => sg ; Pl => pl } ;
+            Dat   => table { Sg => stem+"jeje" ; Pl => stem+"jeve" } ;
+            Ablat => table { Sg => stem+"jeje" ; Pl => stem+"jesh" }
+          } ;
+          Def => table {
+            Nom   => table { Sg => sgDefNom ; Pl => plDef } ;
+            Acc   => table { Sg => stem+"jen" ; Pl => plDef } ;
+            Dat   => table { Sg => stem+"jes" ; Pl => stem+"jeve" } ;
+            Ablat => table { Sg => stem+"jes" ; Pl => stem+"jeve" }
+          }
+        } ;
+        g = Fem
+      }) ;
+    _ => error "Can't apply paradigm mkN085"
+  } ;
+
+mkN086 : Str -> N ;
+mkN086 base_1 =
+  lin N
+  (let b = base_1 ; pl = b+"j" ; plDef = b+"jtë" in {
+    s = table {
+      Indef => table {
+        Nom   => table { Sg => b ; Pl => pl } ;
+        Acc   => table { Sg => b ; Pl => pl } ;
+        Dat   => table { Sg => b+"i" ; Pl => b+"jve" } ;
+        Ablat => table { Sg => b+"i" ; Pl => b+"jsh" }
+      } ;
+      Def => table {
+        Nom   => table { Sg => b+"i" ; Pl => plDef } ;
+        Acc   => table { Sg => b+"in" ; Pl => plDef } ;
+        Dat   => table { Sg => b+"it" ; Pl => b+"jve" } ;
+        Ablat => table { Sg => b+"it" ; Pl => b+"jve" }
+      }
+    } ;
+    g = Masc
+  }) ;
+
+mkN087 : Str -> N ;
+mkN087 base_1 =
+  lin N
+  (let b = base_1 in {
+    s = table {
+      Indef => table {
+        Nom   => table { Sg => b ; Pl => b } ;
+        Acc   => table { Sg => b ; Pl => b } ;
+        Dat   => table { Sg => b+"i" ; Pl => b+"ve" } ;
+        Ablat => table { Sg => b+"i" ; Pl => b+"sh" }
+      } ;
+      Def => table {
+        Nom   => table { Sg => b+"i" ; Pl => b+"të" } ;
+        Acc   => table { Sg => b+"in" ; Pl => b+"të" } ;
+        Dat   => table { Sg => b+"it" ; Pl => b+"ve" } ;
+        Ablat => table { Sg => b+"it" ; Pl => b+"ve" }
+      }
+    } ;
+    g = Masc
+  }) ;
+
+mkN088 : Str -> N ;
+mkN088 base =
+  case base of {
+    base_1+"ll" => lin N
+      { s = table {
+              Indef => table {
+                         Nom => table { Sg => base_1+"ll" ; Pl => base_1+"je" } ;
+                         Acc => table { Sg => base_1+"ll" ; Pl => base_1+"je" } ;
+                         Dat => table { Sg => base_1+"lli" ; Pl => base_1+"jeve" } ;
+                         Ablat => table { Sg => base_1+"lli" ; Pl => base_1+"jesh" }
+                       } ;
+              Def => table {
+                       Nom => table { Sg => base_1+"lli" ; Pl => base_1+"jet" } ;
+                       Acc => table { Sg => base_1+"llin" ; Pl => base_1+"jet" } ;
+                       Dat => table { Sg => base_1+"llit" ; Pl => base_1+"jeve" } ;
+                       Ablat => table { Sg => base_1+"llit" ; Pl => base_1+"jeve" }
+                     }
+            } ;
+        g = Masc
+      };
+    _ => error "Can't apply paradigm mkN088"
+  } ;
+
+mkN089 : Str -> N ;
+mkN089 base_1 =
+  case base_1 of {
+    stem+"k" => mkN089_core base_1 "u" ;
+    stem+"g" => mkN089_core base_1 "u" ;
+    stem+"h" => mkN089_core base_1 "u" ;
+    _        => mkN089_core base_1 "i"
+  } where {
+    mkN089_core : Str -> Str -> N = \b,obl ->
+      lin N
+      (let pl = b+"ra" in {
+        s = table {
+          Indef => table {
+            Nom   => table { Sg => b ; Pl => pl } ;
+            Acc   => table { Sg => b ; Pl => pl } ;
+            Dat   => table { Sg => b+obl ; Pl => b+"rave" } ;
+            Ablat => table { Sg => b+obl ; Pl => b+"rash" }
+          } ;
+          Def => table {
+            Nom   => table { Sg => b+obl ; Pl => b+"rat" } ;
+            Acc   => table { Sg => b+obl+"n" ; Pl => b+"rat" } ;
+            Dat   => table { Sg => b+obl+"t" ; Pl => b+"rave" } ;
+            Ablat => table { Sg => b+obl+"t" ; Pl => b+"rave" }
+          }
+        } ;
+        g = Masc
+      }) ;
+  } ;
+
+mkN090 : Str -> N ;
+mkN090 base_1 = mkN082 base_1 ;

@@ -1,0 +1,2663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="" />
+  <title>The GF Software System</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body class="bg-light">
+  <div class="bg-white pb-5">
+<div class="container-fluid py-5" style="max-width:1200px">
+
+<header id="title-block-header">
+<a href=".." title="Home">
+  <img src="../doc/Logos/gf1.svg" height="200" class="float-md-right ml-3 mb-3 bg-white" alt="GF Logo">
+</a>
+<h1 class="title">The GF Software System</h1>
+<p class="author"></p>
+</header>
+<p>The GF software system implements the GF programming language. Its
+components are</p>
+<ul>
+<li>the <em>compiler</em>, translating <code>.gf</code> source files to
+<code>.gfo</code> object files, to <code>.pgf</code> run-time grammars,
+and to various other formats</li>
+<li>the <em>run-time system</em>, performing parsing, generation,
+translation and other functions with <code>.pgf</code> grammars</li>
+<li>the <em>command interpreter</em>, also known as the <em>GF
+shell</em>, executing user commands by calling the compiler and the
+run-time system</li>
+</ul>
+<p>This page describes the commands of the GF shell, as well as the use
+of the compiler in batch mode.</p>
+<ul>
+<li><a href="#toc1">The GF shell</a>
+<ul>
+<li><a href="#toc2">GF shell commands</a>
+<ul>
+<li><a href="#toc3">!</a></li>
+<li><a href="#toc4">?</a></li>
+<li><a href="#toc5">ai = abstract_info</a></li>
+<li><a href="#toc6">aw = align_words</a></li>
+<li><a href="#toc7">ca = clitic_analyse</a></li>
+<li><a href="#toc8">cc = compute_concrete</a></li>
+<li><a href="#toc9">dc = define_command</a></li>
+<li><a href="#toc10">dg = dependency_graph</a></li>
+<li><a href="#toc11">dt = define_tree</a></li>
+<li><a href="#toc12">e = empty</a></li>
+<li><a href="#toc13">eb = example_based</a></li>
+<li><a href="#toc14">eh = execute_history</a></li>
+<li><a href="#toc15">gr = generate_random</a></li>
+<li><a href="#toc16">gt = generate_trees</a></li>
+<li><a href="#toc17">h = help</a></li>
+<li><a href="#toc18">i = import</a></li>
+<li><a href="#toc19">l = linearize</a></li>
+<li><a href="#toc20">lc = linearize_chunks</a></li>
+<li><a href="#toc21">ma = morpho_analyse</a></li>
+<li><a href="#toc22">mq = morpho_quiz</a></li>
+<li><a href="#toc23">p = parse</a></li>
+<li><a href="#toc24">pg = print_grammar</a></li>
+<li><a href="#toc25">ph = print_history</a></li>
+<li><a href="#toc26">ps = put_string</a></li>
+<li><a href="#toc27">pt = put_tree</a></li>
+<li><a href="#toc28">q = quit</a></li>
+<li><a href="#toc29">r = reload</a></li>
+<li><a href="#toc30">rf = read_file</a></li>
+<li><a href="#toc31">rt = rank_trees</a></li>
+<li><a href="#toc32">sd = show_dependencies</a></li>
+<li><a href="#toc33">se = set_encoding</a></li>
+<li><a href="#toc34">so = show_operations</a></li>
+<li><a href="#toc35">sp = system_pipe</a></li>
+<li><a href="#toc36">ss = show_source</a></li>
+<li><a href="#toc37">tq = translation_quiz</a></li>
+<li><a href="#toc38">tt = to_trie</a></li>
+<li><a href="#toc39">ut = unicode_table</a></li>
+<li><a href="#toc40">vd = visualize_dependency</a></li>
+<li><a href="#toc41">vp = visualize_parse</a></li>
+<li><a href="#toc42">vt = visualize_tree</a></li>
+<li><a href="#toc43">wf = write_file</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#toc44">The GF batch compiler</a></li>
+</ul>
+<div id="toc1">
+
+</div>
+<h2 id="the-gf-shell">The GF shell</h2>
+<p>The GF shell is invoked by the command <code>gf</code>, which takes
+arguments and options according to the following syntax:</p>
+<pre><code>    gf (OPTION | FLAG)* FILE*</code></pre>
+<p>The shell maintains a <em>state</em>, to which belong</p>
+<ul>
+<li>a multilingual PGF grammar</li>
+<li>optionally, a set of compiled GF modules (retaining
+<code>oper</code> definitions)</li>
+<li>a history of previous commands</li>
+<li>a set of string, tree, and command macros</li>
+</ul>
+<p>Unless file arguments are provided to the <code>gf</code> command,
+the shell starts in an empty state, with no grammars and no history.</p>
+<p>In the shell, a set of commands is available. Some of these commands
+may change the grammars in the state. The general syntax of commands is
+given by the following BNF grammar:</p>
+<pre><code>    COMMAND_LINE ::= COMMAND_PIPE
+    COMMAND_LINE ::= COMMAND_PIPE &quot;;&quot; COMMAND_LINE
+    COMMAND_PIPE ::= COMMAND
+    COMMAND_PIPE ::= COMMAND &quot;|&quot; COMMAND_PIPE
+    COMMAND      ::= COMMAND_ID (OPTION | FLAG)* ARGUMENT?
+    OPTION       ::= &quot;-&quot;OPTION_ID
+    FLAG         ::= &quot;-&quot;OPTION_ID &quot;=&quot; VALUE
+    ARGUMENT     ::= QUOTED_STRING | TREE
+    VALUE        ::= IDENT | QUOTED_STRING</code></pre>
+<p>A command pipe is a sequence of commands interpreted in such a way
+that the output of each command is send as input to the next. The option
+<code>-tr</code> causes GF to show a trace, i.e. the intermediate result
+of the command to which it is attached.</p>
+<p>A command line is a sequence of pipes separated by <code>;</code>.
+These pipes are executed one by one, in the order of appearance.</p>
+<div id="toc2">
+
+</div>
+<h3 id="gf-shell-commands">GF shell commands</h3>
+<p>The full set of GF shell commands is listed below with explanations.
+This list can also be obtained in the GF shell by the command
+<code>help -full</code>.</p>
+<hr />
+<div id="toc3">
+
+</div>
+<h4 id="section">!</h4>
+<p><code>!</code>: <em>system command: escape to system shell.</em></p>
+<ul>
+<li>Syntax: <code>! SYSTEMCOMMAND</code></li>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>! ls *.gf</code></td>
+<td>list all GF files in the working directory</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc4">
+
+</div>
+<h4 id="section-1">?</h4>
+<p><code>?</code>: <em>system pipe: send value from previous command to
+a system command.</em></p>
+<ul>
+<li>Syntax: <code>? SYSTEMCOMMAND</code></li>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>gt | l | ? wc</code></td>
+<td>generate, linearize, word-count</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc5">
+
+</div>
+<h4 id="ai-abstract_info">ai = abstract_info</h4>
+<p><code>ai</code> = <code>abstract_info</code>: <em>Provides an
+information about a function, an expression or a category from the
+abstract syntax.</em></p>
+<p>The command has one argument which is either function, expression or
+a category defined in the abstract syntax of the current grammar. If the
+argument is a function then ?its type is printed out. If it is a
+category then the category definition is printed. If a whole expression
+is given it prints the expression with refined metavariables and the
+type of the expression.</p>
+<ul>
+<li>Syntax: <code>ai IDENTIFIER or ai EXPR</code></li>
+</ul>
+<hr />
+<div id="toc6">
+
+</div>
+<h4 id="aw-align_words">aw = align_words</h4>
+<p><code>aw</code> = <code>align_words</code>: <em>show word alignments
+between languages graphically.</em></p>
+<p>Prints a set of strings in the .dot format (the graphviz format). The
+graph can be saved in a file by the wf command as usual. If the -view
+flag is defined, the graph is saved in a temporary file which is
+processed by 'dot' (graphviz) and displayed by the program indicated by
+the view flag. The target format is png, unless overridden by the flag
+-format. Results from multiple trees are combined to pdf with convert
+(ImageMagick).</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-giza</code></td>
+<td>show alignments in the Giza format; the first two languages</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-format</code></td>
+<td>format of the visualization file (default "png")</td>
+</tr>
+<tr class="even">
+<td><code>-lang</code></td>
+<td>alignments for this list of languages (default: all)</td>
+</tr>
+<tr class="odd">
+<td><code>-view</code></td>
+<td>program to open the resulting file</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>gr | aw</code></td>
+<td>generate a tree and show word alignment as graph script</td>
+</tr>
+<tr class="even">
+<td><code>gr | aw -view="open"</code></td>
+<td>generate a tree and display alignment on Mac</td>
+</tr>
+<tr class="odd">
+<td><code>gr | aw -view="eog"</code></td>
+<td>generate a tree and display alignment on Ubuntu</td>
+</tr>
+<tr class="even">
+<td><code>gt | aw -giza | wf -file=aligns</code></td>
+<td>generate trees, send giza alignments to file</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc7">
+
+</div>
+<h4 id="ca-clitic_analyse">ca = clitic_analyse</h4>
+<p><code>ca</code> = <code>clitic_analyse</code>: <em>print the analyses
+of all words into stems and clitics.</em></p>
+<p>Analyses all words into all possible combinations of stem + clitics.
+The analysis is returned in the format stem &amp;+ clitic1 &amp;+
+clitic2 ... which is hence the inverse of 'pt -bind'. The list of
+clitics is give by the flag '-clitics'. The list of stems is given as
+the list of words of the language given by the '-lang' flag.</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-raw</code></td>
+<td>analyse each word separately (not suitable input for parser)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-clitics</code></td>
+<td>the list of possible clitics (comma-separated, no spaces)</td>
+</tr>
+<tr class="even">
+<td><code>-lang</code></td>
+<td>the language of analysis</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>ca -lang=Fin -clitics=ko,ni "nukkuuko minun vaimoni" | p</code></td>
+<td>to parse Finnish</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc8">
+
+</div>
+<h4 id="cc-compute_concrete">cc = compute_concrete</h4>
+<p><code>cc</code> = <code>compute_concrete</code>: <em>computes
+concrete syntax term using a source grammar.</em></p>
+<p>Compute TERM by concrete syntax definitions. Uses the topmost module
+(the last one imported) to resolve constant names. N.B.1 You need the
+flag -retain when importing the grammar, if you want the definitions to
+be retained after compilation. N.B.2 The resulting term is not a tree in
+the sense of abstract syntax and hence not a valid input to a
+Tree-expecting command. This command must be a line of its own, and thus
+cannot be a part of a pipe.</p>
+<ul>
+<li>Syntax: <code>cc (-all | -table | -unqual)? TERM</code></li>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-all</code></td>
+<td>pick all strings (forms and variants) from records and tables</td>
+</tr>
+<tr class="even">
+<td><code>-list</code></td>
+<td>all strings, comma-separated on one line</td>
+</tr>
+<tr class="odd">
+<td><code>-one</code></td>
+<td>pick the first strings, if there is any, from records and
+tables</td>
+</tr>
+<tr class="even">
+<td><code>-table</code></td>
+<td>show all strings labelled by parameters</td>
+</tr>
+<tr class="odd">
+<td><code>-unqual</code></td>
+<td>hide qualifying module names</td>
+</tr>
+<tr class="even">
+<td><code>-trace</code></td>
+<td>trace computations</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc9">
+
+</div>
+<h4 id="dc-define_command">dc = define_command</h4>
+<p><code>dc</code> = <code>define_command</code>: <em>define a command
+macro.</em></p>
+<p>Defines IDENT as macro for COMMANDLINE, until IDENT gets redefined. A
+call of the command has the form %IDENT. The command may take an
+argument, which in COMMANDLINE is marked as ?0. Both strings and trees
+can be arguments. Currently at most one argument is possible. This
+command must be a line of its own, and thus cannot be a part of a
+pipe.</p>
+<ul>
+<li>Syntax: <code>dc IDENT COMMANDLINE</code></li>
+</ul>
+<hr />
+<div id="toc10">
+
+</div>
+<h4 id="dg-dependency_graph">dg = dependency_graph</h4>
+<p><code>dg</code> = <code>dependency_graph</code>: <em>print module
+dependency graph.</em></p>
+<p>Prints the dependency graph of source modules. Requires that import
+has been done with the -retain flag. The graph is written in the file
+_gfdepgraph.dot which can be further processed by Graphviz (the system
+command 'dot'). By default, all modules are shown, but the -only flag
+restricts them by a comma-separated list of patterns, where 'name*'
+matches modules whose name has prefix 'name', and other patterns match
+modules with exactly the same name. The graphical conventions are: solid
+box = abstract, solid ellipse = concrete, dashed ellipse = other solid
+arrow empty head = of, solid arrow = **, dashed arrow = open dotted
+arrow = other dependency</p>
+<ul>
+<li>Syntax: <code>dg (-only=MODULES)?</code></li>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-only</code></td>
+<td>list of modules included (default: all), literally or by
+prefix*</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>dg -only=SyntaxEng,Food*</code></td>
+<td>shows only SyntaxEng, and those with prefix Food</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc11">
+
+</div>
+<h4 id="dt-define_tree">dt = define_tree</h4>
+<p><code>dt</code> = <code>define_tree</code>: <em>define a tree or
+string macro.</em></p>
+<p>Defines IDENT as macro for TREE or STRING, until IDENT gets
+redefined. The defining value can also come from a command, preceded by
+"&lt;". If the command gives many values, the first one is selected. A
+use of the macro has the form %IDENT. Currently this use cannot be a
+subtree of another tree. This command must be a line of its own and thus
+cannot be a part of a pipe.</p>
+<ul>
+<li>Syntax:
+<code>dt IDENT (TREE | STRING | "&lt;" COMMANDLINE)</code></li>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>dt ex "hello world"</code></td>
+<td>define ex as string</td>
+</tr>
+<tr class="even">
+<td><code>dt ex UseN man_N</code></td>
+<td>define ex as string</td>
+</tr>
+<tr class="odd">
+<td><code>dt ex &lt; p -cat=NP "the man in the car"</code></td>
+<td>define ex as parse result</td>
+</tr>
+<tr class="even">
+<td><code>l -lang=LangSwe %ex | ps -to_utf8</code></td>
+<td>linearize the tree ex</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc12">
+
+</div>
+<h4 id="e-empty">e = empty</h4>
+<p><code>e</code> = <code>empty</code>: <em>empty the environment
+(except the command history).</em></p>
+<hr />
+<div id="toc13">
+
+</div>
+<h4 id="eb-example_based">eb = example_based</h4>
+<p><code>eb</code> = <code>example_based</code>: <em>converts .gfe files
+to .gf files by parsing examples to trees.</em></p>
+<p>Reads FILE.gfe and writes FILE.gf. Each expression of form '%ex CAT
+QUOTEDSTRING' in FILE.gfe is replaced by a syntax tree. This tree is the
+first one returned by the parser; a biased ranking can be used to
+regulate the order. If there are more than one parses the rest are shown
+in comments, with probabilities if the order is biased. The
+probabilities flag and configuration file is similar to the commands gr
+and rt. Notice that the command doesn't change the environment, but the
+resulting .gf file must be imported separately.</p>
+<ul>
+<li>Syntax:
+<code>eb (-probs=FILE | -lang=LANG)* -file=FILE.gfe</code></li>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-api</code></td>
+<td>convert trees to overloaded API expressions (using Syntax not
+Lang)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-file</code></td>
+<td>the file to be converted (suffix .gfe must be given)</td>
+</tr>
+<tr class="even">
+<td><code>-lang</code></td>
+<td>the language in which to parse</td>
+</tr>
+<tr class="odd">
+<td><code>-probs</code></td>
+<td>file with probabilities to rank the parses</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc14">
+
+</div>
+<h4 id="eh-execute_history">eh = execute_history</h4>
+<p><code>eh</code> = <code>execute_history</code>: <em>read commands
+from a file and execute them.</em></p>
+<ul>
+<li>Syntax: <code>eh FILE</code></li>
+</ul>
+<hr />
+<div id="toc15">
+
+</div>
+<h4 id="gr-generate_random">gr = generate_random</h4>
+<p><code>gr</code> = <code>generate_random</code>: <em>generate random
+trees in the current abstract syntax.</em></p>
+<p>Generates a list of random trees, by default one tree up to depth 5.
+If a tree argument is given, the command completes the Tree with values
+to all metavariables in the tree. The generation can be biased by
+probabilities, given in a file in the -probs flag.</p>
+<ul>
+<li>Syntax: <code>gr [-cat=CAT] [-number=INT]</code></li>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-cat</code></td>
+<td>generation category</td>
+</tr>
+<tr class="even">
+<td><code>-lang</code></td>
+<td>uses only functions that have linearizations in all these
+languages</td>
+</tr>
+<tr class="odd">
+<td><code>-number</code></td>
+<td>number of trees generated</td>
+</tr>
+<tr class="even">
+<td><code>-depth</code></td>
+<td>the maximum generation depth (default: 5)</td>
+</tr>
+<tr class="odd">
+<td><code>-probs</code></td>
+<td>file with biased probabilities (format 'f 0.4' one by line)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>gr</code></td>
+<td>one tree in the startcat of the current grammar</td>
+</tr>
+<tr class="even">
+<td><code>gr -cat=NP -number=16</code></td>
+<td>16 trees in the category NP</td>
+</tr>
+<tr class="odd">
+<td><code>gr -cat=NP -depth=2</code></td>
+<td>one tree in the category NP, up to depth 2</td>
+</tr>
+<tr class="even">
+<td><code>gr -lang=LangHin,LangTha -cat=Cl</code></td>
+<td>Cl, both in LangHin and LangTha</td>
+</tr>
+<tr class="odd">
+<td><code>gr -probs=FILE</code></td>
+<td>generate with bias</td>
+</tr>
+<tr class="even">
+<td><code>gr (AdjCN ? (UseN ?))</code></td>
+<td>generate trees of form (AdjCN ? (UseN ?))</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc16">
+
+</div>
+<h4 id="gt-generate_trees">gt = generate_trees</h4>
+<p><code>gt</code> = <code>generate_trees</code>: <em>generates a list
+of trees, by default exhaustive.</em></p>
+<p>Generates all trees of a given category. By default, the depth is
+limited to 5, but this can be changed by a flag. If a Tree argument is
+given, the command completes the Tree with values to all metavariables
+in the tree.</p>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-cat</code></td>
+<td>the generation category</td>
+</tr>
+<tr class="even">
+<td><code>-depth</code></td>
+<td>the maximum generation depth</td>
+</tr>
+<tr class="odd">
+<td><code>-lang</code></td>
+<td>excludes functions that have no linearization in this language</td>
+</tr>
+<tr class="even">
+<td><code>-number</code></td>
+<td>the number of trees generated</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>gt</code></td>
+<td>all trees in the startcat, to depth 5</td>
+</tr>
+<tr class="even">
+<td><code>gt -cat=NP -number=16</code></td>
+<td>16 trees in the category NP</td>
+</tr>
+<tr class="odd">
+<td><code>gt -cat=NP -depth=2</code></td>
+<td>trees in the category NP to depth 2</td>
+</tr>
+<tr class="even">
+<td><code>gt (AdjCN ? (UseN ?))</code></td>
+<td>trees of form (AdjCN ? (UseN ?))</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc17">
+
+</div>
+<h4 id="h-help">h = help</h4>
+<p><code>h</code> = <code>help</code>: <em>get description of a command,
+or a the full list of commands.</em></p>
+<p>Displays information concerning the COMMAND. Without argument, shows
+the synopsis of all commands.</p>
+<ul>
+<li>Syntax: <code>h (-full)? COMMAND?</code></li>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-changes</code></td>
+<td>give a summary of changes from GF 2.9</td>
+</tr>
+<tr class="even">
+<td><code>-coding</code></td>
+<td>give advice on character encoding</td>
+</tr>
+<tr class="odd">
+<td><code>-full</code></td>
+<td>give full information of the commands</td>
+</tr>
+<tr class="even">
+<td><code>-license</code></td>
+<td>show copyright and license information</td>
+</tr>
+<tr class="odd">
+<td><code>-t2t</code></td>
+<td>output help in txt2tags format</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc18">
+
+</div>
+<h4 id="i-import">i = import</h4>
+<p><code>i</code> = <code>import</code>: <em>import a grammar from
+source code or compiled .pgf file.</em></p>
+<p>Reads a grammar from File and compiles it into a GF runtime grammar.
+If its abstract is different from current state, old modules are
+discarded. If its abstract is the same and a concrete with the same name
+is already in the state it is overwritten - but only if compilation
+succeeds. The grammar parser depends on the file name suffix: .cf
+context-free (labelled BNF) source .ebnf extended BNF source .gfm
+multi-module GF source .gf normal GF source .gfo compiled GF source .pgf
+precompiled grammar in Portable Grammar Format</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-retain</code></td>
+<td>retain operations (used for cc command)</td>
+</tr>
+<tr class="even">
+<td><code>-src</code></td>
+<td>force compilation from source</td>
+</tr>
+<tr class="odd">
+<td><code>-v</code></td>
+<td>be verbose - show intermediate status information</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-probs</code></td>
+<td>file with biased probabilities for generation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc19">
+
+</div>
+<h4 id="l-linearize">l = linearize</h4>
+<p><code>l</code> = <code>linearize</code>: <em>convert an abstract
+syntax expression to string.</em></p>
+<p>Shows the linearization of a Tree by the grammars in scope. The -lang
+flag can be used to restrict this to fewer languages. A sequence of
+string operations (see command ps) can be given as options, and works
+then like a pipe to the ps command, except that it only affect the
+strings, not e.g. the table labels. These can be given separately to
+each language with the unlexer flag whose results are prepended to the
+other lexer flags. The value of the unlexer flag is a space-separated
+list of comma-separated string operation sequences; see example.</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-all</code></td>
+<td>show all forms and variants, one by line (cf. l -list)</td>
+</tr>
+<tr class="even">
+<td><code>-bracket</code></td>
+<td>show tree structure with brackets and paths to nodes</td>
+</tr>
+<tr class="odd">
+<td><code>-groups</code></td>
+<td>all languages, grouped by lang, remove duplicate strings</td>
+</tr>
+<tr class="even">
+<td><code>-list</code></td>
+<td>show all forms and variants, comma-separated on one line (cf. l
+-all)</td>
+</tr>
+<tr class="odd">
+<td><code>-multi</code></td>
+<td>linearize to all languages (default)</td>
+</tr>
+<tr class="even">
+<td><code>-table</code></td>
+<td>show all forms labelled by parameters</td>
+</tr>
+<tr class="odd">
+<td><code>-tabtreebank</code></td>
+<td>show the tree and its linearizations on a tab-separated line</td>
+</tr>
+<tr class="even">
+<td><code>-treebank</code></td>
+<td>show the tree and tag linearizations with language names</td>
+</tr>
+<tr class="odd">
+<td><code>-bind</code></td>
+<td>bind tokens separated by Prelude.BIND, i.e. &amp;+</td>
+</tr>
+<tr class="even">
+<td><code>-chars</code></td>
+<td>lexer that makes every non-space character a token</td>
+</tr>
+<tr class="odd">
+<td><code>-from_amharic</code></td>
+<td>from unicode to GF Amharic transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_ancientgreek</code></td>
+<td>from unicode to GF ancient Greek transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_arabic</code></td>
+<td>from unicode to GF Arabic transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_arabic_unvocalized</code></td>
+<td>from unicode to GF unvocalized Arabic transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_cp1251</code></td>
+<td>decode from cp1251 (Cyrillic used in Bulgarian resource)</td>
+</tr>
+<tr class="even">
+<td><code>-from_devanagari</code></td>
+<td>from unicode to GF Devanagari transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_greek</code></td>
+<td>from unicode to GF modern Greek transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_hebrew</code></td>
+<td>from unicode to GF unvocalized Hebrew transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_nepali</code></td>
+<td>from unicode to GF Nepali transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_persian</code></td>
+<td>from unicode to GF Persian/Farsi transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_sanskrit</code></td>
+<td>from unicode to GF Sanskrit transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_sindhi</code></td>
+<td>from unicode to GF Sindhi transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_telugu</code></td>
+<td>from unicode to GF Telugu transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_thai</code></td>
+<td>from unicode to GF Thai transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_urdu</code></td>
+<td>from unicode to GF Urdu transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_utf8</code></td>
+<td>decode from utf8 (default)</td>
+</tr>
+<tr class="odd">
+<td><code>-lexcode</code></td>
+<td>code-like lexer</td>
+</tr>
+<tr class="even">
+<td><code>-lexgreek</code></td>
+<td>lexer normalizing ancient Greek accentuation</td>
+</tr>
+<tr class="odd">
+<td><code>-lexgreek2</code></td>
+<td>lexer normalizing ancient Greek accentuation for text with vowel
+length annotations</td>
+</tr>
+<tr class="even">
+<td><code>-lexmixed</code></td>
+<td>mixture of text and code, as in LaTeX (code between $...$, \(...)\,
+\[...\])</td>
+</tr>
+<tr class="odd">
+<td><code>-lextext</code></td>
+<td>text-like lexer</td>
+</tr>
+<tr class="even">
+<td><code>-to_amharic</code></td>
+<td>from GF Amharic transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_ancientgreek</code></td>
+<td>from GF ancient Greek transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_arabic</code></td>
+<td>from GF Arabic transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_arabic_unvocalized</code></td>
+<td>from GF unvocalized Arabic transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_cp1251</code></td>
+<td>encode to cp1251 (Cyrillic used in Bulgarian resource)</td>
+</tr>
+<tr class="odd">
+<td><code>-to_devanagari</code></td>
+<td>from GF Devanagari transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_greek</code></td>
+<td>from GF modern Greek transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_hebrew</code></td>
+<td>from GF unvocalized Hebrew transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_html</code></td>
+<td>wrap in a html file with linebreaks</td>
+</tr>
+<tr class="odd">
+<td><code>-to_nepali</code></td>
+<td>from GF Nepali transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_persian</code></td>
+<td>from GF Persian/Farsi transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_sanskrit</code></td>
+<td>from GF Sanskrit transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_sindhi</code></td>
+<td>from GF Sindhi transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_telugu</code></td>
+<td>from GF Telugu transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_thai</code></td>
+<td>from GF Thai transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_urdu</code></td>
+<td>from GF Urdu transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_utf8</code></td>
+<td>encode to utf8 (default)</td>
+</tr>
+<tr class="odd">
+<td><code>-unchars</code></td>
+<td>unlexer that puts no spaces between tokens</td>
+</tr>
+<tr class="even">
+<td><code>-unlexcode</code></td>
+<td>code-like unlexer</td>
+</tr>
+<tr class="odd">
+<td><code>-unlexgreek</code></td>
+<td>unlexer de-normalizing ancient Greek accentuation</td>
+</tr>
+<tr class="even">
+<td><code>-unlexmixed</code></td>
+<td>mixture of text and code (code between $...$, \(...)\, \[...\])</td>
+</tr>
+<tr class="odd">
+<td><code>-unlextext</code></td>
+<td>text-like unlexer</td>
+</tr>
+<tr class="even">
+<td><code>-unwords</code></td>
+<td>unlexer that puts a single space between tokens (default)</td>
+</tr>
+<tr class="odd">
+<td><code>-words</code></td>
+<td>lexer that assumes tokens separated by spaces (default)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-lang</code></td>
+<td>the languages of linearization (comma-separated, no spaces)</td>
+</tr>
+<tr class="even">
+<td><code>-unlexer</code></td>
+<td>set unlexers separately to each language (space-separated)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>l -lang=LangSwe,LangNor no_Utt</code></td>
+<td>linearize tree to LangSwe and LangNor</td>
+</tr>
+<tr class="even">
+<td><code>gr -lang=LangHin -cat=Cl | l -table -to_devanagari</code></td>
+<td>hindi table</td>
+</tr>
+<tr class="odd">
+<td><code>l -unlexer="LangAra=to_arabic LangHin=to_devanagari"</code></td>
+<td>different unlexers</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc20">
+
+</div>
+<h4 id="lc-linearize_chunks">lc = linearize_chunks</h4>
+<p><code>lc</code> = <code>linearize_chunks</code>: <em>linearize a tree
+that has metavariables in maximal chunks without them.</em></p>
+<p>A hopefully temporary command, intended to work around the type
+checker that fails trees where a function node is a metavariable.</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-treebank</code></td>
+<td>show the tree and tag linearizations with language names</td>
+</tr>
+<tr class="even">
+<td><code>-bind</code></td>
+<td>bind tokens separated by Prelude.BIND, i.e. &amp;+</td>
+</tr>
+<tr class="odd">
+<td><code>-chars</code></td>
+<td>lexer that makes every non-space character a token</td>
+</tr>
+<tr class="even">
+<td><code>-from_amharic</code></td>
+<td>from unicode to GF Amharic transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_ancientgreek</code></td>
+<td>from unicode to GF ancient Greek transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_arabic</code></td>
+<td>from unicode to GF Arabic transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_arabic_unvocalized</code></td>
+<td>from unicode to GF unvocalized Arabic transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_cp1251</code></td>
+<td>decode from cp1251 (Cyrillic used in Bulgarian resource)</td>
+</tr>
+<tr class="odd">
+<td><code>-from_devanagari</code></td>
+<td>from unicode to GF Devanagari transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_greek</code></td>
+<td>from unicode to GF modern Greek transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_hebrew</code></td>
+<td>from unicode to GF unvocalized Hebrew transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_nepali</code></td>
+<td>from unicode to GF Nepali transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_persian</code></td>
+<td>from unicode to GF Persian/Farsi transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_sanskrit</code></td>
+<td>from unicode to GF Sanskrit transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_sindhi</code></td>
+<td>from unicode to GF Sindhi transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_telugu</code></td>
+<td>from unicode to GF Telugu transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_thai</code></td>
+<td>from unicode to GF Thai transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_urdu</code></td>
+<td>from unicode to GF Urdu transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_utf8</code></td>
+<td>decode from utf8 (default)</td>
+</tr>
+<tr class="even">
+<td><code>-lexcode</code></td>
+<td>code-like lexer</td>
+</tr>
+<tr class="odd">
+<td><code>-lexgreek</code></td>
+<td>lexer normalizing ancient Greek accentuation</td>
+</tr>
+<tr class="even">
+<td><code>-lexgreek2</code></td>
+<td>lexer normalizing ancient Greek accentuation for text with vowel
+length annotations</td>
+</tr>
+<tr class="odd">
+<td><code>-lexmixed</code></td>
+<td>mixture of text and code, as in LaTeX (code between $...$, \(...)\,
+\[...\])</td>
+</tr>
+<tr class="even">
+<td><code>-lextext</code></td>
+<td>text-like lexer</td>
+</tr>
+<tr class="odd">
+<td><code>-to_amharic</code></td>
+<td>from GF Amharic transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_ancientgreek</code></td>
+<td>from GF ancient Greek transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_arabic</code></td>
+<td>from GF Arabic transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_arabic_unvocalized</code></td>
+<td>from GF unvocalized Arabic transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_cp1251</code></td>
+<td>encode to cp1251 (Cyrillic used in Bulgarian resource)</td>
+</tr>
+<tr class="even">
+<td><code>-to_devanagari</code></td>
+<td>from GF Devanagari transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_greek</code></td>
+<td>from GF modern Greek transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_hebrew</code></td>
+<td>from GF unvocalized Hebrew transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_html</code></td>
+<td>wrap in a html file with linebreaks</td>
+</tr>
+<tr class="even">
+<td><code>-to_nepali</code></td>
+<td>from GF Nepali transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_persian</code></td>
+<td>from GF Persian/Farsi transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_sanskrit</code></td>
+<td>from GF Sanskrit transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_sindhi</code></td>
+<td>from GF Sindhi transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_telugu</code></td>
+<td>from GF Telugu transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_thai</code></td>
+<td>from GF Thai transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_urdu</code></td>
+<td>from GF Urdu transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_utf8</code></td>
+<td>encode to utf8 (default)</td>
+</tr>
+<tr class="even">
+<td><code>-unchars</code></td>
+<td>unlexer that puts no spaces between tokens</td>
+</tr>
+<tr class="odd">
+<td><code>-unlexcode</code></td>
+<td>code-like unlexer</td>
+</tr>
+<tr class="even">
+<td><code>-unlexgreek</code></td>
+<td>unlexer de-normalizing ancient Greek accentuation</td>
+</tr>
+<tr class="odd">
+<td><code>-unlexmixed</code></td>
+<td>mixture of text and code (code between $...$, \(...)\, \[...\])</td>
+</tr>
+<tr class="even">
+<td><code>-unlextext</code></td>
+<td>text-like unlexer</td>
+</tr>
+<tr class="odd">
+<td><code>-unwords</code></td>
+<td>unlexer that puts a single space between tokens (default)</td>
+</tr>
+<tr class="even">
+<td><code>-words</code></td>
+<td>lexer that assumes tokens separated by spaces (default)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-lang</code></td>
+<td>the languages of linearization (comma-separated, no spaces)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-border="1" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>l -lang=LangSwe,LangNor -chunks ? a b (? c d)</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc21">
+
+</div>
+<h4 id="ma-morpho_analyse">ma = morpho_analyse</h4>
+<p><code>ma</code> = <code>morpho_analyse</code>: <em>print the
+morphological analyses of all words in the string.</em></p>
+<p>Prints all the analyses of space-separated words in the input string,
+using the morphological analyser of the actual grammar (see command
+pg)</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-known</code></td>
+<td>return only the known words, in order of appearance</td>
+</tr>
+<tr class="even">
+<td><code>-missing</code></td>
+<td>show the list of unknown words, in order of appearance</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-lang</code></td>
+<td>the languages of analysis (comma-separated, no spaces)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc22">
+
+</div>
+<h4 id="mq-morpho_quiz">mq = morpho_quiz</h4>
+<p><code>mq</code> = <code>morpho_quiz</code>: <em>start a morphology
+quiz.</em></p>
+<ul>
+<li>Syntax: <code>mq (-cat=CAT)? (-probs=FILE)? TREE?</code></li>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-lang</code></td>
+<td>language of the quiz</td>
+</tr>
+<tr class="even">
+<td><code>-cat</code></td>
+<td>category of the quiz</td>
+</tr>
+<tr class="odd">
+<td><code>-number</code></td>
+<td>maximum number of questions</td>
+</tr>
+<tr class="even">
+<td><code>-probs</code></td>
+<td>file with biased probabilities for generation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc23">
+
+</div>
+<h4 id="p-parse">p = parse</h4>
+<p><code>p</code> = <code>parse</code>: <em>parse a string to abstract
+syntax expression.</em></p>
+<p>Shows all trees returned by parsing a string in the grammars in
+scope. The -lang flag can be used to restrict this to fewer languages.
+The default start category can be overridden by the -cat flag. See also
+the ps command for lexing and character encoding.</p>
+<p>The -openclass flag is experimental and allows some robustness in the
+parser. For example if -openclass="A,N,V" is given, the parser will
+accept unknown adjectives, nouns and verbs with the resource
+grammar.</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-bracket</code></td>
+<td>prints the bracketed string from the parser</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-cat</code></td>
+<td>target category of parsing</td>
+</tr>
+<tr class="even">
+<td><code>-lang</code></td>
+<td>the languages of parsing (comma-separated, no spaces)</td>
+</tr>
+<tr class="odd">
+<td><code>-openclass</code></td>
+<td>list of open-class categories for robust parsing</td>
+</tr>
+<tr class="even">
+<td><code>-depth</code></td>
+<td>maximal depth for proof search if the abstract syntax tree has meta
+variables</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc24">
+
+</div>
+<h4 id="pg-print_grammar">pg = print_grammar</h4>
+<p><code>pg</code> = <code>print_grammar</code>: <em>print the actual
+grammar with the given printer.</em></p>
+<p>Prints the actual grammar, with all involved languages. In some
+printers, this can be restricted to a subset of languages with the
+-lang=X,Y flag (comma-separated, no spaces). The -printer=P flag sets
+the format in which the grammar is printed. N.B.1 Since grammars are
+compiled when imported, this command generally shows a grammar that
+looks rather different from the source. N.B.2 Another way to produce
+different formats is to use 'gf -make', the batch compiler. The
+following values are available both for the batch compiler (flag
+-output-format) and the print_grammar command (flag -printer):</p>
+<p>bnf BNF (context-free grammar) ebnf Extended BNF fa finite automaton
+in graphviz format gsl Nuance speech recognition format haskell Haskell
+(abstract syntax) java Java (abstract syntax) js JavaScript (whole
+grammar) jsgf JSGF speech recognition format pgf_pretty human-readable
+pgf prolog Prolog (whole grammar) python Python (whole grammar) regexp
+regular expression slf SLF speech recognition format srgs_abnf SRGS
+speech recognition format in ABNF srgs_abnf_nonrec SRGS ABNF, recursion
+eliminated srgs_xml SRGS speech recognition format in XML
+srgs_xml_nonrec SRGS XML, recursion eliminated vxml Voice XML based on
+abstract syntax</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-cats</code></td>
+<td>show just the names of abstract syntax categories</td>
+</tr>
+<tr class="even">
+<td><code>-fullform</code></td>
+<td>print the fullform lexicon</td>
+</tr>
+<tr class="odd">
+<td><code>-funs</code></td>
+<td>show just the names and types of abstract syntax functions</td>
+</tr>
+<tr class="even">
+<td><code>-langs</code></td>
+<td>show just the names of top concrete syntax modules</td>
+</tr>
+<tr class="odd">
+<td><code>-lexc</code></td>
+<td>print the lexicon in Xerox LEXC format</td>
+</tr>
+<tr class="even">
+<td><code>-missing</code></td>
+<td>show just the names of functions that have no linearization</td>
+</tr>
+<tr class="odd">
+<td><code>-opt</code></td>
+<td>optimize the generated pgf</td>
+</tr>
+<tr class="even">
+<td><code>-pgf</code></td>
+<td>write current pgf image in file</td>
+</tr>
+<tr class="odd">
+<td><code>-words</code></td>
+<td>print the list of words</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-file</code></td>
+<td>set the file name when printing with -pgf option</td>
+</tr>
+<tr class="even">
+<td><code>-lang</code></td>
+<td>select languages for the some options (default all languages)</td>
+</tr>
+<tr class="odd">
+<td><code>-printer</code></td>
+<td>select the printing format (see flag values above)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>pg -funs | ? grep " S ;"</code></td>
+<td>show functions with value cat S</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc25">
+
+</div>
+<h4 id="ph-print_history">ph = print_history</h4>
+<p><code>ph</code> = <code>print_history</code>: <em>print command
+history.</em></p>
+<p>Prints the commands issued during the GF session. The result is
+readable by the eh command. The result can be used as a script when
+starting GF.</p>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>ph | wf -file=foo.gfs</code></td>
+<td>save the history into a file</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc26">
+
+</div>
+<h4 id="ps-put_string">ps = put_string</h4>
+<p><code>ps</code> = <code>put_string</code>: <em>return a string,
+possibly processed with a function.</em></p>
+<p>Returns a string obtained from its argument string by applying string
+processing functions in the order given in the command line option list.
+Thus 'ps -f -g s' returns g (f s). Typical string processors are lexers
+and unlexers, but also character encoding conversions are possible. The
+unlexers preserve the division of their input to lines. To see
+transliteration tables, use command ut.</p>
+<ul>
+<li>Syntax: <code>ps OPT? STRING</code></li>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-lines</code></td>
+<td>apply the operation separately to each input line, returning a list
+of lines</td>
+</tr>
+<tr class="even">
+<td><code>-bind</code></td>
+<td>bind tokens separated by Prelude.BIND, i.e. &amp;+</td>
+</tr>
+<tr class="odd">
+<td><code>-chars</code></td>
+<td>lexer that makes every non-space character a token</td>
+</tr>
+<tr class="even">
+<td><code>-from_amharic</code></td>
+<td>from unicode to GF Amharic transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_ancientgreek</code></td>
+<td>from unicode to GF ancient Greek transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_arabic</code></td>
+<td>from unicode to GF Arabic transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_arabic_unvocalized</code></td>
+<td>from unicode to GF unvocalized Arabic transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_cp1251</code></td>
+<td>decode from cp1251 (Cyrillic used in Bulgarian resource)</td>
+</tr>
+<tr class="odd">
+<td><code>-from_devanagari</code></td>
+<td>from unicode to GF Devanagari transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_greek</code></td>
+<td>from unicode to GF modern Greek transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_hebrew</code></td>
+<td>from unicode to GF unvocalized Hebrew transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_nepali</code></td>
+<td>from unicode to GF Nepali transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_persian</code></td>
+<td>from unicode to GF Persian/Farsi transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_sanskrit</code></td>
+<td>from unicode to GF Sanskrit transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_sindhi</code></td>
+<td>from unicode to GF Sindhi transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_telugu</code></td>
+<td>from unicode to GF Telugu transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_thai</code></td>
+<td>from unicode to GF Thai transliteration</td>
+</tr>
+<tr class="even">
+<td><code>-from_urdu</code></td>
+<td>from unicode to GF Urdu transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>-from_utf8</code></td>
+<td>decode from utf8 (default)</td>
+</tr>
+<tr class="even">
+<td><code>-lexcode</code></td>
+<td>code-like lexer</td>
+</tr>
+<tr class="odd">
+<td><code>-lexgreek</code></td>
+<td>lexer normalizing ancient Greek accentuation</td>
+</tr>
+<tr class="even">
+<td><code>-lexgreek2</code></td>
+<td>lexer normalizing ancient Greek accentuation for text with vowel
+length annotations</td>
+</tr>
+<tr class="odd">
+<td><code>-lexmixed</code></td>
+<td>mixture of text and code, as in LaTeX (code between $...$, \(...)\,
+\[...\])</td>
+</tr>
+<tr class="even">
+<td><code>-lextext</code></td>
+<td>text-like lexer</td>
+</tr>
+<tr class="odd">
+<td><code>-to_amharic</code></td>
+<td>from GF Amharic transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_ancientgreek</code></td>
+<td>from GF ancient Greek transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_arabic</code></td>
+<td>from GF Arabic transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_arabic_unvocalized</code></td>
+<td>from GF unvocalized Arabic transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_cp1251</code></td>
+<td>encode to cp1251 (Cyrillic used in Bulgarian resource)</td>
+</tr>
+<tr class="even">
+<td><code>-to_devanagari</code></td>
+<td>from GF Devanagari transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_greek</code></td>
+<td>from GF modern Greek transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_hebrew</code></td>
+<td>from GF unvocalized Hebrew transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_html</code></td>
+<td>wrap in a html file with linebreaks</td>
+</tr>
+<tr class="even">
+<td><code>-to_nepali</code></td>
+<td>from GF Nepali transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_persian</code></td>
+<td>from GF Persian/Farsi transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_sanskrit</code></td>
+<td>from GF Sanskrit transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_sindhi</code></td>
+<td>from GF Sindhi transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_telugu</code></td>
+<td>from GF Telugu transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_thai</code></td>
+<td>from GF Thai transliteration to unicode</td>
+</tr>
+<tr class="even">
+<td><code>-to_urdu</code></td>
+<td>from GF Urdu transliteration to unicode</td>
+</tr>
+<tr class="odd">
+<td><code>-to_utf8</code></td>
+<td>encode to utf8 (default)</td>
+</tr>
+<tr class="even">
+<td><code>-unchars</code></td>
+<td>unlexer that puts no spaces between tokens</td>
+</tr>
+<tr class="odd">
+<td><code>-unlexcode</code></td>
+<td>code-like unlexer</td>
+</tr>
+<tr class="even">
+<td><code>-unlexgreek</code></td>
+<td>unlexer de-normalizing ancient Greek accentuation</td>
+</tr>
+<tr class="odd">
+<td><code>-unlexmixed</code></td>
+<td>mixture of text and code (code between $...$, \(...)\, \[...\])</td>
+</tr>
+<tr class="even">
+<td><code>-unlextext</code></td>
+<td>text-like unlexer</td>
+</tr>
+<tr class="odd">
+<td><code>-unwords</code></td>
+<td>unlexer that puts a single space between tokens (default)</td>
+</tr>
+<tr class="even">
+<td><code>-words</code></td>
+<td>lexer that assumes tokens separated by spaces (default)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-env</code></td>
+<td>apply in this environment only</td>
+</tr>
+<tr class="even">
+<td><code>-from</code></td>
+<td>backward-apply transliteration defined in this file (format 'unicode
+translit' per line)</td>
+</tr>
+<tr class="odd">
+<td><code>-to</code></td>
+<td>forward-apply transliteration defined in this file</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>l (EAdd 3 4) | ps -unlexcode</code></td>
+<td>linearize code-like output</td>
+</tr>
+<tr class="even">
+<td><code>ps -lexcode | p -cat=Exp</code></td>
+<td>parse code-like input</td>
+</tr>
+<tr class="odd">
+<td><code>gr -cat=QCl | l | ps -bind</code></td>
+<td>linearization output from LangFin</td>
+</tr>
+<tr class="even">
+<td><code>ps -to_devanagari "A-p"</code></td>
+<td>show Devanagari in UTF8 terminal</td>
+</tr>
+<tr class="odd">
+<td><code>rf -file=Hin.gf | ps -env=quotes -to_devanagari</code></td>
+<td>convert translit to UTF8</td>
+</tr>
+<tr class="even">
+<td><code>rf -file=Ara.gf | ps -from_utf8 -env=quotes -from_arabic</code></td>
+<td>convert UTF8 to transliteration</td>
+</tr>
+<tr class="odd">
+<td><code>ps -to=chinese.trans "abc"</code></td>
+<td>apply transliteration defined in file chinese.trans</td>
+</tr>
+<tr class="even">
+<td><code>ps -lexgreek "a)gavoi` a)'nvrwpoi' tines*"</code></td>
+<td>normalize ancient greek accentuation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc27">
+
+</div>
+<h4 id="pt-put_tree">pt = put_tree</h4>
+<p><code>pt</code> = <code>put_tree</code>: <em>return a tree, possibly
+processed with a function.</em></p>
+<p>Returns a tree obtained from its argument tree by applying tree
+processing functions in the order given in the command line option list.
+Thus 'pt -f -g s' returns g (f s). Typical tree processors are type
+checking and semantic computation.</p>
+<ul>
+<li>Syntax: <code>pt OPT? TREE</code></li>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-compute</code></td>
+<td>compute by using semantic definitions (def)</td>
+</tr>
+<tr class="even">
+<td><code>-largest</code></td>
+<td>sort trees from largest to smallest, in number of nodes</td>
+</tr>
+<tr class="odd">
+<td><code>-nub</code></td>
+<td>remove duplicate trees</td>
+</tr>
+<tr class="even">
+<td><code>-smallest</code></td>
+<td>sort trees from smallest to largest, in number of nodes</td>
+</tr>
+<tr class="odd">
+<td><code>-subtrees</code></td>
+<td>return all fully applied subtrees (stopping at abstractions), by
+default sorted from the largest</td>
+</tr>
+<tr class="even">
+<td><code>-funs</code></td>
+<td>return all fun functions appearing in the tree, with
+duplications</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-number</code></td>
+<td>take at most this many trees</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>pt -compute (plus one two)</code></td>
+<td>compute value</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc28">
+
+</div>
+<h4 id="q-quit">q = quit</h4>
+<p><code>q</code> = <code>quit</code>: <em>exit GF interpreter.</em></p>
+<hr />
+<div id="toc29">
+
+</div>
+<h4 id="r-reload">r = reload</h4>
+<p><code>r</code> = <code>reload</code>: <em>repeat the latest import
+command.</em></p>
+<hr />
+<div id="toc30">
+
+</div>
+<h4 id="rf-read_file">rf = read_file</h4>
+<p><code>rf</code> = <code>read_file</code>: <em>read string or tree
+input from a file.</em></p>
+<p>Reads input from file. The filename must be in double quotes. The
+input is interpreted as a string by default, and can hence be piped e.g.
+to the parse command. The option -tree interprets the input as a tree,
+which can be given e.g. to the linearize command. The option -lines will
+result in a list of strings or trees, one by line.</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-lines</code></td>
+<td>return the list of lines, instead of the singleton of all
+contents</td>
+</tr>
+<tr class="even">
+<td><code>-tree</code></td>
+<td>convert strings into trees</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-file</code></td>
+<td>the input file name</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc31">
+
+</div>
+<h4 id="rt-rank_trees">rt = rank_trees</h4>
+<p><code>rt</code> = <code>rank_trees</code>: <em>show trees in an order
+of decreasing probability.</em></p>
+<p>Order trees from the most to the least probable, using either even
+distribution in each category (default) or biased as specified by the
+file given by flag -probs=FILE, where each line has the form 'function
+probability', e.g. 'youPol_Pron 0.01'.</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-v</code></td>
+<td>show all trees with their probability scores</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-probs</code></td>
+<td>probabilities from this file (format 'f 0.6' per line)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>p "you are here" | rt -probs=probs | pt -number=1</code></td>
+<td>most probable result</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc32">
+
+</div>
+<h4 id="sd-show_dependencies">sd = show_dependencies</h4>
+<p><code>sd</code> = <code>show_dependencies</code>: <em>show all
+constants that the given constants depend on.</em></p>
+<p>Show recursively all qualified constant names, by tracing back the
+types and definitions of each constant encountered, but just listing
+every name once. This command requires a source grammar to be in scope,
+imported with 'import -retain'. Notice that the accuracy is better if
+the modules are compiled with the flag -optimize=noexpand. This command
+must be a line of its own, and thus cannot be a part of a pipe.</p>
+<ul>
+<li>Syntax: <code>sd QUALIFIED_CONSTANT+</code></li>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-size</code></td>
+<td>show the size of the source code for each constants (number of
+constructors)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>sd ParadigmsEng.mkV ParadigmsEng.mkN</code></td>
+<td>show all constants on which mkV and mkN depend</td>
+</tr>
+<tr class="even">
+<td><code>sd -size ParadigmsEng.mkV</code></td>
+<td>show all constants on which mkV depends, together with size</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc33">
+
+</div>
+<h4 id="se-set_encoding">se = set_encoding</h4>
+<p><code>se</code> = <code>set_encoding</code>: <em>set the encoding
+used in current terminal.</em></p>
+<ul>
+<li>Syntax: <code>se ID</code></li>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>se cp1251</code></td>
+<td>set encoding to cp1521</td>
+</tr>
+<tr class="even">
+<td><code>se utf8</code></td>
+<td>set encoding to utf8 (default)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc34">
+
+</div>
+<h4 id="so-show_operations">so = show_operations</h4>
+<p><code>so</code> = <code>show_operations</code>: <em>show all
+operations in scope, possibly restricted to a value type.</em></p>
+<p>Show the names and type signatures of all operations available in the
+current resource. This command requires a source grammar to be in scope,
+imported with 'import -retain'. The operations include the parameter
+constructors that are in scope. The optional TYPE filters according to
+the value type. The grep STRINGs filter according to other substrings of
+the type signatures.</p>
+<ul>
+<li>Syntax: <code>so (-grep=STRING)* TYPE?</code></li>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-raw</code></td>
+<td>show the types in computed forms (instead of category names)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-grep</code></td>
+<td>substring used for filtering (the command can have many of
+these)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>so Det</code></td>
+<td>show all opers that create a Det</td>
+</tr>
+<tr class="even">
+<td><code>so -grep=Prep</code></td>
+<td>find opers relating to Prep</td>
+</tr>
+<tr class="odd">
+<td><code>so | wf -file=/tmp/opers</code></td>
+<td>write the list of opers to a file</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc35">
+
+</div>
+<h4 id="sp-system_pipe">sp = system_pipe</h4>
+<p><code>sp</code> = <code>system_pipe</code>: <em>send argument to a
+system command.</em></p>
+<ul>
+<li>Syntax:
+<code>sp -command="SYSTEMCOMMAND", alt. ? SYSTEMCOMMAND</code></li>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-command</code></td>
+<td>the system command applied to the argument</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>gt | l | ? wc</code></td>
+<td>generate trees, linearize, and count words</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc36">
+
+</div>
+<h4 id="ss-show_source">ss = show_source</h4>
+<p><code>ss</code> = <code>show_source</code>: <em>show the source code
+of modules in scope, possibly just headers.</em></p>
+<p>Show compiled source code, i.e. as it is included in GF object files.
+This command requires a source grammar to be in scope, imported with
+'import -retain'. The optional MODULE arguments cause just these modules
+to be shown. The -size and -detailedsize options show code size as the
+number of constructor nodes. This command must be a line of its own, and
+thus cannot be a part of a pipe.</p>
+<ul>
+<li>Syntax: <code>ss (-strip)? (-save)? MODULE*</code></li>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-detailedsize</code></td>
+<td>instead of code, show the sizes of all judgements and modules</td>
+</tr>
+<tr class="even">
+<td><code>-save</code></td>
+<td>save each MODULE in file MODULE.gfh instead of printing it on
+terminal</td>
+</tr>
+<tr class="odd">
+<td><code>-size</code></td>
+<td>instead of code, show the sizes of all modules</td>
+</tr>
+<tr class="even">
+<td><code>-strip</code></td>
+<td>show only type signatures of oper's and lin's, not their
+definitions</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>ss</code></td>
+<td>print complete current source grammar on terminal</td>
+</tr>
+<tr class="even">
+<td><code>ss -strip -save MorphoFin</code></td>
+<td>print the headers in file MorphoFin.gfh</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc37">
+
+</div>
+<h4 id="tq-translation_quiz">tq = translation_quiz</h4>
+<p><code>tq</code> = <code>translation_quiz</code>: <em>start a
+translation quiz.</em></p>
+<ul>
+<li>Syntax:
+<code>tq -from=LANG -to=LANG (-cat=CAT)? (-probs=FILE)? TREE?</code></li>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-from</code></td>
+<td>translate from this language</td>
+</tr>
+<tr class="even">
+<td><code>-to</code></td>
+<td>translate to this language</td>
+</tr>
+<tr class="odd">
+<td><code>-cat</code></td>
+<td>translate in this category</td>
+</tr>
+<tr class="even">
+<td><code>-number</code></td>
+<td>the maximum number of questions</td>
+</tr>
+<tr class="odd">
+<td><code>-probs</code></td>
+<td>file with biased probabilities for generation</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>tq -from=Eng -to=Swe</code></td>
+<td>any trees in startcat</td>
+</tr>
+<tr class="even">
+<td><code>tq -from=Eng -to=Swe (AdjCN (PositA ?2) (UseN ?))</code></td>
+<td>only trees of this form</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc38">
+
+</div>
+<h4 id="tt-to_trie">tt = to_trie</h4>
+<p><code>tt</code> = <code>to_trie</code>: <em>combine a list of trees
+into a trie.</em></p>
+<ul>
+<li>Syntax: <code>to_trie</code></li>
+</ul>
+<hr />
+<div id="toc39">
+
+</div>
+<h4 id="ut-unicode_table">ut = unicode_table</h4>
+<p><code>ut</code> = <code>unicode_table</code>: <em>show a
+transliteration table for a unicode character set.</em></p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-amharic</code></td>
+<td>Amharic</td>
+</tr>
+<tr class="even">
+<td><code>-ancientgreek</code></td>
+<td>ancient Greek</td>
+</tr>
+<tr class="odd">
+<td><code>-arabic</code></td>
+<td>Arabic</td>
+</tr>
+<tr class="even">
+<td><code>-arabic_unvocalized</code></td>
+<td>unvocalized Arabic</td>
+</tr>
+<tr class="odd">
+<td><code>-devanagari</code></td>
+<td>Devanagari</td>
+</tr>
+<tr class="even">
+<td><code>-greek</code></td>
+<td>modern Greek</td>
+</tr>
+<tr class="odd">
+<td><code>-hebrew</code></td>
+<td>unvocalized Hebrew</td>
+</tr>
+<tr class="even">
+<td><code>-nepali</code></td>
+<td>Nepali</td>
+</tr>
+<tr class="odd">
+<td><code>-persian</code></td>
+<td>Persian/Farsi</td>
+</tr>
+<tr class="even">
+<td><code>-sanskrit</code></td>
+<td>Sanskrit</td>
+</tr>
+<tr class="odd">
+<td><code>-sindhi</code></td>
+<td>Sindhi</td>
+</tr>
+<tr class="even">
+<td><code>-telugu</code></td>
+<td>Telugu</td>
+</tr>
+<tr class="odd">
+<td><code>-thai</code></td>
+<td>Thai</td>
+</tr>
+<tr class="even">
+<td><code>-urdu</code></td>
+<td>Urdu</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc40">
+
+</div>
+<h4 id="vd-visualize_dependency">vd = visualize_dependency</h4>
+<p><code>vd</code> = <code>visualize_dependency</code>: <em>show word
+dependency tree graphically.</em></p>
+<p>Prints a dependency tree in the .dot format (the graphviz format,
+default) or LaTeX (flag -output=latex) or the CoNLL/MaltParser format
+(flag -output=conll for training, malt_input for unanalysed input). By
+default, the last argument is the head of every abstract syntax
+function; moreover, the head depends on the head of the function above.
+The graph can be saved in a file by the wf command as usual. If the
+-view flag is defined, the graph is saved in a temporary file which is
+processed by dot (graphviz) and displayed by the program indicated by
+the view flag. The target format is png, unless overridden by the flag
+-format. Results from multiple trees are combined to pdf with convert
+(ImageMagick). See also 'vp -showdep' for another visualization of
+dependencies.</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-v</code></td>
+<td>show extra information</td>
+</tr>
+<tr class="even">
+<td><code>-conll2latex</code></td>
+<td>convert conll to latex</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-abslabels</code></td>
+<td>abstract configuration file for labels, format per line 'fun
+label*'</td>
+</tr>
+<tr class="even">
+<td><code>-cnclabels</code></td>
+<td>concrete configuration file for labels, format per line 'fun
+{words|*} pos label head'</td>
+</tr>
+<tr class="odd">
+<td><code>-file</code></td>
+<td>same as abslabels (abstract configuration file)</td>
+</tr>
+<tr class="even">
+<td><code>-format</code></td>
+<td>format of the visualization file using dot (default "png")</td>
+</tr>
+<tr class="odd">
+<td><code>-output</code></td>
+<td>output format of graph source (latex, conll, dot (default but
+deprecated))</td>
+</tr>
+<tr class="even">
+<td><code>-view</code></td>
+<td>program to open the resulting graph file (default "open")</td>
+</tr>
+<tr class="odd">
+<td><code>-lang</code></td>
+<td>the language of analysis</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>gr | vd</code></td>
+<td>generate a tree and show dependency tree in .dot</td>
+</tr>
+<tr class="even">
+<td><code>gr | vd -view=open</code></td>
+<td>generate a tree and display dependency tree on with Mac's
+'open'</td>
+</tr>
+<tr class="odd">
+<td><code>gr | vd -view=open -output=latex</code></td>
+<td>generate a tree and display latex dependency tree with Mac's
+'open'</td>
+</tr>
+<tr class="even">
+<td><code>gr -number=1000 | vd -abslabels=Lang.labels -cnclabels=LangSwe.labels -output=conll</code></td>
+<td>generate a random treebank</td>
+</tr>
+<tr class="odd">
+<td><code>rf -file=ex.conll | vd -conll2latex | wf -file=ex.tex</code></td>
+<td>convert conll file to latex</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc41">
+
+</div>
+<h4 id="vp-visualize_parse">vp = visualize_parse</h4>
+<p><code>vp</code> = <code>visualize_parse</code>: <em>show parse tree
+graphically.</em></p>
+<p>Prints a parse tree in the .dot format (the graphviz format). The
+graph can be saved in a file by the wf command as usual. If the -view
+flag is defined, the graph is saved in a temporary file which is
+processed by dot (graphviz) and displayed by the program indicated by
+the view flag. The target format is png, unless overridden by the flag
+-format. Results from multiple trees are combined to pdf with convert
+(ImageMagick).</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-showcat</code></td>
+<td>show categories in the tree nodes (default)</td>
+</tr>
+<tr class="even">
+<td><code>-nocat</code></td>
+<td>don't show categories</td>
+</tr>
+<tr class="odd">
+<td><code>-showdep</code></td>
+<td>show dependency labels</td>
+</tr>
+<tr class="even">
+<td><code>-showfun</code></td>
+<td>show function names in the tree nodes</td>
+</tr>
+<tr class="odd">
+<td><code>-nofun</code></td>
+<td>don't show function names (default)</td>
+</tr>
+<tr class="even">
+<td><code>-showleaves</code></td>
+<td>show the leaves of the tree (default)</td>
+</tr>
+<tr class="odd">
+<td><code>-noleaves</code></td>
+<td>don't show the leaves of the tree (i.e., only the abstract
+tree)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-lang</code></td>
+<td>the language to visualize</td>
+</tr>
+<tr class="even">
+<td><code>-file</code></td>
+<td>configuration file for dependency labels with -deps, format per line
+'fun label*'</td>
+</tr>
+<tr class="odd">
+<td><code>-format</code></td>
+<td>format of the visualization file (default "png")</td>
+</tr>
+<tr class="even">
+<td><code>-view</code></td>
+<td>program to open the resulting file (default "open")</td>
+</tr>
+<tr class="odd">
+<td><code>-nodefont</code></td>
+<td>font for tree nodes (default: Times -- graphviz standard font)</td>
+</tr>
+<tr class="even">
+<td><code>-leaffont</code></td>
+<td>font for tree leaves (default: nodefont)</td>
+</tr>
+<tr class="odd">
+<td><code>-nodecolor</code></td>
+<td>color for tree nodes (default: black -- graphviz standard
+color)</td>
+</tr>
+<tr class="even">
+<td><code>-leafcolor</code></td>
+<td>color for tree leaves (default: nodecolor)</td>
+</tr>
+<tr class="odd">
+<td><code>-nodeedgestyle</code></td>
+<td>edge style between tree nodes (solid/dashed/dotted/bold, default:
+solid)</td>
+</tr>
+<tr class="even">
+<td><code>-leafedgestyle</code></td>
+<td>edge style for links to leaves (solid/dashed/dotted/bold, default:
+dashed)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>p "John walks" | vp</code></td>
+<td>generate a tree and show parse tree as .dot script</td>
+</tr>
+<tr class="even">
+<td><code>gr | vp -view=open</code></td>
+<td>generate a tree and display parse tree on a Mac</td>
+</tr>
+<tr class="odd">
+<td><code>p "she loves us" | vp -view=open -showdep -file=uddeps.labels -nocat</code></td>
+<td>show a visual variant of a dependency tree</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc42">
+
+</div>
+<h4 id="vt-visualize_tree">vt = visualize_tree</h4>
+<p><code>vt</code> = <code>visualize_tree</code>: <em>show a set of
+trees graphically.</em></p>
+<p>Prints a set of trees in the .dot format (the graphviz format). The
+graph can be saved in a file by the wf command as usual. If the -view
+flag is defined, the graph is saved in a temporary file which is
+processed by dot (graphviz) and displayed by the command indicated by
+the view flag. The target format is postscript, unless overridden by the
+flag -format. Results from multiple trees are combined to pdf with
+convert (ImageMagick). With option -mk, use for showing library style
+function names of form 'mkC'.</p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-api</code></td>
+<td>show the tree with function names converted to 'mkC' with value cats
+C</td>
+</tr>
+<tr class="even">
+<td><code>-mk</code></td>
+<td>similar to -api, deprecated</td>
+</tr>
+<tr class="odd">
+<td><code>-nofun</code></td>
+<td>don't show functions but only categories</td>
+</tr>
+<tr class="even">
+<td><code>-nocat</code></td>
+<td>don't show categories but only functions</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-format</code></td>
+<td>format of the visualization file (default "png")</td>
+</tr>
+<tr class="even">
+<td><code>-view</code></td>
+<td>program to open the resulting file (default "open")</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Examples:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>p "hello" | vt</code></td>
+<td>parse a string and show trees as graph script</td>
+</tr>
+<tr class="even">
+<td><code>p "hello" | vt -view="open"</code></td>
+<td>parse a string and display trees on a Mac</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="toc43">
+
+</div>
+<h4 id="wf-write_file">wf = write_file</h4>
+<p><code>wf</code> = <code>write_file</code>: <em>send string or tree to
+a file.</em></p>
+<ul>
+<li>Options:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-append</code></td>
+<td>append to file, instead of overwriting it</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flags:</li>
+</ul>
+<table class="table" data-align="center" data-cellpadding="4">
+<tbody>
+<tr class="odd">
+<td><code>-file</code></td>
+<td>the output filename</td>
+</tr>
+</tbody>
+</table>
+<div id="toc44">
+
+</div>
+<h2 id="the-gf-batch-compiler">The GF batch compiler</h2>
+<p>With the option <code>-batch</code>, GF can be invoked in batch mode,
+i.e. without opening the shell, to compile files from <code>.gf</code>
+to <code>.gfo</code>. The <code>-s</code> option ("silent") eliminates
+all messages except errors.</p>
+<pre><code>    $ gf -batch -s LangIta.gf</code></pre>
+<p>With the option <code>-make</code>, and as a set of top-level grammar
+files (with the same abstract syntax) as arguments, GF produces a
+<code>.pgf</code> file. The flag <code>-optimize-pgf</code> minimizes
+the size of the <code>.pgf</code> file, and is recommended for grammars
+to be shipped.</p>
+<pre><code>    $ gf -make -optimize-pgf LangIta.gf LangEng.gf LangGer.gf</code></pre>
+<p>The flag <code>-output-format</code> changes the output format from
+<code>.pgf</code> to some other format. For instance</p>
+<pre><code>    $ gf -make -output-format=js LangEng.pgf LangGer.pgf</code></pre>
+<p>Notice that the arguments can be <code>.pgf</code> files, which in
+this case are merged and written into a JavaScript grammar file.</p>
+<p>More options and instructions are obtained with</p>
+<pre><code>    $ gf -help</code></pre>
+<p>To run GF from a <em>script</em>, redirection of standard input can
+be used:</p>
+<pre><code>    $ gf &lt;script.gfs</code></pre>
+<p>The file <code>script.gfs</code> should then contain a sequence of GF
+commands, one per line. Unrecognized command lines are skipped without
+terminating GF.</p>
+</div><!-- .container -->
+</div><!-- .bg-white -->
+
+<footer class="py-5">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-6 col-sm-3">
+        <a href="..">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <h6 class="text-muted mt-3">Get started</h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.youtube.com/watch?v=x1LFbDQhbso">Google Tech Talk</a></li>
+          <li><a href="http://cloud.grammaticalframework.org/">GF Cloud</a></li>
+          <li>
+            <a href="../doc/tutorial/gf-tutorial.html">Tutorial</a>
+             ·
+            <a href="../lib/doc/rgl-tutorial/index.html">RGL Tutorial</a>
+          </li>
+          <li><a href="../doc/gf-video-tutorials.html">Video Tutorials</a></li>
+          <li><a href="../download"><strong>Download GF</strong></a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Learn more</h6>
+        <ul class="list-unstyled">
+          <li><a href="../gf-book">The GF Book</a></li>
+          <li><a href="../doc/gf-refman.html">Reference Manual</a></li>
+          <li><a href="../doc/gf-shell-reference.html">GF Shell Reference</a></li>
+          <li><a href="http://www.molto-project.eu/sites/default/files/MOLTO_D2.3.pdf">Best Practices</a></li>
+          <li><a href="../lib/doc/synopsis/index.html"><strong>RGL Synopsis</strong></a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Develop</h6>
+        <ul class="list-unstyled">
+          <li><a href="../doc/gf-developers.html">Developers Guide</a></li>
+          <li><a href="http://hackage.haskell.org/package/gf/docs/PGF.html">PGF library API (Haskell runtime)</a></li>
+          <li><a href="../doc/runtime-api.html">PGF library API (C runtime)</a></li>
+          <li><a href="http://hackage.haskell.org/package/gf/docs/GF.html">GF compiler API</a></li>
+          <li><a href="../doc/gf-editor-modes.html">Text Editor Support</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-sm-3">
+        <h6 class="text-muted">Contribute</h6>
+        <ul class="list-unstyled">
+          <li><a href="http://groups.google.com/group/gf-dev">Mailing List</a></li>
+          <li><a href="https://github.com/GrammaticalFramework/gf-core/issues">Issue Tracker</a></li>
+          <li><a href="../doc/gf-people.html">Authors</a></li>
+          <li><a href="http://school.grammaticalframework.org/2018/">Summer School</a></li>
+        </ul>
+        <h6 class="text-muted">
+          Repositories
+          <i class="fab fa-github ml-1"></i>
+        </h6>
+        <a href="https://github.com/GrammaticalFramework/gf-core">GF</a> ·
+        <a href="https://github.com/GrammaticalFramework/gf-rgl">RGL</a> ·
+        <a href="https://github.com/GrammaticalFramework/gf-contrib">Contributions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7811807-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

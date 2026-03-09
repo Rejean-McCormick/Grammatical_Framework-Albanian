@@ -1,0 +1,79 @@
+# Type: VP
+
+- Meaning: verb phrase
+- Example: //is very warm//
+
+## Producers (returns this type)
+- Count: 33
+- [AdvVP](../by_function/AdvVP.md) — `VP -> Adv -> VP`
+- [AdVVP](../by_function/AdVVP.md) — `AdV -> VP -> VP`
+- [ComplBareVS](../by_function/ComplBareVS.md) — `VS -> S -> VP`
+- [ComplDirectVQ](../by_function/ComplDirectVQ.md) — `VQ -> Utt -> VP`
+- [ComplDirectVS](../by_function/ComplDirectVS.md) — `VS -> Utt -> VP`
+- [ComplGenVV](../by_function/ComplGenVV.md) — `VV -> Ant -> Pol -> VP -> VP`
+- [ComplSlash](../by_function/ComplSlash.md) — `VPSlash -> NP -> VP`
+- [ComplVA](../by_function/ComplVA.md) — `VA -> AP -> VP`
+- [ComplVPIVV](../by_function/ComplVPIVV.md) — `VV -> VPI -> VP`
+- [ComplVQ](../by_function/ComplVQ.md) — `VQ -> QS -> VP`
+- [ComplVS](../by_function/ComplVS.md) — `VS -> S -> VP`
+- [ComplVV](../by_function/ComplVV.md) — `VV -> VP -> VP`
+- [ExtAdvVP](../by_function/ExtAdvVP.md) — `VP -> Adv -> VP`
+- [has_age_VP](../by_function/has_age_VP.md) — `Card -> VP`
+- [hungry_VP](../by_function/hungry_VP.md) — `VP`
+- [ill_VP](../by_function/ill_VP.md) — `VP`
+- [is_right_VP](../by_function/is_right_VP.md) — `VP`
+- [is_wrong_VP](../by_function/is_wrong_VP.md) — `VP`
+- [PassAgentVPSlash](../by_function/PassAgentVPSlash.md) — `VPSlash -> NP -> VP`
+- [PassV2](../by_function/PassV2.md) — `V2 -> VP`
+- [PassVPSlash](../by_function/PassVPSlash.md) — `VPSlash -> VP`
+- [ProgrVP](../by_function/ProgrVP.md) — `VP -> VP`
+- [ready_VP](../by_function/ready_VP.md) — `VP`
+- [ReflRNP](../by_function/ReflRNP.md) — `VPSlash -> RNP -> VP`
+- [ReflVP](../by_function/ReflVP.md) — `VPSlash -> VP`
+- [scared_VP](../by_function/scared_VP.md) — `VP`
+- [SelfAdVVP](../by_function/SelfAdVVP.md) — `VP -> VP`
+- [SelfAdvVP](../by_function/SelfAdvVP.md) — `VP -> VP`
+- [thirsty_VP](../by_function/thirsty_VP.md) — `VP`
+- [tired_VP](../by_function/tired_VP.md) — `VP`
+- [UseComp](../by_function/UseComp.md) — `Comp -> VP`
+- [UseCopula](../by_function/UseCopula.md) — `VP`
+- [UseV](../by_function/UseV.md) — `V -> VP`
+
+## Consumers (takes this type as an argument)
+- Count: 36
+- [AdvQVP](../by_function/AdvQVP.md) — `VP -> IAdv -> QVP`
+- [AdvVP](../by_function/AdvVP.md) — `VP -> Adv -> VP`
+- [AdVVP](../by_function/AdVVP.md) — `AdV -> VP -> VP`
+- [ByVP](../by_function/ByVP.md) — `VP -> Adv`
+- [ComplGenVV](../by_function/ComplGenVV.md) — `VV -> Ant -> Pol -> VP -> VP`
+- [ComplVV](../by_function/ComplVV.md) — `VV -> VP -> VP`
+- [CompVP](../by_function/CompVP.md) — `Ant -> Pol -> VP -> Comp`
+- [EmbedPresPart](../by_function/EmbedPresPart.md) — `VP -> SC`
+- [EmbedVP](../by_function/EmbedVP.md) — `VP -> SC`
+- [ExtAdvVP](../by_function/ExtAdvVP.md) — `VP -> Adv -> VP`
+- [GenericCl](../by_function/GenericCl.md) — `VP -> Cl`
+- [GerundAdv](../by_function/GerundAdv.md) — `VP -> Adv`
+- [GerundCN](../by_function/GerundCN.md) — `VP -> CN`
+- [GerundNP](../by_function/GerundNP.md) — `VP -> NP`
+- [ImpersCl](../by_function/ImpersCl.md) — `VP -> Cl`
+- [ImpP3](../by_function/ImpP3.md) — `NP -> VP -> Utt`
+- [ImpPl1](../by_function/ImpPl1.md) — `VP -> Utt`
+- [ImpVP](../by_function/ImpVP.md) — `VP -> Imp`
+- [InOrderToVP](../by_function/InOrderToVP.md) — `VP -> Adv`
+- [MkVPI](../by_function/MkVPI.md) — `VP -> VPI`
+- [MkVPS](../by_function/MkVPS.md) — `Temp -> Pol -> VP -> VPS`
+- [PredAPVP](../by_function/PredAPVP.md) — `AP -> VP -> Cl`
+- [PredSCVP](../by_function/PredSCVP.md) — `SC -> VP -> Cl`
+- [PredVP](../by_function/PredVP.md) — `NP -> VP -> Cl`
+- [PresPartAP](../by_function/PresPartAP.md) — `VP -> AP`
+- [ProgrVP](../by_function/ProgrVP.md) — `VP -> VP`
+- [PurposeVP](../by_function/PurposeVP.md) — `VP -> Adv`
+- [QuestVP](../by_function/QuestVP.md) — `IP -> VP -> QCl`
+- [RelVP](../by_function/RelVP.md) — `RP -> VP -> RCl`
+- [SelfAdVVP](../by_function/SelfAdVVP.md) — `VP -> VP`
+- [SelfAdvVP](../by_function/SelfAdvVP.md) — `VP -> VP`
+- [SlashV2V (overload 2)](../by_function/SlashV2V__02.md) — `V2V -> VP -> VPSlash`
+- [UttVP](../by_function/UttVP.md) — `VP -> Utt`
+- [UttVPShort](../by_function/UttVPShort.md) — `VP -> Utt`
+- [VPSlashPrep](../by_function/VPSlashPrep.md) — `VP -> Prep -> VPSlash`
+- [WithoutVP](../by_function/WithoutVP.md) — `VP -> Adv`

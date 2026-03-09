@@ -1,0 +1,41 @@
+# Module: Construction
+
+- Signatures: 36
+
+## Entries
+- [dayMonthAdv](../by_function/dayMonthAdv.md) — `Monthday -> Month -> Adv`
+- [dayMonthYearAdv](../by_function/dayMonthYearAdv.md) — `Monthday -> Month -> Year -> Adv`
+- [has_age_VP](../by_function/has_age_VP.md) — `Card -> VP`
+- [have_name_Cl](../by_function/have_name_Cl.md) — `NP -> NP -> Cl`
+- [how_far_QCl](../by_function/how_far_QCl.md) — `NP -> QCl`
+- [how_old_QCl](../by_function/how_old_QCl.md) — `NP -> QCl`
+- [hungry_VP](../by_function/hungry_VP.md) — `VP`
+- [ill_VP](../by_function/ill_VP.md) — `VP`
+- [InLanguage](../by_function/InLanguage.md) — `Language -> Adv`
+- [intMonthday](../by_function/intMonthday.md) — `Int -> Monthday`
+- [intYear](../by_function/intYear.md) — `Int -> Year`
+- [is_right_VP](../by_function/is_right_VP.md) — `VP`
+- [is_wrong_VP](../by_function/is_wrong_VP.md) — `VP`
+- [languageCN](../by_function/languageCN.md) — `Language -> CN`
+- [languageNP](../by_function/languageNP.md) — `Language -> NP`
+- [married_Cl](../by_function/married_Cl.md) — `NP -> NP -> Cl`
+- [monthAdv](../by_function/monthAdv.md) — `Month -> Adv`
+- [monthN](../by_function/monthN.md) — `Month -> N`
+- [monthPN](../by_function/monthPN.md) — `Month -> PN`
+- [monthYearAdv](../by_function/monthYearAdv.md) — `Month -> Year -> Adv`
+- [n_units_AP](../by_function/n_units_AP.md) — `Card -> CN -> A -> AP`
+- [n_units_of_NP](../by_function/n_units_of_NP.md) — `Card -> CN -> NP -> NP`
+- [ready_VP](../by_function/ready_VP.md) — `VP`
+- [scared_VP](../by_function/scared_VP.md) — `VP`
+- [thirsty_VP](../by_function/thirsty_VP.md) — `VP`
+- [timeunitAdv](../by_function/timeunitAdv.md) — `Card -> Timeunit -> Adv`
+- [tired_VP](../by_function/tired_VP.md) — `VP`
+- [weather_adjCl](../by_function/weather_adjCl.md) — `AP -> Cl`
+- [weekdayHabitualAdv](../by_function/weekdayHabitualAdv.md) — `Weekday -> Adv`
+- [weekdayLastAdv](../by_function/weekdayLastAdv.md) — `Weekday -> Adv`
+- [weekdayN](../by_function/weekdayN.md) — `Weekday -> N`
+- [weekdayNextAdv](../by_function/weekdayNextAdv.md) — `Weekday -> Adv`
+- [weekdayPN](../by_function/weekdayPN.md) — `Weekday -> PN`
+- [weekdayPunctualAdv](../by_function/weekdayPunctualAdv.md) — `Weekday -> Adv`
+- [what_name_QCl](../by_function/what_name_QCl.md) — `NP -> QCl`
+- [yearAdv](../by_function/yearAdv.md) — `Year -> Adv`
