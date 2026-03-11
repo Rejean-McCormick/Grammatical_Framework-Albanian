@@ -1,0 +1,6 @@
+Grammatical Framework (GF) version 3.12.0
+Built on mingw32/x86_64 with ghc-9.6 at 2025-08-13 12:15:36
+Git info: commit fa2826d tag 
+
+Flags: interrupt server
+Shared folder: C:\cabal\x86_64-windows-ghc-9.6.7\gf-3.12.0

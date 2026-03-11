@@ -1,0 +1,3 @@
+- compiling lib\src\albanian\TenseSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\TenseSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Tense.pgf...

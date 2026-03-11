@@ -1,6 +1,63 @@
 -- GF/lib/src/albanian/ExtendSqi.gf
---# -path=.:../abstract
-concrete ExtendSqi of Extend = CatSqi **
+--# -path=.:../common:../abstract
+concrete ExtendSqi of Extend =
+  CatSqi ** ExtendFunctor -
+  [
+    VPS, ListVPS, VPI, ListVPI, VPS2, ListVPS2, VPI2, ListVPI2,
+    RNP, RNPList, X, ListComp, ListImp,
+
+    GenNP, GenIP, GenRP, GenModNP, GenModIP,
+    PiedPipingQuestSlash, PiedPipingRelSlash, StrandQuestSlash, StrandRelSlash, EmptyRelSlash,
+
+    MkVPS, ConjVPS, PredVPS, SQuestVPS, QuestVPS, RelVPS,
+    ExistS, ExistNPQS, ExistIPQS, ExistCN, ExistMassCN, ExistPluralCN, ExistsNP,
+
+    MkVPI, ConjVPI, ComplVPIVV,
+    MkVPS2, ConjVPS2, ComplVPS2, ReflVPS2,
+    MkVPI2, ConjVPI2, ComplVPI2,
+
+    BaseVPS, ConsVPS, BaseVPI, ConsVPI, BaseVPS2, ConsVPS2, BaseVPI2, ConsVPI2,
+    BaseComp, ConsComp, ConjComp, BaseImp, ConsImp, ConjImp,
+
+    ProDrop, AdAdV, PositAdVAdj, ICompAP, IAdvAdv,
+    CompBareCN, CompIQuant, CompS, CompQS, CompVP,
+
+    UttAccIP, UttDatIP, UttAccNP, UttDatNP, UttAdV, UttVPShort,
+
+    FocusObj, FocusAdv, FocusAdV, FocusAP, PrepCN,
+
+    PresPartAP, EmbedPresPart, PastPartAP, PastPartAgentAP,
+    PassVPSlash, PassAgentVPSlash, NominalizeVPSlashNP, ProgrVPSlash,
+    A2VPSlash, N2VPSlash, AdvIsNP, AdvIsNPAP,
+
+    PurposeVP, WithoutVP, ByVP, InOrderToVP,
+
+    ComplBareVS, SlashBareV2S, ComplDirectVS, ComplDirectVQ,
+    FrontComplDirectVS, FrontComplDirectVQ,
+
+    PredAPVP, PredIAdvVP, AdjAsCN, AdjAsNP, ApposNP,
+
+    ReflRNP, ReflPron, ReflPoss, PredetRNP, AdvRNP, AdvRVP, AdvRAP, ReflA2RNP,
+    PossPronRNP, ConjRNP,
+    Base_rr_RNP, Base_nr_RNP, Base_rn_RNP,
+    Cons_rr_RNP, Cons_nr_RNP, Cons_rn_RNP,
+
+    ReflPossPron, ComplGenVV, CompoundN, CompoundAP,
+    GerundCN, GerundNP, GerundAdv,
+    UncontractedNeg, TPastSimple, ComplSlashPartLast,
+
+    DetNPMasc, DetNPFem, UseComp_estar, UseComp_ser,
+    SubjRelNP, SubjunctRelCN,
+
+    iFem_Pron, youFem_Pron, weFem_Pron, youPlFem_Pron,
+    theyFem_Pron, theyNeutr_Pron,
+    youPolFem_Pron, youPolPl_Pron, youPolPlFem_Pron,
+
+    UseDAP, UseDAPMasc, UseDAPFem,
+    CardCNCard, AdjOrd, SentAP
+  ]
+  with
+    (Grammar = GrammarSqi) **
   open Prelude, Predef, ResSqi, ParamX in {
 
   oper
@@ -143,9 +200,9 @@ concrete ExtendSqi of Extend = CatSqi **
 
     PrepCN prep cn = {s = prep.s ++ sp ++ cnStr cn} ;
 
-    PresPartAP vp            = apConst vp.s ;
-    EmbedPresPart vp         = {s = vp.s} ;
-    PastPartAP vpslash       = apConst vpslash.s ;
+    PresPartAP vp              = apConst vp.s ;
+    EmbedPresPart vp           = {s = vp.s} ;
+    PastPartAP vpslash         = apConst vpslash.s ;
     PastPartAgentAP vpslash np = apConst (vpslash.s ++ sp ++ np.s ! Nom) ;
 
     PassVPSlash vpslash         = {s = vpslash.s} ;
@@ -165,11 +222,11 @@ concrete ExtendSqi of Extend = CatSqi **
     ByVP vp        = {s = "nga" ++ sp ++ vp.s} ;
     InOrderToVP vp = {s = "që të" ++ sp ++ vp.s} ;
 
-    ComplBareVS vs s      = {s = (vs.s ! ParamX.Pres ! agrMascSg) ++ sp ++ s.s} ;
-    SlashBareV2S v2s s    = {s = s.s} ;
+    ComplBareVS vs s   = {s = (vs.s ! ParamX.Pres ! agrMascSg) ++ sp ++ s.s} ;
+    SlashBareV2S v2s s = {s = s.s} ;
 
-    ComplDirectVS vs utt  = {s = (vs.s ! ParamX.Pres ! agrMascSg) ++ sp ++ utt.s} ;
-    ComplDirectVQ vq utt  = {s = (vq.s ! ParamX.Pres ! agrMascSg) ++ sp ++ utt.s} ;
+    ComplDirectVS vs utt = {s = (vs.s ! ParamX.Pres ! agrMascSg) ++ sp ++ utt.s} ;
+    ComplDirectVQ vq utt = {s = (vq.s ! ParamX.Pres ! agrMascSg) ++ sp ++ utt.s} ;
 
     FrontComplDirectVS np vs utt = {s = np.s ! Nom ++ sp ++ utt.s ++ sp ++ (vs.s ! ParamX.Pres ! agrMascSg)} ;
     FrontComplDirectVQ np vq utt = {s = np.s ! Nom ++ sp ++ utt.s ++ sp ++ (vq.s ! ParamX.Pres ! agrMascSg)} ;
@@ -248,15 +305,15 @@ concrete ExtendSqi of Extend = CatSqi **
 
     SubjunctRelCN cn rs = cnConst (cnStr cn ++ sp ++ rs.s) cn.g ;
 
-    iFem_Pron        = mkPronConst "unë"  "mua"  "mua"  "më" "më" Fem Sg ;
-    youFem_Pron      = mkPronConst "ti"   "ty"   "ty"   "të" "të" Fem Sg ;
-    weFem_Pron       = mkPronConst "ne"   "ne"   "ne"   "na" "na" Fem Pl ;
-    youPlFem_Pron    = mkPronConst "ju"   "ju"   "ju"   "ju" "ju" Fem Pl ;
-    theyFem_Pron     = mkPronConst "ato"  "ato"  "atyre" ""   ""  Fem Pl ;
-    theyNeutr_Pron   = mkPronConst "ata"  "ata"  "atyre" ""   ""  Masc Pl ;
-    youPolFem_Pron   = mkPronConst "ju"   "ju"   "ju"   "ju" "ju" Fem Sg ;
-    youPolPl_Pron    = mkPronConst "ju"   "ju"   "ju"   "ju" "ju" Masc Pl ;
-    youPolPlFem_Pron = mkPronConst "ju"   "ju"   "ju"   "ju" "ju" Fem Pl ;
+    iFem_Pron        = mkPronConst "unë" "mua" "mua" "më" "më" Fem Sg ;
+    youFem_Pron      = mkPronConst "ti" "ty" "ty" "të" "të" Fem Sg ;
+    weFem_Pron       = mkPronConst "ne" "ne" "ne" "na" "na" Fem Pl ;
+    youPlFem_Pron    = mkPronConst "ju" "ju" "ju" "ju" "ju" Fem Pl ;
+    theyFem_Pron     = mkPronConst "ato" "ato" "atyre" "" "" Fem Pl ;
+    theyNeutr_Pron   = mkPronConst "ata" "ata" "atyre" "" "" Masc Pl ;
+    youPolFem_Pron   = mkPronConst "ju" "ju" "ju" "ju" "ju" Fem Sg ;
+    youPolPl_Pron    = mkPronConst "ju" "ju" "ju" "ju" "ju" Masc Pl ;
+    youPolPlFem_Pron = mkPronConst "ju" "ju" "ju" "ju" "ju" Fem Pl ;
 
     UseDAP dap     = npConst dap.s Masc Sg ;
     UseDAPMasc dap = npConst dap.s Masc Sg ;
@@ -264,4 +321,12 @@ concrete ExtendSqi of Extend = CatSqi **
 
     CardCNCard card cn = cnConst (card.s ++ sp ++ cnStr cn) cn.g ;
 
-} 
+    AdjOrd ord = {
+      s = \\_,_,_,_ => ord.s
+    } ;
+
+    SentAP ap sc = {
+      s = \\spec,c,g,n => ap.s ! spec ! c ! g ! n ++ "që" ++ sc.s
+    } ;
+
+}

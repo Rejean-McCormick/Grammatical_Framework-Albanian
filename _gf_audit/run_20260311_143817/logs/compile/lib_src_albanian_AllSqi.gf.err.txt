@@ -1,0 +1,175 @@
+
+lib\src\albanian\NounSqi.gf:
+   Warning: no linearization of AdNum
+   Warning: no linearization of AdjDAP
+   Warning: no linearization of AdvCN
+   Warning: no linearization of AdvNP
+   Warning: no linearization of ApposCN
+   Warning: no linearization of ComplN2
+   Warning: no linearization of ComplN3
+   Warning: no linearization of CountNP
+   Warning: no linearization of DetDAP
+   Warning: no linearization of DetNP
+   Warning: no linearization of DetQuantOrd
+   Warning: no linearization of ExtAdvNP
+   Warning: no linearization of MassNP
+   Warning: no linearization of NumCard
+   Warning: no linearization of NumDecimal
+   Warning: no linearization of NumDigits
+   Warning: no linearization of NumNumeral
+   Warning: no linearization of OrdDigits
+   Warning: no linearization of OrdNumeral
+   Warning: no linearization of OrdNumeralSuperl
+   Warning: no linearization of OrdSuperl
+   Warning: no linearization of PPartNP
+   Warning: no linearization of PartNP
+   Warning: no linearization of PossNP
+   Warning: no linearization of PossPron
+   Warning: no linearization of PredetNP
+   Warning: no linearization of QuantityNP
+   Warning: no linearization of RelCN
+   Warning: no linearization of RelNP
+   Warning: no linearization of SentCN
+   Warning: no linearization of Use2N3
+   Warning: no linearization of Use3N3
+   Warning: no linearization of UsePN
+
+lib\src\albanian\NumeralSqi.gf:97-101:
+  Happened in the renaming of IIDig
+   Warning: atomic term inc
+            conflict ParamX.inc, NumeralSqi.inc
+            given Prelude, ParamX, CommonX, CatSqi, NumeralSqi
+
+lib\src\albanian\NumeralSqi.gf:
+   Warning: no linearization type for Sub1000000000, inserting default {s : Str}
+   Warning: no linearization type for Sub1000000000000, inserting default {s : Str}
+   Warning: no linearization of pot21
+   Warning: no linearization of pot31
+   Warning: no linearization of pot3as4
+   Warning: no linearization of pot3decimal
+   Warning: no linearization of pot4
+   Warning: no linearization of pot41
+   Warning: no linearization of pot4as5
+   Warning: no linearization of pot4decimal
+   Warning: no linearization of pot4plus
+   Warning: no linearization of pot5
+   Warning: no linearization of pot51
+   Warning: no linearization of pot5decimal
+   Warning: no linearization of pot5plus
+
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:34-35:
+     Happened in linearization of CompNP
+      Warning: missing lock field lock_NP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:40-41:
+     Happened in linearization of CompCN
+      Warning: missing lock field lock_CN
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:37-38:
+     Happened in linearization of CompAP
+      Warning: missing lock field lock_AP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:106-107:
+     Happened in linearization of SlashV2VNP
+      Warning: missing lock field lock_NP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:94-95:
+     Happened in linearization of SlashV2A
+      Warning: missing lock field lock_AP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:100-101:
+     Happened in linearization of Slash3V3
+      Warning: missing lock field lock_NP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:97-98:
+     Happened in linearization of Slash2V3
+      Warning: missing lock field lock_NP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:79-80:
+     Happened in linearization of ComplVA
+      Warning: missing lock field lock_AP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:61-62:
+     Happened in linearization of ComplSlash
+      Warning: missing lock field lock_NP
+
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:37:
+     Happened in linearization of ConjS
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:95:
+     Happened in linearization of ConjRS
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:49-52:
+     Happened in linearization of ConjNP
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:91:
+     Happened in linearization of ConjIAdv
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:113-117:
+     Happened in linearization of ConjDet
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:64-67:
+     Happened in linearization of ConjCN
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:83:
+     Happened in linearization of ConjAdv
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:87:
+     Happened in linearization of ConjAdV
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:77-79:
+     Happened in linearization of ConjAP
+      Warning: missing lock field lock_Conj
+
+lib\src\albanian\IdiomSqi.gf:
+   lib\src\albanian\IdiomSqi.gf:46-47:
+     Happened in linearization of ImpP3
+      Warning: missing lock field lock_NP
+lib\src\albanian\IdiomSqi.gf:
+   lib\src\albanian\IdiomSqi.gf:34-35:
+     Happened in linearization of ExistNPAdv
+      Warning: missing lock field lock_NP
+lib\src\albanian\IdiomSqi.gf:
+   lib\src\albanian\IdiomSqi.gf:31-32:
+     Happened in linearization of ExistNP
+      Warning: missing lock field lock_NP
+lib\src\albanian\IdiomSqi.gf:
+   lib\src\albanian\IdiomSqi.gf:20-21:
+     Happened in linearization of CleftNP
+      Warning: missing lock field lock_NP
+
+lib\src\albanian\TextSqi.gf:
+   Warning: function TColon is not in abstract
+   Warning: function TComma is not in abstract
+   Warning: function TSemicolon is not in abstract
+
+lib\src\albanian\PhraseSqi.gf:
+   Warning: function UttImpS is not in abstract
+   Warning: no linearization of PConjConj
+   Warning: no linearization of UttAP
+   Warning: no linearization of UttCN
+   Warning: no linearization of UttCard
+   Warning: no linearization of UttImpPl
+   Warning: no linearization of UttImpPol
+   Warning: no linearization of UttImpSg
+   Warning: no linearization of UttVP
+   Warning: no linearization of VocNP
+
+lib\src\albanian\GrammarSqi.gf:
+   cannot unify the information
+       oper sp : Str
+               = [] ;
+   in module RelativeSqi with
+       oper sp : Str
+               = [] ;
+   in module VerbSqi

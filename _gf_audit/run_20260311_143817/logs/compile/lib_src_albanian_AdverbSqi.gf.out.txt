@@ -1,0 +1,4 @@
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Adverb.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Adverb.gfo
+- compiling lib\src\albanian\AdverbSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\AdverbSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Adverb.pgf...

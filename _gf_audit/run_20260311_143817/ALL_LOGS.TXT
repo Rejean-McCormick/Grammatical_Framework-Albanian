@@ -1,0 +1,3482 @@
+
+
+==============================================================================
+BEGIN: master.log
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\master.log
+==============================================================================
+2026-03-11 14:38:17.142  RunDir: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817
+2026-03-11 14:38:17.147  ProjectRoot: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF
+2026-03-11 14:38:17.149  RglRoot: C:\mycode\Grammatical_Framework\gf-rgl\src
+2026-03-11 14:38:17.150  GfExe: C:\mycode\Grammatical_Framework\gf-3.12-windows\gf.exe
+2026-03-11 14:38:17.152  TimeoutSec: 60
+2026-03-11 14:38:17.154  NoCompile: False
+2026-03-11 14:38:17.155  ALL_SCAN_LOGS.TXT: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\ALL_SCAN_LOGS.TXT
+2026-03-11 14:38:17.156  GF_LIB_PATH set to: C:\mycode\Grammatical_Framework\gf-rgl\src
+2026-03-11 14:38:17.163  RGL folders found under RglRoot: prelude, abstract, common, api
+2026-03-11 14:38:17.166  Sanity: found Cat module at: C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Cat.gf
+2026-03-11 14:38:17.171  GfPath: lib/src:lib/src/albanian:common:abstract:prelude:api
+2026-03-11 14:38:17.173  Probing: gf --version (timeout 10s)
+2026-03-11 14:38:17.240  gf --version exit=0 timedOut=False
+2026-03-11 14:38:17.253  Enumerating files...
+2026-03-11 14:38:17.263  Found 33 GF files under C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian
+2026-03-11 14:38:17.271  ---- FILE: lib\src\albanian\AdjectiveSqi.gf ----
+2026-03-11 14:38:17.701  Compile exit=0 timedOut=False time=289ms kind=OK first=
+2026-03-11 14:38:17.704  ---- FILE: lib\src\albanian\AdverbSqi.gf ----
+2026-03-11 14:38:18.032  Compile exit=0 timedOut=False time=268ms kind=OK first=
+2026-03-11 14:38:18.034  ---- FILE: lib\src\albanian\AllSqi.gf ----
+2026-03-11 14:38:20.006  Compile exit=1 timedOut=False time=1950ms kind=OTHER first=lib\src\albanian\NounSqi.gf:
+2026-03-11 14:38:20.008  ---- FILE: lib\src\albanian\AllSqiAbs.gf ----
+2026-03-11 14:38:20.124  Compile exit=0 timedOut=False time=100ms kind=OK first=
+2026-03-11 14:38:20.127  ---- FILE: lib\src\albanian\CatSqi.gf ----
+2026-03-11 14:38:20.243  Compile exit=0 timedOut=False time=60ms kind=OK first=
+2026-03-11 14:38:20.245  ---- FILE: lib\src\albanian\ConjunctionSqi.gf ----
+2026-03-11 14:38:20.422  Compile exit=0 timedOut=False time=64ms kind=OK first=
+2026-03-11 14:38:20.424  ---- FILE: lib\src\albanian\ConstructionSqi.gf ----
+2026-03-11 14:38:21.497  Compile exit=0 timedOut=False time=985ms kind=OK first=
+2026-03-11 14:38:21.498  ---- FILE: lib\src\albanian\DocumentationSqi.gf ----
+2026-03-11 14:38:22.338  Compile exit=0 timedOut=False time=732ms kind=OK first=
+2026-03-11 14:38:22.339  ---- FILE: lib\src\albanian\ExtendSqi.gf ----
+2026-03-11 14:38:22.785  Compile exit=1 timedOut=False time=257ms kind=OTHER first=lib\src\albanian\GrammarSqi.gf:
+2026-03-11 14:38:22.786  ---- FILE: lib\src\albanian\ExtraSqi.gf ----
+2026-03-11 14:38:23.131  Compile exit=0 timedOut=False time=299ms kind=OK first=
+2026-03-11 14:38:23.133  ---- FILE: lib\src\albanian\ExtraSqiAbs.gf ----
+2026-03-11 14:38:23.179  Compile exit=0 timedOut=False time=27ms kind=OK first=
+2026-03-11 14:38:23.181  ---- FILE: lib\src\albanian\GrammarSqi.gf ----
+2026-03-11 14:38:23.426  Compile exit=1 timedOut=False time=222ms kind=OTHER first=lib\src\albanian\GrammarSqi.gf:
+2026-03-11 14:38:23.427  ---- FILE: lib\src\albanian\IdiomSqi.gf ----
+2026-03-11 14:38:23.540  Compile exit=0 timedOut=False time=75ms kind=OK first=
+2026-03-11 14:38:23.541  ---- FILE: lib\src\albanian\IrregSqi.gf ----
+2026-03-11 14:38:24.458  Compile exit=0 timedOut=False time=908ms kind=OK first=
+2026-03-11 14:38:24.459  ---- FILE: lib\src\albanian\LangSqi.gf ----
+2026-03-11 14:38:24.698  Compile exit=1 timedOut=False time=224ms kind=OTHER first=lib\src\albanian\GrammarSqi.gf:
+2026-03-11 14:38:24.700  ---- FILE: lib\src\albanian\LexiconSqi.gf ----
+2026-03-11 14:38:27.042  Compile exit=0 timedOut=False time=2321ms kind=OK first=
+2026-03-11 14:38:27.043  ---- FILE: lib\src\albanian\MorphoSqi.gf ----
+2026-03-11 14:38:43.904  Compile exit=0 timedOut=False time=84ms kind=OK first=
+2026-03-11 14:38:43.906  ---- FILE: lib\src\albanian\NamesSqi.gf ----
+2026-03-11 14:38:44.031  Compile exit=0 timedOut=False time=107ms kind=OK first=
+2026-03-11 14:38:44.032  ---- FILE: lib\src\albanian\NounSqi.gf ----
+2026-03-11 14:38:44.151  Compile exit=0 timedOut=False time=92ms kind=OK first=
+2026-03-11 14:38:44.153  ---- FILE: lib\src\albanian\NumeralSqi.gf ----
+2026-03-11 14:38:44.287  Compile exit=0 timedOut=False time=61ms kind=OK first=
+2026-03-11 14:38:44.288  ---- FILE: lib\src\albanian\ParadigmsSqi.gf ----
+2026-03-11 14:38:45.180  Compile exit=0 timedOut=False time=93ms kind=OK first=
+2026-03-11 14:38:45.181  ---- FILE: lib\src\albanian\PhraseSqi.gf ----
+2026-03-11 14:38:45.253  Compile exit=0 timedOut=False time=57ms kind=OK first=
+2026-03-11 14:38:45.254  ---- FILE: lib\src\albanian\QuestionSqi.gf ----
+2026-03-11 14:38:45.358  Compile exit=0 timedOut=False time=61ms kind=OK first=
+2026-03-11 14:38:45.359  ---- FILE: lib\src\albanian\RelativeSqi.gf ----
+2026-03-11 14:38:45.438  Compile exit=0 timedOut=False time=61ms kind=OK first=
+2026-03-11 14:38:45.439  ---- FILE: lib\src\albanian\ResSqi.gf ----
+2026-03-11 14:38:45.637  Compile exit=0 timedOut=False time=49ms kind=OK first=
+2026-03-11 14:38:45.638  ---- FILE: lib\src\albanian\SentenceSqi.gf ----
+2026-03-11 14:38:45.730  Compile exit=0 timedOut=False time=64ms kind=OK first=
+2026-03-11 14:38:45.732  ---- FILE: lib\src\albanian\StructuralSqi.gf ----
+2026-03-11 14:38:46.077  Compile exit=1 timedOut=False time=210ms kind=INTERNAL first=gf.exe: Internal error in GeneratePMCFG:
+2026-03-11 14:38:46.079  ---- FILE: lib\src\albanian\SymbolSqi.gf ----
+2026-03-11 14:38:46.239  Compile exit=0 timedOut=False time=102ms kind=OK first=
+2026-03-11 14:38:46.241  ---- FILE: lib\src\albanian\TenseSqi.gf ----
+2026-03-11 14:38:46.320  Compile exit=0 timedOut=False time=57ms kind=OK first=
+2026-03-11 14:38:46.321  ---- FILE: lib\src\albanian\TestAbs.gf ----
+2026-03-11 14:38:46.373  Compile exit=0 timedOut=False time=42ms kind=OK first=
+2026-03-11 14:38:46.375  ---- FILE: lib\src\albanian\TestSqi.gf ----
+2026-03-11 14:38:46.497  Compile exit=0 timedOut=False time=112ms kind=OK first=
+2026-03-11 14:38:46.498  ---- FILE: lib\src\albanian\TextSqi.gf ----
+2026-03-11 14:38:46.572  Compile exit=0 timedOut=False time=56ms kind=OK first=
+2026-03-11 14:38:46.573  ---- FILE: lib\src\albanian\VerbSqi.gf ----
+2026-03-11 14:38:46.696  Compile exit=0 timedOut=False time=62ms kind=OK first=
+2026-03-11 14:38:46.712  Wrote summary CSV:  C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\summary.csv
+2026-03-11 14:38:46.714  Wrote summary JSON: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\summary.json
+2026-03-11 14:38:46.727  Wrote top errors: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\top_errors.txt
+
+==============================================================================
+END: master.log
+==============================================================================
+
+==============================================================================
+BEGIN: ALL_SCAN_LOGS.TXT
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\ALL_SCAN_LOGS.TXT
+==============================================================================
+
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\AdjectiveSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_AdjectiveSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\AdjectiveSqi.gf
+REL:  lib\src\albanian\AdjectiveSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\AdjectiveSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\AdverbSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_AdverbSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\AdverbSqi.gf
+REL:  lib\src\albanian\AdverbSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\AdverbSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\AllSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_AllSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\AllSqi.gf
+REL:  lib\src\albanian\AllSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\AllSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\AllSqiAbs.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_AllSqiAbs.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\AllSqiAbs.gf
+REL:  lib\src\albanian\AllSqiAbs.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\AllSqiAbs.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\CatSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_CatSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\CatSqi.gf
+REL:  lib\src\albanian\CatSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\CatSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\ConjunctionSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ConjunctionSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\ConjunctionSqi.gf
+REL:  lib\src\albanian\ConjunctionSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\ConjunctionSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\ConstructionSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ConstructionSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\ConstructionSqi.gf
+REL:  lib\src\albanian\ConstructionSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\ConstructionSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\DocumentationSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_DocumentationSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\DocumentationSqi.gf
+REL:  lib\src\albanian\DocumentationSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\DocumentationSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\ExtendSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ExtendSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\ExtendSqi.gf
+REL:  lib\src\albanian\ExtendSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\ExtendSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\ExtraSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ExtraSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\ExtraSqi.gf
+REL:  lib\src\albanian\ExtraSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\ExtraSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\ExtraSqiAbs.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ExtraSqiAbs.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\ExtraSqiAbs.gf
+REL:  lib\src\albanian\ExtraSqiAbs.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\ExtraSqiAbs.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\GrammarSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_GrammarSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\GrammarSqi.gf
+REL:  lib\src\albanian\GrammarSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\GrammarSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\IdiomSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_IdiomSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\IdiomSqi.gf
+REL:  lib\src\albanian\IdiomSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\IdiomSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\IrregSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_IrregSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\IrregSqi.gf
+REL:  lib\src\albanian\IrregSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\IrregSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\LangSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_LangSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\LangSqi.gf
+REL:  lib\src\albanian\LangSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\LangSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\LexiconSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_LexiconSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\LexiconSqi.gf
+REL:  lib\src\albanian\LexiconSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\LexiconSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\MorphoSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_MorphoSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\MorphoSqi.gf
+REL:  lib\src\albanian\MorphoSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 2
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 25
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+lines 15634-15643: case stem of {
+lines 15679-15689: case stem of {
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\MorphoSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\NamesSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_NamesSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\NamesSqi.gf
+REL:  lib\src\albanian\NamesSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\NamesSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\NounSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_NounSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\NounSqi.gf
+REL:  lib\src\albanian\NounSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\NounSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\NumeralSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_NumeralSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\NumeralSqi.gf
+REL:  lib\src\albanian\NumeralSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\NumeralSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\ParadigmsSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ParadigmsSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\ParadigmsSqi.gf
+REL:  lib\src\albanian\ParadigmsSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 6
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 1
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+lines 9-609: = \form -> <case form of {
+lines 612-961: = \form1, form2 -> <case <form1, form2> of {
+lines 964-1051: = \form -> <case form of {
+lines 1054-1072: = \form1, form2 -> <case <form1, form2> of {
+lines 1075-1159: = \form -> <case form of {
+lines 1162-1200: = \form1, form2 -> <case <form1, form2> of {
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\ParadigmsSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\PhraseSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_PhraseSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\PhraseSqi.gf
+REL:  lib\src\albanian\PhraseSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\PhraseSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\QuestionSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_QuestionSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\QuestionSqi.gf
+REL:  lib\src\albanian\QuestionSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 1
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\QuestionSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\RelativeSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_RelativeSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\RelativeSqi.gf
+REL:  lib\src\albanian\RelativeSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\RelativeSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\ResSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ResSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\ResSqi.gf
+REL:  lib\src\albanian\ResSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\ResSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\SentenceSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_SentenceSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\SentenceSqi.gf
+REL:  lib\src\albanian\SentenceSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\SentenceSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\StructuralSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_StructuralSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\StructuralSqi.gf
+REL:  lib\src\albanian\StructuralSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\StructuralSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\SymbolSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_SymbolSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\SymbolSqi.gf
+REL:  lib\src\albanian\SymbolSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\SymbolSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\TenseSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_TenseSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\TenseSqi.gf
+REL:  lib\src\albanian\TenseSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\TenseSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\TestAbs.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_TestAbs.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\TestAbs.gf
+REL:  lib\src\albanian\TestAbs.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\TestAbs.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\TestSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_TestSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\TestSqi.gf
+REL:  lib\src\albanian\TestSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\TestSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\TextSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_TextSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\TextSqi.gf
+REL:  lib\src\albanian\TextSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\TextSqi.gf
+==============================================================================
+
+==============================================================================
+BEGIN: scan: lib\src\albanian\VerbSqi.gf
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_VerbSqi.gf.scan.txt
+==============================================================================
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\VerbSqi.gf
+REL:  lib\src\albanian\VerbSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+==============================================================================
+END: scan: lib\src\albanian\VerbSqi.gf
+==============================================================================
+
+==============================================================================
+END: ALL_SCAN_LOGS.TXT
+==============================================================================
+
+==============================================================================
+BEGIN: top_errors.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\top_errors.txt
+==============================================================================
+TOP ERRORS (bucketed by [Kind] FirstError)
+=========================================
+
+   3  [OTHER] lib\src\albanian\GrammarSqi.gf:
+   1  [INTERNAL] gf.exe: Internal error in GeneratePMCFG:
+   1  [OTHER] lib\src\albanian\NounSqi.gf:
+
+==============================================================================
+END: top_errors.txt
+==============================================================================
+
+==============================================================================
+BEGIN: summary.csv
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\summary.csv
+==============================================================================
+"File","ExitCode","DurationMs","Hit_SingleSlashEq","Hit_DoubleSlashDash","Hit_RuntimeStrMatch","Hit_UntypedCaseStrPat","Hit_UntypedTableStrPat","Hit_TrailingSpaces","ScanLog","CompileOut","CompileErr","ErrorKind","FirstError","ErrorDetail"
+"lib\src\albanian\AdjectiveSqi.gf","0","289","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_AdjectiveSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AdjectiveSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AdjectiveSqi.gf.err.txt","OK","",""
+"lib\src\albanian\AdverbSqi.gf","0","268","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_AdverbSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AdverbSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AdverbSqi.gf.err.txt","OK","",""
+"lib\src\albanian\AllSqi.gf","1","1950","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_AllSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AllSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AllSqi.gf.err.txt","OTHER","lib\src\albanian\NounSqi.gf:",""
+"lib\src\albanian\AllSqiAbs.gf","0","100","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_AllSqiAbs.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AllSqiAbs.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AllSqiAbs.gf.err.txt","OK","",""
+"lib\src\albanian\CatSqi.gf","0","60","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_CatSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_CatSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_CatSqi.gf.err.txt","OK","",""
+"lib\src\albanian\ConjunctionSqi.gf","0","64","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ConjunctionSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ConjunctionSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ConjunctionSqi.gf.err.txt","OK","",""
+"lib\src\albanian\ConstructionSqi.gf","0","985","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ConstructionSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ConstructionSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ConstructionSqi.gf.err.txt","OK","",""
+"lib\src\albanian\DocumentationSqi.gf","0","732","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_DocumentationSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_DocumentationSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_DocumentationSqi.gf.err.txt","OK","",""
+"lib\src\albanian\ExtendSqi.gf","1","257","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ExtendSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtendSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtendSqi.gf.err.txt","OTHER","lib\src\albanian\GrammarSqi.gf:",""
+"lib\src\albanian\ExtraSqi.gf","0","299","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ExtraSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtraSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtraSqi.gf.err.txt","OK","",""
+"lib\src\albanian\ExtraSqiAbs.gf","0","27","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ExtraSqiAbs.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtraSqiAbs.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtraSqiAbs.gf.err.txt","OK","",""
+"lib\src\albanian\GrammarSqi.gf","1","222","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_GrammarSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_GrammarSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_GrammarSqi.gf.err.txt","OTHER","lib\src\albanian\GrammarSqi.gf:",""
+"lib\src\albanian\IdiomSqi.gf","0","75","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_IdiomSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_IdiomSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_IdiomSqi.gf.err.txt","OK","",""
+"lib\src\albanian\IrregSqi.gf","0","908","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_IrregSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_IrregSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_IrregSqi.gf.err.txt","OK","",""
+"lib\src\albanian\LangSqi.gf","1","224","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_LangSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_LangSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_LangSqi.gf.err.txt","OTHER","lib\src\albanian\GrammarSqi.gf:",""
+"lib\src\albanian\LexiconSqi.gf","0","2321","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_LexiconSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_LexiconSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_LexiconSqi.gf.err.txt","OK","",""
+"lib\src\albanian\MorphoSqi.gf","0","84","0","0","0","2","0","25","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_MorphoSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_MorphoSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_MorphoSqi.gf.err.txt","OK","",""
+"lib\src\albanian\NamesSqi.gf","0","107","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_NamesSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NamesSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NamesSqi.gf.err.txt","OK","",""
+"lib\src\albanian\NounSqi.gf","0","92","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_NounSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NounSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NounSqi.gf.err.txt","OK","",""
+"lib\src\albanian\NumeralSqi.gf","0","61","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_NumeralSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NumeralSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NumeralSqi.gf.err.txt","OK","",""
+"lib\src\albanian\ParadigmsSqi.gf","0","93","0","0","0","6","0","1","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ParadigmsSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ParadigmsSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ParadigmsSqi.gf.err.txt","OK","",""
+"lib\src\albanian\PhraseSqi.gf","0","57","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_PhraseSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_PhraseSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_PhraseSqi.gf.err.txt","OK","",""
+"lib\src\albanian\QuestionSqi.gf","0","61","0","0","0","0","0","1","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_QuestionSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_QuestionSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_QuestionSqi.gf.err.txt","OK","",""
+"lib\src\albanian\RelativeSqi.gf","0","61","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_RelativeSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_RelativeSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_RelativeSqi.gf.err.txt","OK","",""
+"lib\src\albanian\ResSqi.gf","0","49","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_ResSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ResSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ResSqi.gf.err.txt","OK","",""
+"lib\src\albanian\SentenceSqi.gf","0","64","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_SentenceSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_SentenceSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_SentenceSqi.gf.err.txt","OK","",""
+"lib\src\albanian\StructuralSqi.gf","1","210","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_StructuralSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_StructuralSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_StructuralSqi.gf.err.txt","INTERNAL","gf.exe: Internal error in GeneratePMCFG:","GeneratePMCFG"
+"lib\src\albanian\SymbolSqi.gf","0","102","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_SymbolSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_SymbolSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_SymbolSqi.gf.err.txt","OK","",""
+"lib\src\albanian\TenseSqi.gf","0","57","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_TenseSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TenseSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TenseSqi.gf.err.txt","OK","",""
+"lib\src\albanian\TestAbs.gf","0","42","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_TestAbs.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TestAbs.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TestAbs.gf.err.txt","OK","",""
+"lib\src\albanian\TestSqi.gf","0","112","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_TestSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TestSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TestSqi.gf.err.txt","OK","",""
+"lib\src\albanian\TextSqi.gf","0","56","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_TextSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TextSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TextSqi.gf.err.txt","OK","",""
+"lib\src\albanian\VerbSqi.gf","0","62","0","0","0","0","0","0","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\scan\lib_src_albanian_VerbSqi.gf.scan.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_VerbSqi.gf.out.txt","C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_VerbSqi.gf.err.txt","OK","",""
+
+==============================================================================
+END: summary.csv
+==============================================================================
+
+==============================================================================
+BEGIN: summary.json
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\summary.json
+==============================================================================
+[
+  {
+    "File": "lib\\src\\albanian\\AdjectiveSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 289,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_AdjectiveSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_AdjectiveSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_AdjectiveSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\AdverbSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 268,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_AdverbSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_AdverbSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_AdverbSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\AllSqi.gf",
+    "ExitCode": 1,
+    "DurationMs": 1950,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_AllSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_AllSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_AllSqi.gf.err.txt",
+    "ErrorKind": "OTHER",
+    "FirstError": "lib\\src\\albanian\\NounSqi.gf:",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\AllSqiAbs.gf",
+    "ExitCode": 0,
+    "DurationMs": 100,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_AllSqiAbs.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_AllSqiAbs.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_AllSqiAbs.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\CatSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 60,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_CatSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_CatSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_CatSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\ConjunctionSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 64,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_ConjunctionSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ConjunctionSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ConjunctionSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\ConstructionSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 985,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_ConstructionSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ConstructionSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ConstructionSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\DocumentationSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 732,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_DocumentationSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_DocumentationSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_DocumentationSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\ExtendSqi.gf",
+    "ExitCode": 1,
+    "DurationMs": 257,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_ExtendSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ExtendSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ExtendSqi.gf.err.txt",
+    "ErrorKind": "OTHER",
+    "FirstError": "lib\\src\\albanian\\GrammarSqi.gf:",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\ExtraSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 299,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_ExtraSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ExtraSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ExtraSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\ExtraSqiAbs.gf",
+    "ExitCode": 0,
+    "DurationMs": 27,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_ExtraSqiAbs.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ExtraSqiAbs.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ExtraSqiAbs.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\GrammarSqi.gf",
+    "ExitCode": 1,
+    "DurationMs": 222,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_GrammarSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_GrammarSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_GrammarSqi.gf.err.txt",
+    "ErrorKind": "OTHER",
+    "FirstError": "lib\\src\\albanian\\GrammarSqi.gf:",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\IdiomSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 75,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_IdiomSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_IdiomSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_IdiomSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\IrregSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 908,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_IrregSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_IrregSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_IrregSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\LangSqi.gf",
+    "ExitCode": 1,
+    "DurationMs": 224,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_LangSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_LangSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_LangSqi.gf.err.txt",
+    "ErrorKind": "OTHER",
+    "FirstError": "lib\\src\\albanian\\GrammarSqi.gf:",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\LexiconSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 2321,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_LexiconSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_LexiconSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_LexiconSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\MorphoSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 84,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 2,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 25,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_MorphoSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_MorphoSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_MorphoSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\NamesSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 107,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_NamesSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_NamesSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_NamesSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\NounSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 92,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_NounSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_NounSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_NounSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\NumeralSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 61,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_NumeralSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_NumeralSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_NumeralSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\ParadigmsSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 93,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 6,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 1,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_ParadigmsSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ParadigmsSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ParadigmsSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\PhraseSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 57,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_PhraseSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_PhraseSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_PhraseSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\QuestionSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 61,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 1,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_QuestionSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_QuestionSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_QuestionSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\RelativeSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 61,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_RelativeSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_RelativeSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_RelativeSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\ResSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 49,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_ResSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ResSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_ResSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\SentenceSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 64,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_SentenceSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_SentenceSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_SentenceSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\StructuralSqi.gf",
+    "ExitCode": 1,
+    "DurationMs": 210,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_StructuralSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_StructuralSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_StructuralSqi.gf.err.txt",
+    "ErrorKind": "INTERNAL",
+    "FirstError": "gf.exe: Internal error in GeneratePMCFG:",
+    "ErrorDetail": "GeneratePMCFG"
+  },
+  {
+    "File": "lib\\src\\albanian\\SymbolSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 102,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_SymbolSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_SymbolSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_SymbolSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\TenseSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 57,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_TenseSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_TenseSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_TenseSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\TestAbs.gf",
+    "ExitCode": 0,
+    "DurationMs": 42,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_TestAbs.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_TestAbs.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_TestAbs.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\TestSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 112,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_TestSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_TestSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_TestSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\TextSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 56,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_TextSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_TextSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_TextSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  },
+  {
+    "File": "lib\\src\\albanian\\VerbSqi.gf",
+    "ExitCode": 0,
+    "DurationMs": 62,
+    "Hit_SingleSlashEq": 0,
+    "Hit_DoubleSlashDash": 0,
+    "Hit_RuntimeStrMatch": 0,
+    "Hit_UntypedCaseStrPat": 0,
+    "Hit_UntypedTableStrPat": 0,
+    "Hit_TrailingSpaces": 0,
+    "ScanLog": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\scan\\lib_src_albanian_VerbSqi.gf.scan.txt",
+    "CompileOut": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_VerbSqi.gf.out.txt",
+    "CompileErr": "C:\\mycode\\Grammatical_Framework\\Grammatical_Framework-Albanian\\_gf_audit\\run_20260311_143817\\logs\\compile\\lib_src_albanian_VerbSqi.gf.err.txt",
+    "ErrorKind": "OK",
+    "FirstError": "",
+    "ErrorDetail": ""
+  }
+]
+
+==============================================================================
+END: summary.json
+==============================================================================
+
+==============================================================================
+BEGIN: gf_version.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\gf_version.out.txt
+==============================================================================
+Grammatical Framework (GF) version 3.12.0
+Built on mingw32/x86_64 with ghc-9.6 at 2025-08-13 12:15:36
+Git info: commit fa2826d tag 
+
+Flags: interrupt server
+Shared folder: C:\cabal\x86_64-windows-ghc-9.6.7\gf-3.12.0
+
+==============================================================================
+END: gf_version.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: gf_version.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\gf_version.err.txt
+==============================================================================
+==============================================================================
+END: gf_version.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_AdjectiveSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AdjectiveSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\CatSqi.gf:
+   Warning: no linearization type for DAP, inserting default {s : Str}
+   Warning: no linearization type for GN, inserting default {s : Str}
+   Warning: no linearization type for LN, inserting default {s : Str}
+   Warning: no linearization type for PN, inserting default {s : Str}
+   Warning: no linearization type for SN, inserting default {s : Str}
+
+==============================================================================
+END: compile: lib_src_albanian_AdjectiveSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_AdjectiveSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AdjectiveSqi.gf.out.txt
+==============================================================================
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Common.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Common.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Cat.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Cat.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Adjective.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Adjective.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\prelude\Predef.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Predef.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\prelude\Prelude.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Prelude.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\common\ParamX.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\ParamX.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\common\CommonX.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\CommonX.gfo
+- compiling lib\src\albanian\ResSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\ResSqi.gfo
+- compiling lib\src\albanian\CatSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\CatSqi.gfo
+- compiling lib\src\albanian\AdjectiveSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\AdjectiveSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Adjective.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_AdjectiveSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_AdverbSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AdverbSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\AdverbSqi.gf:
+   lib\src\albanian\AdverbSqi.gf:36:
+     Happened in linearization of PrepNP
+      Warning: missing lock field lock_Prep
+      Warning: missing lock field lock_NP
+lib\src\albanian\AdverbSqi.gf:
+   lib\src\albanian\AdverbSqi.gf:30-31:
+     Happened in linearization of ComparAdvAdj
+      Warning: missing lock field lock_NP
+
+==============================================================================
+END: compile: lib_src_albanian_AdverbSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_AdverbSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AdverbSqi.gf.out.txt
+==============================================================================
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Adverb.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Adverb.gfo
+- compiling lib\src\albanian\AdverbSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\AdverbSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Adverb.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_AdverbSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_AllSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AllSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\NounSqi.gf:
+   Warning: no linearization of AdNum
+   Warning: no linearization of AdjDAP
+   Warning: no linearization of AdvCN
+   Warning: no linearization of AdvNP
+   Warning: no linearization of ApposCN
+   Warning: no linearization of ComplN2
+   Warning: no linearization of ComplN3
+   Warning: no linearization of CountNP
+   Warning: no linearization of DetDAP
+   Warning: no linearization of DetNP
+   Warning: no linearization of DetQuantOrd
+   Warning: no linearization of ExtAdvNP
+   Warning: no linearization of MassNP
+   Warning: no linearization of NumCard
+   Warning: no linearization of NumDecimal
+   Warning: no linearization of NumDigits
+   Warning: no linearization of NumNumeral
+   Warning: no linearization of OrdDigits
+   Warning: no linearization of OrdNumeral
+   Warning: no linearization of OrdNumeralSuperl
+   Warning: no linearization of OrdSuperl
+   Warning: no linearization of PPartNP
+   Warning: no linearization of PartNP
+   Warning: no linearization of PossNP
+   Warning: no linearization of PossPron
+   Warning: no linearization of PredetNP
+   Warning: no linearization of QuantityNP
+   Warning: no linearization of RelCN
+   Warning: no linearization of RelNP
+   Warning: no linearization of SentCN
+   Warning: no linearization of Use2N3
+   Warning: no linearization of Use3N3
+   Warning: no linearization of UsePN
+
+lib\src\albanian\NumeralSqi.gf:97-101:
+  Happened in the renaming of IIDig
+   Warning: atomic term inc
+            conflict ParamX.inc, NumeralSqi.inc
+            given Prelude, ParamX, CommonX, CatSqi, NumeralSqi
+
+lib\src\albanian\NumeralSqi.gf:
+   Warning: no linearization type for Sub1000000000, inserting default {s : Str}
+   Warning: no linearization type for Sub1000000000000, inserting default {s : Str}
+   Warning: no linearization of pot21
+   Warning: no linearization of pot31
+   Warning: no linearization of pot3as4
+   Warning: no linearization of pot3decimal
+   Warning: no linearization of pot4
+   Warning: no linearization of pot41
+   Warning: no linearization of pot4as5
+   Warning: no linearization of pot4decimal
+   Warning: no linearization of pot4plus
+   Warning: no linearization of pot5
+   Warning: no linearization of pot51
+   Warning: no linearization of pot5decimal
+   Warning: no linearization of pot5plus
+
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:34-35:
+     Happened in linearization of CompNP
+      Warning: missing lock field lock_NP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:40-41:
+     Happened in linearization of CompCN
+      Warning: missing lock field lock_CN
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:37-38:
+     Happened in linearization of CompAP
+      Warning: missing lock field lock_AP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:106-107:
+     Happened in linearization of SlashV2VNP
+      Warning: missing lock field lock_NP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:94-95:
+     Happened in linearization of SlashV2A
+      Warning: missing lock field lock_AP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:100-101:
+     Happened in linearization of Slash3V3
+      Warning: missing lock field lock_NP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:97-98:
+     Happened in linearization of Slash2V3
+      Warning: missing lock field lock_NP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:79-80:
+     Happened in linearization of ComplVA
+      Warning: missing lock field lock_AP
+lib\src\albanian\VerbSqi.gf:
+   lib\src\albanian\VerbSqi.gf:61-62:
+     Happened in linearization of ComplSlash
+      Warning: missing lock field lock_NP
+
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:37:
+     Happened in linearization of ConjS
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:95:
+     Happened in linearization of ConjRS
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:49-52:
+     Happened in linearization of ConjNP
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:91:
+     Happened in linearization of ConjIAdv
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:113-117:
+     Happened in linearization of ConjDet
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:64-67:
+     Happened in linearization of ConjCN
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:83:
+     Happened in linearization of ConjAdv
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:87:
+     Happened in linearization of ConjAdV
+      Warning: missing lock field lock_Conj
+lib\src\albanian\ConjunctionSqi.gf:
+   lib\src\albanian\ConjunctionSqi.gf:77-79:
+     Happened in linearization of ConjAP
+      Warning: missing lock field lock_Conj
+
+lib\src\albanian\IdiomSqi.gf:
+   lib\src\albanian\IdiomSqi.gf:46-47:
+     Happened in linearization of ImpP3
+      Warning: missing lock field lock_NP
+lib\src\albanian\IdiomSqi.gf:
+   lib\src\albanian\IdiomSqi.gf:34-35:
+     Happened in linearization of ExistNPAdv
+      Warning: missing lock field lock_NP
+lib\src\albanian\IdiomSqi.gf:
+   lib\src\albanian\IdiomSqi.gf:31-32:
+     Happened in linearization of ExistNP
+      Warning: missing lock field lock_NP
+lib\src\albanian\IdiomSqi.gf:
+   lib\src\albanian\IdiomSqi.gf:20-21:
+     Happened in linearization of CleftNP
+      Warning: missing lock field lock_NP
+
+lib\src\albanian\TextSqi.gf:
+   Warning: function TColon is not in abstract
+   Warning: function TComma is not in abstract
+   Warning: function TSemicolon is not in abstract
+
+lib\src\albanian\PhraseSqi.gf:
+   Warning: function UttImpS is not in abstract
+   Warning: no linearization of PConjConj
+   Warning: no linearization of UttAP
+   Warning: no linearization of UttCN
+   Warning: no linearization of UttCard
+   Warning: no linearization of UttImpPl
+   Warning: no linearization of UttImpPol
+   Warning: no linearization of UttImpSg
+   Warning: no linearization of UttVP
+   Warning: no linearization of VocNP
+
+lib\src\albanian\GrammarSqi.gf:
+   cannot unify the information
+       oper sp : Str
+               = [] ;
+   in module RelativeSqi with
+       oper sp : Str
+               = [] ;
+   in module VerbSqi
+
+==============================================================================
+END: compile: lib_src_albanian_AllSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_AllSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AllSqi.gf.out.txt
+==============================================================================
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Noun.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Noun.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Verb.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Verb.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Numeral.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Numeral.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Sentence.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Sentence.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Question.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Question.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Relative.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Relative.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Conjunction.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Conjunction.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Phrase.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Phrase.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Text.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Text.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Structural.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Structural.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Idiom.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Idiom.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Tense.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Tense.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Names.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Names.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\NumeralTransfer.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\NumeralTransfer.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Transfer.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Transfer.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Grammar.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Grammar.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Lexicon.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Lexicon.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Construction.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Construction.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Documentation.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Documentation.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\MarkHTML.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\MarkHTML.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Markup.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Markup.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Lang.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Lang.gfo
+- compiling lib\src\albanian\AllSqiAbs.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\AllSqiAbs.gfo
+- compiling lib\src\albanian\MorphoSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\MorphoSqi.gfo
+- compiling lib\src\albanian\NounSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\NounSqi.gfo
+- compiling lib\src\albanian\NumeralSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\NumeralSqi.gfo
+- compiling lib\src\albanian\VerbSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\VerbSqi.gfo
+- compiling lib\src\albanian\SentenceSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\SentenceSqi.gfo
+- compiling lib\src\albanian\QuestionSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\QuestionSqi.gfo
+- compiling lib\src\albanian\RelativeSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\RelativeSqi.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\prelude\Coordination.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Coordination.gfo
+- compiling lib\src\albanian\ConjunctionSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\ConjunctionSqi.gfo
+- compiling lib\src\albanian\IdiomSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\IdiomSqi.gfo
+- compiling lib\src\albanian\TextSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\TextSqi.gfo
+- compiling lib\src\albanian\PhraseSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\PhraseSqi.gfo
+- compiling lib\src\albanian\GrammarSqi.gf... 
+==============================================================================
+END: compile: lib_src_albanian_AllSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_AllSqiAbs.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AllSqiAbs.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_AllSqiAbs.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_AllSqiAbs.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_AllSqiAbs.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\AllSqiAbs.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_AllSqiAbs.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_CatSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_CatSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_CatSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_CatSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_CatSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Cat.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_CatSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ConjunctionSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ConjunctionSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_ConjunctionSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ConjunctionSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ConjunctionSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Conjunction.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_ConjunctionSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ConstructionSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ConstructionSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\ConstructionSqi.gf:
+   Warning: no linearization type for Hour, inserting default {s : Str}
+   Warning: no linearization type for Language, inserting default {s : Str}
+   Warning: no linearization type for Month, inserting default {s : Str}
+   Warning: no linearization type for Monthday, inserting default {s : Str}
+   Warning: no linearization type for Timeunit, inserting default {s : Str}
+   Warning: no linearization type for Weekday, inserting default {s : Str}
+   Warning: no linearization type for Year, inserting default {s : Str}
+   Warning: no linearization of afrikaans_Language
+   Warning: no linearization of amharic_Language
+   Warning: no linearization of april_Month
+   Warning: no linearization of arabic_Language
+   Warning: no linearization of august_Month
+   Warning: no linearization of bottle_of_CN
+   Warning: no linearization of bulgarian_Language
+   Warning: no linearization of catalan_Language
+   Warning: no linearization of chinese_Language
+   Warning: no linearization of cup_of_CN
+   Warning: no linearization of danish_Language
+   Warning: no linearization of day_Timeunit
+   Warning: no linearization of december_Month
+   Warning: no linearization of dutch_Language
+   Warning: no linearization of eightHour
+   Warning: no linearization of eighteenHour
+   Warning: no linearization of elevenHour
+   Warning: no linearization of english_Language
+   Warning: no linearization of estonian_Language
+   Warning: no linearization of february_Month
+   Warning: no linearization of few_X_short_of_Y
+   Warning: no linearization of fifteenHour
+   Warning: no linearization of finnish_Language
+   Warning: no linearization of fiveHour
+   Warning: no linearization of fourHour
+   Warning: no linearization of fourteenHour
+   Warning: no linearization of french_Language
+   Warning: no linearization of friday_Weekday
+   Warning: no linearization of german_Language
+   Warning: no linearization of glass_of_CN
+   Warning: no linearization of greek_Language
+   Warning: no linearization of hebrew_Language
+   Warning: no linearization of hindi_Language
+   Warning: no linearization of hour_Timeunit
+   Warning: no linearization of italian_Language
+   Warning: no linearization of january_Month
+   Warning: no linearization of japanese_Language
+   Warning: no linearization of july_Month
+   Warning: no linearization of june_Month
+   Warning: no linearization of latin_Language
+   Warning: no linearization of latvian_Language
+   Warning: no linearization of maltese_Language
+   Warning: no linearization of march_Month
+   Warning: no linearization of may_Month
+   Warning: no linearization of minute_Timeunit
+   Warning: no linearization of monday_Weekday
+   Warning: no linearization of month_Timeunit
+   Warning: no linearization of n_unit_CN
+   Warning: no linearization of nepali_Language
+   Warning: no linearization of nineHour
+   Warning: no linearization of nineteenHour
+   Warning: no linearization of norwegian_Language
+   Warning: no linearization of november_Month
+   Warning: no linearization of october_Month
+   Warning: no linearization of oneHour
+   Warning: no linearization of persian_Language
+   Warning: no linearization of polish_Language
+   Warning: no linearization of punjabi_Language
+   Warning: no linearization of romanian_Language
+   Warning: no linearization of russian_Language
+   Warning: no linearization of saturday_Weekday
+   Warning: no linearization of second_Timeunit
+   Warning: no linearization of september_Month
+   Warning: no linearization of sevenHour
+   Warning: no linearization of seventeenHour
+   Warning: no linearization of sindhi_Language
+   Warning: no linearization of sixHour
+   Warning: no linearization of sixteenHour
+   Warning: no linearization of spanish_Language
+   Warning: no linearization of sunday_Weekday
+   Warning: no linearization of swahili_Language
+   Warning: no linearization of swedish_Language
+   Warning: no linearization of tenHour
+   Warning: no linearization of thai_Language
+   Warning: no linearization of thirteenHour
+   Warning: no linearization of threeHour
+   Warning: no linearization of thursday_Weekday
+   Warning: no linearization of timeHour
+   Warning: no linearization of timeHourMinute
+   Warning: no linearization of timeunitRange
+   Warning: no linearization of tuesday_Weekday
+   Warning: no linearization of turkish_Language
+   Warning: no linearization of twelveHour
+   Warning: no linearization of twentyFourHour
+   Warning: no linearization of twentyHour
+   Warning: no linearization of twentyOneHour
+   Warning: no linearization of twentyThreeHour
+   Warning: no linearization of twentyTwoHour
+   Warning: no linearization of twoHour
+   Warning: no linearization of urdu_Language
+   Warning: no linearization of wednesday_Weekday
+   Warning: no linearization of week_Timeunit
+   Warning: no linearization of year_Timeunit
+
+==============================================================================
+END: compile: lib_src_albanian_ConstructionSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ConstructionSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ConstructionSqi.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\ConstructionSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\ConstructionSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Construction.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_ConstructionSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_DocumentationSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_DocumentationSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\DocumentationSqi.gf:52-108:
+  Happened in the renaming of InflectionV
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+
+lib\src\albanian\DocumentationSqi.gf:
+   Warning: no linearization of InflectionA2
+   Warning: no linearization of InflectionAdA
+   Warning: no linearization of InflectionAdN
+   Warning: no linearization of InflectionAdV
+   Warning: no linearization of InflectionGN
+   Warning: no linearization of InflectionLN
+   Warning: no linearization of InflectionN2
+   Warning: no linearization of InflectionN3
+   Warning: no linearization of InflectionPN
+   Warning: no linearization of InflectionPrep
+   Warning: no linearization of InflectionSN
+   Warning: no linearization of InflectionV2
+   Warning: no linearization of InflectionV2A
+   Warning: no linearization of InflectionV2Q
+   Warning: no linearization of InflectionV2S
+   Warning: no linearization of InflectionV2V
+   Warning: no linearization of InflectionV3
+   Warning: no linearization of InflectionVA
+   Warning: no linearization of InflectionVQ
+   Warning: no linearization of InflectionVS
+   Warning: no linearization of InflectionVV
+
+==============================================================================
+END: compile: lib_src_albanian_DocumentationSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_DocumentationSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_DocumentationSqi.gf.out.txt
+==============================================================================
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\prelude\HTML.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\HTML.gfo
+- compiling lib\src\albanian\DocumentationSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\DocumentationSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Documentation.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_DocumentationSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ExtendSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtendSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\GrammarSqi.gf:
+   cannot unify the information
+       oper sp : Str
+               = [] ;
+   in module RelativeSqi with
+       oper sp : Str
+               = [] ;
+   in module VerbSqi
+
+==============================================================================
+END: compile: lib_src_albanian_ExtendSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ExtendSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtendSqi.gf.out.txt
+==============================================================================
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Extend.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Extend.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\common\ExtendFunctor.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\ExtendFunctor.gfo
+- compiling lib\src\albanian\GrammarSqi.gf... 
+==============================================================================
+END: compile: lib_src_albanian_ExtendSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ExtraSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtraSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\ExtraSqi.gf:
+   lib\src\albanian\ExtraSqi.gf:57:
+     Happened in linearization of PrepCN
+      Warning: missing lock field lock_CN
+lib\src\albanian\ExtraSqi.gf:
+   lib\src\albanian\ExtraSqi.gf:54:
+     Happened in linearization of ICompAP
+      Warning: missing lock field lock_AP
+lib\src\albanian\ExtraSqi.gf:
+   lib\src\albanian\ExtraSqi.gf:62:
+     Happened in linearization of FocAP
+      Warning: missing lock field lock_AP
+
+==============================================================================
+END: compile: lib_src_albanian_ExtraSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ExtraSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtraSqi.gf.out.txt
+==============================================================================
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Extra.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Extra.gfo
+- compiling lib\src\albanian\ExtraSqiAbs.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\ExtraSqiAbs.gfo
+- compiling lib\src\albanian\ExtraSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\ExtraSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\ExtraSqiAbs.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_ExtraSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ExtraSqiAbs.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtraSqiAbs.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_ExtraSqiAbs.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ExtraSqiAbs.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ExtraSqiAbs.gf.out.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_ExtraSqiAbs.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_GrammarSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_GrammarSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\GrammarSqi.gf:
+   cannot unify the information
+       oper sp : Str
+               = [] ;
+   in module RelativeSqi with
+       oper sp : Str
+               = [] ;
+   in module VerbSqi
+
+==============================================================================
+END: compile: lib_src_albanian_GrammarSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_GrammarSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_GrammarSqi.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\GrammarSqi.gf... 
+==============================================================================
+END: compile: lib_src_albanian_GrammarSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_IdiomSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_IdiomSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_IdiomSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_IdiomSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_IdiomSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Idiom.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_IdiomSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_IrregSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_IrregSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\ParadigmsSqi.gf:1373:
+  Happened in the renaming of noPrep
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1264-1267:
+  Happened in the renaming of mkV3
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1244-1247:
+  Happened in the renaming of mkV2V
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1249-1252:
+  Happened in the renaming of mkV2S
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1254-1257:
+  Happened in the renaming of mkV2Q
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1259-1262:
+  Happened in the renaming of mkV2A
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1234-1237:
+  Happened in the renaming of mkV2
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1286-1331:
+  Happened in the renaming of mkQuant
+   Warning: atomic term Quant
+            conflict ResSqi.Quant, CatSqi.Quant
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1360-1366:
+  Happened in the renaming of mkPron
+   Warning: atomic term Pron
+            conflict ResSqi.Pron, CatSqi.Pron
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1372:
+  Happened in the renaming of mkPrep
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1207-1210:
+  Happened in the renaming of mkN2
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1333-1355:
+  Happened in the renaming of mkDet
+   Warning: atomic term Det
+            conflict ResSqi.Det, CatSqi.Det
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1224-1227:
+  Happened in the renaming of mkA2
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+
+==============================================================================
+END: compile: lib_src_albanian_IrregSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_IrregSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_IrregSqi.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\ParadigmsSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\ParadigmsSqi.gfo
+- compiling lib\src\albanian\IrregSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\IrregSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\IrregSqi.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_IrregSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_LangSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_LangSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\GrammarSqi.gf:
+   cannot unify the information
+       oper sp : Str
+               = [] ;
+   in module RelativeSqi with
+       oper sp : Str
+               = [] ;
+   in module VerbSqi
+
+==============================================================================
+END: compile: lib_src_albanian_LangSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_LangSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_LangSqi.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\GrammarSqi.gf... 
+==============================================================================
+END: compile: lib_src_albanian_LangSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_LexiconSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_LexiconSqi.gf.err.txt
+==============================================================================
+
+lib\src\albanian\LexiconSqi.gf:
+   Warning: no linearization of add_V3
+   Warning: no linearization of alas_Interj
+   Warning: no linearization of already_Adv
+   Warning: no linearization of animal_N
+   Warning: no linearization of answer_V2S
+   Warning: no linearization of apartment_N
+   Warning: no linearization of art_N
+   Warning: no linearization of ashes_N
+   Warning: no linearization of ask_V2Q
+   Warning: no linearization of baby_N
+   Warning: no linearization of back_N
+   Warning: no linearization of bad_A
+   Warning: no linearization of bank_N
+   Warning: no linearization of bark_N
+   Warning: no linearization of beautiful_A
+   Warning: no linearization of become_VA
+   Warning: no linearization of beer_N
+   Warning: no linearization of beg_V2V
+   Warning: no linearization of belly_N
+   Warning: no linearization of big_A
+   Warning: no linearization of bike_N
+   Warning: no linearization of bird_N
+   Warning: no linearization of bite_V2
+   Warning: no linearization of black_A
+   Warning: no linearization of blood_N
+   Warning: no linearization of blow_V
+   Warning: no linearization of blue_A
+   Warning: no linearization of boat_N
+   Warning: no linearization of bone_N
+   Warning: no linearization of book_N
+   Warning: no linearization of boot_N
+   Warning: no linearization of boss_N
+   Warning: no linearization of boy_N
+   Warning: no linearization of bread_N
+   Warning: no linearization of break_V2
+   Warning: no linearization of breast_N
+   Warning: no linearization of breathe_V
+   Warning: no linearization of broad_A
+   Warning: no linearization of brother_N2
+   Warning: no linearization of brown_A
+   Warning: no linearization of burn_V
+   Warning: no linearization of butter_N
+   Warning: no linearization of buy_V2
+   Warning: no linearization of camera_N
+   Warning: no linearization of cap_N
+   Warning: no linearization of car_N
+   Warning: no linearization of carpet_N
+   Warning: no linearization of cat_N
+   Warning: no linearization of ceiling_N
+   Warning: no linearization of chair_N
+   Warning: no linearization of cheese_N
+   Warning: no linearization of child_N
+   Warning: no linearization of church_N
+   Warning: no linearization of city_N
+   Warning: no linearization of clean_A
+   Warning: no linearization of clever_A
+   Warning: no linearization of close_V2
+   Warning: no linearization of cloud_N
+   Warning: no linearization of coat_N
+   Warning: no linearization of cold_A
+   Warning: no linearization of come_V
+   Warning: no linearization of computer_N
+   Warning: no linearization of correct_A
+   Warning: no linearization of count_V2
+   Warning: no linearization of country_N
+   Warning: no linearization of cousin_N
+   Warning: no linearization of cow_N
+   Warning: no linearization of cut_V2
+   Warning: no linearization of day_N
+   Warning: no linearization of die_V
+   Warning: no linearization of dig_V
+   Warning: no linearization of dirty_A
+   Warning: no linearization of distance_N3
+   Warning: no linearization of do_V2
+   Warning: no linearization of doctor_N
+   Warning: no linearization of dog_N
+   Warning: no linearization of door_N
+   Warning: no linearization of drink_V2
+   Warning: no linearization of dry_A
+   Warning: no linearization of dull_A
+   Warning: no linearization of dust_N
+   Warning: no linearization of ear_N
+   Warning: no linearization of earth_N
+   Warning: no linearization of easy_A2V
+   Warning: no linearization of eat_V2
+   Warning: no linearization of egg_N
+   Warning: no linearization of empty_A
+   Warning: no linearization of enemy_N
+   Warning: no linearization of eye_N
+   Warning: no linearization of factory_N
+   Warning: no linearization of fall_V
+   Warning: no linearization of far_Adv
+   Warning: no linearization of fat_N
+   Warning: no linearization of father_N2
+   Warning: no linearization of fear_V2
+   Warning: no linearization of fear_VS
+   Warning: no linearization of feather_N
+   Warning: no linearization of fight_V2
+   Warning: no linearization of find_V2
+   Warning: no linearization of fingernail_N
+   Warning: no linearization of fire_N
+   Warning: no linearization of fish_N
+   Warning: no linearization of float_V
+   Warning: no linearization of floor_N
+   Warning: no linearization of flow_V
+   Warning: no linearization of flower_N
+   Warning: no linearization of fly_V
+   Warning: no linearization of fog_N
+   Warning: no linearization of foot_N
+   Warning: no linearization of forest_N
+   Warning: no linearization of forget_V2
+   Warning: no linearization of freeze_V
+   Warning: no linearization of fridge_N
+   Warning: no linearization of friend_N
+   Warning: no linearization of fruit_N
+   Warning: no linearization of full_A
+   Warning: no linearization of fun_AV
+   Warning: no linearization of garden_N
+   Warning: no linearization of girl_N
+   Warning: no linearization of give_V3
+   Warning: no linearization of glove_N
+   Warning: no linearization of go_V
+   Warning: no linearization of gold_N
+   Warning: no linearization of grammar_N
+   Warning: no linearization of grass_N
+   Warning: no linearization of green_A
+   Warning: no linearization of guts_N
+   Warning: no linearization of hair_N
+   Warning: no linearization of hand_N
+   Warning: no linearization of harbour_N
+   Warning: no linearization of hat_N
+   Warning: no linearization of hate_V2
+   Warning: no linearization of head_N
+   Warning: no linearization of hear_V2
+   Warning: no linearization of heart_N
+   Warning: no linearization of heavy_A
+   Warning: no linearization of hill_N
+   Warning: no linearization of hit_V2
+   Warning: no linearization of hold_V2
+   Warning: no linearization of hope_VS
+   Warning: no linearization of horn_N
+   Warning: no linearization of horse_N
+   Warning: no linearization of hot_A
+   Warning: no linearization of house_N
+   Warning: no linearization of hunt_V2
+   Warning: no linearization of husband_N
+   Warning: no linearization of ice_N
+   Warning: no linearization of important_A
+   Warning: no linearization of industry_N
+   Warning: no linearization of iron_N
+   Warning: no linearization of john_PN
+   Warning: no linearization of jump_V
+   Warning: no linearization of kill_V2
+   Warning: no linearization of king_N
+   Warning: no linearization of knee_N
+   Warning: no linearization of know_V2
+   Warning: no linearization of know_VQ
+   Warning: no linearization of know_VS
+   Warning: no linearization of lake_N
+   Warning: no linearization of lamp_N
+   Warning: no linearization of language_N
+   Warning: no linearization of laugh_V
+   Warning: no linearization of leaf_N
+   Warning: no linearization of learn_V2
+   Warning: no linearization of leather_N
+   Warning: no linearization of leave_V2
+   Warning: no linearization of left_Ord
+   Warning: no linearization of leg_N
+   Warning: no linearization of lie_V
+   Warning: no linearization of like_V2
+   Warning: no linearization of listen_V2
+   Warning: no linearization of live_V
+   Warning: no linearization of liver_N
+   Warning: no linearization of long_A
+   Warning: no linearization of lose_V2
+   Warning: no linearization of louse_N
+   Warning: no linearization of love_N
+   Warning: no linearization of love_V2
+   Warning: no linearization of man_N
+   Warning: no linearization of married_A2
+   Warning: no linearization of meat_N
+   Warning: no linearization of milk_N
+   Warning: no linearization of moon_N
+   Warning: no linearization of mother_N2
+   Warning: no linearization of mountain_N
+   Warning: no linearization of mouth_N
+   Warning: no linearization of music_N
+   Warning: no linearization of name_N
+   Warning: no linearization of narrow_A
+   Warning: no linearization of near_A
+   Warning: no linearization of neck_N
+   Warning: no linearization of new_A
+   Warning: no linearization of newspaper_N
+   Warning: no linearization of night_N
+   Warning: no linearization of nose_N
+   Warning: no linearization of now_Adv
+   Warning: no linearization of number_N
+   Warning: no linearization of oil_N
+   Warning: no linearization of old_A
+   Warning: no linearization of open_V2
+   Warning: no linearization of paint_V2A
+   Warning: no linearization of paper_N
+   Warning: no linearization of paris_PN
+   Warning: no linearization of peace_N
+   Warning: no linearization of pen_N
+   Warning: no linearization of person_N
+   Warning: no linearization of planet_N
+   Warning: no linearization of plastic_N
+   Warning: no linearization of play_V
+   Warning: no linearization of play_V2
+   Warning: no linearization of policeman_N
+   Warning: no linearization of priest_N
+   Warning: no linearization of probable_AS
+   Warning: no linearization of pull_V2
+   Warning: no linearization of push_V2
+   Warning: no linearization of put_V2
+   Warning: no linearization of queen_N
+   Warning: no linearization of question_N
+   Warning: no linearization of radio_N
+   Warning: no linearization of rain_N
+   Warning: no linearization of rain_V0
+   Warning: no linearization of read_V2
+   Warning: no linearization of ready_A
+   Warning: no linearization of reason_N
+   Warning: no linearization of red_A
+   Warning: no linearization of religion_N
+   Warning: no linearization of restaurant_N
+   Warning: no linearization of right_Ord
+   Warning: no linearization of river_N
+   Warning: no linearization of road_N
+   Warning: no linearization of rock_N
+   Warning: no linearization of roof_N
+   Warning: no linearization of root_N
+   Warning: no linearization of rope_N
+   Warning: no linearization of rotten_A
+   Warning: no linearization of round_A
+   Warning: no linearization of rub_V2
+   Warning: no linearization of rubber_N
+   Warning: no linearization of rule_N
+   Warning: no linearization of run_V
+   Warning: no linearization of salt_N
+   Warning: no linearization of sand_N
+   Warning: no linearization of say_VS
+   Warning: no linearization of school_N
+   Warning: no linearization of science_N
+   Warning: no linearization of scratch_V2
+   Warning: no linearization of sea_N
+   Warning: no linearization of see_V2
+   Warning: no linearization of seed_N
+   Warning: no linearization of seek_V2
+   Warning: no linearization of sell_V3
+   Warning: no linearization of send_V3
+   Warning: no linearization of sew_V
+   Warning: no linearization of sharp_A
+   Warning: no linearization of sheep_N
+   Warning: no linearization of ship_N
+   Warning: no linearization of shirt_N
+   Warning: no linearization of shoe_N
+   Warning: no linearization of shop_N
+   Warning: no linearization of short_A
+   Warning: no linearization of silver_N
+   Warning: no linearization of sing_V
+   Warning: no linearization of sister_N
+   Warning: no linearization of sit_V
+   Warning: no linearization of skin_N
+   Warning: no linearization of sky_N
+   Warning: no linearization of sleep_V
+   Warning: no linearization of small_A
+   Warning: no linearization of smell_V
+   Warning: no linearization of smoke_N
+   Warning: no linearization of smooth_A
+   Warning: no linearization of snake_N
+   Warning: no linearization of snow_N
+   Warning: no linearization of sock_N
+   Warning: no linearization of song_N
+   Warning: no linearization of speak_V2
+   Warning: no linearization of spit_V
+   Warning: no linearization of split_V2
+   Warning: no linearization of squeeze_V2
+   Warning: no linearization of stab_V2
+   Warning: no linearization of stand_V
+   Warning: no linearization of star_N
+   Warning: no linearization of steel_N
+   Warning: no linearization of stick_N
+   Warning: no linearization of stone_N
+   Warning: no linearization of stop_V
+   Warning: no linearization of stove_N
+   Warning: no linearization of straight_A
+   Warning: no linearization of student_N
+   Warning: no linearization of stupid_A
+   Warning: no linearization of suck_V2
+   Warning: no linearization of sun_N
+   Warning: no linearization of swell_V
+   Warning: no linearization of swim_V
+   Warning: no linearization of switch8off_V2
+   Warning: no linearization of switch8on_V2
+   Warning: no linearization of table_N
+   Warning: no linearization of tail_N
+   Warning: no linearization of talk_V3
+   Warning: no linearization of teach_V2
+   Warning: no linearization of teacher_N
+   Warning: no linearization of television_N
+   Warning: no linearization of thick_A
+   Warning: no linearization of thin_A
+   Warning: no linearization of think_V
+   Warning: no linearization of throw_V2
+   Warning: no linearization of tie_V2
+   Warning: no linearization of today_Adv
+   Warning: no linearization of tongue_N
+   Warning: no linearization of tooth_N
+   Warning: no linearization of train_N
+   Warning: no linearization of travel_V
+   Warning: no linearization of tree_N
+   Warning: no linearization of turn_V
+   Warning: no linearization of ugly_A
+   Warning: no linearization of uncertain_A
+   Warning: no linearization of understand_V2
+   Warning: no linearization of university_N
+   Warning: no linearization of village_N
+   Warning: no linearization of vomit_V
+   Warning: no linearization of wait_V2
+   Warning: no linearization of walk_V
+   Warning: no linearization of war_N
+   Warning: no linearization of warm_A
+   Warning: no linearization of wash_V2
+   Warning: no linearization of watch_V2
+   Warning: no linearization of water_N
+   Warning: no linearization of wet_A
+   Warning: no linearization of white_A
+   Warning: no linearization of wide_A
+   Warning: no linearization of wife_N
+   Warning: no linearization of win_V2
+   Warning: no linearization of wind_N
+   Warning: no linearization of window_N
+   Warning: no linearization of wine_N
+   Warning: no linearization of wing_N
+   Warning: no linearization of wipe_V2
+   Warning: no linearization of woman_N
+   Warning: no linearization of wonder_VQ
+   Warning: no linearization of wood_N
+   Warning: no linearization of worm_N
+   Warning: no linearization of write_V2
+   Warning: no linearization of year_N
+   Warning: no linearization of yellow_A
+   Warning: no linearization of young_A
+
+==============================================================================
+END: compile: lib_src_albanian_LexiconSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_LexiconSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_LexiconSqi.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\LexiconSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\LexiconSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Lexicon.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_LexiconSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_MorphoSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_MorphoSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_MorphoSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_MorphoSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_MorphoSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\MorphoSqi.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_MorphoSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_NamesSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NamesSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_NamesSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_NamesSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NamesSqi.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\NamesSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\NamesSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\NamesSqi.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_NamesSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_NounSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NounSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_NounSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_NounSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NounSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Noun.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_NounSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_NumeralSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NumeralSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_NumeralSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_NumeralSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_NumeralSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Numeral.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_NumeralSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ParadigmsSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ParadigmsSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_ParadigmsSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ParadigmsSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ParadigmsSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\ParadigmsSqi.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_ParadigmsSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_PhraseSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_PhraseSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_PhraseSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_PhraseSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_PhraseSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Phrase.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_PhraseSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_QuestionSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_QuestionSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_QuestionSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_QuestionSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_QuestionSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Question.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_QuestionSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_RelativeSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_RelativeSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_RelativeSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_RelativeSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_RelativeSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Relative.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_RelativeSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ResSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ResSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_ResSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_ResSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_ResSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\ResSqi.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_ResSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_SentenceSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_SentenceSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_SentenceSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_SentenceSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_SentenceSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Sentence.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_SentenceSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_StructuralSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_StructuralSqi.gf.err.txt
+==============================================================================
+gf.exe: Internal error in GeneratePMCFG:
+    evalTerm (Predef.error "Cannot find an inflection rule")
+CallStack (from HasCallStack):
+  error, called at src/compiler\GF\Compile\GeneratePMCFG.hs:621:13 in gf-3.12.0-inplace:GF.Compile.GeneratePMCFG
+
+==============================================================================
+END: compile: lib_src_albanian_StructuralSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_StructuralSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_StructuralSqi.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\StructuralSqi.gf... 
+==============================================================================
+END: compile: lib_src_albanian_StructuralSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_SymbolSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_SymbolSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_SymbolSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_SymbolSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_SymbolSqi.gf.out.txt
+==============================================================================
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\prelude\PredefAbs.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\PredefAbs.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Symbol.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\Symbol.gfo
+- compiling lib\src\albanian\SymbolSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\SymbolSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Symbol.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_SymbolSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_TenseSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TenseSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_TenseSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_TenseSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TenseSqi.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\TenseSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\TenseSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Tense.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_TenseSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_TestAbs.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TestAbs.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_TestAbs.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_TestAbs.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TestAbs.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\TestAbs.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\TestAbs.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\TestAbs.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_TestAbs.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_TestSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TestSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_TestSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_TestSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TestSqi.gf.out.txt
+==============================================================================
+- compiling lib\src\albanian\TestSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\gfo\TestSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\TestAbs.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_TestSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_TextSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TextSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_TextSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_TextSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_TextSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Text.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_TextSqi.gf.out.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_VerbSqi.gf.err.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_VerbSqi.gf.err.txt
+==============================================================================
+==============================================================================
+END: compile: lib_src_albanian_VerbSqi.gf.err.txt
+==============================================================================
+
+==============================================================================
+BEGIN: compile: lib_src_albanian_VerbSqi.gf.out.txt
+PATH: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\logs\compile\lib_src_albanian_VerbSqi.gf.out.txt
+==============================================================================
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_143817\artifacts\out\Verb.pgf...
+
+==============================================================================
+END: compile: lib_src_albanian_VerbSqi.gf.out.txt
+==============================================================================

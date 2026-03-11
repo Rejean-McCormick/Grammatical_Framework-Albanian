@@ -1,0 +1,74 @@
+
+lib\src\albanian\DocumentationSqi.gf:52-108:
+  Happened in the renaming of InflectionV
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Pres
+            conflict ResSqi.Pres, ParamX.Pres
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+   Warning: atomic term Past
+            conflict ResSqi.Past, ParamX.Past
+            given HTML, Prelude, ResSqi, ParamX, CommonX, CatSqi,
+                  DocumentationSqi
+
+lib\src\albanian\DocumentationSqi.gf:
+   Warning: no linearization of InflectionA2
+   Warning: no linearization of InflectionAdA
+   Warning: no linearization of InflectionAdN
+   Warning: no linearization of InflectionAdV
+   Warning: no linearization of InflectionGN
+   Warning: no linearization of InflectionLN
+   Warning: no linearization of InflectionN2
+   Warning: no linearization of InflectionN3
+   Warning: no linearization of InflectionPN
+   Warning: no linearization of InflectionPrep
+   Warning: no linearization of InflectionSN
+   Warning: no linearization of InflectionV2
+   Warning: no linearization of InflectionV2A
+   Warning: no linearization of InflectionV2Q
+   Warning: no linearization of InflectionV2S
+   Warning: no linearization of InflectionV2V
+   Warning: no linearization of InflectionV3
+   Warning: no linearization of InflectionVA
+   Warning: no linearization of InflectionVQ
+   Warning: no linearization of InflectionVS
+   Warning: no linearization of InflectionVV

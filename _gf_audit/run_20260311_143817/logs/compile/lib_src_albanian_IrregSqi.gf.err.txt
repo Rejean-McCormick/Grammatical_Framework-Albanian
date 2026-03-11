@@ -1,0 +1,81 @@
+
+lib\src\albanian\ParadigmsSqi.gf:1373:
+  Happened in the renaming of noPrep
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1264-1267:
+  Happened in the renaming of mkV3
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1244-1247:
+  Happened in the renaming of mkV2V
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1249-1252:
+  Happened in the renaming of mkV2S
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1254-1257:
+  Happened in the renaming of mkV2Q
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1259-1262:
+  Happened in the renaming of mkV2A
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1234-1237:
+  Happened in the renaming of mkV2
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1286-1331:
+  Happened in the renaming of mkQuant
+   Warning: atomic term Quant
+            conflict ResSqi.Quant, CatSqi.Quant
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1360-1366:
+  Happened in the renaming of mkPron
+   Warning: atomic term Pron
+            conflict ResSqi.Pron, CatSqi.Pron
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1372:
+  Happened in the renaming of mkPrep
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1207-1210:
+  Happened in the renaming of mkN2
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1333-1355:
+  Happened in the renaming of mkDet
+   Warning: atomic term Det
+            conflict ResSqi.Det, CatSqi.Det
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi
+lib\src\albanian\ParadigmsSqi.gf:1224-1227:
+  Happened in the renaming of mkA2
+   Warning: atomic term Prep
+            conflict ResSqi.Prep, CatSqi.Prep
+            given ResSqi, CatSqi, Prelude, Predef, MorphoSqi, ParadigmsSqi

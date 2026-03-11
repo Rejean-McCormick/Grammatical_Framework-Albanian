@@ -1,0 +1,27 @@
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\IrregSqi.gf
+REL:  lib\src\albanian\IrregSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 0
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 0
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.

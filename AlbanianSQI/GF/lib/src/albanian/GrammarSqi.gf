@@ -2,14 +2,13 @@ concrete GrammarSqi of Grammar =
   NounSqi,
   AdjectiveSqi,
   NumeralSqi,
-  VerbSqi-[sp],
-  SentenceSqi,
-  QuestionSqi,
+  VerbSqi,
+  SentenceSqi-[sep],
+  QuestionSqi-[sep],
   RelativeSqi,
   ConjunctionSqi,
   IdiomSqi,
   TextSqi,
   PhraseSqi
   ** {
-
 } ;

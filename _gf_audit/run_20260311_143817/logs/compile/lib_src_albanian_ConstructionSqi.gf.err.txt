@@ -1,0 +1,102 @@
+
+lib\src\albanian\ConstructionSqi.gf:
+   Warning: no linearization type for Hour, inserting default {s : Str}
+   Warning: no linearization type for Language, inserting default {s : Str}
+   Warning: no linearization type for Month, inserting default {s : Str}
+   Warning: no linearization type for Monthday, inserting default {s : Str}
+   Warning: no linearization type for Timeunit, inserting default {s : Str}
+   Warning: no linearization type for Weekday, inserting default {s : Str}
+   Warning: no linearization type for Year, inserting default {s : Str}
+   Warning: no linearization of afrikaans_Language
+   Warning: no linearization of amharic_Language
+   Warning: no linearization of april_Month
+   Warning: no linearization of arabic_Language
+   Warning: no linearization of august_Month
+   Warning: no linearization of bottle_of_CN
+   Warning: no linearization of bulgarian_Language
+   Warning: no linearization of catalan_Language
+   Warning: no linearization of chinese_Language
+   Warning: no linearization of cup_of_CN
+   Warning: no linearization of danish_Language
+   Warning: no linearization of day_Timeunit
+   Warning: no linearization of december_Month
+   Warning: no linearization of dutch_Language
+   Warning: no linearization of eightHour
+   Warning: no linearization of eighteenHour
+   Warning: no linearization of elevenHour
+   Warning: no linearization of english_Language
+   Warning: no linearization of estonian_Language
+   Warning: no linearization of february_Month
+   Warning: no linearization of few_X_short_of_Y
+   Warning: no linearization of fifteenHour
+   Warning: no linearization of finnish_Language
+   Warning: no linearization of fiveHour
+   Warning: no linearization of fourHour
+   Warning: no linearization of fourteenHour
+   Warning: no linearization of french_Language
+   Warning: no linearization of friday_Weekday
+   Warning: no linearization of german_Language
+   Warning: no linearization of glass_of_CN
+   Warning: no linearization of greek_Language
+   Warning: no linearization of hebrew_Language
+   Warning: no linearization of hindi_Language
+   Warning: no linearization of hour_Timeunit
+   Warning: no linearization of italian_Language
+   Warning: no linearization of january_Month
+   Warning: no linearization of japanese_Language
+   Warning: no linearization of july_Month
+   Warning: no linearization of june_Month
+   Warning: no linearization of latin_Language
+   Warning: no linearization of latvian_Language
+   Warning: no linearization of maltese_Language
+   Warning: no linearization of march_Month
+   Warning: no linearization of may_Month
+   Warning: no linearization of minute_Timeunit
+   Warning: no linearization of monday_Weekday
+   Warning: no linearization of month_Timeunit
+   Warning: no linearization of n_unit_CN
+   Warning: no linearization of nepali_Language
+   Warning: no linearization of nineHour
+   Warning: no linearization of nineteenHour
+   Warning: no linearization of norwegian_Language
+   Warning: no linearization of november_Month
+   Warning: no linearization of october_Month
+   Warning: no linearization of oneHour
+   Warning: no linearization of persian_Language
+   Warning: no linearization of polish_Language
+   Warning: no linearization of punjabi_Language
+   Warning: no linearization of romanian_Language
+   Warning: no linearization of russian_Language
+   Warning: no linearization of saturday_Weekday
+   Warning: no linearization of second_Timeunit
+   Warning: no linearization of september_Month
+   Warning: no linearization of sevenHour
+   Warning: no linearization of seventeenHour
+   Warning: no linearization of sindhi_Language
+   Warning: no linearization of sixHour
+   Warning: no linearization of sixteenHour
+   Warning: no linearization of spanish_Language
+   Warning: no linearization of sunday_Weekday
+   Warning: no linearization of swahili_Language
+   Warning: no linearization of swedish_Language
+   Warning: no linearization of tenHour
+   Warning: no linearization of thai_Language
+   Warning: no linearization of thirteenHour
+   Warning: no linearization of threeHour
+   Warning: no linearization of thursday_Weekday
+   Warning: no linearization of timeHour
+   Warning: no linearization of timeHourMinute
+   Warning: no linearization of timeunitRange
+   Warning: no linearization of tuesday_Weekday
+   Warning: no linearization of turkish_Language
+   Warning: no linearization of twelveHour
+   Warning: no linearization of twentyFourHour
+   Warning: no linearization of twentyHour
+   Warning: no linearization of twentyOneHour
+   Warning: no linearization of twentyThreeHour
+   Warning: no linearization of twentyTwoHour
+   Warning: no linearization of twoHour
+   Warning: no linearization of urdu_Language
+   Warning: no linearization of wednesday_Weekday
+   Warning: no linearization of week_Timeunit
+   Warning: no linearization of year_Timeunit

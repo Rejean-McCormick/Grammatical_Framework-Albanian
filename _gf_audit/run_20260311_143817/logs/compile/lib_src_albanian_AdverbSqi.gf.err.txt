@@ -1,0 +1,10 @@
+
+lib\src\albanian\AdverbSqi.gf:
+   lib\src\albanian\AdverbSqi.gf:36:
+     Happened in linearization of PrepNP
+      Warning: missing lock field lock_Prep
+      Warning: missing lock field lock_NP
+lib\src\albanian\AdverbSqi.gf:
+   lib\src\albanian\AdverbSqi.gf:30-31:
+     Happened in linearization of ComparAdvAdj
+      Warning: missing lock field lock_NP

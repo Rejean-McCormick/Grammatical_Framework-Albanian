@@ -1,12 +1,16 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
-REM ---- CONFIG (edit if needed) ----
-set "AUDIT_PS1=C:\MyCode\Grammatical_Framework\gf_audit.ps1"
-set "PROJECT_ROOT=C:\MyCode\Grammatical_Framework\AlbanianSQI\GF"
-set "RGL_ROOT=C:\MyCode\Grammatical_Framework\gf-rgl\src"
-set "OUT_ROOT=C:\MyCode\Grammatical_Framework\_gf_audit"
-set "GF_EXE=C:\MyCode\SemantiK_Architect\gf-3.12-windows\gf.exe"
+REM ---- BASE PATHS ----
+for %%I in ("%~dp0.") do set "SCRIPT_DIR=%%~fI"
+for %%I in ("%SCRIPT_DIR%\..") do set "WORK_ROOT=%%~fI"
+
+REM ---- CONFIG ----
+set "AUDIT_PS1=%SCRIPT_DIR%\gf_audit.ps1"
+set "PROJECT_ROOT=%SCRIPT_DIR%\AlbanianSQI\GF"
+set "RGL_ROOT=%WORK_ROOT%\gf-rgl\src"
+set "OUT_ROOT=%SCRIPT_DIR%\_gf_audit"
+set "GF_EXE=%WORK_ROOT%\gf-3.12-windows\gf.exe"
 set "TIMEOUT_SEC=60"
 
 REM ---- PREP LOG PATHS ----
@@ -17,6 +21,8 @@ set "TRANSCRIPT=%OUT_ROOT%\launcher_%TS%_transcript.txt"
 
 echo ================================================== > "%LAUNCH_LOG%"
 echo Launch time: %date% %time%>> "%LAUNCH_LOG%"
+echo SCRIPT_DIR=%SCRIPT_DIR%>> "%LAUNCH_LOG%"
+echo WORK_ROOT=%WORK_ROOT%>> "%LAUNCH_LOG%"
 echo AUDIT_PS1=%AUDIT_PS1%>> "%LAUNCH_LOG%"
 echo PROJECT_ROOT=%PROJECT_ROOT%>> "%LAUNCH_LOG%"
 echo RGL_ROOT=%RGL_ROOT%>> "%LAUNCH_LOG%"
@@ -45,6 +51,12 @@ if not exist "%RGL_ROOT%" (
   pause
   exit /b 2
 )
+if not exist "%RGL_ROOT%\abstract\Cat.gf" (
+  echo ERROR: Expected RGL file not found: "%RGL_ROOT%\abstract\Cat.gf" >> "%LAUNCH_LOG%"
+  echo ERROR: Expected RGL file not found: "%RGL_ROOT%\abstract\Cat.gf"
+  pause
+  exit /b 2
+)
 if not exist "%GF_EXE%" (
   echo ERROR: gf.exe not found: "%GF_EXE%" >> "%LAUNCH_LOG%"
   echo ERROR: gf.exe not found: "%GF_EXE%"
@@ -60,7 +72,7 @@ if errorlevel 1 (
 )
 
 REM ---- RUN (PowerShell wrapper captures full exception + stack) ----
-echo Running gf_audit... (see transcript) 
+echo Running gf_audit... (see transcript)
 echo Running gf_audit... >> "%LAUNCH_LOG%"
 
 pwsh -NoProfile -ExecutionPolicy Bypass -Command ^

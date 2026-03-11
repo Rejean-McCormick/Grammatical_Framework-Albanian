@@ -1,0 +1,7 @@
+
+lib\src\albanian\CatSqi.gf:
+   Warning: no linearization type for DAP, inserting default {s : Str}
+   Warning: no linearization type for GN, inserting default {s : Str}
+   Warning: no linearization type for LN, inserting default {s : Str}
+   Warning: no linearization type for PN, inserting default {s : Str}
+   Warning: no linearization type for SN, inserting default {s : Str}

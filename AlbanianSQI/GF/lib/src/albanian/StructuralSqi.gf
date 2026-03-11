@@ -1,5 +1,8 @@
+-- GF/lib/src/albanian/StructuralSqi.gf
 concrete StructuralSqi of Structural = CatSqi **
   open Prelude, ParamX, ResSqi, (P = ParadigmsSqi) in {
+
+flags optimize = all ;
 
 oper
   mkNPConst : Str -> GenNum -> Person -> CatSqi.NP =
@@ -51,19 +54,16 @@ oper
       spec = Indef
     } ;
 
-  mkSubj : Str -> Subj =
-    \x -> lin Subj {s = x} ;
-
 lin
   above_Prep = ResSqi.mkPrep "sipër" ;
   after_Prep = ResSqi.mkPrep "pas" ;
   all_Predet = P.mkPredet "të gjithë" ;
-  almost_AdA = {s = "pothuajse"} ;
-  almost_AdN = {s = "pothuajse"} ;
-  although_Subj = mkSubj "megjithëse" ;
-  always_AdV = {s = "gjithmonë"} ;
+  almost_AdA = P.mkAdA "pothuajse" ;
+  almost_AdN = P.mkAdN "pothuajse" ;
+  although_Subj = P.mkSubj "megjithëse" ;
+  always_AdV = P.mkAdV "gjithmonë" ;
   and_Conj = P.mkConj "dhe" ;
-  because_Subj = mkSubj "sepse" ;
+  because_Subj = P.mkSubj "sepse" ;
   before_Prep = ResSqi.mkPrep "para" ;
   behind_Prep = ResSqi.mkPrep "pas" ;
   between_Prep = ResSqi.mkPrep "midis" ;
@@ -102,28 +102,25 @@ lin
 
   i_Pron = ResSqi.mkPron "unë" "mua" "mua" "meje" "më" "më" (GSg Masc) P1 ;
 
-  if_Subj = mkSubj "nëse" ;
+  if_Subj = P.mkSubj "nëse" ;
   in8front_Prep = ResSqi.mkPrep "përpara" ;
   in_Prep = ResSqi.mkPrep "në" ;
 
   it_Pron = ResSqi.mkPron "ai" "atë" "atij" "atij" "e" "i" (GSg Masc) P3 ;
 
-  less_CAdv = {s = "më pak" ; p = "se"} ;
+  less_CAdv = lin CAdv {s = "më pak" ; p = "se"} ;
 
   many_Det = mkDetInv "shumë" Pl ;
-  more_CAdv = {s = "më" ; p = "se"} ;
+  more_CAdv = lin CAdv {s = "më" ; p = "se"} ;
 
   most_Predet = P.mkPredet "shumica" ;
   much_Det = mkDetInv "shumë" Sg ;
 
   must_VV = P.mkVV (P.mkV "duhet") ;
 
-  no_Phr = {s = "jo"} ;
-  no_Utt = {s = "jo"} ;
+  no_Utt = lin Utt {s = "jo"} ;
 
   on_Prep = ResSqi.mkPrep "mbi" ;
-
-  one_Quant = mkQuantInv "një" ;
 
   only_Predet = P.mkPredet "vetëm" ;
 
@@ -136,11 +133,11 @@ lin
 
   possess_Prep = ResSqi.mkPrep "i" ;
 
-  quite_Adv = {s = "mjaft"} ;
+  quite_Adv = P.mkAdA "mjaft" ;
 
   she_Pron = ResSqi.mkPron "ajo" "atë" "asaj" "asaj" "e" "i" (GSg Fem) P3 ;
 
-  so_AdA = {s = "aq"} ;
+  so_AdA = P.mkAdA "aq" ;
 
   someSg_Det = mkDetInv "disa" Sg ;
   somePl_Det = mkDetInv "disa" Pl ;
@@ -155,7 +152,7 @@ lin
                    "atij" "atyre" "asaj" "atyre"
                    "atij" "atyre" "asaj" "atyre" ;
 
-  that_Subj = mkSubj "që" ;
+  that_Subj = P.mkSubj "që" ;
 
   there_Adv = P.mkAdv "atje" ;
   there7to_Adv = P.mkAdv "deri atje" ;
@@ -174,11 +171,11 @@ lin
   through_Prep = ResSqi.mkPrep "përmes" ;
   to_Prep = ResSqi.mkPrep "në" ;
 
-  too_AdA = {s = "tepër"} ;
+  too_AdA = P.mkAdA "tepër" ;
 
   under_Prep = ResSqi.mkPrep "nën" ;
 
-  very_AdA = {s = "shumë"} ;
+  very_AdA = P.mkAdA "shumë" ;
 
   want_VV = P.mkVV (P.mkV "dua") ;
 
@@ -188,7 +185,7 @@ lin
   whatSg_IP = P.mkIP "çfarë" ;
 
   when_IAdv = P.mkIAdv "kur" ;
-  when_Subj = mkSubj "kur" ;
+  when_Subj = P.mkSubj "kur" ;
 
   where_IAdv = P.mkIAdv "ku" ;
 
@@ -202,8 +199,7 @@ lin
   with_Prep = ResSqi.mkPrep "me" ;
   without_Prep = ResSqi.mkPrep "pa" ;
 
-  yes_Phr = {s = "po"} ;
-  yes_Utt = {s = "po"} ;
+  yes_Utt = lin Utt {s = "po"} ;
 
   youSg_Pron = ResSqi.mkPron "ti" "ty" "ty" "teje" "të" "të" (GSg Masc) P2 ;
   youPl_Pron = ResSqi.mkPron "ju" "ju" "juve" "jush" "ju" "ju" GPl P2 ;
@@ -212,20 +208,20 @@ lin
   no_Quant = mkQuantInv "asnjë" ;
   not_Predet = P.mkPredet "jo" ;
 
-  if_then_Conj = P.mkConj "nëse . atëherë" ;
+  if_then_Conj = P.mkConj "nëse atëherë" ;
 
-  at_least_AdN = {s = "të paktën"} ;
-  at_most_AdN = {s = "të shumtën"} ;
+  at_least_AdN = P.mkAdN "të paktën" ;
+  at_most_AdN = P.mkAdN "të shumtën" ;
 
   nobody_NP = mkNPConstP3 "askush" ;
   nothing_NP = mkNPConstP3 "asgjë" ;
 
   except_Prep = ResSqi.mkPrep "përveç" ;
 
-  as_CAdv = {s = "po aq" ; p = "sa"} ;
+  as_CAdv = lin CAdv {s = "po aq" ; p = "sa"} ;
 
   have_V2 = P.mkV2 (P.mkV "kam") ;
 
-  language_title_Utt = {s = "shqip"} ;
+  language_title_Utt = lin Utt {s = "shqip"} ;
 
 } ;

@@ -1,0 +1,13 @@
+
+lib\src\albanian\ExtraSqi.gf:
+   lib\src\albanian\ExtraSqi.gf:57:
+     Happened in linearization of PrepCN
+      Warning: missing lock field lock_CN
+lib\src\albanian\ExtraSqi.gf:
+   lib\src\albanian\ExtraSqi.gf:54:
+     Happened in linearization of ICompAP
+      Warning: missing lock field lock_AP
+lib\src\albanian\ExtraSqi.gf:
+   lib\src\albanian\ExtraSqi.gf:62:
+     Happened in linearization of FocAP
+      Warning: missing lock field lock_AP

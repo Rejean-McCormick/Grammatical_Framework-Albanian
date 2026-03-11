@@ -6,10 +6,6 @@ concrete SymbolSqi of Symbol = CatSqi
     Symb, [Symb] = SS ;
 
   oper
-    tokToStr : Tok -> Str = \t -> Predef.toStr Tok t ;
-    showIntStr : Int -> Str = \i -> tokToStr (Predef.show Int i) ;
-    showFloatStr : Float -> Str = \f -> tokToStr (Predef.show Float f) ;
-
     agr3 : Number -> Gender -> Agr = \n,g ->
       { gn = case n of {Sg => GSg g ; Pl => GPl} ; p = P3 } ;
 
@@ -44,8 +40,8 @@ concrete SymbolSqi of Symbol = CatSqi
 
     SymbPN symb = mkPN symb.s ;
 
-    IntPN i = mkPN (showIntStr i) ;
-    FloatPN f = mkPN (showFloatStr f) ;
+    IntPN i = mkPN i.s ;
+    FloatPN f = mkPN f.s ;
     NumPN c = mkPN c.s ;
 
     SymbNum symb = mkCard symb.s ;
@@ -59,7 +55,7 @@ concrete SymbolSqi of Symbol = CatSqi
       let
         n : CatSqi.CN = lin CN cn ;
       in
-      mkNP_NumCN (showIntStr i) Pl n.g (cnCaseIndef n Pl) ;
+      mkNP_NumCN i.s Pl n.g (cnCaseIndef n Pl) ;
 
     CNNumNP cn c =
       let
