@@ -1,0 +1,9 @@
+
+lib\src\albanian\GrammarSqi.gf:
+   cannot unify the information
+       oper sp : Str
+               = [] ;
+   in module RelativeSqi with
+       oper sp : Str
+               = [] ;
+   in module VerbSqi

@@ -1,0 +1,13 @@
+================================================== 
+Launch time: 2026-03-11 16:37:20,22
+SCRIPT_DIR=C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian
+WORK_ROOT=C:\mycode\Grammatical_Framework
+AUDIT_PS1=C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\gf_audit.ps1
+PROJECT_ROOT=C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF
+RGL_ROOT=C:\mycode\Grammatical_Framework\gf-rgl\src
+OUT_ROOT=C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit
+GF_EXE=C:\mycode\Grammatical_Framework\gf-3.12-windows\gf.exe
+TIMEOUT_SEC=60
+TRANSCRIPT=C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\launcher_20260311_163720_transcript.txt
+================================================== 
+Running gf_audit... 

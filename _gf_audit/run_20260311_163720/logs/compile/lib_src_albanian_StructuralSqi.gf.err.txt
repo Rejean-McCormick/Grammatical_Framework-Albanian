@@ -1,0 +1,4 @@
+gf.exe: Internal error in GeneratePMCFG:
+    evalTerm (Predef.error "Cannot find an inflection rule")
+CallStack (from HasCallStack):
+  error, called at src/compiler\GF\Compile\GeneratePMCFG.hs:621:13 in gf-3.12.0-inplace:GF.Compile.GeneratePMCFG

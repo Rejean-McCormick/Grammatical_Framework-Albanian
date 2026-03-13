@@ -1,0 +1,6 @@
+TOP ERRORS (bucketed by [Kind] FirstError)
+=========================================
+
+   3  [OTHER] lib\src\albanian\GrammarSqi.gf:
+   1  [INTERNAL] gf.exe: Internal error in GeneratePMCFG:
+   1  [OTHER] lib\src\albanian\NounSqi.gf:

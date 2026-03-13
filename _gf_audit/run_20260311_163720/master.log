@@ -1,0 +1,86 @@
+2026-03-11 16:37:20.696  RunDir: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720
+2026-03-11 16:37:20.702  ProjectRoot: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF
+2026-03-11 16:37:20.704  RglRoot: C:\mycode\Grammatical_Framework\gf-rgl\src
+2026-03-11 16:37:20.705  GfExe: C:\mycode\Grammatical_Framework\gf-3.12-windows\gf.exe
+2026-03-11 16:37:20.707  TimeoutSec: 60
+2026-03-11 16:37:20.709  NoCompile: False
+2026-03-11 16:37:20.710  ALL_SCAN_LOGS.TXT: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\ALL_SCAN_LOGS.TXT
+2026-03-11 16:37:20.711  GF_LIB_PATH set to: C:\mycode\Grammatical_Framework\gf-rgl\src
+2026-03-11 16:37:20.718  RGL folders found under RglRoot: prelude, abstract, common, api
+2026-03-11 16:37:20.721  Sanity: found Cat module at: C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Cat.gf
+2026-03-11 16:37:20.725  GfPath: lib/src:lib/src/albanian:common:abstract:prelude:api
+2026-03-11 16:37:20.727  Probing: gf --version (timeout 10s)
+2026-03-11 16:37:20.763  gf --version exit=0 timedOut=False
+2026-03-11 16:37:20.775  Enumerating files...
+2026-03-11 16:37:20.786  Found 33 GF files under C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian
+2026-03-11 16:37:20.793  ---- FILE: lib\src\albanian\AdjectiveSqi.gf ----
+2026-03-11 16:37:21.208  Compile exit=0 timedOut=False time=287ms kind=OK first=
+2026-03-11 16:37:21.212  ---- FILE: lib\src\albanian\AdverbSqi.gf ----
+2026-03-11 16:37:21.509  Compile exit=0 timedOut=False time=240ms kind=OK first=
+2026-03-11 16:37:21.511  ---- FILE: lib\src\albanian\AllSqi.gf ----
+2026-03-11 16:37:23.419  Compile exit=1 timedOut=False time=1880ms kind=OTHER first=lib\src\albanian\NounSqi.gf:
+2026-03-11 16:37:23.421  ---- FILE: lib\src\albanian\AllSqiAbs.gf ----
+2026-03-11 16:37:23.540  Compile exit=0 timedOut=False time=102ms kind=OK first=
+2026-03-11 16:37:23.542  ---- FILE: lib\src\albanian\CatSqi.gf ----
+2026-03-11 16:37:23.650  Compile exit=0 timedOut=False time=52ms kind=OK first=
+2026-03-11 16:37:23.652  ---- FILE: lib\src\albanian\ConjunctionSqi.gf ----
+2026-03-11 16:37:23.813  Compile exit=0 timedOut=False time=60ms kind=OK first=
+2026-03-11 16:37:23.815  ---- FILE: lib\src\albanian\ConstructionSqi.gf ----
+2026-03-11 16:37:24.821  Compile exit=0 timedOut=False time=925ms kind=OK first=
+2026-03-11 16:37:24.823  ---- FILE: lib\src\albanian\DocumentationSqi.gf ----
+2026-03-11 16:37:25.626  Compile exit=0 timedOut=False time=703ms kind=OK first=
+2026-03-11 16:37:25.628  ---- FILE: lib\src\albanian\ExtendSqi.gf ----
+2026-03-11 16:37:26.025  Compile exit=1 timedOut=False time=226ms kind=OTHER first=lib\src\albanian\GrammarSqi.gf:
+2026-03-11 16:37:26.027  ---- FILE: lib\src\albanian\ExtraSqi.gf ----
+2026-03-11 16:37:26.370  Compile exit=0 timedOut=False time=290ms kind=OK first=
+2026-03-11 16:37:26.371  ---- FILE: lib\src\albanian\ExtraSqiAbs.gf ----
+2026-03-11 16:37:26.411  Compile exit=0 timedOut=False time=27ms kind=OK first=
+2026-03-11 16:37:26.412  ---- FILE: lib\src\albanian\GrammarSqi.gf ----
+2026-03-11 16:37:26.634  Compile exit=1 timedOut=False time=207ms kind=OTHER first=lib\src\albanian\GrammarSqi.gf:
+2026-03-11 16:37:26.635  ---- FILE: lib\src\albanian\IdiomSqi.gf ----
+2026-03-11 16:37:26.728  Compile exit=0 timedOut=False time=57ms kind=OK first=
+2026-03-11 16:37:26.730  ---- FILE: lib\src\albanian\IrregSqi.gf ----
+2026-03-11 16:37:27.568  Compile exit=0 timedOut=False time=830ms kind=OK first=
+2026-03-11 16:37:27.570  ---- FILE: lib\src\albanian\LangSqi.gf ----
+2026-03-11 16:37:27.795  Compile exit=1 timedOut=False time=212ms kind=OTHER first=lib\src\albanian\GrammarSqi.gf:
+2026-03-11 16:37:27.797  ---- FILE: lib\src\albanian\LexiconSqi.gf ----
+2026-03-11 16:37:29.997  Compile exit=0 timedOut=False time=2188ms kind=OK first=
+2026-03-11 16:37:29.999  ---- FILE: lib\src\albanian\MorphoSqi.gf ----
+2026-03-11 16:37:46.268  Compile exit=0 timedOut=False time=76ms kind=OK first=
+2026-03-11 16:37:46.270  ---- FILE: lib\src\albanian\NamesSqi.gf ----
+2026-03-11 16:37:46.381  Compile exit=0 timedOut=False time=91ms kind=OK first=
+2026-03-11 16:37:46.383  ---- FILE: lib\src\albanian\NounSqi.gf ----
+2026-03-11 16:37:46.494  Compile exit=0 timedOut=False time=84ms kind=OK first=
+2026-03-11 16:37:46.495  ---- FILE: lib\src\albanian\NumeralSqi.gf ----
+2026-03-11 16:37:46.648  Compile exit=0 timedOut=False time=75ms kind=OK first=
+2026-03-11 16:37:46.650  ---- FILE: lib\src\albanian\ParadigmsSqi.gf ----
+2026-03-11 16:37:47.511  Compile exit=0 timedOut=False time=97ms kind=OK first=
+2026-03-11 16:37:47.513  ---- FILE: lib\src\albanian\PhraseSqi.gf ----
+2026-03-11 16:37:47.589  Compile exit=0 timedOut=False time=57ms kind=OK first=
+2026-03-11 16:37:47.590  ---- FILE: lib\src\albanian\QuestionSqi.gf ----
+2026-03-11 16:37:47.704  Compile exit=0 timedOut=False time=70ms kind=OK first=
+2026-03-11 16:37:47.705  ---- FILE: lib\src\albanian\RelativeSqi.gf ----
+2026-03-11 16:37:47.777  Compile exit=0 timedOut=False time=54ms kind=OK first=
+2026-03-11 16:37:47.779  ---- FILE: lib\src\albanian\ResSqi.gf ----
+2026-03-11 16:37:48.007  Compile exit=0 timedOut=False time=81ms kind=OK first=
+2026-03-11 16:37:48.009  ---- FILE: lib\src\albanian\SentenceSqi.gf ----
+2026-03-11 16:37:48.103  Compile exit=0 timedOut=False time=66ms kind=OK first=
+2026-03-11 16:37:48.105  ---- FILE: lib\src\albanian\StructuralSqi.gf ----
+2026-03-11 16:37:48.450  Compile exit=1 timedOut=False time=209ms kind=INTERNAL first=gf.exe: Internal error in GeneratePMCFG:
+2026-03-11 16:37:48.452  ---- FILE: lib\src\albanian\SymbolSqi.gf ----
+2026-03-11 16:37:48.627  Compile exit=0 timedOut=False time=116ms kind=OK first=
+2026-03-11 16:37:48.629  ---- FILE: lib\src\albanian\TenseSqi.gf ----
+2026-03-11 16:37:48.711  Compile exit=0 timedOut=False time=58ms kind=OK first=
+2026-03-11 16:37:48.713  ---- FILE: lib\src\albanian\TestAbs.gf ----
+2026-03-11 16:37:48.765  Compile exit=0 timedOut=False time=42ms kind=OK first=
+2026-03-11 16:37:48.767  ---- FILE: lib\src\albanian\TestSqi.gf ----
+2026-03-11 16:37:48.880  Compile exit=0 timedOut=False time=99ms kind=OK first=
+2026-03-11 16:37:48.882  ---- FILE: lib\src\albanian\TextSqi.gf ----
+2026-03-11 16:37:48.967  Compile exit=0 timedOut=False time=69ms kind=OK first=
+2026-03-11 16:37:48.969  ---- FILE: lib\src\albanian\VerbSqi.gf ----
+2026-03-11 16:37:49.106  Compile exit=0 timedOut=False time=78ms kind=OK first=
+2026-03-11 16:37:49.127  Wrote summary CSV:  C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\summary.csv
+2026-03-11 16:37:49.128  Wrote summary JSON: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\summary.json
+2026-03-11 16:37:49.140  Wrote top errors: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\top_errors.txt
+2026-03-11 16:37:49.288  Wrote ALL_SCAN_LOGS.TXT: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\ALL_SCAN_LOGS.TXT
+2026-03-11 16:37:49.290  Wrote ALL_LOGS.TXT:     C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\ALL_LOGS.TXT

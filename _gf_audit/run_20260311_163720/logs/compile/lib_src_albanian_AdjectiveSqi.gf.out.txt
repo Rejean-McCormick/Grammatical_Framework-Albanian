@@ -1,0 +1,12 @@
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Common.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\Common.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Cat.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\Cat.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Adjective.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\Adjective.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\prelude\Predef.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\Predef.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\prelude\Prelude.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\Prelude.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\common\ParamX.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\ParamX.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\common\CommonX.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\CommonX.gfo
+- compiling lib\src\albanian\ResSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\ResSqi.gfo
+- compiling lib\src\albanian\CatSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\CatSqi.gfo
+- compiling lib\src\albanian\AdjectiveSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\AdjectiveSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\out\Adjective.pgf...

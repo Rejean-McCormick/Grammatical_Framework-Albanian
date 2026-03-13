@@ -1,0 +1,3 @@
+- compiling lib\src\albanian\NamesSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\NamesSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\out\NamesSqi.pgf...

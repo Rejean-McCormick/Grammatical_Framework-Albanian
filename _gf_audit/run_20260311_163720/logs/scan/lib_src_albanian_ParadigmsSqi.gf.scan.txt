@@ -1,0 +1,32 @@
+FILE: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src\albanian\ParadigmsSqi.gf
+REL:  lib\src\albanian\ParadigmsSqi.gf
+
+SCAN SUMMARY:
+SingleSlashThenEq hits: 0
+DoubleSlashThenDash hits: 0
+RuntimeStringMatch hits: 0
+UntypedCaseWithStrPatterns hits: 6
+UntypedTableWithStrPatterns hits: 0
+TrailingSpaces hits: 1
+
+DETAILS:
+
+SingleSlashThenEq (only if no '->' before '=>'):
+None.
+
+DoubleSlashThenDash (only if no '=>' before '->'):
+None.
+
+RuntimeStringMatch (case <expr>.s of { "..." => ... }):
+None.
+
+UntypedCaseWithStrPatterns (string-pattern rules but missing ': Str>'):
+lines 9-609: = \form -> <case form of {
+lines 612-961: = \form1, form2 -> <case <form1, form2> of {
+lines 964-1051: = \form -> <case form of {
+lines 1054-1072: = \form1, form2 -> <case <form1, form2> of {
+lines 1075-1159: = \form -> <case form of {
+lines 1162-1200: = \form1, form2 -> <case <form1, form2> of {
+
+UntypedTableWithStrPatterns (string-pattern rules but missing ': Str>'):
+None.

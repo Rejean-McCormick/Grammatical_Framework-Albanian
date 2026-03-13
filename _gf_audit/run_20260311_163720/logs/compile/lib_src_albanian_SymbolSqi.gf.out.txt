@@ -1,0 +1,5 @@
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\prelude\PredefAbs.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\PredefAbs.gfo
+- compiling C:\mycode\Grammatical_Framework\gf-rgl\src\abstract\Symbol.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\Symbol.gfo
+- compiling lib\src\albanian\SymbolSqi.gf...   write file C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\gfo\SymbolSqi.gfo
+linking ... OK
+Writing C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\_gf_audit\run_20260311_163720\artifacts\out\Symbol.pgf...
