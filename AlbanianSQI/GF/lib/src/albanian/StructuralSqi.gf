@@ -116,7 +116,7 @@ lin
   most_Predet = P.mkPredet "shumica" ;
   much_Det = mkDetInv "shumë" Sg ;
 
-  must_VV = P.mkVV (P.mkV "duhet") ;
+--  must_VV = P.mkVV (P.mkV "duhet") ;
 
   no_Utt = lin Utt {s = "jo"} ;
 
