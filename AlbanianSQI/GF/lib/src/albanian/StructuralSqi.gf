@@ -1,227 +1,128 @@
 -- GF/lib/src/albanian/StructuralSqi.gf
 concrete StructuralSqi of Structural = CatSqi **
-  open Prelude, ParamX, ResSqi, (P = ParadigmsSqi) in {
+  open (SN = StructuralSqiNominal),
+       (SV = StructuralSqiVerbal),
+       (SC = StructuralSqiClause) in {
 
 flags optimize = all ;
 
-oper
-  mkNPConst : Str -> GenNum -> Person -> CatSqi.NP =
-    \x,gn,p -> lin NP {
-      s = table {
-        Nom   => x ;
-        Acc   => x ;
-        Dat   => x ;
-        Ablat => x
-      } ;
-      a = {gn = gn ; p = p}
-    } ;
-
-  mkNPConstP3 : Str -> CatSqi.NP =
-    \x -> mkNPConst x (GSg Masc) P3 ;
-
-  mkDetInv : Str -> Number -> CatSqi.Det =
-    \x,n -> lin Det {
-      s = table {
-        Nom   => table {Masc => x ; Fem => x} ;
-        Acc   => table {Masc => x ; Fem => x} ;
-        Dat   => table {Masc => x ; Fem => x} ;
-        Ablat => table {Masc => x ; Fem => x}
-      } ;
-      spec = Indef ;
-      n = n
-    } ;
-
-  mkQuantInv : Str -> CatSqi.Quant =
-    \x -> lin Quant {
-      s = table {
-        Nom => table {
-          Masc => table {Sg => x ; Pl => x} ;
-          Fem  => table {Sg => x ; Pl => x}
-        } ;
-        Acc => table {
-          Masc => table {Sg => x ; Pl => x} ;
-          Fem  => table {Sg => x ; Pl => x}
-        } ;
-        Dat => table {
-          Masc => table {Sg => x ; Pl => x} ;
-          Fem  => table {Sg => x ; Pl => x}
-        } ;
-        Ablat => table {
-          Masc => table {Sg => x ; Pl => x} ;
-          Fem  => table {Sg => x ; Pl => x}
-        }
-      } ;
-      spec = Indef
-    } ;
-
 lin
-  above_Prep = ResSqi.mkPrep "sipër" ;
-  after_Prep = ResSqi.mkPrep "pas" ;
-  all_Predet = P.mkPredet "të gjithë" ;
-  almost_AdA = P.mkAdA "pothuajse" ;
-  almost_AdN = P.mkAdN "pothuajse" ;
-  although_Subj = P.mkSubj "megjithëse" ;
-  always_AdV = P.mkAdV "gjithmonë" ;
-  and_Conj = P.mkConj "dhe" ;
-  because_Subj = P.mkSubj "sepse" ;
-  before_Prep = ResSqi.mkPrep "para" ;
-  behind_Prep = ResSqi.mkPrep "pas" ;
-  between_Prep = ResSqi.mkPrep "midis" ;
+  -- Prepositions
+  above_Prep = SC.above_Prep ;
+  after_Prep = SC.after_Prep ;
+  before_Prep = SC.before_Prep ;
+  behind_Prep = SC.behind_Prep ;
+  between_Prep = SC.between_Prep ;
+  by8agent_Prep = SC.by8agent_Prep ;
+  by8means_Prep = SC.by8means_Prep ;
+  during_Prep = SC.during_Prep ;
+  for_Prep = SC.for_Prep ;
+  from_Prep = SC.from_Prep ;
+  in8front_Prep = SC.in8front_Prep ;
+  in_Prep = SC.in_Prep ;
+  on_Prep = SC.on_Prep ;
+  part_Prep = SC.part_Prep ;
+  possess_Prep = SC.possess_Prep ;
+  through_Prep = SC.through_Prep ;
+  to_Prep = SC.to_Prep ;
+  under_Prep = SC.under_Prep ;
+  with_Prep = SC.with_Prep ;
+  without_Prep = SC.without_Prep ;
+  except_Prep = SC.except_Prep ;
 
-  both7and_DConj = P.mkConj "si edhe" ;
+  -- Conjunctions and subordinators
+  although_Subj = SC.although_Subj ;
+  and_Conj = SC.and_Conj ;
+  because_Subj = SC.because_Subj ;
+  both7and_DConj = SC.both7and_DConj ;
+  but_PConj = SC.but_PConj ;
+  either7or_DConj = SC.either7or_DConj ;
+  if_Subj = SC.if_Subj ;
+  if_then_Conj = SC.if_then_Conj ;
+  or_Conj = SC.or_Conj ;
+  otherwise_PConj = SC.otherwise_PConj ;
+  that_Subj = SC.that_Subj ;
+  therefore_PConj = SC.therefore_PConj ;
+  when_Subj = SC.when_Subj ;
 
-  but_PConj = P.mkPConj "por" ;
-  by8agent_Prep = ResSqi.mkPrep "nga" ;
-  by8means_Prep = ResSqi.mkPrep "me" ;
+  -- Adverbs and adverbials
+  almost_AdA = SC.almost_AdA ;
+  almost_AdN = SC.almost_AdN ;
+  always_AdV = SC.always_AdV ;
+  everywhere_Adv = SC.everywhere_Adv ;
+  here_Adv = SC.here_Adv ;
+  here7to_Adv = SC.here7to_Adv ;
+  here7from_Adv = SC.here7from_Adv ;
+  how_IAdv = SC.how_IAdv ;
+  how8much_IAdv = SC.how8much_IAdv ;
+  quite_Adv = SC.quite_Adv ;
+  so_AdA = SC.so_AdA ;
+  somewhere_Adv = SC.somewhere_Adv ;
+  there_Adv = SC.there_Adv ;
+  there7to_Adv = SC.there7to_Adv ;
+  there7from_Adv = SC.there7from_Adv ;
+  too_AdA = SC.too_AdA ;
+  very_AdA = SC.very_AdA ;
+  when_IAdv = SC.when_IAdv ;
+  where_IAdv = SC.where_IAdv ;
+  why_IAdv = SC.why_IAdv ;
+  at_least_AdN = SC.at_least_AdN ;
+  at_most_AdN = SC.at_most_AdN ;
 
-  can8know_VV = P.mkVV (P.mkV "di") ;
-  can_VV = P.mkVV (P.mkV "mundem") ;
+  -- Comparative adverbs
+  less_CAdv = SC.less_CAdv ;
+  more_CAdv = SC.more_CAdv ;
+  as_CAdv = SC.as_CAdv ;
 
-  during_Prep = ResSqi.mkPrep "gjatë" ;
+  -- Utterances and vocatives
+  no_Utt = SC.no_Utt ;
+  yes_Utt = SC.yes_Utt ;
+  please_Voc = SC.please_Voc ;
+  language_title_Utt = SC.language_title_Utt ;
 
-  either7or_DConj = P.mkConj "ose" ;
+  -- Determiners, quantifiers, predeterminers
+  all_Predet = SN.all_Predet ;
+  every_Det = SN.every_Det ;
+  few_Det = SN.few_Det ;
+  how8many_IDet = SN.how8many_IDet ;
+  many_Det = SN.many_Det ;
+  most_Predet = SN.most_Predet ;
+  much_Det = SN.much_Det ;
+  only_Predet = SN.only_Predet ;
+  someSg_Det = SN.someSg_Det ;
+  somePl_Det = SN.somePl_Det ;
+  that_Quant = SN.that_Quant ;
+  this_Quant = SN.this_Quant ;
+  which_IQuant = SN.which_IQuant ;
+  no_Quant = SN.no_Quant ;
+  not_Predet = SN.not_Predet ;
 
-  every_Det = mkDetInv "çdo" Sg ;
-  everybody_NP = mkNPConstP3 "të gjithë" ;
-  everything_NP = mkNPConstP3 "gjithçka" ;
-  everywhere_Adv = P.mkAdv "kudo" ;
+  -- Pronouns and noun phrases
+  everybody_NP = SN.everybody_NP ;
+  everything_NP = SN.everything_NP ;
+  he_Pron = SN.he_Pron ;
+  i_Pron = SN.i_Pron ;
+  it_Pron = SN.it_Pron ;
+  she_Pron = SN.she_Pron ;
+  somebody_NP = SN.somebody_NP ;
+  something_NP = SN.something_NP ;
+  they_Pron = SN.they_Pron ;
+  we_Pron = SN.we_Pron ;
+  whatPl_IP = SN.whatPl_IP ;
+  whatSg_IP = SN.whatSg_IP ;
+  whoPl_IP = SN.whoPl_IP ;
+  whoSg_IP = SN.whoSg_IP ;
+  youSg_Pron = SN.youSg_Pron ;
+  youPl_Pron = SN.youPl_Pron ;
+  youPol_Pron = SN.youPol_Pron ;
+  nobody_NP = SN.nobody_NP ;
+  nothing_NP = SN.nothing_NP ;
 
-  few_Det = mkDetInv "pak" Pl ;
-
-  for_Prep = ResSqi.mkPrep "për" ;
-  from_Prep = ResSqi.mkPrep "nga" ;
-
-  he_Pron = ResSqi.mkPron "ai" "atë" "atij" "atij" "e" "i" (GSg Masc) P3 ;
-  here_Adv = P.mkAdv "këtu" ;
-  here7to_Adv = P.mkAdv "deri këtu" ;
-  here7from_Adv = P.mkAdv "prej këtu" ;
-
-  how_IAdv = P.mkIAdv "si" ;
-  how8many_IDet = P.mkIDet "sa" ;
-  how8much_IAdv = P.mkIAdv "sa" ;
-
-  i_Pron = ResSqi.mkPron "unë" "mua" "mua" "meje" "më" "më" (GSg Masc) P1 ;
-
-  if_Subj = P.mkSubj "nëse" ;
-  in8front_Prep = ResSqi.mkPrep "përpara" ;
-  in_Prep = ResSqi.mkPrep "në" ;
-
-  it_Pron = ResSqi.mkPron "ai" "atë" "atij" "atij" "e" "i" (GSg Masc) P3 ;
-
-  less_CAdv = lin CAdv {s = "më pak" ; p = "se"} ;
-
-  many_Det = mkDetInv "shumë" Pl ;
-  more_CAdv = lin CAdv {s = "më" ; p = "se"} ;
-
-  most_Predet = P.mkPredet "shumica" ;
-  much_Det = mkDetInv "shumë" Sg ;
-
---  must_VV = P.mkVV (P.mkV "duhet") ;
-
-  no_Utt = lin Utt {s = "jo"} ;
-
-  on_Prep = ResSqi.mkPrep "mbi" ;
-
-  only_Predet = P.mkPredet "vetëm" ;
-
-  or_Conj = P.mkConj "ose" ;
-  otherwise_PConj = P.mkPConj "përndryshe" ;
-
-  part_Prep = ResSqi.mkPrep "prej" ;
-
-  please_Voc = P.mkVoc "ju lutem" ;
-
-  possess_Prep = ResSqi.mkPrep "i" ;
-
-  quite_Adv = P.mkAdA "mjaft" ;
-
-  she_Pron = ResSqi.mkPron "ajo" "atë" "asaj" "asaj" "e" "i" (GSg Fem) P3 ;
-
-  so_AdA = P.mkAdA "aq" ;
-
-  someSg_Det = mkDetInv "disa" Sg ;
-  somePl_Det = mkDetInv "disa" Pl ;
-
-  somebody_NP = mkNPConstP3 "dikush" ;
-  something_NP = mkNPConstP3 "diçka" ;
-  somewhere_Adv = P.mkAdv "diku" ;
-
-  that_Quant =
-    ResSqi.mkQuant "ai"   "ata"   "ajo"  "ato"
-                   "atë"  "ata"   "atë"  "ato"
-                   "atij" "atyre" "asaj" "atyre"
-                   "atij" "atyre" "asaj" "atyre" ;
-
-  that_Subj = P.mkSubj "që" ;
-
-  there_Adv = P.mkAdv "atje" ;
-  there7to_Adv = P.mkAdv "deri atje" ;
-  there7from_Adv = P.mkAdv "prej andej" ;
-
-  therefore_PConj = P.mkPConj "prandaj" ;
-
-  they_Pron = ResSqi.mkPron "ata" "ata" "atyre" "atyre" "i" "u" GPl P3 ;
-
-  this_Quant =
-    ResSqi.mkQuant "ky"    "këta"     "kjo"   "këto"
-                   "këtë"  "këtyre"   "këtë"  "këtyre"
-                   "këtij" "këtyre"   "kësaj" "këtyre"
-                   "këtij" "këtyre"   "kësaj" "këtyre" ;
-
-  through_Prep = ResSqi.mkPrep "përmes" ;
-  to_Prep = ResSqi.mkPrep "në" ;
-
-  too_AdA = P.mkAdA "tepër" ;
-
-  under_Prep = ResSqi.mkPrep "nën" ;
-
-  very_AdA = P.mkAdA "shumë" ;
-
-  want_VV = P.mkVV (P.mkV "dua") ;
-
-  we_Pron = ResSqi.mkPron "ne" "ne" "neve" "nesh" "na" "na" GPl P1 ;
-
-  whatPl_IP = P.mkIP "çfarë" ;
-  whatSg_IP = P.mkIP "çfarë" ;
-
-  when_IAdv = P.mkIAdv "kur" ;
-  when_Subj = P.mkSubj "kur" ;
-
-  where_IAdv = P.mkIAdv "ku" ;
-
-  which_IQuant = P.mkIQuant "cili" ;
-
-  whoPl_IP = P.mkIP "kush" ;
-  whoSg_IP = P.mkIP "kush" ;
-
-  why_IAdv = P.mkIAdv "pse" ;
-
-  with_Prep = ResSqi.mkPrep "me" ;
-  without_Prep = ResSqi.mkPrep "pa" ;
-
-  yes_Utt = lin Utt {s = "po"} ;
-
-  youSg_Pron = ResSqi.mkPron "ti" "ty" "ty" "teje" "të" "të" (GSg Masc) P2 ;
-  youPl_Pron = ResSqi.mkPron "ju" "ju" "juve" "jush" "ju" "ju" GPl P2 ;
-  youPol_Pron = ResSqi.mkPron "ju" "ju" "juve" "jush" "ju" "ju" GPl P2 ;
-
-  no_Quant = mkQuantInv "asnjë" ;
-  not_Predet = P.mkPredet "jo" ;
-
-  if_then_Conj = P.mkConj "nëse atëherë" ;
-
-  at_least_AdN = P.mkAdN "të paktën" ;
-  at_most_AdN = P.mkAdN "të shumtën" ;
-
-  nobody_NP = mkNPConstP3 "askush" ;
-  nothing_NP = mkNPConstP3 "asgjë" ;
-
-  except_Prep = ResSqi.mkPrep "përveç" ;
-
-  as_CAdv = lin CAdv {s = "po aq" ; p = "sa"} ;
-
-  have_V2 = P.mkV2 (P.mkV "kam") ;
-
-  language_title_Utt = lin Utt {s = "shqip"} ;
+  -- Verbal items
+  can8know_VV = SV.can8know_VV ;
+  can_VV = SV.can_VV ;
+  must_VV = SV.must_VV ;
+  want_VV = SV.want_VV ;
+  have_V2 = SV.have_V2 ;
 
 } ;

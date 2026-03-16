@@ -13,8 +13,9 @@ lincat V3, V2A, V2V      = Verb ** {c2,c3 : Compl} ;
 
 lincat Prep = Compl ;
 
-lincat Subj = {s : Str} ;
-lincat Conj = {s : Str} ;
+lincat Subj  = {s : Str} ;
+lincat Conj  = {s : Str} ;
+lincat DConj = {s : Str} ;
 
 lincat Card   = {s : Str} ;
 lincat ACard  = {s : Str} ;
@@ -39,6 +40,11 @@ lincat ClSlash = {s : Str} ;
 lincat VP      = {s : Str} ;
 lincat VPSlash = {s : Str} ;
 lincat Comp    = {s : Str} ;
+lincat DAP     = {s : Str} ;
+lincat GN      = {s : Str} ;
+lincat LN      = {s : Str} ;
+lincat PN      = {s : Str} ;
+lincat SN      = {s : Str} ;
 
 lincat Imp = {s : Str} ;
 

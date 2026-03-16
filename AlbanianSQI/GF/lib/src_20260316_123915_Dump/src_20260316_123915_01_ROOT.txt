@@ -1,0 +1,133 @@
+==== VOLUME META ====
+generated_at: 2026-03-16T12:39:15.102022
+title: ROOT FILES
+root_dir: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\AlbanianSQI\GF\lib\src
+file_count: 4
+total_size_mb: 0.0019
+home: 00_START_HERE.instructions.md
+next_volume: src_20260316_123915_02_albanian.txt
+prev_title: 
+next_title: albanian
+short_title: Root
+
+==== FILE_INDEX ====
+ENTRY id=5735a21f50fe path="ConstructorsSqi.gf" kind=source size=243 lines=11 chunks=0
+ENTRY id=8cf19c665399 path="SymbolicSqi.gf" kind=source size=125 lines=2 chunks=0
+ENTRY id=e768c1c3ec65 path="SyntaxSqi.gf" kind=source size=1260 lines=42 chunks=0
+ENTRY id=1587ed001465 path="TrySqi.gf" kind=source size=400 lines=19 chunks=0
+
+==== FILES ====
+
+----- FILE BEGIN -----
+path="ConstructorsSqi.gf"
+id=5735a21f50fe
+kind=source
+size=243
+lines=11
+chunks=0
+----
+--# -path=.:albanian:common:abstract:prelude
+
+resource ConstructorsSqi =
+  SyntaxSqi - [
+    i_Pron, youSg_Pron, he_Pron, she_Pron, it_Pron,
+    we_Pron, youPl_Pron, they_Pron,
+    this_Quant, that_Quant
+  ]
+  ** open Prelude in {
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="SymbolicSqi.gf"
+id=8cf19c665399
+kind=source
+size=125
+lines=2
+chunks=0
+----
+--# -path=.:present:mathematical:prelude
+resource SymbolicSqi = Symbolic with (Symbol = SymbolSqi), (Grammar = GrammarSqi) ;
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="SyntaxSqi.gf"
+id=e768c1c3ec65
+kind=source
+size=1260
+lines=42
+chunks=0
+----
+--# -path=.:./abstract:./albanian
+
+resource SyntaxSqi = open Prelude, Predef,
+  CatSqi, ResSqi,
+  NounSqi, AdjectiveSqi, PhraseSqi, StructuralSqi
+in {
+
+oper
+  mkCN : N -> CN = UseN ;
+  mkCN : AP -> CN -> CN = AdjCN ;
+  mkCN : A -> CN -> CN = \a,cn -> AdjCN (PositA a) cn ;
+  mkCN : A -> N -> CN  = \a,n  -> mkCN a (mkCN n) ;
+
+  mkAP : A -> AP = PositA ;
+
+  mkDet : Quant -> Num -> Det = DetQuant ;
+
+  mkNP : Det -> CN -> NP = DetCN ;
+  mkNP : Det -> N  -> NP = \det,n -> DetCN det (UseN n) ;
+
+  mkNP : Pron -> NP = UsePron ;
+
+  mkNP : Quant -> CN -> NP = \q,cn -> DetCN (DetQuant q NumSg) cn ;
+  mkNP : Quant -> N  -> NP = \q,n  -> mkNP q (mkCN n) ;
+  mkNP : Quant -> Num -> CN -> NP = \q,num,cn -> DetCN (DetQuant q num) cn ;
+
+  the_Det   : Det = DetQuant DefArt   NumSg ;
+  a_Det     : Det = DetQuant IndefArt NumSg ;
+
+  this_Det  : Det = DetQuant this_Quant NumSg ;
+  these_Det : Det = DetQuant this_Quant NumPl ;
+  that_Det  : Det = DetQuant that_Quant NumSg ;
+  those_Det : Det = DetQuant that_Quant NumPl ;
+
+  mkUtt : S -> Utt = UttS ;
+  mkUtt : NP -> Utt = UttNP ;
+  mkUtt : Interj -> Utt = UttInterj ;
+
+  mkPhr : Utt -> Phr = \utt -> PhrUtt NoPConj utt NoVoc ;
+  mkPhr : PConj -> Utt -> Voc -> Phr = PhrUtt ;
+
+}
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="TrySqi.gf"
+id=1587ed001465
+kind=source
+size=400
+lines=19
+chunks=0
+----
+--# -path=.:albanian:common:abstract:prelude
+
+resource TrySqi =
+  SyntaxSqi-[mkAdN],
+  LexiconSqi,
+  ParadigmsSqi - [mkAdv,mkAdN,mkQuant,mkVoc]
+  ** open (P = ParadigmsSqi) in {
+
+  oper
+    mkAdv = overload SyntaxSqi {
+      mkAdv : Str -> Adv = P.mkAdv ;
+    } ;
+
+    mkAdN = overload {
+      mkAdN : CAdv -> AdN = SyntaxSqi.mkAdN ;
+      mkAdN : Str  -> AdN = P.mkAdN ;
+    } ;
+
+}
+----- FILE END -----
