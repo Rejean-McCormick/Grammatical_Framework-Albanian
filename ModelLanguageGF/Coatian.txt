@@ -1,0 +1,1626 @@
+
+========== FILE: AdjectiveHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/AdjectiveHrv.gf
+
+concrete AdjectiveHrv of Adjective = CatHrv ** open ResHrv, Prelude in {
+
+  lin
+
+    PositA a = adjFormsAdjective a.posit ** {isPost = False} ;
+    
+    AdAP ada ap = ap ** {s = \\g,n,c => ada.s ++ ap.s ! g ! n ! c} ;
+
+    AdjOrd a = adjFormsAdjective a ** {isPost = False} ;
+
+    ComparA a np =
+      let ap = adjFormsAdjective a.compar
+      in
+      ap **  {
+        s = \\g,n,c => ap.s ! g ! n ! c ++ od_Str ++ np.s ! Gen ;
+	isPost = True ;
+	} ;
+	
+    ComplA2 a np =
+      let ap = adjFormsAdjective a
+      in
+      ap **  {
+        s = \\g,n,c => ap.s ! g ! n ! c ++ a.c.s ++ np.s ! a.c.c ;
+	isPost = True ;
+	} ;
+
+    UseA2 a = adjFormsAdjective a ** {isPost = False} ;
+
+    UseComparA a = adjFormsAdjective a.compar ** {isPost = False} ;
+
+    AdvAP ap adv = ap ** {s = \\g,n,c => ap.s ! g ! n ! c ++ adv.s ; isPost = True} ;
+
+}
+
+----------------------------------------
+
+========== FILE: AdverbHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/AdverbHrv.gf
+
+concrete AdverbHrv of Adverb = CatHrv ** 
+  open ResHrv, Prelude in {
+
+lin
+    PrepNP prep np = {
+      s = prep.s ++ np.prep ! prep.c
+      } ;
+    AdnCAdv a = a ;
+
+    SubjS subj s = {s = subj.s ++ s.s} ;
+}
+
+----------------------------------------
+
+========== FILE: CatHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/CatHrv.gf
+
+concrete CatHrv of Cat =
+---  CommonX **
+
+  open ResHrv, Prelude in {
+
+  lincat
+    Text = {s : Str} ;
+    Phr = {s : Str} ;
+    Utt = {s : Str} ;
+    
+    S   = {s : Str} ;
+    Cl  = {subj,clit,compl : Str ; verb : VerbForms ; a : Agr} ;
+    Comp = {s : Agr => Str} ;
+
+    QS  = {s : Str} ; ---- TODO: indirect questions
+    QCl = {subj,clit,compl : Str ; verb : VerbForms ; a : Agr} ; -- = Cl ---- check if enough
+    IAdv = {s : Str} ;
+
+    RS  = {s : Agr => Str} ;
+    RCl = {subj,clit,compl : Agr => Str ; verb : VerbForms} ; ---- RAgr with composite RP
+    RP  = {s : Gender => Number => Case => Str} ; -- same as AP 
+
+    VP = {verb : VerbForms ; clit,compl : Agr => Str} ; ---- more fields probably needed
+    VPSlash = {verb : VerbForms ; clit,compl : Agr => Str ; c : ComplementCase} ; ----
+    V  = {s : VerbForms} ;
+    V2 = {s : VerbForms ; c : ComplementCase} ;
+    VS,VQ  = {s : VerbForms} ;
+
+    A  = {posit, compar, superl : AdjForms} ;
+    AP = ResHrv.Adjective ** {isPost : Bool} ; -- {s : Gender => Number => Case => Str}
+    A2 = ResHrv.AdjForms ** {c : ComplementCase} ;
+    
+    AdA = {s : Str} ;
+
+    N  = ResHrv.NounForms ** {g : Gender} ;
+    N2  = ResHrv.NounForms ** {g : Gender ; c : ComplementCase} ;
+    CN = ResHrv.Noun ;      -- {s : Number => Case => Str ; g : Gender}
+    NP = {s,clit,prep : Case => Str ; a : Agr ; hasClit : Bool} ; -- clit,prep differ for pronouns
+    PN = {s : Case => Str ; g : Gender} ; 
+    Det = Determiner ; -- {s : Gender => Case => Str ; size : NumSize} ; -- can contain a numeral, therefore NumSize
+    Predet = {s : Gender => Number => Case => Str} ; -- same as AP
+    Quant = {s : Gender => Number => Case => Str} ; -- same as AP
+    Num = Determiner ;
+    Card = Determiner ; -- {s : Gender => Case => Str ; size : NumSize} ;
+    Ord = AdjForms ;
+    Pron = PronForms ** {poss : AdjForms} ;
+
+    Adv  = {s : Str} ;
+    Prep = ResHrv.ComplementCase ; -- {s : Str ; c : Case ; hasPrep : Bool} ;
+    Conj = {s1,s2 : Str} ; ---- may need a number
+
+    Pol = {s : Str ; p : Bool} ;
+    Temp = {s : Str ; t : CTense} ; 
+    Tense = {s : Str ; t : CTense} ;
+    Ant = {s : Str ; t : CTense} ; 
+
+    PConj = {s : Str} ;
+    Voc = {s : Str} ;
+
+    AdN = {s : Str} ;
+    AdV = {s : Str} ;
+    CAdv = {s : Str} ;
+    SC = {s : Str} ;
+
+  linref
+    N = \s -> s.snom ;
+    A = \s -> s.posit.msnom ;
+    V = \v -> v.s ! VInf ;
+
+
+  lincat Numeral = {s : AdjForms ; size : NumSize} ;
+  lincat Digits = {s : Str ; size : NumSize} ;
+  lincat Decimal = {s : Str ; size : NumSize ; hasDot : Bool} ;
+
+}
+
+----------------------------------------
+
+========== FILE: ConjunctionHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/ConjunctionHrv.gf
+
+concrete ConjunctionHrv of Conjunction = CatHrv **
+  open ResHrv, Coordination, Prelude in {
+
+  lincat
+    [Adv] = {s1,s2 : Str} ;
+    [AP]  = {s1,s2 : Gender => Number => Case => Str ; isPost : Bool} ;
+    [NP]  = {s1,s2,prep1,prep2 : Case => Str ; a : Agr} ;
+    [S] = {s1,s2 : Str} ;
+    [RS] = {s1,s2 : Agr => Str} ;
+
+  lin
+    BaseAdv = twoSS ;
+    ConsAdv = consrSS comma ;
+
+    BaseAP x y = twoTable3 Gender Number Case x y
+                  ** {isPost = orB x.isPost y.isPost} ; ---- should be so in Pol too
+    ConsAP x xs = consrTable3 Gender Number Case comma x xs
+                  ** {isPost = orB x.isPost xs.isPost} ;
+
+    BaseNP x y = {
+      s1 = x.s ;
+      s2 = y.s ;
+      prep1 = x.prep ;
+      prep2 = y.prep ;
+      a = y.a
+      } ; -- clitics disappear ---- Agr TODO
+    ConsNP x xs = {
+      s1 = \\c => x.s ! c ++ comma ++ xs.s1 ! c ;
+      s2 = xs.s2 ; 
+      prep1 = \\c => x.prep ! c ++ comma ++ xs.prep1 ! c ;
+      prep2 = xs.prep2 ;
+      a = xs.a ----
+      } ; 
+
+    BaseS = twoSS ;
+    ConsS = consrSS comma ;
+
+    BaseRS = twoTable Agr ;
+    ConsRS = consrTable Agr comma ;
+
+    ConjAdv = conjunctDistrSS ;
+    
+    ConjAP conj xs = conjunctDistrTable3 Gender Number Case conj xs
+                       ** {isPost = xs.isPost} ;
+    
+    ConjNP conj xs = {
+      s,clit = \\c => conj.s1 ++ xs.s1 ! c ++ conj.s2 ++ xs.s2 ! c ;
+      prep   = \\c => conj.s1 ++ xs.prep1 ! c ++ conj.s2 ++ xs.prep2 ! c ;
+      a = xs.a ; ---- dep. on conj as well
+      hasClit = False ;
+      } ;
+
+    ConjS = conjunctDistrSS ;
+    ConjRS = conjunctDistrTable Agr ;
+
+}
+
+----------------------------------------
+
+========== FILE: ExtendHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/ExtendHrv.gf
+
+concrete ExtendHrv of Extend = CatHrv ** 
+  ExtendFunctor - [
+    --- ReflPossPron
+    CardCNCard
+    ---- constant not found (yet)
+    ,GenRP
+    ,youPolFem_Pron
+    ,UttVPShort
+    ,UttAccIP
+    ,UttDatIP
+    ,SubjRelNP
+    ,StrandRelSlash
+    ,StrandQuestSlash
+    ,SlashBareV2S
+    ,PredIAdvVP
+    ,PredAPVP
+    ,ExistsNP
+    ,ExistS
+    ,ExistPluralCN
+    ,ExistNPQS
+    ,ExistMassCN
+    ,ExistIPQS
+    ,ExistCN
+    ,EmptyRelSlash
+    ,DetNPMasc
+    ,DetNPFem
+    ,ComplBareVS
+    ,CompIQuant
+    ,CompBareCN
+    ,PiedPipingQuestSlash
+    ,PiedPipingRelSlash
+    ]
+  with (Grammar = GrammarHrv)
+    **
+open
+  ResHrv, ParadigmsHrv
+in {
+
+---lin ReflPossPron = justDemPronFormsAdjective reflPossessivePron ;
+
+lin
+  CardCNCard card cn = {
+    s = \\g,c => card.s ! g ! c ++ numSizeForm cn.s card.size c ;
+    size = NS_20_
+    } ;
+
+  GenRP num cn = {
+    s = \\g, n, c => (adjFormsAdjective (mkA "čiji").posit).s ! g ! n ! c ++ num.s ! cn.g ! c ++ cn.s ! n ! c
+    } ;
+
+}
+
+----------------------------------------
+
+========== FILE: IdiomHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/IdiomHrv.gf
+
+concrete IdiomHrv of Idiom = CatHrv ** open Prelude, ResHrv in {
+
+lin
+  ExistNP np = { ---- TODO verify this
+    subj = np.s ! Nom ;
+    verb = copula_VerbForms ;
+    clit, compl = [] ;
+    a = np.a 
+    } ;
+    
+  ExistNPAdv np adv = ExistNP np ** {compl = adv.s} ;
+
+  ImpersCl vp =
+    let npa = Ag Neutr Sg P3 in {
+      subj  = "" ;
+      verb  = vp.verb ;
+      clit  = vp.clit ! npa ;
+      compl = vp.compl ! npa ;
+      a = npa ;
+      } ;
+
+}
+
+----------------------------------------
+
+========== FILE: NounHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/NounHrv.gf
+
+concrete NounHrv of Noun =
+  CatHrv
+**
+
+  open ResHrv, Prelude in {
+
+lin
+    DetCN det cn = {
+        s,prep,clit = \\c => det.s ! cn.g ! c ++ numSizeForm cn.s det.size c ;
+        a = numSizeAgr cn.g det.size P3 ;
+        hasClit = False ;
+      } ;
+
+    DetNP det = {
+        s,prep,clit = \\c => det.s ! Neutr ! c ;
+        a = numSizeAgr Neutr det.size P3 ;
+        hasClit = False ;
+      } ;
+
+    MassNP cn = {
+      s,prep,clit = \\c => cn.s ! Sg ! c ;
+      a = Ag cn.g Sg P3 ;
+      hasClit = False ;
+      } ;
+
+    DetQuant quant num = {
+      s = \\g,c => num.s ! g ! c ++ quant.s ! g ! numSizeNumber num.size ! c ;
+      size = num.size
+      } ;
+
+    DefArt = {s = \\_,_,_ => []} ;
+    IndefArt = {s = \\_,_,_ => []} ;
+    NumPl = {s = \\_,_ => [] ; size = NS_2_4} ; ---- size
+    NumSg = {s = \\_,_ => [] ; size = NS_1} ;
+
+    UsePron pron = {
+      s, prep = table {  ---- TODO check prep
+        Nom | Voc => pron.nom ;
+	Gen | Acc => pron.gen ;
+	Dat | Loc => pron.dat ;
+	Ins => pron.ins
+        } ;
+      clit = table {  ---- TODO check prep
+        Nom | Voc => pron.nom ;
+	Gen | Acc => pron.cgen ;
+	Dat | Loc => pron.cdat ;
+	Ins => pron.ins
+        } ;
+      a = pron.a ;
+      hasClit = True ;
+      } ;
+      
+    PossPron pron = adjFormsAdjective pron.poss ;
+
+    UsePN pn = {
+      s,clit,prep = \\c => pn.s ! c ;
+      a = Ag pn.g Sg P3 ;
+      hasClit = False ;
+      } ;
+
+    AdjCN ap cn = {
+      s = \\n,c => preOrPost (notB ap.isPost) (ap.s ! cn.g ! n ! c) (cn.s ! n ! c) ;
+      g = cn.g
+      } ;
+      
+    PredetNP predet np =
+      case np.a of {
+        Ag g n _ => { 
+          s,clit,prep = \\c => predet.s ! g ! n ! c ++ np.s ! c ;
+          a = np.a ;
+	  hasClit = False 
+	}
+      } ;
+
+    RelCN cn rs = {
+      s = \\n,c => cn.s ! n ! c ++ rs.s ! Ag cn.g n P3 ;
+      g = cn.g
+      } ;
+
+    AdvCN cn adv = {
+      s = \\n,c => cn.s ! n ! c ++ adv.s ;
+      g = cn.g
+      } ;
+      
+    AdvNP np adv = {
+      s,clit = \\c => np.s ! c ++ adv.s ;
+      prep = \\c => np.prep ! c ++ adv.s ;
+      a = np.a ;
+      hasClit = False ;
+      } ;
+      
+    UseN n = nounFormsNoun n n.g ;
+
+    ApposCN cn np = {
+      s = \\n,c => cn.s ! n ! c ++ np.s ! c ; ---- TODO check apposition order
+      g = cn.g
+      } ;
+      
+    NumCard c = c ;
+    NumDigits ds = ds ** {s = \\_,_ => ds.s} ;
+    NumDecimal dec = dec ** {s = \\_,_ => dec.s} ;
+    NumNumeral nu = {
+      s = \\g,c => (adjFormsAdjective nu.s).s ! g ! Sg ! c ; ---- TODO Sg?
+      size = nu.size
+      } ;
+      
+    AdNum adn card = card ** {s = \\g,c => adn.s ++ card.s ! g ! c} ;
+    OrdSuperl a = a.superl ;
+
+
+}
+
+----------------------------------------
+
+========== FILE: NumeralHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/NumeralHrv.gf
+
+concrete NumeralHrv of Numeral =
+
+  CatHrv [Numeral, Digits, Decimal] **
+  
+  open
+    ResHrv,
+    Prelude
+  in {
+
+-- AR 2022-09-27
+---- TODO ordinal forms
+
+oper LinNumeral = {s : AdjForms ; size : NumSize} ;
+oper LinDigit = {unit : AdjForms ; teen, ten, hundred : Str ; size : NumSize} ;
+
+lincat Digit = LinDigit ;
+lincat Sub10 = LinDigit ;
+
+lincat Sub100 = LinNumeral ;
+lincat Sub1000 = LinNumeral ;
+lincat Sub1000000 = LinNumeral ;
+
+oper mkDigit : AdjForms -> Str -> Str -> Str -> NumSize -> LinDigit = 
+  \dva, dvanaest, dvadeset, dvjesto, size -> {
+    unit = dva ;
+    teen = dvanaest ;
+    ten  = dvadeset ;
+    hundred = dvjesto ;
+    size = size
+   } ;
+
+oper mkBigDigit : (unit, teen, ten, hundred : Str) -> LinDigit =
+  \unit,ten,teen,hundred -> mkDigit (invarAdjForms unit) ten teen hundred NS_5_20 ;
+  
+oper bigNumeral : Str -> LinNumeral = \s -> {
+  s = invarAdjForms s ;
+  size = NS_20_
+  } ;
+
+lin num x = x ;
+
+lin n2 =
+  let
+    dva = invarAdjForms "dva" ** {  --- BCMS: cases rarely used
+      fsnom, fsacc = "dvije" ;
+      msgen = "dvaju" ;
+      fsgen = "dviju" ;
+      msdat = "dvama" ;
+      fsdat = "dvjema"
+      }
+  in mkDigit dva "dvanaest" "dvadeset" "dvjesto" NS_2_4 ;
+  
+lin n3 =
+  let
+    tri = invarAdjForms "tri" ** {  --- BCMS: cases rarely used
+      msgen, fsgen = "triju" ;
+      msdat, fsdat, msloc, mksins = "trima"
+      }
+  in
+  mkDigit tri "trinaest" "trideset" "tristo" NS_2_4 ;
+  
+lin n4 =
+  let
+    cetiri = invarAdjForms "četiri" ** {  --- BCMS: cases rarely used
+      msgen, fsgen = "četiriju" ;
+      msdat, fsdat, msloc, mksins = "četirima"
+      }
+  in
+  mkDigit cetiri "četrnaest" "četrdeset" "četiristo" NS_2_4 ;
+  
+lin n5 = mkBigDigit "pet" "petnaest" "pedeset" "petsto" ;
+lin n6 = mkBigDigit "šest" "šesnaest" "šezdeset" "šeststo" ;
+lin n7 = mkBigDigit "sedam" "sedamnaest" "sedamdeset" "sedamsto" ;
+lin n8 = mkBigDigit "osam" "osamnaest" "osamdeset" "osamsto" ;
+lin n9 = mkBigDigit "devet" "devetnaest" "devedeset" "devetsto" ;
+
+lin pot01 = mkDigit (velikA "jedan") "jedanaest" "deset" "sto" NS_1 ; 
+lin pot0 d = d ; 
+
+
+lin pot110 = bigNumeral "deset" ;
+lin pot111 = bigNumeral "jedanaest" ;
+lin pot1to19 d = bigNumeral d.teen ;
+
+lin pot0as1 n = {s = n.unit ; size = n.size} ;
+lin pot1 d = bigNumeral d.ten ;
+lin pot1plus d e = {
+  s = invarAdjForms (d.ten ++ e.unit.msnom) ; ---- TODO inflection of e
+  size = e.size
+  } ;
+
+lin pot1as2 n = n ;
+lin pot2 d = bigNumeral d.hundred ;
+lin pot2plus d e = {
+  s = invarAdjForms (d.hundred ++ e.s.msnom) ;  ---- TODO inflection of e
+  size = e.size
+  } ;
+
+lin pot2as3 n = n ;
+
+
+lin pot3 n = bigNumeral (mkThousand n.s.fsnom n.size) ;
+
+lin pot3plus n m = {
+  s = invarAdjForms (mkThousand n.s.fsnom n.size ++ m.s.msnom) ;  ---- TODO inflect m
+  size = m.size
+  } ;
+
+----oper tfSize : NumSize -> NumSize = \sz -> 
+----  table {Num1 => Num5 ; other => other} ! sz ; 
+
+oper mkThousand : Str -> NumSize -> Str = \attr,size -> 
+  case size of {
+    NS_1 => "tisuću" ;            -- BMS: hiljadu etc
+    NS_2_4 => attr ++ "tisuće" ; 
+    _ => attr ++ "tisuća"
+    } ;
+
+
+-- -- Numerals as sequences of digits have a separate, simpler grammar
+  lincat Dig = {s : Str ; size : NumSize} ;
+
+  lin
+    IDig d = d ;
+    
+    IIDig d dd = {s = d.s ++ Predef.BIND ++ dd.s ; size = dd.size} ;
+
+    PosDecimal d = d ** {hasDot=False} ;
+    NegDecimal d = {
+      s = "-" ++ Predef.BIND ++ d.s ;
+      size = d.size ;
+      hasDot=False
+      } ;
+    IFrac d i = {
+      s = d.s ++
+          if_then_Str d.hasDot BIND (BIND++"."++BIND) ++
+          i.s;
+      size = d.size ;
+      hasDot=True
+      } ;
+
+    D_0 = { s = "0" ; size = NS_1} ; ---- ??
+    D_1 = { s = "1" ; size = NS_1} ; 
+    D_2 = { s = "2" ; size = NS_2_4} ;
+    D_3 = { s = "3" ; size = NS_2_4} ;
+    D_4 = { s = "4" ; size = NS_2_4} ;
+    D_5 = { s = "5" ; size = NS_5_20} ;
+    D_6 = { s = "6" ; size = NS_5_20} ;
+    D_7 = { s = "7" ; size = NS_5_20} ;
+    D_8 = { s = "8" ; size = NS_5_20} ;
+    D_9 = { s = "9" ; size = NS_5_20} ;
+
+}
+
+----------------------------------------
+
+========== FILE: ParadigmsHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/ParadigmsHrv.gf
+
+resource ParadigmsHrv = open CatHrv, ResHrv, (R=ResHrv), Prelude in {
+
+----------------
+-- Parameters
+
+oper
+  singular : Number
+    = Sg ;
+  plural : Number
+    = Pl ;
+
+  mascAnimate : Gender
+    = Masc Anim ;
+  mascInanimate : Gender
+    = Masc Inanim ;
+  masculine : Gender
+    = Masc Inanim ;
+  feminine : Gender
+    = Fem ;
+  neuter : Gender
+    = Neutr ;
+
+  nominative : Case
+    = Nom ;
+  genitive : Case
+    = Gen ;
+  dative : Case
+    = Dat ;
+  accusative : Case
+    = Acc ;
+  vocative : Case
+    = R.Voc ;
+  locative : Case
+    = Loc ;
+  instrumental : Case
+    = Ins ;
+
+------------------------------
+-- Nouns
+
+oper
+
+  mkN = overload {
+    mkN : (sgnom : Str) -> N        -- guessing gender
+      = \sgnom -> lin N (smartLexNoun sgnom) ;
+    mkN : (sgnom : Str) -> Gender -> N 
+      = \sgnom, g -> lin N (mkgLexNoun sgnom g) ;
+    mkN : NForms -> Gender -> N     -- the worst case
+      = \nfs,g -> lin N (nfs ** {g = g}) ;
+    } ;
+
+-- The following standard declensions can be used with good accuracy.
+-- However, they have some defaults that may have to be overwritten.
+-- This can be done easily by overriding those formes with record extension (**).
+
+  NForms = {snom,sgen,sdat,sacc,svoc,sins,pnom,pgen,pdat,pacc : Str} ;
+
+  izvorNForms : Str -> NForms
+    = izvorN ;
+  nokatNForms : Str -> NForms
+    = nokatN ;
+  gradaninNForms : Str -> NForms
+    = gradaninN ;
+  vojnikNForms : Str -> NForms
+    = vojnikN ;
+  bubregNForms : Str -> NForms
+    = bubregN ;
+  trbuhNForms : Str -> NForms
+    = trbuhN ;
+  cvorakNForms : Str -> NForms
+    = cvorakN ;
+  panjNForms : Str -> NForms
+    = panjN ;
+  suzanjNForms : Str -> NForms
+    = suzanjN ;
+  pristNForms : Str -> NForms
+    = pristN ;
+  stricNForms : Str -> NForms
+    = stricN ;
+  klinacNForms : Str -> NForms
+    = klinacN ;
+  posjetilacNForms : Str -> NForms
+    = posjetilacN ;
+  pepeoNForms : Str -> NForms
+    = pepeoN ;
+  ugaoNForms : Str -> NForms
+    = ugaoN ;
+  bifeNForms : Str -> NForms
+    = bifeN ;
+  ziriNForms : Str -> NForms
+    = ziriN ;
+  taksiNForms : Str -> NForms
+    = taksiN ;
+  koljenoNForms : Str -> NForms
+    = koljenoN ;
+  jedroNForms : Str -> NForms
+    = jedroN ;
+  poljeNForms : Str -> NForms
+    = poljeN ;
+  zenaNForms : Str -> NForms
+    = zenaN ;
+
+  PNForms : Type = {snom, sgen, sdat, sacc, svoc, sins : Str} ;
+
+  mkPN = overload {
+    mkPN : Str -> PN
+      = \s -> 
+        let
+	  nf = smartLexNoun s ;
+	  n = nounFormsNoun nf nf.g
+	in lin PN {
+	  s = \\c => n.s ! Sg ! c ; ---- TODO check this
+          g = nf.g
+          } ;
+    mkPN : PNForms -> Gender -> PN
+      = \fs, g -> lin PN {
+        s = table {
+          Nom => fs.snom ;
+          Gen => fs.sgen ;
+          Dat | Loc => fs.sdat ;
+          Acc => fs.sacc ;
+          Voc => fs.svoc ;
+          Ins => fs.sins 
+          } ;
+	g = g
+        } ;
+    } ;
+
+---------------------
+-- Adjectives
+
+-- Only positive forms so far ----
+
+  mkA = overload {
+    mkA : Str -> A
+      = \s ->
+        let
+	  velik = velikA s ;
+	  velikiji = regComparAForms velik ; 
+	in lin A {
+	  posit = velik ;
+	  compar = velikiji ;
+	  superl = superlAForms velikiji
+	  } ;
+    mkA : (pos, comp : Str) -> A
+      = \pos, comp -> lin A {
+          posit = velikA pos ;
+	  compar = velikA comp ;
+	  superl = superlAForms (velikA comp)
+	  } ;
+    mkA : (posit : AForms) -> (compar : Str) -> A
+      = \posit,compar -> lin A {
+          posit = posit ;
+	  compar = velikA compar ;
+	  superl = superlAForms (velikA compar)
+	  } ;
+    mkA : (posit, compar : AForms) -> A
+      = \posit,compar -> lin A {
+          posit = posit ;
+	  compar = compar ;
+	  superl = superlAForms compar
+	  } ;
+    mkA : (posit : AForms) -> A
+      = \posit ->
+          let
+            compar = regComparAForms posit
+          in lin A {
+            posit = posit ;
+	    compar = compar ;
+	    superl = superlAForms compar
+	    } ;
+    } ;
+
+  invarA : Str -> A
+    = \s -> lin A {posit,compar,superl = invarAForms s} ; ---- TODO compar, superl?
+
+  AForms : Type
+    = R.AdjForms ;
+
+-- the complete definition of AForms is
+--   {msnom, fsnom, nsnom, msgen, fsgen, msdat,
+--    fsdat, fsacc, msloc, msins, fsins, mpnom, pgen : Str} ;
+
+  velikAForms : Str -> AForms
+    = velikA ;
+    
+  invarAForms : Str -> AForms
+    = \s -> invarAdjForms s ;
+
+
+-------------------------
+-- Verbs
+
+  mkV = overload {
+    mkV : (raditi : Str) -> V
+      = \s -> lin V {s = smartVerbForms s} ;
+    mkV : (raditi, radem, radio : Str) -> V
+      = \raditi, radem, radio ->
+           lin V {s = aeiVerbForms raditi radem radio} ;
+    mkV : VerbForms -> V
+      = \vf -> lin V {s = vf} ;
+    } ;
+
+
+  mkV2 = overload {
+    mkV2 : V -> V2
+      = \v -> lin V2 {s = v.s ;
+           c = {s = [] ; c = accusative ; hasPrep = False}} ;
+    mkV2 : V -> Case -> V2
+      = \v,c -> lin V2 {s = v.s ;
+           c = {s = [] ; c = c ; hasPrep = False}} ;
+    mkV2 : V -> Prep -> V2 
+      = \v,c -> lin V2 {s = v.s ; c = c} ;
+    } ;
+
+------------------------
+-- Adverbs, prepositions, conjunctions, ...
+
+  mkAdv : Str -> Adv
+    = \s -> lin Adv {s = s} ;
+
+  mkPrep = overload {
+    mkPrep : Str -> Prep    -- genitive prepositions
+      = \s -> lin Prep {s = s ; c = genitive ; hasPrep = True} ;
+    mkPrep : Case -> Prep   -- oblique cases, empty string
+      = \c -> lin Prep {s = [] ; c = c ; hasPrep = False} ;
+    mkPrep : Str -> Case -> Prep
+      = \s,c -> lin Prep {s = s ; c = c ; hasPrep = True} ;
+    } ;
+    
+  mkConj : Str -> Conj
+    = \s -> lin Conj {s1 = [] ; s2 = s} ;
+
+  mkAdN : Str -> AdN
+    = \s -> lin AdN {s = s} ;
+    
+  mkOrd : Str -> Ord
+    = \s -> lin Ord (velikA s) ;
+
+  ifPluralNP : NP -> Bool
+    = \np -> case np.a of {
+      Ag _ Pl _ => True ;
+      _ => False
+      } ;
+
+}
+
+----------------------------------------
+
+========== FILE: QuestionHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/QuestionHrv.gf
+
+concrete QuestionHrv of Question = CatHrv ** 
+  open ResHrv, Prelude in {
+
+lin
+    QuestCl cl = cl ; ----
+
+}
+
+----------------------------------------
+
+========== FILE: RelativeHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/RelativeHrv.gf
+
+concrete RelativeHrv of Relative = CatHrv ** open
+  ParadigmsHrv,
+  ResHrv,
+  Prelude in {
+
+lin
+    RelVP rp vp = vp ** {
+      subj  =
+        let rel = rp.s
+	in \\a => case a of {
+	  Ag g n _ => rel ! g ! n ! Nom
+	  } 
+      } ;
+      
+    IdRP = adjFormsAdjective (mkA "koji").posit ; 
+
+}
+
+----------------------------------------
+
+========== FILE: ResHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/ResHrv.gf
+
+resource ResHrv = open Prelude in {
+
+-- AR September 2022
+-- sources:
+-- Wiki = https://en.wikipedia.org/wiki/Serbo-Croatian_grammar
+-- BCMS = Bosnian, Croatian, Montenegrin and Serbian:
+--   An Essential Grammar (Routledge Essential Grammars) 1st Edition, by Željko Vrabec
+
+-- parameters
+
+param
+  Number = Sg | Pl ;
+
+  Animacy = Anim | Inanim ;
+  Gender = Masc Animacy | Fem | Neutr ;
+
+  Case = Nom | Gen | Dat | Acc | Voc | Loc | Ins ; -- traditional order
+
+  Person = P1 | P2 | P3 ;
+
+  VForm =
+      VInf
+    | VPres Number Person
+    | VPastPart Gender Number
+    ;
+    ---- TODO aorist, imperfect
+
+  Agr = Ag Gender Number Person ;
+
+  CTense = CTPres | CTPast ; ----- TODO complete the tense system to match BCS verb morphology
+
+-- phonology
+
+oper
+  softConsonant : pattern Str = #("c"|"č"|"ć"|"đ"|"j"|"lj"|"nj"|"š"|"ž"|"št") ;
+  --- wiki "and sometimes r"; BCMS slightly different
+
+  ifSoft : Str -> (soft,hard : Str) -> Str = \word, ssoft, shard ->
+    case word of {
+      _ + #softConsonant => ssoft ;
+      _ => shard
+      } ;
+
+   animate = Masc Anim ;
+   inanimate = Masc Inanim ;
+   feminine = Fem ;
+   neuter = Neutr ;
+
+palatalize : Str -> Str = \s -> case s of {
+  x + "ki" => x + "ci" ;
+  x + "ke" => x + "če" ;
+  x + "gi" => x + "zi" ;
+  x + "ge" => x + "že" ;
+  x + "hi" => x + "si" ;
+  x + "he" => x + "še" ;
+  x + "ce" => x + "če" ;
+  _ => s
+  } ;
+
+voicing : Str -> Str = \s -> case s of {
+  x + "b"  => x + "p" ;
+  x + "d"  => x + "t" ;
+  x + "đ"  => x + "ć" ;
+  x + "z"  => x + "s" ;
+  x + "dž" => x + "č" ;
+  x + "ž"  => x + "š" ;
+  _ => s
+  } ;
+  
+---------------
+-- Nouns
+---------------
+
+-- novel idea (for RGL): lexical items stored as records rather than tables
+-- advantages:
+-- - easier to make exceptions to paradigms (by ** {})
+-- - easier to keep the number of forms minimal
+-- - easier to see what is happening than with lots of anonymous arguments to mkN, mkA, mkV
+
+-- so this is the lincat of N
+
+  NounForms : Type = {snom,sgen,sdat,sacc,svoc,sins,pnom,pgen,pdat,pacc : Str} ;
+
+-- But traditional tables make agreement easier to handle in syntax
+-- so this is the lincat of CN
+
+  Noun : Type = {s : Number => Case => Str ; g : Gender} ;
+
+-- for lexical nouns N, we also need the gender but keep the minimal set of forms
+
+  LexNoun : Type = NounForms ** {g : Gender} ;
+
+-- this is used in UseN
+
+  nounFormsNoun : NounForms -> Gender -> Noun
+    = \forms, g -> {
+      s = table {
+        Sg => table {
+	  Nom => forms.snom ;
+	  Gen => forms.sgen ;
+	  Dat => forms.sdat ;
+	  Acc => case g of {
+	    Masc Anim | Fem => forms.sacc ;
+	    _ => forms.snom
+	    } ;
+	  Voc => forms.svoc ;
+	  Loc => forms.sdat ;
+	  Ins => forms.sins
+	  } ;
+        Pl => table {
+	  Nom => forms.pnom ;
+	  Gen => forms.pgen ;
+	  Dat => forms.pdat ;
+	  Acc => forms.pacc ;
+	  Voc => forms.pnom ;
+	  Loc => forms.pdat ;
+	  Ins => forms.pdat
+	  }
+	} ;
+      g = g
+      } ;
+
+-- a declension type produces these forms from a string
+
+  DeclensionType : Type = Str -> NounForms ;
+
+-- smart paradigms
+
+  smartLexNoun : Str -> LexNoun = \s -> case s of {
+    _ + "a"       => zenaN s ** {g = feminine} ;
+    _ + "i"       => ziriN s ** {g = inanimate} ; ---- TODO feminine i
+    _ + "e"       => poljeN s ** {g = neuter} ; ---- TODO sunce, uze, zvonce, rame
+    _ + "ao"      => ugaoN s ** {g = inanimate} ;
+    _ + "eo"      => pepeoN s ** {g = inanimate} ;
+    _ + "o"       => koljenoN s ** {g = neuter} ; ---- TODO jedro
+    _ + "lac"     => posjetilacN s ** {g = inanimate} ;
+    _ + "anj"     => suzanjN s ** {g = inanimate} ;
+    _ + "nj"      => panjN s ** {g = inanimate} ;
+    _ + "št"      => pristN s ** {g = inanimate} ;
+    _ + "ac"      => klinacN s ** {g = neuter} ;
+    _ + "c"       => stricN s ** {g = inanimate} ;
+    _ + "in"      => gradaninN s ** {g = neuter} ;
+    _ + "ak"      => cvorakN s ** {g = inanimate} ;
+    _ + "a" + ?   => nokatN s ** {g = inanimate} ;
+    _ + "g"       => bubregN s ** {g = inanimate} ;
+    _ + "h"       => trbuhN s ** {g = inanimate} ;
+    _ + "k"       => vojnikN s ** {g = inanimate} ;
+    _             => izvorN s ** {g = inanimate}
+    } ;
+
+  mkgLexNoun : Str -> Gender -> LexNoun = \s,g -> case <s,g> of {
+    <_ + "i", Masc _> => ziriN s ** {g = g} ;
+    <_ + "e", Masc _> => bifeN s ** {g = g} ;
+    <_ + "o", Masc _> => bifeN s ** {g = g} ;
+    <_, g> => smartLexNoun s ** {g = g}
+    } ;
+
+
+-- the traditional declensions, following Wiki
+-- they are also exported in ParadigmsHrv with names izvorN etc
+
+  izvorN : DeclensionType = \izvor ->
+    {
+      snom = izvor ;
+      sgen = izvor + "a" ;
+      sdat = izvor + "u" ;
+      sacc = izvor + "a" ;
+      svoc = ifSoft izvor
+                    (izvor + "u")
+		    (palatalize (izvor + "e")) ;
+      sins = ifSoft izvor
+                    (izvor + "em") 
+                    (izvor + "om") ;
+
+      pnom = palatalize (izvor + "i") ;
+      pgen = izvor + "a" ;
+      pdat =
+        ifSoft izvor
+	  (palatalize (izvor + "e") + "vima")
+	  (palatalize (izvor + "i") + "ma") ;
+      pacc      = izvor + "e" ;
+      } ;
+
+   nokatN : DeclensionType = \nokat ->
+      let
+        nokt = Predef.tk 2 nokat + last nokat
+      in izvorN nokt ** {
+        snom = nokat ;
+	sacc = nokt + "a" ;
+	pgen = nokat + "a" ;
+        } ;
+	
+   gradaninN : DeclensionType = \gradanin ->
+      let
+        gradan = Predef.tk 2 gradanin ;
+        gradanN = izvorN gradan 
+      in numbersNounForms (izvorN gradanin) gradanN ;
+
+   numbersNounForms : (sg, pl : NounForms) -> NounForms =
+     \sg, pl -> sg ** {
+        pnom = pl.pnom ;
+        pgen = pl.pgen ;
+        pdat = pl.pdat ;
+        pacc = pl.pacc ;
+        } ;
+  
+   vojnikN : DeclensionType = izvorN ;
+   bubregN : DeclensionType = izvorN ;
+   trbuhN : DeclensionType = izvorN ;
+   cvorakN : DeclensionType = nokatN ;
+
+   panjN : DeclensionType = \panj ->
+     numbersNounForms (izvorN panj) (izvorN (palatalize (panj + "e") + "v")) ;
+
+   suzanjN : DeclensionType = \suzanj ->
+     let
+       suznj = Predef.tk 3 suzanj + Predef.dp 2 suzanj
+     in
+     numbersNounForms
+       (izvorN suzanj)
+       (izvorN suznj ** {
+         pgen = "sužanja" ;
+         pdat = "sužnjima"
+         }) ;
+
+    pristN : DeclensionType = panjN ;
+    
+    stricN : DeclensionType = \stric ->
+      panjN stric ** {
+        svoc = palatalize (stric + "e")
+	} ;
+
+    klinacN : DeclensionType = \klinac ->
+      let
+        klinc = Predef.tk 2 klinac + last klinac
+      in nokatN klinac ** {
+        svoc = palatalize (klinc + "e") ;
+	pdat = klinc + "ima" ;
+	} ;
+
+    posjetilacN : DeclensionType = \posjetilac ->
+      let
+        posjetioc = Predef.tk 3 posjetilac + "oc"
+      in izvorN posjetioc ** {
+        snom = posjetilac ;
+	svoc = palatalize (posjetioc + "e") ;
+	sins = palatalize (posjetioc + "e") + "m" ;
+	pgen = posjetilac + "a" ;
+	pdat = palatalize (posjetioc + "i") + "ma" ;
+        } ;
+
+    pepeoN : DeclensionType = \pepeo ->
+      let
+        pepel = init pepeo + "l"
+      in izvorN pepel ** {snom = pepeo} ;
+
+    ugaoN : DeclensionType = \ugao ->
+      let
+        ugal = init ugao + "l" ;
+	ugl = Predef.tk 2 ugal + last ugal
+      in numbersNounForms
+           (nokatN ugal ** {snom = ugao})
+	   (izvorN (ugl + "ov")) ;
+	   
+    bifeN : DeclensionType = \bife ->
+      izvorN bife ** {svoc = bife + "u"} ;
+      
+    ziriN : DeclensionType = \ziri ->
+      bifeN (ziri + "j") ** {
+        snom = ziri ;
+	pdat = ziri + "jima" ;
+	} ;
+
+    taksiN : DeclensionType = ziriN ;
+
+---- Danilo, Hrvoje, raščupànko skipped
+
+    koljenoN : DeclensionType = \koljeno ->
+      let
+        koljen = init koljeno
+      in izvorN koljen ** {
+        snom, sacc, svoc = koljeno ;
+	pnom, pacc, pvoc = koljen + "a" ;
+        } ;
+
+    jedroN : DeclensionType = \jedro ->
+      let
+        jed = Predef.tk 2 jedro ;
+	r = last (init jedro) ; 
+      in koljenoN jedro ** {
+        pgen = jed + "a" + r + "a" ;
+        } ;
+
+---- drvo - drveta skipped, can also decline as koljeno
+---- oči, čudo skipped
+
+    poljeN : DeclensionType = \polje ->
+      koljenoN polje ** {
+        pdat = init polje + "ima" ;
+        } ;
+    
+---- sunce, uže, zvonce, rame, podne, doba
+
+---- no tables given in the sources for feminine nouns, so guessing from ending tables
+
+    zenaN : DeclensionType = \zena -> 
+      let
+        zen = init zena
+      in {
+        snom = zena ;
+	sgen = zen + "e" ;
+	sdat = zen + "i" ;
+	sacc = zen + "u" ;
+	svoc = zen + "o" ; ---- o/a in Wiki ; o in https://sh.wiktionary.org/wiki/%C5%BEena
+	sins = zen + "om" ;
+	pnom, pacc, pvoc = zen + "e" ;
+	pdat = zen + "ama" ;
+	pgen = zen + "a" ;
+        } ;
+
+
+
+---------------------------
+-- Adjectives
+
+-- to be used for AP: 56 forms for each degree
+  Adjective : Type = {s : Gender => Number => Case => Str} ;
+
+-- to be used for A, in three degrees: 12 forms in each
+---- TODO other degrees than positive
+
+  AdjForms : Type = {
+    msnom, fsnom, nsnom : Str ; 
+    msgen, fsgen : Str ;        -- nsgen = msgen
+    msdat : Str ;               -- msloc,nsdat,nsloc = msdat
+    fsdat : Str ;               -- fsloc = fsdat
+    fsacc : Str ;               -- 
+    msins : Str ;        -- nsins, pdat, ploc, pins = msins
+    fsins : Str ;               -- no o/e variation like in msdat
+    mpnom : Str ;               -- mpvoc = mpnom
+    mpgen : Str ;               --
+    } ;
+
+invarAdjForms : Str -> AdjForms = \s -> {
+    msnom, fsnom, nsnom, msgen, fsgen, msdat,
+    fsdat, fsacc, msins, fsins, mpnom, mpgen = s ;
+    } ;
+
+-- used in PositA but will also work in Compar and Superl by calling their record fields
+
+adjFormsAdjective : AdjForms -> Adjective = \afs -> {
+  s = \\g,n,c => case <n,c,g> of {
+
+    <Sg, Nom|Voc, Masc _>
+      | <Sg, Acc, Masc Inanim>   => afs.msnom ;
+    <Sg, Nom|Voc, Fem>
+      | <Pl, Nom|Acc|Voc, Neutr> => afs.fsnom ;
+    <Sg, Nom|Acc|Voc, Neutr>     => afs.nsnom ;
+    <Sg, Gen, Masc _ | Neutr>
+      | <Sg, Acc, Masc Anim>     => afs.msgen ;
+    <Sg, Gen, Fem>
+      | <Pl, Nom|Acc|Voc, Fem>
+      | <Pl, Acc, Masc _>        => afs.fsgen ;
+    <Sg, Dat|Loc, Masc _|Neutr>  => afs.msdat ;
+    <Sg, Dat|Loc, Fem>           => afs.fsdat ;
+    <Sg, Acc, Fem>               => afs.fsacc ;
+    <Sg, Ins, Masc _|Neutr>
+      | <Pl,Dat|Loc|Ins, _>      => afs.msins ;
+    <Sg, Ins, Fem>               => afs.fsins ;
+    <Pl, Nom|Voc, Masc _>        => afs.mpnom ;
+    <Pl, Gen,_>                  => afs.mpgen
+    }
+    } ;
+
+  velikA : Str -> AdjForms = \velik ->
+    let
+      velk : Str = case velik of {
+        vel + "stan" => vel + "sn" ;
+        vel + "ao" => vel + "l" ;
+        vel + "ak" => voicing vel + "k" ;
+        vel + "a" + k@? => vel + k ;
+	vel + "i" => vel ;
+	_ => velik
+        } ;
+      oe : Str = ifSoft velik "e" "o"
+    in {
+      msnom   = velik ;
+      fsnom   = velk + "a" ;
+      nsnom   = velk + oe ;
+      msgen   = velk + oe + "g" ;
+      fsgen   = velk + "e" ;
+      msdat   = velk + oe + "m" ;
+      fsdat   = velk + "oj" ;
+      fsacc   = velk + "u" ;
+      msins   = velk + "im" ;
+      fsins   = velk + "om" ;
+      mpnom   = velk + "i" ;
+      mpgen   = velk + "ih" ;
+      } ;
+
+  regComparAForms : AdjForms -> AdjForms
+    = \aposit -> case init aposit.fsnom of {
+        grub@(_ + "b"|"p"|"v"|"h") => velikA (grub + "lji") ;
+        star => velikA (star + "iji")
+	} ;
+
+  superlAForms : AdjForms -> AdjForms
+    = \acompar -> velikA ("naj" + acompar.msnom) ;
+
+  od_Str = "od" ;
+
+---------------------
+-- Verbs
+-- Wiki
+
+  VerbForms : Type = VForm => Str ;
+
+  ComplementCase : Type = {s : Str ; c : Case ; hasPrep : Bool} ;
+
+  verbAgr : VerbForms -> Agr -> CTense -> Str   ---- TODO tenses
+    = \vf,a,b -> case <a,b> of {
+      <Ag _ n p, CTPres> => vf ! VPres n p ;
+      <Ag g n _, CTPast> => vf ! VPastPart g n
+      } ;
+
+  smartVerbForms : Str -> VerbForms = \s -> case s of {
+    cit + "ati" => aeiVerbForms s (cit + "am") (cit + "ao") ;
+    vid + "jeti" => aeiVerbForms s (vid + "im") (vid + "io") ;
+    radi + "ti" => aeiVerbForms s (init radi + "em") (radi + "o") ;
+    radi + ? => aeiVerbForms s (init radi + "em") (radi + "o") ; ----
+    _ => Predef.error ("expect infinitive form \"-ti\", found" ++ s)
+    } ;
+
+-- an traditional paradigm type, with a slight abstraction
+---- TODO other traditional paradigms
+
+  aeiVerbForms : Str -> Str -> Str -> VerbForms = \citati, citam, citao ->
+   let
+     cita = init citam ;
+     u = case last cita of {
+        "a" => "aju" ;
+	"e" => "u" ;
+	"i" => "e" ;
+	_ => "e" ---- should not happen
+        } ;
+     cital = init citao + "l" ;
+   in table {
+      VInf => citati ;
+      VPres Sg P1 => cita + "m" ;
+      VPres Sg P2 => cita + "š" ;
+      VPres Sg P3 => cita ;
+      VPres Pl P1 => cita + "mo" ;
+      VPres Pl P2 => cita + "te" ;
+      VPres pl P3 => init cita + u ;
+      VPastPart (Masc _) Sg => citao ;
+      VPastPart Fem Sg => cital + "a" ;
+      VPastPart Neutr Sg => cital + "o" ;
+      VPastPart (Masc _) Pl => cital + "i" ;
+      VPastPart Fem Pl => cital + "e" ;
+      VPastPart Neutr Pl => cital + "a"
+    } ;
+
+
+-- copula
+
+  jesam_Copula : {short, long, negative : Number => Person => Str} =
+    let
+      sam : Number => Person => Str = table {
+        Sg => table {
+	  P1 => "sam" ;
+	  P2 => "si" ;
+	  P3 => "je"
+	  } ;
+        Pl => table {
+	  P1 => "smo" ;
+	  P2 => "ste" ;
+	  P3 => "su"
+	  }
+	}
+     in {
+       short = sam ;
+       long = \\n,p => case <n,p> of {
+         <Sg,P3> => "jeste" ; --- wiki: jest(e)
+	 _ => sam ! n ! p
+	 } ;
+       negative = \\n,p => "ni" + sam ! n ! p
+       } ;
+       
+-- Wiki: some grammars (chiefly Serbian ones) treat jesam as a defective verb
+-- having only present tense. Others treat these forms as two realizations
+-- of the same irregular verb biti, jesam being imperfective and budem perfective.
+
+    copula_VerbForms : VerbForms = table {
+      VPres n p => jesam_Copula.short ! n ! p ;
+      v => biti_VerbForms ! v
+      } ;
+
+    biti_VerbForms : VerbForms = aeiVerbForms "biti" "budem" "bio" ;
+
+    imati_VerbForms : VerbForms = aeiVerbForms "imati" "imam" "imao" ;
+
+
+---------------------------
+-- Pronouns
+
+  PronForms : Type = {
+    nom, 
+    gen, cgen,  -- bare, clitic (also as Acc)
+    dat, cdat,  -- also as Loc
+    ins        : Str ;
+    a : Agr
+    } ;
+
+  personalPron : Agr -> PronForms = \a ->
+    {a = a ; cnom = []} **
+    case a of {
+      Ag _ Sg P1 => {
+        nom = "ja" ;
+        gen = "mene" ;
+        cgen = "ma" ;
+        dat = "meni" ;
+        cdat = "mi" ;
+        ins = "mnom"
+        } ;
+      Ag _ Sg P2 => {
+        nom = "ti" ;
+        gen = "tebe" ;
+        cgen = "te" ;
+        dat = "tebi" ;
+        cdat = "ti" ;
+        ins = "tobom"
+        } ;
+      Ag Fem Sg P3 => {
+        nom = "ona" ;
+        gen = "nje" ;
+        cgen = "je" ;
+        dat = "njoj" ;
+        cdat = "joj" ;
+        ins = "njom"
+        } ;
+      Ag g Sg P3 => {
+        nom = case g of {
+	  Masc _ => "on" ;
+	  _ => "ono"
+	  } ;
+        gen = "njega" ;
+        cgen = "ga" ;
+        dat = "njemu" ;
+        cdat = "mu" ;
+        ins = "njim"
+        } ;
+
+      Ag _ Pl P1 => {
+        nom = "mi" ;
+        gen, cgen = "nas" ;
+        dat, ins = "nama" ;
+        cdat = "nam"
+        } ;
+      Ag _ Pl P2 => {
+        nom = "vi" ;
+        gen, cgen = "vas" ;
+        dat, ins = "vama" ;
+        cdat = "vam"
+        } ;
+      Ag g Pl P3 => {
+        nom = case g of {
+	  Masc _ => "oni" ;
+	  Fem => "one" ;
+	  Neutr => "ona"
+	  } ;
+        gen = "njih" ;
+        cgen = "ih" ;
+        dat, ins = "njima" ;
+        cdat = "im" 
+        }
+      } ;
+
+  possessivePron : Agr -> AdjForms = \a -> case a of {
+      Ag _ Sg P1 => velikA "moj" ;
+      Ag _ Sg P2 => velikA "tvoj" ;
+      Ag (Masc _) Sg P3 => velikA "njegov" ;
+      Ag (Fem|Neutr) Sg P3 => velikA "njezin" ; -- BCMS: Hrv: otherwise njen
+      Ag _ Pl P1 => velikA "naš" ;
+      Ag _ Pl P2 => velikA "vaš" ;
+      Ag _ Pl P3 => velikA "njihov"
+    } ;
+
+{-
+  reflPossessivePron : DemPronForms = otcovA "svoj" ** {
+        msnom = "svoj" ; msgen = "svojho" ; msdat = "svojmu" ;
+	msins = "svojím" ;
+	ampnom = "svoji" ;
+	nsnom, fpnom = "svoje" ;
+	pgen = "svojich" ;
+	pdat = "svojim" ;
+	pins = "svojimi" ;
+	} ;
+-}
+
+  mkPron : Agr -> PronForms ** {poss : AdjForms} = \a ->
+    personalPron a ** {poss = possessivePron a} ;
+    
+
+param NumSize = NS_1 | NS_2_4 | NS_5_20 | NS_20_ ;
+
+oper
+  Determiner : Type = {
+    s : Gender => Case => Str ;
+    size : NumSize
+    } ;
+
+{-
+-- interrogatives TODO
+
+ ktoForms : Case => Str = table {
+   Nom => "kto" ;
+   Gen | Acc => "koho" ;
+   Dat => "komu" ;
+   Loc => "kom" ;
+   Ins => "kým"
+   } ;
+
+ coForms : Case => Str = table {
+   Nom|Acc => "čo" ;
+   Gen => "čoho" ;
+   Dat => "čomu" ;
+   Loc => "čom" ;
+   Ins => "čím"
+   } ;
+-}
+
+
+--------------------------------
+-- combining nouns with numerals
+
+oper
+  numSizeForm : (Number => Case => Str) -> NumSize -> Case -> Str
+    = \cns,n,c -> case n of {
+        NS_1   => cns ! Sg ! c ;
+	NS_2_4 => cns ! Pl ! c ;
+	_ => case c of {
+	  Nom | Acc => cns ! Pl ! Gen ;
+	  _ => cns ! Pl ! c
+	  }
+	} ;
+
+  numSizeAgr : Gender -> NumSize -> Person -> Agr
+    = \g,ns,p -> case ns of {
+    	NS_1   => Ag g Sg p ;
+	NS_2_4 => Ag g Pl p ;
+	_   => Ag Neutr Sg p ---- TODO verify
+	} ;
+
+  numSizeNumber : NumSize -> Number = \ns -> case ns of {
+    NS_1 => Sg ;
+    _ => Pl      ---- TO CHECK
+    } ;
+
+}
+
+----------------------------------------
+
+========== FILE: StructuralHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/StructuralHrv.gf
+
+concrete StructuralHrv of Structural = CatHrv **
+  open ParadigmsHrv, ResHrv, Prelude in {
+
+lin
+    and_Conj = mkConj "i" ;
+----    by8agent_Prep = mkPrep "" Ins ; 
+----    few_Det = invarNumeral "málo" ; -- see notes
+    for_Prep = mkPrep "pre" accusative ;
+    from_Prep = mkPrep "iz" Gen ;
+    have_V2 = mkV2 (mkV imati_VerbForms) ;
+    in_Prep = mkPrep "u" Loc ; 
+----    many_Det = regNumeral "mnoho" "mnohých" "mnohým" "mnohými" ; ---- alternative: invarNumeral "veľa" ;
+    or_Conj = mkConj "alebo" ;
+----    somePl_Det = invarDeterminer "niekoľko" Num5 ;
+----    somePl_Det = {s = \\g,c => (demPronFormsAdjective (mkDemPronForms "niekoľko") "").s ! g ! Pl ! c ; size = Num5} ;
+----    something_NP = {s,clit,prep = \\c => "nie" + coForms ! c ; a = Ag Neutr Sg P3 ; hasClit = False} ; -- CEG 5.6.3
+    possess_Prep = mkPrep "" Gen ;
+    that_Quant = adjFormsAdjective (velikA "oni" ** {msnom = "onaj"}) ; ---- TODO: taj, ta, to
+    this_Quant = adjFormsAdjective (velikA "ovi" ** {msnom = "ovaj"}) ;
+    to_Prep = mkPrep "u" Acc ;
+    with_Prep = mkPrep (pre {"s"|"z"|"š"|"ž"|"mnom" => "sa" ; _ => "s"}) Ins ; 
+
+    i_Pron = mkPron (Ag (Masc Anim) Sg P1) ;   --- to add Fem pronouns in Extend
+    youSg_Pron = mkPron (Ag (Masc Anim) Sg P2) ;
+    he_Pron = mkPron (Ag (Masc Anim) Sg P3) ;
+    she_Pron = mkPron (Ag Fem Sg P3) ;
+    it_Pron = mkPron (Ag Neutr Sg P3) ;
+    we_Pron = mkPron (Ag (Masc Anim) Pl P1) ;
+    youPl_Pron = mkPron (Ag (Masc Anim) Pl P2) ;
+    they_Pron = mkPron (Ag (Masc Anim) Pl P3) ;
+
+    somewhere_Adv = mkAdv "negdje" ;
+
+    if_Subj = lin Subj {s = "ako"} ;
+    every_Det = {s = \\g, c => (adjFormsAdjective (velikA "svaki")).s ! g ! Sg ! c ; size = NS_1} ;
+    all_Predet = adjFormsAdjective (velikA "svi") ;
+    that_Subj = lin Subj {s = "da"} ;
+    someSg_Det = {s = \\g, c => (adjFormsAdjective (velikA "neki")).s ! g ! Sg ! c ; size = NS_1} ;
+    at_least_AdN = lin AdN {s = "najmanje"} ;
+    part_Prep = mkPrep genitive ;
+
+
+--    ExtAdvS
+--    mkN2
+--    mkA2
+
+}
+
+----------------------------------------
+
+========== FILE: VerbHrv.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/croatian/VerbHrv.gf
+
+concrete VerbHrv of Verb = CatHrv ** open ResHrv, Prelude in {
+
+lin
+    UseV v = {
+      verb = v.s ;
+      clit,compl = \\_ => []
+      } ;
+    
+    ComplSlash vps np = case <np.hasClit, vps.c.hasPrep> of {
+      <True,False> => vps ** {
+        clit = \\a => vps.clit ! a ++ np.clit ! vps.c.c
+        } ;
+      _  => vps ** {
+        compl = \\a => vps.compl ! a ++ vps.c.s ++ np.s ! vps.c.c
+        }
+      } ;
+
+    SlashV2a v = {
+      verb = v.s ;
+      clit,compl = \\_ => [] ;
+      c = v.c
+      } ;
+
+    UseComp comp = {
+      verb  = copula_VerbForms ;
+      clit = \\_ => [] ;
+      compl = comp.s
+      } ;
+      
+    CompAP ap = {
+      s = \\a => case a of {
+        Ag g n p_ => ap.s ! g ! n ! Nom
+        }
+      } ;
+      
+    CompNP np = {
+      s = \\a_ => np.s ! Nom ;
+      } ;
+      
+    CompCN cn = {
+      s = \\a => case a of {
+        Ag _ n _ => cn.s ! n ! Nom
+	} ;
+      } ;
+      
+    CompAdv adv = {
+      s = \\a_ => adv.s
+      } ;
+
+    AdvVP vp adv = vp ** {
+      compl = \\a => vp.compl ! a ++ adv.s
+      } ;
+
+}
+
+----------------------------------------

@@ -9,7 +9,7 @@ concrete IdiomSqi of Idiom = CatSqi ** open ResSqi, Prelude in {
     letPart : Str = "le" ++ "të" ;
     selfWord : Str = "vetë" ;
 
-    npNom : NP -> Str = \np -> np.s ! Nom ;
+    idiomNpNom : NP -> Str = \np -> np.s ! Nom ;
 
   lin
     -- it is here she slept
@@ -18,7 +18,7 @@ concrete IdiomSqi of Idiom = CatSqi ** open ResSqi, Prelude in {
 
     -- it is NP who/that ...
     CleftNP np rs =
-      {s = copBe ++ npNom np ++ relThat ++ rs.s} ;
+      {s = copBe ++ idiomNpNom np ++ relThat ++ rs.s} ;
 
     -- which X are there
     ExistIP ip =
@@ -29,10 +29,10 @@ concrete IdiomSqi of Idiom = CatSqi ** open ResSqi, Prelude in {
 
     -- there is NP
     ExistNP np =
-      {s = existV ++ npNom np} ;
+      {s = existV ++ idiomNpNom np} ;
 
     ExistNPAdv np adv =
-      {s = existV ++ npNom np ++ adv.s} ;
+      {s = existV ++ idiomNpNom np ++ adv.s} ;
 
     -- one sleeps (draft: no explicit subject)
     GenericCl vp =
@@ -44,7 +44,7 @@ concrete IdiomSqi of Idiom = CatSqi ** open ResSqi, Prelude in {
 
     -- let NP VP
     ImpP3 np vp =
-      {s = letPart ++ npNom np ++ vp.s} ;
+      {s = letPart ++ idiomNpNom np ++ vp.s} ;
 
     -- let's VP
     ImpPl1 vp =
@@ -59,7 +59,7 @@ concrete IdiomSqi of Idiom = CatSqi ** open ResSqi, Prelude in {
       vp ** {s = vp.s ++ selfWord} ;
 
     SelfAdvVP vp =
-      vp ** {s = vp.s ++ selfWord} ;
+      {s = vp.s ++ selfWord} ;
 
     -- NP itself
     SelfNP np =

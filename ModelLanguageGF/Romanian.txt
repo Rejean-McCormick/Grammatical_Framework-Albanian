@@ -1,0 +1,2779 @@
+
+========== FILE: AdjectiveRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/AdjectiveRon.gf
+
+concrete AdjectiveRon of Adjective = 
+  CatRon ** open ResRon, Prelude in {
+
+  lin
+
+    PositA  a = {
+      s = a.s ;
+      isPre = a.isPre
+      } ;
+    ComparA a np = {
+      s = \\af => "mai" ++ a.s ! af  ++ conjThan ++ (np.s ! Ac).comp ; 
+      isPre = False
+      } ;
+  
+  CAdvAP ad ap np = {
+      s = \\af => case af of
+                    { AF g n sp c => artDem g n c ++ ad.s ++ ap.s ! (AF g n Indef c) ++ ad.p ++ (np.s ! No).comp ; 
+                      AA          => ad.s ++ ap.s ! af ++ ad.p ++ (np.s ! No).comp 
+                    };
+      isPre = False
+      } ;
+
+   UseComparA a = {
+      s = \\af => "mai" ++ a.s ! af ;
+      isPre = False
+      } ;
+  
+ AdjOrd ord = {
+      s = \\af => case af of {
+        AF g n sp c => ord.s ! n ! g ! (convACase c) ; 
+        _ => ord.s ! Sg ! Masc ! No
+        } ;
+      isPre = True 
+      } ;
+
+-- $SuperlA$ belongs to determiner syntax in $Noun$.
+
+    ComplA2 adj np = {
+      s = \\af => adj.s ! af ++ appCompl adj.c2 np ; 
+      isPre = False
+      } ;
+
+    ReflA2 adj = {
+      s = \\af => case af of
+            { AF g n sp c => adj.s ! af ++ adj.c2.s ++
+              reflPron n P3 (convCase adj.c2.c) ++ reflPronHard g n P3; 
+              AA => adj.s ! af ++ adj.c2.s ++ reflPron Sg P3 (convCase adj.c2.c) ++ reflPronHard Masc Sg P3
+             };
+      isPre = False
+      } ;
+
+    SentAP ap sc = {
+      s = \\a => ap.s ! a ++ sc.s ; --- mood 
+      isPre = False
+      } ;
+
+    AdAP ada ap = {
+      s = \\a => ada.s ++ ap.s ! a ;
+      isPre = ap.isPre
+      } ;
+
+    UseA2 a = {
+      s = a.s ;
+      isPre = False 
+      } ;
+
+};
+
+----------------------------------------
+
+========== FILE: AdverbRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/AdverbRon.gf
+
+concrete AdverbRon of Adverb = 
+  CatRon ** open ResRon, Prelude in {
+
+  lin
+    PositAdvAdj a = {
+      s = a.s ! AA
+      } ;
+    ComparAdvAdj cadv a np = {
+      s = cadv.s ++ a.s ! AA ++ cadv.p ++ (np.s ! No).comp 
+                 
+      } ;
+    ComparAdvAdjS cadv a s = {
+      s = cadv.s ++ a.s ! AA ++ cadv.p ++ s.s ! Indic
+      } ;
+   
+    PrepNP prep np = {s = case prep.needIndef of
+                              {False => prep.s ++ (np.s ! prep.c).comp;
+                               _     => prep.s ++ np.indForm}
+                      };
+
+    AdAdv ada adv = {s = ada.s ++ adv.s }  ;
+    
+    SubjS subj s = {
+      s = subj.s ++ s.s ! Indic
+      }  ;
+    
+    AdnCAdv cadv = {s = cadv.s ++ cadv.sNum ++ conjThan} ; 
+-- doesn't yield to a correct form for more_CAdv
+
+}
+
+----------------------------------------
+
+========== FILE: CatRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/CatRon.gf
+
+[Error: 'utf-8' codec can't decode byte 0xe2 in position 4442: invalid continuation byte]
+----------------------------------------
+
+========== FILE: ConjunctionRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/ConjunctionRon.gf
+
+concrete ConjunctionRon of Conjunction = 
+  CatRon ** open ResRon, Coordination, Prelude in {
+
+  flags optimize=all_subs ;
+
+  lin
+   
+    ConjS conj ss = conjunctDistrTable Mood conj ss ;
+
+    ConjAdv conj ss = conjunctDistrSS conj ss ;
+
+    ConjNP conj ss = heavyNP (conjunctDistrTable NCase conj ss ** {
+      a = {g = ss.a.g ; n = conjNumber conj.n ss.a.n ; p = ss.a.p} ;
+      hasClit = ss.nForm;
+      ss = ""  
+      }) ;
+
+
+    ConjAP conj ss = conjunctDistrTable AForm conj ss ** {
+      isPre = ss.isPre
+      } ;
+  
+  ConjRS conj ss = conjunctDistrTable2 Mood Agr conj ss ** {
+      c = ss.c
+      } ;
+
+
+-- These fun's are generated from the list cat's.
+
+    BaseS = twoTable Mood ;
+    ConsS = consrTable Mood comma ;
+    BaseAdv = twoSS ;
+    ConsAdv = consrSS comma ;
+  BaseNP x y = {
+      s1 = \\c => (x.s ! c).comp ; 
+      s2 = \\c => (y.s ! c).comp ;  
+      a = conjAgr x.a y.a;
+      nForm  = case x.nForm of
+                   {HasClit => y.nForm ;
+                    _       => HasRef False } 
+      } ;  
+ ConsNP x xs = {
+      s1 = \\c => (x.s ! c).comp ++ comma ++ xs.s1 ! c ; ----e (conjunctCase c) ; 
+      s2 = \\c => xs.s2 ! c ; ----e (conjunctCase c) ; 
+      a = conjAgr x.a xs.a ;
+      nForm = case x.nForm of 
+                  {HasClit => xs.nForm ;
+                   _       => HasRef False}
+      } ;
+
+    BaseAP x y = twoTable AForm x y ** {isPre = andB x.isPre y.isPre} ;
+    ConsAP xs x = consrTable AForm comma xs x ** {isPre = andB xs.isPre x.isPre} ;
+    BaseRS x y = twoTable2 Mood Agr x y ** {c = y.c} ;
+   ConsRS xs x = consrTable2 Mood Agr comma xs x ** {c = xs.c} ;
+
+  lincat
+     [S] = {s1,s2 : Mood => Str} ;
+    [Adv] = {s1,s2 : Str} ;
+    [NP] = {s1,s2 : NCase => Str ; a : Agr; nForm : NForm} ;
+    [AP] = {s1,s2 : AForm  => Str ; isPre : Bool} ;
+    [RS] = {s1,s2 : Mood => Agr => Str ; c : NCase} ;
+ 
+};
+
+----------------------------------------
+
+========== FILE: ExtendRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/ExtendRon.gf
+
+--# -path=.:../common:../abstract
+
+concrete ExtendRon of Extend =
+  CatRon ** ExtendFunctor - [PassVPSlash]
+  with
+    (Grammar = GrammarRon) ** 
+  open ResRon in {
+
+lin iFem_Pron = mkPronoun "eu" "mine" "mie" [] [] "meu" "mea" "mei" "mele" Fem Sg P1 ;
+    youFem_Pron = mkPronoun "tu" "tine" "ţie" [] "tu" "tău" "ta" "tăi" "tale"  Fem Sg P2 ;
+    youPlFem_Pron = mkPronoun "voi" "voi" "vouă" [] "voi" "vostru" "voastră" "voştri" "voastre" Fem Pl P2 ;
+    youPolFem_Pron =
+       let dvs = mkPronoun "dumneavoastră" "dumneavoastră" "dumneavoastră" [] "dumneavoastră" "dumneavoastră" "dumneavoastră" "dumneavoastră" "dumneavoastră" Fem Pl P2 
+       in {s = dvs.s; c1 = dvs.c1; 
+           c2 = dvs.c2; a = dvs.a; isPol = True; poss = dvs.poss} ;  
+
+-- KA: derived from PassV2, objects are ignored
+lin PassVPSlash vps = insertSimpObj (\\a => vps.s ! PPasse a.g a.n Indef ANomAcc) auxPassive ** {lock_VP = <>};
+
+}
+
+----------------------------------------
+
+========== FILE: IdiomRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/IdiomRon.gf
+
+concrete IdiomRon of Idiom = 
+-- CatRon **   open (P = ParamX), MorphoRon, ParadigmsRon,Prelude 
+CatRon ** open Prelude, ResRon,BeschRon
+in {
+
+  flags optimize=all_subs ;
+    coding=utf8 ;
+
+
+
+  lin
+    ImpersCl vp = mkClause "" False (agrP3 Masc Sg) vp  ;
+    
+    GenericCl vp = mkClause "cineva" False (agrP3 Masc Sg) vp ; -- an exact correspondent does not exist !
+
+    ExistNP np = 
+      mkClause "" False np.a (insertSimpObj (\\ag => (np.s ! No ).comp) (useVerb (v_besch20 "existã"))) ;
+-- v_besch20 "exista"
+   
+    ExistIP ip = {
+      s = \\t,a,p,_ => 
+        ip.s ! No ++ 
+        (mkClause "" False (agrP3 (ip.a.g) (ip.a.n))
+              copula).s 
+           ! DDir ! t ! a ! p ! Indic       } ;
+
+    CleftNP np rs = mkClause "" False np.a 
+      (insertSimpObj (\\_ => rs.s ! Indic ! np.a) 
+        (insertSimpObj (\\_ => (np.s ! rs.c).comp) copula)) ;
+--need adverb for 
+    
+    CleftAdv ad s = mkClause "" False (agrP3 Masc Sg) 
+      (insertSimpObj (\\_ => conjThat ++ s.s ! Indic) 
+        (insertSimpObj (\\_ => ad.s) copula)) ;
+
+
+    ProgrVP vp = vp; -- for the moment, since there is no particular way to express continuous action, except for the imperfect, which wouldn't work for all tenses
+
+    ImpPl1 vp = let a = {p = P1 ; n = Pl ; g = Masc} in
+      { s =  "sã"  ++ (flattenSimpleClitics vp.nrClit vp.clAcc vp.clDat (vp.isRefl ! a)) ++ conjVP vp a ++vp.comp ! a ++ vp.ext ! Pos };
+
+}
+
+
+
+----------------------------------------
+
+========== FILE: NounRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/NounRon.gf
+
+concrete NounRon of Noun =
+  CatRon ** open ResRon,Prelude in {
+
+  flags optimize=all_subs ;
+
+  lin
+    DetCN det cn = 
+      let 
+        n = det.n;
+        gg = agrGender cn.g n ;
+        ag = agrP3 gg n ;
+        hr = orB cn.needsRefForm  (andB (getClit cn.a) (orB det.hasRef (andB det.isDef cn.isComp)));
+        nf = if_then_else NForm hr HasClit (HasRef False);
+        st= if_then_else Species det.isDef Def Indef;
+        rs = if_then_else Species det.hasRef Def Indef
+      in 
+       {s = \\c => case c of
+                   {Vo =>
+                   {comp = det.s ! gg ! No ++ det.size ++ cn.s ! n ! st ! ANomAcc ++ det.post ! gg ! No  ;
+                    clit = \\cs => if_then_Str hr ((genCliticsCase ag c).s ! cs) [] };
+                    _ => {comp = det.s ! gg ! c ++ det.size ++ cn.s ! n ! st ! (convCase c) ++ det.post ! gg ! c  ;
+                    clit = \\cs => if_then_Str hr ((genCliticsCase ag c).s ! cs) [] }
+                   };
+        a = ag ;
+        nForm = nf;
+        isPol = False;
+        isPronoun = False;
+        indForm = det.s ! gg ! No ++ det.size ++cn.s ! n ! rs ! ANomAcc ++ det.post ! gg ! No 
+             
+        } ;
+
+    UsePN pn = let 
+        g = pn.g ;
+        n = pn.n ;
+        ag = agrP3 g n ;
+        hc = getClit pn.a 
+      in {
+        s = \\c =>  {comp = pn.s ! c ;
+                      clit = \\cs => if_then_Str hc ((genCliticsCase ag c).s ! cs) [] } ;
+                   
+        a = ag;
+        nForm = if_then_else NForm hc HasClit (HasRef False) ;
+        isPronoun = False ; isPol = False;
+        indForm = pn.s ! No
+        } ;
+
+   UsePron p = {s = \\c =>{comp = p.s ! c ;
+                           clit = (genCliticsCase p.a c).s } ;
+                nForm = HasClit;
+                isPronoun = True ;
+                isPol = p.isPol ;
+                a = p.a;
+                indForm = p.s ! Ac
+               };
+
+
+
+    PredetNP pred np = 
+       {s = \\c => {comp = pred.s ! aagr (np.a.g) (np.a.n) ! (convCase c) ++ (np.s ! pred.c).comp  ; 
+                    clit = (np.s ! c).clit };
+        a = np.a ;
+        nForm = np.nForm ;
+        isPronoun = False ; isPol = False;
+        indForm = pred.s ! aagr (np.a.g) (np.a.n) ! ANomAcc ++ (np.s ! pred.c).comp
+   } ;
+
+
+    PPartNP np v2 = 
+     heavyNP {
+      s = \\c => (np.s ! c).comp ++ v2.s ! PPasse np.a.g np.a.n Indef (convCase c);
+      a = np.a ;
+      hasClit = np.nForm;
+      ss = (np.s ! No).comp ++ v2.s ! PPasse np.a.g np.a.n Indef ANomAcc
+      } ;
+
+    RelNP np rs = heavyNP {
+      s = \\c => (np.s ! c).comp ++ rs.s ! Indic ! np.a ;
+      a = np.a ;
+      hasClit = np.nForm ;
+      ss = (np.s ! No).comp ++ rs.s ! Indic ! np.a  
+     } ;
+
+    AdvNP np adv = heavyNP {
+      s = \\c => (np.s ! c).comp ++ adv.s ;
+      a = np.a ;
+      hasClit = np.nForm;
+      ss = (np.s ! No).comp ++adv.s ;
+      } ;
+
+    DetQuantOrd quant num ord = let n = num.n                                       
+in {
+      s = \\g,c => let s1 = if_then_Str quant.isDef (ord.s ! n ! g ! c) (ord.s ! n ! g ! No);
+                       s2 = if_then_Str quant.isPost "" (quant.s ! num.isNum ! n ! g  ! (convCase c) ++ s1) 
+                  
+                    in 
+                    s2 ++ num.s ! g  ;
+      sp = \\g,c => let 
+                        s1 = if_then_Str quant.isDef (ord.s ! n ! g ! c) (ord.s ! n ! g ! No) ;
+                        s3 = if_then_Str quant.isPost (s1 ++ num.sp ! g ++ quant.sp ! n ! g ! ANomAcc) (quant.sp ! n ! g ! (convCase c) ++ s1 ++ num.sp ! g) 
+                        
+                      in   
+                      s3 ; 
+      post = \\g,c => let s1 = ord.s ! n ! g ! No;
+                          s2 = if_then_Str quant.isPost (quant.s ! num.isNum ! n ! g  ! (convCase c) ++ s1) ""     
+                      in  
+                      s2    ;
+      n = num.n ;
+      isDef = quant.hasRef;
+      size = num.size;
+      hasRef = quant.hasRef 
+
+      } ;
+
+    DetQuant quant num = let n = num.n ;
+                             needDem = case num.n of 
+                                        { Sg => False ; -- for the moment, since no other construction would convey the proper meaning of "the one man"
+                                           _ => andB quant.isDef num.isNum}                                      
+        in {
+      s  = \\g,c => let s1 = if_then_Str quant.isPost "" (quant.s ! num.isNum ! n ! g ! (convCase c)) ; 
+                        s2 = if_then_Str needDem (artDem g n (convCase c)) ""   
+                           in s2 ++ s1 ++ num.s ! g ;
+      sp = \\g,c => let s1 = if_then_Str needDem (artDem g n (convCase c)) "" ;
+                        s2 = if_then_Str quant.isPost (s1 ++ num.sp ! g ++ quant.sp ! n ! g ! ANomAcc) (s1 ++ quant.sp ! n ! g ! (convCase c) ++ num.sp ! g)
+                      in s2 ;
+        
+      post = \\g,c => if_then_Str quant.isPost (quant.s ! num.isNum ! n ! g ! (convCase c)) "" ;
+      n = num.n ;
+      isDef = case num.isNum of 
+                {True => False ;
+                 _    => quant.isDef };
+      size = num.size ;
+      hasRef = quant.hasRef
+      } ;
+
+
+    DetNP det = 
+      let 
+        g = Masc ;  
+        n = det.n
+      in heavyNP {
+        s = \\c => det.sp ! g ! c ;
+        a = agrP3 g n ;
+        hasClit = HasClit ;
+        ss = det.sp ! g ! No   
+       } ;
+
+-- assume that it refers to people
+
+    PossPron p = {
+      s = \\_,n,g,c =>  p.poss ! n ! g ! c; 
+      sp = \\ n,g,c => artPos g n c ++ p.poss ! n ! g ! c ; 
+      isDef = True ;
+      isPost = True ;
+      hasRef = True
+      } ;
+
+
+
+
+    NumSg = {s = \\_ => [] ; sp = \\_ => [] ; isNum = False ; n = Sg ; size = ""} ;
+    NumPl = {s = \\_ => [] ; sp = \\_ => [] ; isNum = False ; n = Pl ; size = ""} ;
+
+    NumCard n = {s = n.s ; sp = n.sp ; size = getSize n.size ;
+                 isNum = True;  
+                 n = getNumber n.size   
+                 } ;
+
+    NumDigits nu = {s,sp = \\g => nu.s ! NCard g ;
+                    size = nu.n; n = getNumber nu.n };
+    OrdDigits nu = {s =  table{Sg => \\g,c => nu.s ! NOrd g ;
+                               Pl => \\g,c => []  } ;
+                    isPre = True
+                    };
+
+    NumDecimal nu = {s,sp = \\g => nu.s ! NCard g ;
+                     size = nu.n; n = getNumber nu.n };
+
+    NumNumeral nu = {s = \\g => nu.s ! ANomAcc ! (NCard g) ! Formal ; 
+                     sp = \\g => nu.sp ! ANomAcc ! (NCard g) ! Formal ;
+                     n = getNumber nu.size ; size = nu.size };
+
+    OrdNumeral nu = {s = table {Sg => \\g,c => nu.s ! (convCase c) ! NOrd g ! Formal;
+                                Pl => \\g,c => []
+                               };
+                     isPre = True} ;
+
+    AdNum adn num = {s = \\a => adn.s ++ num.s ! a ; 
+                     sp = \\a => adn.s ++ num.sp ! a ;
+                     isNum = num.isNum ; n = num.n; size = num.size} ;
+
+    OrdSuperl adj = {s = \\n,g,c => artDem g n (convCase c) ++ "mai" ++ adj.s ! AF g n Indef (convCase c);
+                     isPre = True;
+                     };
+
+    DefArt = {
+      s = \\b,n,g,c => [] ;  
+      sp = \\n,g,c => [] ; 
+      isDef = True ;
+      isPost = False ;
+      hasRef = False 
+      } ;
+
+    IndefArt = {
+      s = \\b,n,g,c =>  if_then_Str b [] (artUndef g n (convACase c)) ;
+      sp = table {Sg => table {Masc => table {AGenDat => "unuia"; AVoc => [] ; _ => "unul" };
+                               Fem  => table {AGenDat => "uneia"; AVoc => [] ; _ => "una" }
+                               };
+                  Pl => table {Masc => table {AGenDat => "unora"; AVoc => "" ; _ => "unii"};
+                               Fem  => table {AGenDat => "unora"; AVoc => "" ; _ => "unele"}
+                              }  
+                  };    
+      isDef = False ;
+      isPost = False ;
+      hasRef = False
+
+      } ;
+
+-- since mass noun phrases are not referential, it's no point keeping track of clitics
+-- no matter if the noun is animate or not
+
+    MassNP cn = let 
+        g = case cn.g of
+             {NFem => Fem ;
+              _    => Masc} ;  
+        hc = getClit cn.a ;
+        n = Sg
+      in {
+        s = \\c =>   {comp = cn.s ! n ! Indef ! (convCase c); 
+                      clit = \\cs => []  } ;
+        a = agrP3 g n ;
+        nForm = HasRef False ;
+        isPol = False;
+        isPronoun = False ;
+        indForm = cn.s ! n ! Indef ! ANomAcc
+        } ;
+
+-- This is based on record subtyping.
+
+    UseN, UseN2 = \noun -> noun ** {isComp = False; needsRefForm = False};
+
+    Use2N3 f = f ;
+
+    Use3N3 f = f ** {c2 = f.c3} ;
+
+    ComplN2 f x = {
+      s = \\n,sp,c => f.s ! n ! sp ! c ++ appCompl f.c2 x ;
+      g = f.g ;
+      a = f.a ;
+      needsRefForm = False ;  
+      isComp = False
+      } ;
+
+    ComplN3 f x = {
+      s = \\n,sp,c => f.s ! n ! sp ! c ++ appCompl f.c2 x ;
+      g = f.g ;
+      c2 = f.c3;
+      a = f.a ;
+      needsRefForm = False ;  
+      isComp = False
+      } ;
+
+    AdjCN ap cn = 
+      let 
+        g = cn.g         
+      in {
+        s =  case ap.isPre of 
+                 {True => \\n => table {Def => \\c => ap.s ! (AF (agrGender g n) n Def c) ++ cn.s ! n ! Indef ! c;
+                                        Indef => \\c => ap.s ! (AF (agrGender g n) n Indef c) ++ cn.s ! n ! Indef ! c};
+                  False => \\n => table {Def => \\c => cn.s ! n ! Def ! c ++ ap.s ! (AF (agrGender g n) n Indef c);
+                                         Indef => \\c => cn.s ! n ! Indef ! c ++ ap.s ! (AF (agrGender g n) n Indef c) } 
+                 };
+        g = g ;
+        a = cn.a ;
+        needsRefForm = cn.needsRefForm ;
+        isComp = True  
+        } ;
+
+
+    RelCN cn rs = {
+      s = \\n,sp,c => cn.s ! n ! sp ! c ++ rs.s ! Indic ! agrP3 (agrGender cn.g n) n ;
+      g = cn.g  ;
+      a = cn.a ;
+      needsRefForm = cn.needsRefForm;
+      isComp = True  
+      } ;
+
+    SentCN  cn sc = let g = cn.g in {
+      s = \\n,sp,c => cn.s ! n ! sp ! c ++ sc.s ;
+      g = g ;
+      a = cn.a ;
+      needsRefForm = cn.needsRefForm;
+      isComp = True
+      } ;
+
+    AdvCN  cn sc = let g = cn.g in {
+      s = \\n,sp,c => cn.s ! n ! sp ! c ++ sc.s ;
+      g = g;
+      a = cn.a ;
+      needsRefForm = cn.needsRefForm; 
+      isComp = True
+      } ;
+
+    ApposCN  cn np = let g = cn.g in {
+      s = \\n,sp,c => cn.s ! n ! sp ! c ++ (np.s ! No).comp ;
+      g = g;
+      a = cn.a ;
+      needsRefForm = cn.needsRefForm;
+      isComp = True
+      } ;
+
+}; 
+
+----------------------------------------
+
+========== FILE: NumeralRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/NumeralRon.gf
+
+concrete NumeralRon of Numeral = CatRon [Numeral,Digits,Decimal] **
+  open  MorphoRon, CatRon, Prelude in {
+
+flags coding = utf8 ;
+
+param DForm = unit | teen | ten | teen_inf ;
+param Placement = indep | attr ;
+
+lincat Digit = {s : CardOrd => DForm => Str ; size : Size} ;
+lincat Sub10 = {s : CardOrd => DForm => Placement => Str ; size : Size} ;
+lincat Sub100 = {s : CardOrd => NumF => Placement => Str ; size : Size} ;
+lincat Sub1000 = {s : CardOrd => NumF => Placement => Str ; size : Size } ;
+lincat Sub1000000 = { s : CardOrd => NumF => Placement => Str; size : Size } ;
+lincat Sub1000000000 = { s : CardOrd => NumF => Placement => Str; size : Size } ;
+lincat Sub1000000000000 = { s : CardOrd => NumF => Placement => Str; size : Size } ;
+
+
+
+oper mkOrdinalForm : Str -> Gender ->  Str =
+\two, g ->  case g of 
+                  { Masc => case two of 
+                            {x+"t"    => two+"ulea"; 
+                             x + "ie" => x + "iilea";
+                             _        => two+"lea" 
+                            };      
+                    Fem => case two of
+                            { x + ("ă"|"u")   => x +"a"; 
+                              x + "ei"        => two + "a";
+                              x + "ii"        => x + "ia" ;
+                              x + "i"         => x + "ea";
+                              x + "ie"         => x +"a" ;
+                              _               => two +"a" 
+                            }
+                   };                        
+ 
+                
+oper mkOrdinal : Str -> Gender -> ACase -> Str =
+\two, g, fl ->  mkOrd (mkOrdinalForm two g) g fl;  
+
+oper mkOrd : Str -> Gender -> ACase -> Str =
+\two, g, fl -> let cc = (artPos g Sg ANomAcc) ++ two  
+                        in
+         case fl of
+                { ANomAcc => cc ;             
+                  AGenDat => (artDem g Sg AGenDat)++"de-"+(artPos g Sg ANomAcc)++ two ;
+                  AVoc => cc
+                };  
+
+
+oper mkNum : Str -> Str -> Str -> Str -> Digit = 
+ \two -> \twelve -> \twenty -> \doispe -> mkNumVSpc two twelve twelve twenty two doispe doispe (mkOrdinalForm two Masc) (mkOrdinalForm two Fem);
+
+
+oper mkNumVSpc : Str -> Str -> Str -> Str -> Str -> Str -> Str -> Str -> Str -> Digit = 
+  \two -> \twelve -> \douasprezece -> \twenty -> \dou -> \doispe -> \douaspe -> \doilea -> \doua ->  
+  {s = table { 
+               NCard Masc  => table {unit => two ; teen => twelve ;
+                                     ten => twenty ; teen_inf => doispe
+                                    } ;
+               NCard Fem  => table {unit => dou ; teen => douasprezece ;
+                                    ten  => twenty ; teen_inf => douaspe 
+                                   } ;                      
+               NOrd Masc  => table {unit     => doilea ; 
+                                    teen     => mkOrdinalForm twelve Masc ;   
+                                    ten      => mkOrdinalForm twenty Masc ;   
+                                    teen_inf => mkOrdinalForm doispe Masc       
+                                   } ;
+               NOrd Fem   => table {unit     => doua  ;
+                                    teen     => mkOrdinalForm douasprezece Fem ;   
+                                    ten      => mkOrdinalForm twenty Fem ;   
+                                    teen_inf => mkOrdinalForm douaspe Fem        
+                                   }                      
+              } ;      
+   size = less20 ;
+   lock_Digit = <>
+  } ;
+
+oper regNum : Str -> Digit = 
+  \trei -> mkNum trei (trei + "sprezece") (trei + "zeci") (trei + "şpe") ;
+
+
+oper mkMidF : Str -> Str -> Sub100 =
+\unsprezece, unspe -> 
+{ s = table {NCard g => table { Formal   => \\_ => unsprezece  ;
+                                Informal => \\_ => unspe  
+                               };
+             NOrd g  => table {Formal    => \\_ =>  mkOrdinalForm unsprezece g;
+                               Informal  => \\_ => mkOrdinalForm unspe g 
+                              }                 
+            };
+            
+ size = less20 ;
+ lock_Sub100 = <>
+ };
+
+
+lin num = \d ->
+ { s = \\cse => table { NCard g => \\f => d.s ! (NCard g) ! f ! indep  ;
+                        NOrd g => \\f =>  let ss = d.s ! (NOrd g) ! f ! indep
+                                                 in 
+                                       case d.size of 
+                                              { sg => (artDem g Sg cse) ++ ss ;
+                                                _  => mkOrd ss g cse
+                                               }
+                       };
+   sp =  \\cse => table { NCard g => \\f => d.s ! (NCard g) ! f ! attr  ;
+                        NOrd g => \\f =>  let ss = d.s ! (NOrd g) ! f ! indep
+                                                 in 
+                                       case d.size of 
+                                              { sg => (artDem g Sg cse) ++ ss ;
+                                                _  => mkOrd ss g cse
+                                               }
+                       };
+   size = d.size
+ } ; 
+-- Latin A Supplement chars
+
+lin n2 = mkNumVSpc "doi" "doispreze" "douăsprezece" "douăzeci" "două" "doişpe" "douăşpe" "doilea" "doua";
+lin n3 = regNum "trei";
+lin n4 = mkNum "patru" "paisprezece" "patruzeci" "paişpe";
+lin n5 = mkNum "cinci" "cinsprezece" "cincizeci" "cinşpe";
+lin n6 = mkNum "şase" "şaisprezece" "şaizeci" "şaişpe";
+lin n7 = mkNum "şapte" "şaptesprezece" "şaptezeci" "şaptispe";
+lin n8 = mkNum "opt" "optsprezece" "optzeci" "optişpe";
+lin n9 = regNum "nouă";
+
+lin pot01 = let num = mkNumVSpc "un" "unsprezece" "unsprezece" "zece" "o" "unşpe" "unşpe" "dintâi" "dintâi" ;
+                dep = mkNumVSpc "unu" "unsprezece" "unsprezece" "zece" "una" "unşpe" "unşpe" "unulea" "una" 
+                        
+              in 
+         { s = \\o,c => table {indep => num.s ! o ! c ;
+                               attr  => dep.s ! o ! c
+                                } ;
+           size = sg 
+          };            
+
+lin pot0 d = { s = \\o, c => \\_ => d.s ! o ! c ;
+               size = less20
+              };
+
+lin pot110 = mkMidF "zece" "zece" ;           
+
+lin pot111 = mkMidF "unsprezece" "unşpe" ; 
+                                       
+lin pot1to19 = \d -> 
+  {s = \\c => table { Formal   => \\_ => d.s ! c ! teen ;
+                      Informal => \\_ => d.s ! c ! teen_inf 
+                  };                        
+   size = less20
+  };
+               
+lin pot0as1  = \d -> 
+  {s = \\c,_,p => d.s ! c ! unit ! p ;                                  
+   size = d.size
+  };
+                   
+lin pot1  = \d -> 
+  {s = \\c => \\_,_ => d.s ! c ! ten ;                                        
+   size = pl
+  };
+
+
+                 
+lin pot1plus d e = 
+  {s = table { 
+          NCard g => \\_,_ => d.s ! (NCard g) ! ten ++ "şi" ++ e.s ! (NCard g) ! unit ! attr  ;
+          NOrd g  => \\_,_ => d.s ! (NCard g) ! ten ++ "şi" ++ e.s ! (NOrd g) ! unit ! attr 
+             };
+   size = pl 
+   };          
+     
+lin pot1as2 n = n ;
+
+lin pot2 d = 
+  {s = table {
+              NCard g => \\_,_ => d.s ! (NCard Fem) ! unit ! indep ++ (mksute d.size) ; 
+              NOrd g  => \\_,_ => d.s ! (NCard Fem) ! unit ! indep ++ (mkSute d.size g)       
+             };
+  size = pl} ;
+             
+lin pot2plus d e = 
+  {s = \\c,f,_ => d.s ! (NCard Fem) ! unit ! indep ++ (mksute d.size) ++ e.s ! c ! f ! attr ;    
+   size = e.size} ;
+
+lin pot2as3 n = n ;
+ 
+lin pot3 n = 
+  {s =  table {  
+              NCard g => \\f,p => mkmie n.size (n.s ! (NCard Fem) ! f ! indep)  ;
+              NOrd g  => \\f,p => mkMie n.size g (n.s ! (NCard Fem) ! f ! indep)   
+              };
+  size = pl                     
+  } ;
+
+
+lin pot3plus n m = 
+ {s = \\c, f, p => mkmie n.size (n.s ! (NCard Fem) ! f ! indep)  ++ m.s ! c ! f ! attr;                  
+  size = m.size                              
+   };
+
+lin pot3as4 n = n ;
+lin pot4as5 n = n ;
+
+oper mksute : Size -> Str = \sz -> table {sg => "sută" ; _ => "sute" } ! sz ; 
+oper mkSute : Size -> Gender -> Str = \sz, g -> 
+table {sg => mkOrdinalForm "sută" g  ;
+       _  => mkOrdinalForm "sute" g  } ! sz ;
+
+oper mkmie : Size -> Str -> Str = \sz, attr -> 
+  table {sg     => "o" ++ "mie" ;
+         less20 => attr ++ "mii" ;
+         pl     => attr ++ "de" ++ "mii"} ! sz ;
+
+
+oper mkMie : Size -> Gender -> Str -> Str = \sz, g, attr ->
+table { sg      => "o" ++ mkOrdinalForm "mie" g  ;
+        less20  => attr ++ mkOrdinalForm "mii" g ;
+        pl      => attr ++ "de" ++ mkOrdinalForm "mii" g  } ! sz ; 
+
+
+
+--numerals as sequences of digits :
+
+lincat 
+    Dig = {s : CardOrd => Str; n : Size ; isDig : Bool} ;
+
+lin 
+   IDig d = d ;
+
+   IIDig d i = {
+     s = \\o => d.s ! NCard Masc ++ BIND ++ i.s ! o ;
+      n = case d.n of
+              { sg => if_then_else Size (i.isDig) less20 pl ;
+                _  => pl           
+              };
+      isDig = False
+    } ;
+lin
+    D_0 = mkDig "0" ;
+    D_1 = mk3Dig "1" "1ul" "1a" sg ; ---- gender
+    D_2 = mkDig "2";
+    D_3 = mkDig "3" ;
+    D_4 = mkDig "4" ;
+    D_5 = mkDig "5" ;
+    D_6 = mkDig "6" ;
+    D_7 = mkDig "7" ;
+    D_8 = mkDig "8" ;
+    D_9 = mkDig "9" ;
+
+lin PosDecimal d = d ** {hasDot=False} ;
+lin NegDecimal d = {
+     s = \\o => "-" ++ BIND ++ d.s ! o ;
+     n = pl;
+     isDig = False ;
+     hasDot=False
+     } ;
+    IFrac d i = {
+     s = \\o => d.s ! NCard Masc ++
+                if_then_Str d.hasDot BIND (BIND++"."++BIND) ++
+                i.s ! o ;
+     n = pl ;
+     isDig = False ;
+     hasDot=True
+     } ;
+
+oper mkDig : Str -> Dig = \c -> mk3Dig c (c + "lea") (c + "a") less20 ;
+
+oper  mk3Dig : Str -> Str -> Str-> Size -> Dig = \c,u,o,n -> {
+      s = table {NCard g => c ; NOrd Masc => u ; NOrd Fem => o } ; 
+      n = n;
+      isDig = True ;
+      lock_Dig = <> 
+      } ;
+
+    TDigit = {s : CardOrd => Str; n : Size ; isDig : Bool} ;
+
+
+}
+
+----------------------------------------
+
+========== FILE: ParadigmsRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/ParadigmsRon.gf
+
+--# -path=.:../romance:../common:../abstract:../../prelude
+
+--1 Romanian Lexical Paradigms
+--
+--  Ramona Enache 2008 - 2009
+--
+
+
+resource ParadigmsRon = 
+  open 
+    (Predef=Predef), 
+    Prelude, 
+    MorphoRon, 
+    CatRon,
+    BeschRon in {
+
+  flags optimize=all ; coding = utf8 ;
+
+--2 Parameters 
+--
+-- To abstract over gender names, we define the following identifiers.
+
+oper
+  NGender : Type ; 
+
+  masculine : NGender ;
+  feminine  : NGender ;
+  neuter    : NGender ;
+  
+  Gender : Type ;
+  
+  Masculine : Gender ;
+  Feminine  : Gender ;
+  
+--To abstract over animacy, we define the following :  
+
+  Anim : Type ;
+  
+  animate   : Anim ;
+  inanimate : Anim;
+  
+-- To abstract over number names, we define the following.
+
+  Number : Type ; 
+
+  singular : Number ;
+  plural   : Number ;
+
+-- prepositions which require cases :
+   
+   Preposition : Type ;
+ 
+ NCase : Type ;
+  Acc : NCase ;
+  Dat : NCase ;
+  Gen : NCase ;
+  Nom : NCase ;
+ 
+mkPrep : overload {   
+  mkPrep : Str -> NCase-> Bool -> Prep ;
+  mkPrep : Str -> NCase -> Prep; 
+ };
+noPrep : NCase -> Prep ;
+
+--2 Nouns
+
+ mkN = overload {
+    mkN : Str -> N -- Singular, infers gender and Plural 
+    = mkSPN; 
+    mkN : Str -> Str -> NGender -> N -- worst case: Singular + Plural + gender
+    = mkNI; 
+    mkN : Str -> Str -> Str -> N -- very irregular nouns - feminine 
+    = mkVI; 
+    mkN : Str -> Str -> N -- Singular + Plural, infers gender
+    = mkNN; 
+    mkN : Str -> NGender -> N -- Singular +  gender, infers Plural 
+    = regN;  
+ } ; 
+
+--because the plurals ending in "uri" are becoming less and less frequent for neuter nouns,
+--and because there is no way of infering the plural form by looking at the structure of the word
+--we treat this case separately :
+   
+mkNR : Str -> N;
+mkNR s = mkInanimate (mkNomNeut s) ** {lock_N = <>} ;
+
+
+
+--3 Relational nouns 
+-- 
+-- Relational nouns need a noun and a preposition. 
+
+ mkN2 : N -> Prep -> N2 ;
+ mkN2 n p = n ** {lock_N2 = <> ; c2 = p};
+
+-- Three-place relational nouns need two prepositions.
+
+mkN3 : N -> Prep -> Prep -> N3 ;
+mkN3 n p q = n ** {lock_N3 = <> ; c2 = p ; c3 = q };
+
+
+
+--3 Proper names and noun phrases
+--
+-- Proper names need a string and a gender. If no gender is given, the
+-- feminine is used for strings ending with "e", the masculine for other strings.
+
+  mkPN  = overload {
+    mkPN : Str -> PN 
+    = mkPropN ;
+    mkPN : Str -> Str -> Gender -> Number -> PN 
+    = mkPropNI ;
+    mkPN : Str -> Gender -> PN 
+    = mkPropNoun ;
+    mkPN : Str -> Gender -> Number -> PN 
+    = mkProperNoun;  
+   } ;
+
+mkInAn : PN -> PN
+   = \romania ->
+   {s = table {No | Ac | Vo => romania.s ! No ;
+               _ => case romania.g of
+                       { Fem => romania.s ! Ge ;
+                         Masc => romania.s ! No + "ului" }
+              };
+    g = romania.g; n = romania.n;
+    a = Inanimate;
+    lock_PN = <>
+    };
+
+mkPropNI : Str -> Str -> Gender -> Number -> PN --% 
+ = \romania, romaniei,g,n ->
+{s = table {Ge | Da => romaniei;
+            _       => romania  };
+g = g; n = n;
+a = Inanimate;
+lock_PN = <>
+};
+mkPropN : Str -> PN --%
+ = \Ion ->
+case last Ion of
+{ "a" => mkPropNoun Ion Feminine ;
+   _  => mkPropNoun Ion Masculine
+};
+
+mkPropNoun : Str -> Gender -> PN 
+= \Ion, gen ->
+ mkProperNoun Ion gen singular ;
+
+mkProperNoun : Str -> Gender -> Number -> PN --%
+= \Ion, gen, num ->
+{s = table {No => Ion;
+            Ac => Ion;
+            Ge => case <last Ion,gen> of
+                      { <"a",Fem> => init Ion + "ei" ;
+                        _         => "lui" ++ Ion
+                      };
+            Da => case <last Ion,gen> of
+                      { <"a",Fem> => init Ion + "ei" ;
+                        _         => "lui" ++ Ion
+                      };
+            Vo => Ion            
+            };
+g = gen ;
+n = num ; a = Animate;
+lock_PN = <>
+};
+
+
+--3 Adjectives
+--
+mkA = overload {
+   mkA : Str -> A -- regular adjectives 
+   = regA; 
+   mkA : Str -> Str -> Str -> Str -> Str -> A --worst case -- all 4 forms are needed + form for adverb
+   = mk5A ; 
+   mkA : Str -> Str -> Str -> Str -> A -- 4 forms are needed 
+   = mk4A; 
+};
+
+
+
+--3 Two-place adjectives
+--
+-- Two-place adjectives need a preposition for their second argument.
+
+ mkA2 : A -> Prep -> A2 ;
+ mkA2 a p = a ** {c2 = p ; lock_A2 = <>} ;
+
+ mkV : Str -> V 
+ = \s -> mkNV (regV s) ; 
+
+
+
+  mkV2S : V -> Prep -> V2S ;  
+  mkV2V : V -> Prep -> Prep -> V2V ;
+  mkVA  : V -> VA ;
+  mkV2A : V -> Prep -> Prep -> V2A ;
+  mkVQ  : V -> VQ ;
+  mkV2Q : V -> Prep -> V2Q ;
+
+  mkAS  : A -> AS ; --%
+  mkA2S : A -> Prep -> A2S ; --%
+  mkAV  : A -> Prep -> AV ; --%
+  mkA2V : A -> Prep -> Prep -> A2V ; --%
+
+
+
+
+--.
+--2 Definitions of the paradigms
+
+
+
+  NGender = MorphoRon.NGender ; 
+  Number = MorphoRon.Number ;
+  Anim   = MorphoRon.Animacy ;
+  Gender = MorphoRon.Gender ;
+  NCase   = MorphoRon.NCase ;
+  
+  masculine = NMasc ;
+  feminine  = NFem ;
+  neuter    = NNeut ;
+  
+  singular = Sg ;
+  plural   = Pl ;
+ 
+  animate   = Animate ;
+  inanimate = Inanimate ;
+
+  Masculine = Masc ;
+  Feminine = Fem ;
+  
+  Acc = Ac ;
+  Dat = Da ;
+  Gen = Ge ;
+  Nom = No ; 
+  
+  Preposition = Compl ;
+
+mkPrep = overload {
+mkPrep : Str -> NCase-> Bool -> Prep = mkPreposition;
+mkPrep : Str -> NCase -> Prep = mkPrepos; 
+};
+  mkPreposition : Str -> NCase-> Bool -> Prep ;
+  mkPreposition ss cc b = {s = ss ; c = cc; isDir = NoDir; needIndef = b; prepDir = ""; lock_Prep = <>} ;
+  
+  mkPrepos : Str -> NCase -> Prep ;
+  mkPrepos ss cc = mkPreposition ss cc False;
+
+  noPrep cc = case cc of 
+                      {Ac  => {s = []; c = Ac ; isDir = Dir PAcc; needIndef = True; prepDir = "pe"; lock_Prep = <>};
+                       Da  => {s = []; c = Da ; isDir = Dir PDat; needIndef = False; prepDir = "" ; lock_Prep = <>};
+                       _  => mkPreposition [] cc False 
+                       } ;
+  
+compN : N -> Str -> N ;
+compN x y = composeN x y ** {lock_N = <>} ;
+
+ccompN : N -> Str -> N ;
+ccompN x y = ccompose x y ** {lock_N = <>} ;
+
+mkNI : Str -> Str -> NGender -> N;
+mkNI s ss g = mkInanimate (mkNomIrreg s ss g) ** {lock_N = <>}; 
+             
+regN : Str -> NGender -> N ;
+regN s g = mkInanimate (mkNomReg s g) ** {lock_N = <>};
+             
+
+mkVI : Str -> Str -> Str -> N ;
+mkVI s ss sss = mkInanimate (mkNomVIrreg s ss sss) ** {lock_N = <>};
+
+mkIn : N -> N ;
+mkIn n = mkInanimate n ** {lock_N = <>};
+
+mkAnim : N -> N ;
+mkAnim n = mkAnimate n ** {lock_N = <>}; 
+
+chV : Str -> N -> N ;
+chV s n = mkVocc n s ** {lock_N = <>};
+
+
+--smart paradigm for inferring the gender of the nouns
+--partly based on the paper 
+--"COVERT SEMANTIC AND MORPHOPHONEMIC CATEGORIES IN THE ROMANIAN GENDER SYSTEM"
+-- by Jan Louis Perkowski, Emil Vrabie
+
+mkSPN : Str -> N ;
+mkSPN s = case s of 
+   { x + ("ă"|"e"|"a") => regN s feminine ;
+     x + ("el"|"mp"|"mb"|"en"|"id"|"at"|"ete"|"ol"|"et"|"or") => regN s masculine ;
+     _  => regN s neuter  
+    };
+
+mkNN : Str -> Str -> N ;
+mkNN s ss = case s of 
+     { x + ("ă"|"e"|"a") => mkNI s ss feminine ;
+       _                 => case ss of 
+                          {x + "uri" => mkNI s ss neuter ;
+                           x + "e"   => mkNI s ss neuter ;
+                           _         => mkNI s ss masculine
+                          
+                          }
+     };
+
+
+--------------------------------------------------------------------
+
+
+mk4A : Str -> Str -> Str -> Str -> A;
+mk4A a b c d =  
+let adj = mkAdjSpec a b c d in
+{s =  adj.s ;
+ isPre = False ; lock_A = <>} ;
+
+mk5A : Str -> Str -> Str -> Str -> Str -> A ;
+mk5A a b c d e = 
+let adj = mkAdjSSpec a b c d e in
+{s =  adj.s ;
+ isPre = False ; lock_A = <>} ;
+
+regA : Str -> A = \auriu ->  let adj = mkAdjReg auriu in
+                             {s = adj.s ;
+                              isPre = False ; lock_A = <> } ;
+                             
+invarA : Str -> A = \auriu -> 
+let adj =mkAdjInvar auriu in
+{s = adj.s ;
+ isPre = False ; lock_A = <>} ;
+
+mkRMut : Str -> A = \auriu ->
+let adj = mkRegMut auriu in
+{s = adj.s ;
+ isPre = False ; lock_A = <>} ;
+       
+mkSMut : Str -> A = \auriu ->
+let adj = mkSpecMut auriu in
+{s = adj.s ;
+ isPre = False ; lock_A = <>} ;    
+            
+ mkADeg : A -> A -> A ;
+ noComp : A -> A ;
+
+
+  prefA : A -> A ;
+
+mkADeg a b = 
+    {s = a.s ; isPre = a.isPre ; lock_A = <>} ;
+
+noComp a = 
+    {s =  a.s ;
+     isPre = a.isPre ;
+     lock_A = <>} ;
+  
+prefA a = {s = a.s ; isPre = True ; lock_A = <>} ;
+
+--Adverbs :
+         
+    mkAdv : Str -> Adv ;
+    mkAdV : Str -> AdV ;
+    mkAdA : Str -> AdA ;      
+
+  mkAdv x = ss x ** {lock_Adv = <>} ;
+  mkAdV x = ss x ** {lock_AdV = <>} ;
+  mkAdA x = ss x ** {lock_AdA = <>} ;
+
+
+--Verbs :
+
+oper regV : Str -> Verbe = \s ->
+case s of 
+{ x + ("chea"|"ghea") => mkV61 s ;
+  x + "ea" => mkV69 s ;
+  x + "ca" => mkV8 s ;
+  x + "ga" => mkV9 s ;
+  x + "eia" => mkV11 s;
+  x + "ia"  => mkV10 s;
+  x + "a"   => mkV6 s ;
+  x + "e"   => mkV79 s ;
+  x + "ui"  => mkV121 s ;
+  x + "ii"  => mkV120 s ;
+  x + "i"   => mkV119 s ;
+  x + "î"   => mkV141 s
+};
+
+oper 
+  mmkV3 : V -> Prep -> Prep -> V3;
+  mmkV3 v p q = v ** {c2 = p ; c3 = q ; lock_V3 = <>} ;
+  
+  dirV3 : V -> V3 ;
+  dirV3 v = mmkV3 v (noPrep Ac) (noPrep Da) ;
+
+  mkV3 = overload {
+    mkV3 : V -> V3 = dirV3 ;          
+    mkV3 : V -> Prep -> Prep ->  V3 = mmkV3    
+    } ;
+
+  V0 : Type = V ;
+  AS, AV : Type = A ;
+  A2S, A2V : Type = A2 ;
+  mkV0 : V -> V0 ;
+  mkV0  v = v ** {lock_V0 = <>} ;
+
+  mmkV2 : V -> Prep -> V2 ;
+  mmkV2 v p = v ** {c2 = p ; lock_V2 = <>} ;
+
+  
+  dirV2 : V -> V2 ;
+  dirV2 v = mmkV2 v (noPrep Ac) ;
+  
+  mkVS : V -> VS ;
+  mkVS  v = v ** {m = \\_ => Indic ; lock_VS = <>} ;  
+  mkV2S v p = v ** {c2 = p ; mn,mp = Indic ; lock_V2S = <>} ;
+  mkVV : V -> VV ;
+  mkVV  v = v ** {c2 = \\_ => "" ;  lock_VV = <>} ;
+  mkV2V v p q = v ** {c2 = p; c3 = q; lock_V2V = <>} ;
+  mkVA  v = v ** {lock_VA = <>} ;
+  mkV2A v p q = v ** {c2 = p; c3 = q; lock_V2A = <>} ;
+   mkVQ : V -> VQ ;
+   mkVQ  v = v ** {lock_VQ = <>} ;
+   mkV2Q : V -> Prep -> V2Q ;
+   mkV2Q v p =  v ** {c2 = p ; lock_V2Q = <>} ;
+
+  mkAS  v = v ** {lock_AS = <>} ; ---- more moods
+  mkA2S v p = mkA2 v p ** {lock_A2S = <>} ;
+  mkAV  v p = v ** {c = p.p1 ; s2 = p.p2 ; lock_AV = <>} ;
+  mkA2V v p q = mkA2 v p ** {s3 = q.p2 ; c3 = q.p1 ; lock_A2V = <>} ;
+
+
+
+ 
+mkOrd : A -> Ord ;
+mkOrd a = {s = \\n,g,c => a.s ! AF g n Indef (convCase c)  ; isPre = a.isPre ; lock_Ord = <>} ;
+
+
+
+mkDet = overload {
+    mkDet : (_,_,_,_ : Str) -> Number -> Det = mkDetS ;          
+    mkDet : (_,_,_,_,_,_,_,_ : Str) -> Number -> Det = mkD    
+    } ;
+
+mkDetS : (_,_,_,_ : Str) -> Number -> Det =
+ \orice, oricare,oricarui, oricarei,n ->
+ {s,sp = table { Masc => table {Da | Ge => oricarui ;
+                                _       => orice } ;
+                 Fem  => table {Da | Ge => oricarei ;
+                                _       => oricare }
+               };
+ post = \\g,c => ""; size = "";
+ n = n; isDef = False ; hasRef = False;
+lock_Det = <>
+};
+
+mkD : (_,_,_,_,_,_,_,_ : Str) -> Number -> Det =
+\multi, multe, multor, multorf,multiS,multeS, multora, multoraF, n ->
+ { s = table { Masc => table {Da | Ge => multor ;
+                                _     => multi } ;
+               Fem  => table {Da | Ge => multorf ;
+                                _     => multe }
+               };
+   sp = table  { Masc => table {Da | Ge => multora ;
+                                _       => multiS } ;
+                 Fem  => table {Da | Ge => multoraF ;
+                                _       => multeS }
+               };
+post = \\g,c => ""; size = "";
+  n = n; isDef = False ; hasRef = False;
+lock_Det = <> 
+};
+
+mkNP = overload {
+    mkNP : (_,_ : Str) -> Number -> Gender -> Bool -> NP = mkNPs ;          
+    mkNP : (_,_,_ : Str) -> Number -> Gender -> Bool -> NP = mkNPa ;    
+    mkNP : (_,_,_ : Str) -> Number -> Gender -> NP = mkNPspec
+    } ;
+
+mkNPspec : Str -> Str -> Str -> Number -> Gender -> NP = 
+\cineva,cuiva,cinev, n, g -> let ag = agrP3 g n in
+{ s = \\c => case c of
+        {Da => {clit = \\cs => ((genCliticsCase ag Da).s ! cs) ;
+                comp = cuiva
+                };
+         Ge => {clit = \\cs => [] ;
+                comp = cuiva};
+         Vo => {clit = \\cs => [] ;
+                comp = cinev 
+                };
+         _  => {clit = \\cs => ((genCliticsCase ag c).s ! cs) ;
+                comp = cineva
+                }      
+         };
+a = ag ;
+indForm = cineva ;
+nForm = HasClit ;
+isPronoun = False ; isPol = False;
+lock_NP = <>
+} ;
+
+mkNPs : Str -> Str -> Number -> Gender -> Bool -> NP = 
+\cineva, cuiva, n, g, b -> let ag = agrP3 g n in
+{s = \\c => case c of
+           {Da | Ge => {clit = \\cs => [] ;
+                   comp = cuiva
+                  };   
+            _  => {clit = \\cs => [];
+                   comp = cineva}
+            };
+ a = ag ;
+ indForm = cineva ;
+ isPronoun = False ; isPol = False;
+ nForm = HasRef b ;
+lock_NP = <>
+};
+
+mkNPa : Str -> Str -> Str -> Number -> Gender -> Bool -> NP =
+\om,omului,omule, n, g, b -> let ag = agrP3 g n 
+ in
+{s = \\c => case c of 
+           {Da | Ge => {clit = \\cs => [] ;
+                   comp = omului
+                   }; 
+            Vo => {clit = \\_ => [];
+                   comp = omule};
+            _  => {clit = \\cs => [] ;
+                   comp = om}
+            };
+ a = ag;
+ nForm = HasRef b;
+ isPronoun = False; isPol = False; 
+ indForm = om ;
+lock_NP = <>
+};
+mkPronoun :(_,_,_,_,_,_,_,_,_ : Str) -> Gender -> Number -> Person -> Pron =\eu, mine, mie, meu, euV, meuP, mea, mei, mele,g, n, p -> 
+        {s = table
+              {No => eu ; 
+               Ac =>  mine ;  
+               Da =>  mie ; 
+               Ge =>  meu;  
+               Vo =>  euV  
+               } ; 
+         c1 = \\c => (cliticsAc g n p).s ! c ; c2 = \\c => (cliticsDa g n p).s ! c ;
+         a = {g = g ; n = n ; p = p} ;
+         poss = \\n,g,c => case <n,g,c> of
+                 {<Sg,Masc,AGenDat> => meuP ;
+                  <Sg,Masc,_> => meuP ;
+                  <Sg,Fem,AGenDat> => mele ;
+                  <Sg,Fem,_> => mea;
+                  <Pl,Masc,_> => mei;
+                  <Pl,Fem,_> => mele
+                   } ; 
+         isPol = False;
+         lock_Pron = <>};
+
+
+
+
+-- fix for Genitive, person 1 - 2
+-- only problem is for genitive case demanded by prepositions (ex : beyond me), otherwise the possesive adjective is used. 
+-- in this case we add a case to the complement, so that the right gender is chosen.
+ 
+
+  mkMU : Str -> MU = \s -> lin MU {s=s; isPre=False} ;
+
+
+} ;
+
+----------------------------------------
+
+========== FILE: QuestionRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/QuestionRon.gf
+
+concrete QuestionRon of Question = 
+  CatRon ** open ResRon, Prelude in {
+
+  flags optimize=all_subs ;
+    coding=utf8 ;
+
+  lin
+
+    QuestCl cl = {
+      s = \\t,a,p => 
+            let cls = cl.s ! DDir ! t ! a ! p  
+            in table {
+              QDir   => cls ! Indic ;
+              QIndir => "dacã" ++ cls ! Indic
+              }
+      } ;
+ -- doesn't have clitics since it's subject of the phrase
+
+    QuestVP qp vp = {
+      s = \\t,a,b,_ => 
+        let
+          cl = mkClause (qp.s ! No) False (agrP3 qp.a.g qp.a.n) vp  
+        in
+        cl.s ! DDir ! t ! a ! b ! Indic
+      } ;   
+
+    QuestSlash ip slash = {
+      s = \\t,a,p => 
+            let 
+              cls : Direct -> Str = 
+                    \d -> slash.s ! False ! ip.a ! d ! t ! a ! p ! Indic ;
+                          prep = if_then_Str ip.hasRef slash.c2.prepDir "" ;
+                          who  = prep ++ slash.c2.s ++ ip.s ! slash.c2.c
+            in table {
+              QDir   => who ++ cls DInv ;
+              QIndir => who ++ cls DDir
+              }
+      } ;
+
+    QuestIAdv iadv cl = {
+      s = \\t,a,p,q => 
+            let 
+              ord = case q of {
+                QDir   => DInv ;
+                QIndir => DInv --- DDir
+              } ;
+              cls = cl.s ! ord ! t ! a ! p ! Indic ;
+              why = iadv.s
+            in why ++ cls
+      } ;
+
+    QuestIComp icomp np = {
+      s = \\t,a,p,_ => 
+            let 
+              vp  = predV copula ;
+              cls = (mkClause (np.s ! No).comp np.isPol np.a vp).s ! 
+                       DInv ! t ! a ! p ! Indic ;
+              why = icomp.s ! {g = np.a.g ; n = np.a.n}
+            in why ++ cls
+      } ;
+
+    PrepIP p ip = {
+      s = p.s ++ ip.s ! p.c
+      } ;
+
+    AdvIP ip adv = {
+      s = \\c => ip.s ! c ++ adv.s ;
+      a = ip.a;
+      hasRef = ip.hasRef
+      } ;
+
+    IdetCN idet cn = 
+      let 
+        
+        n = idet.n ;
+        g = agrGender cn.g n;
+        a = aagr g n
+      in {
+      s = \\c => idet.s ! g ! (convCase c) ++ cn.s ! n ! Indef ! (convCase c); 
+      a = a;
+      hasRef = getClit cn.a
+
+      } ;
+
+    IdetIP idet = 
+      let 
+        g = Masc ; 
+        n = idet.n ;
+        a = aagr g n
+      in {
+      s = \\c => idet.s ! g ! (convCase c) ; 
+      a = a ;
+      hasRef = True
+      } ;
+
+    IdetQuant idet num = 
+      let 
+        n = num.n ;
+      in {
+      s = \\g,c => idet.s ! n ! g ! c ++ num.s ! g ;
+      n = n
+      } ;
+
+    AdvIAdv i a = {s = i.s ++ a.s} ;    
+
+    CompIAdv a = {s = \\_  => a.s} ;
+
+    CompIP p = {s = \\_  => p.s ! No} ;
+
+
+}
+
+----------------------------------------
+
+========== FILE: RelativeRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/RelativeRon.gf
+
+concrete RelativeRon of Relative = 
+  CatRon ** open Prelude, ResRon in {
+
+  flags optimize=all_subs ;
+    coding=utf8 ;
+
+   lin
+
+    RelCl cl = {                          
+      s = \\ag,t,a,p,m => "astfel" ++ "cã" ++ 
+                          cl.s ! DDir ! t ! a ! p ! m ;
+      c = No
+      } ;
+
+
+    RelVP rp vp = case rp.hasAgr of {
+      True => {s = \\ag =>
+          (mkClause 
+                    (rp.s ! {g = ag.g ; n = ag.n} ! No) 
+                    False
+                    {g = rp.a.g ; n = rp.a.n ; p = P3}
+                    vp).s ! DDir ; c = No} ;
+      False => {s = \\ag =>
+          (mkClause
+                    (rp.s  ! {g = ag.g ; n = ag.n} ! No) 
+                    False
+                    ag
+                    vp).s ! DDir ; c = No
+         }
+      } ;
+
+    RelSlash rp slash = {
+      s = \\ag,t,a,p,m => 
+          let aag = {g = ag.g ; n = ag.n} --add Clitics in this case also !
+         in
+          slash.c2.s ++ slash.c2.prepDir ++ rp.s ! aag ! slash.c2.c ++ 
+          slash.s ! True ! aag ! DInv ! t ! a ! p ! m ;   
+      c = No 
+      } ;
+
+    FunRP p np rp = let ss = (np.s ! No).comp 
+      in {
+      s = \\a,c => ss ++ p.s ++ rp.s ! a ! p.c   ;         
+      a = {g = np.a.g ; n = np.a.n} ; 
+      hasAgr = True;
+      hasRef = case np.nForm of 
+                {HasRef False => False ;
+                 _            => True
+                 }
+      } ;
+
+-- Ac => if_then_Str p.isDir (ss ++ p.s ++ rp.s ! a ! p.c) (ss ++ p.s ++ rp.s ! a ! No)
+    IdRP = {
+      s = \\ag,c => case c of { Da | Ge => case <ag.g, ag.n > of
+                                                    {<Fem,Sg> => "cãreia" ; <Masc,Sg> => "cãruia" ;
+                                                     <_Pl> => "cãrora"
+                                                      };
+                                    _   => "care" 
+                                   }
+               ; 
+      a = {g = Masc ; n = Sg} ; 
+      hasAgr = False;
+      hasRef = True
+      } ;
+
+
+
+
+}
+
+----------------------------------------
+
+========== FILE: ResRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/ResRon.gf
+
+--1 Romance auxiliary operations.
+--
+
+resource ResRon = ParamX - [Temp,TTAnt,Tense,TPres,TPast,TFut,TCond] ** open Prelude in {
+
+flags optimize= all ; coding = utf8 ;
+
+  
+--------------------------------------------------------------------------
+----------------------- 1 BASIC PARAMETERS--------------------------------
+--------------------------------------------------------------------------
+
+
+param
+
+  Mood   = Indic | Conjunct ;
+
+  Direct = DDir | DInv ;
+
+-- there are 3 genders in Romanian, the Neuter is a combination of Masculine for Sg and Feminine for Pl
+ 
+  NGender = NMasc | NFem | NNeut ;
+
+-- genders for Agreement, to which the 3 genders ultimately reduce 
+
+  Gender = Masc | Fem ;
+
+-- formal and informal form for numerals (the formal form is used as default)  
+
+  NumF  = Formal | Informal ;
+ 
+-- animacy feature of the nouns, which has consequences on syntactical level
+ 
+  Animacy = Animate | Inanimate ;
+  
+-- basic forms of the clitics
+  
+  Clitics = Normal | Composite | Short | Imperative ;  
+ 
+-- special size parameter used for Numerals
+ 
+  Size = sg | less20 | pl ;
+ 
+-- the cases that require clitics :
+ 
+  ParClit = PAcc | PDat  ;
+
+-- parameter that counts the number of clitics in a verb phrase 
+  
+  VClit = VNone | VOne ParClit | VRefl | VMany ;
+
+-- parameter that specifies whether a preposition would require clitics or not  
+  
+  PrepDir = Dir ParClit | NoDir ;
+
+-- the 5 cases in Romanian
+
+  NCase = No | Da | Ac | Ge | Vo ;
+  
+-- the 3 distinct forms of the declension a noun/adjective, based on the syncretism Nominative-Accusative and Dative-Genitive   
+  
+  ACase = ANomAcc | AGenDat | AVoc ;
+  
+-- due to the enclitical defined article, a parameter for species is needed 
+  
+  Species  =  Indef | Def ;
+  
+-- Adjectives are inflected in number, gender, have specific form for enclitic determined
+--article, and specific forms for Nominative-Accusative/Dative-Genitive/Voccative
+
+  AForm = AF Gender Number Species ACase | AA ;
+
+-- Cardinal numerals have gender, ordinal numerals have full number as well.
+
+  CardOrd = NCard Gender | NOrd Gender;
+
+-- Parameter indicating the presence of clitic doubling / referential form for noun phrases
+
+  NForm = HasClit | HasRef Bool ;
+  
+-------------------------------------------------  
+--------------------2 Verbs ---------------------
+------------------------------------------------- 
+
+
+-- the form we build on syntactical level, based on VForm
+-- it represents the main verb forms in Romanian
+ 
+param
+  
+  Temps    = Presn | Imparf | PSimple | PPerfect ;
+  TSubj    = SPres ;
+  
+-- the form we build on morphological level :
+  
+  VForm    = Inf
+           | Indi Temps Number Person 
+           | Subjo TSubj Number Person
+           | Imper NumPersI
+           | Ger
+           | PPasse Gender Number Species ACase ;
+
+  TMood    = 
+      VPres  Mood 
+    | VImperff  --# notpresent
+    | VPasse Mood  --# notpresent
+    | VFut  --# notpresent
+    | VCondit   --# notpresent
+   ;
+
+  NumPersI = SgP2 | PlP1 | PlP2 ;
+
+  VPForm   = VPFinite TMood Anteriority
+            | VPImperat
+            | VPGerund
+            | VPInfinit Anteriority Bool ;
+
+  RTense = 
+     RPres 
+   | RPast  --# notpresent
+   | RFut  --# notpresent
+   | RCond --# notpresent
+  ;
+
+oper 
+ copula    : VerbPhrase = 
+    let t = table {Inf => "fi" ;
+                Indi Presn Sg P1 => "sunt" ; Indi Presn Sg P2 => "eşti" ; Indi Presn Sg P3 => "este" ;
+                Indi Presn Pl P1 => "suntem" ; Indi Presn Pl P2 => "sunteţi" ; Indi Presn Pl P3 => "sunt" ;
+                Indi PSimple Sg P1 => "fusei" ; Indi PSimple Sg P2 => "fuseşi" ; Indi PSimple Sg P3 => "fuse" ;
+                Indi PSimple Pl P1 => "fuserăm" ; Indi PSimple Pl P2 => "fuserăţi" ; Indi PSimple Pl P3 => "fuseră" ;
+                Indi Imparf Sg P1 => "eram" ; Indi Imparf Sg P2 => "erai" ; Indi Imparf Sg P3 => "era" ;
+                Indi Imparf Pl P1 => "eram" ; Indi Imparf Pl P2 => "eraţi" ; Indi Imparf Pl P3 => "erau" ;
+                Indi PPerfect Sg P1 => "fusesem" ; Indi PPerfect Sg P2 => "fuseseşi" ; Indi PPerfect Sg P3 => "fusese" ;
+                Indi PPerfect Pl P1 => "fusesem" ; Indi PPerfect Pl P2 => "fuseseţi" ; Indi PPerfect Pl P3 => "fuseseră" ;
+                Subjo SPres Sg P1 => "fiu" ; Subjo SPres Sg P2 => "fii" ; Subjo SPres Sg P3 => "fie" ;
+                Subjo SPres Pl P1 => "fim" ; Subjo SPres Pl P2 => "fiţi" ; Subjo SPres Pl P3 => "fie" ;
+                Imper SgP2 => "fii" ; Imper PlP2 => "fiţi" ; Imper PlP1 => "fim" ;
+                Ger => "fiind"; 
+                PPasse g n a d => case <g,n,d,a> of 
+                   {<Masc,Sg,ANomAcc,Def> => "fostul"; <Masc,Sg,_,Indef> => "fost";                   <Masc,Sg,AGenDat,Def> => "fostului"; <Masc,Sg,AVoc,Def> => "fostule";  
+                   <Masc,Pl,ANomAcc,Def> => "foştii"; <Masc,Pl,_,Indef> => "foşti";                   <Masc,Pl,_,Def> => "foştilor"; 
+                   <Fem,Sg,ANomAcc,Def> => "fosta"; <Fem,Sg,ANomAcc,Indef> => "fostă";                   <Fem,Sg,AGenDat,Def> => "fostei"; <Fem,Sg,AGenDat,Indef> => "foste";<Fem,Sg,AVoc,Def> => "fosto"; <Fem,Sg,AVoc,Indef> => "fostă";
+                   <Fem,Pl,ANomAcc,Def> => "fostele"; <Fem,Pl,_,Indef> => "foste";<Fem,Pl,_,Def> => "fostelor"
+                   }                
+                } in
+  {s = t; isRefl = \\_ => RNoAg; nrClit = VNone ; pReflClit = Composite ;
+      isFemSg = False ; neg = table {Pos => "" ; Neg => "nu"} ;
+      clAcc = RNoAg ; clDat = RNoAg ; 
+      comp  = \\_ => "";  
+      ext   = \\_ => ""      
+  } ;
+  
+-- auxiliary for Past Tense :  
+
+ pComp : Number => Person => Str = table {Sg => table {P1 => "am" ; P2 => "ai" ; P3 => "a"} ;
+                                         Pl => table {P1 => "am" ; P2 => "aţi"; P3 => "au"}
+                                         };
+                                         
+-- auxiliary for Future Simple :
+                                         
+ pFut : Number => Person => Str = table  {Sg => table {P1 => "voi" ; P2 => "vei" ; P3 => "va"} ;
+                                         Pl => table {P1 => "vom" ; P2 => "veţi"; P3 => "vor"}
+                                         };                                          
+
+--auxiliary for Condional Present :
+
+ pCond : Number => Person => Str = table {Sg => table {P1 => "aş" ; P2 => "ai" ; P3 => "ar"} ;
+                                         Pl => table {P1 => "am" ; P2 => "aţi"; P3 => "ar"}
+                                         };
+   
+-- short form of the verb, conjunctive present, without the auxiliary
+  
+ conjVP : VerbPhrase -> Agr -> Str = \vp,agr ->
+      let
+        inf  = vp.s ! Subjo SPres agr.n agr.p ;
+        neg  = vp.neg ! Pos ; 
+      in
+       neg ++ inf ;      
+
+-- VPC form of the verb, needed for building a clause 
+
+ useVP : VerbPhrase -> VPC = \vp -> 
+    let
+      verb = vp.s ;
+      vinf  : Bool -> Str = \b -> verb ! Inf ;
+      vger  = verb ! Ger ;
+
+      vimp : Agr -> Str = \a -> case <a.n,a.p> of 
+       {<Sg,P2>  => verb ! Imper SgP2 ;
+        <Pl,P2>  => verb ! Imper PlP2 ;
+        _        => verb ! Subjo SPres a.n a.p           
+       } ;
+      vf : Str -> (Agr -> Str) -> {
+                      sa : Str ;                    
+                      sv : Agr => Str 
+                                  } = 
+                           \fin,inf -> {
+                               sa = fin ; 
+                               sv = \\a => inf a
+                                       } ;
+   
+
+    in {
+    s = table {
+      VPFinite tm Simul => case tm of 
+                             {
+        VPres Indic => vf "" (\a -> verb ! Indi Presn a.n a.p) ;
+        VPres Conjunct => vf "să" (\a -> verb ! Subjo SPres a.n a.p) 
+        ; VImperff  => vf "" (\a -> verb ! Indi Imparf a.n a.p)  --# notpresent
+        ; VPasse  Indic => vf "" (\a -> pComp ! a.n ! a.p ++ verb ! PPasse Masc Sg Indef ANomAcc) ; --# notpresent 
+        VPasse  Conjunct => vf "să" (\a -> copula.s! Inf ++ verb ! PPasse Masc Sg Indef ANomAcc) ;  --# notpresent
+        VFut => vf "" (\a -> pFut ! a.n ! a.p ++ verb ! Inf) ;  --# notpresent
+        VCondit => vf "" (\a -> pCond ! a.n ! a.p ++ verb ! Inf)  --# notpresent
+        } ;  
+      VPFinite tm Anter => case tm of {  --# notpresent
+        VPres Indic => vf "" (\a -> pComp ! a.n ! a.p ++ verb ! PPasse Masc Sg Indef ANomAcc) ;  --# notpresent 
+        (VPres Conjunct | VPasse Conjunct) => vf "să" (\a -> copula.s! Inf ++ verb ! PPasse Masc Sg Indef ANomAcc) ;  --# notpresent
+        VFut => vf "" (\a -> pFut !a.n ! a.p ++ copula.s! Inf ++ verb ! PPasse Masc Sg Indef ANomAcc) ;   --# notpresent
+        VCondit => vf "" (\a -> pCond ! a.n ! a.p ++ copula.s ! Inf ++ verb ! PPasse Masc Sg Indef ANomAcc);  --# notpresent
+        _       => vf "" (\a -> verb ! Indi PPerfect a.n a.p)  --# notpresent 
+                              };  --# notpresentx
+      VPInfinit Anter b=> vf "a" (\a -> copula.s ! Inf ++ verb ! PPasse Masc Sg Indef ANomAcc);  --# notpresent  
+      VPImperat        => vf "să" (\a -> verb ! Subjo SPres a.n a.p) ; -- fix it later !
+      VPGerund         => vf "" (\a -> vger) ;
+      VPInfinit Simul b => vf "a" (\a -> verb ! Inf) 
+      } ;
+    agr    = vp.agr ; 
+    neg    = vp.neg ; 
+    clitAc  = vp.clAcc ; 
+    clitDa  = vp.clDat ; 
+    clitRe = RNoAg ; 
+    nrClit = vp.nrClit ;
+    pReflClit = vp.pReflClit;
+    comp   = vp.comp ; 
+    ext    = vp.ext 
+    } ;       
+ 
+-- basic UseV function 
+ 
+ predV : Verb -> VerbPhrase = \verb -> 
+    {
+    s = verb.s ; 
+    isRefl = verb.isRefl;
+    isFemSg = False ;
+    nrClit = verb.nrClit ; pReflClit = verb.pReflClit;
+    neg    = table {Pos => ""; Neg => "nu"} ;
+    clAcc  = RNoAg ; 
+    clDat  = RNoAg ; 
+    comp   = \\a => [] ;
+    ext    = \\p => [] 
+    } ;     
+            
+-- various helper functions for VerbRon     
+        
+useVerb : Verb -> VerbPhrase =\verb -> 
+    {
+    s = verb.s ; 
+    isRefl = verb.isRefl;
+    nrClit = verb.nrClit;
+    isFemSg = False ; pReflClit = verb.pReflClit ;
+    neg    = table {Pos => ""; Neg => "nu"} ;
+    clAcc  = RNoAg ; 
+    clDat  = RNoAg ; 
+    comp   = \\a => [] ;
+    ext    = \\p => [] ; 
+    lock_V = <>
+    } ;
+        
+ insertExtrapos : (Polarity => Str) -> VerbPhrase -> VerbPhrase = \co,vp -> { 
+    s     = vp.s ;
+    isFemSg = vp.isFemSg ;
+    clAcc = vp.clAcc ; isRefl = vp.isRefl;
+    clDat = vp.clDat ; pReflClit = vp.pReflClit ;
+    neg   = vp.neg ;
+    comp  = vp.comp ; nrClit = vp.nrClit ;
+    ext   = \\p => vp.ext ! p ++ co ! p 
+    } ;  
+ insertObje : (Agr => Str) -> RAgr -> RAgr -> Bool -> VClit -> VerbPhrase -> VerbPhrase = \obj,clA, clD, agg, vc, vp -> {
+   s = vp.s ; isRefl = vp.isRefl;
+   isFemSg= orB agg vp.isFemSg ; 
+   nrClit = vc; pReflClit = vp.pReflClit;
+   neg    = table {Pos => ""; Neg => "nu"} ;
+   clAcc  = {s = \\cs => vp.clAcc.s ! cs ++ clA.s ! cs };
+   clDat  = {s = \\cs => vp.clDat.s ! cs ++ clD.s ! cs };
+   comp = \\a => obj ! a ++  vp.comp ! a  ; 
+   ext = vp.ext 
+    };
+
+ insertSimpObj : (Agr => Str) -> VerbPhrase -> VerbPhrase = \obj,vp -> {
+   s = vp.s ; isRefl = vp.isRefl; isFemSg = vp.isFemSg ; neg = vp.neg ;
+   clAcc = vp.clAcc ; clDat = vp.clDat ;
+   nrClit = vp.nrClit ; pReflClit = vp.pReflClit ;
+   comp = \\a => vp.comp ! a ++ obj ! a ; 
+   ext = vp.ext 
+   };
+
+ insertSimpObjPre : (Agr => Str) -> VerbPhrase -> VerbPhrase = \obj,vp -> {
+   s = vp.s ; isRefl = vp.isRefl; isFemSg = vp.isFemSg ; neg = vp.neg ;
+   clAcc = vp.clAcc ; clDat = vp.clDat ; pReflClit = vp.pReflClit ;
+   nrClit = vp.nrClit ; 
+   comp = \\a => obj ! a ++ vp.comp ! a  ;
+   ext = vp.ext 
+   };
+  
+insertAdv : Str -> VerbPhrase -> VerbPhrase = \co,vp -> { 
+    s     = vp.s ;
+    isRefl = vp.isRefl;
+    isFemSg = vp.isFemSg ; pReflClit = vp.pReflClit ;
+    clAcc = vp.clAcc ; nrClit = vp.nrClit ;
+    clDat = vp.clDat ; 
+    neg   = vp.neg ; 
+    comp  = \\a => vp.comp ! a ++ co ;
+    ext   = vp.ext 
+    } ;
+  
+-----------------------------------------------------------------   
+---------------3 CATEGORY DEFINITIONS ---------------------------  
+-----------------------------------------------------------------
+oper 
+
+ Noun = {s : Number => Species => ACase => Str; g : NGender; a : Animacy} ;
+ Adj = {s : AForm => Str} ;
+ 
+ Verbe : Type = { s : VForm => Str};
+ Verb : Type = {s : VForm => Str ; isRefl : Agr => RAgr; nrClit : VClit ; pReflClit : Clitics};   
+ Compl : Type = {s : Str ; c : NCase ; isDir : PrepDir ; needIndef : Bool ; prepDir : Str} ;
+ NounPhrase : Type = {s : NCase => {comp : Str ; clit : Clitics => Str} ;
+                      a : Agr ; 
+                      indForm : Str ; --needed for prepositions that demand the indefinite form of a NP  
+                      nForm : NForm ; -- indicates the presence of clitic doubling and referential form
+                      isPronoun : Bool ; -- in the case of pronouns, just the clitics are used, and not the comp form
+                      isPol : Bool -- needed for the agreement of the polite pronoun, singular form
+                      } ;   
+ VerbPhrase :Type = {
+      s : VForm => Str ;
+      isRefl : Agr => RAgr ;             -- the clitics for reflexive verbs
+      nrClit : VClit ;                   -- number of clitics of the verb phrase
+      pReflClit : Clitics ;              -- clitic parameter for reflexive clitic, in case it is present in the verb phrase, along with another clitic 
+      isFemSg : Bool ;                   -- needed for the correct placement of the Accusative clitic    
+      neg    : Polarity => Str ;         -- negation
+      clAcc  : RAgr ;                    -- clitic for the Accusative case (direct object)
+      clDat  : RAgr ;                    -- clitic for the Dative case (indirect object without preposition)
+      comp   : Agr => Str ;              -- object of the verb phraes 
+      ext    : Polarity => Str ;         -- object sentece of the verb phrase
+      } ;
+ VPC : Type = {                                  
+       s : VPForm => {
+        sa :  Str ;                
+        sv : Agr => Str                
+        } ;           
+      neg    : Polarity => Str ; 
+      clitAc  : RAgr ;                     
+      clitDa  : RAgr ;                     
+      clitRe  : RAgr ;        
+      nrClit  : VClit ;             
+      comp    : Agr => Str ;              
+      ext     : Polarity => Str ;         
+      } ;    
+            
+-----------------------------------------------------------------------------
+------------------------- 4 CLITICS -----------------------------------------
+-----------------------------------------------------------------------------           
+oper   
+-- for the treatment of clitics 
+  
+ RAgr : Type = {s : Clitics => Str} ; 
+
+ RNoAg : RAgr = genClit "" "" "" "";
+
+ genClit : (x1,_,_,x4 : Str) -> {s : Clitics => Str} = \ma, m, me, mma ->
+   {s = table {Normal => ma;
+               Short => m;
+               Composite => me ;
+               Imperative => mma 
+               }}; 
+
+ genCliticsCase : Agr -> NCase -> {s : Clitics => Str} = \agr, c ->
+   case c of 
+     {Da => cliticsDa agr.g agr.n agr.p ;
+      Ac  => cliticsAc agr.g agr.n agr.p ;
+      _ => {s = \\_ => []} 
+     };
+
+ aRefl : Agr -> RAgr =  \a -> 
+   case <a.g,a.n,a.p> of
+     {<_,_,P3> => {s = (genClit "se" "s-" "se" "").s } ;
+      _ => {s = (cliticsAc a.g a.n a.p).s }
+     };
+
+ dRefl : Agr -> RAgr = \a -> 
+   case <a.g,a.n,a.p> of
+    {<_,_,P3> => {s = (genClit "îşi" "-şi" "şi" "").s } ;
+     _ => {s = (cliticsDa a.g a.n a.p).s }
+    };
+
+ cliticsAc : Gender -> Number -> Person -> {s: Clitics => Str} = \g,n,p -> 
+   case <g,n,p> of
+    {<_,Sg,P1> => genClit "mă" "m-" "mă" "-mă"; <_,Pl,P1> => genClit "ne" "ne-" "ne" "-ne"; 
+     <_,Sg,P2> => genClit "te" "te-" "te" "-te"; <_,Pl,P2> => genClit "vă" "v-" "vă" "-vă";
+     <Masc,Sg,P3> => genClit "îl" "l-" "-l" "-l"; <Masc,Pl,P3> => genClit "îi" "i-" "-i" "-i";
+     <Fem,Sg,P3> => genClit "o" "-o" "-o" "-o"; <Fem,Pl,P3> => genClit "le" "le-" "le" "-le" 
+    };
+
+ cliticsDa : Gender -> Number -> Person -> {s : Clitics => Str} = \g,n,p -> 
+   case <g,n,p> of
+    {<_,Sg,P1> => genClit "îmi" "mi-" "mi" "-mi"; <_,Pl,P1> => genClit "ne" "ne-" "ni" "-ne"; 
+     <_,Sg,P2> => genClit "îţi" "ţi-" "ţi" "-ţi"; <_,Pl,P2> => genClit "vă" "v-" "vi" "-vă";
+     <_,Sg,P3> => genClit "îi" "i-" "i" "-i"; <_,Pl,P3> => genClit "le" "le-" "li" "-le"
+    };
+
+     
+ flattenClitics : VClit -> RAgr -> RAgr -> RAgr -> Bool -> Bool -> Clitics -> {s1 : Str ; s2 : Str } = \vc, clA, clD, clR, isFemSg, b, pReflClit -> 
+                    let par = if_then_else Clitics b Short Normal;
+                        pcomb = if_then_else Clitics b Short Composite ;
+                        pRefl = if_then_else Clitics b pReflClit Composite                         
+                        
+   in
+  case isFemSg of
+      {True => {s1 = clD.s ! par ++ clR.s ! par ; s2 = clA.s ! Short};
+       _    => case vc of
+           {VOne PAcc  => {s1 = clA.s ! par ; s2 = ""};
+            VOne PDat  => {s1 = clD.s ! par ; s2 = ""};
+            VRefl => {s1 = clR.s ! par ; s2 = ""};
+            _     => {s1 = clD.s ! Composite ++ clR.s ! pRefl ++ clA.s ! pcomb ; s2 = ""}
+             }
+      };
+
+ flattenSimpleClitics : VClit -> RAgr -> RAgr -> RAgr -> Str = \vc, clA, clD, clR ->
+    case vc of 
+     {VOne _ => clD.s ! Normal ++ clA.s ! Normal;
+      _      => clD.s ! Composite ++ clR.s ! Composite ++ clA.s ! Composite 
+     };
+
+-- we rely on the fact that there are not more than 2 clitics for a verb 
+
+
+-----------------------------------------------------------------------------
+------------------------- 5 ARTICLES ----------------------------------------
+-----------------------------------------------------------------------------             
+oper 
+
+-- demonstrative article 
+-- used as Determined article in order to emphasise on the noun/adjective, and for Dative/Genitive for of ordinals
+
+ artDem : Gender -> Number -> ACase -> Str = \g,n,c ->
+   case <g,n,c> of
+      {<Masc,Sg,ANomAcc> => "cel"; <Masc,Pl,ANomAcc> => "cei"; <Masc,Sg,AGenDat> => "celui"; 
+       <Fem,Sg,ANomAcc>  => "cea"; <Fem,Pl,ANomAcc>  => "cele"; <Fem,Sg,AGenDat>  => "celei";
+       <_,Pl,AGenDat>    => "celor";
+       <Masc,Sg,AVoc> => "cel"; 
+       <Masc,Pl,AVoc> => "cei"; <Fem,Sg,AVoc> => "cea"; <Fem,Pl,AVoc> => "cele"
+      };
+
+-- undefined article (proclitical) -- 
+-- we keep the non-articled form of the noun and glue it with the article on syntactical level
+
+ artUndef : Gender -> Number -> NCase -> Str = \g,n,a ->
+   case <g,n,a> of
+      {<Masc,Sg,No> => "un"; <Masc,Sg,Ac> => "un" ; <Masc,Sg,Ge> => "unui"; <Masc,Sg,Da> => "unui" ;<_,_,Vo> => "" ;
+       <_,Pl,No> => "nişte"; <_,Pl,Ac> => "nişte"; <_,Pl,Da> => "unor"; <_,Pl,Ge> => "unor" ; 
+       <Fem,Sg,No> => "o"; <Fem,Sg,Ac> => "o"; <Fem,Sg,Da> => "unei"; <Fem,Sg,Ge> => "unei"
+      };
+     
+-- possesive article 
+-- used for Cardinals and for Genitive case		  				    	
+
+ artPos : Gender -> Number -> ACase -> Str = \g,n,c ->
+   case <g,n,c> of
+      {<Masc,Sg,AGenDat> => "alui"; <Masc,Sg,_> => "al";
+       <Masc,Pl,AGenDat> => "alor"; <Masc,Pl,_> => "ai";
+       <Fem,Sg,AGenDat>  => "alei"; <Fem,Sg,_>  => "a";
+       <Fem,Pl,AGenDat>  => "ale";  <Fem,Pl,_>  => "ale"
+      };           
+            
+-----------------------------------------------------------------------------
+------------------------- 6 VARIOUS HELPER FUNCTIONS ------------------------
+-----------------------------------------------------------------------------           
+
+oper 
+   
+--Reflexive pronouns
+
+ reflPron : Number -> Person -> ACase -> Str = \n,p,c -> 
+   case <n,p,c> of
+     {<Sg,P1,AGenDat> => "mie" ; <Sg,P1,_> => "mine";
+      <Sg,P2,AGenDat> => "ţie" ; <Sg,P2,_> => "tine";
+      <_,P3,AGenDat> => "sieşi" ; <_,P3,_> => "sine" ;
+      <Pl,P1,AGenDat> => "nouă" ; <Pl,P1,_> => "noi" ;
+      <Pl,P2,AGenDat> => "vouă" ; <Pl,P2,_> => "voi"   
+     };
+
+ reflPronHard : Gender -> Number -> Person -> Str = \g,n,p -> 
+   case <g,n,p> of
+     {<Masc,Sg,P1> => "însumi" ; <Fem,Sg,P1> => "însămi";
+      <Masc,Sg,P2> => "însuţi" ; <Fem,Sg,P2> => "însăţi";
+      <Masc,Sg,P3> => "însuşi" ; <Fem,Sg,P3> => "însăşi";
+      <Masc,Pl,P1> => "înşine" ; <Fem,Pl,P1> => "însene";  
+      <Masc,Pl,P2> => "înşivă";  <Fem,Pl,P2> => "înseva";
+      <Masc,Pl,P3> => "înşişi";  <Fem,Pl,P3> => "înseşi"};   
+   
+   
+-- Agreements :
+
+-- for relatives
+
+ AAgr : PType = {g : Gender ; n : Number} ;
+
+-- for agreement between subject and predicate
+
+ Agr  : PType = {g : Gender ; n : Number ; p : Person} ;
+
+
+-- clause building function :
+
+ mkClause : Str ->  Bool -> Agr -> VerbPhrase -> 
+    {s : Direct => RTense => Anteriority => Polarity => Mood => Str} =
+    \subj,isPol,agr,vpr -> {
+      s = \\d,t,a,b,m => 
+        let 
+          tm = case t of {
+            RPast  => VPasse m ;  --# notpresent   
+            RFut   => VFut ;         --# notpresent
+            RCond  => VCondit ;         --# notpresent
+            RPres  => VPres m
+            } ;
+          cmp = case <<t,a,m> : RTense * Anteriority * Mood> of {
+            <RPast,Simul,Indic> | <RPres, Anter,Indic> => True ; --# notpresent
+            <RCond, _, _> => True;  --# notpresent
+            _             => False
+            } ;
+          vp    = useVP vpr ;
+          vps   = (vp.s ! VPFinite tm a).sv ;
+          sa    = (vp.s ! VPFinite tm a ).sa ; 
+          verb  = vps ! agr ; 
+          neg   = vp.neg ! b ;
+          clpr  = flattenClitics vpr.nrClit vpr.clAcc vpr.clDat (vpr.isRefl ! agr) (andB vpr.isFemSg cmp) cmp vpr.pReflClit;   
+          compl = case isPol of {
+            True => vp.comp ! {g = agr.g ; n = Sg ; p = agr.p} ;
+            _ => vp.comp ! agr
+            } ++ vp.ext ! b         
+in
+        case d of {
+          DDir => 
+            subj ++ sa ++ neg ++ clpr.s1 ++ verb ++ clpr.s2;
+          DInv => 
+            sa ++ neg ++ clpr.s1 ++verb ++ clpr.s2 ++subj 
+          }
+        ++ compl
+    } ;    
+ 
+-- various : 
+
+ heavyNP : {s : NCase => Str ; a : Agr; hasClit : NForm; ss : Str} -> NounPhrase = \np -> {
+    s = \\c => {comp = np.s ! c ; 
+                clit = \\cs => case np.hasClit of
+                                 {HasClit => (genCliticsCase np.a c).s ! cs ; 
+                                  _       => [] }};
+    a = np.a ;
+    indForm = np.ss ; 
+    nForm = np.hasClit ;
+    isPronoun = False ;isPol = False 
+    } ;
+ 
+ genForms : Str -> Str -> Gender => Str = \bon,bonne ->
+      table {
+        Masc => bon ; 
+        Fem => bonne
+        } ; 
+   
+ aagrForms : (x1,_,_,x4 : Str) -> (AAgr => Str) = \tout,toute,tous,toutes ->
+      table {
+        {g = g ; n = Sg} => genForms tout toute ! g ;
+        {g = g ; n = Pl} => genForms tous toutes ! g
+        } ;
+ 
+ appCompl : Compl -> NounPhrase -> Str = \comp,np ->
+    comp.s ++ (np.s ! comp.c).comp ;
+ 
+ convCase : NCase -> ACase =\nc -> 
+   case nc of
+     {Da | Ge => AGenDat;
+      No | Ac => ANomAcc;
+      _       => AVoc} ;
+ 
+ convACase : ACase -> NCase = \ac -> 
+    case ac of
+     {ANomAcc => No ;
+      AGenDat => Ge ;
+      _       => Vo};
+
+ getSize : Size -> Str =\s -> 
+    case s of
+     {pl => "de" ;
+      _ => ""
+     };
+
+ nextClit : VClit -> ParClit ->  VClit = \vc,pc ->
+    case vc of
+     {VNone => VOne pc;
+       _     => VMany
+     };
+  
+ isAgrFSg : Agr -> Bool = \ag ->
+    case <ag.n,ag.g,ag.p> of
+     {<Sg,Fem,P3> => True ;
+      _           => False
+     };
+
+ clitFromNoun : NounPhrase -> NCase -> RAgr = \np,nc ->
+    {s = (np.s ! nc).clit; hasClit = True};
+
+ agrGender : NGender -> Number -> Gender =\ng,n ->
+   case <ng,n> of
+    {<NMasc,_>   => Masc ;
+     <NFem,_>    => Fem ;
+     <NNeut, Sg> => Masc ;
+     _           => Fem};
+
+ getNumber : Size -> Number =\n -> 
+   case n of
+    {sg => Sg;
+     _  => Pl };
+
+ getClit : Animacy -> Bool =\a -> 
+   case a of
+    {Animate => True;
+     _       => False};
+   
+}
+
+
+----------------------------------------
+
+========== FILE: StructuralRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/StructuralRon.gf
+
+--# -path=.:../abstract:../romance:../common:prelude
+
+concrete StructuralRon of Structural = CatRon ** 
+  open  MorphoRon, ParadigmsRon, BeschRon, Prelude,(X = ConstructX) in {
+
+  flags optimize=all ; 
+        coding=utf8 ;
+
+lin
+
+  above_Prep = mkPrep "deasupra" Ge ;
+  after_Prep = mkPrep "după" Ac True;
+  all_Predet = {
+    s = \\a => table { AGenDat => aagrForms nonExist nonExist "tuturor" "tuturor" ! a ;
+                       _       => aagrForms "tot" "toată" "toţi" "toate" ! a 
+                     };
+    c = No
+    } ;
+  almost_AdA, almost_AdN = ss "aproape" ;
+  always_AdV = ss "mereu" ;
+  although_Subj = ss "deşi" ;
+  and_Conj = {s1 = [] ; s2 = "şi" ; n = Pl} ;
+  because_Subj = ss "deoarece" ;
+  before_Prep = mkPrep "înaintea" Ge ;
+  behind_Prep = mkPrep "înapoia" Ge ;
+  between_Prep = mkPrep "între" Ac True ;
+  both7and_DConj = {s1,s2 = "şi" ; n = Pl} ;
+  but_PConj = ss "dar" ;
+  by8agent_Prep = mkPrep "de către" Ac True;
+  by8means_Prep = mkPrep "de" Ac True;
+  can8know_VV = mkVV (v_besch68 "putea") ;
+  can_VV = mkVV (v_besch68 "putea") ;
+  during_Prep = mkPrep "în timpul" Ge ;
+  either7or_DConj = {s1,s2 = "sau" ; n = Pl} ;
+  everybody_NP = mkNP "toţi" "tuturor" Pl Masc True; -- form for Fem needed also !
+  every_Det = mkDet "orice" "orice" "oricărui" "oricărei" "orice" "orice" "oricăruia" "oricăreia" Sg ; 
+  everything_NP = mkNP "totul" nonExist Sg Masc False;
+  everywhere_Adv = ss "pretutindeni" ;
+  few_Det  = mkDet "câţiva" "câteva" "câtorva" "câtorva" Pl ;
+  for_Prep = mkPrep "pentru" Ac True;
+  from_Prep = mkPrep "de la" Ac True; 
+  
+  he_Pron = 
+    mkPronoun
+      "el" "el" "lui" "lui" [] "său" "sa" "săi" "sale"  Masc Sg P3 ;
+  
+  here7from_Adv = ss "de aici" ;
+  here7to_Adv = ss "până aici" ;
+  here_Adv = ss "aici" ;
+  how_IAdv = ss "cum" ;
+  how8much_IAdv = ss "cât" ; ---- ? AR
+  how8many_IDet = {s = \\g,c => case <g,c> of
+                                   { <Fem,AGenDat> => "câtor"; <Fem,_> => "câte" ;
+                                     <Masc,AGenDat> => "câtor" ; _ => "câţi" 
+                                     };
+                   n = Pl
+                    } ;
+  if_Subj = ss "dacă" ;
+  in8front_Prep = mkPrep "în faţa" Ge ;
+  i_Pron = mkPronoun "eu" "mine" "mie" [] [] "meu" "mea" "mei" "mele" Masc Sg P1 ;
+  in_Prep = mkPrep "în" Ac True;
+  it_Pron = 
+     mkPronoun
+      "" "el" "lui" "lui" [] "său" "sa" "săi" "sale"  Masc Sg P3 ;
+  
+  have_V2 = dirV2 (v_have) ;
+  less_CAdv = {s = "mai puţin" ; sNum = ""; p = conjThan ; lock_CAdv = <> } ; 
+  many_Det = mkDet "mulţi" "multe" "multor" "multor" "mulţi" "multe" "multora" "multora" Pl; 
+  more_CAdv = {s = "mai" ; sNum = "mult" ; p =conjThan ; lock_CAdv = <>};
+  most_Predet = {
+    s = \\a => table { AGenDat => "marii parţi a" ;
+                       ANomAcc => "marea parte a"; 
+                       AVoc    => "mare parte a"
+                     };
+    c = Ge
+    };
+  much_Det = mkDet "mult" "multă" nonExist nonExist Sg ;
+  must_VV = mkVV (v_besch140 "trebui") ;
+  no_Utt = ss "nu" ;
+  on_Prep = mkPrep "pe" Ac True;
+  only_Predet = {s = \\_,c => "doar" ; c = No} ; 
+  or_Conj = {s1 = [] ; s2 = "sau" ; n = Sg} ;
+  otherwise_PConj = ss "altfel" ;
+  part_Prep = mkPrep "din" Ac True;
+  please_Voc = ss ["vă rog"] ;
+  possess_Prep = mkPrep "" Ge ; -- required forms for Fem Sg, Masc Pl and Fem Pl - maybe variants
+  quite_Adv = ss "chiar" ;
+  she_Pron = 
+    mkPronoun
+       "ea" "ea" "ei" "ei" [] "său" "sa" "săi" "sale"  
+        Fem Sg P3 ;
+
+  so_AdA = ss "aşa" ;
+  somebody_NP = mkNP "cineva" "cuiva" Sg Masc True;
+somePl_Det = mkDet "unii" "unele" "unor" "unor" "unii" "unele" "unora" "unora" Pl ;
+someSg_Det = mkDet "nişte" "nişte" "la nişte" "la nişte" Sg ;
+  something_NP = mkNP "ceva" "a ceva" Sg Masc False;
+  somewhere_Adv = ss ["undeva"] ; --- ne - pas
+
+that_Quant = {
+    s = \\_ => table {
+      Sg => table {Masc => table { AGenDat => "acelui";
+                                   _       => "acel"
+                                 };
+                   Fem  => table {AGenDat => "acelei";
+                                  _       => "acea"
+                                 }
+                  };
+      Pl => table { Masc => table {AGenDat => "acelor";
+                                   _       => "acei" 
+                                  };
+                    Fem  => table {AGenDat => "acelor";
+                                   _       => "acele" 
+                                  }
+                   }
+                      } ;
+    sp = table { 
+      Sg => table {Masc => table { AGenDat => "aceluia";
+                                   _       => "acela"
+                                 };
+                   Fem  => table {AGenDat => "aceleia";
+                                  _       => "aceea"
+                                 }
+                  };
+      Pl => table {Masc => table {AGenDat => "acelora";
+                                  _       => "aceia" 
+                                  };
+                   Fem  => table {AGenDat => "acelora";
+                                  _       => "acelea" 
+                                 }
+                  }
+              }; 
+  isDef = False ; isPost = False ; hasRef = False
+};
+
+  that_Subj = ss "că" ;
+
+  there7from_Adv = ss ["de acolo"] ;
+  there7to_Adv = ss "până acolo" ; 
+  there_Adv = ss "acolo" ;
+  therefore_PConj = ss "astfel" ;
+  --these_NP = mkNP "aceştia" "acestora" Masc Pl True; --form for Fem needed also !
+  they_Pron = mkPronoun
+      "ei" "ei" "lor" "lor" [] "lor" "lor" "lor" "lor"  
+        Masc Pl P3 ;
+  this_Quant = {
+    s = \\_ => table {
+      Sg => table {Masc => table { AGenDat => "acestui";
+                                   _       => "acest"
+                                 };
+                   Fem  => table {AGenDat => "acestei";
+                                  _       => "această"
+                                 }
+                  };
+      Pl => table { Masc => table {AGenDat => "acestor";
+                                   _       => "aceşti" 
+                                  };
+                    Fem  => table {AGenDat => "acestor";
+                                   _       => "aceste" 
+                                  }
+                   }
+                      } ;
+    sp = table { 
+      Sg => table {Masc => table { AGenDat => "acestuia";
+                                   _       => "acesta"
+                                 };
+                   Fem  => table {AGenDat => "acesteia";
+                                  _       => "aceasta"
+                                 }
+                  };
+      Pl => table {Masc => table {AGenDat => "acestora";
+                                  _       => "aceştia" 
+                                  };
+                   Fem  => table {AGenDat => "acestora";
+                                  _       => "acestea" 
+                                 }
+                  }
+              } ;
+   isDef = False ; isPost = False ; hasRef = False
+ };
+  through_Prep = mkPrep "prin" Ac True;
+  too_AdA = ss "prea" ;
+  to_Prep = mkPrep "la" Ac True;
+  under_Prep = mkPrep "sub" Ac True;
+  very_AdA = ss "foarte" ;
+  want_VV = mkVV (v_besch74 "vrea") ; 
+  we_Pron =  mkPronoun
+    "noi" "noi" "nouă" [] [] "nostru" "noastră" "noştri" "noastre"  
+        Masc Pl P1 ; 
+whatSg_IP = 
+    {s = \\c => case c of
+                { Da => "căruia"  ;
+                  Ge => "a căruia" ; 
+                  _      => "ce" };
+     a = aagr Masc Sg;
+     hasRef = False
+    };
+
+whatPl_IP = 
+   {s = \\c => case c of
+                { Da => "cărora" ;
+                  Ge => "a cărora" ; 
+                  _      => "ce" };
+     a = aagr Masc Pl;
+     hasRef = False
+    };
+  when_IAdv = ss "când" ;
+  when_Subj = ss "când" ;
+  where_IAdv = ss "unde" ;
+  which_IQuant = {s = table {
+      Sg => table {Masc => table { AGenDat => "cărui";
+                                   _       => "care"
+                                 };
+                   Fem  => table {AGenDat => "cărei";
+                                  _       => "care"
+                                 }
+                  };
+      Pl => \\g => table {AGenDat => "căror";
+                                   _       => "care" 
+                                  }
+                   
+                    };
+   isDef = False 
+  };
+
+  whoPl_IP = {s = \\c => case c of
+                { Da => "cui" ;
+                  Ge => "a cui" ; 
+                  _      => "cine" };
+     a = aagr Masc Pl;
+     hasRef = True
+    };
+
+  whoSg_IP = {s = \\c => case c of
+                { Da => "cui" ;
+                  Ge => "a cui" ; 
+                  _      => "cine" };
+     a = aagr Masc Sg;
+     hasRef = True
+    };
+  why_IAdv = ss "de ce" ;
+  without_Prep = mkPrep "fără" Ac True;
+  with_Prep = mkPrep "cu" Ac ;
+  yes_Utt = ss "da" ; 
+
+  youSg_Pron = mkPronoun 
+    "tu" "tine" "ţie" [] "tu" "tău" "ta" "tăi" "tale"  
+        Masc Sg P2 ;
+  youPl_Pron =  
+    mkPronoun
+      "voi" "voi" "vouă" [] "voi" "vostru" "voastră" "voştri" "voastre"  
+         Masc Pl P2 ;
+  youPol_Pron = let dvs = mkPronoun "dumneavoastră" "dumneavoastră" "dumneavoastră" [] "dumneavoastră" "dumneavoastră" "dumneavoastră" "dumneavoastră" "dumneavoastră" Masc Pl P2 
+             in 
+            {s = dvs.s; c1 = dvs.c1; 
+                c2 = dvs.c2; a = dvs.a; isPol = True; poss = dvs.poss} ; 
+
+ not_Predet = {s = \\a,c => "nu" ; c = No} ;
+
+  no_Quant = 
+{
+    s = \\_ => table {
+      Sg => table {Masc => table { AGenDat => "niciunui";
+                                   _       => "niciun"
+                                 };
+                   Fem  => table {AGenDat => "niciunei";
+                                  _       => "nicio"
+                                 }
+                  };
+      Pl => table { Masc => table {AGenDat => "niciunor";
+                                   _       => "niciunii" 
+                                  };
+                    Fem  => table {AGenDat => "niciunor";
+                                   _       => "niciunele" 
+                                  }
+                   }
+                      } ;
+    sp = table { 
+      Sg => table {Masc => table { AGenDat => "nimănui";
+                                   _       => "nimeni"
+                                 };
+                   Fem  => table {AGenDat => "nimănui";
+                                  _       => "nimeni"
+                                 }
+                  };
+      Pl => table {Masc => table {AGenDat => "niciunora";
+                                  _       => "niciunii" 
+                                  };
+                   Fem  => table {AGenDat => "niciunora";
+                                  _       => "niciunele" 
+                                 }
+                  }
+              } ;
+ isDef = False ; isPost = False ; hasRef = False
+};
+  if_then_Conj = {s1 = "dacă" ; s2 = "atunci" ; n = Sg ; lock_Conj = <>} ;
+  nobody_NP = mkNP "nimeni" "nimănui" Sg Masc True;
+ 
+  nothing_NP = mkNP "nimic" "nimicului" Sg Masc False;
+  at_least_AdN = ss "cel puţin" ;
+  at_most_AdN = ss "cel mult" ;
+
+  except_Prep = mkPrep "cu excepţia" Ge ;
+
+  as_CAdv = { s = "la fel de"; sNum = "mult"; p = "ca" ; lock_CAdv = <> };
+
+}
+
+
+----------------------------------------
+
+========== FILE: VerbRon.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/romanian/VerbRon.gf
+
+concrete VerbRon of Verb = 
+  CatRon ** open Prelude, ResRon in {
+
+  flags optimize=all_subs ;
+    coding=utf8 ;
+
+  lin
+    UseV = useVerb ;
+
+    ComplVV v vp =insertSimpObj (\\a => "sã"  ++ (flattenSimpleClitics vp.nrClit vp.clAcc vp.clDat (vp.isRefl ! a)) ++ conjVP vp a ++vp.comp ! a ++ vp.ext ! Pos) (useVerb v) ;
+
+
+    ComplVS v s  = insertExtrapos (\\b => conjThat ++ s.s ! (v.m ! b)) (predV v) ;
+    ComplVQ v q  = insertExtrapos (\\_ => q.s ! QIndir) (predV v) ;
+ 
+
+    ComplVA v ap = 
+    insertSimpObj (\\a => ap.s ! AF a.g a.n Indef ANomAcc) (useVerb v) ;
+
+
+    SlashV2a verb = {s = verb.s ; isRefl = verb.isRefl; nrClit = verb.nrClit;     
+                     isFemSg = False ; pReflClit = verb.pReflClit ;
+                     neg = table {Pos => ""; Neg => "nu"} ;
+                     clAcc  = RNoAg ; 
+                     clDat  = RNoAg ; 
+                     comp   = \\a => [] ;
+                     ext    = \\p => [] ;
+                     c2 = verb.c2 ; needAgr = False ; needClit = True ; lock_VP = <>};
+  
+
+
+
+    Slash2V3 v np = let  s1 = v.c2.s ++(np.s ! (v.c2.c)).comp ;
+                         ss = case np.nForm of 
+                                 {HasRef False => s1 ;
+                                  _            => v.c2.prepDir ++ s1 }; 
+                         sir = if_then_Str np.isPronoun "" ss ;
+                         vcDa = case np.nForm of
+                                    {HasClit => nextClit v.nrClit PDat ;
+                                     _       => v.nrClit };
+                         vcAc = case np.nForm of
+                                    {HasClit => nextClit v.nrClit PAcc ;
+                                     _       => v.nrClit }  
+                         in
+                               case v.c2.isDir of
+                                  {Dir PAcc => (insertObje (\\_ => sir) (clitFromNoun np Ac) RNoAg (isAgrFSg np.a) vcAc (useVerb v)) ** {needAgr = False ; needClit = True ; c2 = v.c3} ;
+                                   Dir PDat => (insertObje (\\_ => sir) RNoAg (clitFromNoun np Da) False vcDa (useVerb v)) ** {needAgr = False ; needClit = True ; c2 = v.c3};
+                                    _ => (insertSimpObjPre (\\_ => ss) (useVerb v)) ** {needAgr = False ; needClit = True ; c2 = v.c3}
+                                    };
+    
+    Slash3V3 v np = let s1 = v.c3.s ++ (np.s ! (v.c3.c)).comp ;
+                        ss = case np.nForm of 
+                               {HasRef False => s1 ;
+                                _            => v.c3.prepDir ++ s1} ;
+                        sir = if_then_Str np.isPronoun "" ss ;
+                        vcDa = case np.nForm of 
+                                {HasClit => nextClit v.nrClit PDat ;
+                                 _       => v.nrClit };
+                        vcAc = case np.nForm of 
+                                {HasClit => nextClit v.nrClit PAcc ;
+                                 _       => v.nrClit };  
+                            in
+                           case v.c3.isDir of
+                            {Dir PAcc => (insertObje (\\_ => sir) (clitFromNoun np Ac) RNoAg (isAgrFSg np.a) vcAc (useVerb v)) ** {needAgr = False ; needClit = True ; c2 = v.c2}  ;
+                             Dir PDat => (insertObje (\\_ => sir) RNoAg (clitFromNoun np Da) False vcDa (useVerb v)) ** {needAgr = False ; needClit = True ; c2 = v.c2}  ;
+                            _ => (insertSimpObjPre (\\_ => ss) (useVerb v)) ** {needAgr = False ; needClit = True ;c2 = v.c2}
+                             };
+
+-- needs fixing - agreement for the added verb must be made accordingly to what we add in ComplSlash !!! 
+-- fixed with extra parameter !
+
+    SlashV2V v vp =  (insertSimpObj (\\a =>  "sã" ++ (flattenSimpleClitics vp.nrClit vp.clAcc vp.clDat (vp.isRefl ! a)) ++ conjVP vp a ++ vp.comp ! a ++ vp.ext ! Pos) (useVerb v)) ** {needAgr = True ; needClit = True ;c2 = v.c2} ; 
+
+
+    SlashV2S v s = (insertExtrapos (\\b => conjThat ++ s.s ! Indic) (useVerb v)) ** {needAgr = False; needClit = True ;c2 = v.c2}; 
+
+    SlashV2Q v q = (insertExtrapos (\\_ => q.s ! QIndir) (useVerb v)) ** {needAgr = False ; needClit = False ;c2 = v.c2 } ; 
+
+   
+
+ -- more usually the adverbial form is used, hence no agreement
+ 
+   SlashV2A v ap =  
+     (insertSimpObj  (\\a => v.c2.s ++ ap.s ! (AF Masc Sg Indef (convCase v.c2.c)))  
+(useVerb v)) ** {needAgr = False ; needClit = True ; c2 = v.c2} ;
+
+    ComplSlash vp np =  let  s1 = vp.c2.s ++(np.s ! (vp.c2.c)).comp ;
+                             ss = case np.nForm of
+                                { HasRef False =>  s1 ;
+                                  _            => vp.c2.prepDir ++ s1 };                                
+                             sir = if_then_Str np.isPronoun "" ss  ;
+                             vcDa = case np.nForm of 
+                                        {HasClit => nextClit vp.nrClit PDat ;
+                                         _       => vp.nrClit
+                                         };                             
+                             --if_then_else VClit np.hasClit (nextClit vp.nrClit PDat) vp.nrClit;
+                             vcAc = case np.nForm of 
+                                         {HasClit => nextClit vp.nrClit PAcc ;
+                                          _       => vp.nrClit
+                                         };
+                             --if_then_else VClit np.hasClit (nextClit vp.nrClit PAcc) vp.nrClit;  
+                             vpp =  case vp.c2.isDir of
+                          {Dir PAcc => insertObje (\\_ => sir) (clitFromNoun np Ac) RNoAg (isAgrFSg np.a) vcAc vp  ;
+                           Dir PDat => insertObje (\\_ => sir) RNoAg (clitFromNoun np Da) False vcDa vp;
+                           _ => insertSimpObjPre (\\_ => ss) vp 
+                             }
+                            in 
+                         {isRefl = vpp.isRefl; 
+                          s = vpp.s ; isFemSg = vpp.isFemSg ; pReflClit = vp.pReflClit ;
+                          nrClit = vpp.nrClit; clAcc = vpp.clAcc ; 
+                          clDat = vpp.clDat ; neg   = vpp.neg ;
+                          comp  = case vp.needAgr of 
+                                     {True => \\a => vpp.comp ! (np.a);
+                                      _    => \\a => vpp.comp ! a 
+                                      };
+                          ext   = vpp.ext ;
+                          lock_VP = <> };
+
+ 
+
+
+--add reflexive clitics 
+    ReflVP v = {isRefl = case v.c2.c of
+                           {Da => \\a => dRefl a;
+                            _  => \\a => aRefl a
+                            };
+                s     = v.s ; isFemSg = v.isFemSg ;                 
+                nrClit = case v.nrClit of 
+                            {VNone => VRefl;
+                             _     => VMany };
+                clAcc = v.clAcc ; 
+                pReflClit = case v.c2.c of
+                                      {Ac => Short ;
+                                       _  => Composite};
+                clDat = v.clDat ; 
+                neg   = v.neg ;
+                comp  = v.comp ;
+                ext   = v.ext ;
+                lock_VP = <> 
+                };
+      
+
+    SlashVV v vp = 
+              insertObjc (\\a => "sã" ++ (flattenSimpleClitics vp.nrClit vp.clAcc vp.clDat (vp.isRefl ! a)) ++ conjVP vp a ++ vp.comp ! a ++ vp.ext ! Pos) ((useVerb v) **{c2=vp.c2; needAgr= vp.needAgr ; needClit = False; lock_VPSlash = <>}) ;
+
+    SlashV2VNP v np vp = let  s1 = v.c2.s ++(np.s ! (v.c2.c)).comp ;
+                              ss = case np.nForm of
+                                    {HasRef False => s1 ;
+                                     _            => v.c2.prepDir ++ s1 }; 
+                              sir = if_then_Str np.isPronoun "" ss ;
+                              vcDa = case np.nForm of
+                                    {HasClit =>  nextClit v.nrClit PDat;
+                                     _       =>  v.nrClit };
+                              vcAc = case np.nForm of
+                                    {HasClit =>  nextClit v.nrClit PAcc;
+                                     _       => v.nrClit };  
+                              vvp = vp ** {lock_VP = <>};
+                              vcomp = (getConjComp vvp np.a).s
+                           in   
+                              case v.c2.isDir  of
+                                {Dir PAcc => (insertObje (\\a => sir ++ vcomp ! a) (clitFromNoun np Ac) RNoAg (isAgrFSg np.a) vcAc (useVerb v)) ** {needAgr = vp.needAgr ; needClit = False ;c2 = vp.c2} ;
+                                
+                                 Dir PDat =>  (insertObje (\\a => sir ++ vcomp ! a) RNoAg (clitFromNoun np Da) False vcDa (useVerb v)) ** {needAgr = vp.needAgr ; needClit = False ; c2 = vp.c2};
+                                 
+                                 _        => (insertSimpObjPre (\\a => ss ++ vcomp ! a) (useVerb v)) ** {needAgr = vp.needAgr ; needClit = False ; c2 = vp.c2}  
+                                };
+
+
+    UseComp comp = insertSimpObj comp.s copula ;
+    UseCopula = copula ;
+
+    CompAP ap = {s = \\ag => ap.s ! AF ag.g ag.n Indef ANomAcc} ;
+    CompCN cn = { s = \\ag => cn.s ! ag.n ! Indef ! ANomAcc }; --- RE 7/12/2010
+    CompNP np = {s = \\_  => (np.s ! No).comp} ;
+    CompAdv a = {s = \\_  => a.s} ;
+
+
+    AdvVP vp adv = insertAdv adv.s vp ;
+    AdVVP adv vp = insertAdv adv.s vp ;
+
+    PassV2 v = insertSimpObj (\\a => v.s ! PPasse a.g a.n Indef ANomAcc) auxPassive ** {lock_VP = <>};
+
+    VPSlashPrep vp prep = vp ** {c2 = prep ; needAgr = False; needClit = True} ; ---- AR
+
+oper auxPassive = copula ; 
+
+mkVPSlash : Compl -> VP -> VP ** {c2 : Compl} = \c,vp -> vp ** {c2 = c; needAgr = False; needClit = True} ;
+
+
+insertObjc : (Agr => Str) -> VPSlash -> VPSlash = \obj,vp -> 
+    insertSimpObj obj vp ** {c2 = vp.c2; needAgr = False ; needClit = True ; lock_VPSlash = <>} ;
+
+
+
+getConjComp : VP -> Agr -> {s: Agr => Str} = \vp,ag ->
+ {s  = \\a => "sã" ++ (flattenSimpleClitics vp.nrClit vp.clAcc vp.clDat (vp.isRefl ! a)) ++ conjVP vp ag ++ vp.comp ! a ++ vp.ext ! Pos};
+
+};
+
+----------------------------------------

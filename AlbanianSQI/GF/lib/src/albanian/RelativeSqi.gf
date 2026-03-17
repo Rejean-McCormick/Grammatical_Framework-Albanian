@@ -3,7 +3,7 @@ concrete RelativeSqi of Relative = CatSqi **
 
   oper
     relPart : Str = "që" ;
-    sp : Str = " " ;
+    relSp   : Str = " " ;
 
   lin
     -- Invariant:
@@ -12,7 +12,7 @@ concrete RelativeSqi of Relative = CatSqi **
     IdRP = {s = []} ;
 
     FunRP prep np rp =
-      {s = sp ++ np.s ! Nom ++ sp ++ prep.s ++ rp.s} ;
+      {s = relSp ++ np.s ! Nom ++ relSp ++ prep.s ++ rp.s} ;
 
     RelCl _ =
       {s = relPart} ;

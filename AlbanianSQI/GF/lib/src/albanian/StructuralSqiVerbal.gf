@@ -55,9 +55,8 @@ oper
   can_VV : CatSqi.VV =
     P.mkVV (P.mkV "mundem") ;
 
-  -- Keep this disabled until the GeneratePMCFG trigger is isolated.
-  -- must_VV : CatSqi.VV =
-  --   P.mkVV (P.mkV "duhet") ;
+  must_VV : CatSqi.VV =
+    P.mkVV (mkVConst "duhet") ;
 
   want_VV : CatSqi.VV =
     P.mkVV (mkVConst "dua") ;

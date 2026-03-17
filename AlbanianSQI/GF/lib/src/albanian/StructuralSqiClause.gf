@@ -3,8 +3,11 @@ resource StructuralSqiClause =
   open Prelude, ParamX, CatSqi, ResSqi, (P = ParadigmsSqi) in {
 
 oper
+  -- Local DConj record type for this resource.
+  DConj : Type = {s : Str} ;
+
   -- Local DConj constructor: keep DConj separate from Conj.
-  mkDConj : Str -> DConj = \s -> lin DConj {s = s} ;
+  mkDConj : Str -> DConj = \s -> {s = s} ;
 
   -- Prepositions
   above_Prep : CatSqi.Prep = ResSqi.mkPrep "sipër" ;

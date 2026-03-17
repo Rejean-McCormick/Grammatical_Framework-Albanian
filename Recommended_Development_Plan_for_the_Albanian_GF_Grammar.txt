@@ -1,0 +1,305 @@
+## Recommended Development Plan for the Albanian GF Grammar
+
+The current resource set is sufficient to implement the missing parts of the Albanian GF grammar in a structured way. It includes:
+
+* a full descriptive grammar of Albanian,
+* lesson material covering key verbal and syntactic phenomena,
+* Tosk and Geg dictionaries/glossaries,
+* and a broad set of Albanian texts for later validation.
+
+These materials are enough to support a serious first-pass completion of the grammar.
+
+### General recommendation
+
+Do **not** postpone compilation stabilisation until all modules are written.
+
+The best workflow is incremental:
+
+1. implement one coherent block of modules,
+2. make that block compile,
+3. test it,
+4. then move to the next block.
+
+GF is designed for this kind of staged development. The Albanian grammar already has a broad module structure, so the most efficient approach is to keep the grammar compilable while expanding coverage.
+
+### Linguistic target
+
+The grammar should explicitly target:
+
+* **Standard Albanian as the default norm**, with
+* **Tosk as the main baseline**, and
+* **Geg handled in a controlled way**, mainly through optional lexical, structural, or extension-layer variants.
+
+This decision must be fixed early. Otherwise, Tosk and Geg forms may be mixed inconsistently across morphology, lexicon, and syntax.
+
+## Development order
+
+### Phase 1: Stabilise the morphological core
+
+Work on these files first:
+
+* `CatSqi.gf`
+* `ResSqi.gf`
+* `MorphoSqi.gf`
+* `ParadigmsSqi.gf`
+* `IrregSqi.gf`
+
+This phase should define and stabilise:
+
+* core categories,
+* morphological parameters,
+* nominal inflection,
+* verbal paradigms,
+* irregular verbs,
+* participles,
+* analytic tenses,
+* passive/mediopassive behavior,
+* future constructions,
+* and other core inflectional mechanisms.
+
+This is the foundation for everything else. If this layer is unstable, later syntax modules will accumulate ad hoc fixes and local workarounds.
+
+### Phase 2: Complete the main phrase-category modules
+
+After the core is stable, work on:
+
+* `NounSqi.gf`
+* `VerbSqi.gf`
+* `AdjectiveSqi.gf`
+* `AdverbSqi.gf`
+* `NumeralSqi.gf`
+* `SentenceSqi.gf`
+* `QuestionSqi.gf`
+* `RelativeSqi.gf`
+* `ConjunctionSqi.gf`
+* `IdiomSqi.gf`
+* `PhraseSqi.gf`
+* `TextSqi.gf`
+
+This phase should focus on turning the morphological base into a real RGL-style syntax:
+
+* noun phrase formation,
+* verbal constructions,
+* adjective/adverb integration,
+* sentence building,
+* question formation,
+* relative clauses,
+* conjunctions and subordinators,
+* idiomatic structures,
+* phrase-level composition,
+* and text-level composition.
+
+The highest-priority files in this phase are:
+
+* `VerbSqi.gf`
+* `SentenceSqi.gf`
+* `QuestionSqi.gf`
+* `RelativeSqi.gf`
+* `ConjunctionSqi.gf`
+
+### Phase 3: Finish the structural layer
+
+Then complete the structural modules:
+
+* `StructuralSqiRes.gf`
+* `StructuralSqiNominal.gf`
+* `StructuralSqiVerbal.gf`
+* `StructuralSqiClause.gf`
+* `StructuralSqi.gf`
+
+This layer should contain the grammatical vocabulary and fixed structural material:
+
+* prepositions,
+* pronouns,
+* conjunctions,
+* subordinators,
+* grammatical adverbs,
+* functional particles,
+* and related closed-class items.
+
+`StructuralSqi.gf` itself should be completed only after its submodules are stable.
+
+### Phase 4: Build lexical coverage
+
+Then fill:
+
+* `LexiconSqi.gf`
+* `NamesSqi.gf`
+* `IrregSqi.gf` (second pass)
+
+This stage should provide:
+
+* a usable core lexicon,
+* basic named entities,
+* expanded irregular lexical entries,
+* and standard lexical coverage based primarily on the Tosk/standard system.
+
+Geg lexical variants can be added later in a controlled way rather than mixed into the default lexicon too early.
+
+### Phase 5: Work on extensions only after the core is clean
+
+Only then move to:
+
+* `ExtendSqi.gf`
+* `ConstructionSqi.gf`
+* `ExtraSqi.gf`
+* `ExtraSqiAbs.gf`
+* `SymbolSqi.gf`
+* `TenseSqi.gf`
+
+These files are useful, but they should not drive the project before the core grammar is stable. Extension code built on top of an unstable base usually increases maintenance cost.
+
+### Phase 6: Use top-level grammars and tests for integration
+
+Finally, use these files as integration checkpoints:
+
+* `GrammarSqi.gf`
+* `LangSqi.gf`
+* `AllSqi.gf`
+* `AllSqiAbs.gf`
+* `TrySqi.gf`
+* `TestSqi.gf`
+* `DocumentationSqi.gf`
+
+These should not be the place where major grammar decisions are invented. Their role is to:
+
+* compose the system,
+* expose the final public interface,
+* and detect integration breakage early.
+
+## Priority list by file group
+
+### Priority 1: Core required modules
+
+* `CatSqi.gf`
+* `ResSqi.gf`
+* `MorphoSqi.gf`
+* `ParadigmsSqi.gf`
+* `IrregSqi.gf`
+* `NounSqi.gf`
+* `VerbSqi.gf`
+* `AdjectiveSqi.gf`
+* `AdverbSqi.gf`
+* `NumeralSqi.gf`
+* `SentenceSqi.gf`
+* `QuestionSqi.gf`
+* `RelativeSqi.gf`
+* `ConjunctionSqi.gf`
+* `IdiomSqi.gf`
+* `PhraseSqi.gf`
+* `TextSqi.gf`
+
+### Priority 2: Structural layer
+
+* `StructuralSqiRes.gf`
+* `StructuralSqiNominal.gf`
+* `StructuralSqiVerbal.gf`
+* `StructuralSqiClause.gf`
+* `StructuralSqi.gf`
+
+### Priority 3: Lexicon and extensions
+
+* `LexiconSqi.gf`
+* `NamesSqi.gf`
+* `ConstructionSqi.gf`
+* `ExtendSqi.gf`
+* `ExtraSqi.gf`
+* `ExtraSqiAbs.gf`
+* `SymbolSqi.gf`
+* `TenseSqi.gf`
+
+### Priority 4: Integration and testing
+
+* `GrammarSqi.gf`
+* `LangSqi.gf`
+* `AllSqi.gf`
+* `AllSqiAbs.gf`
+* `TrySqi.gf`
+* `TestSqi.gf`
+* `DocumentationSqi.gf`
+
+## How to use the new resources
+
+### 1. Descriptive grammar sources
+
+Use the full Albanian grammar materials and PDF as the main reference for:
+
+* morphology,
+* case system,
+* definiteness,
+* articles,
+* verbal categories,
+* participles,
+* tense/aspect/mood,
+* subordination,
+* clause structure,
+* and general syntactic behavior.
+
+These should guide `ResSqi`, `MorphoSqi`, `ParadigmsSqi`, `VerbSqi`, `SentenceSqi`, `QuestionSqi`, `RelativeSqi`, and `ConjunctionSqi`.
+
+### 2. Lesson materials
+
+Use the lesson files as practical guidance for:
+
+* future constructions,
+* infinitive usage,
+* participles,
+* modals,
+* progressive/periphrastic constructions,
+* and important Tosk/Geg contrasts.
+
+These are especially useful for:
+
+* `VerbSqi.gf`
+* `ParadigmsSqi.gf`
+* `IrregSqi.gf`
+* `ExtendSqi.gf`
+
+### 3. Dictionaries and glossaries
+
+Use the Tosk and Geg dictionaries/glossaries to populate:
+
+* `LexiconSqi.gf`
+* `NamesSqi.gf`
+* `IrregSqi.gf`
+
+A good strategy is:
+
+1. first build a standard/Tosk-oriented lexical base,
+2. then add Geg variants in a controlled second pass.
+
+### 4. Literary, legal, and historical texts
+
+Use the longer Albanian texts mainly for:
+
+* validation,
+* idiomatic checking,
+* stylistic verification,
+* and coverage testing.
+
+They should not be the main source for paradigm design, but they are excellent for checking whether implemented structures behave naturally across genres.
+
+## Recommended workflow
+
+The most effective order of work is:
+
+1. stabilise `ResSqi` / `MorphoSqi` / `ParadigmsSqi` / `IrregSqi`,
+2. complete `VerbSqi` / `NounSqi` / `SentenceSqi` / `QuestionSqi` / `RelativeSqi` / `ConjunctionSqi`,
+3. complete the `StructuralSqi*` modules,
+4. expand `LexiconSqi`,
+5. only then finish `ExtendSqi`, `ExtraSqi`, and the top-level integration modules.
+
+## Practical rule
+
+Every file should be developed with three things written down:
+
+* its primary linguistic source,
+* the phenomena it must implement,
+* and the minimum tests it must pass before moving on.
+
+The next useful project step would be to turn this plan into a file-by-file TODO list with:
+
+* source references,
+* target phenomena,
+* open issues,
+* and test sentences for each module.

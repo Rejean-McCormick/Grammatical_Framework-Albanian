@@ -82,7 +82,7 @@ concrete ExtendSqi of Extend =
       } ;
 
     mkPronConst : Str -> Str -> Str -> Str -> Str -> Gender -> Number -> CatSqi.Pron =
-      \nom,acc,dat,accCl,datCl,g,n -> lin CatSqi.Pron {
+      \nom,acc,dat,accCl,datCl,g,n -> lin Pron {
         s        = table {Nom => nom ; Acc => acc ; Dat => dat ; Ablat => dat} ;
         acc_clit = accCl ;
         dat_clit = datCl ;
@@ -168,7 +168,7 @@ concrete ExtendSqi of Extend =
     ConjComp conj comps = {s = comps.s} ;
     ConjImp conj imps   = {s = imps.s} ;
 
-    ProDrop p = lin CatSqi.Pron {
+    ProDrop p = lin Pron {
       s        = \\_ => "" ;
       acc_clit = p.acc_clit ;
       dat_clit = p.dat_clit ;

@@ -1,0 +1,1382 @@
+
+========== FILE: AdjectiveIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/AdjectiveIta.gf
+
+concrete AdjectiveIta of Adjective = CatIta ** AdjectiveRomance with
+  (ResRomance = ResIta) ;
+
+----------------------------------------
+
+========== FILE: AdverbIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/AdverbIta.gf
+
+concrete AdverbIta of Adverb = CatIta ** AdverbRomance with
+  (ResRomance = ResIta) ;
+
+----------------------------------------
+
+========== FILE: CatIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/CatIta.gf
+
+--# -path=.:../romance:../abstract:../common:prelude
+
+concrete CatIta of Cat = CommonX - [SC,Temp,TTAnt,Tense,TPres,TPast,TFut,TCond,Pol,MU] ** CatRomance with
+  (ResRomance = ResIta) ;
+
+----------------------------------------
+
+========== FILE: ConjunctionIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/ConjunctionIta.gf
+
+concrete ConjunctionIta of Conjunction = CatIta ** ConjunctionRomance with
+  (ResRomance = ResIta) ;
+
+----------------------------------------
+
+========== FILE: ConstructionIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/ConstructionIta.gf
+
+--# -path=alltenses:.:../abstract
+
+concrete ConstructionIta of Construction = CatIta ** 
+  open SyntaxIta, SymbolicIta, ParadigmsIta, 
+       (L = LexiconIta), (E = ExtraIta), (I = IrregIta), (R = ResIta), (C = CommonRomance),
+       Prelude in {
+flags coding=utf8 ;
+
+
+lin
+  hungry_VP = E.ComplCN have_V2 (mkCN (mkN "fame")) ;
+  thirsty_VP = E.ComplCN have_V2 (mkCN (mkN "sete")) ;
+  tired_VP = mkVP (mkA "stanco") ;
+  scared_VP = E.ComplCN have_V2 (mkCN (mkN "paura" feminine)) ;
+  ill_VP = mkVP (mkA "malato") ;
+  ready_VP = mkVP (mkA "pronto") ;
+
+  has_age_VP card = mkVP have_V2 (mkNP <lin Card card : Card> L.year_N) ;
+
+  have_name_Cl x y = mkCl x (mkV2 (reflV (mkV "chiamare"))) y ;
+  married_Cl x y = mkCl (lin NP x) L.married_A2 (lin NP y) | mkCl (mkNP and_Conj (lin NP x) (lin NP y)) (mkA "sposato") ;
+
+  what_name_QCl x = mkQCl how_IAdv (mkCl (lin NP x) (reflV (mkV "chiamare"))) ;
+  how_old_QCl x = mkQCl (mkIP how8many_IDet L.year_N) x have_V2 ;
+  how_far_QCl x = mkQCl how8much_IAdv (mkCl x (mkV "distare")) ;
+
+-- some more things
+  weather_adjCl ap = mkCl (mkVP (mkVA I.fare_V) (lin AP ap)) ;
+   
+  is_right_VP = E.ComplCN have_V2 (mkCN (mkN "ragione")) ;
+  is_wrong_VP = mkVP (reflV (mkV "sbagliare")) ;
+
+  n_units_AP card cn a = mkAP (lin AdA (mkUtt (mkNP <lin Card card : Card> (lin CN cn)))) (lin A a) ;
+
+  bottle_of_CN np = mkCN (lin N2 (mkN2 (mkN "bottiglia" feminine) part_Prep)) np ;
+  cup_of_CN    np = mkCN (lin N2 (mkN2 (mkN "tazza") part_Prep)) np ;
+  glass_of_CN  np = mkCN (lin N2 (mkN2 (mkN "bicchiere") part_Prep)) np ;
+
+{-
+-- spatial deixis and motion verbs
+
+  where_go_QCl np = mkQCl where_IAdv (mkCl np (mkVP L.go_V)) ;
+  where_come_from_QCl np =  mkQCl (lin IAdv (ss "d'où")) (mkCl np (mkVP L.go_V)) ;
+  
+  go_here_VP = mkVP (mkVP L.go_V) here_Adv ;
+  come_here_VP = mkVP (mkVP L.come_V) here_Adv ;
+  come_from_here_VP = mkVP (mkVP L.come_V) (mkAdv "d'ici") ;
+
+  go_there_VP = mkVP (mkVP L.go_V)  there_Adv ;
+  come_there_VP = mkVP (mkVP L.come_V) there_Adv ;
+  come_from_there_VP = mkVP (mkVP L.come_V) (mkAdv "de là") ;
+-}  
+
+lincat
+  Weekday = N ;
+  Monthday = NP ;
+  Month = N ;
+  Year = NP ;
+oper
+  noPrep : Prep = mkPrep [] ;
+
+lin
+  weekdayPunctualAdv w = lin Adv {s = w.s ! C.Sg} ;         -- lundi
+  weekdayHabitualAdv w = SyntaxIta.mkAdv noPrep (mkNP the_Det w) ; -- il lunedí ----
+  weekdayLastAdv w = SyntaxIta.mkAdv noPrep (mkNP the_Det (mkCN (mkA "scorso") w)) ; -- il lunedí scorso
+  weekdayNextAdv w = SyntaxIta.mkAdv noPrep (mkNP the_Det (mkCN (mkA "prossimo") w)) ; -- il lunedí prossimo
+
+  monthAdv m = lin Adv {s = "in" ++ m.s ! C.Sg} ;         -- in mggio
+  yearAdv y = SyntaxIta.mkAdv (mkPrep "nel") y ; ----
+  dayMonthAdv d m = ParadigmsIta.mkAdv ("il" ++ (d.s ! R.Nom).comp ++ m.s ! C.Sg) ; -- le 17 mai 
+  monthYearAdv m y = lin Adv {s = "in" ++ m.s ! C.Sg ++ (y.s ! R.Nom).comp} ;         -- in maggio 2012
+  dayMonthYearAdv d m y = ParadigmsIta.mkAdv ("il" ++ (d.s ! R.Nom).comp ++ m.s ! C.Sg ++ (y.s ! R.Nom).comp) ; -- il 17 maggio 2013
+
+  intYear = symb ;
+  intMonthday = symb ;
+  
+
+lincat Language = N ;
+
+lin InLanguage l = SyntaxIta.mkAdv (mkPrep "in") (mkNP l) ;
+
+lin
+  weekdayN w = w ;
+
+  weekdayPN w = mkPN w ;
+  monthPN m = mkPN m ;
+
+  languageNP l = mkNP l ;
+  languageCN l = mkCN l ;
+
+oper mkLanguage : Str -> N = \s -> mkN s ;
+
+----------------------------------------------
+---- lexicon of special names
+
+lin monday_Weekday = mkN "lunedí" ;
+lin tuesday_Weekday = mkN "martedí" ;
+lin wednesday_Weekday = mkN "mercoledí" ;
+lin thursday_Weekday = mkN "giovedí" ;
+lin friday_Weekday = mkN "venerdi" ;
+lin saturday_Weekday = mkN "sabato" ;
+lin sunday_Weekday = mkN "domenica" ;
+
+lin january_Month = mkN "gennaio" ; 
+lin february_Month = mkN "febbraio" ; 
+lin march_Month = mkN "marzo" ; 
+lin april_Month = mkN "aprile" ;
+lin may_Month = mkN "maggio" ;
+lin june_Month = mkN "giugno" ;
+lin july_Month = mkN "luglio" ;
+lin august_Month = mkN "agosto" ;
+lin september_Month = mkN "settembre" ;
+lin october_Month = mkN "ottobre" ;
+lin november_Month = mkN "novembre" ;
+lin december_Month = mkN "dicembre" ;
+
+lin afrikaans_Language = mkLanguage "afrikaans" ;
+lin amharic_Language = mkLanguage "amarico" ; 
+lin arabic_Language = mkLanguage "arabo" ;
+lin bulgarian_Language = mkLanguage "bulgaro" ;
+lin catalan_Language = mkLanguage "catalano" ;
+lin chinese_Language = mkLanguage "cinese" ;
+lin danish_Language = mkLanguage "danese" ;
+lin dutch_Language = mkLanguage "olandese" ;
+lin english_Language = mkLanguage "inglese" ;
+lin estonian_Language = mkLanguage "estone" ;
+lin finnish_Language = mkLanguage "finnico" ;
+lin french_Language = mkLanguage "francese" ;
+lin german_Language = mkLanguage "tedesco" ;
+lin greek_Language = mkLanguage "greco" ;
+lin hebrew_Language = mkLanguage "ebraico" ;
+lin hindi_Language = mkLanguage "hindi" ;
+lin japanese_Language = mkLanguage "giapponese" ;
+lin italian_Language = mkLanguage "italiano" ;
+lin latin_Language = mkLanguage "latino" ;
+lin latvian_Language = mkLanguage "lettone" ;
+lin maltese_Language = mkLanguage "maltese" ;
+lin nepali_Language = mkLanguage "nepali" ;
+lin norwegian_Language = mkLanguage "norvegese" ;
+lin persian_Language = mkLanguage "persiano" ;
+lin polish_Language = mkLanguage "polacco" ;
+lin punjabi_Language = mkLanguage "punjabi" ;
+lin romanian_Language = mkLanguage "rumeno" ;
+lin russian_Language = mkLanguage "russo" ;
+lin sindhi_Language = mkLanguage "sindhi" ;
+lin spanish_Language = mkLanguage "spagnolo" ;
+lin swahili_Language = mkLanguage "swahili" ;
+lin swedish_Language = mkLanguage "svedese" ;
+lin thai_Language = mkLanguage "thai" ;
+lin turkish_Language = mkLanguage "turco" ;
+lin urdu_Language = mkLanguage "urdu" ;
+
+}
+
+----------------------------------------
+
+========== FILE: ExtendIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/ExtendIta.gf
+
+--# -path=alltenses:../common:../abstract:../romance
+concrete ExtendIta of Extend = CatIta ** ExtendRomanceFunctor  -
+   [
+   GenRP,
+   PassVPSlash, PassAgentVPSlash,
+   ExistsNP
+
+   ]
+  -- don't forget to put the names of your own
+                       -- definitions here
+  with
+    (Grammar = GrammarIta), (Syntax = SyntaxIta), (ResRomance = ResIta) **
+  open
+  GrammarIta,
+  ResIta,
+  MorphoIta,
+  Coordination,
+  Prelude,
+  ParadigmsIta,
+  IrregIta in {
+    -- put your own definitions here
+
+lin
+    GenRP nu cn = {
+      s = \\_b,_aagr,_c => "di cui" ++ num ++ cn.s ! n ;
+      a = aagr g n ;
+      hasAgr = True
+      } where {
+        g = cn.g ;
+        n = nu.n ;
+        num = if_then_Str nu.isNum (nu.s ! g) []
+      } ;
+
+
+
+
+lin PassVPSlash vps = passVPSlash vps [] ;
+    PassAgentVPSlash vps np = passVPSlash 
+      vps (let by = <Grammar.by8agent_Prep : Prep> in by.s ++ (np.s ! by.c).ton) ;
+
+oper
+    passVPSlash : VPSlash -> Str -> VP = \vps, agent -> 
+      let auxvp = predV auxPassive 
+      in
+      vps ** {
+         s = auxvp.s ;
+         agr = auxvp.agr ;
+         comp  = \\a => vps.comp ! a ++ (let agr = complAgr a in vps.s.s ! VPart agr.g agr.n) ++ agent ;
+        } ;
+
+
+lin
+    ExistsNP np =
+      mkClause [] True False np.a
+      (insertComplement (\\_ => (np.s ! Nom).ton)
+         (predV esistere_V)) ;
+
+
+
+}
+
+----------------------------------------
+
+========== FILE: IdiomIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/IdiomIta.gf
+
+concrete IdiomIta of Idiom = CatIta ** 
+  open (P = ParamX), PhonoIta, MorphoIta, BeschIta, ParadigmsIta, Prelude in {
+
+  flags optimize=all_subs ;
+
+  lin
+    ImpersCl vp = mkClause [] True False (agrP3 Masc Sg) vp ;
+
+    GenericCl vp = 
+      mkClause [] True False (agrP3 Masc Sg) (insertRefl vp) ;
+
+    CleftNP np rs = mkClause [] True False (agrP3 Masc Sg) 
+      (insertComplement (\\_ => rs.s ! Indic ! np.a)
+        (insertComplement (\\_ => (np.s ! rs.c).ton) (predV copula))) ;
+
+    CleftAdv ad s = mkClause [] True False (agrP3 Masc Sg) 
+      (insertComplement (\\_ => conjThat ++ s.s ! Indic)
+        (insertComplement (\\_ => ad.s) (predV copula))) ;
+
+    ExistNP np = 
+      let npa = complAgr np.a in
+      mkClause [] True False (agrP3 npa.g npa.n) 
+        (insertClit3 (elision "ci" "c'" "ci") 
+          (insertComplement (\\_ => (np.s ! Nom).ton) 
+            (predV copula))) ;
+	    
+    ExistNPAdv np adv =
+      let npa = complAgr np.a in
+      mkClause [] True False (agrP3 npa.g npa.n)
+      (insertAdv adv.s 
+        (insertClit3 (elision "ci" "c'" "ci") 
+          (insertComplement (\\_ => (np.s ! Nom).ton) 
+            (predV copula)))) ;
+
+    ExistIP ip = {
+      s = \\t,a,p,_ =>
+        ip.s ! Nom ++ 
+        (mkClause [] True False (agrP3 ip.a.g ip.a.n) 
+           (insertClit3 (elision "ci" "c'" "ci") 
+              (predV copula))).s ! DDir ! t ! a ! p ! Indic
+      } ;
+
+    ProgrVP vp =
+      insertComplement 
+        (\\agr => 
+           let 
+             clpr = <[],[],False> ; ----e pronArg agr.n agr.p vp.clAcc vp.clDat ;
+             obj  = clpr.p2 ++ vp.comp ! agr ++ vp.ext ! RPos ---- pol
+           in
+           vp.s.s ! VGer ++ clpr.p1 ++ obj
+        )
+        (predV (essereV (verboV (stare_16 "stare")))) ;
+
+    ImpPl1 vp = {s =
+      mkImperative False P1 vp ! RPos ! Masc ! Pl --- fem
+      } ;
+
+    ImpP3 np vp = {
+      s = (mkClause (np.s ! Nom).comp np.hasClit False np.a vp).s 
+             ! DInv ! RPres ! Simul ! RPos ! Conjunct
+      } ;
+
+}
+
+
+----------------------------------------
+
+========== FILE: NounIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/NounIta.gf
+
+concrete NounIta of Noun = CatIta ** NounRomance with
+  (ResRomance = ResIta) ;
+
+----------------------------------------
+
+========== FILE: NumeralIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/NumeralIta.gf
+
+concrete NumeralIta of Numeral = CatIta [Numeral,Digits,Decimal] ** 
+  open CommonRomance, ResRomance, MorphoIta, PhonoIta, Prelude in {
+
+lincat 
+  Digit = {s : DForm => CardOrd => Str  ; isContr : Bool} ;
+  Sub10 = {s : DForm => CardOrd => Str ; n : Number ; isContr : Bool} ;
+  Sub100 = {s : CardOrd => Str ; n : Number} ;
+  Sub1000 = {s : CardOrd => Str ; n : Number} ;
+  Sub1000000 = {s : CardOrd => Str ; n : Number} ;
+  Sub1000000000 = {s : CardOrd => Str ; n : Number} ;
+  Sub1000000000000 = {s : CardOrd => Str ; n : Number} ;
+
+lin num x = x ;
+
+lin n2 = mkDigit (mkTal "due"     "dodici"      "venti"     "secondo");
+lin n3 = mkDigit (mkTal "tre"     "tredici"     "trenta"    "terzo") ;
+lin n4 = mkDigit (mkTal "quattro" "quattordici" "quaranta"  "quarto") ;
+lin n5 = mkDigit (mkTal "cinque"  "quindici"    "cinquanta" "quinto") ;
+lin n6 = mkDigit (mkTal "sei"     "sedici"      "sessanta"  "sesto") ;
+lin n7 = mkDigit (mkTal "sette"   "diciassette" "settanta"  "settimo") ; 
+lin n8 = {s = (mkTal "otto"    "diciotto"    "ottanta"   "ottavo").s ; isContr = True } ;
+lin n9 = mkDigit (mkTal "nove"    "diciannove"  "novanta"   "nono") ;
+
+oper getRoot : Str -> Str = \due -> 
+case due of 
+  { _ + ("ue" | "o" | "te"| "ve")  => init due;
+    _                             => due
+   };
+oper mkDigit : {s : DForm => CardOrd => Str} -> {s : DForm => CardOrd => Str  ; isContr : Bool} = \ss->
+{s = ss.s; isContr = False};
+
+lin pot01 = 
+  let uno = (mkTal "uno" "undici" "dieci" "primo" ).s in
+  {s =\\f,g => case f of {
+      ental t => case t of 
+                   {pred  =>  case g of {
+                                         NCard Fem => elision "una" "un'" "una" ;
+                                         _ => pre {"un" ; "uno" / sImpuro}
+                                         } ;
+                    indip =>  case g of
+                                   { NCard _ => [] ;
+                                     _       => uno ! f ! g
+                                    }
+                    };
+     _     => uno ! f ! g
+     } ; 
+   n = Sg; isContr = True
+} ;
+
+lin pot0 d = {s = d.s ; n = Pl; isContr = d.isContr} ;
+lin pot110 = spl ((mkTall "dieci" [] [] "decimo" []).s ! ental pred) ;
+lin pot111 = spl ((mkTall "undici" [] [] "undicesimo" []).s ! ental pred) ;
+lin pot1to19 d = spl (d.s ! ton) ;
+lin pot0as1 n = {s = n.s ! ental pred ; n = n.n} ;
+lin pot1 d = spl (d.s ! tiotal) ;
+lin pot1plus d e = 
+       let ss = if_then_Str e.isContr  (d.s ! tiouno ! NCard Masc) (d.s ! tiotal ! NCard Masc)
+              in
+   {s = table {NCard g =>  ss ++ BIND ++(e.s ! ental pred ! NCard Masc) ;
+               NOrd g n => ss ++ BIND ++e.s ! ental indip ! NOrd g n};
+     n = Pl} ;
+
+lin pot1as2 n = n ;
+
+lin pot2 d = spl (\\co => d.s ! ental indip ! NCard Masc ++ nBIND d.n ++
+  (mkTall "cento" [] [] [] "cent").s ! ental indip ! co) ;
+lin pot2plus d e = 
+  {s = table {NCard g => d.s ! ental indip ! NCard Masc ++ nBIND d.n ++"cento" ++ BIND ++e.s ! NCard Masc ;
+              NOrd g n => d.s ! ental indip ! NCard Masc ++ nBIND d.n ++"cento" ++ BIND ++ e.s ! NOrd g n};
+   n = Pl} ;
+lin pot2as3 n = n ;
+lin pot3 n = spl (\\co => n.s ! NCard Masc ++ nBIND n.n ++
+  (mkTall (mille ! n.n) [] [] [] "mill").s ! ental indip ! co ) ;
+
+lin pot3plus n m = {s = \\g => n.s ! NCard Masc ++ nBIND n.n ++ mille ! n.n ++ "e" ++ m.s ! g ; n = Pl} ;
+
+lin pot3as4 n = n ;
+lin pot4as5 n = n ;
+
+oper
+  nBIND : Number -> Str = \n -> case n of {Sg => [] ; _ => BIND} ; -- no BIND after silent 1
+
+  mkTall : (x1,_,_,_,x5 : Str) -> {s : DForm => CardOrd => Str} =
+    \due,dodici,venti,secondo,du -> 
+   {s = \\d,co => case <d,co> of {
+       <ental _, NCard _>  => due ;
+       <ental indip, NOrd g n> => regOrdpred du g n ;
+       <ental pred, NOrd g n> => pronForms (adjSolo secondo) g n ;
+       <tiotal,  NCard _>  => venti ;
+       <tiotal,  NOrd g n> => regCard venti g n ;
+       <ton,     NCard _>  => dodici ;
+       <ton,     NOrd g n> => regCard dodici g n ;
+       <tiouno, _>  => init venti   
+      }
+    } ;
+
+mkTal : (x1,_,_,x4 : Str) -> {s : DForm => CardOrd => Str} = \due, dodici, venti, secondo ->
+mkTall due dodici venti secondo (getRoot due) ;
+
+  regCard : Str -> Gender -> Number -> Str = \venti ->
+    regOrdpred (init venti) ;
+
+  regOrdpred : Str -> Gender -> Number -> Str = \sei ->
+    pronForms (adjSolo (sei + "esimo")) ;
+     
+
+  spl : (CardOrd => Str) -> {s : CardOrd => Str ; n : Number} = \s -> {
+    s = s ;
+    n = Pl
+    } ;
+
+oper mille : Number => Str = table {Sg => "mille" ; Pl => "mila"} ;
+param DForm = ental Pred | ton | tiotal | tiouno ;
+param Pred = pred | indip ;
+
+
+-- numerals as sequences of digits
+
+  lincat 
+    Dig = TDigit ;
+
+  lin
+    IDig d = d ** {tail = T1} ;
+
+    IIDig d i = {
+      s = \\o => d.s ! NCard Masc ++ spaceIf i.tail ++ i.s ! o ;
+      n = Pl ;
+      tail = inc i.tail
+    } ;
+
+    D_0 = mkDig "0" ;
+    D_1 = mk2Dig "1"  Sg ; ---- gender
+    D_2 = mkDig "2" ;
+    D_3 = mkDig "3" ;
+    D_4 = mkDig "4" ;
+    D_5 = mkDig "5" ;
+    D_6 = mkDig "6" ;
+    D_7 = mkDig "7" ;
+    D_8 = mkDig "8" ;
+    D_9 = mkDig "9" ;
+    
+    PosDecimal d = d ** {hasDot=False} ;
+    NegDecimal d = {
+      s = \\o => "-" ++ BIND ++ d.s ! o ;
+      n = Pl ;
+      hasDot=False
+      } ;
+    IFrac d i = {
+      s = \\o => d.s ! NCard Masc ++
+                 if_then_Str d.hasDot BIND (BIND++","++BIND) ++
+                 i.s ! o;
+      n = Pl ;
+      hasDot=True
+      } ;
+
+  oper
+    spaceIf : DTail -> Str = \t -> case t of {
+      T3 => SOFT_SPACE ;
+      _  => BIND
+      } ;
+
+  oper
+    mkDig : Str -> TDigit = \c -> mk2Dig c Pl ;
+    
+    mk2Dig : Str -> Number -> TDigit = \c,n -> {
+      s = table {NCard _ => c ; 
+                 NOrd Masc Sg => c + ":o" ; NOrd Fem Sg => c + ":a" ;
+                 NOrd Masc Pl => c + ":i" ; NOrd Fem Pl => c + ":e"
+                 } ; 
+      n = n
+      } ;
+
+    TDigit = {
+      n : Number ;
+      s : CardOrd => Str
+    } ;
+
+}
+
+----------------------------------------
+
+========== FILE: ParadigmsIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/ParadigmsIta.gf
+
+--# -path=.:../romance:../common:../abstract:../../prelude
+
+--1 Italian Lexical Paradigms
+--
+-- Aarne Ranta 2003
+--
+-- This is an API for the user of the resource grammar
+-- for adding lexical items. It gives functions for forming
+-- expressions of open categories: nouns, adjectives, verbs.
+--
+-- Closed categories (determiners, pronouns, conjunctions) are
+-- accessed through the resource syntax API, $Structural.gf$.
+--
+-- The main difference with $MorphoIta.gf$ is that the types
+-- referred to are compiled resource grammar types. We have moreover
+-- had the design principle of always having existing forms, rather
+-- than stems, as string arguments of the paradigms.
+--
+-- The structure of functions for each word class $C$ is the following:
+-- first we give a handful of patterns that aim to cover all
+-- regular cases. Then we give a worst-case function $mkC$, which serves as an
+-- escape to construct the most irregular words of type $C$.
+-- However, this function should only seldom be needed. For verbs, we have a
+-- separate module [``BeschIta`` ../../italian/BeschIta.gf],
+-- which covers the "Bescherelle" verb conjugations.
+
+resource ParadigmsIta = BeschIta **
+  open
+    (Predef=Predef),
+    Prelude,
+    MorphoIta,
+--    BeschIta,
+    CatIta in {
+
+  flags optimize=all ;
+    coding=utf8 ;
+
+--2 Parameters
+--
+-- To abstract over gender names, we define the following identifiers.
+
+oper
+  Gender : PType ;
+
+  masculine : Gender ;
+  feminine  : Gender ;
+
+-- To abstract over number names, we define the following.
+
+  Number : PType ;
+
+  singular : Number ;
+  plural   : Number ;
+
+-- Prepositions used in many-argument functions are either strings
+-- (including the 'accusative' empty string) or strings that
+-- amalgamate with the following word (the 'genitive' "di" and the
+-- 'dative' "a").
+
+  --Prep : Type ;
+
+  accusative : Prep ; -- direct object
+  genitive   : Prep ; -- preposition "di" and its contractions
+  dative     : Prep ; -- preposition "a" and its contractions
+
+  di_Prep    : Prep ; -- = genitive
+  a_Prep     : Prep ; -- = dative
+
+-- The following prepositions also have special contracted forms.
+
+  con_Prep : Prep ; -- preposition "con" and its contractions
+  da_Prep : Prep ; -- preposition "da" and its contractions
+  in_Prep : Prep ; -- preposition "in" and its contractions
+  su_Prep : Prep ; -- preposition "su" and its contractions
+
+-- other prepositions
+
+  mkPrep : overload {
+    mkPrep : Str -> Prep  ;         -- simple preposition (other than a, di, con, da, in, su)
+    mkPrep : Str -> Prep -> Prep ;  -- complex preposition e.g. "vicino a"
+    } ;
+
+
+--2 Nouns
+
+  mkN : overload {
+
+-- The regular function takes the singular form and the gender,
+-- and computes the plural and the gender by a heuristic.
+-- The heuristic says that the gender is feminine for nouns
+-- ending with "a", and masculine for all other words.
+
+    mkN : (cane : Str) -> N ; -- regular noun; fem for -"a", masc otherwise
+
+-- To force a different gender, give it explicitly.
+
+    mkN : (carne : Str) -> Gender -> N ; -- override default gender
+
+-- Worst case: give both two forms and the gender.
+
+    mkN : (uomo,uomini : Str) -> Gender -> N ; -- worst case
+
+-- In *compound nouns*, the first part is inflected as a noun but
+-- the second part is not inflected. e.g. "numero di telefono".
+-- They could be formed in syntax, but we give a shortcut here since
+-- they are frequent in lexica.
+
+    mkN : N -> Str -> N -- compound such as "numero" + "di telefono"
+    } ;
+
+
+
+
+--3 Relational nouns
+--
+-- Relational nouns ("figlio di x") need a case and a preposition.
+-- The default is regular nouns with the genitive "di".
+
+  mkN2 : overload {
+    mkN2 : Str -> N2 ; -- regular with genitive, e.g. "figlio" + "di"
+    mkN2 : N -> Prep -> N2 -- arbitrary noun and preposition
+  } ;
+
+-- Three-place relational nouns ("la connessione di x a y") need two prepositions.
+
+  mkN3 : N -> Prep -> Prep -> N3 ; -- e.g. volo + da + per
+
+
+--3 Relational common noun phrases
+--
+-- In some cases, you may want to make a complex $CN$ into a
+-- relational noun (e.g. "la vecchia chiesa di"). However, $N2$ and
+-- $N3$ are purely lexical categories. But you can use the $AdvCN$
+-- and $PrepNP$ constructions to build phrases like this.
+
+--
+--3 Proper names and noun phrases
+--
+-- Proper names need a string and a gender. The gender is by default feminine if
+-- the name ends with an "a", and masculine otherwise.
+
+  mkPN : overload {
+    mkPN : Str -> PN ; -- femininne for "-a", otherwise masculine
+    mkPN : Str -> Gender -> PN ; -- set gender manually
+    mkPN : N -> PN ;  -- get gender from noun
+  } ;
+
+  mkGN = overload {
+    mkGN : (Anna : Str) -> GN = \s -> lin GN (regPN s) ; -- feminine for "-a", otherwise masculine
+    mkGN : (Pilar : Str) -> Gender -> GN = \s,g -> lin GN (mk2PN s g) ; -- force gender
+    } ;
+
+  mkSN = overload {
+    mkSN : Str -> SN = \s -> lin SN {s = \\_ => s; pl = s} ;
+    mkSN : Str -> Str -> Str -> SN = \male,female,pl -> lin SN {s = table {Masc=>male; Fem=>female}; pl = pl} ;
+    } ;
+
+  mkLN = overload {
+    mkLN : Str -> LN = \s ->
+      lin LN {s = s ;
+              onPrep = False ;
+              art = NoArt ;
+              g = Masc ;
+              num = Sg} ;
+    mkLN : Str -> Gender -> LN = \s,g ->
+      lin LN {s = s ;
+              onPrep = False ;
+              art = NoArt ;
+              g = g ;
+              num = Sg} ;
+    mkLN : Str -> Gender -> Number -> LN = \s,g,n ->
+      lin LN {s = s ;
+              onPrep = False ;
+              art = NoArt ;
+              g = g ;
+              num = n}
+  } ;
+
+  defLN : LN -> LN = \n -> n ** {art = UseArt} ;
+
+--2 Adjectives
+
+  mkA : overload {
+
+-- For regular adjectives, all forms are derived from the
+-- masculine singular. Comparison is formed by "più".
+
+    mkA : (bianco : Str) -> A ; -- predictable adjective
+
+-- Five forms are needed in the worst
+-- case (masc and fem singular, masc plural, adverbial), given that
+-- comparison is formed by "più".
+
+    mkA : (solo,sola,soli,sole : Str) -> A ; -- possibly irregular adjective
+
+    mkA : (solo,sola,soli,sole,solamente : Str) -> A ; -- irregular adjective, with adverb
+
+-- With irregular comparison, there are as it were two adjectives:
+-- the positive ("buono") and the comparative ("migliore").
+
+    mkA : A -> A -> A ; -- special comparison, e.g. buono - migliore
+
+    mkA : A -> CopulaType -> A -- force copula type
+    } ;
+
+-- All the functions above create postfix adjectives. To switch
+-- them to prefix ones (i.e. ones placed before the noun in
+-- modification, as in "vecchia chiesa"), the following function is
+-- provided.
+
+    prefixA : A -> A -- adjective that comes before noun (default: after)
+    = prefA ;
+
+
+
+--3 Two-place adjectives
+--
+-- Two-place adjectives need a preposition for their second argument.
+
+  mkA2 : A -> Prep -> A2 ; -- e.g. divisibile + per
+
+
+
+--2 Adverbs
+
+-- Adverbs are not inflected. Most lexical ones have position
+-- after the verb.
+
+  mkAdv : Str -> Adv ;
+
+-- Some appear next to the verb (e.g. "sempre").
+
+  mkAdV : Str -> AdV ;
+
+-- Adverbs modifying adjectives and sentences can also be formed.
+
+  mkAdA : Str -> AdA ;
+
+
+--2 Verbs
+
+  mkV : overload {
+
+-- Regular verbs are ones with the infinitive "are" or "ire", the
+-- latter with singular present indicative forms as "finisco".
+-- The regular verb function is the first conjugation recognizes
+-- these endings, as well as the variations among
+-- "amare, cominciare, mangiare, legare, cercare".
+
+    mkV : Str -> V ; -- regular verbs in "-are"/"-ire"
+
+-- The module $BeschIta$ gives (almost) all the patterns of the "Bescherelle"
+-- book. To use them in the category $V$, wrap them with the function
+
+    mkV : Verbo -> V ; -- verbs formed by BeschIta
+
+-- If $BeschIta$ does not give the desired result or feels difficult
+-- to consult, here is a worst-case function for "-ire" and "-ere" verbs,
+-- taking 11 arguments.
+
+    mkV : (udire,odo,ode,udiamo,udiro,udii,udisti,udi,udirono,odi,udito : Str) -> V ; -- worst case
+
+    mkV : V -> Str -> V ; -- particle verb
+    } ;
+
+-- The function $regV$ gives all verbs the compound auxiliary "avere".
+-- To change it to "essere", use the following function.
+-- Reflexive implies "essere".
+
+  essereV : V -> V ; -- force "essere" as auxiliary (default avere)
+  reflV : V -> V ; -- reflexive verb (implies essere)
+
+
+--3 Two-place verbs
+--
+-- Two-place verbs need a preposition, except the special case with direct object.
+-- (transitive verbs). Notice that a particle comes from the $V$.
+
+  mkV2 : overload {
+    mkV2 : Str -> V2 ; -- regular verb, direct object
+    mkV2 : V -> V2 ;   -- direct object
+    mkV2 : V -> Prep -> V2 -- prepositional object
+    } ;
+
+-- You can reuse a $V2$ verb in $V$.
+
+  v2V : V2 -> V ; --%
+
+--3 Three-place verbs
+--
+-- Three-place (ditransitive) verbs need two prepositions, of which
+-- the first one or both can be absent.
+
+  mkV3 : overload {
+    mkV3 : V -> V3 ;                -- donner (+ accusative + dative)
+    mkV3 : V -> Prep -> V3 ;        -- placer (+ accusative) + dans
+    mkV3 : V -> Prep -> Prep -> V3  -- parler + dative + genitive
+    } ;
+
+  dirV3    : V -> Prep -> V3 ;         -- dare,_,a
+  dirdirV3 : V -> V3 ;                 -- dare,_,_
+
+
+--3 Other complement patterns
+--
+-- Verbs and adjectives can take complements such as sentences,
+-- questions, verb phrases, and adjectives.
+
+  mkV0  : V -> V0 ; --%
+  mkVS  : V -> VS ;
+  subjVS  : V -> VS ;
+  mkVV  : V -> VV ;  -- plain infinitive: "voglio parlare"
+  deVV  : V -> VV ;  -- "cerco di parlare"
+  aVV   : V -> VV ;  -- "arrivo a parlare"
+  mkVA  : V -> VA ;
+  mkVQ  : V -> VQ ;
+  mkV2Q : V -> Prep -> V2Q ;
+  mkV2S  : overload {
+    mkV2S : V -> V2S ;
+    mkV2S : V -> Prep -> V2S ;
+    } ;
+  mkV2V  : overload {
+    mkV2V : V -> V2V ;
+    mkV2V : V -> Prep -> Prep -> V2V ;
+    } ;
+  mkV2A : overload {
+    mkV2A : V -> V2A ;
+    mkV2A : V -> Prep -> Prep -> V2A ;
+    } ;
+
+
+
+  mkAS  : A -> AS ; --%
+  mkA2S : A -> Prep -> A2S ; --%
+  mkAV  : A -> Prep -> AV ; --%
+  mkA2V : A -> Prep -> Prep -> A2V ; --%
+
+-- Notice: categories $AS, A2S, AV, A2V$ are just $A$,
+-- and the second argument is given
+-- as an adverb. Likewise
+-- $V0$ is just $V$.
+
+  V0 : Type ; --%
+  AS, A2S, AV, A2V : Type ; --%
+
+
+--2 Closed categories
+
+  mkPredet : Str -> Predet
+    = \s -> lin Predet {s = \\a,c => prepCase c ++ s ; c = Nom ; a = PNoAg} ;
+
+--.
+--2 The definitions of the paradigms
+--
+-- The definitions should not bother the user of the API. So they are
+-- hidden from the document.
+
+
+  Gender = MorphoIta.Gender ;
+  Number = MorphoIta.Number ;
+  masculine, male = Masc ;
+  feminine, female = Fem ;
+  singular = Sg ;
+  plural = Pl ;
+
+  --Prep = Compl ;
+  accusative = lin Prep complAcc ;
+  genitive, di_Prep = lin Prep complGen ;
+  dative, a_Prep = lin Prep complDat ;
+
+  mkPrep = overload {
+    mkPrep : Str -> Prep  = \p -> {s = p ; c = Acc ; isDir = False ; lock_Prep = <>} ;
+    mkPrep : Str -> Prep -> Prep = \s,c-> {s = s ; c = c.c ; isDir = False ; lock_Prep = <>}
+    } ;
+
+  con_Prep = {s = [] ; c = CPrep P_con ; isDir = False ; lock_Prep = <>} ;
+  da_Prep = {s = [] ; c = CPrep P_da ; isDir = False ; lock_Prep = <>} ;
+  in_Prep = {s = [] ; c = CPrep P_in ; isDir = False ; lock_Prep = <>} ;
+  su_Prep = {s = [] ; c = CPrep P_su ; isDir = False ; lock_Prep = <>} ;
+
+  mk2N x y g = mkNounIrreg x y g ** {relType=NRelPrep P_da; lock_N = <>} ;
+  regN x = mkNomReg x ** {relType=NRelPrep P_da; lock_N = <>} ;
+  compN x y = x ** {s = \\n => x.s ! n ++ y} ;
+  femN x = {s = x.s ; g = feminine ; relType=NRelPrep P_da; lock_N = <>} ;
+  mascN x = {s = x.s ; g = masculine ; relType=NRelPrep P_da; lock_N = <>} ;
+
+
+  mk2N2 = \n,p -> n ** {lock_N2 = <> ; c2 = p} ;
+  diN2 n = mk2N2 n genitive ;
+  aN2 n = mk2N2 n dative ;
+  mkN3 = \n,p,q -> n ** {lock_N3 = <> ; c2 = p ; c3 = q} ;
+
+  mk2PN : Str -> Gender -> PN ;
+  mk2PN x g = {s = x ; g = g} ** {lock_PN = <>} ;
+  regPN x = mk2PN x g where {
+    g = case last x of {
+      "a" => feminine ;
+      _ => masculine
+      }
+    } ;
+
+  makeNP x g n = {s = (pn2np (mk2PN x g)).s; a = agrP3 g n ; hasClit = False ; isPol = False ; isNeg = False} ** {lock_NP = <>} ;
+
+  mk5A a b c d e =
+   compADeg (mkAdj a b c d e) ;
+  regA a = compADeg (mkAdjReg a) ;
+  prefA a = a ** {isPre = True} ;
+  adjCopula a cop = a ** {copTyp = cop} ;
+
+  mkA2 a p = a ** {c2 = p ; lock_A2 = <>} ;
+
+  mkADeg a b = a ** {
+    compar = \\num => b.s ! AF Masc num ; -- mejor, mejores
+    isDeg = True } ;
+  compADeg a = lin A
+    {s = a.s ;
+     compar = \\_ => nonExist ; --
+     isPre = False ;       -- default values
+     copTyp = serCopula ;
+     isDeg = False
+     } ;
+  regADeg a = compADeg (regA a) ;
+
+  mkAdv x = ss x ** {lock_Adv = <>} ;
+  mkAdV x = ss x ** {lock_AdV = <>} ;
+  mkAdA x = ss x ** {lock_AdA = <>} ;
+
+  regV x =
+    let
+----      are = Predef.dp 3 x ;
+      ci  = Predef.dp 2 (Predef.tk 3 x) ;
+      i   = last ci ;
+      verb : {s : VForm => Str} = case x of {
+        _ + "ire" =>  finire_100 x ;
+        _ + "ere" =>  temere_20 x ;
+        _ + "durre" =>  condurre_36 x ;
+        _ + "trarre" =>  trarre_91 x ;
+	_ + "rre" =>  porre_68 x ; --- all other verbs in -rre?
+        _ + "are" => case i of {
+          "c" => cercare_7 x ;
+          "g" => legare_8 x ;
+          _ => case ci of {
+            "ci" => cominciare_9 x ;
+            "gi" => mangiare_10 x ;
+           _    => amare_6 x
+            }
+          } ;
+         _ => Predef.error ("regular verb infinitive must end are/ire/ere, not satisfied by" ++ x)
+        }
+    in verbBesch verb ** {vtyp = VHabere ; p = [] ; lock_V = <>} ;
+
+  verboV ve = verbBesch ve ** {vtyp = VHabere ; p = [] ; lock_V = <>} ;
+
+  mk11V
+    dovere devo deve dobbiamo dovro
+    dovetti dovesti dovette dovettero dovi dovuto = verboV (mkVerbo
+      dovere devo deve dobbiamo dovro
+      dovetti dovesti dovette dovettero dovi dovuto
+      ) ;
+
+  essereV v = v ** {vtyp = VEsse} ;
+  reflV v = v ** {vtyp = VRefl} ;
+
+  mk2V2 v p = lin V2 (v ** {c2 = p}) ;
+  dirV2 v = mk2V2 v accusative ;
+  v2V v = v ** {lock_V = <>} ;
+
+
+  V0 : Type = V ;
+  AS, AV : Type = A ;
+  A2S, A2V : Type = A2 ;
+
+  mkV0  v = v ** {lock_V0 = <>} ;
+  mkVS  v = v ** {m = \\_ => Indic ; lock_VS = <>} ;  ---- more moods
+  subjVS  v = v ** {m = \\_ => Conjunct ; lock_VS = <>} ;
+  mkVV  v = v ** {c2 = complAcc ; lock_VV = <>} ;
+  deVV  v = v ** {c2 = complGen ; lock_VV = <>} ;
+  aVV  v = v ** {c2 = complDat ; lock_VV = <>} ;
+  mkVA  v = v ** {lock_VA = <>} ;
+  mkVQ  v = v ** {lock_VQ = <>} ;
+  mkV2Q v p = mk2V2 v p ** {lock_V2Q = <>} ;
+
+  mmkV3    : V -> Prep -> Prep -> V3 ;  -- parler, à, de
+  mmkV3 v p q = v ** {c2 = p ; c3 = q ; lock_V3 = <>} ;
+  dirV3 v p = mmkV3 v accusative p ;
+  dirdirV3 v = mmkV3 v dative accusative ;
+
+  mmkV2 : V -> Prep -> V2 ;
+  mmkV2 v p = v ** {c2 = p ; lock_V2 = <>} ;
+
+  mkV3 = overload {
+    mkV3 : V -> V3 = dirdirV3 ;               -- donner,_,_
+    mkV3 : V -> Prep -> V3 = dirV3 ;          -- placer,_,sur
+    mkV3 : V -> Prep -> Prep -> V3 = mmkV3    -- parler, à, de
+    } ;
+
+  mkV2S = overload {
+    mkV2S : V -> V2S = \v -> mmkV2 v dative ** {mn,mp = Indic ; lock_V2S = <>} ;
+    mkV2S : V -> Prep -> V2S = \v,p -> mmkV2 v p ** {mn,mp = Indic ; lock_V2S = <>} ;
+    } ;
+  mkV2V = overload {
+    mkV2V : V -> V2V                 = \v -> mmkV3 v accusative dative ** {lock_V2V = <>} ;
+    mkV2V : V -> Prep -> Prep -> V2V = \v,p,q -> mmkV3 v p q ** {lock_V2V = <>} ;
+    } ;
+
+  mkV2A = overload {
+    mkV2A : V -> V2A                 = \v -> mmkV3 v accusative dative ** {lock_V2A = <>} ;
+    mkV2A : V -> Prep -> Prep -> V2A = \v,p,q -> mmkV3 v p q ** {lock_V2A = <>} ;
+    } ;
+
+
+  mkAS  v = v ** {lock_AS = <>} ; ---- more moods
+  mkA2S v p = mkA2 v p ** {lock_A2S = <>} ;
+  mkAV  v p = v ** {c = p.p1 ; s2 = p.p2 ; lock_AV = <>} ;
+  mkA2V v p q = mkA2 v p ** {s3 = q.p2 ; c3 = q.p1 ; lock_A2V = <>} ;
+
+------------------------
+
+  mkN = overload {
+    mkN : (cane : Str) -> N = regN ;
+    mkN : (carne : Str) -> Gender -> N = \n,g -> (regN n) ** {g = g} ;
+    mkN : (uomo,uomini : Str) -> Gender -> N = mk2N ;
+    mkN : N -> Str -> N = compN
+    } ;
+
+  compN : N -> Str -> N ;
+  mk2N  :(uomo,uomini : Str) -> Gender -> N ;
+  regN  : Str -> N ;
+  mascN : N -> N ;
+  femN  : N -> N ;
+
+  mkN2 = overload {
+    mkN2 : Str -> N2 = \s -> diN2 (regN s) ;
+    mkN2 : N -> Prep -> N2 = mk2N2
+  } ;
+
+  mk2N2 : N -> Prep -> N2 ;
+  diN2 : N -> N2 ;
+  aN2  : N -> N2 ;
+
+  regPN : Str -> PN ;           -- feminine if "-a", otherwise masculine
+
+-- obsolete
+  makeNP : Str -> Gender -> Number -> NP ;
+
+  mkPN = overload {
+    mkPN : Str -> PN = regPN ;
+    mkPN : Str -> Gender -> PN = mk2PN ;
+    mkPN : N -> PN = \n -> lin PN {s = n.s ! Sg ; g = n.g} ;
+  } ;
+
+  mkA = overload {
+    mkA : (bianco : Str) -> A = regA ;
+    mkA : (solo,sola,soli,sole : Str) -> A = \solo,sola,soli,sole -> mk5A solo sola soli sole (sola + "mente") ;
+    mkA : (solo,sola,soli,sole, solamente : Str) -> A = mk5A ;
+    mkA : A -> A -> A = mkADeg ;
+    mkA : A -> CopulaType -> A = adjCopula ;
+    } ;
+  mk5A : (solo,sola,soli,sole, solamente : Str) -> A ;
+  regA : Str -> A ;
+  prefA : A -> A ;
+  adjCopula : A -> CopulaType -> A ;
+  mkADeg : A -> A -> A ;
+  compADeg : Adj -> A ;
+  regADeg : Str -> A ;
+
+  mkV = overload {
+    mkV : Str -> V = \s -> case s of {
+      _ + "rsi" => reflV (regV (Predef.tk 2 s + "e")) ;
+      _ => regV s
+      } ;
+    mkV : Verbo -> V = verboV ;
+    mkV :
+     (udire,odo,ode,udiamo,udiro,udii,udisti,udi,udirono,odi,udito : Str) -> V = mk11V ;
+
+    mkV : V -> Str -> V = \v,p -> v ** {p = p} ;  ---- to recognize particles in dict, not yet in lincat V
+    } ;
+
+  regV : Str -> V ;
+  verboV : Verbo -> V ;
+  mk11V :
+    (udire,odo,ode,udiamo,udiro,udii,udisti,udi,udirono,odi,udito : Str) -> V ;
+
+  mkV2 = overload {
+    mkV2 : Str -> V2 = \s -> dirV2 (regV s) ;
+    mkV2 : V -> V2 = dirV2 ;
+    mkV2 : V -> Prep -> V2 = mk2V2
+    } ;
+  mk2V2  : V -> Prep -> V2 ;
+  dirV2 : V -> V2 ;
+
+  mkMU : Str -> MU = \s -> lin MU {s=s; isPre=False; hasArt=False} ;
+
+} ;
+
+----------------------------------------
+
+========== FILE: QuestionIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/QuestionIta.gf
+
+concrete QuestionIta of Question = CatIta ** QuestionRomance with
+  (ResRomance = ResIta) ;
+
+----------------------------------------
+
+========== FILE: RelativeIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/RelativeIta.gf
+
+concrete RelativeIta of Relative = CatIta ** RelativeRomance with
+  (ResRomance = ResIta) ;
+
+----------------------------------------
+
+========== FILE: ResIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/ResIta.gf
+
+--1 Italian auxiliary operations.
+--
+---- This module contains operations that are needed to make the
+---- resource syntax work. To define everything that is needed to
+---- implement $Test$, it moreover contains regular lexical
+---- patterns needed for $Lex$.
+--
+
+instance ResIta of ResRomance = DiffIta ** open CommonRomance, Prelude in {
+
+  flags optimize=all ;
+
+} ;
+
+----------------------------------------
+
+========== FILE: StructuralIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/StructuralIta.gf
+
+concrete StructuralIta of Structural = CatIta ** 
+  open 
+  PhonoIta, MorphoIta, MakeStructuralIta,
+  ParadigmsIta, BeschIta, (X = ConstructX), Prelude in {
+
+  flags optimize=all ; coding=utf8 ;
+
+lin
+
+  above_Prep = {s = ["sopra"] ; c = MorphoIta.genitive ; isDir = False} ;
+  after_Prep = mkPrep "dopo" ;
+  all_Predet = {
+    s = \\a,c => prepCase c ++ aagrForms "tutto" "tutta" "tutti" "tutte" ! a ;
+    c = Nom ;
+    a = PNoAg
+    } ;
+  almost_AdA, almost_AdN = ss "quasi" ;
+  always_AdV = ss "sempre" ;
+  although_Subj = ss "benché" ** {m = Conjunct} ;
+  and_Conj = {s1 = [] ; s2 = pre {#vocale => "ed" ; _ => "e"} ; n = Pl} ;
+  because_Subj = ss "perché" ** {m = Indic} ;
+  before_Prep = mkPrep "prima" ;
+  behind_Prep = mkPrep "dietro" ;
+  between_Prep = mkPrep "fra" ;
+  both7and_DConj = {s1,s2 = "e" ; n = Pl} ;
+  but_PConj = ss "ma" ;
+  by8agent_Prep = {s = [] ; c = CPrep P_da ; isDir = False} ;
+  by8means_Prep = mkPrep "per" ;
+  can8know_VV = mkVV (verboV (sapere_78 "sapere")) ;
+  can_VV = mkVV (verboV (potere_69 "potere")) ;
+  during_Prep = mkPrep "durante" ;
+  either7or_DConj = {s1,s2 = "o" ; n = Sg} ;
+  everybody_NP = makeNP ["tutti"] Masc Pl ;
+  every_Det = {
+    s,sp = \\_,_ => "ogni" ;
+    spn = \\c => prepCase c ++ "tutto" ;
+    n = Sg ; s2 = \\g => [] ; isNeg = False} ;
+  everything_NP = pn2np (mkPN ["tutto"] Masc) ;
+  everywhere_Adv = ss "dappertutto" ;
+  few_Det  = {
+    s,sp = \\g,c => prepCase c ++ genForms "pochi" "poche" ! g ;
+    spn = \\c => prepCase c ++ "pochi" ;
+    n = Pl ; s2 = \\g => [] ; isNeg = False} ;
+----  first_Ord = {s = \\ag => (regA "primo").s ! Posit ! AF ag.g ag.n} ;
+  for_Prep = mkPrep "per" ;
+  from_Prep = da_Prep ;
+  he_Pron = 
+    mkPronoun
+      "lui" "lo" "gli" "glie" "lui" "suo" "sua" "suoi" "sue"
+      Masc Sg P3 ;
+  here7from_Adv = ss ["da quà"] ;
+  here7to_Adv = ss "quà" ;
+  here_Adv = ss "quà" ;
+  how_IAdv = ss "come" ;
+  how8much_IAdv = ss "quanto" ;
+  how8many_IDet = {s = \\g,c => prepCase c ++ genForms "quanti" "quante" ! g ; n = Pl} ;
+  if_Subj = ss "se" ** {m = Indic} ;
+  in8front_Prep = mkPrep "davanti" ;
+  i_Pron = 
+    mkPronoun
+      "io" "mi" "mi" "me" "me" "mio" "mia" "miei" "mie"
+      Masc Sg P1 ;
+  in_Prep = {s = [] ; c = CPrep P_in ; isDir = False} ;
+  it_Pron = 
+    mkPronoun
+      "lui" "lo" "gli" "glie" "lui" "suo" "sua" "suoi" "sue"
+      Masc Sg P3 ;
+  less_CAdv = X.mkCAdv "meno" conjThan ;
+  many_Det = {
+    s,sp = \\g,c => prepCase c ++ genForms "molti" "molte" ! g ;
+    spn = \\c => prepCase c ++ "molto" ;
+    n = Pl ; s2 = \\g => [] ; isNeg = False} ;
+  more_CAdv = X.mkCAdv "più" conjThan ;
+  most_Predet = {s = \\_,c => prepCase c ++ ["la maggior parte"] ; c = CPrep P_di ;
+    a = PNoAg} ;
+  much_Det = {
+    s,sp = \\g,c => prepCase c ++ genForms "molto" "molta" ! g ;
+    spn = \\c => prepCase c ++ "molto" ;
+    n = Sg ; s2 = \\g => [] ; isNeg = False} ;
+  must_VV = mkVV (verboV (dovere_47 "dovere")) ;
+  no_Utt = ss "no" ;
+  on_Prep = {s = [] ; c = CPrep P_su ; isDir = False} ;
+----  one_Quant = {s = \\g,c => prepCase c ++ genForms "uno" "una" ! g} ;
+  only_Predet = {s = \\_,c => prepCase c ++ "soltanto" ; c = Nom ;
+    a = PNoAg} ; --- solo|a|i|e
+  or_Conj = {s1 = [] ; s2 = "o" ; n = Sg} ;
+  otherwise_PConj = ss "altramente" ;
+  part_Prep = complGen ;
+  please_Voc = ss ["per favore"] ;
+  possess_Prep = complGen ;
+  quite_Adv = ss "assai" ;
+  she_Pron = 
+    mkPronoun
+      "lei" "la" "le" "glie" "lei" "suo" "sua" "suoi" "sue"
+      Fem Sg P3 ;
+  so_AdA = ss "così" ;
+  somebody_NP = pn2np (mkPN ["qualcuno"] Masc) ;
+  somePl_Det = {
+    s,sp = \\_,c => prepCase c ++ "qualche" ;
+    spn = \\c => prepCase c ++ "qualche cosa" ;
+    n = Pl ; s2 = \\g => [] ; isNeg = False} ;
+  someSg_Det = {
+    s,sp = \\_,c => prepCase c ++ "qualche" ;
+    spn = \\c => prepCase c ++ "qualche cosa" ;
+    n = Sg ; s2 = \\g => [] ; isNeg = False} ;
+  something_NP = pn2np (mkPN ["qualche cosa"] Masc) ;
+  somewhere_Adv = ss ["qualche parte"] ;
+  that_Quant = let
+    quello : Str -> Str -> ParadigmsIta.Number => ParadigmsIta.Gender => Case => Str = 
+     \quel, quelli -> table {
+      Sg => \\g,c => prepCase c ++ genForms quel "quella" ! g ;
+      Pl => \\g,c => prepCase c ++ genForms quelli "quelle" ! g ---- quegli
+      }
+    in {
+      s = \\_ => 
+        quello (elision "quel" "quell'" "quello") 
+               (elision "quei" "quegli" "quegli")  ;
+      sp = quello "quello" "quelli" ;
+      spn= \\c => prepCase c ++ "quello" ;
+      s2 = [] ;
+    isNeg = False
+      } ;
+
+  there7from_Adv = ss ["di là"] ;
+  there7to_Adv = ss "là" ; --- ci
+  there_Adv = ss "là" ;
+  therefore_PConj = ss "quindi" ;
+  they_Pron = mkPronoun
+    "loro" "li" "loro" "glie" "loro" "loro" "loro" "loro" "loro" 
+    Masc Pl P3 ;
+
+  this_Quant = let
+    questo : ParadigmsIta.Number => ParadigmsIta.Gender => Case => Str = table {
+      Sg => \\g,c => prepCase c ++ genForms "questo" "questa" ! g ;
+      Pl => \\g,c => prepCase c ++ genForms "questi" "queste" ! g
+      }
+    in {
+      s = \\_ => questo ;
+      sp = questo ;
+      spn= \\c => prepCase c ++ "questo" ;
+      s2 = [] ;
+    isNeg = False
+      } ;
+
+  through_Prep = mkPrep "per" ;
+  too_AdA = ss "troppo" ;
+  to_Prep = complDat ;
+  under_Prep = mkPrep "sotto" ;
+  very_AdA = ss "molto" ;
+  want_VV = mkVV (verboV (volere_96 "volere")) ;
+  we_Pron = 
+    mkPronoun "noi" "ci" "ci" "ce" "noi" "nostro" "nostra" "nostri" "nostre"
+    Masc Pl P1 ;
+  whatSg_IP = {s = \\c => prepCase c ++ ["che"] ; a = aagr Fem Sg} ;
+  whatPl_IP = {s = \\c => prepCase c ++ ["che"] ; a = aagr Fem Pl} ; ---
+  when_IAdv = ss "quando" ;
+  when_Subj = ss "quando" ** {m = Indic} ;
+  where_IAdv = ss "dove" ;
+  which_IQuant = {s = table {
+    Sg => \\g,c => prepCase c ++ genForms "quale" "quale" ! g ;
+    Pl => \\g,c => prepCase c ++ genForms "quali" "quali" ! g
+    }
+  } ;
+  whoPl_IP = {s = \\c => prepCase c ++ "chi" ; a = aagr Masc Pl} ;
+  whoSg_IP = {s = \\c => prepCase c ++ "chi" ; a = aagr Masc Sg} ;
+  why_IAdv = ss "perché" ;
+  without_Prep = mkPrep "senza" ;
+  with_Prep = {s = [] ; c = CPrep P_con ; isDir = False} ;
+  yes_Utt = ss "sì" ;
+  youSg_Pron = mkPronoun 
+    "tu" "ti" "ti" "te" "te" "tuo" "tua" "tuoi" "tue"
+    Masc Sg P2 ;
+  youPl_Pron =
+    mkPronoun
+       "voi" "vi" "vi" "ve" "voi" "vostro" "vostra" "vostri" "vostre"
+       Masc Pl P2 ;
+  youPol_Pron =
+    mkPronoun
+      "Lei" "La" "Le" "Glie" "Lei" "Suo" "Sua" "Suoi" "Sue"
+      Masc Sg P3 ;
+  not_Predet = {s = \\a,c => prepCase c ++ "non" ; c = Nom ;
+    a = PNoAg} ;
+
+  no_Quant = 
+    let aucun : ParadigmsIta.Number => ParadigmsIta.Gender => Case => Str = table {
+      Sg => \\g,c => prepCase c ++ genForms "nessuno" "nessuna" ! g ;
+      Pl => \\g,c => prepCase c ++ genForms "nessuni" "nessune" ! g ---- 
+      }
+    in {
+    s = \\_ => aucun ;
+    sp = aucun ;
+    spn= \\c => prepCase c ++ "nessuno" ;
+    s2 = [] ;
+    isNeg = True
+    } ;
+  if_then_Conj = {s1 = "si" ; s2 = "allora" ; n = Sg ; lock_Conj = <>} ;
+  nobody_NP = pn2npNeg (mkPN ["nessuno"] Masc) ;
+ 
+  nothing_NP = pn2npNeg (mkPN "niente" Masc) ;
+  at_least_AdN = ss "almeno" ;
+  at_most_AdN = ss "al massimo" ;
+
+  as_CAdv = X.mkCAdv "così" conjThan ;
+  except_Prep = mkPrep "eccetto" ;
+
+  have_V2 = dirV2 (verboV (avere_2 "avere")) ;
+  that_Subj = ss "che" ** {m = Conjunct} ;
+
+  lin language_title_Utt = ss "italiano" ;
+
+}
+
+
+----------------------------------------
+
+========== FILE: VerbIta.gf ==========
+Path: C:\mycode\Grammatical_Framework\gf-rgl\src/italian/VerbIta.gf
+
+concrete VerbIta of Verb = CatIta ** VerbRomance with
+  (ResRomance = ResIta) ;
+
+----------------------------------------
