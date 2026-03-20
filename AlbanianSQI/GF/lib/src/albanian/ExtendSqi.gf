@@ -87,7 +87,7 @@ concrete ExtendSqi of Extend =
   ]
   with
     (Grammar = GrammarSqi) **
-  open Prelude, Predef, ResSqi, ParamX in {
+  open Prelude, Predef, ResSqi, ParamX, (NS = NounSqi), (AS = AdverbSqi) in {
 
   oper
     -- =========================================================
@@ -132,8 +132,7 @@ concrete ExtendSqi of Extend =
     mkBareNpFromCn : Number -> CN -> NP =
       \n,cn -> lin NP {
         s = \\c => cn.s ! Indef ! c ! n ;
-        a = agrgP3 cn.g n ;
-        lock_NP = <>
+        a = agrgP3 cn.g n
       } ;
 
     -- =========================================================
@@ -154,22 +153,19 @@ concrete ExtendSqi of Extend =
 
     mkCompatAPFromStr : Str -> AP =
       \w -> lin AP {
-        s = \\spec,cas,g,n => w ;
-        lock_AP = <>
+        s = \\spec,cas,g,n => w
       } ;
 
     mkCompatCNFromStr : Str -> Gender -> CN =
       \w,g -> lin CN {
         s = \\spec,cas,n => w ;
-        g = g ;
-        lock_CN = <>
+        g = g
       } ;
 
     mkCompatNPFromStr : Str -> Gender -> Number -> NP =
       \w,g,n -> lin NP {
         s = \\cas => w ;
-        a = agrgP3 g n ;
-        lock_NP = <>
+        a = agrgP3 g n
       } ;
 
   lincat
@@ -278,12 +274,10 @@ concrete ExtendSqi of Extend =
 
     PredIAdvVP iadv vp = {s = iadv.s ++ wordSep ++ vp.s} ;
 
-    ApposNP np1 np2 =
-      lin NP {
-        s = \\c => np1.s ! c ++ wordSep ++ np2.s ! c ;
-        a = np1.a ;
-        lock_NP = <>
-      } ;
+    ApposNP np1 np2 = {
+      s = \\c => np1.s ! c ++ wordSep ++ np2.s ! c ;
+      a = np1.a
+    } ;
 
     ComplGenVV vv ant pol vp = vp ;
 
@@ -299,36 +293,28 @@ concrete ExtendSqi of Extend =
 
     ComplSlashPartLast vpslash np = {s = vpslash.s ++ wordSep ++ np.s ! Acc} ;
 
-    DetNPMasc det =
-      lin NP {
-        s = \\c => det.s ! c ! Masc ;
-        a = agrgP3 Masc det.n ;
-        lock_NP = <>
-      } ;
+    DetNPMasc det = {
+      s = \\c => det.s ! c ! Masc ;
+      a = agrgP3 Masc det.n
+    } ;
 
-    DetNPFem det =
-      lin NP {
-        s = \\c => det.s ! c ! Fem ;
-        a = agrgP3 Fem det.n ;
-        lock_NP = <>
-      } ;
+    DetNPFem det = {
+      s = \\c => det.s ! c ! Fem ;
+      a = agrgP3 Fem det.n
+    } ;
 
     UseComp_estar comp = {s = comp.s} ;
     UseComp_ser   comp = {s = comp.s} ;
 
-    SubjRelNP np rs =
-      lin NP {
-        s = \\c => np.s ! c ++ wordSep ++ rs.s ;
-        a = np.a ;
-        lock_NP = <>
-      } ;
+    SubjRelNP np rs = {
+      s = \\c => np.s ! c ++ wordSep ++ rs.s ;
+      a = np.a
+    } ;
 
-    SubjunctRelCN cn rs =
-      lin CN {
-        s = \\spec,c,n => cn.s ! spec ! c ! n ++ wordSep ++ rs.s ;
-        g = cn.g ;
-        lock_CN = <>
-      } ;
+    SubjunctRelCN cn rs = {
+      s = \\spec,c,n => cn.s ! spec ! c ! n ++ wordSep ++ rs.s ;
+      g = cn.g
+    } ;
 
     -- =========================================================
     -- EXISTENTIAL SUBSYSTEM
@@ -340,7 +326,7 @@ concrete ExtendSqi of Extend =
     ExistIPQS temp pol ip = UseQCl temp pol (ExistIP ip) ;
 
     ExistCN cn        = ExistNP (DetCN (DetQuant IndefArt NumSg) cn) ;
-    ExistMassCN cn    = ExistNP (MassNP cn) ;
+    ExistMassCN cn    = ExistNP (NS.MassNP cn) ;
     ExistPluralCN cn  = ExistNP (DetCN (DetQuant IndefArt NumPl) cn) ;
     ExistsNP          = ExistNP ;
 
@@ -359,28 +345,23 @@ concrete ExtendSqi of Extend =
       ImpersCl
         (UseComp
           (CompAP
-            (lin AP {
+            {
               s = \\spec,c,g,n =>
-                    ap.s ! spec ! c ! g ! n ++ wordSep ++ "që" ++ wordSep ++ (EmbedVP vp).s ;
-              lock_AP = <>
-            }))) ;
+                    ap.s ! spec ! c ! g ! n ++ wordSep ++ "që" ++ wordSep ++ (EmbedVP vp).s
+            })) ;
 
-    AdjAsCN ap =
-      lin CN {
-        s = \\spec,c,n => ap.s ! spec ! c ! Masc ! n ;
-        g = Masc ;
-        lock_CN = <>
-      } ;
+    AdjAsCN ap = {
+      s = \\spec,c,n => ap.s ! spec ! c ! Masc ! n ;
+      g = Masc
+    } ;
 
-    AdjAsNP ap =
-      lin NP {
-        s = \\c => ap.s ! Indef ! c ! Masc ! Sg ;
-        a = agrgP3 Masc Sg ;
-        lock_NP = <>
-      } ;
+    AdjAsNP ap = {
+      s = \\c => ap.s ! Indef ! c ! Masc ! Sg ;
+      a = agrgP3 Masc Sg
+    } ;
 
     CardCNCard card cn =
-      card ** {s = card.s ++ wordSep ++ cnSurfaceNomSg cn} ;
+      {s = card.s ++ wordSep ++ cnSurfaceNomSg cn} ;
 
     -- =========================================================
     -- FOCUS / PREPOSITION SUBSYSTEM
@@ -393,7 +374,7 @@ concrete ExtendSqi of Extend =
 
     FocusAP ap np      = {s = apSurfaceNomMascSg ap ++ wordSep ++ np.s ! Nom} ;
 
-    PrepCN prep cn     = PrepNP prep (MassNP cn) ;
+    PrepCN prep cn     = AS.PrepNP prep (NS.MassNP cn) ;
 
     -- =========================================================
     -- VP / VPSlash BRIDGE SUBSYSTEM
@@ -408,12 +389,10 @@ concrete ExtendSqi of Extend =
     PassVPSlash vpslash         = {s = vpslash.s} ;
     PassAgentVPSlash vpslash np = {s = vpslash.s ++ wordSep ++ np.s ! Nom} ;
 
-    NominalizeVPSlashNP vpslash np =
-      lin NP {
-        s = \\c => vpslash.s ++ wordSep ++ np.s ! c ;
-        a = agrgP3 Masc Sg ;
-        lock_NP = <>
-      } ;
+    NominalizeVPSlashNP vpslash np = {
+      s = \\c => vpslash.s ++ wordSep ++ np.s ! c ;
+      a = agrgP3 Masc Sg
+    } ;
 
     ProgrVPSlash vpslash = {s = vpslash.s} ;
 
@@ -440,58 +419,44 @@ concrete ExtendSqi of Extend =
 
     ReflPron = mkCompatNPFromStr "veten" Masc Sg ;
 
-    ReflPoss num cn =
-      lin NP {
-        s = \\c => "të vet" ++ wordSep ++ cn.s ! Indef ! c ! num.n ;
-        a = agrgP3 cn.g num.n ;
-        lock_NP = <>
-      } ;
+    ReflPoss num cn = {
+      s = \\c => "të vet" ++ wordSep ++ cn.s ! Indef ! c ! num.n ;
+      a = agrgP3 cn.g num.n
+    } ;
 
-    PredetRNP pred rnp =
-      lin NP {
-        s = \\c => pred.s ++ wordSep ++ rnp.s ! c ;
-        a = rnp.a ;
-        lock_NP = <>
-      } ;
+    PredetRNP pred rnp = {
+      s = \\c => pred.s ++ wordSep ++ rnp.s ! c ;
+      a = rnp.a
+    } ;
 
-    AdvRNP np prep rnp =
-      lin NP {
-        s = \\c => rnp.s ! c ++ wordSep ++ prep.s ++ wordSep ++ np.s ! Acc ;
-        a = rnp.a ;
-        lock_NP = <>
-      } ;
+    AdvRNP np prep rnp = {
+      s = \\c => rnp.s ! c ++ wordSep ++ prep.s ++ wordSep ++ np.s ! Acc ;
+      a = rnp.a
+    } ;
 
     AdvRVP vp prep rnp =
       {s = vp.s ++ wordSep ++ prep.s ++ wordSep ++ rnp.s ! Acc} ;
 
-    AdvRAP ap prep rnp =
-      lin AP {
-        s = \\spec,c,g,n =>
-              ap.s ! spec ! c ! g ! n ++ wordSep ++ prep.s ++ wordSep ++ rnp.s ! Acc ;
-        lock_AP = <>
-      } ;
+    AdvRAP ap prep rnp = {
+      s = \\spec,c,g,n =>
+            ap.s ! spec ! c ! g ! n ++ wordSep ++ prep.s ++ wordSep ++ rnp.s ! Acc
+    } ;
 
-    ReflA2RNP a2 rnp =
-      lin AP {
-        s = \\spec,c,g,n =>
-              adjComplStr a2 spec c g n ++ wordSep ++ a2.c2.s ++ wordSep ++ rnp.s ! Acc ;
-        lock_AP = <>
-      } ;
+    ReflA2RNP a2 rnp = {
+      s = \\spec,c,g,n =>
+            adjComplStr a2 spec c g n ++ wordSep ++ a2.c2.s ++ wordSep ++ rnp.s ! Acc
+    } ;
 
-    PossPronRNP pron num cn rnp =
-      lin NP {
-        s = \\c =>
-              pron.s ! c ++ wordSep ++ cn.s ! Indef ! c ! num.n ++ wordSep ++ rnp.s ! Acc ;
-        a = pron.a ;
-        lock_NP = <>
-      } ;
+    PossPronRNP pron num cn rnp = {
+      s = \\c =>
+            pron.s ! c ++ wordSep ++ cn.s ! Indef ! c ! num.n ++ wordSep ++ rnp.s ! Acc ;
+      a = pron.a
+    } ;
 
-    ConjRNP conj rnps =
-      lin NP {
-        s = \\c => rnps.init ! c ++ wordSep ++ conj.s ++ wordSep ++ rnps.last ! c ;
-        a = rnps.a ;
-        lock_NP = <>
-      } ;
+    ConjRNP conj rnps = {
+      s = \\c => rnps.init ! c ++ wordSep ++ conj.s ++ wordSep ++ rnps.last ! c ;
+      a = rnps.a
+    } ;
 
     Base_rr_RNP r1 r2 =
       lin ListNP {

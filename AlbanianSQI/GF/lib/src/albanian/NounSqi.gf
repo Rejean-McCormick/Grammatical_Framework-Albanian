@@ -1,6 +1,8 @@
+-- GF/lib/src/albanian/NounSqi.gf
+
 concrete NounSqi of Noun = CatSqi ** open MorphoSqi, ResSqi, Prelude in {
 
-  flags optimize=all_subs ;
+  flags optimize = all_subs ;
 
   lin
     DetCN det cn = {
@@ -8,11 +10,16 @@ concrete NounSqi of Noun = CatSqi ** open MorphoSqi, ResSqi, Prelude in {
       a = agrgP3 cn.g det.n
       } ;
 
+    MassNP cn = {
+      s = \\c => cn.s ! Indef ! c ! Sg ;
+      a = agrgP3 cn.g Sg
+      } ;
+
     UsePron p = p ;
 
     DetQuant quant num = {
-      s  = \\c,g => quant.s ! c ! g ! num.n ++ num.s ;
-      n  = num.n ;
+      s    = \\c,g => quant.s ! c ! g ! num.n ++ num.s ;
+      n    = num.n ;
       spec = quant.spec
       } ;
 
@@ -20,16 +27,16 @@ concrete NounSqi of Noun = CatSqi ** open MorphoSqi, ResSqi, Prelude in {
     NumPl = {s = [] ; n = Pl} ;
 
     DefArt = {
-      s  = \\c,g,n => [] ;
+      s    = \\c,g,n => [] ;
       spec = Def
       } ;
 
     IndefArt = {
-      s = \\c,g => table {Sg => "një" ; Pl => []} ;
+      s    = \\c,g => table {Sg => "një" ; Pl => []} ;
       spec = Indef
       } ;
 
-    UseN n = n ;
+    UseN n  = n ;
     UseN2 n = n ;
 
     AdjCN ap cn = {
