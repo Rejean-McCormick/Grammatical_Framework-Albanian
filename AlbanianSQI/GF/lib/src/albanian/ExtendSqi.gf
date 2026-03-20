@@ -1,8 +1,20 @@
 -- GF/lib/src/albanian/ExtendSqi.gf
 --# -path=.:../common:../abstract
+
+-- POLICY:
+-- 1. ExtendFunctor is the default source of structure.
+-- 2. Rich Albanian categories (AP/CN/NP/Pron) must not be flattened for rich outputs.
+-- 3. Surface extractors are allowed only for string-like targets.
+-- 4. Existential, AP/CN, Prep/Focus, VP-bridge, and RNP are maintained as subsystems.
+-- 5. Every nontrivial override should be readable as inherited / mirrored /
+--    Albanian-specific / temporary.
+
 concrete ExtendSqi of Extend =
   CatSqi ** ExtendFunctor -
   [
+    -- =========================================================
+    -- SHALLOW SCAFFOLDING / LIST WRAPPERS
+    -- =========================================================
     VPS, ListVPS, VPI, ListVPI, VPS2, ListVPS2, VPI2, ListVPI2,
     X, ListComp, ListImp,
 
@@ -10,8 +22,6 @@ concrete ExtendSqi of Extend =
     PiedPipingQuestSlash, PiedPipingRelSlash, StrandQuestSlash, StrandRelSlash, EmptyRelSlash,
 
     MkVPS, ConjVPS, PredVPS, SQuestVPS, QuestVPS, RelVPS,
-    ExistS, ExistNPQS, ExistIPQS, ExistCN, ExistMassCN, ExistPluralCN, ExistsNP,
-
     MkVPI, ConjVPI, ComplVPIVV,
     MkVPS2, ConjVPS2, ComplVPS2, ReflVPS2,
     MkVPI2, ConjVPI2, ComplVPI2,
@@ -19,30 +29,17 @@ concrete ExtendSqi of Extend =
     BaseVPS, ConsVPS, BaseVPI, ConsVPI, BaseVPS2, ConsVPS2, BaseVPI2, ConsVPI2,
     BaseComp, ConsComp, ConjComp, BaseImp, ConsImp, ConjImp,
 
-    ProDrop, AdAdV, PositAdVAdj, ICompAP, IAdvAdv,
-    CompBareCN, CompIQuant, CompS, CompQS, CompVP,
+    ProDrop, AdAdV, PositAdVAdj, IAdvAdv,
+    CompS, CompQS, CompVP,
 
     UttAccIP, UttDatIP, UttAccNP, UttDatNP, UttAdV, UttVPShort,
-
-    FocusObj, FocusAdv, FocusAdV, FocusAP, PrepCN,
-
-    PresPartAP, EmbedPresPart, PastPartAP, PastPartAgentAP,
-    PassVPSlash, PassAgentVPSlash, NominalizeVPSlashNP, ProgrVPSlash,
-    A2VPSlash, N2VPSlash, AdvIsNP, AdvIsNPAP,
-
-    PurposeVP, WithoutVP, ByVP, InOrderToVP,
 
     ComplBareVS, SlashBareV2S, ComplDirectVS, ComplDirectVQ,
     FrontComplDirectVS, FrontComplDirectVQ,
 
-    PredAPVP, PredIAdvVP, AdjAsCN, AdjAsNP, ApposNP,
+    PredIAdvVP, ApposNP,
 
-    ReflRNP, ReflPron, ReflPoss, PredetRNP, AdvRNP, AdvRVP, AdvRAP, ReflA2RNP,
-    PossPronRNP, ConjRNP,
-    Base_rr_RNP, Base_nr_RNP, Base_rn_RNP,
-    Cons_rr_RNP, Cons_nr_RNP, Cons_rn_RNP,
-
-    ReflPossPron, ComplGenVV, CompoundN, CompoundAP,
+    ReflPossPron, ComplGenVV, CompoundN,
     GerundCN, GerundNP, GerundAdv,
     UncontractedNeg, TPastSimple, ComplSlashPartLast,
 
@@ -54,59 +51,71 @@ concrete ExtendSqi of Extend =
     youPolFem_Pron, youPolPl_Pron, youPolPlFem_Pron,
 
     UseDAP, UseDAPMasc, UseDAPFem,
-    CardCNCard, AdjOrd, SentAP
+
+    -- =========================================================
+    -- EXISTENTIAL SUBSYSTEM
+    -- =========================================================
+    ExistS, ExistNPQS, ExistIPQS, ExistCN, ExistMassCN, ExistPluralCN, ExistsNP,
+
+    -- =========================================================
+    -- AP/CN CONVERSION SUBSYSTEM
+    -- =========================================================
+    ICompAP, CompBareCN, CompIQuant,
+    PredAPVP, AdjAsCN, AdjAsNP, CardCNCard,
+
+    -- =========================================================
+    -- FOCUS / PREPOSITION SUBSYSTEM
+    -- =========================================================
+    FocusObj, FocusAdv, FocusAdV, FocusAP, PrepCN,
+
+    -- =========================================================
+    -- VP / VPSlash BRIDGE SUBSYSTEM
+    -- =========================================================
+    PresPartAP, EmbedPresPart, PastPartAP, PastPartAgentAP,
+    PassVPSlash, PassAgentVPSlash, NominalizeVPSlashNP, ProgrVPSlash,
+    A2VPSlash, N2VPSlash, AdvIsNP, AdvIsNPAP,
+    PurposeVP, WithoutVP, ByVP, InOrderToVP,
+    CompoundAP,
+
+    -- =========================================================
+    -- RNP SUBSYSTEM
+    -- =========================================================
+    ReflRNP, ReflPron, ReflPoss, PredetRNP, AdvRNP, AdvRVP, AdvRAP, ReflA2RNP,
+    PossPronRNP, ConjRNP,
+    Base_rr_RNP, Base_nr_RNP, Base_rn_RNP,
+    Cons_rr_RNP, Cons_nr_RNP
   ]
   with
     (Grammar = GrammarSqi) **
   open Prelude, Predef, ResSqi, ParamX in {
 
   oper
-    extSp : Str = " " ;
+    -- =========================================================
+    -- 1. NEUTRAL UTILITIES
+    -- structurally safe helpers
+    -- =========================================================
+
+    wordSep : Str = " " ;
 
     agrMascSg : Agr = agrgP3 Masc Sg ;
 
-    cnStr : CN -> Str = \cn -> cn.s ! Indef ! Nom ! Sg ;
-    apStr : AP -> Str = \ap -> ap.s ! Indef ! Nom ! Masc ! Sg ;
-    adjToStr : Adj -> Str = \a -> a.s ! Nom ! Masc ! Sg ;
+    adjSurfaceNomMascSg : Adj -> Str =
+      \a -> a.s ! Nom ! Masc ! Sg ;
 
-    vPres3sg : Verb -> Str =
+    verbPres3sg : Verb -> Str =
       \v -> v.Indicative ! ParamX.Pres ! Sg ! P3 ;
 
-    apConst : Str -> AP =
-      \w -> lin AP {s = \\spec,cas,g,n => w} ;
+    prepSurfaceAcc : Str -> NP -> Str =
+      \prepS,np -> prepS ++ np.s ! Acc ;
 
-    cnConst : Str -> Gender -> CN =
-      \w,g -> lin CN {s = \\spec,cas,n => w ; g = g} ;
-
-    npConst : Str -> Gender -> Number -> NP =
-      \w,g,n -> lin NP {
-        s = \\cas => w ;
-        a = agrgP3 g n
-      } ;
-
-    bareNPfromCN : Number -> CN -> NP =
-      \n,cn -> lin NP {
-        s = \\c => cn.s ! Indef ! c ! n ;
-        a = agrgP3 cn.g n
-      } ;
-
-    prepNPAdv : Prep -> NP -> Adv =
-      \prep,np -> {s = prep.s ++ extSp ++ np.s ! Acc} ;
-
-    compApStr : AP -> Str = \ap -> (CompAP ap).s ;
-    compCnStr : CN -> Str = \cn -> (CompCN cn).s ;
-
-    mkPronConst : Str -> Str -> Str -> Str -> Str -> Gender -> Number -> CatSqi.Pron =
+    mkPronConst :
+      Str -> Str -> Str -> Str -> Str -> Gender -> Number -> CatSqi.Pron =
       \nom,acc,dat,accCl,datCl,g,n -> lin Pron {
         s        = table {Nom => nom ; Acc => acc ; Dat => dat ; Ablat => dat} ;
         acc_clit = accCl ;
         dat_clit = datCl ;
         a        = agrgP3 g n
       } ;
-
-    ipNom : IP -> Str = \ip -> ip.s ;
-    ipAcc : IP -> Str = \ip -> ip.s ;
-    ipDat : IP -> Str = \ip -> ip.s ;
 
     adjComplStr : Adj -> Species -> Case -> Gender -> Number -> Str =
       \a,spec,c,g,n ->
@@ -115,11 +124,64 @@ concrete ExtendSqi of Extend =
           False => a.s ! c ! g ! n
         } ;
 
+    -- =========================================================
+    -- 2. CATEGORY-PRESERVING HELPERS
+    -- allowed for rich outputs
+    -- =========================================================
+
+    mkBareNpFromCn : Number -> CN -> NP =
+      \n,cn -> lin NP {
+        s = \\c => cn.s ! Indef ! c ! n ;
+        a = agrgP3 cn.g n ;
+        lock_NP = <>
+      } ;
+
+    -- =========================================================
+    -- 3. LOSSY SURFACE EXTRACTORS
+    -- allowed only for string-like targets
+    -- =========================================================
+
+    cnSurfaceNomSg : CN -> Str =
+      \cn -> cn.s ! Indef ! Nom ! Sg ;
+
+    apSurfaceNomMascSg : AP -> Str =
+      \ap -> ap.s ! Indef ! Nom ! Masc ! Sg ;
+
+    -- =========================================================
+    -- 4. TEMPORARY COMPATIBILITY HELPERS
+    -- rich outputs built here are provisional, not final design
+    -- =========================================================
+
+    mkCompatAPFromStr : Str -> AP =
+      \w -> lin AP {
+        s = \\spec,cas,g,n => w ;
+        lock_AP = <>
+      } ;
+
+    mkCompatCNFromStr : Str -> Gender -> CN =
+      \w,g -> lin CN {
+        s = \\spec,cas,n => w ;
+        g = g ;
+        lock_CN = <>
+      } ;
+
+    mkCompatNPFromStr : Str -> Gender -> Number -> NP =
+      \w,g,n -> lin NP {
+        s = \\cas => w ;
+        a = agrgP3 g n ;
+        lock_NP = <>
+      } ;
+
   lincat
     VPS, VPI, VPS2, VPI2, X = {s : Str} ;
     [VPS], [VPI], [VPS2], [VPI2], [Comp], [Imp] = {s : Str} ;
 
   lin
+    -- =========================================================
+    -- SHALLOW SCAFFOLDING / LIST WRAPPERS
+    -- Strategy: keep wrappers visibly shallow
+    -- =========================================================
+
     GenNP np = lin Quant {
       s    = \\c,g,n => link_clitic ! Indef ! c ! g ! n ++ np.s ! Ablat ;
       spec = Indef
@@ -134,27 +196,18 @@ concrete ExtendSqi of Extend =
     GenModNP num np cn = np ;
     GenModIP num ip cn = ip ;
 
-    PiedPipingQuestSlash ip slash = {s = ip.s ++ extSp ++ slash.s} ;
-    PiedPipingRelSlash rp slash   = {s = rp.s ++ extSp ++ slash.s} ;
-    StrandQuestSlash ip slash     = {s = ip.s ++ extSp ++ slash.s} ;
-    StrandRelSlash rp slash       = {s = rp.s ++ extSp ++ slash.s} ;
+    PiedPipingQuestSlash ip slash = {s = ip.s ++ wordSep ++ slash.s} ;
+    PiedPipingRelSlash rp slash   = {s = rp.s ++ wordSep ++ slash.s} ;
+    StrandQuestSlash ip slash     = {s = ip.s ++ wordSep ++ slash.s} ;
+    StrandRelSlash rp slash       = {s = rp.s ++ wordSep ++ slash.s} ;
     EmptyRelSlash slash           = {s = slash.s} ;
 
     MkVPS temp pol vp = {s = vp.s} ;
     ConjVPS conj vpss = {s = vpss.s} ;
-    PredVPS np vps    = {s = np.s ! Nom ++ extSp ++ vps.s} ;
-    SQuestVPS np vps  = {s = np.s ! Nom ++ extSp ++ vps.s} ;
-    QuestVPS ip vps   = {s = ip.s ++ extSp ++ vps.s} ;
-    RelVPS rp vps     = {s = rp.s ++ extSp ++ vps.s} ;
-
-    ExistS temp pol np    = UseCl temp pol (ExistNP np) ;
-    ExistNPQS temp pol np = UseQCl temp pol (QuestCl (ExistNP np)) ;
-    ExistIPQS temp pol ip = UseQCl temp pol (ExistIP ip) ;
-
-    ExistCN cn        = ExistNP (DetCN (DetQuant IndefArt NumSg) cn) ;
-    ExistMassCN cn    = ExistNP (bareNPfromCN Sg cn) ;
-    ExistPluralCN cn  = ExistNP (DetCN (DetQuant IndefArt NumPl) cn) ;
-    ExistsNP          = ExistNP ;
+    PredVPS np vps    = {s = np.s ! Nom ++ wordSep ++ vps.s} ;
+    SQuestVPS np vps  = {s = np.s ! Nom ++ wordSep ++ vps.s} ;
+    QuestVPS ip vps   = {s = ip.s ++ wordSep ++ vps.s} ;
+    RelVPS rp vps     = {s = rp.s ++ wordSep ++ vps.s} ;
 
     MkVPI vp          = {s = vp.s} ;
     ConjVPI conj vpis = {s = vpis.s} ;
@@ -162,30 +215,30 @@ concrete ExtendSqi of Extend =
 
     MkVPS2 temp pol vpslash = {s = vpslash.s} ;
     ConjVPS2 conj vps2s     = {s = vps2s.s} ;
-    ComplVPS2 vps2 np       = {s = vps2.s ++ extSp ++ np.s ! Acc} ;
-    ReflVPS2 vps2 rnp       = {s = vps2.s ++ extSp ++ rnp.s ! Acc} ;
+    ComplVPS2 vps2 np       = {s = vps2.s ++ wordSep ++ np.s ! Acc} ;
+    ReflVPS2 vps2 rnp       = {s = vps2.s ++ wordSep ++ rnp.s ! Acc} ;
 
     MkVPI2 vpslash      = {s = vpslash.s} ;
     ConjVPI2 conj vpi2s = {s = vpi2s.s} ;
-    ComplVPI2 vpi2 np   = {s = vpi2.s ++ extSp ++ np.s ! Acc} ;
+    ComplVPI2 vpi2 np   = {s = vpi2.s ++ wordSep ++ np.s ! Acc} ;
 
-    BaseVPS x y   = {s = x.s ++ extSp ++ y.s} ;
-    ConsVPS x xs  = {s = x.s ++ extSp ++ xs.s} ;
+    BaseVPS x y   = {s = x.s ++ wordSep ++ y.s} ;
+    ConsVPS x xs  = {s = x.s ++ wordSep ++ xs.s} ;
 
-    BaseVPI x y   = {s = x.s ++ extSp ++ y.s} ;
-    ConsVPI x xs  = {s = x.s ++ extSp ++ xs.s} ;
+    BaseVPI x y   = {s = x.s ++ wordSep ++ y.s} ;
+    ConsVPI x xs  = {s = x.s ++ wordSep ++ xs.s} ;
 
-    BaseVPS2 x y  = {s = x.s ++ extSp ++ y.s} ;
-    ConsVPS2 x xs = {s = x.s ++ extSp ++ xs.s} ;
+    BaseVPS2 x y  = {s = x.s ++ wordSep ++ y.s} ;
+    ConsVPS2 x xs = {s = x.s ++ wordSep ++ xs.s} ;
 
-    BaseVPI2 x y  = {s = x.s ++ extSp ++ y.s} ;
-    ConsVPI2 x xs = {s = x.s ++ extSp ++ xs.s} ;
+    BaseVPI2 x y  = {s = x.s ++ wordSep ++ y.s} ;
+    ConsVPI2 x xs = {s = x.s ++ wordSep ++ xs.s} ;
 
-    BaseComp x y  = {s = x.s ++ extSp ++ y.s} ;
-    ConsComp x xs = {s = x.s ++ extSp ++ xs.s} ;
+    BaseComp x y  = {s = x.s ++ wordSep ++ y.s} ;
+    ConsComp x xs = {s = x.s ++ wordSep ++ xs.s} ;
 
-    BaseImp x y   = {s = x.s ++ extSp ++ y.s} ;
-    ConsImp x xs  = {s = x.s ++ extSp ++ xs.s} ;
+    BaseImp x y   = {s = x.s ++ wordSep ++ y.s} ;
+    ConsImp x xs  = {s = x.s ++ wordSep ++ xs.s} ;
 
     ConjComp conj comps = {s = comps.s} ;
     ConjImp conj imps   = {s = imps.s} ;
@@ -198,12 +251,9 @@ concrete ExtendSqi of Extend =
     } ;
 
     AdAdV ada adv   = {s = ada.s ++ adv.s} ;
-    PositAdVAdj a   = {s = adjToStr a} ;
-    ICompAP ap      = {s = compApStr ap} ;
+    PositAdVAdj a   = {s = adjSurfaceNomMascSg a} ;
     IAdvAdv adv     = {s = adv.s} ;
 
-    CompBareCN cn     = CompCN cn ;
-    CompIQuant iq     = CompIP (IdetIP (IdetQuant iq NumSg)) ;
     CompS s           = {s = s.s} ;
     CompQS qs         = {s = qs.s} ;
     CompVP ant pol vp = {s = vp.s} ;
@@ -215,116 +265,232 @@ concrete ExtendSqi of Extend =
     UttAdV adv    = {s = adv.s} ;
     UttVPShort vp = {s = vp.s} ;
 
-    FocusObj np sslash = {s = np.s ! Nom ++ extSp ++ sslash.s} ;
-    FocusAdv adv s     = {s = adv.s ++ extSp ++ s.s} ;
-    FocusAdV adv s     = {s = adv.s ++ extSp ++ s.s} ;
-    FocusAP ap np      = {s = compApStr ap ++ extSp ++ np.s ! Nom} ;
+    ComplBareVS vs s   = {s = verbPres3sg vs ++ wordSep ++ s.s} ;
+    SlashBareV2S v2s s = {s = s.s} ;
 
-    PrepCN prep cn = prepNPAdv prep (bareNPfromCN Sg cn) ;
+    ComplDirectVS vs utt = {s = verbPres3sg vs ++ wordSep ++ utt.s} ;
+    ComplDirectVQ vq utt = {s = verbPres3sg vq ++ wordSep ++ utt.s} ;
 
-    PresPartAP vp              = apConst vp.s ;
+    FrontComplDirectVS np vs utt =
+      {s = np.s ! Nom ++ wordSep ++ utt.s ++ wordSep ++ verbPres3sg vs} ;
+    FrontComplDirectVQ np vq utt =
+      {s = np.s ! Nom ++ wordSep ++ utt.s ++ wordSep ++ verbPres3sg vq} ;
+
+    PredIAdvVP iadv vp = {s = iadv.s ++ wordSep ++ vp.s} ;
+
+    ApposNP np1 np2 =
+      lin NP {
+        s = \\c => np1.s ! c ++ wordSep ++ np2.s ! c ;
+        a = np1.a ;
+        lock_NP = <>
+      } ;
+
+    ComplGenVV vv ant pol vp = vp ;
+
+    CompoundN n1 n2 = n1 ;
+
+    -- temporary compatibility path
+    GerundCN vp  = mkCompatCNFromStr vp.s Masc ;
+    GerundNP vp  = mkCompatNPFromStr vp.s Masc Sg ;
+    GerundAdv vp = {s = vp.s} ;
+
+    UncontractedNeg = {s = "nuk" ; p = ParamX.Neg} ;
+    TPastSimple     = {s = "" ; t = ParamX.Past} ;
+
+    ComplSlashPartLast vpslash np = {s = vpslash.s ++ wordSep ++ np.s ! Acc} ;
+
+    DetNPMasc det =
+      lin NP {
+        s = \\c => det.s ! c ! Masc ;
+        a = agrgP3 Masc det.n ;
+        lock_NP = <>
+      } ;
+
+    DetNPFem det =
+      lin NP {
+        s = \\c => det.s ! c ! Fem ;
+        a = agrgP3 Fem det.n ;
+        lock_NP = <>
+      } ;
+
+    UseComp_estar comp = {s = comp.s} ;
+    UseComp_ser   comp = {s = comp.s} ;
+
+    SubjRelNP np rs =
+      lin NP {
+        s = \\c => np.s ! c ++ wordSep ++ rs.s ;
+        a = np.a ;
+        lock_NP = <>
+      } ;
+
+    SubjunctRelCN cn rs =
+      lin CN {
+        s = \\spec,c,n => cn.s ! spec ! c ! n ++ wordSep ++ rs.s ;
+        g = cn.g ;
+        lock_CN = <>
+      } ;
+
+    -- =========================================================
+    -- EXISTENTIAL SUBSYSTEM
+    -- Strategy: mirror ExtendFunctor clause/question composition
+    -- =========================================================
+
+    ExistS temp pol np    = UseCl temp pol (ExistNP np) ;
+    ExistNPQS temp pol np = UseQCl temp pol (QuestCl (ExistNP np)) ;
+    ExistIPQS temp pol ip = UseQCl temp pol (ExistIP ip) ;
+
+    ExistCN cn        = ExistNP (DetCN (DetQuant IndefArt NumSg) cn) ;
+    ExistMassCN cn    = ExistNP (MassNP cn) ;
+    ExistPluralCN cn  = ExistNP (DetCN (DetQuant IndefArt NumPl) cn) ;
+    ExistsNP          = ExistNP ;
+
+    -- =========================================================
+    -- AP/CN CONVERSION SUBSYSTEM
+    -- Strategy: preserve rich boundaries where possible;
+    -- any lossy path here is provisional and must stay explicit
+    -- =========================================================
+
+    ICompAP ap      = {s = apSurfaceNomMascSg ap} ;
+
+    CompBareCN cn   = CompCN cn ;
+    CompIQuant iq   = CompIP (IdetIP (IdetQuant iq NumSg)) ;
+
+    PredAPVP ap vp =
+      ImpersCl
+        (UseComp
+          (CompAP
+            (lin AP {
+              s = \\spec,c,g,n =>
+                    ap.s ! spec ! c ! g ! n ++ wordSep ++ "që" ++ wordSep ++ (EmbedVP vp).s ;
+              lock_AP = <>
+            }))) ;
+
+    AdjAsCN ap =
+      lin CN {
+        s = \\spec,c,n => ap.s ! spec ! c ! Masc ! n ;
+        g = Masc ;
+        lock_CN = <>
+      } ;
+
+    AdjAsNP ap =
+      lin NP {
+        s = \\c => ap.s ! Indef ! c ! Masc ! Sg ;
+        a = agrgP3 Masc Sg ;
+        lock_NP = <>
+      } ;
+
+    CardCNCard card cn =
+      card ** {s = card.s ++ wordSep ++ cnSurfaceNomSg cn} ;
+
+    -- =========================================================
+    -- FOCUS / PREPOSITION SUBSYSTEM
+    -- Strategy: keep focus wrappers shallow, avoid hidden CN drift
+    -- =========================================================
+
+    FocusObj np sslash = {s = np.s ! Nom ++ wordSep ++ sslash.s} ;
+    FocusAdv adv s     = {s = adv.s ++ wordSep ++ s.s} ;
+    FocusAdV adv s     = {s = adv.s ++ wordSep ++ s.s} ;
+
+    FocusAP ap np      = {s = apSurfaceNomMascSg ap ++ wordSep ++ np.s ! Nom} ;
+
+    PrepCN prep cn     = PrepNP prep (MassNP cn) ;
+
+    -- =========================================================
+    -- VP / VPSlash BRIDGE SUBSYSTEM
+    -- Strategy: shallow verbal wrappers, explicit complement handling
+    -- =========================================================
+
+    PresPartAP vp              = mkCompatAPFromStr vp.s ;
     EmbedPresPart vp           = {s = vp.s} ;
-    PastPartAP vpslash         = apConst vpslash.s ;
-    PastPartAgentAP vpslash np = apConst (vpslash.s ++ extSp ++ np.s ! Nom) ;
+    PastPartAP vpslash         = mkCompatAPFromStr vpslash.s ;
+    PastPartAgentAP vpslash np = mkCompatAPFromStr (vpslash.s ++ wordSep ++ np.s ! Nom) ;
 
     PassVPSlash vpslash         = {s = vpslash.s} ;
-    PassAgentVPSlash vpslash np = {s = vpslash.s ++ extSp ++ np.s ! Nom} ;
+    PassAgentVPSlash vpslash np = {s = vpslash.s ++ wordSep ++ np.s ! Nom} ;
 
     NominalizeVPSlashNP vpslash np =
       lin NP {
-        s = \\c => vpslash.s ++ extSp ++ np.s ! c ;
-        a = agrgP3 Masc Sg
+        s = \\c => vpslash.s ++ wordSep ++ np.s ! c ;
+        a = agrgP3 Masc Sg ;
+        lock_NP = <>
       } ;
 
     ProgrVPSlash vpslash = {s = vpslash.s} ;
 
-    A2VPSlash a2 = {s = adjToStr a2 ++ extSp ++ a2.c2.s} ;
-    N2VPSlash n2 = {s = compCnStr (UseN2 n2) ++ extSp ++ n2.c2.s} ;
+    A2VPSlash a2 = {s = adjSurfaceNomMascSg a2 ++ wordSep ++ a2.c2.s} ;
+    N2VPSlash n2 = {s = cnSurfaceNomSg (UseN2 n2) ++ wordSep ++ n2.c2.s} ;
 
     AdvIsNP adv np      = PredVP np (UseComp (CompAdv adv)) ;
     AdvIsNPAP adv np ap = PredVP np (AdvVP (UseComp (CompAP ap)) adv) ;
 
-    PurposeVP vp   = {s = "për të" ++ extSp ++ vp.s} ;
-    WithoutVP vp   = {s = "pa" ++ extSp ++ vp.s} ;
-    ByVP vp        = {s = "nga" ++ extSp ++ vp.s} ;
-    InOrderToVP vp = {s = "që të" ++ extSp ++ vp.s} ;
+    PurposeVP vp   = {s = "për të" ++ wordSep ++ vp.s} ;
+    WithoutVP vp   = {s = "pa" ++ wordSep ++ vp.s} ;
+    ByVP vp        = {s = "nga" ++ wordSep ++ vp.s} ;
+    InOrderToVP vp = {s = "që të" ++ wordSep ++ vp.s} ;
 
-    ComplBareVS vs s   = {s = vPres3sg vs ++ extSp ++ s.s} ;
-    SlashBareV2S v2s s = {s = s.s} ;
+    CompoundAP n a =
+      AdvAP (PositA a) (PrepCN (mkPrep "nga") (UseN n)) ;
 
-    ComplDirectVS vs utt = {s = vPres3sg vs ++ extSp ++ utt.s} ;
-    ComplDirectVQ vq utt = {s = vPres3sg vq ++ extSp ++ utt.s} ;
+    -- =========================================================
+    -- RNP SUBSYSTEM
+    -- Strategy: one coherent representation across the family
+    -- =========================================================
 
-    FrontComplDirectVS np vs utt = {s = np.s ! Nom ++ extSp ++ utt.s ++ extSp ++ vPres3sg vs} ;
-    FrontComplDirectVQ np vq utt = {s = np.s ! Nom ++ extSp ++ utt.s ++ extSp ++ vPres3sg vq} ;
+    ReflRNP vpslash rnp = {s = vpslash.s ++ wordSep ++ rnp.s ! Acc} ;
 
-    PredAPVP ap vp =
-      ImpersCl (UseComp (CompAP (AdjectiveSqi.SentAP ap (EmbedVP vp)))) ;
-    PredIAdvVP iadv vp = {s = iadv.s ++ extSp ++ vp.s} ;
-
-    AdjAsCN ap =
-      lin CN {
-        s = \\spec,c,n => compApStr ap ;
-        g = Masc
-      } ;
-    AdjAsNP ap =
-      lin NP {
-        s = \\c => compApStr ap ;
-        a = agrgP3 Masc Sg
-      } ;
-
-    ApposNP np1 np2 =
-      lin NP {
-        s = \\c => np1.s ! c ++ extSp ++ np2.s ! c ;
-        a = np1.a
-      } ;
-
-    ReflRNP vpslash rnp = {s = vpslash.s ++ extSp ++ rnp.s ! Acc} ;
-
-    ReflPron = npConst "veten" Masc Sg ;
+    ReflPron = mkCompatNPFromStr "veten" Masc Sg ;
 
     ReflPoss num cn =
       lin NP {
-        s = \\c => "të vet" ++ extSp ++ cn.s ! Indef ! c ! num.n ;
-        a = agrgP3 cn.g num.n
+        s = \\c => "të vet" ++ wordSep ++ cn.s ! Indef ! c ! num.n ;
+        a = agrgP3 cn.g num.n ;
+        lock_NP = <>
       } ;
 
     PredetRNP pred rnp =
       lin NP {
-        s = \\c => pred.s ++ extSp ++ rnp.s ! c ;
-        a = rnp.a
+        s = \\c => pred.s ++ wordSep ++ rnp.s ! c ;
+        a = rnp.a ;
+        lock_NP = <>
       } ;
 
     AdvRNP np prep rnp =
       lin NP {
-        s = \\c => rnp.s ! c ++ extSp ++ prep.s ++ extSp ++ np.s ! Acc ;
-        a = rnp.a
+        s = \\c => rnp.s ! c ++ wordSep ++ prep.s ++ wordSep ++ np.s ! Acc ;
+        a = rnp.a ;
+        lock_NP = <>
       } ;
 
-    AdvRVP vp prep rnp = {s = vp.s ++ extSp ++ prep.s ++ extSp ++ rnp.s ! Acc} ;
+    AdvRVP vp prep rnp =
+      {s = vp.s ++ wordSep ++ prep.s ++ wordSep ++ rnp.s ! Acc} ;
 
     AdvRAP ap prep rnp =
       lin AP {
         s = \\spec,c,g,n =>
-              ap.s ! spec ! c ! g ! n ++ extSp ++ prep.s ++ extSp ++ rnp.s ! Acc
+              ap.s ! spec ! c ! g ! n ++ wordSep ++ prep.s ++ wordSep ++ rnp.s ! Acc ;
+        lock_AP = <>
       } ;
 
     ReflA2RNP a2 rnp =
       lin AP {
         s = \\spec,c,g,n =>
-              adjComplStr a2 spec c g n ++ extSp ++ a2.c2.s ++ extSp ++ rnp.s ! Acc
+              adjComplStr a2 spec c g n ++ wordSep ++ a2.c2.s ++ wordSep ++ rnp.s ! Acc ;
+        lock_AP = <>
       } ;
 
     PossPronRNP pron num cn rnp =
       lin NP {
-        s = \\c => pron.s ! c ++ extSp ++ cn.s ! Indef ! c ! num.n ++ extSp ++ rnp.s ! Acc ;
-        a = pron.a
+        s = \\c =>
+              pron.s ! c ++ wordSep ++ cn.s ! Indef ! c ! num.n ++ wordSep ++ rnp.s ! Acc ;
+        a = pron.a ;
+        lock_NP = <>
       } ;
 
     ConjRNP conj rnps =
       lin NP {
-        s = \\c => rnps.init ! c ++ extSp ++ conj.s ++ extSp ++ rnps.last ! c ;
-        a = rnps.a
+        s = \\c => rnps.init ! c ++ wordSep ++ conj.s ++ wordSep ++ rnps.last ! c ;
+        a = rnps.a ;
+        lock_NP = <>
       } ;
 
     Base_rr_RNP r1 r2 =
@@ -350,71 +516,26 @@ concrete ExtendSqi of Extend =
 
     Cons_rr_RNP r rs =
       lin ListNP {
-        init = \\c => r.s ! c ++ extSp ++ rs.init ! c ;
+        init = \\c => r.s ! c ++ wordSep ++ rs.init ! c ;
         last = rs.last ;
         a = rs.a
       } ;
 
     Cons_nr_RNP np rs =
       lin ListNP {
-        init = \\c => np.s ! c ++ extSp ++ rs.init ! c ;
+        init = \\c => np.s ! c ++ wordSep ++ rs.init ! c ;
         last = rs.last ;
         a = rs.a
       } ;
 
-    Cons_rn_RNP r rs =
-      lin ListNP {
-        init = \\c => r.s ! c ++ extSp ++ rs.init ! c ;
-        last = rs.last ;
-        a = rs.a
-      } ;
+    -- =========================================================
+    -- CONSTANTS / LEXICAL TAIL
+    -- =========================================================
 
     ReflPossPron = {
       s    = \\c,g,n => "vet" ;
       spec = Indef
     } ;
-
-    ComplGenVV vv ant pol vp = vp ;
-
-    CompoundN n1 n2 = n1 ;
-    CompoundAP n a  =
-      AdvAP (PositA a) (prepNPAdv (mkPrep "nga") (bareNPfromCN Sg (UseN n))) ;
-
-    GerundCN vp  = cnConst vp.s Masc ;
-    GerundNP vp  = npConst vp.s Masc Sg ;
-    GerundAdv vp = {s = vp.s} ;
-
-    UncontractedNeg = {s = "nuk" ; p = ParamX.Neg} ;
-    TPastSimple     = {s = "" ; t = ParamX.Past} ;
-
-    ComplSlashPartLast vpslash np = {s = vpslash.s ++ extSp ++ np.s ! Acc} ;
-
-    DetNPMasc det =
-      lin NP {
-        s = \\c => det.s ! c ! Masc ;
-        a = agrgP3 Masc det.n
-      } ;
-
-    DetNPFem det =
-      lin NP {
-        s = \\c => det.s ! c ! Fem ;
-        a = agrgP3 Fem det.n
-      } ;
-
-    UseComp_estar comp = {s = comp.s} ;
-    UseComp_ser   comp = {s = comp.s} ;
-
-    SubjRelNP np rs =
-      lin NP {
-        s = \\c => np.s ! c ++ extSp ++ rs.s ;
-        a = np.a
-      } ;
-
-    SubjunctRelCN cn rs =
-      lin CN {
-        s = \\spec,c,n => cn.s ! spec ! c ! n ++ extSp ++ rs.s ;
-        g = cn.g
-      } ;
 
     iFem_Pron        = mkPronConst "unë" "mua" "mua" "më" "më" Fem Sg ;
     youFem_Pron      = mkPronConst "ti" "ty" "ty" "të" "të" Fem Sg ;
@@ -426,18 +547,8 @@ concrete ExtendSqi of Extend =
     youPolPl_Pron    = mkPronConst "ju" "ju" "ju" "ju" "ju" Masc Pl ;
     youPolPlFem_Pron = mkPronConst "ju" "ju" "ju" "ju" "ju" Fem Pl ;
 
-    UseDAP dap     = npConst dap.s Masc Sg ;
-    UseDAPMasc dap = npConst dap.s Masc Sg ;
-    UseDAPFem dap  = npConst dap.s Fem Sg ;
-
-    CardCNCard card cn = {s = card.s ++ extSp ++ compCnStr cn} ;
-
-    AdjOrd ord = {
-      s = \\_,_,_,_ => ord.s
-    } ;
-
-    SentAP ap sc = {
-      s = \\spec,c,g,n => ap.s ! spec ! c ! g ! n ++ "që" ++ sc.s
-    } ;
+    UseDAP dap     = mkCompatNPFromStr dap.s Masc Sg ;
+    UseDAPMasc dap = mkCompatNPFromStr dap.s Masc Sg ;
+    UseDAPFem dap  = mkCompatNPFromStr dap.s Fem Sg ;
 
 }
