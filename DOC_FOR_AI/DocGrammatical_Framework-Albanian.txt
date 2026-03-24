@@ -1,18 +1,18 @@
 # Single upload doc
 
-- generated_at: 2026-03-20T13:48:42.029812
+- generated_at: 2026-03-24T10:42:05.732340
 - output_format: text
 - volumes: 1
 
 
 
-===== BEGIN VOLUME docs_20260320_134841_01_ROOT.txt :: ROOT FILES =====
+===== BEGIN VOLUME docs_20260324_104205_01_ROOT.txt :: ROOT FILES =====
 ==== VOLUME META ====
-generated_at: 2026-03-20T13:48:42.028637
+generated_at: 2026-03-24T10:42:05.730455
 title: ROOT FILES
 root_dir: C:\mycode\Grammatical_Framework\Grammatical_Framework-Albanian\docs
-file_count: 15
-total_size_mb: 0.2321
+file_count: 17
+total_size_mb: 0.2614
 home: 00_START_HERE.instructions.md
 prev_title: 
 next_title: 
@@ -22,8 +22,10 @@ short_title: Root
 ENTRY id=a867b79985af path="ALBANIAN_CATEGORY_AND_LINCAT_REFERENCE.md" kind=markdown size=15286 lines=428 chunks=2
 ENTRY id=8e3225f566e8 path="ALBANIAN_DECISION_LOG.md" kind=markdown size=16571 lines=453 chunks=2
 ENTRY id=d37123b83c9c path="ALBANIAN_EVIDENCE_APPENDIX.md" kind=markdown size=17053 lines=674 chunks=2
+ENTRY id=179e751fa566 path="ALBANIAN_EXTENDSQI_FINAL_TARGET.md" kind=markdown size=8872 lines=333 chunks=0
+ENTRY id=285a3b611870 path="ALBANIAN_EXTENDSQI_OVERRIDE_MATRIX.md" kind=markdown size=18659 lines=389 chunks=2
 ENTRY id=bdc4663da514 path="ALBANIAN_FORBIDDEN_PATTERNS_AND_ANTI_DRIFT_RULES.md" kind=markdown size=13276 lines=375 chunks=2
-ENTRY id=d64b517ad734 path="ALBANIAN_FUTURE_EXTENDSQI_STRUCTURE.md" kind=markdown size=20238 lines=785 chunks=3
+ENTRY id=5aa033fd9e7e path="ALBANIAN_FUTURE_EXTENDSQI_STRUCTURE.md" kind=markdown size=23396 lines=881 chunks=3
 ENTRY id=17b2dc42318b path="ALBANIAN_IMPLEMENTATION_PATTERNS.md" kind=markdown size=14766 lines=540 chunks=2
 ENTRY id=0b6ef558315d path="ALBANIAN_LANGUAGE_ARCHITECTURE.md" kind=markdown size=19676 lines=119 chunks=0
 ENTRY id=13ddaf655dd9 path="ALBANIAN_LEXICAL_AND_FUNCTIONAL_ELEMENTS.md" kind=markdown size=18195 lines=543 chunks=2
@@ -1662,6 +1664,761 @@ If a main documentation file makes a strong architectural or implementation clai
 ----- FILE END -----
 
 ----- FILE BEGIN -----
+path="ALBANIAN_EXTENDSQI_FINAL_TARGET.md"
+id=179e751fa566
+kind=markdown
+size=8872
+lines=333
+chunks=0
+----
+# ALBANIAN_EXTENDSQI_FINAL_TARGET
+
+## Status
+Approved target architecture for the current Albanian development cycle.
+
+This document defines the final intended role of `GF/lib/src/albanian/ExtendSqi.gf` and the subsystem ownership rules that all companion modules must follow.
+
+---
+
+## 1. Purpose
+
+The purpose of this document is to freeze the target architecture of the Albanian `Extend` layer before further implementation work.
+
+The guiding principle for this cycle is:
+
+- `ExtendSqi.gf` is a **thin coordinator**.
+- Companion modules hold Albanian-specific implementation logic.
+- Unsupported families stay inherited from `ExtendFunctor`.
+- Every local override must be justified by Albanian-specific evidence and must preserve the correct concrete category shape.
+
+This document is the source of truth for all `ExtendSqi`-related edits in this cycle.
+
+---
+
+## 2. Final target for `GF/lib/src/albanian/ExtendSqi.gf`
+
+`ExtendSqi.gf` must be a **thin wiring layer only**.
+
+It must contain:
+
+- the concrete header and `Grammar = GrammarSqi` binding
+- the canonical subsystem imports
+- the subtraction list for supported local Albanian overrides only
+- the `lin` renamings that connect abstract `Extend` functions to subsystem implementations
+
+It must not contain:
+
+- local VPS/VPI/VPS2/VPI2/list-family machinery
+- local coordinator-side helper definitions
+- generic repair code
+- drifted or experimental logic that belongs in a subsystem module
+- overflow implementations that should live in core Albanian modules
+
+---
+
+## 3. Fixed architecture decisions for this cycle
+
+### 3.1 Coordinator rule
+
+`ExtendSqi.gf` remains thin and declarative.
+
+### 3.2 Companion module set
+
+The canonical Albanian `Extend` companion modules for this cycle are:
+
+- `GF/lib/src/albanian/ExtendSqiScaffolding.gf`
+- `GF/lib/src/albanian/ExtendSqiExistential.gf`
+- `GF/lib/src/albanian/ExtendSqiAPCN.gf`
+- `GF/lib/src/albanian/ExtendSqiFocusPrep.gf`
+- `GF/lib/src/albanian/ExtendSqiVPBridge.gf`
+- `GF/lib/src/albanian/ExtendSqiRNP.gf`
+- `GF/lib/src/albanian/ExtendSqiLexicon.gf`
+- `GF/lib/src/albanian/ExtendSqiHelpers.gf`
+
+### 3.3 VPS-family decision
+
+Do **not** build `ExtendSqiVPS.gf` in this cycle.
+
+The entire VPS/VPI/VPS2/VPI2/list-wrapper family remains inherited from `ExtendFunctor`.
+
+Reason:
+
+- the family was previously half-local and failed as a family
+- the chosen architecture for this cycle is stability first
+- the coordinator must not reintroduce unsupported local list-family logic
+
+### 3.4 Contract-side rule
+
+Boundary-facing helpers must align with the `Extend` / `ExtendFunctor` / `CommonX` contract, not with ad hoc local shapes.
+
+### 3.5 Category-shape rule
+
+Do not flatten rich Albanian categories to `Str` unless the current Albanian lincat is already string-shaped.
+
+### 3.6 Family-coherence rule
+
+Subsystems are implemented and reviewed family-by-family, not one isolated function at a time.
+
+---
+
+## 4. Final role of each subsystem
+
+### 4.1 `ExtendSqiScaffolding.gf`
+
+Role:
+
+- boundary-safe helpers
+- contract alignment helpers
+- small Albanian glue operations that do not belong in richer subsystem modules
+
+Responsibilities include:
+
+- `GenNP`, `GenIP`, `GenRP`, `GenModNP`, `GenModIP`
+- pied-piping/stranding shell helpers
+- basic utterance and complement wrappers
+- boundary-facing tense/polarity/anteriority helpers
+- gerund wrappers
+- small NP/CN/Comp helpers
+
+This subsystem is the first stabilization target and must remain contract-correct.
+
+### 4.2 `ExtendSqiVPBridge.gf`
+
+Role:
+
+- participial/AP/VP bridging
+- VPSlash-derived bridges
+- VP-to-Adv/AP conversion helpers in the Albanian extension layer
+
+### 4.3 `ExtendSqiAPCN.gf`
+
+Role:
+
+- AP/CN/NP conversion family
+- category-preserving adjectival and nominal bridge helpers
+
+### 4.4 `ExtendSqiExistential.gf`
+
+Role:
+
+- existential family only
+- all existential variants implemented coherently as one subsystem
+
+### 4.5 `ExtendSqiRNP.gf`
+
+Role:
+
+- reflexive NP family
+- reflexive/possessive/RNP coordination family
+- AP/VP attachment helpers that are specifically part of the RNP family
+
+### 4.6 `ExtendSqiFocusPrep.gf`
+
+Role:
+
+- focus family
+- focused prep-related extension behavior only
+
+### 4.7 `ExtendSqiLexicon.gf`
+
+Role:
+
+- extension-specific lexical tail only
+- no structural repair logic
+
+### 4.8 `ExtendSqiHelpers.gf`
+
+Role:
+
+- local helper constructors and reusable internal support for the above modules
+- not a second coordinator
+
+---
+
+## 5. Final ownership map
+
+### Owned by `ExtendSqi.gf`
+
+Only:
+
+- subsystem imports
+- subtraction list
+- subsystem renamings
+
+### Owned by `ExtendSqiScaffolding.gf`
+
+Only:
+
+- boundary-safe glue helpers
+- tense/polarity/anteriority contract-safe wrappers
+- gerund and small shell wrappers
+
+### Owned by `ExtendSqiVPBridge.gf`
+
+Only:
+
+- VP/VPSlash/AP/Adv bridge family
+
+### Owned by `ExtendSqiAPCN.gf`
+
+Only:
+
+- AP/CN/NP conversion family
+
+### Owned by `ExtendSqiExistential.gf`
+
+Only:
+
+- existential family
+
+### Owned by `ExtendSqiRNP.gf`
+
+Only:
+
+- reflexive NP / RNP family
+
+### Owned by `ExtendSqiFocusPrep.gf`
+
+Only:
+
+- focus/preposition extension behavior
+
+### Owned by `ExtendSqiLexicon.gf`
+
+Only:
+
+- extension-specific lexical entries and lexical wrappers
+
+---
+
+## 6. Final override policy for this cycle
+
+A function belongs in local Albanian `Extend` code only when all of the following are true:
+
+1. The abstract `Extend` function is present and understood.
+2. The `ExtendFunctor` default path is inspected.
+3. The Albanian category shape is confirmed in the current codedump.
+4. The override has a specific Albanian reason.
+5. The implementation preserves the correct concrete category shape.
+
+Otherwise, the function remains inherited.
+
+This cycle applies that rule strictly.
+
+---
+
+## 7. Explicit inherited families
+
+The following remain inherited from `ExtendFunctor` for this cycle:
+
+- VPS family
+- VPI family
+- VPS2 family
+- VPI2 family
+- list wrappers for those families
+- any `Base*` / `Cons*` / `Conj*` members belonging to that unsupported local family
+
+These are intentionally not owned by local Albanian subsystem modules in this cycle.
+
+---
+
+## 8. Explicit local Albanian subsystem families
+
+The following are local Albanian subsystem families for this cycle:
+
+- scaffolding family
+- existential family
+- AP/CN family
+- focus/prep family
+- VP bridge family
+- RNP family
+- lexical tail
+
+Each of these is completed and validated as a family.
+
+---
+
+## 9. Acceptance criteria for this cycle
+
+The Albanian `Extend` layer is considered correct for this cycle only when all of the following are true:
+
+1. `ExtendSqi.gf` remains a thin coordinator.
+2. `ExtendSqiScaffolding.gf` is contract-correct.
+3. No unsupported local VPS/VPI/VPS2/VPI2/list-family logic is present.
+4. Every local override is owned by the correct subsystem file.
+5. No accidental category flattening has been introduced.
+6. The full Albanian extension layer compiles cleanly.
+7. No new lock warnings are introduced by the extension layer.
+8. Final public-surface validation through `GrammarSqi` and `SyntaxSqi` passes.
+
+---
+
+## 10. Current implementation order
+
+The implementation order for this cycle is fixed:
+
+1. `ExtendSqiScaffolding.gf`
+2. `ExtendSqiHelpers.gf`
+3. `ExtendSqi.gf` coordinator lock
+4. `ExtendSqiVPBridge.gf`
+5. `ExtendSqiAPCN.gf`
+6. `ExtendSqiExistential.gf`
+7. `ExtendSqiRNP.gf`
+8. `ExtendSqiFocusPrep.gf`
+9. `ExtendSqiLexicon.gf`
+10. structural cleanup outside `Extend`
+11. final validation
+
+---
+
+## 11. Anti-drift rules
+
+The following are prohibited during this cycle:
+
+- reintroducing local VPS/VPI/VPS2/VPI2/list-family coordinator logic
+- moving subsystem logic into `ExtendSqi.gf`
+- fixing one function in a family while leaving the rest structurally inconsistent
+- flattening rich Albanian categories to strings for convenience
+- using coordinator-level hacks instead of subsystem fixes
+- treating stale run logs as more authoritative than the current codedump
+
+---
+
+## 12. Reference set
+
+This target document is aligned to the current Albanian source dump and the Albanian architecture docs, especially:
+
+- future `ExtendSqi` structure
+- override and inheritance policy
+- module dependency map
+- implementation pattern catalog
+- high-priority watchlist
+- forbidden patterns and anti-drift rules
+
+---
+
+## 13. Immediate next deliverable
+
+The next document to create from this target is:
+
+- `ALBANIAN_EXTENDSQI_OVERRIDE_MATRIX.md`
+
+That matrix will enumerate every function currently wired through `ExtendSqi.gf`, identify its subsystem owner, and mark it as either inherited or locally overridden for this cycle.
+----- FILE END -----
+
+----- FILE BEGIN -----
+path="ALBANIAN_EXTENDSQI_OVERRIDE_MATRIX.md"
+id=285a3b611870
+kind=markdown
+size=18659
+lines=389
+chunks=2
+
+--- CHUNK BEGIN ---
+id=285a3b611870:1-350
+start=1
+end=350
+----
+# ALBANIAN_EXTENDSQI_OVERRIDE_MATRIX
+
+Status: target matrix for the current development cycle  
+Scope: `GF/lib/src/albanian/ExtendSqi.gf` and its companion extension modules  
+Authority order: current codedump > Albanian architecture docs > `ExtendFunctor` default path > model-language comparison
+
+---
+
+## 1. Fixed architectural decisions
+
+This matrix assumes the following decisions are already locked for this cycle:
+
+- `ExtendSqi.gf` is a **thin coordinator**.
+- Companion modules align to `ExtendSqi.gf`, not the other way around.
+- The VPS/VPI/VPS2/VPI2/list-family remains **inherited from `ExtendFunctor`** in this cycle.
+- No `ExtendSqiVPS.gf` will be introduced in this cycle.
+- No local override is accepted unless there is Albanian-specific evidence or a clear structural need.
+- Each override family must be coherent as a family; no one-off drift.
+
+---
+
+## 2. Coordinator module
+
+### File
+- `GF/lib/src/albanian/ExtendSqi.gf`
+
+### Role
+Thin wiring layer only.
+
+### Allowed contents
+- subsystem imports
+- override subtraction list
+- subsystem-to-function renamings
+
+### Disallowed contents
+- new local helper logic
+- local ad hoc record construction
+- local VPS/VPI/VPS2/VPI2/list-family machinery
+- repair code that belongs in companion modules
+
+---
+
+## 3. Inherited families for this cycle
+
+These remain inherited from `ExtendFunctor` and must **not** be reintroduced as local Albanian override machinery in `ExtendSqi.gf`.
+
+### Entire inherited family
+- `VPS`
+- `ListVPS`
+- `VPI`
+- `ListVPI`
+- `VPS2`
+- `ListVPS2`
+- `VPI2`
+- `ListVPI2`
+- `X`
+- `ListComp`
+- `ListImp`
+
+### Inherited functions
+- `MkVPS`
+- `ConjVPS`
+- `PredVPS`
+- `SQuestVPS`
+- `QuestVPS`
+- `RelVPS`
+- `MkVPI`
+- `ConjVPI`
+- `ComplVPIVV`
+- `MkVPS2`
+- `ConjVPS2`
+- `ComplVPS2`
+- `ReflVPS2`
+- `MkVPI2`
+- `ConjVPI2`
+- `ComplVPI2`
+- `BaseVPS`
+- `ConsVPS`
+- `BaseVPI`
+- `ConsVPI`
+- `BaseVPS2`
+- `ConsVPS2`
+- `BaseVPI2`
+- `ConsVPI2`
+- `BaseComp`
+- `ConsComp`
+- `ConjComp`
+- `BaseImp`
+- `ConsImp`
+- `ConjImp`
+
+### Rationale
+This family previously failed when it was partially localized. In this cycle, maturity is better served by stable inheritance than by half-complete local machinery.
+
+---
+
+## 4. Override matrix by subsystem
+
+Legend:
+- **Owner** = module that must implement the function in this cycle
+- **Mode** = `override` or `inherit`
+- **Priority** = execution order for this cycle
+- **Evidence required** = what must be checked before accepting the implementation
+
+---
+
+### 4.1 Scaffolding subsystem
+
+**Owner modules**
+- `GF/lib/src/albanian/ExtendSqiScaffolding.gf`
+- `GF/lib/src/albanian/ExtendSqiHelpers.gf`
+
+**Coordinator touchpoint**
+- `GF/lib/src/albanian/ExtendSqi.gf`
+
+**Priority**
+1
+
+| Function | Mode | Owner | Evidence required | Acceptance rule |
+|---|---|---|---|---|
+| `GenNP` | override | `ExtendSqiScaffolding.gf` | abstract signature + Albanian lincat shape | no flattening, compiles cleanly |
+| `GenIP` | override | `ExtendSqiScaffolding.gf` | signature + current codedump | safe IQuant shape |
+| `GenRP` | override | `ExtendSqiScaffolding.gf` | signature + CN/Num ownership | RP shape preserved |
+| `GenModNP` | override | `ExtendSqiScaffolding.gf` | signature + Albanian modifier behavior | placeholder only if justified |
+| `GenModIP` | override | `ExtendSqiScaffolding.gf` | signature + Albanian modifier behavior | placeholder only if justified |
+| `PiedPipingQuestSlash` | override | `ExtendSqiScaffolding.gf` | abstract + current lincats | QS shape preserved |
+| `PiedPipingRelSlash` | override | `ExtendSqiScaffolding.gf` | abstract + current lincats | RS shape preserved |
+| `StrandQuestSlash` | override | `ExtendSqiScaffolding.gf` | abstract + current lincats | QS shape preserved |
+| `StrandRelSlash` | override | `ExtendSqiScaffolding.gf` | abstract + current lincats | RS shape preserved |
+| `EmptyRelSlash` | override | `ExtendSqiScaffolding.gf` | abstract + current lincats | RS shape preserved |
+| `ProDrop` | override | `ExtendSqiScaffolding.gf` | pronoun record shape | no clitic field loss |
+| `AdAdV` | override | `ExtendSqiScaffolding.gf` | AdA/Adv/AdV shapes | no category flattening |
+| `PositAdVAdj` | override | `ExtendSqiScaffolding.gf` | `A` category evidence | no wrong resource type leakage |
+| `IAdvAdv` | override | `ExtendSqiScaffolding.gf` | IAdv/Adv shapes | safe coercion only |
+| `CompS` | override | `ExtendSqiScaffolding.gf` | `Comp` record shape | only valid `Comp` fields |
+| `CompQS` | override | `ExtendSqiScaffolding.gf` | `Comp` record shape | only valid `Comp` fields |
+| `CompVP` | override | `ExtendSqiScaffolding.gf` | abstract signature + `CommonX` contract | no `TenseSqi` leakage |
+| `UttAccIP` | override | `ExtendSqiScaffolding.gf` | `Utt` shape | no lock-field damage |
+| `UttDatIP` | override | `ExtendSqiScaffolding.gf` | `Utt` shape | no lock-field damage |
+| `UttAccNP` | override | `ExtendSqiScaffolding.gf` | NP case behavior | only valid case use |
+| `UttDatNP` | override | `ExtendSqiScaffolding.gf` | NP case behavior | only valid case use |
+| `UttAdV` | override | `ExtendSqiScaffolding.gf` | `Utt` shape | safe utterance coercion |
+| `UttVPShort` | override | `ExtendSqiScaffolding.gf` | `Utt` shape | safe utterance coercion |
+| `ComplBareVS` | override | `ExtendSqiScaffolding.gf` | VS/VP shape | no tense-side drift |
+| `SlashBareV2S` | override | `ExtendSqiScaffolding.gf` | VPSlash shape | no partial records |
+| `ComplDirectVS` | override | `ExtendSqiScaffolding.gf` | VS/VP/Utt shapes | no partial records |
+| `ComplDirectVQ` | override | `ExtendSqiScaffolding.gf` | VQ/VP/Utt shapes | no partial records |
+| `FrontComplDirectVS` | override | `ExtendSqiScaffolding.gf` | Cl shape | no partial records |
+| `FrontComplDirectVQ` | override | `ExtendSqiScaffolding.gf` | Cl shape | no partial records |
+| `PredIAdvVP` | override | `ExtendSqiScaffolding.gf` | QCl shape | no partial records |
+| `ApposNP` | override | `ExtendSqiScaffolding.gf` | NP record shape | agreement preserved |
+| `ComplGenVV` | override | `ExtendSqiScaffolding.gf` | abstract signature + `CommonX` contract | no `TenseSqi` leakage |
+| `CompoundN` | override | `ExtendSqiScaffolding.gf` | N shape | no ad hoc flattening |
+| `GerundCN` | override | `ExtendSqiScaffolding.gf` | CN helper ownership | uses helper, not ad hoc CN |
+| `GerundNP` | override | `ExtendSqiScaffolding.gf` | NP helper ownership | uses helper, not ad hoc NP |
+| `GerundAdv` | override | `ExtendSqiScaffolding.gf` | Adv shape | no wrong-case leakage |
+| `UncontractedNeg` | override | `ExtendSqiScaffolding.gf` | abstract signature + polarity record shape | `CommonX`-side contract only |
+| `TPastSimple` | override | `ExtendSqiScaffolding.gf` | abstract signature + tense record shape | `CommonX`-side contract only |
+| `ComplSlashPartLast` | override | `ExtendSqiScaffolding.gf` | VPSlash/VP/NP shape | no partial records |
+| `DetNPMasc` | override | `ExtendSqiScaffolding.gf` | Det/NP agreement | gender agreement preserved |
+| `DetNPFem` | override | `ExtendSqiScaffolding.gf` | Det/NP agreement | gender agreement preserved |
+| `UseComp_estar` | override | `ExtendSqiScaffolding.gf` | VP/Comp shape | no bogus copula logic |
+| `UseComp_ser` | override | `ExtendSqiScaffolding.gf` | VP/Comp shape | no bogus copula logic |
+| `SubjRelNP` | override | `ExtendSqiScaffolding.gf` | NP/RS shape | agreement preserved |
+| `SubjunctRelCN` | override | `ExtendSqiScaffolding.gf` | CN/RS shape | category shape preserved |
+
+**Required outcome**
+This subsystem compiles with no contract-shape errors and no accidental `TenseSqi`/`CommonX` leakage.
+
+---
+
+### 4.2 Existential subsystem
+
+**Owner modules**
+- `GF/lib/src/albanian/ExtendSqiExistential.gf`
+
+**Coordinator touchpoint**
+- `GF/lib/src/albanian/ExtendSqi.gf`
+
+**Priority**
+5
+
+| Function | Mode | Owner | Evidence required | Acceptance rule |
+|---|---|---|---|---|
+| `ExistS` | override | `ExtendSqiExistential.gf` | abstract signature + constructor path | constructor-based composition |
+| `ExistNPQS` | override | `ExtendSqiExistential.gf` | abstract signature + constructor path | constructor-based composition |
+| `ExistIPQS` | override | `ExtendSqiExistential.gf` | abstract signature + constructor path | constructor-based composition |
+| `ExistCN` | override | `ExtendSqiExistential.gf` | abstract signature + CN behavior | no ad hoc flattening |
+| `ExistMassCN` | override | `ExtendSqiExistential.gf` | abstract signature + CN behavior | no ad hoc flattening |
+| `ExistPluralCN` | override | `ExtendSqiExistential.gf` | abstract signature + CN behavior | no ad hoc flattening |
+| `ExistsNP` | override | `ExtendSqiExistential.gf` | abstract signature + constructor path | constructor-based composition |
+
+---
+
+### 4.3 AP/CN subsystem
+
+**Owner modules**
+- `GF/lib/src/albanian/ExtendSqiAPCN.gf`
+
+**Audit spillover modules**
+- `GF/lib/src/albanian/AdjectiveSqi.gf`
+- `GF/lib/src/albanian/NounSqi.gf`
+
+**Coordinator touchpoint**
+- `GF/lib/src/albanian/ExtendSqi.gf`
+
+**Priority**
+4
+
+| Function | Mode | Owner | Evidence required | Acceptance rule |
+|---|---|---|---|---|
+| `ICompAP` | override | `ExtendSqiAPCN.gf` | abstract signature + AP shape | AP shape preserved |
+| `CompBareCN` | override | `ExtendSqiAPCN.gf` | abstract signature + CN shape | CN shape preserved |
+| `CompIQuant` | override | `ExtendSqiAPCN.gf` | abstract signature + IQuant/Comp behavior | category shape preserved |
+| `PredAPVP` | override | `ExtendSqiAPCN.gf` | AP/VP predicate behavior | no flattening |
+| `AdjAsCN` | override | `ExtendSqiAPCN.gf` | AP→CN conversion evidence | only justified Albanian conversion |
+| `AdjAsNP` | override | `ExtendSqiAPCN.gf` | AP→NP conversion evidence | only justified Albanian conversion |
+| `CardCNCard` | override | `ExtendSqiAPCN.gf` | numeral/CN integration | no partial records |
+
+---
+
+### 4.4 Focus/preposition subsystem
+
+**Owner modules**
+- `GF/lib/src/albanian/ExtendSqiFocusPrep.gf`
+
+**Audit spillover modules**
+- `GF/lib/src/albanian/AdverbSqi.gf`
+
+**Coordinator touchpoint**
+- `GF/lib/src/albanian/ExtendSqi.gf`
+
+**Priority**
+7
+
+| Function | Mode | Owner | Evidence required | Acceptance rule |
+|---|---|---|---|---|
+| `FocusObj` | override | `ExtendSqiFocusPrep.gf` | abstract signature + focus behavior | no string-only hacks |
+| `FocusAdv` | override | `ExtendSqiFocusPrep.gf` | abstract signature + focus behavior | Adv shape preserved |
+| `FocusAdV` | override | `ExtendSqiFocusPrep.gf` | abstract signature + focus behavior | AdV shape preserved |
+| `FocusAP` | override | `ExtendSqiFocusPrep.gf` | abstract signature + focus behavior | AP shape preserved |
+| `PrepCN` | override | `ExtendSqiFocusPrep.gf` | abstract signature + prep ownership | if shared, migrate logic toward `AdverbSqi` |
+
+---
+
+### 4.5 VP bridge subsystem
+
+**Owner modules**
+- `GF/lib/src/albanian/ExtendSqiVPBridge.gf`
+
+**Coordinator touchpoint**
+- `GF/lib/src/albanian/ExtendSqi.gf`
+
+**Priority**
+3
+
+| Function | Mode | Owner | Evidence required | Acceptance rule |
+|---|---|---|---|---|
+| `PresPartAP` | override | `ExtendSqiVPBridge.gf` | participial/AP evidence | AP shape preserved |
+| `EmbedPresPart` | override | `ExtendSqiVPBridge.gf` | participial embedding evidence | no ad hoc flattening |
+| `PastPartAP` | override | `ExtendSqiVPBridge.gf` | participial/AP evidence | AP shape preserved |
+| `PastPartAgentAP` | override | `ExtendSqiVPBridge.gf` | participial/AP evidence | AP shape preserved |
+| `PassVPSlash` | override | `ExtendSqiVPBridge.gf` | abstract signature + VPSlash shape | no bare record mismatch |
+| `PassAgentVPSlash` | override | `ExtendSqiVPBridge.gf` | abstract signature + VPSlash shape | no bare record mismatch |
+| `NominalizeVPSlashNP` | override | `ExtendSqiVPBridge.gf` | nominalization evidence | no ad hoc NP construction |
+| `ProgrVPSlash` | override | `ExtendSqiVPBridge.gf` | progressive evidence | category shape preserved |
+| `A2VPSlash` | override | `ExtendSqiVPBridge.gf` | abstract signature + A2 bridge | no bare record mismatch |
+| `N2VPSlash` | override | `ExtendSqiVPBridge.gf` | abstract signature + N2 bridge | no bare record mismatch |
+| `AdvIsNP` | override | `ExtendSqiVPBridge.gf` | abstract signature + Adv/NP bridge | no ad hoc flattening |
+| `AdvIsNPAP` | override | `ExtendSqiVPBridge.gf` | abstract signature + Adv/AP/NP bridge | no ad hoc flattening |
+| `PurposeVP` | override | `ExtendSqiVPBridge.gf` | abstract signature + Adv bridge | no bare record mismatch |
+| `WithoutVP` | override | `ExtendSqiVPBridge.gf` | abstract signature + Adv bridge | no bare record mismatch |
+| `ByVP` | override | `ExtendSqiVPBridge.gf` | abstract signature + Adv bridge | no bare record mismatch |
+| `InOrderToVP` | override | `ExtendSqiVPBridge.gf` | abstract signature + Adv bridge | no bare record mismatch |
+| `CompoundAP` | override | `ExtendSqiVPBridge.gf` | abstract signature + AP bridge | AP shape preserved |
+
+---
+
+### 4.6 RNP subsystem
+
+**Owner modules**
+- `GF/lib/src/albanian/ExtendSqiRNP.gf`
+
+**Audit spillover modules**
+- `GF/lib/src/albanian/NounSqi.gf`
+
+**Coordinator touchpoint**
+- `GF/lib/src/albanian/ExtendSqi.gf`
+
+**Priority**
+6
+
+| Function | Mode | Owner | Evidence required | Acceptance rule |
+|---|---|---|---|---|
+| `ReflRNP` | override | `ExtendSqiRNP.gf` | abstract signature + NP/VPSlash shapes | no ad hoc flattening |
+| `ReflPron` | override | `ExtendSqiRNP.gf` | pronoun evidence | no partial records |
+| `ReflPoss` | override | `ExtendSqiRNP.gf` | possessive/reflexive evidence | agreement preserved |
+| `PredetRNP` | override | `ExtendSqiRNP.gf` | predeterminer evidence | NP shape preserved |
+| `AdvRNP` | override | `ExtendSqiRNP.gf` | NP/prep attachment evidence | category shape preserved |
+| `AdvRVP` | override | `ExtendSqiRNP.gf` | VP/prep attachment evidence | category shape preserved |
+| `AdvRAP` | override | `ExtendSqiRNP.gf` | AP/prep attachment evidence | category shape preserved |
+| `ReflA2RNP` | override | `ExtendSqiRNP.gf` | AP/reflexive evidence | category shape preserved |
+| `PossPronRNP` | override | `ExtendSqiRNP.gf` | possessive pronoun evidence | agreement preserved |
+| `ConjRNP` | override | `ExtendSqiRNP.gf` | NP coordination evidence | coherent list behavior |
+| `Base_rr_RNP` | override | `ExtendSqiRNP.gf` | list behavior evidence | coherent list behavior |
+| `Base_nr_RNP` | override | `ExtendSqiRNP.gf` | list behavior evidence | coherent list behavior |
+| `Base_rn_RNP` | override | `ExtendSqiRNP.gf` | list behavior evidence | coherent list behavior |
+| `Cons_rr_RNP` | override | `ExtendSqiRNP.gf` | list behavior evidence | coherent list behavior |
+| `Cons_nr_RNP` | override | `ExtendSqiRNP.gf` | list behavior evidence | coherent list behavior |
+
+---
+
+### 4.7 Lexical tail subsystem
+
+**Owner modules**
+- `GF/lib/src/albanian/ExtendSqiLexicon.gf`
+
+**Coordinator touchpoint**
+- `GF/lib/src/albanian/ExtendSqi.gf`
+
+**Priority**
+8
+
+| Function | Mode | Owner | Evidence required | Acceptance rule |
+|---|---|---|---|---|
+| `ReflPossPron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | syntax clean, quant shape correct |
+| `iFem_Pron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | full pronoun record preserved |
+| `youFem_Pron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | full pronoun record preserved |
+| `weFem_Pron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | full pronoun record preserved |
+| `youPlFem_Pron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | full pronoun record preserved |
+| `theyFem_Pron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | full pronoun record preserved |
+| `theyNeutr_Pron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | full pronoun record preserved |
+| `youPolFem_Pron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | full pronoun record preserved |
+| `youPolPl_Pron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | full pronoun record preserved |
+| `youPolPlFem_Pron` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | full pronoun record preserved |
+| `UseDAP` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | NP shape preserved |
+| `UseDAPMasc` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | NP shape preserved |
+| `UseDAPFem` | override | `ExtendSqiLexicon.gf` | lexical ownership evidence | NP shape preserved |
+
+---
+
+## 5. Acceptance checks per subsystem
+
+Every subsystem pass is accepted only if all of the following are true:
+
+1. The companion module compiles with no hard errors.
+2. `ExtendSqi.gf` still remains a thin coordinator.
+3. No inherited VPS/VPI/VPS2/VPI2/list-family machinery has been reintroduced.
+4. No category has been flattened to `Str` unless the Albanian lincat is truly string-shaped.
+5. No new lock-field warnings are introduced.
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=285a3b611870:351-389
+start=351
+end=389
+----
+6. No override is justified only by convenience; every override must have Albanian or structural evidence.
+7. The family remains coherent as a family.
+
+---
+
+## 6. Current cycle execution order
+
+1. Scaffolding boundary (`ExtendSqiScaffolding.gf`, `ExtendSqiHelpers.gf`)
+2. Coordinator lock (`ExtendSqi.gf`)
+3. VP bridge (`ExtendSqiVPBridge.gf`)
+4. AP/CN (`ExtendSqiAPCN.gf`)
+5. Existentials (`ExtendSqiExistential.gf`)
+6. RNP (`ExtendSqiRNP.gf`)
+7. Focus/prep (`ExtendSqiFocusPrep.gf`)
+8. Lexical tail (`ExtendSqiLexicon.gf`)
+9. Structural cleanup outside `Extend` (`StructuralSqi.gf`, `StructuralSqiClause.gf`)
+10. Full validation through `GrammarSqi` and `SyntaxSqi`
+
+---
+
+## 7. What is not allowed in this cycle
+
+- Reintroducing local `MkVPS` / `BaseVPS` / `BaseComp` / `BaseImp` machinery into `ExtendSqi.gf`
+- Creating `ExtendSqiVPS.gf`
+- Fixing a family by scattering ad hoc helpers into unrelated modules
+- Accepting compile success if it depends on category-shape drift
+- Leaving warnings unexplained in high-risk families
+
+---
+
+## 8. Final target state
+
+At the end of this cycle:
+
+- `ExtendSqi.gf` is a stable thin coordinator.
+- Every local override belongs to one of the canonical companion modules.
+- The VPS/VPI/VPS2/VPI2/list-family remains inherited and stable.
+- All companion modules compile cleanly.
+- Structural warnings are reduced to the point that Albanian behaves like a mature GF language rather than an exploratory extension layer.
+--- CHUNK END ---
+----- FILE END -----
+
+----- FILE BEGIN -----
 path="ALBANIAN_FORBIDDEN_PATTERNS_AND_ANTI_DRIFT_RULES.md"
 id=bdc4663da514
 kind=markdown
@@ -2061,14 +2818,14 @@ If any item fails, do not merge the patch.
 
 ----- FILE BEGIN -----
 path="ALBANIAN_FUTURE_EXTENDSQI_STRUCTURE.md"
-id=d64b517ad734
+id=5aa033fd9e7e
 kind=markdown
-size=20238
-lines=785
+size=23396
+lines=881
 chunks=3
 
 --- CHUNK BEGIN ---
-id=d64b517ad734:1-350
+id=5aa033fd9e7e:1-350
 start=1
 end=350
 ----
@@ -2425,7 +3182,7 @@ These are expected to be shallow unless Albanian proves otherwise.
 --- CHUNK END ---
 
 --- CHUNK BEGIN ---
-id=d64b517ad734:351-700
+id=5aa033fd9e7e:351-700
 start=351
 end=700
 ----
@@ -2775,17 +3532,113 @@ Shared behavior belongs in a more stable Albanian-local helper layer or in the r
 
 `ExtendSqi` must not become a second Albanian core.
 
+
+## 12.4 Extension companion-module layout
+
+This section makes the future physical file split explicit.
+--- CHUNK END ---
+
+--- CHUNK BEGIN ---
+id=5aa033fd9e7e:701-881
+start=701
+end=881
+----
+
+### Rule
+
+`ExtendSqi.gf` must remain a **thin coordinator**.
+
+It should:
+
+* inherit from `ExtendFunctor` by default
+* exclude only the functions Albanian truly overrides
+* wire overridden families to dedicated Albanian companion modules
+* avoid becoming a general repair bucket
+
+### Canonical Albanian extension modules
+
+The preferred Albanian extension layout is:
+
+* `ExtendSqi.gf` — thin coordinator only
+* `ExtendSqiScaffolding.gf` — boundary-safe helper constructors needed by `ExtendSqi`
+* `ExtendSqiExistential.gf` — existential subsystem
+* `ExtendSqiAPCN.gf` — AP/CN conversion and related complement subsystem
+* `ExtendSqiFocusPrep.gf` — focus/preposition subsystem
+* `ExtendSqiVPBridge.gf` — VP/VPSlash bridge subsystem
+* `ExtendSqiRNP.gf` — reflexive NP / RNP subsystem
+* `ExtendSqiLexicon.gf` — extension-specific lexical tail only
+
+### Conditional extension module
+
+Create:
+
+* `ExtendSqiVPS.gf`
+
+only if Albanian chooses to implement a **full custom override** for the:
+
+* `VPS`
+* `VPI`
+* `VPS2`
+* `VPI2`
+* list/coordinating wrapper family
+
+If that family is not being implemented coherently as an Albanian subsystem, it should remain inherited from `ExtendFunctor`.
+
+### File-creation rule
+
+Create a new Albanian extension file only when all of the following are true:
+
+1. the functions form one coherent subsystem
+2. the subsystem cannot safely remain inherited from `ExtendFunctor`
+3. keeping the subsystem inside `ExtendSqi.gf` would reduce clarity or boundary control
+4. the Albanian target category shapes are already understood from core modules
+
+### Do not create these by default
+
+Do **not** introduce extra files such as:
+
+* `ExtendSqiLists.gf`
+* `ExtendSqiParticiples.gf`
+* `ExtendSqiCompounds.gf`
+* `ExtendSqiTense.gf`
+* `ExtendSqiMisc.gf`
+* `ExtendSqiFixes.gf`
+
+unless a real Albanian override family has grown large enough to justify them.
+
+### Reason
+
+Over-splitting increases namespace pressure, weakens ownership clarity, and makes subsystem reasoning harder.
+
+The preferred strategy is:
+
+* keep canonical ownership in Albanian core modules
+* keep extension-specific override families in a small number of companion files
+* add a new file only when a whole override family genuinely exists
+
+### Ownership reminder
+
+Do not move canonical ownership out of core Albanian modules merely for convenience.
+
+In particular:
+
+* closed-class grammatical items belong in structural modules
+* open-class lexical growth belongs in `LexiconSqi.gf`, `ParadigmsSqi.gf`, or `NamesSqi.gf`
+* core category shape belongs in `CatSqi.gf`
+* shared Albanian resource behavior belongs in `ResSqi.gf`
+
+### Anti-patterns
+
+Avoid:
+
+* generic overflow files
+* splitting list wrappers away from the subsystem they belong to without strong reason
+* moving structural or lexical ownership into extension files just to keep `ExtendSqi.gf` shorter
+* introducing a custom override family one function at a time when the family must remain coherent
 ---
 
 ## 13. Override matrix template
 
---- CHUNK END ---
-
---- CHUNK BEGIN ---
-id=d64b517ad734:701-785
-start=701
-end=785
-----
 Every nontrivial overridden function should eventually be tracked in a small matrix with these columns:
 
 * function
@@ -7868,4 +8721,4 @@ This file is normative for constructor design. If code and this file disagree, u
 --- CHUNK END ---
 ----- FILE END -----
 
-===== END VOLUME docs_20260320_134841_01_ROOT.txt =====
+===== END VOLUME docs_20260324_104205_01_ROOT.txt =====

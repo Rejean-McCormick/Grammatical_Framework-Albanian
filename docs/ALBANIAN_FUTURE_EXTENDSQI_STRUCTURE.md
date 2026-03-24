@@ -694,6 +694,102 @@ Shared behavior belongs in a more stable Albanian-local helper layer or in the r
 
 `ExtendSqi` must not become a second Albanian core.
 
+
+## 12.4 Extension companion-module layout
+
+This section makes the future physical file split explicit.
+
+### Rule
+
+`ExtendSqi.gf` must remain a **thin coordinator**.
+
+It should:
+
+* inherit from `ExtendFunctor` by default
+* exclude only the functions Albanian truly overrides
+* wire overridden families to dedicated Albanian companion modules
+* avoid becoming a general repair bucket
+
+### Canonical Albanian extension modules
+
+The preferred Albanian extension layout is:
+
+* `ExtendSqi.gf` — thin coordinator only
+* `ExtendSqiScaffolding.gf` — boundary-safe helper constructors needed by `ExtendSqi`
+* `ExtendSqiExistential.gf` — existential subsystem
+* `ExtendSqiAPCN.gf` — AP/CN conversion and related complement subsystem
+* `ExtendSqiFocusPrep.gf` — focus/preposition subsystem
+* `ExtendSqiVPBridge.gf` — VP/VPSlash bridge subsystem
+* `ExtendSqiRNP.gf` — reflexive NP / RNP subsystem
+* `ExtendSqiLexicon.gf` — extension-specific lexical tail only
+
+### Conditional extension module
+
+Create:
+
+* `ExtendSqiVPS.gf`
+
+only if Albanian chooses to implement a **full custom override** for the:
+
+* `VPS`
+* `VPI`
+* `VPS2`
+* `VPI2`
+* list/coordinating wrapper family
+
+If that family is not being implemented coherently as an Albanian subsystem, it should remain inherited from `ExtendFunctor`.
+
+### File-creation rule
+
+Create a new Albanian extension file only when all of the following are true:
+
+1. the functions form one coherent subsystem
+2. the subsystem cannot safely remain inherited from `ExtendFunctor`
+3. keeping the subsystem inside `ExtendSqi.gf` would reduce clarity or boundary control
+4. the Albanian target category shapes are already understood from core modules
+
+### Do not create these by default
+
+Do **not** introduce extra files such as:
+
+* `ExtendSqiLists.gf`
+* `ExtendSqiParticiples.gf`
+* `ExtendSqiCompounds.gf`
+* `ExtendSqiTense.gf`
+* `ExtendSqiMisc.gf`
+* `ExtendSqiFixes.gf`
+
+unless a real Albanian override family has grown large enough to justify them.
+
+### Reason
+
+Over-splitting increases namespace pressure, weakens ownership clarity, and makes subsystem reasoning harder.
+
+The preferred strategy is:
+
+* keep canonical ownership in Albanian core modules
+* keep extension-specific override families in a small number of companion files
+* add a new file only when a whole override family genuinely exists
+
+### Ownership reminder
+
+Do not move canonical ownership out of core Albanian modules merely for convenience.
+
+In particular:
+
+* closed-class grammatical items belong in structural modules
+* open-class lexical growth belongs in `LexiconSqi.gf`, `ParadigmsSqi.gf`, or `NamesSqi.gf`
+* core category shape belongs in `CatSqi.gf`
+* shared Albanian resource behavior belongs in `ResSqi.gf`
+
+### Anti-patterns
+
+Avoid:
+
+* generic overflow files
+* splitting list wrappers away from the subsystem they belong to without strong reason
+* moving structural or lexical ownership into extension files just to keep `ExtendSqi.gf` shorter
+* introducing a custom override family one function at a time when the family must remain coherent
 ---
 
 ## 13. Override matrix template
