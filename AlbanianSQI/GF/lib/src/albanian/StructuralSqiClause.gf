@@ -1,36 +1,40 @@
 -- GF/lib/src/albanian/StructuralSqiClause.gf
 resource StructuralSqiClause =
-  open Prelude, ParamX, CatSqi, ResSqi, (P = ParadigmsSqi) in {
+  open Prelude, ParamX, CatSqi, (R = ResSqi), (P = ParadigmsSqi) in {
 
 oper
-  -- Local DConj record type for this resource.
-  DConj : Type = {s : Str} ;
+  -- =========================================================
+  -- CLAUSE / DISCOURSE STRUCTURAL VOCABULARY
+  -- Strategy: keep clause-level closed-class items here.
+  -- Use paradigm constructors where they exist.
+  -- Use mkPrep for prepositions; use direct record construction only
+  -- for genuinely surface-only local categories such as DConj, CAdv, Utt.
+  -- =========================================================
 
-  -- Local DConj constructor: keep DConj separate from Conj.
-  mkDConj : Str -> DConj = \s -> {s = s} ;
+  mkDConj : Str -> DConj = \s -> lin DConj {s = s} ;
 
   -- Prepositions
-  above_Prep : CatSqi.Prep = ResSqi.mkPrep "sipër" ;
-  after_Prep : CatSqi.Prep = ResSqi.mkPrep "pas" ;
-  before_Prep : CatSqi.Prep = ResSqi.mkPrep "para" ;
-  behind_Prep : CatSqi.Prep = ResSqi.mkPrep "pas" ;
-  between_Prep : CatSqi.Prep = ResSqi.mkPrep "midis" ;
-  by8agent_Prep : CatSqi.Prep = ResSqi.mkPrep "nga" ;
-  by8means_Prep : CatSqi.Prep = ResSqi.mkPrep "me" ;
-  during_Prep : CatSqi.Prep = ResSqi.mkPrep "gjatë" ;
-  for_Prep : CatSqi.Prep = ResSqi.mkPrep "për" ;
-  from_Prep : CatSqi.Prep = ResSqi.mkPrep "nga" ;
-  in8front_Prep : CatSqi.Prep = ResSqi.mkPrep "përpara" ;
-  in_Prep : CatSqi.Prep = ResSqi.mkPrep "në" ;
-  on_Prep : CatSqi.Prep = ResSqi.mkPrep "mbi" ;
-  part_Prep : CatSqi.Prep = ResSqi.mkPrep "prej" ;
-  possess_Prep : CatSqi.Prep = ResSqi.mkPrep "i" ;
-  through_Prep : CatSqi.Prep = ResSqi.mkPrep "përmes" ;
-  to_Prep : CatSqi.Prep = ResSqi.mkPrep "në" ;
-  under_Prep : CatSqi.Prep = ResSqi.mkPrep "nën" ;
-  with_Prep : CatSqi.Prep = ResSqi.mkPrep "me" ;
-  without_Prep : CatSqi.Prep = ResSqi.mkPrep "pa" ;
-  except_Prep : CatSqi.Prep = ResSqi.mkPrep "përveç" ;
+  above_Prep : Prep = R.mkPrep "sipër" ;
+  after_Prep : Prep = R.mkPrep "pas" ;
+  before_Prep : Prep = R.mkPrep "para" ;
+  behind_Prep : Prep = R.mkPrep "pas" ;
+  between_Prep : Prep = R.mkPrep "midis" ;
+  by8agent_Prep : Prep = R.mkPrep "nga" ;
+  by8means_Prep : Prep = R.mkPrep "me" ;
+  during_Prep : Prep = R.mkPrep "gjatë" ;
+  for_Prep : Prep = R.mkPrep "për" ;
+  from_Prep : Prep = R.mkPrep "nga" ;
+  in8front_Prep : Prep = R.mkPrep "përpara" ;
+  in_Prep : Prep = R.mkPrep "në" ;
+  on_Prep : Prep = R.mkPrep "mbi" ;
+  part_Prep : Prep = R.mkPrep "prej" ;
+  possess_Prep : Prep = R.mkPrep "i" ;
+  through_Prep : Prep = R.mkPrep "përmes" ;
+  to_Prep : Prep = R.mkPrep "në" ;
+  under_Prep : Prep = R.mkPrep "nën" ;
+  with_Prep : Prep = R.mkPrep "me" ;
+  without_Prep : Prep = R.mkPrep "pa" ;
+  except_Prep : Prep = R.mkPrep "përveç" ;
 
   -- Conjunctions and subordinators
   although_Subj : Subj = P.mkSubj "megjithëse" ;

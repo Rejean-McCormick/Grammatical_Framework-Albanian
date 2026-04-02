@@ -7,6 +7,13 @@ concrete StructuralSqi of Structural = CatSqi **
 flags optimize = all ;
 
 lin
+  -- =========================================================
+  -- STRUCTURAL AGGREGATOR
+  -- Strategy: pure re-export join point over nominal, verbal,
+  -- and clause structural subresources.
+  -- Keep ownership in the submodules; do not add local repair logic here.
+  -- =========================================================
+
   -- Prepositions
   above_Prep = SC.above_Prep ;
   after_Prep = SC.after_Prep ;

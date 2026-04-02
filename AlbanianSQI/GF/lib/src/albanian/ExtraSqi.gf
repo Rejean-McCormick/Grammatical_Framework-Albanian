@@ -10,7 +10,8 @@
 
 concrete ExtraSqi of ExtraSqiAbs =
   CatSqi **
-  open Prelude, ResSqi in {
+  open Prelude, ResSqi, GrammarSqi,
+       (NS = NounSqi), (AS = AdverbSqi) in {
 
   oper
     -- =========================================================
@@ -21,6 +22,12 @@ concrete ExtraSqi of ExtraSqiAbs =
 
     verbPres3sg : Verb -> Str =
       \v -> v.Indicative ! Pres ! Sg ! P3 ;
+
+    npSurfaceNom : NP -> Str =
+      \np -> np.s ! Nom ;
+
+    npSurfaceAcc : NP -> Str =
+      \np -> np.s ! Acc ;
 
     -- =========================================================
     -- 2. CATEGORY-PRESERVING HELPERS
@@ -39,12 +46,6 @@ concrete ExtraSqi of ExtraSqiAbs =
 
     apSurfaceNomMascSg : AP -> Str =
       \ap -> ap.s ! Indef ! Nom ! Masc ! Sg ;
-
-    cnSurfaceAccSg : CN -> Str =
-      \cn -> cn.s ! Indef ! Acc ! Sg ;
-
-    npSurfaceAfterPrep : NP -> Str =
-      \np -> np.s ! Acc ;
 
     -- =========================================================
     -- 4. TEMPORARY COMPATIBILITY HELPERS
@@ -97,38 +98,41 @@ concrete ExtraSqi of ExtraSqiAbs =
     ConsVPS x xs = {s = x.s ++ "," ++ wordSep ++ xs.s} ;
     MkVPS t p vp = {s = vp.s} ;
     ConjVPS conj xs = {s = xs.s ++ wordSep ++ conj.s} ;
-    PredVPS np vps = {s = np.s ! Nom ++ wordSep ++ vps.s} ;
+    PredVPS np vps = {s = npSurfaceNom np ++ wordSep ++ vps.s} ;
 
     -- =========================================================
     -- AP/CN CONVERSION SUBSYSTEM
-    -- Strategy: shallow targets only; lossy paths remain explicit
+    -- Strategy:
+    -- - use inherited/compositional Albanian paths where available
+    -- - keep shallow reduction only for genuinely string-like targets
     -- =========================================================
 
-    -- temporary shallow target (IComp is string-like here)
-    ICompAP ap = {s = apSurfaceNomMascSg ap} ;
+    -- aligned with ExtendSqiAPCN
+    ICompAP ap = lin IComp (CompAP ap) ;
+
     IAdvAdv adv = {s = adv.s} ;
 
-    -- mirrored shallow target
-    CompIQuant iq = {s = iq.s} ;
+    -- aligned with ExtendSqiAPCN
+    CompIQuant iq = CompIP (IdetIP (IdetQuant iq NumSg)) ;
 
-    -- temporary shallow prep+CN surface path
-    PrepCN prep cn = {s = prep.s ++ wordSep ++ cnSurfaceAccSg cn} ;
+    -- aligned with ExtendSqiFocusPrep / Albanian prep government
+    PrepCN prep cn = AS.PrepNP prep (NS.MassNP cn) ;
 
     -- =========================================================
     -- FOCUS SUBSYSTEM
     -- Strategy: keep Foc shallow and visibly surface-oriented
     -- =========================================================
 
-    FocObj np slash = {s = np.s ! Acc ++ wordSep ++ slash.s} ;
+    FocObj np slash = {s = npSurfaceAcc np ++ wordSep ++ slash.s} ;
     FocAdv adv cl   = {s = adv.s ++ wordSep ++ cl.s} ;
     FocAdV adv cl   = {s = adv.s ++ wordSep ++ cl.s} ;
 
-    -- temporary shallow target
-    FocAP ap np     = {s = apSurfaceNomMascSg ap ++ wordSep ++ np.s ! Nom} ;
+    -- temporary shallow target, aligned with ExtendSqiFocusPrep
+    FocAP ap np     = {s = apSurfaceNomMascSg ap ++ wordSep ++ npSurfaceNom np} ;
 
     FocNeg cl       = {s = "nuk" ++ wordSep ++ cl.s} ;
-    FocVP vp np     = {s = vp.s ++ wordSep ++ np.s ! Nom} ;
-    FocVV vv vp np  = {s = verbPres3sg vv ++ wordSep ++ vp.s ++ wordSep ++ np.s ! Nom} ;
+    FocVP vp np     = {s = vp.s ++ wordSep ++ npSurfaceNom np} ;
+    FocVV vv vp np  = {s = verbPres3sg vv ++ wordSep ++ vp.s ++ wordSep ++ npSurfaceNom np} ;
     UseFoc t p foc  = {s = foc.s} ;
 
     -- =========================================================
@@ -139,6 +143,7 @@ concrete ExtraSqi of ExtraSqiAbs =
     -- realization here is a temporary compatibility path.
     PartVP vp = mkCompatAPFromStr vp.s ;
 
+    -- SC is shallow/string-like here.
     EmbedPresPart vp = {s = vp.s} ;
 
     PassVPSlash vpslash = vpslash ;

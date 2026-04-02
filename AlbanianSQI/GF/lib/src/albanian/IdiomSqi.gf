@@ -2,14 +2,24 @@
 concrete IdiomSqi of Idiom = CatSqi ** open ResSqi, Prelude in {
 
   oper
-    copBe : Str = "është" ;
-    relThat : Str = "që" ;
-    existV : Str = "ka" ;
+    -- =========================================================
+    -- IDIOM SUBSYSTEM
+    -- Strategy:
+    -- - keep established Albanian idioms shallow and explicit
+    -- - do not pretend draft paths preserve richer structure than they do
+    -- - preserve full records with ** only when the target category remains
+    --   the same and only the surface string is being adjusted
+    -- =========================================================
+
+    copBe    : Str = "është" ;
+    relThat  : Str = "që" ;
+    existV   : Str = "ka" ;
     progPart : Str = "po" ;
-    letPart : Str = "le" ++ "të" ;
+    letPart  : Str = "le" ++ "të" ;
     selfWord : Str = "vetë" ;
 
-    idiomNpNom : NP -> Str = \np -> np.s ! Nom ;
+    idiomNpNom : NP -> Str =
+      \np -> np.s ! Nom ;
 
   lin
     -- it is here she slept
@@ -34,11 +44,14 @@ concrete IdiomSqi of Idiom = CatSqi ** open ResSqi, Prelude in {
     ExistNPAdv np adv =
       {s = existV ++ idiomNpNom np ++ adv.s} ;
 
-    -- one sleeps (draft: no explicit subject)
+    -- TEMPORARY / DRAFT:
+    -- no explicit Albanian generic-subject strategy has been surfaced here.
+    -- Keep this shallow rather than manufacturing a fake expletive/pronoun path.
     GenericCl vp =
       {s = vp.s} ;
 
-    -- it is hot (draft: no explicit expletive)
+    -- TEMPORARY / DRAFT:
+    -- likewise, no explicit impersonal/expletive path is currently established.
     ImpersCl vp =
       {s = vp.s} ;
 
@@ -50,14 +63,19 @@ concrete IdiomSqi of Idiom = CatSqi ** open ResSqi, Prelude in {
     ImpPl1 vp =
       {s = letPart ++ vp.s} ;
 
-    -- progressive VP (draft marker "po")
+    -- TEMPORARY / DRAFT:
+    -- progressive marking is currently realized with shallow "po" prefixing.
+    -- Preserve the VP record, but only adjust its surface string.
     ProgrVP vp =
       vp ** {s = progPart ++ vp.s} ;
 
-    -- VP ... himself/herself (draft: suffix)
+    -- TEMPORARY / DRAFT:
+    -- reflexive/emphatic self path remains a shallow suffix strategy.
+    -- Preserve the VP record, but only adjust its surface string.
     SelfAdVVP vp =
       vp ** {s = vp.s ++ selfWord} ;
 
+    -- Shallow Adv-like realization.
     SelfAdvVP vp =
       {s = vp.s ++ selfWord} ;
 
@@ -66,4 +84,4 @@ concrete IdiomSqi of Idiom = CatSqi ** open ResSqi, Prelude in {
       {s = \\c => np.s ! c ++ selfWord ;
        a = np.a} ;
 
-}
+} ;

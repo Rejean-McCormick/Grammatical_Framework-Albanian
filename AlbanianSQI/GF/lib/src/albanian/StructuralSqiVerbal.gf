@@ -3,64 +3,63 @@ resource StructuralSqiVerbal =
   open Prelude, ParamX, ResSqi, CatSqi, (P = ParadigmsSqi) in {
 
 oper
-  -- Compile-safe fallback for verbs we do not want ParadigmsSqi.mkV to analyze.
-  mkVConst : CatSqi.V -> Str -> CatSqi.V =
-    \_ , x -> lin V {
+  -- =========================================================
+  -- STRUCTURAL VERBAL VOCABULARY
+  -- Strategy:
+  -- - keep compile-safe constant-verb fallbacks here for verbs we do not
+  --   want ParadigmsSqi.mkV to analyze
+  -- - centralize the constant builders instead of repeating ad hoc wrappers
+  -- - keep must_VV disabled until the GeneratePMCFG crash source is isolated
+  -- =========================================================
+
+  mkPersTab : Str -> _ =
+    \x -> table {P1 => x ; P2 => x ; P3 => x} ;
+
+  mkNumPersTab : Str -> _ =
+    \x -> table {
+      Sg => mkPersTab x ;
+      Pl => mkPersTab x
+    } ;
+
+  mkVConst : Str -> CatSqi.V =
+    \x -> lin V {
       Indicative = table {
-        ParamX.Pres => table {
-          Sg => table {P1 => x ; P2 => x ; P3 => x} ;
-          Pl => table {P1 => x ; P2 => x ; P3 => x}
-        } ;
-        ParamX.Past => table {
-          Sg => table {P1 => x ; P2 => x ; P3 => x} ;
-          Pl => table {P1 => x ; P2 => x ; P3 => x}
-        } ;
-        Aorist => table {
-          Sg => table {P1 => x ; P2 => x ; P3 => x} ;
-          Pl => table {P1 => x ; P2 => x ; P3 => x}
-        } ;
-        Imperfect => table {
-          Sg => table {P1 => x ; P2 => x ; P3 => x} ;
-          Pl => table {P1 => x ; P2 => x ; P3 => x}
-        }
+        ParamX.Pres      => mkNumPersTab x ;
+        ParamX.Past      => mkNumPersTab x ;
+        Aorist           => mkNumPersTab x ;
+        Imperfect        => mkNumPersTab x
       } ;
       Imperative = table {
         Sg => x ;
         Pl => x
       } ;
       participle = x ;
-      pres_optative = table {
-        Sg => table {P1 => x ; P2 => x ; P3 => x} ;
-        Pl => table {P1 => x ; P2 => x ; P3 => x}
-      } ;
-      perf_optative = table {
-        Sg => table {P1 => x ; P2 => x ; P3 => x} ;
-        Pl => table {P1 => x ; P2 => x ; P3 => x}
-      } ;
-      pres_admirative = table {
-        Sg => table {P1 => x ; P2 => x ; P3 => x} ;
-        Pl => table {P1 => x ; P2 => x ; P3 => x}
-      } ;
-      imperf_admirative = table {
-        Sg => table {P1 => x ; P2 => x ; P3 => x} ;
-        Pl => table {P1 => x ; P2 => x ; P3 => x}
-      }
+      pres_optative = mkNumPersTab x ;
+      perf_optative = mkNumPersTab x ;
+      pres_admirative = mkNumPersTab x ;
+      imperf_admirative = mkNumPersTab x
     } ;
 
+  mkVVConst : Str -> CatSqi.VV =
+    \x -> P.mkVV (mkVConst x) ;
+
+  mkV2Const : Str -> CatSqi.V2 =
+    \x -> P.mkV2 (mkVConst x) ;
+
   can8know_VV : CatSqi.VV =
-    P.mkVV (mkVConst (lin V {Indicative = Predef.error "unused" ; Imperative = Predef.error "unused" ; participle = [] ; pres_optative = Predef.error "unused" ; perf_optative = Predef.error "unused" ; pres_admirative = Predef.error "unused" ; imperf_admirative = Predef.error "unused"}) "di") ;
+    mkVVConst "di" ;
 
   can_VV : CatSqi.VV =
-    P.mkVV (mkVConst (lin V {Indicative = Predef.error "unused" ; Imperative = Predef.error "unused" ; participle = [] ; pres_optative = Predef.error "unused" ; perf_optative = Predef.error "unused" ; pres_admirative = Predef.error "unused" ; imperf_admirative = Predef.error "unused"}) "mundem") ;
+    mkVVConst "mundem" ;
 
   -- Keep disabled until the GeneratePMCFG crash source is isolated.
   -- must_VV : CatSqi.VV =
-  --   P.mkVV (mkVConst (lin V {Indicative = Predef.error "unused" ; Imperative = Predef.error "unused" ; participle = [] ; pres_optative = Predef.error "unused" ; perf_optative = Predef.error "unused" ; pres_admirative = Predef.error "unused" ; imperf_admirative = Predef.error "unused"}) "duhet") ;
+  --   mkVVConst "duhet" ;
 
   want_VV : CatSqi.VV =
-    P.mkVV (mkVConst (lin V {Indicative = Predef.error "unused" ; Imperative = Predef.error "unused" ; participle = [] ; pres_optative = Predef.error "unused" ; perf_optative = Predef.error "unused" ; pres_admirative = Predef.error "unused" ; imperf_admirative = Predef.error "unused"}) "dua") ;
+    mkVVConst "dua" ;
 
   have_V2 : CatSqi.V2 =
-    P.mkV2 (mkVConst (lin V {Indicative = Predef.error "unused" ; Imperative = Predef.error "unused" ; participle = [] ; pres_optative = Predef.error "unused" ; perf_optative = Predef.error "unused" ; pres_admirative = Predef.error "unused" ; imperf_admirative = Predef.error "unused"}) "kam") ;
+    mkV2Const "kam" ;
 
 } ;

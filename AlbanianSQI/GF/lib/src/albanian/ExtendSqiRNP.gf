@@ -4,9 +4,12 @@ resource ExtendSqiRNP =
   oper
     rnp_wordSep : Str = " " ;
 
+    rnp_afterPrepNP : Prep -> NP -> Str =
+      \_,np -> np.s ! R.Acc ;
+
     rnp_mkCompatNPFromStr : Str -> R.Gender -> Number -> NP =
       \w,g,n -> lin NP {
-        s = \\cas => w ;
+        s = \\c => w ;
         a = R.agrgP3 g n
       } ;
 
@@ -17,9 +20,11 @@ resource ExtendSqiRNP =
           False => a.s ! c ! g ! n
         } ;
 
-    rnp_ReflRNP : VPSlash -> NP -> VPSlash =
+    rnp_ReflRNP : VPSlash -> NP -> VP =
       \vpslash,rnp ->
-        lin VPSlash {s = vpslash.s ++ rnp_wordSep ++ rnp.s ! R.Acc} ;
+        lin VP {
+          s = vpslash.s ++ rnp_wordSep ++ rnp.s ! R.Acc
+        } ;
 
     rnp_ReflPron : NP =
       rnp_mkCompatNPFromStr "veten" R.Masc Sg ;
@@ -38,26 +43,35 @@ resource ExtendSqiRNP =
 
     rnp_AdvRNP : NP -> Prep -> NP -> NP =
       \np,prep,rnp -> lin NP {
-        s = \\c => rnp.s ! c ++ rnp_wordSep ++ prep.s ++ rnp_wordSep ++ np.s ! R.Acc ;
+        s = \\c =>
+              rnp.s ! c ++
+              rnp_wordSep ++ prep.s ++ rnp_wordSep ++
+              rnp_afterPrepNP prep np ;
         a = rnp.a
       } ;
 
     rnp_AdvRVP : VP -> Prep -> NP -> VP =
       \vp,prep,rnp ->
-        lin VP {s = vp.s ++ rnp_wordSep ++ prep.s ++ rnp_wordSep ++ rnp.s ! R.Acc} ;
+        lin VP {
+          s = vp.s ++
+              rnp_wordSep ++ prep.s ++ rnp_wordSep ++
+              rnp_afterPrepNP prep rnp
+        } ;
 
     rnp_AdvRAP : AP -> Prep -> NP -> AP =
       \ap,prep,rnp -> lin AP {
         s = \\spec,c,g,n =>
               ap.s ! spec ! c ! g ! n ++
-              rnp_wordSep ++ prep.s ++ rnp_wordSep ++ rnp.s ! R.Acc
+              rnp_wordSep ++ prep.s ++ rnp_wordSep ++
+              rnp_afterPrepNP prep rnp
       } ;
 
     rnp_ReflA2RNP : A2 -> NP -> AP =
       \a2,rnp -> lin AP {
         s = \\spec,c,g,n =>
               rnp_adjComplStr a2 spec c g n ++
-              rnp_wordSep ++ a2.c2.s ++ rnp_wordSep ++ rnp.s ! R.Acc
+              rnp_wordSep ++ a2.c2.s ++ rnp_wordSep ++
+              rnp.s ! R.Acc
       } ;
 
     rnp_PossPronRNP : CatSqi.Pron -> Num -> CN -> NP -> NP =
@@ -71,7 +85,10 @@ resource ExtendSqiRNP =
 
     rnp_ConjRNP : Conj -> ListNP -> NP =
       \conj,rnps -> lin NP {
-        s = \\c => rnps.init ! c ++ rnp_wordSep ++ conj.s ++ rnp_wordSep ++ rnps.last ! c ;
+        s = \\c =>
+              rnps.init ! c ++
+              rnp_wordSep ++ conj.s ++ rnp_wordSep ++
+              rnps.last ! c ;
         a = rnps.a
       } ;
 
@@ -108,6 +125,13 @@ resource ExtendSqiRNP =
         init = \\c => np.s ! c ++ rnp_wordSep ++ rs.init ! c ;
         last = rs.last ;
         a = rs.a
+      } ;
+
+    rnp_Cons_rn_RNP : NP -> ListNP -> ListNP =
+      \r,ns -> lin ListNP {
+        init = \\c => r.s ! c ++ rnp_wordSep ++ ns.init ! c ;
+        last = ns.last ;
+        a = ns.a
       } ;
 
 }

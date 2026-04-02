@@ -1,9 +1,16 @@
 -- GF/lib/src/albanian/ExtendSqiLexicon.gf
 
 resource ExtendSqiLexicon =
-  open Prelude, Predef, ParamX, CatSqi, ExtendSqiHelpers, (R = ResSqi) in {
+  open Prelude, ParamX, CatSqi, ExtendSqiHelpers, (R = ResSqi) in {
 
   oper
+    -- =========================================================
+    -- LEXICAL TAIL
+    -- Strategy: extension-specific lexical entries and simple
+    -- lexical wrappers only.
+    -- No structural repair logic belongs here.
+    -- =========================================================
+
     lex_ReflPossPron : Quant =
       lin Quant {
         s    = \\c,g,n => "vet" ;
@@ -36,6 +43,12 @@ resource ExtendSqiLexicon =
 
     lex_youPolPlFem_Pron : Pron =
       mkPronConst "ju" "ju" "ju" "ju" "ju" R.Fem Pl ;
+
+    -- =========================================================
+    -- LEXICAL WRAPPERS
+    -- Strategy: keep DAP-to-NP wrappers lexical and explicitly
+    -- compatibility-based.
+    -- =========================================================
 
     lex_UseDAP : DAP -> NP =
       \dap -> mkCompatNPFromStr dap.s R.Masc Sg ;

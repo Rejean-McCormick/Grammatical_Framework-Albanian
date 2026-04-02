@@ -1,119 +1,697 @@
 # ALBANIAN_LANGUAGE_ARCHITECTURE
 
+## Status
+
+Authoritative architecture document for the Albanian GF grammar in the current uploaded code snapshot.
+
+This document is the top-level map for how the Albanian concrete syntax is organized, which modules define category shapes, which modules are the stable grammatical center, which modules are structural or extension layers, which modules are thin wrappers or package surfaces, and how future work should align with the current architecture instead of drifting into ad hoc local rewrites.
+
+It is an architecture document, not a repair log.
+
+It is intentionally separate from the more operational documents that govern:
+- exact constructor legality,
+- exact helper compatibility,
+- stale-comment handling,
+- symbol maturity,
+- shallow-category constructor verification,
+- and test-level regression policy.
+
+Those belong to:
+- `ALBANIAN_SYNTAX_AND_CONSTRUCTOR_RULES.md`
+- `ALBANIAN_IMPLEMENTATION_PATTERNS.md`
+- `ALBANIAN_CATEGORY_AND_LINCAT_REFERENCE.md`
+- `ALBANIAN_HELPER_REGISTRY.md`
+- `ALBANIAN_SHALLOW_CATEGORY_CONSTRUCTOR_MATRIX.md`
+- `ALBANIAN_SYMBOL_STATUS_LEDGER.md`
+- `ALBANIAN_STALE_COMMENT_TRACKER.md`
+- `ALBANIAN_MODULE_EXTRACTION_COVERAGE.md`
+- `ALBANIAN_OVERRIDE_AND_INHERITANCE_POLICY.md`
+
+This file defines the architectural picture those documents are expected to preserve.
+
+---
+
 ## Purpose
 
-This document describes the architectural structure of the Albanian GF resource grammar in the uploaded code snapshot. It is intended to be the top-level map for how the Albanian concrete syntax is organized, which modules define core category shapes, which modules build syntax compositionally, which modules are best treated as higher-risk override zones, and how new work should align with the existing grammar rather than drift into ad-hoc local rewrites.
+The Albanian GF grammar has reached the point where maintainers and AI systems need one document that answers the architecture question clearly:
+
+- What is the stable center of the Albanian grammar?
+- Which modules define concrete category shapes?
+- Which modules are the intended producers of the most important categories?
+- Which modules are architectural aggregators rather than owners?
+- Which modules are extension/risk zones?
+- Which modules should remain thin?
+- Where do structural items belong?
+- Which documents should be consulted for architecture, and which for concrete implementation discipline?
+
+The purpose of this document is to preserve that stable architectural picture while also stating, explicitly, the architectural boundaries that prevent AI systems and maintainers from confusing:
+
+- architectural approval with constructor legality,
+- category shape with module-local constructor availability,
+- module ownership with local patch permission,
+- and surface permissibility with helper-type compatibility.
+
+This document therefore does two things at once:
+
+1. it describes the architectural layering of the Albanian grammar;  
+2. it states the architectural boundaries that operational docs must respect.
+
+---
 
 ## Scope
 
-The architecture described here is based on the uploaded Albanian source dump under `GF/lib/src/albanian`, together with the visible root-level resources `SyntaxSqi`, `ConstructorsSqi`, `TrySqi`, and the current extension/debugging context around `ExtendSqi`. It also uses `ExtendFunctor.gf`, `Extend.gf`, and the Bulgarian/German reference materials only as architectural comparison points, not as primary sources for Albanian facts.
+The architecture described here is based on:
+
+- the uploaded Albanian source dump under `GF/lib/src/albanian`,
+- the visible root-level resources `SyntaxSqi`, `ConstructorsSqi`, `TrySqi`, and `SymbolicSqi`,
+- the current extension/debugging context around `ExtendSqi`,
+- the current Albanian documentation bundle,
+- and selected comparison sources such as `ExtendFunctor.gf`, `Extend.gf`, and the codex router/guidance only as supporting comparison points, not as primary sources for Albanian facts.
+
+This document is not intended to replace more detailed implementation-control documents such as:
+- `ALBANIAN_SYNTAX_AND_CONSTRUCTOR_RULES.md`
+- `ALBANIAN_IMPLEMENTATION_PATTERNS.md`
+- `ALBANIAN_CATEGORY_AND_LINCAT_REFERENCE.md`
+- `ALBANIAN_OVERRIDE_AND_INHERITANCE_POLICY.md`
+
+It also does not replace support-control documents such as:
+- `ALBANIAN_HELPER_REGISTRY.md`
+- `ALBANIAN_SHALLOW_CATEGORY_CONSTRUCTOR_MATRIX.md`
+- `ALBANIAN_SYMBOL_STATUS_LEDGER.md`
+- `ALBANIAN_STALE_COMMENT_TRACKER.md`
+- `ALBANIAN_MODULE_EXTRACTION_COVERAGE.md`
+
+Instead, it provides the architectural frame that those documents refine.
+
+---
 
 ## 1. Top-level system shape
 
-The Albanian grammar follows the standard RGL layering pattern: the usable language entry points sit at the top (`LangSqi`, `GrammarSqi`, `SyntaxSqi`, `ConstructorsSqi`, `TrySqi`), while the concrete syntactic work is distributed across the core category modules such as `NounSqi`, `AdjectiveSqi`, `VerbSqi`, `SentenceSqi`, `QuestionSqi`, `RelativeSqi`, `ConjunctionSqi`, `PhraseSqi`, `IdiomSqi`, `TextSqi`, and the language-specific resource module `ResSqi`. The dump’s file index shows this whole module set under `albanian/`, and `GrammarSqi` explicitly composes the main syntactic modules into the language grammar. fileciteturn55file0 fileciteturn56file1
+The Albanian grammar follows the standard RGL layering pattern.
 
-At the API layer, `SyntaxSqi` opens `CatSqi`, `ResSqi`, `NounSqi`, `AdjectiveSqi`, `PhraseSqi`, and `StructuralSqi`, then exposes convenience constructors such as `mkCN`, `mkAP`, `mkDet`, `mkNP`, `mkUtt`, and `mkPhr`. That means the practical programming surface for Albanian is intentionally narrower than the full module graph: most user-facing composition should go through `SyntaxSqi`, not by directly rebuilding records from scratch. fileciteturn55file0
+At the top sit the exposed and practical entry points:
+- `LangSqi`
+- `GrammarSqi`
+- `SyntaxSqi`
+- `ConstructorsSqi`
+- `TrySqi`
+- `SymbolicSqi`
+
+Below those sit the ordinary Albanian grammar modules:
+- `NounSqi`
+- `AdjectiveSqi`
+- `NumeralSqi`
+- `VerbSqi`
+- `SentenceSqi`
+- `QuestionSqi`
+- `RelativeSqi`
+- `ConjunctionSqi`
+- `IdiomSqi`
+- `TextSqi`
+- `PhraseSqi`
+
+Below or alongside them sit the Albanian resource and paradigm layers:
+- `ResSqi`
+- `CatSqi`
+- `MorphoSqi`
+- `ParadigmsSqi`
+
+Next to the ordinary grammar sits the structural vocabulary path:
+- `StructuralSqiRes`
+- `StructuralSqiNominal`
+- `StructuralSqiVerbal`
+- `StructuralSqiClause`
+- `StructuralSqi`
+
+And outside the stable core sits the explicit extension/override layer:
+- `ExtraSqi`
+- `ExtraSqiAbs`
+- `ExtendSqi`
+- `ExtendSqiScaffolding`
+- `ExtendSqiHelpers`
+- `ExtendSqiVPBridge`
+- `ExtendSqiAPCN`
+- `ExtendSqiExistential`
+- `ExtendSqiRNP`
+- `ExtendSqiFocusPrep`
+- `ExtendSqiLexicon`
+
+This is the basic architectural picture:
+- the core grammar remains the baseline,
+- the structural layer supplies the shared structural vocabulary,
+- the user-facing API is narrower than the full graph,
+- and `ExtendSqi` is an additional override layer rather than the center of the language.
+
+This distinction must remain explicit.
+
+---
 
 ## 2. Architectural layers
 
-### 2.1 Resource and parameter layer
+## 2.1 Resource and parameter layer
 
-`ResSqi` is the foundational language resource. `CatSqi` opens `ResSqi`, and most syntactic modules open it as well. In the current architecture, `ResSqi` is where Albanian-specific shared types and operations live: inflectional parameters, agreement machinery, noun/adjective/verb record structures, complements/prepositions, and support operations such as linking clitics and lexical constructors. The architecture should therefore treat `ResSqi` as the central source of truth for low-level Albanian shape decisions. fileciteturn55file1
+### `ResSqi`
+`ResSqi` is the foundational Albanian resource layer.
 
-`MorphoSqi` and `ParadigmsSqi` sit just above this layer. The dump shows `MorphoSqi.gf` as by far the largest Albanian module and `ParadigmsSqi.gf` as the lexical-pattern layer; both compile independently in the audit logs. The intended architecture is therefore: `ResSqi` defines the shared record and parameter vocabulary, `MorphoSqi` realizes the morphological system, and `ParadigmsSqi` packages recurring lexical constructors for practical use. fileciteturn55file1 fileciteturn57file5turn57file8turn57file9
+Architecturally, it is the main source of truth for:
+- shared low-level structures,
+- agreement machinery,
+- core noun/adjective/verb record shapes,
+- complements and preposition-like support structures,
+- clitic-linking behavior,
+- and basic lexical support constructors.
 
-### 2.2 Category layer
+This means:
+- low-level Albanian shape decisions should be grounded in `ResSqi`,
+- not inferred indirectly from abstract category names alone,
+- and not reverse-engineered from one surface string.
 
-`CatSqi` is the architectural hinge between the abstract RGL categories and Albanian concrete representations. It defines which categories are rich inflectional records and which are intentionally simplified `{s : Str}` records. In the current snapshot, `CN` is `Noun`, `AP` is a four-dimensional agreement table over `Species`, `Case`, `Gender`, and `Number`, `NP` is `{s : Case => Str; a : Agr}`, `Pron` carries both case forms and clitic forms, `Prep = Compl`, and many clause-level or phrase-level categories are simplified to `{s : Str}`. This division is the single most important architectural fact about the language. fileciteturn55file1
+### `MorphoSqi`
+`MorphoSqi` is the main morphological realization layer.
 
-Because `CatSqi` makes some categories rich and others stringy, Albanian code must preserve category shape exactly. A `CN` or `AP` implementation is not just a string; a `Cl`, `S`, or `VP` often is. This asymmetry is intentional and should be documented as a language-wide rule, because many later bugs in `ExtendSqi` arise precisely when rich categories are accidentally flattened to strings or rebuilt with partial records. fileciteturn55file1
+Architecturally, it carries the heavy language-specific inflectional machinery. It is large, foundational, and downstream-critical, but it is not the preferred first coding surface for ordinary syntactic edits. Most syntax work should treat it as a lower layer whose effects are accessed through `ResSqi`, `ParadigmsSqi`, and the core grammar modules.
 
-### 2.3 Core syntax layer
+### `ParadigmsSqi`
+`ParadigmsSqi` sits above the resource/morphology base as the lexical-pattern and constructor-pattern layer.
 
-The core Albanian syntax is assembled in `GrammarSqi`, which combines `NounSqi`, `AdjectiveSqi`, `NumeralSqi`, `VerbSqi`, `SentenceSqi`, `QuestionSqi`, `RelativeSqi`, `ConjunctionSqi`, `IdiomSqi`, `TextSqi`, and `PhraseSqi`. This means the stable architectural center of the language is not `ExtendSqi`; it is `GrammarSqi` plus these core modules. `ExtendSqi` is an additional override layer on top of that core, not the foundation. fileciteturn56file1
+Architecturally, it matters because:
+- many structural and lexical modules use paradigm constructors,
+- it is a safe source of public lexical/functional builders when available,
+- and it often supplies the correct package boundary between raw morphology and grammar-level use.
 
-Inside that core layer, modules divide roughly by grammatical domain: `NounSqi` handles determiners, noun phrases, and adjectival modification of common nouns; `AdjectiveSqi` handles adjective phrases and A2 complements; `VerbSqi` handles verbal predication and verbal complements; `SentenceSqi` handles clause-to-sentence assembly; `ConjunctionSqi` handles list categories and coordination; `IdiomSqi` packages existential and cleft-like idioms; and `PhraseSqi`/`TextSqi` handle utterance and text assembly. This distribution is visible both in module names and in the concrete definitions shown in the dump. fileciteturn55file1turn56file1
+### `ParamX`
+`ParamX` is part of the shared parameter environment visible across many Albanian modules. It belongs to the low-level structural environment rather than to the user-facing grammar surface.
 
-### 2.4 Extension and debugging layer
+## 2.2 Category layer
 
-`ExtendSqi` is an override-heavy module instantiated as `CatSqi ** ExtendFunctor - [...] with (Grammar = GrammarSqi)`. Architecturally, that means Albanian extension work starts from the inherited default implementations in `ExtendFunctor` and then replaces selected families. This is a different layer from the core grammar: it should be treated as a controlled override surface, not as a place to redefine category theory. fileciteturn55file1turn58file1turn58file9
+### `CatSqi`
+`CatSqi` is the hinge between abstract RGL categories and Albanian concrete representations.
 
-The German reference confirms this architectural reading. `ExtendGer` also starts from `CatGer ** ExtendFunctor - [...]` and then removes families of default implementations in coordinated blocks, such as `RNP`, `RNPList`, and related reflexive functions. The architectural lesson is not “copy German fields,” but “override by subsystem, not by isolated function.” fileciteturn58file2
+This is one of the most important architectural facts in the whole grammar.
+
+`CatSqi` defines which categories are:
+- rich,
+- shallow,
+- list-like,
+- pronoun-sensitive,
+- agreement-bearing,
+- or simplified for higher-level composition.
+
+The current Albanian architecture deliberately uses a mixed model:
+- some categories preserve rich internal structure,
+- many higher clausal or verbal categories are shallow/string-like.
+
+This rich/shallow divide is intentional and must remain visible.
+
+The architecture therefore assumes:
+
+- `CN` is rich
+- `AP` is rich
+- `NP` is rich enough to carry case and agreement
+- `Pron` is rich
+- important list categories preserve structure
+- many clause/sentence/question outputs are shallow
+
+This is not a bug and must not be “normalized away”.
+
+## 2.3 Core syntax layer
+
+### `GrammarSqi`
+`GrammarSqi` is the ordinary core grammar aggregator.
+
+It combines the main Albanian syntax modules and serves as the baseline grammar without extension-specific override logic. Architecturally, this is the stable center of the language.
+
+New work should prefer:
+- core grammar reuse,
+- core constructor paths,
+- and the `SyntaxSqi` API built on top of them,
+
+before reaching for the extension layer.
+
+### Core syntax producers
+The main ordinary syntax producers are:
+
+- `NounSqi`
+- `AdjectiveSqi`
+- `NumeralSqi`
+- `VerbSqi`
+- `SentenceSqi`
+- `QuestionSqi`
+- `RelativeSqi`
+- `ConjunctionSqi`
+- `IdiomSqi`
+- `TextSqi`
+- `PhraseSqi`
+
+Architecturally, these are the modules that define the ordinary Albanian grammar. They should be treated as the default home for ordinary syntactic behavior.
+
+### `SyntaxSqi`
+`SyntaxSqi` is the practical API layer.
+
+It exposes a narrower and more practical constructor surface than the full module graph. That design is intentional. The preferred path for most composition is through `SyntaxSqi` and the stable core modules, not through direct low-level record rebuilding.
+
+This means:
+- for ordinary composition, `SyntaxSqi` is the preferred public surface,
+- for architectural reasoning, `GrammarSqi` is the core grammar center,
+- and for low-level category truth, `CatSqi` and `ResSqi` remain authoritative.
+
+---
 
 ## 3. Core data model
 
-### 3.1 Nouns and noun phrases
+## 3.1 Nouns and noun phrases
 
-In Albanian, `CN = Noun`, and `Noun` is used throughout the grammar as a non-flat nominal record. `NounSqi` shows the intended usage: `DetCN` combines a determiner and a noun by reading `det.s ! c ! cn.g` and `cn.s ! det.spec ! c ! det.n`, while `AdjCN` preserves the noun table and noun gender and adds the AP after the noun string. This means the architectural center of nominal syntax is the `CN/Noun` table, not `NP`. fileciteturn54file0 fileciteturn55file1
+`CN` is a rich nominal record, and `NounSqi` uses it compositionally.
 
-`NP` is structurally lighter than `CN`: it contains a case-indexed string and agreement record, and it is what sentence and verbal modules usually consume. The architecture therefore has a consistent noun pipeline: lexical noun or noun-like material builds `CN`; determination converts `CN` to `NP`; sentential modules consume `NP`. `SyntaxSqi` encodes this same pipeline in its convenience API. fileciteturn55file0turn55file1
+Architecturally, the nominal pipeline is:
 
-### 3.2 Adjectives and adjective phrases
+- lexical noun-like material builds `CN`
+- determination and quantification turn `CN` into `NP`
+- higher syntax consumes `NP`
 
-`AP` is a rich agreement table over `Species`, `Case`, `Gender`, and `Number`. `AdjectiveSqi` shows the expected architecture: `PositA`, `ComparA`, `ComplA2`, `AdAP`, `AdvAP`, `CAdvAP`, and `SentAP` all preserve full AP shape by returning functions over those four indices. The linking clitic behavior is also centralized here: when an adjective has `clit = True`, the AP realizes `link_clitic` before the adjective form. fileciteturn55file1
+This is the correct Albanian reading and should not be blurred.
 
-This makes AP one of the language’s structurally sensitive categories. Architectural rule: if a function returns `AP`, it should normally preserve the full AP table and any associated behavior, not collapse to a single string form unless the target category is explicitly stringy. The current `ExtendSqi` debugging history reinforces this. fileciteturn55file1turn54file4turn54file9
+The key architectural consequence is:
+- noun-like lexical material belongs on the `CN` side,
+- sentence-level consumption belongs on the `NP` side,
+- and it is a mistake to treat a noun string as if it were already a full `CN` or `NP`.
 
-### 3.3 Verbs and predication
+## 3.2 Adjectives and adjective phrases
 
-`VerbSqi` exposes a pragmatic verbal architecture. It relies on `Verb` records from the resource layer, but many high-level verbal outputs are string-valued, since `VP` and `VPSlash` are stringy in `CatSqi`. The module defines helpers such as `vPred`, `npNom`, `npAcc`, and `apPred`, indicating that Albanian predication is currently implemented mostly by selecting surface forms and concatenating them. This is consistent with `SentenceSqi`, where `PredVP` is simply `np.s ! Nom ++ sep ++ vp.s` and `UseCl`/`UseQCl` pass clause strings through. fileciteturn56file9turn54file5
+`AP` is structurally sensitive and agreement-bearing.
 
-The architecture is therefore mixed: nominal and adjectival categories are structurally rich, while many sentential and verbal categories are simplified. This is a valid design, but it means extension code must know exactly which side of the boundary it is operating on. fileciteturn55file1turn54file5
+Architecturally, `AP` must not be confused with a lexical adjective item or a single extracted adjective surface cell.
+
+This means:
+- `A`/lexical adjective material and `AP` are not the same architectural object,
+- `AP` belongs to the rich side of the grammar,
+- and any architecture or coding discussion must keep `A`/`Adj` distinct from `AP`.
+
+Surface extraction is architecturally acceptable only when the **target** is shallow. That rule belongs to implementation control, but it follows from architecture.
+
+## 3.3 Pronouns and agreement
+
+`Pron` is not merely a string.
+`NP` is not merely a string.
+Agreement is part of the architecture.
+
+This matters because pronouns, agreement-bearing NPs, and list categories sit on the rich side of the grammar even when many clause-level outputs do not. Architectural work therefore has to treat nominal/pronominal categories as structurally sensitive, not as “surface-like because Albanian often linearizes strings at higher levels”.
+
+## 3.4 Verbs and predication
+
+Albanian verbal and clausal architecture is intentionally mixed:
+- much of the higher predicational surface is shallow,
+- while nominal and adjectival structure remains richer.
+
+This rich/shallow asymmetry is one of the most important architectural facts of Albanian GF.
+
+Therefore:
+- a shallow `Cl`/`S`/`QS`/`VP`-side result does not imply that its inputs were architecturally shallow,
+- and a rich `AP`/`NP`/`CN` target still requires structure even if the surrounding clause layer is string-like.
+
+## 3.5 List categories
+
+`ConjunctionSqi` and related list architecture show that list categories matter structurally.
+
+Architecturally:
+- `ListNP`, `ListCN`, and `ListAP` are not disposable wrappers,
+- and their treatment must preserve the shape of what they coordinate when that shape matters.
+
+This becomes especially important in:
+- nominal coordination,
+- reflexive-NP work,
+- and any place where list categories are tempted into flattening because the visible surface looks easy.
+
+---
 
 ## 4. Composition pattern across modules
 
-The Albanian grammar composes upward in a fairly regular path: `ResSqi` and the morphology/paradigm layer define the raw materials; `CatSqi` assigns concrete shapes to abstract categories; domain modules like `NounSqi`, `AdjectiveSqi`, `VerbSqi`, `SentenceSqi`, and `ConjunctionSqi` implement the ordinary grammar; `GrammarSqi` aggregates those modules; and `SyntaxSqi` re-exports a simpler constructor-style API. This is the architectural “happy path” for the language. fileciteturn55file0turn56file1
+The main upward path of Albanian composition is:
 
-`TrySqi` and `ConstructorsSqi` sit on top of that path as ergonomic shells. `TrySqi` reuses `SyntaxSqi`, `LexiconSqi`, and `ParadigmsSqi`, and adds overloaded helpers like `mkAdv` and `mkAdN`. Architecturally, that means the grammar already has a designed outer shell for experimentation; new language logic should not be encoded there. fileciteturn55file0
+1. `ResSqi` / `MorphoSqi` / `ParadigmsSqi` define low-level materials and lexical patterns.
+2. `CatSqi` assigns Albanian concrete category shapes.
+3. Domain modules (`NounSqi`, `AdjectiveSqi`, `VerbSqi`, etc.) implement the ordinary grammar.
+4. `GrammarSqi` aggregates the ordinary grammar.
+5. `SyntaxSqi` provides a narrower practical API.
+6. Structural modules supply shared structural vocabulary.
+7. `ExtendSqi` and `ExtraSqi` provide additional extension behavior outside the stable center.
 
-## 5. Coordination and list architecture
+This is the “happy path” of Albanian development.
 
-`ConjunctionSqi` is the model for how nontrivial list categories should be handled in Albanian. It gives explicit `lincat` for `[NP]`, `[CN]`, `[AP]`, `[Adv]`, `[S]`, and others, preserving the relevant internal structure of each coordinated category. For instance, `ListNP` stores `init`, `last`, and `a`; `ListCN` stores table-shaped `init` and `last` plus `g`; and `ListAP` stores full AP tables. This is a strong architectural signal that list categories should preserve the shape of the coordinated object, not be collapsed to plain strings when richer information matters. fileciteturn55file1
+A change is architecturally safe when it respects that path:
+- low-level truth comes from resources and categories,
+- ordinary grammar belongs in the core modules,
+- structural vocabulary belongs in structural resources,
+- extension-specific behavior belongs in extension layers,
+- and user-facing composition should not bypass the API layer unnecessarily.
 
-This same module also reveals a practical maintenance reality: when a category is missing or implicitly defaulted, Albanian sometimes falls back to a stringy implementation, as in the comments around `DAP` and `ListDAP`. That is acceptable as a documented fallback, but it should be called out explicitly in architecture docs so AI edits do not mistake it for the preferred pattern everywhere. fileciteturn55file1
+---
 
-## 6. Idiom, question, and utterance architecture
+## 5. Structural architecture
 
-`IdiomSqi` is where Albanian packages existential, cleft, imperative-person, progressive, and self-related idioms. It uses straightforward Albanian lexical items such as `është`, `që`, `ka`, `po`, `le të`, and `vetë`, and its outputs are mostly stringy clause-level objects. Since `GrammarSqi` includes `IdiomSqi`, these idiomatic constructions are part of the core grammar, not an external addon. fileciteturn56file1
+## 5.1 Structural path
 
-This matters for architecture because some constructions that look like “extension features” actually belong to the idiom layer of the base grammar. The `Idiom.gfo` artifact also confirms the abstract idiom family includes `ExistIP`, `ExistNP`, `ImpersCl`, `ImpP3`, `ProgrVP`, and related operations. Albanian’s current idiom architecture is therefore the right place for existential and impersonal defaults unless `ExtendSqi` has a compelling language-specific reason to override them. fileciteturn56file0turn56file1
+The structural vocabulary is intentionally split into subresources and then re-exported:
 
-`PhraseSqi` and `TextSqi` occupy the outer utterance/text layer. `TextSqi` is minimal punctuation composition, and the compile logs show that `PhraseSqi` compiles cleanly even though some utterance functions remain unimplemented. Architecturally, these outer layers should stay thin wrappers over already-formed clauses, NPs, APs, and imperatives. fileciteturn56file5turn57file2turn57file3
+- `StructuralSqiRes`
+- `StructuralSqiNominal`
+- `StructuralSqiVerbal`
+- `StructuralSqiClause`
+- `StructuralSqi`
 
-## 7. Structural simplification policy
+This is not accidental factoring. It is the architectural path for:
+- determiners,
+- quantifiers,
+- structural pronouns,
+- prepositions,
+- clause particles,
+- conjunction-like items,
+- and other structural vocabulary.
 
-The Albanian grammar makes a deliberate simplification choice: many higher-level categories are `{s : Str}` even when richer structures are possible in other languages. `S`, `QS`, `RS`, `Cl`, `QCl`, `RCl`, `VP`, `VPSlash`, `Comp`, `IP`, `IComp`, and several others are string-based in `CatSqi`. By contrast, `CN`, `AP`, `NP`, `Pron`, and list categories preserve structured agreement or case information. Architecture work must respect this boundary instead of trying to normalize everything in one direction. fileciteturn55file1
+## 5.2 Ownership rule
 
-This policy partly explains why Albanian compiles many core modules cleanly despite having unresolved warnings in higher modules: the core grammar is intentionally lightweight in many sentential areas. But it also explains why `ExtendSqi` is fragile: overrides there often cross the boundary between rich and stringy categories and can accidentally flatten a rich category or expect structure where Albanian has already simplified. fileciteturn56file3turn58file6turn54file9
+Architecturally:
+- `StructuralSqi` should remain a pure aggregator,
+- ownership belongs in the structural submodules,
+- and fixes to clause/preposition/function-word behavior usually belong in structural resources, not in `ExtendSqi`.
 
-## 8. Extension architecture and risk zones
+This is especially important because recent drift cases have shown that:
+- clause-level structural items can look deceptively simple,
+- but their ownership still belongs to the structural layer.
 
-`ExtendSqi` should be treated as a high-risk architectural zone. It is not part of the compact, already-working `GrammarSqi` core; it is a large override module instantiated from `ExtendFunctor`. The current debugging history shows that failures in `PrepCN`, `ReflPoss`, the `RNPList` constructors, `PredAPVP`, and several AP/CN-related functions all occurred there rather than in the core grammar. That pattern is architectural, not accidental. fileciteturn58file6turn54file7turn54file8turn54file9
+## 5.3 Structural join point
 
-The right architecture rule for `ExtendSqi` is therefore: override by subsystem and only with exact signature/context evidence. `GFCodex` explicitly warns that inheritance restrictions and module composition can cause subtle problems if definitions are removed or reintroduced without respecting the original module structure. For Albanian, this means any change in `ExtendSqi` should be traced against the abstract `Extend` signature, the inherited `ExtendFunctor` behavior, the local Albanian category shapes from `CatSqi`, and where relevant the Albanian core module that already handles similar constructions. fileciteturn58file9turn58file1
+`StructuralSqi` is the structural join point used by `SyntaxSqi`.
 
-The German and Bulgarian materials are useful as model-language references only at the subsystem level. German shows that large extension modules remove and replace coordinated families such as `RNP` together, and Bulgarian shows that reflexive NP families can be implemented as coherent structured subsystems. Neither should be copied blindly into Albanian, but both confirm that subsystem coherence is architecturally more important than one-line local fixes. fileciteturn58file2turn54file6turn56file8
+That means:
+- it is architecturally important,
+- but not as a place for new logic,
+- rather as the surface where the already-owned structural submodules are re-exported.
 
-## 9. Current implementation maturity
+The architecture should continue to treat it as a thin aggregator.
 
-The uploaded audits show that the Albanian grammar core compiles surprisingly well, but many warnings remain. `GrammarSqi`, `ParadigmsSqi`, `MorphoSqi`, `PhraseSqi`, and other core modules compile cleanly in the logs, while warnings cluster around missing lock fields in some modules, incomplete linearizations in `NounSqi`, `PhraseSqi`, and `DocumentationSqi`, and the still-active `ExtendSqi` work. This suggests an architecture that is already usable but not yet uniform in discipline. fileciteturn56file6turn57file5turn58file6turn58file7
+---
 
-For documentation purposes, the architecture should therefore distinguish between three maturity levels: stable core modules that define the language baseline, fallback modules that compile but contain deliberate simplifications, and active override modules where type- and shape-discipline are still being repaired. In the current snapshot, `GrammarSqi` and its constituent core modules are closer to the first two levels, while `ExtendSqi` belongs to the third. fileciteturn56file1turn58file6turn54file9
+## 6. Extension architecture
 
-## 10. Architectural rules for future work
+## 6.1 `ExtraSqi`
+`ExtraSqi` is an extra grammar layer with non-core helpers and additional constructions.
 
-First, the category authority is `CatSqi`. Any code that returns `CN`, `AP`, `NP`, `Pron`, or a list category must preserve the concrete shape defined there or in the relevant list module. Any code that returns a stringy category should use the simplest correct composition rather than inventing richer local records. fileciteturn55file1
+Architecturally, it sits outside the stable core grammar but inside the Albanian-specific extension space. It is not the same thing as `ExtendSqi`, and it should not be conflated with the controlled `ExtendFunctor` override discipline. It is a shared extension-support area and deserves explicit respect as a separate layer.
 
-Second, core syntactic logic belongs in the core grammar modules and should be reused through `GrammarSqi` and `SyntaxSqi` whenever possible. `SyntaxSqi` already provides canonical constructor paths for everyday composition, and the architecture should prefer those paths over direct manipulation of low-level fields unless the module’s purpose is precisely to define such manipulation. fileciteturn55file0turn56file1
+## 6.2 `ExtendSqi`
+`ExtendSqi` is the high-risk extension/override layer for `Extend`.
 
-Third, extension work must start from the inherited design. The `ExtendFunctor` artifact shows that several extension functions are intended to be built compositionally through existing grammar constructors, and `GFCodex` warns that careless inheritance surgery creates subtle later failures. Therefore, override only when Albanian genuinely needs it, and document the entire overridden family together. fileciteturn58file1turn58file9
+Architecturally:
+- it is instantiated from `ExtendFunctor`,
+- it must start from inherited design,
+- and it must override only where Albanian has a genuine local need.
 
-Fourth, when a fallback uses a stringy approximation for a rich grammatical concept, document it as a fallback rather than treating it as a canonical design. `ConstructionSqi`, `AdverbSqi`, `IdiomSqi`, and parts of `ExtendSqi` all contain useful fallbacks, but they are not all architectural gold standards. The architecture document should label them accordingly. fileciteturn55file1turn56file1
+This remains one of the main architectural rules of the current cycle.
 
-## 11. Recommended reading order for maintainers and AI systems
+## 6.3 Thin-coordinator decision
+The approved cycle design keeps:
+- `ExtendSqi.gf` thin,
+- companion subsystem modules as the owners of Albanian-specific implementation logic,
+- and unsupported families inherited.
 
-To understand the Albanian language architecture correctly, the recommended reading order is: `CatSqi.gf` for category shapes, `ResSqi.gf` for shared resource structures, `NounSqi.gf` / `AdjectiveSqi.gf` / `VerbSqi.gf` / `SentenceSqi.gf` / `ConjunctionSqi.gf` / `IdiomSqi.gf` for core implementation patterns, `GrammarSqi.gf` for aggregation, `SyntaxSqi.gf` for public composition, and only then `ExtendSqi.gf` for extension work. This order follows the actual dependency logic of the grammar and reduces drift. fileciteturn55file1turn56file1turn55file0
+That decision is architecturally correct and should not be changed casually.
 
-## 12. Summary
+In particular:
+- `ExtendSqi.gf` is not a second Albanian core grammar,
+- it is not the place for local ad hoc helpers,
+- and it is not the place to quietly reintroduce unsupported family machinery.
 
-The Albanian GF resource grammar is architecturally a layered RGL concrete syntax with a strong resource/category foundation, a compact but effective core grammar, a constructor-oriented public API, and a large extension surface that is currently the main source of instability. Its key design choice is a split between rich nominal/adjectival categories and simplified string-level clausal categories. Future work should preserve that split, rely on the core modules before inventing local rewrites, and treat `ExtendSqi` as a carefully documented subsystem override area rather than as a free-form patch file. fileciteturn55file1turn56file1turn54file9turn58file9
+## 6.4 Companion subsystem structure
+
+The companion split under the current architecture includes:
+- scaffolding
+- helpers
+- VP bridge
+- AP/CN conversion
+- existential
+- RNP
+- focus/preposition
+- lexical tail
+
+Architecturally, this means:
+- extension logic should be grouped by subsystem,
+- subsystem ownership belongs in companion files,
+- and family coherence matters more than one-off function patches.
+
+## 6.5 Unsupported inherited families
+
+The current architecture explicitly keeps the VPS/VPI/VPS2/VPI2/list-wrapper family inherited this cycle.
+
+Architectural consequence:
+- no `ExtendSqiVPS.gf`
+- no quiet reintroduction of VPS-family ownership into companion modules
+- no drift from the approved cycle scope
+
+This is a locked architectural decision for the current cycle.
+
+---
+
+## 7. Risk zones
+
+The architecture now clearly distinguishes between the stable center and the high-risk override zones.
+
+## 7.1 Stable architectural center
+
+The stable center includes:
+- `ResSqi`
+- `CatSqi`
+- `NounSqi`
+- the ordinary core grammar modules
+- `GrammarSqi`
+- the structural split and aggregation path
+- the `SyntaxSqi` API surface
+
+These are the modules and paths that future work should prefer first.
+
+## 7.2 High-risk override zones
+
+The highest architectural risk sits in:
+- `ExtendSqi`
+- its companion override subsystem modules
+- `ExtraSqi`
+- structurally shallow-looking but ownership-sensitive clause/function-word zones
+- modules where stale comments or fallback patterns can distort AI reasoning
+
+This risk classification does **not** mean those modules are architecturally wrong. It means they require stronger discipline and stronger documentation.
+
+## 7.3 Rich/shallow boundary as a permanent risk
+The deepest Albanian architectural risk is not one file. It is the boundary between:
+- rich categories (`CN`, `AP`, `NP`, `Pron`, list categories)
+- and shallow higher categories (`Cl`, `S`, `QS`, many `VP`-side outputs, structural shell outputs)
+
+Many future bugs come from forgetting which side a category belongs to.
+
+The architecture therefore requires that this boundary remain explicit.
+
+---
+
+## 8. Thin wrappers and package surfaces
+
+Several top-level or support modules are intentionally thin:
+- `ConstructorsSqi`
+- `TrySqi`
+- `SymbolicSqi`
+- `AllSqi`
+- `AllSqiAbs`
+- `LangSqi`
+- `TextSqi` in practice
+- some support/test modules
+
+Architecturally, these are:
+- package surfaces,
+- convenience shells,
+- or light aggregators.
+
+They should remain thin and should not become storage for new grammatical logic.
+
+That thinness is a feature, not an omission.
+
+---
+
+## 9. Architecture vs implementation truth
+
+This distinction now needs to be explicit.
+
+### Architecture truth
+Architecture determines:
+- ownership,
+- layering,
+- stable center vs extension zones,
+- aggregation boundaries,
+- which family belongs where,
+- which files should remain thin.
+
+### Implementation truth
+Implementation determines:
+- exact constructor legality,
+- exact helper compatibility,
+- exact module-context availability,
+- compile acceptance,
+- warning-state behavior,
+- and current symbol maturity.
+
+The architecture document therefore **does not certify**:
+- that a specific `lin Cat { ... }` pattern is valid,
+- that a helper can be reused across categories,
+- or that a shallow category summary guarantees a safe local constructor.
+
+Those belong to the operational docs.
+
+This distinction must remain explicit so that no one treats architecture approval as implementation proof.
+
+---
+
+## 10. Relationship to the operational documents
+
+This file should be read together with the following documents, each with a different role.
+
+### `ALBANIAN_SYNTAX_AND_CONSTRUCTOR_RULES.md`
+Use for:
+- shape-preserving implementation logic,
+- constructor legality discipline,
+- exact-helper-type rule,
+- comment-authority rule,
+- module-context constructor rule.
+
+### `ALBANIAN_IMPLEMENTATION_PATTERNS.md`
+Use for:
+- approved coding patterns,
+- helper classes,
+- compatibility wrappers,
+- constructor-chain use,
+- pattern-by-pattern implementation decisions.
+
+### `ALBANIAN_CATEGORY_AND_LINCAT_REFERENCE.md`
+Use for:
+- current Albanian category shapes,
+- rich vs shallow category classification,
+- shape caveats,
+- “do not conclude from shape alone” guidance.
+
+### `ALBANIAN_OVERRIDE_AND_INHERITANCE_POLICY.md`
+Use for:
+- source-precedence hierarchy,
+- inherit-vs-override decisions,
+- architecture-vs-implementation conflict resolution,
+- evidence order for concrete fixes.
+
+### `ALBANIAN_HELPER_REGISTRY.md`
+Use for:
+- exact helper names,
+- exact types,
+- helper class,
+- allowed and forbidden reuse zones.
+
+### `ALBANIAN_SHALLOW_CATEGORY_CONSTRUCTOR_MATRIX.md`
+Use for:
+- category-by-category shallow constructor availability,
+- module-context verification,
+- preferred constructor paths for structurally shallow-looking items.
+
+### `ALBANIAN_SYMBOL_STATUS_LEDGER.md`
+Use for:
+- whether a symbol or file is stable,
+- fallback,
+- warning-state,
+- blocked,
+- historical,
+- or pending repair.
+
+### `ALBANIAN_STALE_COMMENT_TRACKER.md`
+Use for:
+- known comment hazards,
+- historical explanations no longer safe as evidence,
+- comment cleanup obligations.
+
+### `ALBANIAN_MODULE_EXTRACTION_COVERAGE.md`
+Use for:
+- which modules are already documented deeply enough,
+- which are only structurally covered,
+- and which still need targeted extraction.
+
+This file remains the top-level map above those operational layers.
+
+---
+
+## 11. Current architecture-backed decisions that should remain fixed
+
+The following decisions are architecturally correct and should remain fixed unless new strong evidence appears.
+
+1. `ExtendSqi.gf` remains a thin coordinator.
+2. Companion subsystem modules own `ExtendSqi` logic.
+3. Unsupported VPS/VPI/VPS2/VPI2/list-wrapper families remain inherited this cycle.
+4. `StructuralSqi.gf` remains a pure aggregator.
+5. Structural clause/preposition/function-word behavior belongs in structural resources rather than drifting into `ExtendSqi`.
+6. The stable grammar center remains the ordinary core modules aggregated by `GrammarSqi`.
+7. `SyntaxSqi` remains the practical API surface for most composition.
+8. Rich categories must stay visibly rich in the architecture.
+9. Thin wrappers should remain thin.
+10. Module ownership must remain separate from local patch temptation.
+
+---
+
+## 12. Architectural reading order for maintainers and AI systems
+
+When orienting to the Albanian grammar at the architectural level, read in this order:
+
+1. `ALBANIAN_LANGUAGE_ARCHITECTURE.md`
+2. `ALBANIAN_MODULE_EXTRACTION_COVERAGE.md`
+3. `ALBANIAN_MODULE_DEPENDENCY_MAP.md`
+4. `ALBANIAN_CATEGORY_AND_LINCAT_REFERENCE.md`
+5. `ALBANIAN_OVERRIDE_AND_INHERITANCE_POLICY.md`
+6. `ALBANIAN_HELPER_REGISTRY.md`
+7. `ALBANIAN_SHALLOW_CATEGORY_CONSTRUCTOR_MATRIX.md`
+8. relevant source file(s) in the current codedump
+9. current compile/audit evidence
+10. model-language references only if still needed
+
+This order preserves the distinction between:
+- architecture,
+- implementation control,
+- live code reality,
+- and comparison material.
+
+---
+
+## 13. What this document forbids
+
+This architecture document forbids the following confusions:
+
+- treating `ExtendSqi` as the main Albanian grammar center,
+- treating architecture approval as proof of constructor legality,
+- treating category shape as proof of local constructor availability,
+- treating shallow clause categories as evidence that rich nominal/adjectival categories may also be flattened,
+- moving ownership from structural resources into `ExtendSqi` because a local patch feels convenient,
+- moving extension-specific logic into thin aggregators or API wrappers,
+- rebuilding low-level records directly when the architecture already provides a stable path through core modules or API layers,
+- and mistaking stale comments for architecture truth.
+
+---
+
+## 14. Summary
+
+The Albanian GF grammar has a stable and readable architecture:
+
+- `ResSqi`, `MorphoSqi`, and `ParadigmsSqi` form the low-level material/pattern base.
+- `CatSqi` defines the concrete category regime.
+- ordinary grammar modules implement the stable center.
+- `GrammarSqi` aggregates that center.
+- `SyntaxSqi` provides the practical public API.
+- `StructuralSqi*` modules provide structural vocabulary through a split ownership model.
+- `ExtendSqi` is a controlled, high-risk override layer outside the stable center.
+- thin wrappers remain thin.
+
+The architecture does **not** need rewriting.
+
+What must remain strict is the boundary between:
+- architecture truth,
+- implementation truth,
+- and live compile truth.
+
+This file therefore serves as the top-level architectural reference for all future Albanian work: preserve the stable center, keep ownership where it belongs, and let the operational docs govern exact constructors, helpers, and anti-drift enforcement.

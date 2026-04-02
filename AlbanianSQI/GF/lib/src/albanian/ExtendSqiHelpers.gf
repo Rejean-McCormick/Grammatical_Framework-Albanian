@@ -1,71 +1,94 @@
 -- GF/lib/src/albanian/ExtendSqiHelpers.gf
 
 resource ExtendSqiHelpers =
-  open GrammarSqi, CatSqi, ResSqi, ParamX, Prelude in {
+  open GrammarSqi, CatSqi, (R = ResSqi), (P = ParamX), Prelude in {
 
   oper
     -- =========================================================
     -- 1. NEUTRAL UTILITIES
-    -- structurally safe helpers
+    -- Strategy: structurally safe helpers only.
+    -- These may extract strings or constants, but must not pretend
+    -- to preserve rich categories unless they really do.
+    --
+    -- Note: surface extraction to Str is acceptable here when the
+    -- eventual target is explicitly shallow/string-like (e.g. Utt).
     -- =========================================================
 
     wordSep : Str = " " ;
 
-    agrMascSg : Agr =
-      agrgP3 Masc Sg ;
+    agrMascSg : R.Agr =
+      R.agrgP3 R.Masc P.Sg ;
 
-    adjSurfaceNomMascSg : Adj -> Str =
-      \a -> a.s ! Nom ! Masc ! Sg ;
+    -- Base adjective surface form.
+    adjSurfaceNomMascSg : A -> Str =
+      \a -> a.s ! R.Nom ! R.Masc ! P.Sg ;
 
-    verbPres3sg : Verb -> Str =
-      \v -> v.Indicative ! ParamX.Pres ! Sg ! P3 ;
+    -- Adjective phrase surface form.
+    -- Keep this overloaded helper because the focus subsystem calls
+    -- adjSurfaceNomMascSg with AP, and Utt is shallow.
+    adjSurfaceNomMascSg : AP -> Str =
+      \ap -> ap.s ! R.Indef ! R.Nom ! R.Masc ! P.Sg ;
 
-    prepSurfaceAcc : Str -> NP -> Str =
-      \prepS,np -> prepS ++ np.s ! Acc ;
+    verbPres3sg : R.Verb -> Str =
+      \v -> v.Indicative ! P.Pres ! P.Sg ! P.P3 ;
+
+    prepSurfaceAcc : R.Prep -> NP -> Str =
+      \prep,np -> prep.s ++ np.s ! R.Acc ;
 
     mkPronConst :
-      Str -> Str -> Str -> Str -> Str -> Gender -> Number -> CatSqi.Pron =
+      Str -> Str -> Str -> Str -> Str -> R.Gender -> P.Number -> CatSqi.Pron =
       \nom,acc,dat,accCl,datCl,g,n ->
         lin Pron {
-          s        = table {Nom => nom ; Acc => acc ; Dat => dat ; Ablat => dat} ;
+          s = table {
+            R.Nom   => nom ;
+            R.Acc   => acc ;
+            R.Dat   => dat ;
+            R.Ablat => dat
+          } ;
           acc_clit = accCl ;
           dat_clit = datCl ;
-          a        = agrgP3 g n
+          a        = R.agrgP3 g n
         } ;
 
-    adjComplStr : Adj -> Species -> Case -> Gender -> Number -> Str =
+    adjComplStr : A -> R.Species -> R.Case -> R.Gender -> P.Number -> Str =
       \a,spec,c,g,n ->
         case a.clit of {
-          True  => link_clitic ! spec ! c ! g ! n ++ a.s ! c ! g ! n ;
+          True  => R.link_clitic ! spec ! c ! g ! n ++ a.s ! c ! g ! n ;
           False => a.s ! c ! g ! n
         } ;
 
     -- =========================================================
     -- 2. CATEGORY-PRESERVING HELPERS
-    -- allowed for rich outputs
+    -- Strategy: safe builders for rich outputs.
+    -- These may construct NP/CN/AP/Pron only if the full Albanian
+    -- category shape is preserved.
     -- =========================================================
 
-    mkBareNpFromCn : Number -> CN -> NP =
+    mkBareNpFromCn : P.Number -> CN -> NP =
       \n,cn ->
         lin NP {
-          s = \\c => cn.s ! Indef ! c ! n ;
-          a = agrgP3 cn.g n
+          s = \\c => cn.s ! R.Indef ! c ! n ;
+          a = R.agrgP3 cn.g n
         } ;
 
     -- =========================================================
     -- 3. LOSSY SURFACE EXTRACTORS
-    -- allowed only for string-like targets
+    -- Strategy: allowed only when the eventual target is string-like.
+    -- Never use these to build final AP/CN/NP/Pron values.
     -- =========================================================
 
     cnSurfaceNomSg : CN -> Str =
-      \cn -> cn.s ! Indef ! Nom ! Sg ;
+      \cn -> cn.s ! R.Indef ! R.Nom ! P.Sg ;
 
     apSurfaceNomMascSg : AP -> Str =
-      \ap -> ap.s ! Indef ! Nom ! Masc ! Sg ;
+      \ap -> ap.s ! R.Indef ! R.Nom ! R.Masc ! P.Sg ;
 
     -- =========================================================
     -- 4. TEMPORARY COMPATIBILITY HELPERS
-    -- rich outputs built here are provisional, not final design
+    -- Strategy: provisional only.
+    -- Use only when inherited/core Albanian paths are not yet usable.
+    -- Removal plan: replace family-by-family with inherited or
+    -- Albanian-preserving constructors once the target subsystem lands.
     -- =========================================================
 
     mkCompatAPFromStr : Str -> AP =
@@ -74,18 +97,18 @@ resource ExtendSqiHelpers =
           s = \\spec,cas,g,n => w
         } ;
 
-    mkCompatCNFromStr : Str -> Gender -> CN =
+    mkCompatCNFromStr : Str -> R.Gender -> CN =
       \w,g ->
         lin CN {
           s = \\spec,cas,n => w ;
           g = g
         } ;
 
-    mkCompatNPFromStr : Str -> Gender -> Number -> NP =
+    mkCompatNPFromStr : Str -> R.Gender -> P.Number -> NP =
       \w,g,n ->
         lin NP {
           s = \\cas => w ;
-          a = agrgP3 g n
+          a = R.agrgP3 g n
         } ;
 
-}
+} ;
