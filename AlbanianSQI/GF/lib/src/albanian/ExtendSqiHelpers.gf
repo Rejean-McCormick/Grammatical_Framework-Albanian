@@ -20,13 +20,13 @@ resource ExtendSqiHelpers =
       R.agrgP3 R.Masc P.Sg ;
 
     -- Base adjective surface form.
+    -- Keep the historical name here for A-callers.
     adjSurfaceNomMascSg : A -> Str =
       \a -> a.s ! R.Nom ! R.Masc ! P.Sg ;
 
-    -- Adjective phrase surface form.
-    -- Keep this overloaded helper because the focus subsystem calls
-    -- adjSurfaceNomMascSg with AP, and Utt is shallow.
-    adjSurfaceNomMascSg : AP -> Str =
+    -- AP surface form.
+    -- Use this in shallow AP -> Str contexts such as FocusAP.
+    apSurfaceNomMascSg : AP -> Str =
       \ap -> ap.s ! R.Indef ! R.Nom ! R.Masc ! P.Sg ;
 
     verbPres3sg : R.Verb -> Str =
@@ -80,8 +80,9 @@ resource ExtendSqiHelpers =
     cnSurfaceNomSg : CN -> Str =
       \cn -> cn.s ! R.Indef ! R.Nom ! P.Sg ;
 
-    apSurfaceNomMascSg : AP -> Str =
-      \ap -> ap.s ! R.Indef ! R.Nom ! R.Masc ! P.Sg ;
+    -- Alias kept explicit for AP callers in shallow contexts.
+    apSurfaceNomMascSgCompat : AP -> Str =
+      \ap -> apSurfaceNomMascSg ap ;
 
     -- =========================================================
     -- 4. TEMPORARY COMPATIBILITY HELPERS

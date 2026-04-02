@@ -7,11 +7,10 @@ oper
   -- CLAUSE / DISCOURSE STRUCTURAL VOCABULARY
   -- Strategy: keep clause-level closed-class items here.
   -- Use paradigm constructors where they exist.
-  -- Use mkPrep for prepositions; use direct record construction only
-  -- for genuinely surface-only local categories such as DConj, CAdv, Utt.
+  -- Use mkPrep for prepositions.
+  -- Keep paired-conjunction names required by Structural, but type
+  -- them as Conj in line with the GF Codex usage examples.
   -- =========================================================
-
-  mkDConj : Str -> DConj = \s -> lin DConj {s = s} ;
 
   -- Prepositions
   above_Prep : Prep = R.mkPrep "sipër" ;
@@ -40,9 +39,9 @@ oper
   although_Subj : Subj = P.mkSubj "megjithëse" ;
   and_Conj : Conj = P.mkConj "dhe" ;
   because_Subj : Subj = P.mkSubj "sepse" ;
-  both7and_DConj : DConj = mkDConj "si edhe" ;
+  both7and_DConj : Conj = P.mkConj "si edhe" ;
   but_PConj : PConj = P.mkPConj "por" ;
-  either7or_DConj : DConj = mkDConj "ose" ;
+  either7or_DConj : Conj = P.mkConj "ose" ;
   if_Subj : Subj = P.mkSubj "nëse" ;
   if_then_Conj : Conj = P.mkConj "nëse atëherë" ;
   or_Conj : Conj = P.mkConj "ose" ;

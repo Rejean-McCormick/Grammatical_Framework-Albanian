@@ -22,6 +22,8 @@ concrete ExtendSqi of Extend =
     PredIAdvVP, ApposNP, ComplGenVV, CompoundN,
     GerundCN, GerundNP, GerundAdv, UncontractedNeg, TPastSimple, ComplSlashPartLast,
     DetNPMasc, DetNPFem, UseComp_estar, UseComp_ser, SubjRelNP, SubjunctRelCN,
+    BaseComp, ConsComp, ConjComp,
+    BaseImp, ConsImp, ConjImp,
 
     -- =========================================================
     -- LEXICAL TAIL
@@ -56,7 +58,7 @@ concrete ExtendSqi of Extend =
     -- RNP SUBSYSTEM
     -- =========================================================
     ReflRNP, ReflPron, ReflPoss, PredetRNP, AdvRNP, AdvRVP, AdvRAP, ReflA2RNP,
-    PossPronRNP, ConjRNP, Base_rr_RNP, Base_nr_RNP, Base_rn_RNP, Cons_rr_RNP, Cons_nr_RNP, Cons_rn_RNP
+    PossPronRNP, ConjRNP, Base_rr_RNP, Base_nr_RNP, Base_rn_RNP, Cons_rr_RNP, Cons_nr_RNP
   ]
   with
     (Grammar = GrammarSqi) **
@@ -69,6 +71,20 @@ concrete ExtendSqi of Extend =
        ExtendSqiRNP,
        ExtendSqiLexicon
   in {
+
+  lincat
+    ListComp = {s : Str} ;
+    ListImp  = {s : Str} ;
+
+    VPI      = {s : Str} ;
+    VPI2     = {s : Str} ;
+    VPS      = {s : Str} ;
+    VPS2     = {s : Str} ;
+
+    ListVPI  = {s : Str} ;
+    ListVPI2 = {s : Str} ;
+    ListVPS  = {s : Str} ;
+    ListVPS2 = {s : Str} ;
 
   lin
     -- =========================================================
@@ -128,6 +144,14 @@ concrete ExtendSqi of Extend =
     UseComp_ser = sc_UseComp_ser ;
     SubjRelNP = sc_SubjRelNP ;
     SubjunctRelCN = sc_SubjunctRelCN ;
+
+    BaseComp = sc_BaseComp ;
+    ConsComp = sc_ConsComp ;
+    ConjComp = sc_ConjComp ;
+
+    BaseImp = sc_BaseImp ;
+    ConsImp = sc_ConsImp ;
+    ConjImp = sc_ConjImp ;
 
     -- =========================================================
     -- EXISTENTIAL SUBSYSTEM
@@ -206,7 +230,6 @@ concrete ExtendSqi of Extend =
     Base_rn_RNP = rnp_Base_rn_RNP ;
     Cons_rr_RNP = rnp_Cons_rr_RNP ;
     Cons_nr_RNP = rnp_Cons_nr_RNP ;
-    Cons_rn_RNP = rnp_Cons_rn_RNP ;
 
     -- =========================================================
     -- CONSTANTS / LEXICAL TAIL
@@ -228,4 +251,4 @@ concrete ExtendSqi of Extend =
     UseDAPMasc = lex_UseDAPMasc ;
     UseDAPFem = lex_UseDAPFem ;
 
-}
+} ;

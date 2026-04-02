@@ -41,7 +41,7 @@ resource ExtendSqiFocusPrep =
     fp_FocusAP : AP -> NP -> Utt =
       \ap,np ->
         lin Utt {
-          s = adjSurfaceNomMascSg ap ++ wordSep ++ fp_npSurfaceNom np
+          s = apSurfaceNomMascSg ap ++ wordSep ++ fp_npSurfaceNom np
         } ;
 
     fp_PrepCN : CatSqi.Prep -> CN -> Adv =

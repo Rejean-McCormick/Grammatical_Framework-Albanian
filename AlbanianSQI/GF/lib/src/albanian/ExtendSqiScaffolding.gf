@@ -1,9 +1,25 @@
 resource ExtendSqiScaffolding =
-  open Prelude, Predef, (P = ParamX), GrammarSqi, CatSqi, CommonX, ExtendSqiHelpers, (R = ResSqi) in {
+  open Prelude, Predef, (P = ParamX), GrammarSqi, CatSqi, CommonX,
+       ExtendSqiHelpers, (R = ResSqi) in {
 
   oper
     -- =========================================================
     -- SCAFFOLDING OPS SAFE TO KEEP IN A RESOURCE
+    -- Strategy:
+    -- - keep coordinator-facing helpers shallow and explicit
+    -- - preserve current working Albanian category shapes
+    -- - expose minimal boundary glue for Comp/Imp/VPI/VPS families
+    --   without moving ownership into ExtendSqi.gf
+    -- =========================================================
+
+    sc_npSurfaceNom : NP -> Str =
+      \np -> np.s ! R.Nom ;
+
+    sc_npSurfaceAcc : NP -> Str =
+      \np -> np.s ! R.Acc ;
+
+    -- =========================================================
+    -- GENITIVE / REL-SLASH BOUNDARY
     -- =========================================================
 
     sc_GenNP : NP -> Quant =
@@ -17,14 +33,15 @@ resource ExtendSqiScaffolding =
 
     sc_GenRP : Num -> CN -> RP =
       \num,cn -> lin RP {
-        s = R.link_clitic ! R.Indef ! R.Nom ! cn.g ! num.n ++ cn.s ! R.Indef ! R.Ablat ! num.n
+        s = R.link_clitic ! R.Indef ! R.Nom ! cn.g ! num.n
+            ++ cn.s ! R.Indef ! R.Ablat ! num.n
       } ;
 
     sc_GenModNP : Num -> NP -> CN -> NP =
-      \num,np,cn -> np ;
+      \_,np,_ -> np ;
 
     sc_GenModIP : Num -> IP -> CN -> IP =
-      \num,ip,cn -> ip ;
+      \_,ip,_ -> ip ;
 
     sc_PiedPipingQuestSlash : IP -> ClSlash -> QS =
       \ip,slash -> lin QS {s = ip.s ++ wordSep ++ slash.s} ;
@@ -40,6 +57,10 @@ resource ExtendSqiScaffolding =
 
     sc_EmptyRelSlash : ClSlash -> RS =
       \slash -> lin RS {s = slash.s} ;
+
+    -- =========================================================
+    -- SMALL UTTERANCE / COMPLEMENT HELPERS
+    -- =========================================================
 
     sc_ProDrop : Pron -> Pron =
       \p -> lin Pron {
@@ -65,7 +86,7 @@ resource ExtendSqiScaffolding =
       \qs -> lin Comp {s = qs.s} ;
 
     sc_CompVP : Ant -> Pol -> VP -> Comp =
-      \ant,pol,vp -> lin Comp {s = vp.s} ;
+      \_,_,vp -> lin Comp {s = vp.s} ;
 
     sc_UttAccIP : IP -> Utt =
       \ip -> lin Utt {s = ip.s} ;
@@ -89,7 +110,7 @@ resource ExtendSqiScaffolding =
       \vs,s -> lin VP {s = verbPres3sg vs ++ wordSep ++ s.s} ;
 
     sc_SlashBareV2S : V2S -> S -> VPSlash =
-      \v2s,s -> lin VPSlash {s = s.s} ;
+      \v2s,s -> lin VPSlash {s = verbPres3sg v2s ++ wordSep ++ s.s} ;
 
     sc_ComplDirectVS : VS -> Utt -> VP =
       \vs,utt -> lin VP {s = verbPres3sg vs ++ wordSep ++ utt.s} ;
@@ -115,10 +136,10 @@ resource ExtendSqiScaffolding =
       } ;
 
     sc_ComplGenVV : VV -> Ant -> Pol -> VP -> VP =
-      \vv,ant,pol,vp -> vp ;
+      \vv,_,_,vp -> lin VP {s = verbPres3sg vv ++ wordSep ++ vp.s} ;
 
     sc_CompoundN : N -> N -> N =
-      \n1,n2 -> n1 ;
+      \n1,_ -> n1 ;
 
     sc_GerundCN : VP -> CN =
       \vp -> mkCompatCNFromStr vp.s R.Masc ;
@@ -168,4 +189,93 @@ resource ExtendSqiScaffolding =
         g = cn.g
       } ;
 
-}
+    -- =========================================================
+    -- MINIMAL COORDINATION GLUE
+    -- These stay shallow on purpose. They are here so the coordinator
+    -- can wire them if the inherited boundary still proves incomplete.
+    -- =========================================================
+
+    sc_BaseComp : Comp -> Comp -> {s : Str} =
+      \x,y -> {s = x.s ++ "," ++ wordSep ++ y.s} ;
+
+    sc_ConsComp : Comp -> {s : Str} -> {s : Str} =
+      \x,xs -> {s = x.s ++ "," ++ wordSep ++ xs.s} ;
+
+    sc_ConjComp : Conj -> {s : Str} -> Comp =
+      \conj,ss -> lin Comp {s = ss.s ++ wordSep ++ conj.s} ;
+
+    sc_BaseImp : Imp -> Imp -> {s : Str} =
+      \x,y -> {s = x.s ++ "," ++ wordSep ++ y.s} ;
+
+    sc_ConsImp : Imp -> {s : Str} -> {s : Str} =
+      \x,xs -> {s = x.s ++ "," ++ wordSep ++ xs.s} ;
+
+    sc_ConjImp : Conj -> {s : Str} -> Imp =
+      \conj,ss -> lin Imp {s = ss.s ++ wordSep ++ conj.s} ;
+
+    -- =========================================================
+    -- SHALLOW VPI / VPS BOUNDARY WRAPPERS
+    -- Keep these explicit and string-like.
+    -- =========================================================
+
+    sc_BaseVPI : {s : Str} -> {s : Str} -> {s : Str} =
+      \x,y -> {s = x.s ++ "," ++ wordSep ++ y.s} ;
+
+    sc_ConsVPI : {s : Str} -> {s : Str} -> {s : Str} =
+      \x,xs -> {s = x.s ++ "," ++ wordSep ++ xs.s} ;
+
+    sc_MkVPI : VP -> {s : Str} =
+      \vp -> {s = vp.s} ;
+
+    sc_ConjVPI : Conj -> {s : Str} -> {s : Str} =
+      \conj,xs -> {s = xs.s ++ wordSep ++ conj.s} ;
+
+    sc_ComplVPIVV : VV -> {s : Str} -> VP =
+      \vv,vpi -> lin VP {s = verbPres3sg vv ++ wordSep ++ vpi.s} ;
+
+    sc_BaseVPI2 : {s : Str} -> {s : Str} -> {s : Str} =
+      \x,y -> {s = x.s ++ "," ++ wordSep ++ y.s} ;
+
+    sc_ConsVPI2 : {s : Str} -> {s : Str} -> {s : Str} =
+      \x,xs -> {s = x.s ++ "," ++ wordSep ++ xs.s} ;
+
+    sc_MkVPI2 : VPSlash -> {s : Str} =
+      \vpslash -> {s = vpslash.s} ;
+
+    sc_ConjVPI2 : Conj -> {s : Str} -> {s : Str} =
+      \conj,xs -> {s = xs.s ++ wordSep ++ conj.s} ;
+
+    sc_ComplVPI2 : {s : Str} -> NP -> {s : Str} =
+      \vpi2,np -> {s = vpi2.s ++ wordSep ++ np.s ! R.Acc} ;
+
+    sc_BaseVPS : {s : Str} -> {s : Str} -> {s : Str} =
+      \x,y -> {s = x.s ++ "," ++ wordSep ++ y.s} ;
+
+    sc_ConsVPS : {s : Str} -> {s : Str} -> {s : Str} =
+      \x,xs -> {s = x.s ++ "," ++ wordSep ++ xs.s} ;
+
+    sc_MkVPS : Temp -> Pol -> VP -> {s : Str} =
+      \_,_,vp -> {s = vp.s} ;
+
+    sc_ConjVPS : Conj -> {s : Str} -> {s : Str} =
+      \conj,xs -> {s = xs.s ++ wordSep ++ conj.s} ;
+
+    sc_PredVPS : NP -> {s : Str} -> S =
+      \np,vps -> lin S {s = sc_npSurfaceNom np ++ wordSep ++ vps.s} ;
+
+    sc_BaseVPS2 : {s : Str} -> {s : Str} -> {s : Str} =
+      \x,y -> {s = x.s ++ "," ++ wordSep ++ y.s} ;
+
+    sc_ConsVPS2 : {s : Str} -> {s : Str} -> {s : Str} =
+      \x,xs -> {s = x.s ++ "," ++ wordSep ++ xs.s} ;
+
+    sc_MkVPS2 : Temp -> Pol -> VPSlash -> {s : Str} =
+      \_,_,vpslash -> {s = vpslash.s} ;
+
+    sc_ConjVPS2 : Conj -> {s : Str} -> {s : Str} =
+      \conj,xs -> {s = xs.s ++ wordSep ++ conj.s} ;
+
+    sc_ComplVPS2 : {s : Str} -> NP -> {s : Str} =
+      \vps2,np -> {s = vps2.s ++ wordSep ++ sc_npSurfaceAcc np} ;
+
+} ;

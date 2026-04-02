@@ -12,32 +12,49 @@ oper
   -- - keep must_VV disabled until the GeneratePMCFG crash source is isolated
   -- =========================================================
 
-  mkPersTab : Str -> _ =
-    \x -> table {P1 => x ; P2 => x ; P3 => x} ;
+  mkPersTab : Person => Str =
+    table {
+      P1 => [] ;
+      P2 => [] ;
+      P3 => []
+    } ;
 
-  mkNumPersTab : Str -> _ =
+  mkPersTabFromStr : Str -> Person => Str =
     \x -> table {
-      Sg => mkPersTab x ;
-      Pl => mkPersTab x
+      P1 => x ;
+      P2 => x ;
+      P3 => x
+    } ;
+
+  mkNumPersTab : Number => Person => Str =
+    table {
+      Sg => mkPersTab ;
+      Pl => mkPersTab
+    } ;
+
+  mkNumPersTabFromStr : Str -> Number => Person => Str =
+    \x -> table {
+      Sg => mkPersTabFromStr x ;
+      Pl => mkPersTabFromStr x
     } ;
 
   mkVConst : Str -> CatSqi.V =
     \x -> lin V {
       Indicative = table {
-        ParamX.Pres      => mkNumPersTab x ;
-        ParamX.Past      => mkNumPersTab x ;
-        Aorist           => mkNumPersTab x ;
-        Imperfect        => mkNumPersTab x
+        ParamX.Pres => mkNumPersTabFromStr x ;
+        ParamX.Past => mkNumPersTabFromStr x ;
+        Aorist      => mkNumPersTabFromStr x ;
+        Imperfect   => mkNumPersTabFromStr x
       } ;
       Imperative = table {
         Sg => x ;
         Pl => x
       } ;
       participle = x ;
-      pres_optative = mkNumPersTab x ;
-      perf_optative = mkNumPersTab x ;
-      pres_admirative = mkNumPersTab x ;
-      imperf_admirative = mkNumPersTab x
+      pres_optative = mkNumPersTabFromStr x ;
+      perf_optative = mkNumPersTabFromStr x ;
+      pres_admirative = mkNumPersTabFromStr x ;
+      imperf_admirative = mkNumPersTabFromStr x
     } ;
 
   mkVVConst : Str -> CatSqi.VV =
