@@ -10,9 +10,11 @@ resource ExtendSqiVPBridge =
     -- =========================================================
     -- VP / VPSLASH BRIDGE SUBSYSTEM
     -- Strategy:
-    -- - keep inherited Albanian composition wherever a real path exists
-    -- - keep lossy AP/NP bridges explicitly centralized and provisional
-    -- - use Albanian case/government defaults already established elsewhere
+    -- - prefer inherited/compositional Albanian paths whenever they exist
+    -- - keep temporary lossy bridges explicit and centralized
+    -- - allow shallow verbal wrappers where Albanian is already shallow
+    -- - keep rich complements rich as long as possible
+    -- - do not let VP-bridge functions become another AP/CN flattening zone
     -- =========================================================
 
     vp_npSurfaceAcc : NP -> Str =
@@ -21,9 +23,14 @@ resource ExtendSqiVPBridge =
     vp_agentAdv : NP -> Adv =
       \np -> AS.PrepNP (R.mkPrep "nga") np ;
 
+    vp_compFromA2 : A2 -> Comp =
+      \a2 -> CompAP (UseA2 a2) ;
+
+    vp_compFromN2 : N2 -> Comp =
+      \n2 -> CompCN (UseN2 n2) ;
+
     -- TEMPORARY fallback:
-    -- AP-producing participial bridges still have no Albanian AP-preserving
-    -- constructor path. Keep the lossy conversion centralized in helpers.
+    -- no Albanian AP-preserving participial constructor path has been surfaced yet.
     vp_PresPartAP : VP -> AP =
       \vp ->
         mkCompatAPFromStr vp.s ;
@@ -34,20 +41,20 @@ resource ExtendSqiVPBridge =
         lin SC {s = vp.s} ;
 
     -- TEMPORARY fallback:
-    -- preserve subsystem ownership, but do not duplicate local AP builders here.
+    -- preserve subsystem ownership, but keep the lossy AP bridge explicit.
     vp_PastPartAP : VPSlash -> AP =
       \vpslash ->
         mkCompatAPFromStr vpslash.s ;
 
     -- TEMPORARY fallback:
-    -- keep explicit Albanian agent marking through the inherited PrepNP path,
-    -- not by raw NP concatenation.
+    -- build the agented passive through Albanian agent marking first,
+    -- then surface only for the provisional AP bridge.
     vp_PastPartAgentAP : VPSlash -> NP -> AP =
       \vpslash,np ->
         mkCompatAPFromStr (vpslash.s ++ wordSep ++ (vp_agentAdv np).s) ;
 
-    -- VP/VPSlash are already shallow enough in this Albanian implementation,
-    -- so the passive bridge can remain direct.
+    -- VP/VPSlash are shallow in current Albanian CatSqi, so this remains
+    -- a direct coercion at the surface level.
     vp_PassVPSlash : VPSlash -> VP =
       \vpslash ->
         lin VP {s = vpslash.s} ;
@@ -55,15 +62,11 @@ resource ExtendSqiVPBridge =
     -- Preferred passive+agent path: reuse Albanian prep government.
     vp_PassAgentVPSlash : VPSlash -> NP -> VP =
       \vpslash,np ->
-        lin VP {s = vpslash.s ++ wordSep ++ (vp_agentAdv np).s} ;
+        AdvVP (lin VP {s = vpslash.s}) (vp_agentAdv np) ;
 
     -- TEMPORARY fallback:
-    -- centralized compatibility NP builder, not local ad hoc NP record construction.
-    -- Masculine singular agreement remains the documented emergency default for
-    -- semantically neutralized nominalizations.
-    --
-    -- The NP complement is surfaced in Acc, consistent with Albanian complement
-    -- realization elsewhere in the extension layer.
+    -- nominalization is still compatibility-based, but keep the complement
+    -- realization explicit and centralized.
     vp_NominalizeVPSlashNP : VPSlash -> NP -> NP =
       \vpslash,np ->
         mkCompatNPFromStr
@@ -71,24 +74,26 @@ resource ExtendSqiVPBridge =
           R.Masc
           P.Sg ;
 
+    -- Same record shape; keep this as a pure coercion for now.
     vp_ProgrVPSlash : VPSlash -> VPSlash =
       \vpslash ->
-        lin VPSlash {s = vpslash.s} ;
+        vpslash ;
 
-    -- Keep the adjective surface rich as long as possible, then expose only
-    -- the open complement slot as a slash string.
+    -- Keep the rich Albanian adjective path as long as possible:
+    -- A2 -> AP via UseA2, then AP -> Comp via CompAP, and only then expose
+    -- the open complement slot as a shallow slash surface.
     vp_A2VPSlash : A2 -> VPSlash =
       \a2 ->
         lin VPSlash {
-          s = adjComplStr a2 R.Indef R.Nom R.Masc P.Sg ++ wordSep ++ a2.c2.s
+          s = (vp_compFromA2 a2).s ++ wordSep ++ a2.c2.s
         } ;
 
-    -- Same policy for N2: keep the Albanian noun path, expose only the missing
-    -- complement slot as a shallow slash string.
+    -- Same policy for N2:
+    -- N2 -> CN via UseN2, then CN -> Comp via CompCN, then expose the slot.
     vp_N2VPSlash : N2 -> VPSlash =
       \n2 ->
         lin VPSlash {
-          s = cnSurfaceNomSg (UseN2 n2) ++ wordSep ++ n2.c2.s
+          s = (vp_compFromN2 n2).s ++ wordSep ++ n2.c2.s
         } ;
 
     -- Preferred inherited/functor-style composition path.

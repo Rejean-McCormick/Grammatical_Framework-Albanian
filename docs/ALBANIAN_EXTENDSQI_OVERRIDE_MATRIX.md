@@ -16,6 +16,7 @@ This matrix assumes the following decisions are already locked for this cycle:
 - No `ExtendSqiVPS.gf` will be introduced in this cycle.
 - No local override is accepted unless there is Albanian-specific evidence or a clear structural need.
 - Each override family must be coherent as a family; no one-off drift.
+- Local boundary `lincat` declarations are allowed only when they make an inherited shallow family explicit and prevent silent default insertion. They do **not** transfer ownership of that family to Albanian local logic.
 
 ---
 
@@ -31,12 +32,26 @@ Thin wiring layer only.
 - subsystem imports
 - override subtraction list
 - subsystem-to-function renamings
+- minimal boundary `lincat` declarations when explicitly justified by this matrix and the lockfield/boundary guide
 
 ### Disallowed contents
 - new local helper logic
 - local ad hoc record construction
 - local VPS/VPI/VPS2/VPI2/list-family machinery
 - repair code that belongs in companion modules
+- local ownership of functions marked **inherit** in this matrix
+
+### Coordinator ownership rule
+If a function is marked **inherit** in this matrix, `ExtendSqi.gf` must not:
+- subtract it from `ExtendFunctor`
+- wire a local replacement
+- or reintroduce local family logic around it
+
+unless this matrix is updated first with:
+- the exact abstract signature
+- the exact `ExtendFunctor` path
+- the Albanian-specific reason for changing ownership
+- and the acceptance rule for the new owner
 
 ---
 
@@ -92,9 +107,51 @@ These remain inherited from `ExtendFunctor` and must **not** be reintroduced as 
 ### Rationale
 This family previously failed when it was partially localized. In this cycle, maturity is better served by stable inheritance than by half-complete local machinery.
 
+### Drift-control consequence
+If current code locally owns any function listed above, that is a **coordinator drift bug** and must be fixed before accepting the coordinator as stable.
+
 ---
 
-## 4. Override matrix by subsystem
+## 4. Mandatory pre-edit gate for `ExtendSqi.gf`
+
+Run this gate **before any coordinator edit**.
+
+1. Check the exact abstract signature.
+2. Check the current `ExtendFunctor` path.
+3. Check this override matrix.
+4. Check the current full-build stderr for the live warning cluster.
+5. Only then decide whether the function is:
+   - inherited
+   - local override
+   - or boundary-declaration-only
+
+### Hard stop rules
+Do **not** edit `ExtendSqi.gf` if any of the following is true:
+
+- the function is marked **inherit** here and no matrix update has been made
+- the change would move subsystem logic into the coordinator
+- the change would create local list-family logic
+- the change is being justified only by a compile warning, without checking signature/functor/category evidence
+- the change would accept a new `lock_*` warning as “good enough”
+
+---
+
+## 5. Operational drift fields
+
+When a family is under active repair, maintain the following fields for the affected rows or in an adjacent working table.
+
+- **Current code owner**
+- **Allowed owner this cycle**
+- **Inherited from `ExtendFunctor`?**
+- **Current code state** = `aligned` / `drifted`
+- **Required action** = `keep inherited` / `remove from subtraction` / `keep local` / `move to subsystem`
+- **Evidence checked** = abstract / functor / Albanian lincat / model language / current stderr
+
+These fields do not replace the stable matrix below; they are the required working overlay during live repair.
+
+---
+
+## 6. Override matrix by subsystem
 
 Legend:
 - **Owner** = module that must implement the function in this cycle
@@ -104,7 +161,7 @@ Legend:
 
 ---
 
-### 4.1 Scaffolding subsystem
+### 6.1 Scaffolding subsystem
 
 **Owner modules**
 - `GF/lib/src/albanian/ExtendSqiScaffolding.gf`
@@ -169,7 +226,7 @@ This subsystem compiles with no contract-shape errors and no accidental `TenseSq
 
 ---
 
-### 4.2 Existential subsystem
+### 6.2 Existential subsystem
 
 **Owner modules**
 - `GF/lib/src/albanian/ExtendSqiExistential.gf`
@@ -192,7 +249,7 @@ This subsystem compiles with no contract-shape errors and no accidental `TenseSq
 
 ---
 
-### 4.3 AP/CN subsystem
+### 6.3 AP/CN subsystem
 
 **Owner modules**
 - `GF/lib/src/albanian/ExtendSqiAPCN.gf`
@@ -219,7 +276,7 @@ This subsystem compiles with no contract-shape errors and no accidental `TenseSq
 
 ---
 
-### 4.4 Focus/preposition subsystem
+### 6.4 Focus/preposition subsystem
 
 **Owner modules**
 - `GF/lib/src/albanian/ExtendSqiFocusPrep.gf`
@@ -243,7 +300,7 @@ This subsystem compiles with no contract-shape errors and no accidental `TenseSq
 
 ---
 
-### 4.5 VP bridge subsystem
+### 6.5 VP bridge subsystem
 
 **Owner modules**
 - `GF/lib/src/albanian/ExtendSqiVPBridge.gf`
@@ -276,7 +333,7 @@ This subsystem compiles with no contract-shape errors and no accidental `TenseSq
 
 ---
 
-### 4.6 RNP subsystem
+### 6.6 RNP subsystem
 
 **Owner modules**
 - `GF/lib/src/albanian/ExtendSqiRNP.gf`
@@ -310,7 +367,7 @@ This subsystem compiles with no contract-shape errors and no accidental `TenseSq
 
 ---
 
-### 4.7 Lexical tail subsystem
+### 6.7 Lexical tail subsystem
 
 **Owner modules**
 - `GF/lib/src/albanian/ExtendSqiLexicon.gf`
@@ -339,7 +396,7 @@ This subsystem compiles with no contract-shape errors and no accidental `TenseSq
 
 ---
 
-## 5. Acceptance checks per subsystem
+## 7. Acceptance checks per subsystem
 
 Every subsystem pass is accepted only if all of the following are true:
 
@@ -350,10 +407,61 @@ Every subsystem pass is accepted only if all of the following are true:
 5. No new lock-field warnings are introduced.
 6. No override is justified only by convenience; every override must have Albanian or structural evidence.
 7. The family remains coherent as a family.
+8. Any current mismatch between this matrix and `ExtendSqi.gf` ownership has been explicitly resolved.
 
 ---
 
-## 6. Current cycle execution order
+## 8. Coordinator drift checks
+
+Run these checks on every `ExtendSqi.gf` edit.
+
+### 8.1 Subtraction-list check
+For every name in the subtraction list:
+- it must appear in this matrix as `override`
+- its owner must be one of the allowed companion modules
+- it must not appear in the inherited-family section above
+
+### 8.2 Wiring check
+For every `lin` renaming in `ExtendSqi.gf`:
+- it must target the owner declared in this matrix
+- it must not wire a function that is marked inherited
+- it must not keep stale local ownership after a subsystem decision changed
+
+### 8.3 Boundary-lincat check
+Any local `lincat` declaration in `ExtendSqi.gf` must be one of:
+- a documented boundary declaration for an inherited shallow family
+- a documented local family boundary required by current Albanian ownership
+
+If neither is true, the `lincat` is drift.
+
+### 8.4 High-risk mismatch rule
+If a function is:
+- marked inherited here
+- but still subtracted or locally wired in code
+
+then **fix that mismatch before accepting any other coordinator-side patch**.
+
+---
+
+## 9. Doc-sync rule
+
+Whenever any of the following changes:
+- subtraction list
+- subsystem ownership
+- inherited/local status
+- boundary `lincat` policy
+- family execution order
+
+update this matrix in the **same change**.
+
+Do not allow:
+- code-first coordinator changes
+- later “we’ll fix the docs” follow-up
+- untracked ownership exceptions
+
+---
+
+## 10. Current cycle execution order
 
 1. Scaffolding boundary (`ExtendSqiScaffolding.gf`, `ExtendSqiHelpers.gf`)
 2. Coordinator lock (`ExtendSqi.gf`)
@@ -368,17 +476,19 @@ Every subsystem pass is accepted only if all of the following are true:
 
 ---
 
-## 7. What is not allowed in this cycle
+## 11. What is not allowed in this cycle
 
 - Reintroducing local `MkVPS` / `BaseVPS` / `BaseComp` / `BaseImp` machinery into `ExtendSqi.gf`
 - Creating `ExtendSqiVPS.gf`
 - Fixing a family by scattering ad hoc helpers into unrelated modules
 - Accepting compile success if it depends on category-shape drift
 - Leaving warnings unexplained in high-risk families
+- Changing coordinator ownership without updating this matrix
+- Treating a boundary `lincat` declaration as proof of local family ownership
 
 ---
 
-## 8. Final target state
+## 12. Final target state
 
 At the end of this cycle:
 
@@ -387,3 +497,4 @@ At the end of this cycle:
 - The VPS/VPI/VPS2/VPI2/list-family remains inherited and stable.
 - All companion modules compile cleanly.
 - Structural warnings are reduced to the point that Albanian behaves like a mature GF language rather than an exploratory extension layer.
+- The matrix and the coordinator agree on ownership, inheritance, and family boundaries.

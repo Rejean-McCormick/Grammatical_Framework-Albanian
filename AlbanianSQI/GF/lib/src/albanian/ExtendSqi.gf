@@ -4,9 +4,11 @@
 -- POLICY:
 -- 1. ExtendFunctor is the default source of structure.
 -- 2. ExtendSqi.gf remains a thin coordinator only.
--- 3. Unsupported VPS/VPI/VPS2/VPI2/list-family logic stays inherited.
--- 4. Companion modules own Albanian-specific subsystem logic.
--- 5. Rich-category safety is enforced in subsystem modules, not here.
+-- 3. Unsupported VPS/VPI/VPS2/VPI2/list-family LOGIC stays inherited.
+-- 4. Local boundary lincats are allowed here only to stop default insertion
+--    and to make the inherited shallow family explicit in Albanian.
+-- 5. Companion modules own Albanian-specific subsystem logic.
+-- 6. Rich-category safety is enforced in subsystem modules, not here.
 
 concrete ExtendSqi of Extend =
   CatSqi ** ExtendFunctor -
@@ -22,8 +24,6 @@ concrete ExtendSqi of Extend =
     PredIAdvVP, ApposNP, ComplGenVV, CompoundN,
     GerundCN, GerundNP, GerundAdv, UncontractedNeg, TPastSimple, ComplSlashPartLast,
     DetNPMasc, DetNPFem, UseComp_estar, UseComp_ser, SubjRelNP, SubjunctRelCN,
-    BaseComp, ConsComp, ConjComp,
-    BaseImp, ConsImp, ConjImp,
 
     -- =========================================================
     -- LEXICAL TAIL
@@ -73,6 +73,12 @@ concrete ExtendSqi of Extend =
   in {
 
   lincat
+    -- =========================================================
+    -- BOUNDARY LINCATS
+    -- These do NOT mean the whole family is locally reimplemented.
+    -- They only make the inherited shallow family explicit in Albanian
+    -- so GF does not silently insert defaults.
+    -- =========================================================
     ListComp = {s : Str} ;
     ListImp  = {s : Str} ;
 
@@ -144,14 +150,6 @@ concrete ExtendSqi of Extend =
     UseComp_ser = sc_UseComp_ser ;
     SubjRelNP = sc_SubjRelNP ;
     SubjunctRelCN = sc_SubjunctRelCN ;
-
-    BaseComp = sc_BaseComp ;
-    ConsComp = sc_ConsComp ;
-    ConjComp = sc_ConjComp ;
-
-    BaseImp = sc_BaseImp ;
-    ConsImp = sc_ConsImp ;
-    ConjImp = sc_ConjImp ;
 
     -- =========================================================
     -- EXISTENTIAL SUBSYSTEM

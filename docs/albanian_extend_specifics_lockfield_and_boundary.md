@@ -4,12 +4,13 @@
 
 This document is the **tactical repair guide** for `ExtendSqi`.
 
-It does **not** replace the Albanian phase plan or the model-language comparison notes. Those documents already define the architecture, the phase order, and the reference priorities. This document exists to make one class of work explicit and repeatable:
+It does **not** replace the Albanian phase plan, the final-target architecture doc, or the override matrix. Those documents already define the architecture, the phase order, and the stable ownership map. This document exists to make one class of work explicit and repeatable:
 
 - coordinator-boundary decisions in `ExtendSqi.gf`
 - lock-field failures in full `ExtendSqi` builds
 - subsystem repair order for `ExtendSqiVPBridge`, `ExtendSqiAPCN`, `ExtendSqiRNP`, and related glue
 - acceptance rules for temporary shallow fallbacks versus category-preserving Albanian paths
+- drift prevention when current code, current logs, and current ownership docs disagree
 
 Use this document when a change compiles in isolation but the **full `ExtendSqi` build still warns or crashes**.
 
@@ -23,6 +24,7 @@ Use this document when any of the following happens:
 - a subsystem compiles alone but fails or degrades when wired through `ExtendSqi.gf`
 - there is uncertainty about whether to keep a function inherited from `ExtendFunctor` or override it locally
 - there is uncertainty about whether Bulgarian or German should be used as the model for a specific Albanian override
+- the current code and the override matrix disagree about who owns a function
 
 Do **not** use this document as the primary source for overall project ordering. For that, use the Albanian phase plan.
 
@@ -35,8 +37,9 @@ When deciding how to implement or repair an Albanian `Extend` function, use this
 1. **Current abstract signature and current compile behavior**
 2. **`ExtendFunctor` composition path**
 3. **Current Albanian category shape and Albanian core-module precedent**
-4. **Model languages**
-5. **Comments, stale notes, and older local drafts**
+4. **Current override matrix / target architecture**
+5. **Model languages**
+6. **Comments, stale notes, and older local drafts**
 
 This order is mandatory.
 
@@ -46,6 +49,7 @@ This order is mandatory.
 - Never let a model-language function override the evidence of the current abstract signature.
 - Never prefer a shallow local rewrite over a working `ExtendFunctor` path unless Albanian evidence forces it.
 - Never treat an older comment as stronger than the current compiler behavior.
+- Never let current code ownership override the approved ownership docs without an explicit doc update.
 
 ---
 
@@ -60,13 +64,15 @@ Allowed in `ExtendSqi.gf`:
 - inheritance restriction (`- [ ... ]`) when justified
 - subsystem import / opening
 - direct wiring from subsystem operations to abstract functions
-- minimal lincat declarations only when boundary completion requires them and the family remains coherent
+- minimal `lincat` declarations only when boundary completion requires them and the family remains coherent
+- explicit shallow boundary declarations for inherited families only when documented in the override matrix
 
 Not allowed in `ExtendSqi.gf`:
 
 - local reinvention of subsystem logic that belongs in helpers/scaffolding/APCN/VPBridge/RNP/etc.
 - piecemeal category-shape workarounds that should live in a subsystem
 - unstructured copying from `ExtraSqi`
+- local ownership of functions marked inherited in the override matrix
 
 ### 2. `ExtendFunctor` is the primary model for Albanian `ExtendSqi`
 
@@ -81,7 +87,7 @@ Override only when:
 
 If Albanian overrides a family, it must override it **coherently**.
 
-A family is “half-localized” when Albanian subtracts functions from `ExtendFunctor` but does not supply the lincat/lin side needed for the whole family.
+A family is “half-localized” when Albanian subtracts functions from `ExtendFunctor` but does not supply the `lincat`/`lin` side needed for the whole family.
 
 Typical danger zones:
 
@@ -135,6 +141,43 @@ Examples of categories that must be handled more carefully:
 - `Pron`
 - anything built from `A2`, `N2`, determiners, or quantified nominal structures
 
+### 7. Override matrix is binding for coordinator ownership
+
+If the override matrix marks a function as **inherit**, `ExtendSqi.gf` must not:
+
+- subtract it from `ExtendFunctor`
+- wire a local replacement
+- or locally own surrounding family machinery for it
+
+unless the matrix is updated first.
+
+This rule exists specifically to prevent coordinator drift.
+
+---
+
+## Mandatory pre-edit gate for `ExtendSqi.gf`
+
+Run this gate before any coordinator edit.
+
+1. Confirm the exact abstract signature.
+2. Check the current `ExtendFunctor` path.
+3. Check the current override matrix.
+4. Check the current full-build stderr.
+5. Only then decide whether the function is:
+   - inherited
+   - local override
+   - or boundary-declaration-only
+
+### Hard stop rules
+
+Do **not** edit `ExtendSqi.gf` if any of the following is true:
+
+- the function is marked inherited in the matrix and no matrix update has been made
+- the edit would move subsystem logic into the coordinator
+- the edit would create local list-family logic
+- the edit is being justified only by a warning, without checking signature/functor/category evidence
+- the edit would accept a new `lock_*` warning as “good enough”
+
 ---
 
 ## Default decision workflow
@@ -161,7 +204,7 @@ Ask:
 
 If `ExtendFunctor` is adequate, prefer inheritance.
 
-### Step 3. Check current Albanian lincat and core precedent
+### Step 3. Check current Albanian lincats and core precedent
 
 Open and inspect:
 
@@ -175,7 +218,15 @@ Ask:
 - Does the category carry agreement / case / species / complement fields?
 - Is there already an Albanian constructor/composition path for this shape?
 
-### Step 4. Decide whether the target is shallow or rich
+### Step 4. Check the override matrix and target architecture
+
+Ask:
+
+- Is this function supposed to be inherited or overridden this cycle?
+- Is the current code already drifting from the approved ownership?
+- Is the current problem really a subsystem bug, or a coordinator-ownership bug?
+
+### Step 5. Decide whether the target is shallow or rich
 
 If shallow:
 
@@ -188,11 +239,11 @@ If rich:
 - prefer inherited or Albanian-compositional constructors
 - compatibility helpers are temporary and must be explicit
 
-### Step 5. Only then consult model languages
+### Step 6. Only then consult model languages
 
 Use model languages to answer **structural** questions, not lexical or surface questions.
 
-### Step 6. Reject any patch that introduces new lock warnings
+### Step 7. Reject any patch that introduces new lock warnings
 
 If the full `ExtendSqi` compile emits a new `lock_*` warning after your patch, the patch is not finished.
 
@@ -240,18 +291,18 @@ These rules govern `ExtendSqi.gf`.
 If a function is subtracted from `ExtendFunctor`, Albanian must supply:
 
 - a valid local family boundary
-- the needed lincat side if inheritance no longer supplies it
+- the needed `lincat` side if inheritance no longer supplies it
 - a coherent `lin` implementation path
 
 ### 2. Do not rely on implicit default lincats in production patches
 
 If the compiler says it is “inserting default `{s : Str}`” for a family, treat that as a boundary failure.
 
-Only add explicit shallow lincats if:
+Only add explicit shallow `lincat`s if:
 
 - the family is intentionally shallow in Albanian for this cycle, and
 - the family is wired coherently, and
-- the choice is documented here and in the phase notes.
+- the choice is documented here and in the override matrix / phase notes.
 
 ### 3. Boundary glue belongs in scaffolding, not in the coordinator body
 
@@ -272,6 +323,21 @@ A subsystem is only considered stable when:
 - it compiles individually, and
 - the full `ExtendSqi` build compiles without new lock warnings from that subsystem.
 
+### 5. Inherited-family boundary declarations do not transfer ownership
+
+If `ExtendSqi.gf` contains local shallow `lincat` declarations for an inherited family, that does **not** mean Albanian locally owns the family logic.
+
+Boundary declarations are allowed only to make the inherited shallow family explicit and prevent silent default insertion.
+
+### 6. High-risk mismatch rule
+
+If a function is:
+
+- marked inherited in the matrix
+- but still subtracted or locally wired in code
+
+then fix that mismatch before accepting any other coordinator-side patch.
+
 ---
 
 ## Lock-field triage protocol
@@ -288,6 +354,7 @@ In practice, this usually means one of the following:
 - a provisional compatibility helper is being used in a place that is too rich for it
 - the coordinator boundary is incoherent and the function is being checked against the wrong inherited family context
 - a local shallow wrapper is acceptable in isolation but not in the full `ExtendSqi` concrete
+- the current coordinator ownership already disagrees with the approved ownership docs
 
 ### Severity rule
 
@@ -303,7 +370,8 @@ Prioritize warnings in this order:
 1. inspect the first named warning in stderr
 2. inspect the whole subsystem family of that function
 3. inspect the coordinator subtraction/wiring for that family
-4. only then inspect secondary warning clusters
+4. compare current coordinator ownership against the override matrix
+5. only then inspect secondary warning clusters
 
 ### Current live example
 
@@ -314,6 +382,7 @@ That pattern means:
 - start with VP bridge
 - do not start by cleaning lexical tail or RNP in isolation
 - check whether the coordinator/functor boundary is amplifying the damage
+- check whether inherited functions are being locally owned against the matrix
 
 ---
 
@@ -492,7 +561,9 @@ Use this section to prevent slow degradation.
 - Do not move rich-category logic into lexical-tail wrappers.
 - Do not treat a shallow `ExtraSqi` pattern as proof that `ExtendSqi` should also be shallow.
 - Do not accept compile success in a single subsystem as a substitute for full `ExtendSqi` stability.
-- Do not accept new default-inserted lincats without documenting the family decision.
+- Do not accept new default-inserted `lincat`s without documenting the family decision.
+- Do not change coordinator ownership without updating the override matrix in the same change.
+- Do not let current code outrank the approved ownership docs.
 
 ---
 
@@ -508,6 +579,8 @@ A patch is only ready when all items below are true.
 - [ ] Albanian `CatSqi` lincat shape checked
 - [ ] Albanian core-module precedent checked
 - [ ] Correct model-language priority used
+- [ ] Override matrix checked
+- [ ] Current coordinator ownership checked against the matrix
 
 ### Category safety
 
@@ -521,7 +594,8 @@ A patch is only ready when all items below are true.
 - [ ] Whole subsystem family inspected, not only one function
 - [ ] Coordinator subtraction/wiring checked for that family
 - [ ] No half-localized family remains
-- [ ] No default-inserted lincat is being relied on silently
+- [ ] No default-inserted `lincat` is being relied on silently
+- [ ] No inherited function is still locally owned by drift
 
 ### Compile acceptance
 
@@ -533,7 +607,8 @@ A patch is only ready when all items below are true.
 ### Documentation acceptance
 
 - [ ] If a temporary fallback remains, it is recorded here
-- [ ] If a family boundary decision changed, the phase doc is updated
+- [ ] If a family boundary decision changed, the override matrix is updated
+- [ ] If the phase/order implications changed, the phase doc is updated
 - [ ] If model-language priority was non-default, that choice is documented
 
 ---
@@ -559,16 +634,18 @@ Maintain this section during active repair.
 
 - `Comp` / `Imp` coordination families
 - `VPI` / `VPI2` / `VPS` / `VPS2` families
-- list-family lincat insertion by default
+- list-family `lincat` insertion by default
+- any inherited function still subtracted in `ExtendSqi.gf`
 
 ---
 
 ## Maintenance rule
 
-Whenever a full `ExtendSqi` run fails with a new first-warning hotspot, update this document in exactly two places:
+Whenever a full `ExtendSqi` run fails with a new first-warning hotspot, update this document in exactly three places:
 
 1. **Current watchlist template**
 2. the relevant subsystem playbook
+3. the coordinator-boundary section if ownership or inheritance assumptions changed
 
 Do not rewrite the whole document for each run.
 
@@ -579,8 +656,9 @@ Do not rewrite the whole document for each run.
 Use the docs in this order:
 
 1. Albanian phase / architecture doc for project ordering
-2. this document for tactical repair decisions in `ExtendSqi`
-3. model-language comparison notes when deciding Bulgarian vs German vs functor/default path
-4. local comments only as supporting context
+2. final target / override matrix for stable ownership decisions
+3. this document for tactical repair decisions in `ExtendSqi`
+4. model-language comparison notes when deciding Bulgarian vs German vs functor/default path
+5. local comments only as supporting context
 
 This document should stay short enough to be used during live debugging, but concrete enough that two different contributors would make the same repair decision from it.

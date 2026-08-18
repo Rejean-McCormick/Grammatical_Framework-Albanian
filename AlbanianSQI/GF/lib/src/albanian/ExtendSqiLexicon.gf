@@ -6,9 +6,15 @@ resource ExtendSqiLexicon =
   oper
     -- =========================================================
     -- LEXICAL TAIL
-    -- Strategy: extension-specific lexical entries and simple
-    -- lexical wrappers only.
-    -- No structural repair logic belongs here.
+    -- Strategy:
+    -- - keep extension-specific lexical entries here
+    -- - keep DAP -> NP wrappers lexical and explicitly provisional
+    -- - do not move structural repair logic into this module
+    --
+    -- Note:
+    -- In the current Albanian setup, DAP is still too shallow to support
+    -- a richer DAP-aware NP realization here, so these wrappers remain
+    -- compatibility-based until the category boundary is improved upstream.
     -- =========================================================
 
     lex_ReflPossPron : Quant =
@@ -46,17 +52,22 @@ resource ExtendSqiLexicon =
 
     -- =========================================================
     -- LEXICAL WRAPPERS
-    -- Strategy: keep DAP-to-NP wrappers lexical and explicitly
-    -- compatibility-based.
+    -- Strategy:
+    -- - keep all DAP-to-NP compatibility routing in one helper
+    -- - preserve the documented emergency defaults by wrapper
     -- =========================================================
 
+    lex_dapAsNP : R.Gender -> Number -> DAP -> NP =
+      \g,n,dap ->
+        mkCompatNPFromStr dap.s g n ;
+
     lex_UseDAP : DAP -> NP =
-      \dap -> mkCompatNPFromStr dap.s R.Masc Sg ;
+      \dap -> lex_dapAsNP R.Masc Sg dap ;
 
     lex_UseDAPMasc : DAP -> NP =
-      \dap -> mkCompatNPFromStr dap.s R.Masc Sg ;
+      \dap -> lex_dapAsNP R.Masc Sg dap ;
 
     lex_UseDAPFem : DAP -> NP =
-      \dap -> mkCompatNPFromStr dap.s R.Fem Sg ;
+      \dap -> lex_dapAsNP R.Fem Sg dap ;
 
 } ;
